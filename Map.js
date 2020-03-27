@@ -1,15 +1,21 @@
 const Point = require('../def/Point').Point;
-const WorldObjectDef = require('../def/WorldObjectDef').WorldObjectDef;
+var WorldObjectDef = require('../def/WorldObjectDef').WorldObjectDef;
+var NPCDef = require('../def/NPCDef').NPCDef;
+var ShopStorage = require('../internal/ShopStorage').ShopStorage;
+var Action = require('../internal/Action').Action;
+if (WorldObjectDef == null) {
+    WorldObjectDef = require('../def/WorldObjectDef').default;
+    NPCDef = require('../def/NPCDef').default;
+    ShopStorage = require('../internal/ShopStorage').default;
+    Action = require('../internal/Action').default;
+}
 const GroundItemDef = require('../def/GroundItemDef');
-const NPCDef = require('../def/NPCDef').NPCDef;
-const ShopStorage = require('../internal/ShopStorage').ShopStorage;
 const Bounds = require('../def/Bounds');
 const TiledMap = require('../TiledMap.json');
 const TiledMapUnderground = require('../TiledMapUnderground.json');
 const TiledMapSpecial = require('../TiledMapSpecial.json');
 const GuildState = require('../internal/GuildState').GuildState;
 const Item = require('../typedef/Item');
-const Action = require('../internal/Action').Action;
 
 
 const MAP_WIDTH = 400;
