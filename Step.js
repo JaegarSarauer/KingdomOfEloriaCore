@@ -595,9 +595,16 @@ module.exports.StepType = StepType = {
     },
     ROLL_DROP_TABLE: {
         id: 'ROLL_DROP_TABLE',
-        stepResultFail: 'END_ACTION',
+        stepResultFail: 'NEXT_STEP',
         stepResultPass: 'NEXT_STEP',
         paramTypes: ['number', 'Array'], //tableRollChance, 2D Array of drop tables [[itemID, itemMinAmount, itemMaxAmount, rollWeight], [...]]
+        params: [],
+    },
+    ROLL_SKILL_DROP_TABLE: {
+        id: 'ROLL_SKILL_DROP_TABLE',
+        stepResultFail: 'NEXT_STEP',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'Array'], //tableRollChance, skillID, 2D Array of drop tables [[itemID, itemMinAmount, itemMaxAmount, baseWeight, weightIncreasePerLevel], [...]]
         params: [],
     },
     CREATE_GROUND_ITEM: {
@@ -1013,6 +1020,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number'], //npcToBeAttacking, npcToGetAttacked
         params: [],
     },
+    SAY_MESSAGE: {
+        id: 'SAY_MESSAGE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['string'], //message
+        params: [],
+    },
 };
 
 module.exports.buildStep = buildStep = (sType, newDataObject = {}) => {
@@ -1025,11 +1039,11 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.IS_ADJACENT, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.WALK_ADJACENT, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1039,11 +1053,11 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.IS_ON_TOP, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.WALK_ON_TOP, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1053,11 +1067,11 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.HAS_LINE_OF_SIGHT, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.WALK_ADJACENT, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1067,15 +1081,15 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.HAS_LINE_OF_SIGHT, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.CAN_ATTACK_OWNER, {
-                stepResultPass: 'NEXT_STEP',
+                stepResultPass: 'NEXT_STEP', 
                 stepResultFail: 'END_ACTION'
             }),
             buildStep(StepType.WALK_ADJACENT, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1085,15 +1099,15 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.OWNER_IN_ATTACK_RANGE, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.OWNER_IN_WALK_BOUNDS, {
-                stepResultPass: 'NEXT_STEP',
+                stepResultPass: 'NEXT_STEP', 
                 stepResultFail: 'END_ACTION'
             }),
             buildStep(StepType.WALK_ADJACENT, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1104,7 +1118,7 @@ module.exports.StepList = StepList;
 
 module.exports.buildStepList = buildStepList = (sList, newDataObject = {}) => {
     let list = Object.assign({}, StepList[sList.id], newDataObject);
-    for (let i = 0; i < list.steps.length && i < list.params.length; i++) {
+    for  (let i = 0; i < list.steps.length && i < list.params.length; i++) {
         list.steps[i].params = list.params[i];
     }
     return list.steps;
@@ -1211,864 +1225,870 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
     }
 };
 
-try {
-    const StepSendClientMessage = require('../internal/Steps/StepSendClientMessage');
-    const StepSendGlobalMessage = require('../internal/Steps/StepSendGlobalMessage');
-    const StepIsAdjacent = require('../internal/Steps/StepIsAdjacent');
-    const StepWalkAdjacent = require('../internal/Steps/StepWalkAdjacent');
-    const StepDepleteWorldObjectUses = require('../internal/Steps/StepDepleteWorldObjectUses');
-    const StepWalkOnTop = require('../internal/Steps/StepWalkOnTop');
-    const StepIsEnacterOwnerOfOwner = require('../internal/Steps/StepIsEnacterOwnerOfOwner');
-    const StepOfferEnergy = require('../internal/Steps/StepOfferEnergy');
-    const StepAssertItemState = require('../internal/Steps/StepAssertItemState');
-    const StepAssertGoalStates = require('../internal/Steps/StepAssertGoalStates');
-    const StepHealOther = require('../internal/Steps/StepHealOther');
-    const StepCreateBarricade = require('../internal/Steps/StepCreateBarricade');
-    const StepRollRandomEvent = require('../internal/Steps/StepRollRandomEvent');
-    const StepRollSpecialItem = require('../internal/Steps/StepRollSpecialItem');
-    const StepHasInventoryItem = require('../internal/Steps/StepHasInventoryItem');
-    const StepHasStorageItem = require('../internal/Steps/StepHasStorageItem');
-    const StepHasEquipmentItem = require('../internal/Steps/StepHasEquipmentItem');
-    const StepHasSkillLevel = require('../internal/Steps/StepHasSkillLevel');
-    const StepIsInCombat = require('../internal/Steps/StepIsInCombat');
-    const StepIsInPvpArea = require('../internal/Steps/StepIsInPvpArea');
-    const StepIsOwnerInCombat = require('../internal/Steps/StepIsOwnerInCombat');
-    const StepHasInventoryItemGroup = require('../internal/Steps/StepHasInventoryItemGroup');
-    const StepGetMaxItemAmount = require('../internal/Steps/StepGetMaxItemAmount');
-    const StepSetCharacterState = require('../internal/Steps/StepSetCharacterState');
-    const StepBuyStorageSpace = require('../internal/Steps/StepBuyStorageSpace');
-    const StepChangeUsername = require('../internal/Steps/StepChangeUsername');
-    const StepCheckCharacterState = require('../internal/Steps/StepCheckCharacterState');
-    const StepInventoryHasRoom = require('../internal/Steps/StepInventoryHasRoom');
-    const StepChangeMapID = require('../internal/Steps/StepChangeMapID');
-    const StepMapActionParameter = require('../internal/Steps/StepMapActionParameter');
-    const StepIsOnTop = require('../internal/Steps/StepIsOnTop');
-    const StepDepositBagItem = require('../internal/Steps/StepDepositBagItem');
-    const StepBindBagItem = require('../internal/Steps/StepBindBagItem');
-    const StepWithdrawBagItem = require('../internal/Steps/StepWithdrawBagItem');
-    const StepRepairBag = require('../internal/Steps/StepRepairBag');
-    const StepIncinerateItem = require('../internal/Steps/StepIncinerateItem');
-    const StepIncreaseBagSize = require('../internal/Steps/StepIncreaseBagSize');
-    const StepIsTimerExpired = require('../internal/Steps/StepIsTimerExpired');
-    const StepHasInventorySpace = require('../internal/Steps/StepHasInventorySpace');
-    const StepCanPickupGrounditem = require('../internal/Steps/StepCanPickupGrounditem');
-    const StepPlayAnimation = require('../internal/Steps/StepPlayAnimation');
-    const StepPickupItemArea = require('../internal/Steps/StepPickupItemArea');
-    const StepClearBounty = require('../internal/Steps/StepClearBounty');
-    const StepRemoveInventoryItem = require('../internal/Steps/StepRemoveInventoryItem');
-    const StepRemoveStorageItem = require('../internal/Steps/StepRemoveStorageItem');
-    const StepRemoveEquipmentItem = require('../internal/Steps/StepRemoveEquipmentItem');
-    const StepRemoveOwnerEquipmentItem = require('../internal/Steps/StepRemoveOwnerEquipmentItem');
-    const StepUpdateTimer = require('../internal/Steps/StepUpdateTimer');
-    const StepChangeLevel = require('../internal/Steps/StepChangeLevel');
-    const StepDespawnOwner = require('../internal/Steps/StepDespawnOwner');
-    const StepDepositItem = require('../internal/Steps/StepDepositItem');
-    const StepDepositDropPartyItem = require('../internal/Steps/StepDepositDropPartyItem');
-    const StepWithdrawItem = require('../internal/Steps/StepWithdrawItem');
-    const StepSellItemToShop = require('../internal/Steps/StepSellItemToShop');
-    const StepBuyItemFromShop = require('../internal/Steps/StepBuyItemFromShop');
-    const StepRemoveMarketOffer = require('../internal/Steps/StepRemoveMarketOffer');
-    const StepRollSkillSuccess = require('../internal/Steps/StepRollSkillSuccess');
-    const StepSetParameterBestToolPower = require('../internal/Steps/StepSetParameterBestToolPower');
-    const StepRollMinMaxSkillSuccess = require('../internal/Steps/StepRollMinMaxSkillSuccess');
-    const StepCombineMoneyBags = require('../internal/Steps/StepCombineMoneyBags');
-    const StepSetParameterItemAmount = require('../internal/Steps/StepSetParameterItemAmount');
-    const StepSetParameterItemStateDef = require('../internal/Steps/StepSetParameterItemStateDef');
-    const StepCanAttackOwner = require('../internal/Steps/StepCanAttackOwner');
-    const StepHasLineOfSight = require('../internal/Steps/StepHasLineOfSight');
-    const StepRequestDropParty = require('../internal/Steps/StepRequestDropParty');
-    const StepOwnerInAttackRange = require('../internal/Steps/StepOwnerInAttackRange');
-    const StepChangeAttackStyle = require('../internal/Steps/StepChangeAttackStyle');
-    const StepChangeCombatRetaliation = require('../internal/Steps/StepChangeCombatRetaliation');
-    const StepClearTimer = require('../internal/Steps/StepClearTimer');
-    const StepGiveInventoryItem = require('../internal/Steps/StepGiveInventoryItem');
-    const StepGiveStorageItem = require('../internal/Steps/StepGiveStorageItem');
-    const StepGiveEquipmentItem = require('../internal/Steps/StepGiveEquipmentItem');
-    const StepGiveOwnerEquipmentItem = require('../internal/Steps/StepGiveOwnerEquipmentItem');
-    const StepGiveXp = require('../internal/Steps/StepGiveXp');
-    const StepSetPosition = require('../internal/Steps/StepSetPosition');
-    const StepRollDropTable = require('../internal/Steps/StepRollDropTable');
-    const StepCreateGroundItem = require('../internal/Steps/StepCreateGroundItem');
-    const StepOpenStorageInterface = require('../internal/Steps/StepOpenStorageInterface');
-    const StepOpenDialogInterface = require('../internal/Steps/StepOpenDialogInterface');
-    const StepShowDialog = require('../internal/Steps/StepShowDialog');
-    const StepProcessDialog = require('../internal/Steps/StepProcessDialog');
-    const StepShowDirectionArrow = require('../internal/Steps/StepShowDirectionArrow');
-    const StepShowDefaultInterfaces = require('../internal/Steps/StepShowDefaultInterfaces');
-    const StepOperateMarket = require('../internal/Steps/StepOperateMarket');
-    const StepRollDespawn = require('../internal/Steps/StepRollDespawn');
-    const StepSetAutocastSpell = require('../internal/Steps/StepSetAutocastSpell');
-    const StepCastSpell = require('../internal/Steps/StepCastSpell');
-    const StepGiveCutGem = require('../internal/Steps/StepGiveCutGem');
-    const StepCanCastSpell = require('../internal/Steps/StepCanCastSpell');
-    const StepIsSpellUnlocked = require('../internal/Steps/StepIsSpellUnlocked');
-    const StepUnlockSpell = require('../internal/Steps/StepUnlockSpell');
-    const StepSetRespawnTimer = require('../internal/Steps/StepSetRespawnTimer');
-    const StepOpenShopInterface = require('../internal/Steps/StepOpenShopInterface');
-    const StepOpenActionMenuInterface = require('../internal/Steps/StepOpenActionMenuInterface');
-    const StepCreateConstructionObject = require('../internal/Steps/StepCreateConstructionObject');
-    const StepCreateCampFire = require('../internal/Steps/StepCreateCampFire');
-    const StepCombineItems = require('../internal/Steps/StepCombineItems');
-    const StepAttackOwner = require('../internal/Steps/StepAttackOwner');
-    const StepGetUsesUntilDepletion = require('../internal/Steps/StepGetUsesUntilDepletion');
-    const StepFollowOwner = require('../internal/Steps/StepFollowOwner');
-    const StepEatFood = require('../internal/Steps/StepEatFood');
-    const StepDamage = require('../internal/Steps/StepDamage');
-    const StepTeleport = require('../internal/Steps/StepTeleport');
-    const StepSetBounty = require('../internal/Steps/StepSetBounty');
-    const StepHireAdventurer = require('../internal/Steps/StepHireAdventurer');
-    const StepSwitchNoteSettings = require('../internal/Steps/StepSwitchNoteSettings');
-    const StepPlaySound = require('../internal/Steps/StepPlaySound');
-    const StepUpgradeActionInterval = require('../internal/Steps/StepUpgradeActionInterval');
-    const StepUpgradeWorldObject = require('../internal/Steps/StepUpgradeWorldObject');
-    const StepDisassembleConstructionObject = require('../internal/Steps/StepDisassembleConstructionObject');
-    const StepDisassembleWorldObjectUpgrade = require('../internal/Steps/StepDisassembleWorldObjectUpgrade');
-    const StepCheckConstructionObject = require('../internal/Steps/StepCheckConstructionObject');
-    const StepCheckWorldObject = require('../internal/Steps/StepCheckWorldObject');
-    const StepOperateConstructionObject = require('../internal/Steps/StepOperateConstructionObject');
-    const StepSetActionInterval = require('../internal/Steps/StepSetActionInterval');
-    const StepSetParameterMaxNoteAmount = require('../internal/Steps/StepSetParameterMaxNoteAmount');
-    const StepConvertToNote = require('../internal/Steps/StepConvertToNote');
-    const StepSignPermit = require('../internal/Steps/StepSignPermit');
-    const StepGiveObeliskAncientEnergy = require('../internal/Steps/StepGiveObeliskAncientEnergy');
-    const StepHasPermit = require('../internal/Steps/StepHasPermit');
-    const StepPurchaseItem = require('../internal/Steps/StepPurchaseItem');
-    const StepWithdrawPurchase = require('../internal/Steps/StepWithdrawPurchase');
-    const StepOpenPurchasesInterface = require('../internal/Steps/StepOpenPurchasesInterface');
-    const StepOpenDropPartyMinigameChestInterface = require('../internal/Steps/StepOpenDropPartyMinigameChestInterface');
-    const StepOwnerInWalkBounds = require('../internal/Steps/StepOwnerInWalkBounds');
-    const StepHasCombatLevel = require('../internal/Steps/StepHasCombatLevel');
-    const StepRandomizeItemStateItemID = require('../internal/Steps/StepRandomizeItemStateItemID');
-    const StepAcceptTrade = require('../internal/Steps/StepAcceptTrade');
-    const StepDeclineTrade = require('../internal/Steps/StepDeclineTrade');
-    const StepSendTradeRequest = require('../internal/Steps/StepSendTradeRequest');
-    const StepAcceptTradeRequest = require('../internal/Steps/StepAcceptTradeRequest');
-    const StepAddTradeItem = require('../internal/Steps/StepAddTradeItem');
-    const StepRemoveTradeItem = require('../internal/Steps/StepRemoveTradeItem');
-    const StepUseItemCharges = require('../internal/Steps/StepUseItemCharges');
-    const StepIsInArea = require('../internal/Steps/StepIsInArea');
-    const StepJoinMinigame = require('../internal/Steps/StepJoinMinigame');
-    const StepLeaveMinigame = require('../internal/Steps/StepLeaveMinigame');
-    const StepStyleHair = require('../internal/Steps/StepStyleHair');
-    const StepAddMarketBuyOffer = require('../internal/Steps/StepAddMarketBuyOffer');
-    const StepAddMarketSellOffer = require('../internal/Steps/StepAddMarketSellOffer');
-    const StepMakeClosestNPCAttackClosestNPC = require('../internal/Steps/StepMakeClosestNPCAttackClosestNPC');
-    const StepSetUserGoalState = require('../internal/Steps/StepSetUserGoalState');
+const StepSendClientMessage = require('../internal/Steps/StepSendClientMessage');
+const StepSendGlobalMessage = require('../internal/Steps/StepSendGlobalMessage');
+const StepIsAdjacent = require('../internal/Steps/StepIsAdjacent');        
+const StepWalkAdjacent = require('../internal/Steps/StepWalkAdjacent');        
+const StepDepleteWorldObjectUses = require('../internal/Steps/StepDepleteWorldObjectUses');        
+const StepWalkOnTop = require('../internal/Steps/StepWalkOnTop');        
+const StepIsEnacterOwnerOfOwner = require('../internal/Steps/StepIsEnacterOwnerOfOwner');        
+const StepOfferEnergy = require('../internal/Steps/StepOfferEnergy');        
+const StepAssertItemState = require('../internal/Steps/StepAssertItemState');        
+const StepAssertGoalStates = require('../internal/Steps/StepAssertGoalStates');        
+const StepHealOther = require('../internal/Steps/StepHealOther');        
+const StepCreateBarricade = require('../internal/Steps/StepCreateBarricade');         
+const StepRollRandomEvent = require('../internal/Steps/StepRollRandomEvent');         
+const StepRollSpecialItem = require('../internal/Steps/StepRollSpecialItem');         
+const StepHasInventoryItem = require('../internal/Steps/StepHasInventoryItem');        
+const StepHasStorageItem = require('../internal/Steps/StepHasStorageItem');        
+const StepHasEquipmentItem = require('../internal/Steps/StepHasEquipmentItem');        
+const StepHasSkillLevel = require('../internal/Steps/StepHasSkillLevel');        
+const StepIsInCombat = require('../internal/Steps/StepIsInCombat');        
+const StepIsInPvpArea = require('../internal/Steps/StepIsInPvpArea');        
+const StepIsOwnerInCombat = require('../internal/Steps/StepIsOwnerInCombat');        
+const StepHasInventoryItemGroup = require('../internal/Steps/StepHasInventoryItemGroup');        
+const StepGetMaxItemAmount = require('../internal/Steps/StepGetMaxItemAmount');        
+const StepSetCharacterState = require('../internal/Steps/StepSetCharacterState');        
+const StepBuyStorageSpace = require('../internal/Steps/StepBuyStorageSpace');        
+const StepChangeUsername = require('../internal/Steps/StepChangeUsername');        
+const StepCheckCharacterState = require('../internal/Steps/StepCheckCharacterState');        
+const StepInventoryHasRoom = require('../internal/Steps/StepInventoryHasRoom');        
+const StepChangeMapID = require('../internal/Steps/StepChangeMapID');        
+const StepMapActionParameter = require('../internal/Steps/StepMapActionParameter');        
+const StepIsOnTop = require('../internal/Steps/StepIsOnTop');        
+const StepDepositBagItem = require('../internal/Steps/StepDepositBagItem');        
+const StepBindBagItem = require('../internal/Steps/StepBindBagItem');        
+const StepWithdrawBagItem = require('../internal/Steps/StepWithdrawBagItem');        
+const StepRepairBag = require('../internal/Steps/StepRepairBag');        
+const StepIncinerateItem = require('../internal/Steps/StepIncinerateItem');        
+const StepIncreaseBagSize = require('../internal/Steps/StepIncreaseBagSize');        
+const StepIsTimerExpired = require('../internal/Steps/StepIsTimerExpired');        
+const StepHasInventorySpace = require('../internal/Steps/StepHasInventorySpace');        
+const StepCanPickupGrounditem = require('../internal/Steps/StepCanPickupGrounditem');        
+const StepPlayAnimation = require('../internal/Steps/StepPlayAnimation');        
+const StepPickupItemArea = require('../internal/Steps/StepPickupItemArea');        
+const StepClearBounty = require('../internal/Steps/StepClearBounty');        
+const StepRemoveInventoryItem = require('../internal/Steps/StepRemoveInventoryItem');     
+const StepRemoveStorageItem = require('../internal/Steps/StepRemoveStorageItem');        
+const StepRemoveEquipmentItem = require('../internal/Steps/StepRemoveEquipmentItem');        
+const StepRemoveOwnerEquipmentItem = require('../internal/Steps/StepRemoveOwnerEquipmentItem');        
+const StepUpdateTimer = require('../internal/Steps/StepUpdateTimer');        
+const StepChangeLevel = require('../internal/Steps/StepChangeLevel');        
+const StepDespawnOwner = require('../internal/Steps/StepDespawnOwner');        
+const StepDepositItem = require('../internal/Steps/StepDepositItem');        
+const StepDepositDropPartyItem = require('../internal/Steps/StepDepositDropPartyItem');        
+const StepWithdrawItem = require('../internal/Steps/StepWithdrawItem');        
+const StepSellItemToShop = require('../internal/Steps/StepSellItemToShop');        
+const StepBuyItemFromShop = require('../internal/Steps/StepBuyItemFromShop');        
+const StepRemoveMarketOffer = require('../internal/Steps/StepRemoveMarketOffer');        
+const StepRollSkillSuccess = require('../internal/Steps/StepRollSkillSuccess');        
+const StepSetParameterBestToolPower = require('../internal/Steps/StepSetParameterBestToolPower');        
+const StepRollMinMaxSkillSuccess = require('../internal/Steps/StepRollMinMaxSkillSuccess');        
+const StepCombineMoneyBags = require('../internal/Steps/StepCombineMoneyBags');        
+const StepSetParameterItemAmount = require('../internal/Steps/StepSetParameterItemAmount');        
+const StepSetParameterItemStateDef = require('../internal/Steps/StepSetParameterItemStateDef');        
+const StepCanAttackOwner = require('../internal/Steps/StepCanAttackOwner');        
+const StepHasLineOfSight = require('../internal/Steps/StepHasLineOfSight');        
+const StepRequestDropParty = require('../internal/Steps/StepRequestDropParty');        
+const StepOwnerInAttackRange = require('../internal/Steps/StepOwnerInAttackRange');        
+const StepChangeAttackStyle = require('../internal/Steps/StepChangeAttackStyle');        
+const StepChangeCombatRetaliation = require('../internal/Steps/StepChangeCombatRetaliation');        
+const StepClearTimer = require('../internal/Steps/StepClearTimer');        
+const StepGiveInventoryItem = require('../internal/Steps/StepGiveInventoryItem');         
+const StepGiveStorageItem = require('../internal/Steps/StepGiveStorageItem');        
+const StepGiveEquipmentItem = require('../internal/Steps/StepGiveEquipmentItem');       
+const StepGiveOwnerEquipmentItem = require('../internal/Steps/StepGiveOwnerEquipmentItem');
+const StepGiveXp = require('../internal/Steps/StepGiveXp');        
+const StepSetPosition = require('../internal/Steps/StepSetPosition');        
+const StepRollDropTable = require('../internal/Steps/StepRollDropTable');        
+const StepRollSkillDropTable = require('../internal/Steps/StepRollSkillDropTable');        
+const StepCreateGroundItem = require('../internal/Steps/StepCreateGroundItem');        
+const StepOpenStorageInterface = require('../internal/Steps/StepOpenStorageInterface');        
+const StepOpenDialogInterface = require('../internal/Steps/StepOpenDialogInterface');        
+const StepShowDialog = require('../internal/Steps/StepShowDialog');        
+const StepProcessDialog = require('../internal/Steps/StepProcessDialog');        
+const StepShowDirectionArrow = require('../internal/Steps/StepShowDirectionArrow');        
+const StepShowDefaultInterfaces = require('../internal/Steps/StepShowDefaultInterfaces');        
+const StepOperateMarket = require('../internal/Steps/StepOperateMarket');        
+const StepRollDespawn = require('../internal/Steps/StepRollDespawn');        
+const StepSetAutocastSpell = require('../internal/Steps/StepSetAutocastSpell');        
+const StepCastSpell = require('../internal/Steps/StepCastSpell');        
+const StepGiveCutGem = require('../internal/Steps/StepGiveCutGem');        
+const StepCanCastSpell = require('../internal/Steps/StepCanCastSpell');        
+const StepIsSpellUnlocked = require('../internal/Steps/StepIsSpellUnlocked');        
+const StepUnlockSpell = require('../internal/Steps/StepUnlockSpell');        
+const StepSetRespawnTimer = require('../internal/Steps/StepSetRespawnTimer');        
+const StepOpenShopInterface = require('../internal/Steps/StepOpenShopInterface');        
+const StepOpenActionMenuInterface = require('../internal/Steps/StepOpenActionMenuInterface');        
+const StepCreateConstructionObject = require('../internal/Steps/StepCreateConstructionObject');        
+const StepCreateCampFire = require('../internal/Steps/StepCreateCampFire');        
+const StepCombineItems = require('../internal/Steps/StepCombineItems');        
+const StepAttackOwner = require('../internal/Steps/StepAttackOwner');        
+const StepGetUsesUntilDepletion = require('../internal/Steps/StepGetUsesUntilDepletion');        
+const StepFollowOwner = require('../internal/Steps/StepFollowOwner');        
+const StepEatFood = require('../internal/Steps/StepEatFood');        
+const StepDamage = require('../internal/Steps/StepDamage');        
+const StepTeleport = require('../internal/Steps/StepTeleport');        
+const StepSetBounty = require('../internal/Steps/StepSetBounty');        
+const StepHireAdventurer = require('../internal/Steps/StepHireAdventurer');        
+const StepSwitchNoteSettings = require('../internal/Steps/StepSwitchNoteSettings');        
+const StepPlaySound = require('../internal/Steps/StepPlaySound');        
+const StepUpgradeActionInterval = require('../internal/Steps/StepUpgradeActionInterval');        
+const StepUpgradeWorldObject = require('../internal/Steps/StepUpgradeWorldObject');        
+const StepDisassembleConstructionObject = require('../internal/Steps/StepDisassembleConstructionObject');        
+const StepDisassembleWorldObjectUpgrade = require('../internal/Steps/StepDisassembleWorldObjectUpgrade');        
+const StepCheckConstructionObject = require('../internal/Steps/StepCheckConstructionObject');        
+const StepCheckWorldObject = require('../internal/Steps/StepCheckWorldObject');        
+const StepOperateConstructionObject = require('../internal/Steps/StepOperateConstructionObject');        
+const StepSetActionInterval = require('../internal/Steps/StepSetActionInterval');        
+const StepSetParameterMaxNoteAmount = require('../internal/Steps/StepSetParameterMaxNoteAmount');        
+const StepConvertToNote = require('../internal/Steps/StepConvertToNote');        
+const StepSignPermit = require('../internal/Steps/StepSignPermit');        
+const StepGiveObeliskAncientEnergy = require('../internal/Steps/StepGiveObeliskAncientEnergy');        
+const StepHasPermit = require('../internal/Steps/StepHasPermit');         
+const StepPurchaseItem = require('../internal/Steps/StepPurchaseItem');        
+const StepWithdrawPurchase = require('../internal/Steps/StepWithdrawPurchase');         
+const StepOpenPurchasesInterface = require('../internal/Steps/StepOpenPurchasesInterface');        
+const StepOpenDropPartyMinigameChestInterface = require('../internal/Steps/StepOpenDropPartyMinigameChestInterface');        
+const StepOwnerInWalkBounds = require('../internal/Steps/StepOwnerInWalkBounds');        
+const StepHasCombatLevel = require('../internal/Steps/StepHasCombatLevel');        
+const StepRandomizeItemStateItemID = require('../internal/Steps/StepRandomizeItemStateItemID');        
+const StepAcceptTrade = require('../internal/Steps/StepAcceptTrade');        
+const StepDeclineTrade = require('../internal/Steps/StepDeclineTrade');        
+const StepSendTradeRequest = require('../internal/Steps/StepSendTradeRequest');        
+const StepAcceptTradeRequest = require('../internal/Steps/StepAcceptTradeRequest');        
+const StepAddTradeItem = require('../internal/Steps/StepAddTradeItem');        
+const StepRemoveTradeItem = require('../internal/Steps/StepRemoveTradeItem');        
+const StepUseItemCharges = require('../internal/Steps/StepUseItemCharges');        
+const StepIsInArea = require('../internal/Steps/StepIsInArea');        
+const StepJoinMinigame = require('../internal/Steps/StepJoinMinigame');        
+const StepLeaveMinigame = require('../internal/Steps/StepLeaveMinigame');       
+const StepStyleHair = require('../internal/Steps/StepStyleHair') ;
+const StepAddMarketBuyOffer = require('../internal/Steps/StepAddMarketBuyOffer');        
+const StepAddMarketSellOffer = require('../internal/Steps/StepAddMarketSellOffer');        
+const StepMakeClosestNPCAttackClosestNPC = require('../internal/Steps/StepMakeClosestNPCAttackClosestNPC');
+const StepSetUserGoalState = require('../internal/Steps/StepSetUserGoalState');
+const StepSayMessage = require('../internal/Steps/StepSayMessage');
 
-    module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
-        SEND_CLIENT_MESSAGE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSendClientMessage.StepSendClientMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SEND_GLOBAL_MESSAGE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSendGlobalMessage.StepSendGlobalMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OPEN_PURCHASES_INTERFACE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOpenPurchasesInterface.StepOpenPurchasesInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OPEN_DROP_PARTY_MINIGAME_CHEST_INTERFACE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOpenDropPartyMinigameChestInterface.StepOpenDropPartyMinigameChestInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_PARAMETER_MAX_NOTE_AMOUNT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetParameterMaxNoteAmount.StepSetParameterMaxNoteAmount(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SIGN_PERMIT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSignPermit.StepSignPermit(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GIVE_OBELISK_ANCIENT_ENERGY: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGiveObeliskAncientEnergy.StepGiveObeliskAncientEnergy(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OPERATE_CONSTRUCTION_OBJECT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOperateConstructionObject.StepOperateConstructionObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CONVERT_TO_NOTE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepConvertToNote.StepConvertToNote(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_ACTION_INTERVAL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetActionInterval.StepSetActionInterval(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_ADJACENT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsAdjacent.StepIsAdjacent(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ADD_MARKET_BUY_OFFER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAddMarketBuyOffer.StepAddMarketBuyOffer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ADD_MARKET_SELL_OFFER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAddMarketSellOffer.StepAddMarketSellOffer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        PURCHASE_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepPurchaseItem.StepPurchaseItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        WITHDRAW_PURCHASE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepWithdrawPurchase.StepWithdrawPurchase(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        WALK_ADJACENT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepWalkAdjacent.StepWalkAdjacent(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        WALK_ON_TOP: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepWalkOnTop.StepWalkOnTop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_ENACTER_OWNER_OF_OWNER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsEnacterOwnerOfOwner.StepIsEnacterOwnerOfOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CREATE_BARRICADE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCreateBarricade.StepCreateBarricade(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ROLL_RANDOM_EVENT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRollRandomEvent.StepRollRandomEvent(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ROLL_SPECIAL_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRollSpecialItem.StepRollSpecialItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HEAL_OTHER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHealOther.StepHealOther(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OFFER_ENERGY: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOfferEnergy.StepOfferEnergy(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ASSERT_ITEM_STATE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAssertItemState.StepAssertItemState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ASSERT_GOAL_STATES: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAssertGoalStates.StepAssertGoalStates(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_INVENTORY_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasInventoryItem.StepHasInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_CHARACTER_STATE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetCharacterState.StepSetCharacterState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        BUY_STORAGE_SPACE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepBuyStorageSpace.StepBuyStorageSpace(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CHANGE_USERNAME: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepChangeUsername.StepChangeUsername(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CHECK_CHARACTER_STATE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCheckCharacterState.StepCheckCharacterState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_STORAGE_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasStorageItem.StepHasStorageItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_EQUIPMENT_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasEquipmentItem.StepHasEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_SKILL_LEVEL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasSkillLevel.StepHasSkillLevel(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_COMBAT_LEVEL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasCombatLevel.StepHasCombatLevel(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        RANDOMIZE_ITEM_STATE_ITEMID: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRandomizeItemStateItemID.StepRandomizeItemStateItemID(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_IN_COMBAT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsInCombat.StepIsInCombat(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_IN_PVP_AREA: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsInPvpArea.StepIsInPvpArea(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_OWNER_IN_COMBAT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsOwnerInCombat.StepIsOwnerInCombat(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GET_USES_UNTIL_DEPLETION: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGetUsesUntilDepletion.StepGetUsesUntilDepletion(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_INVENTORY_ITEM_GROUP: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasInventoryItemGroup.StepHasInventoryItemGroup(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GET_MAX_ITEM_AMOUNT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGetMaxItemAmount.StepGetMaxItemAmount(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        INVENTORY_HAS_ROOM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepInventoryHasRoom.StepInventoryHasRoom(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CHANGE_MAP_ID: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepChangeMapID.StepChangeMapID(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        MAP_ACTION_PARAMETER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepMapActionParameter.StepMapActionParameter(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_ON_TOP: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsOnTop.StepIsOnTop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        BIND_BAG_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepBindBagItem.StepBindBagItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DEPOSIT_BAG_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDepositBagItem.StepDepositBagItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        WITHDRAW_BAG_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepWithdrawBagItem.StepWithdrawBagItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        REPAIR_BAG: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRepairBag.StepRepairBag(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        INCREASE_BAG_SIZE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIncreaseBagSize.StepIncreaseBagSize(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        INCINERATE_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIncinerateItem.StepIncinerateItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_TIMER_EXPIRED: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsTimerExpired.StepIsTimerExpired(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_INVENTORY_SPACE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasInventorySpace.StepHasInventorySpace(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CAN_PICKUP_GROUNDITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCanPickupGrounditem.StepCanPickupGrounditem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        PLAY_ANIMATION: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepPlayAnimation.StepPlayAnimation(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        PICKUP_ITEM_AREA: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepPickupItemArea.StepPickupItemArea(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        REMOVE_INVENTORY_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRemoveInventoryItem.StepRemoveInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        REMOVE_STORAGE_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRemoveStorageItem.StepRemoveStorageItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        REMOVE_EQUIPMENT_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRemoveEquipmentItem.StepRemoveEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        REMOVE_OWNER_EQUIPMENT_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRemoveOwnerEquipmentItem.StepRemoveOwnerEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        UPDATE_TIMER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepUpdateTimer.StepUpdateTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CHANGE_LEVEL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepChangeLevel.StepChangeLevel(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DESPAWN_OWNER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDespawnOwner.StepDespawnOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DEPOSIT_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDepositItem.StepDepositItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DEPOSIT_DROP_PARTY_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDepositDropPartyItem.StepDepositDropPartyItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        WITHDRAW_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepWithdrawItem.StepWithdrawItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SELL_ITEM_TO_SHOP: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSellItemToShop.StepSellItemToShop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        BUY_ITEM_FROM_SHOP: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepBuyItemFromShop.StepBuyItemFromShop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        REMOVE_MARKET_OFFER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRemoveMarketOffer.StepRemoveMarketOffer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ROLL_SKILL_SUCCESS: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRollSkillSuccess.StepRollSkillSuccess(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_PARAMETER_BEST_TOOL_POWER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetParameterBestToolPower.StepSetParameterBestToolPower(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ROLL_MIN_MAX_SKILL_SUCCESS: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRollMinMaxSkillSuccess.StepRollMinMaxSkillSuccess(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        COMBINE_MONEY_BAGS: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCombineMoneyBags.StepCombineMoneyBags(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_PARAMETER_ITEM_AMOUNT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetParameterItemAmount.StepSetParameterItemAmount(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_PARAMETER_ITEM_STATE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetParameterItemStateDef.StepSetParameterItemStateDef(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CAN_ATTACK_OWNER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCanAttackOwner.StepCanAttackOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_LINE_OF_SIGHT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasLineOfSight.StepHasLineOfSight(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        REQUEST_DROP_PARTY: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRequestDropParty.StepRequestDropParty(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OWNER_IN_ATTACK_RANGE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOwnerInAttackRange.StepOwnerInAttackRange(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OWNER_IN_WALK_BOUNDS: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOwnerInWalkBounds.StepOwnerInWalkBounds(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CHANGE_ATTACK_STYLE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepChangeAttackStyle.StepChangeAttackStyle(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CHANGE_COMBAT_RETALIATION: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepChangeCombatRetaliation.StepChangeCombatRetaliation(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CLEAR_TIMER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepClearTimer.StepClearTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GIVE_INVENTORY_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGiveInventoryItem.StepGiveInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GIVE_STORAGE_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGiveStorageItem.StepGiveStorageItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GIVE_EQUIPMENT_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGiveEquipmentItem.StepGiveEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GIVE_OWNER_EQUIPMENT_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGiveOwnerEquipmentItem.StepGiveOwnerEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HAS_PERMIT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHasPermit.StepHasPermit(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        UPGRADE_ACTION_INTERVAL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepUpgradeActionInterval.StepUpgradeActionInterval(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GIVE_XP: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGiveXp.StepGiveXp(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_POSITION: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetPosition.StepSetPosition(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ROLL_DROP_TABLE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRollDropTable.StepRollDropTable(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CREATE_GROUND_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCreateGroundItem.StepCreateGroundItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OPEN_STORAGE_INTERFACE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOpenStorageInterface.StepOpenStorageInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OPEN_DIALOG_INTERFACE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOpenDialogInterface.StepOpenDialogInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SHOW_DIALOG: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepShowDialog.StepShowDialog(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        PROCESS_DIALOG: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepProcessDialog.StepProcessDialog(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SHOW_DIRECTION_ARROW: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepShowDirectionArrow.StepShowDirectionArrow(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SHOW_DEFAULT_INTERFACES: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepShowDefaultInterfaces.StepShowDefaultInterfaces(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OPERATE_MARKET: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOperateMarket.StepOperateMarket(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ROLL_DESPAWN: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRollDespawn.StepRollDespawn(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_AUTOCAST_SPELL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetAutocastSpell.StepSetAutocastSpell(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CAST_SPELL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCastSpell.StepCastSpell(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        GIVE_CUT_GEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepGiveCutGem.StepGiveCutGem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CAN_CAST_SPELL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCanCastSpell.StepCanCastSpell(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_SPELL_UNLOCKED: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsSpellUnlocked.StepIsSpellUnlocked(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        UNLOCK_SPELL: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepUnlockSpell.StepUnlockSpell(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_RESPAWN_TIMER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetRespawnTimer.StepSetRespawnTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OPEN_SHOP_INTERFACE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOpenShopInterface.StepOpenShopInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        OPEN_ACTION_MENU_INTERFACE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepOpenActionMenuInterface.StepOpenActionMenuInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CREATE_CAMP_FIRE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCreateCampFire.StepCreateCampFire(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        COMBINE_ITEMS: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCombineItems.StepCombineItems(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ATTACK_OWNER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAttackOwner.StepAttackOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        FOLLOW_OWNER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepFollowOwner.StepFollowOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        EAT_FOOD: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepEatFood.StepEatFood(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DAMAGE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDamage.StepDamage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        TELEPORT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepTeleport.StepTeleport(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_BOUNTY: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetBounty.StepSetBounty(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        HIRE_ADVENTURER: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepHireAdventurer.StepHireAdventurer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SWITCH_NOTE_SETTINGS: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSwitchNoteSettings.StepSwitchNoteSettings(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        PLAY_SOUND: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepPlaySound.StepPlaySound(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CREATE_CONSTRUCTION_OBJECT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCreateConstructionObject.StepCreateConstructionObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        UPGRADE_WORLD_OBJECT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepUpgradeWorldObject.StepUpgradeWorldObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DISASSEMBLE_CONSTRUCTION_OBJECT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDisassembleConstructionObject.StepDisassembleConstructionObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DISASSEMBLE_WORLD_OBJECT_UPGRADE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDisassembleWorldObjectUpgrade.StepDisassembleWorldObjectUpgrade(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CHECK_CONSTRUCTION_OBJECT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCheckConstructionObject.StepCheckConstructionObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CHECK_WORLD_OBJECT: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepCheckWorldObject.StepCheckWorldObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DEPLETE_WORLD_OBJECT_USES: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDepleteWorldObjectUses.StepDepleteWorldObjectUses(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        CLEAR_BOUNTY: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepClearBounty.StepClearBounty(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SEND_TRADE_REQUEST: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSendTradeRequest.StepSendTradeRequest(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ACCEPT_TRADE_REQUEST: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAcceptTradeRequest.StepAcceptTradeRequest(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ACCEPT_TRADE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAcceptTrade.StepAcceptTrade(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        DECLINE_TRADE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepDeclineTrade.StepDeclineTrade(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        ADD_TRADE_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAddTradeItem.StepAddTradeItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        REMOVE_TRADE_ITEM: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepRemoveTradeItem.StepRemoveTradeItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        USE_ITEM_CHARGES: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepUseItemCharges.StepUseItemCharges(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        IS_IN_AREA: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepIsInArea.StepIsInArea(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        JOIN_MINIGAME: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepJoinMinigame.StepJoinMinigame(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        LEAVE_MINIGAME: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepLeaveMinigame.StepLeaveMinigame(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        STYLE_HAIR: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepStyleHair.StepStyleHair(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepMakeClosestNPCAttackClosestNPC.StepMakeClosestNPCAttackClosestNPC(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        },
-        SET_USER_GOAL_STATE: {
-            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetUserGoalState.StepSetUserGoalState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
-            },
-        }
-    };
-} catch (e) {
-    if (e.code !== 'MODULE_NOT_FOUND') {
-        throw e;
+module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
+    SEND_CLIENT_MESSAGE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSendClientMessage.StepSendClientMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SAY_MESSAGE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSayMessage.StepSayMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SEND_GLOBAL_MESSAGE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSendGlobalMessage.StepSendGlobalMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OPEN_PURCHASES_INTERFACE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOpenPurchasesInterface.StepOpenPurchasesInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OPEN_DROP_PARTY_MINIGAME_CHEST_INTERFACE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOpenDropPartyMinigameChestInterface.StepOpenDropPartyMinigameChestInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_PARAMETER_MAX_NOTE_AMOUNT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetParameterMaxNoteAmount.StepSetParameterMaxNoteAmount(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SIGN_PERMIT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSignPermit.StepSignPermit(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GIVE_OBELISK_ANCIENT_ENERGY: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGiveObeliskAncientEnergy.StepGiveObeliskAncientEnergy(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OPERATE_CONSTRUCTION_OBJECT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOperateConstructionObject.StepOperateConstructionObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CONVERT_TO_NOTE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepConvertToNote.StepConvertToNote(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_ACTION_INTERVAL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetActionInterval.StepSetActionInterval(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_ADJACENT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsAdjacent.StepIsAdjacent(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ADD_MARKET_BUY_OFFER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepAddMarketBuyOffer.StepAddMarketBuyOffer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ADD_MARKET_SELL_OFFER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepAddMarketSellOffer.StepAddMarketSellOffer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    PURCHASE_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepPurchaseItem.StepPurchaseItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    WITHDRAW_PURCHASE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepWithdrawPurchase.StepWithdrawPurchase(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    WALK_ADJACENT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepWalkAdjacent.StepWalkAdjacent(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    WALK_ON_TOP: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepWalkOnTop.StepWalkOnTop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_ENACTER_OWNER_OF_OWNER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsEnacterOwnerOfOwner.StepIsEnacterOwnerOfOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CREATE_BARRICADE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCreateBarricade.StepCreateBarricade(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ROLL_RANDOM_EVENT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRollRandomEvent.StepRollRandomEvent(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ROLL_SPECIAL_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRollSpecialItem.StepRollSpecialItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HEAL_OTHER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHealOther.StepHealOther(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OFFER_ENERGY: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOfferEnergy.StepOfferEnergy(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ASSERT_ITEM_STATE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepAssertItemState.StepAssertItemState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ASSERT_GOAL_STATES: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepAssertGoalStates.StepAssertGoalStates(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_INVENTORY_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasInventoryItem.StepHasInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_CHARACTER_STATE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetCharacterState.StepSetCharacterState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    BUY_STORAGE_SPACE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepBuyStorageSpace.StepBuyStorageSpace(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CHANGE_USERNAME: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepChangeUsername.StepChangeUsername(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CHECK_CHARACTER_STATE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCheckCharacterState.StepCheckCharacterState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_STORAGE_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasStorageItem.StepHasStorageItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_EQUIPMENT_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasEquipmentItem.StepHasEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_SKILL_LEVEL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasSkillLevel.StepHasSkillLevel(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_COMBAT_LEVEL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasCombatLevel.StepHasCombatLevel(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    RANDOMIZE_ITEM_STATE_ITEMID: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRandomizeItemStateItemID.StepRandomizeItemStateItemID(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_IN_COMBAT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsInCombat.StepIsInCombat(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_IN_PVP_AREA: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsInPvpArea.StepIsInPvpArea(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_OWNER_IN_COMBAT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsOwnerInCombat.StepIsOwnerInCombat(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GET_USES_UNTIL_DEPLETION: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGetUsesUntilDepletion.StepGetUsesUntilDepletion(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_INVENTORY_ITEM_GROUP: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasInventoryItemGroup.StepHasInventoryItemGroup(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GET_MAX_ITEM_AMOUNT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGetMaxItemAmount.StepGetMaxItemAmount(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    INVENTORY_HAS_ROOM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepInventoryHasRoom.StepInventoryHasRoom(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CHANGE_MAP_ID: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepChangeMapID.StepChangeMapID(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    MAP_ACTION_PARAMETER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepMapActionParameter.StepMapActionParameter(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_ON_TOP: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsOnTop.StepIsOnTop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    BIND_BAG_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepBindBagItem.StepBindBagItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DEPOSIT_BAG_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDepositBagItem.StepDepositBagItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    WITHDRAW_BAG_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepWithdrawBagItem.StepWithdrawBagItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    REPAIR_BAG: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRepairBag.StepRepairBag(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    INCREASE_BAG_SIZE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIncreaseBagSize.StepIncreaseBagSize(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    INCINERATE_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIncinerateItem.StepIncinerateItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_TIMER_EXPIRED: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsTimerExpired.StepIsTimerExpired(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_INVENTORY_SPACE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasInventorySpace.StepHasInventorySpace(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CAN_PICKUP_GROUNDITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCanPickupGrounditem.StepCanPickupGrounditem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    PLAY_ANIMATION: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepPlayAnimation.StepPlayAnimation(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    PICKUP_ITEM_AREA: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepPickupItemArea.StepPickupItemArea(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    REMOVE_INVENTORY_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRemoveInventoryItem.StepRemoveInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    REMOVE_STORAGE_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRemoveStorageItem.StepRemoveStorageItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    REMOVE_EQUIPMENT_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRemoveEquipmentItem.StepRemoveEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    REMOVE_OWNER_EQUIPMENT_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRemoveOwnerEquipmentItem.StepRemoveOwnerEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    UPDATE_TIMER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepUpdateTimer.StepUpdateTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CHANGE_LEVEL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepChangeLevel.StepChangeLevel(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DESPAWN_OWNER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDespawnOwner.StepDespawnOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DEPOSIT_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDepositItem.StepDepositItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DEPOSIT_DROP_PARTY_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDepositDropPartyItem.StepDepositDropPartyItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    WITHDRAW_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepWithdrawItem.StepWithdrawItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SELL_ITEM_TO_SHOP: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSellItemToShop.StepSellItemToShop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    BUY_ITEM_FROM_SHOP: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepBuyItemFromShop.StepBuyItemFromShop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    REMOVE_MARKET_OFFER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRemoveMarketOffer.StepRemoveMarketOffer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ROLL_SKILL_SUCCESS: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRollSkillSuccess.StepRollSkillSuccess(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_PARAMETER_BEST_TOOL_POWER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetParameterBestToolPower.StepSetParameterBestToolPower(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ROLL_MIN_MAX_SKILL_SUCCESS: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRollMinMaxSkillSuccess.StepRollMinMaxSkillSuccess(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    COMBINE_MONEY_BAGS: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCombineMoneyBags.StepCombineMoneyBags(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_PARAMETER_ITEM_AMOUNT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetParameterItemAmount.StepSetParameterItemAmount(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_PARAMETER_ITEM_STATE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetParameterItemStateDef.StepSetParameterItemStateDef(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CAN_ATTACK_OWNER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCanAttackOwner.StepCanAttackOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_LINE_OF_SIGHT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasLineOfSight.StepHasLineOfSight(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    REQUEST_DROP_PARTY: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRequestDropParty.StepRequestDropParty(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OWNER_IN_ATTACK_RANGE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOwnerInAttackRange.StepOwnerInAttackRange(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OWNER_IN_WALK_BOUNDS: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOwnerInWalkBounds.StepOwnerInWalkBounds(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CHANGE_ATTACK_STYLE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepChangeAttackStyle.StepChangeAttackStyle(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CHANGE_COMBAT_RETALIATION: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepChangeCombatRetaliation.StepChangeCombatRetaliation(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CLEAR_TIMER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepClearTimer.StepClearTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GIVE_INVENTORY_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGiveInventoryItem.StepGiveInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GIVE_STORAGE_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGiveStorageItem.StepGiveStorageItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GIVE_EQUIPMENT_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGiveEquipmentItem.StepGiveEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GIVE_OWNER_EQUIPMENT_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGiveOwnerEquipmentItem.StepGiveOwnerEquipmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HAS_PERMIT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHasPermit.StepHasPermit(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    UPGRADE_ACTION_INTERVAL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepUpgradeActionInterval.StepUpgradeActionInterval(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GIVE_XP: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGiveXp.StepGiveXp(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_POSITION: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetPosition.StepSetPosition(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ROLL_DROP_TABLE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRollDropTable.StepRollDropTable(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ROLL_SKILL_DROP_TABLE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRollSkillDropTable.StepRollSkillDropTable(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CREATE_GROUND_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCreateGroundItem.StepCreateGroundItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OPEN_STORAGE_INTERFACE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOpenStorageInterface.StepOpenStorageInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OPEN_DIALOG_INTERFACE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOpenDialogInterface.StepOpenDialogInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SHOW_DIALOG: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepShowDialog.StepShowDialog(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    PROCESS_DIALOG: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepProcessDialog.StepProcessDialog(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SHOW_DIRECTION_ARROW: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepShowDirectionArrow.StepShowDirectionArrow(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SHOW_DEFAULT_INTERFACES: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepShowDefaultInterfaces.StepShowDefaultInterfaces(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OPERATE_MARKET: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOperateMarket.StepOperateMarket(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ROLL_DESPAWN: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRollDespawn.StepRollDespawn(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_AUTOCAST_SPELL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetAutocastSpell.StepSetAutocastSpell(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CAST_SPELL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCastSpell.StepCastSpell(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    GIVE_CUT_GEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepGiveCutGem.StepGiveCutGem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CAN_CAST_SPELL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCanCastSpell.StepCanCastSpell(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_SPELL_UNLOCKED: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsSpellUnlocked.StepIsSpellUnlocked(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    UNLOCK_SPELL: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepUnlockSpell.StepUnlockSpell(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_RESPAWN_TIMER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetRespawnTimer.StepSetRespawnTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OPEN_SHOP_INTERFACE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOpenShopInterface.StepOpenShopInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    OPEN_ACTION_MENU_INTERFACE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepOpenActionMenuInterface.StepOpenActionMenuInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CREATE_CAMP_FIRE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCreateCampFire.StepCreateCampFire(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    COMBINE_ITEMS: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCombineItems.StepCombineItems(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ATTACK_OWNER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepAttackOwner.StepAttackOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    FOLLOW_OWNER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepFollowOwner.StepFollowOwner(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    EAT_FOOD: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepEatFood.StepEatFood(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DAMAGE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDamage.StepDamage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    TELEPORT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepTeleport.StepTeleport(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_BOUNTY: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetBounty.StepSetBounty(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    HIRE_ADVENTURER: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepHireAdventurer.StepHireAdventurer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SWITCH_NOTE_SETTINGS: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSwitchNoteSettings.StepSwitchNoteSettings(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    PLAY_SOUND: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepPlaySound.StepPlaySound(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CREATE_CONSTRUCTION_OBJECT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCreateConstructionObject.StepCreateConstructionObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    UPGRADE_WORLD_OBJECT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepUpgradeWorldObject.StepUpgradeWorldObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DISASSEMBLE_CONSTRUCTION_OBJECT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDisassembleConstructionObject.StepDisassembleConstructionObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DISASSEMBLE_WORLD_OBJECT_UPGRADE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDisassembleWorldObjectUpgrade.StepDisassembleWorldObjectUpgrade(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CHECK_CONSTRUCTION_OBJECT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCheckConstructionObject.StepCheckConstructionObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CHECK_WORLD_OBJECT: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepCheckWorldObject.StepCheckWorldObject(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DEPLETE_WORLD_OBJECT_USES: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDepleteWorldObjectUses.StepDepleteWorldObjectUses(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    CLEAR_BOUNTY: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepClearBounty.StepClearBounty(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SEND_TRADE_REQUEST: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSendTradeRequest.StepSendTradeRequest(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ACCEPT_TRADE_REQUEST: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepAcceptTradeRequest.StepAcceptTradeRequest(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ACCEPT_TRADE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepAcceptTrade.StepAcceptTrade(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    DECLINE_TRADE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepDeclineTrade.StepDeclineTrade(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    ADD_TRADE_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepAddTradeItem.StepAddTradeItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    REMOVE_TRADE_ITEM: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepRemoveTradeItem.StepRemoveTradeItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    USE_ITEM_CHARGES: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepUseItemCharges.StepUseItemCharges(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    IS_IN_AREA: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepIsInArea.StepIsInArea(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    JOIN_MINIGAME: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepJoinMinigame.StepJoinMinigame(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    LEAVE_MINIGAME: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepLeaveMinigame.StepLeaveMinigame(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    STYLE_HAIR: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepStyleHair.StepStyleHair(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepMakeClosestNPCAttackClosestNPC.StepMakeClosestNPCAttackClosestNPC(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
+    },
+    SET_USER_GOAL_STATE: {
+        build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+            return new StepSetUserGoalState.StepSetUserGoalState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+        },
     }
-}
+};

@@ -13,12 +13,17 @@ const TestType = {
     KILL_ALPHA_WOLF: {
         id: 'KILL_ALPHA_WOLF',
         executeString: 'kill_alpha_wolf'
-    }
+    },
+    MINE_COPPER_ORE: {
+        id: 'MINE_COPPER_ORE',
+        executeString: 'mine_copper'
+    },
 };
 module.exports.TestType = TestType;
 
 const TestIncinerateAllItems = require('../internal/Tests/TestIncinerateAllItems');
 const TestKillAlphaWolf = require('../internal/Tests/TestKillAlphaWolf');
+const TestMineCopperOre = require('../internal/Tests/TestMineCopperOre');
 
 module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     INCINERATE_ALL_ITEMS: {
@@ -29,6 +34,11 @@ module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     KILL_ALPHA_WOLF: {
         build: (parameters) => {
             return new TestKillAlphaWolf.TestKillAlphaWolf(...parameters);
+        },
+    },
+    MINE_COPPER_ORE: {
+        build: (parameters) => {
+            return new TestMineCopperOre.TestMineCopperOre(...parameters);
         },
     }
 };

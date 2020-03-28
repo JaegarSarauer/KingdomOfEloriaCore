@@ -56,7 +56,7 @@ const SpellBuilder = {
             }],
         };
     },
-    ENCHANT: (id, name, magicLevelReq, essenceRequirement, enchantmentID, spellIconIndex) => {
+    ENCHANT: (id, xpGain, name, magicLevelReq, essenceRequirement, enchantmentID, spellIconIndex) => {
         let enchantSteps = [];
         for (let i = 0; i < essenceRequirement.length; i++) {
             enchantSteps.push(buildStep(StepType.HAS_INVENTORY_ITEM, { params: [essenceRequirement[i][0], essenceRequirement[i][1]] }));
@@ -67,11 +67,10 @@ const SpellBuilder = {
         for (let i = 0; i < essenceRequirement.length; i++) {
             enchantSteps.push(buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [essenceRequirement[i][0], essenceRequirement[i][1]] }));
         }
-        enchantSteps.push(buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You cast the teleport spell...'] }));
+        enchantSteps.push(buildStep(StepType.SEND_CLIENT_MESSAGE, { params: [''] }));
         
-        enchantSteps.push(buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }));
+        enchantSteps.push(buildStep(StepType.IS_TIMER_EXPIRED, { params: [0] }));
         enchantSteps.push(buildStep(StepType.GIVE_XP, { params: [22, xpGain] })); //hardcoded env. magic xp
-        enchantSteps.push(buildStep(StepType.TELEPORT, { params: teleportParams }));
 
         return {
             id,

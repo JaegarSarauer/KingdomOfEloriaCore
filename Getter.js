@@ -64,8 +64,22 @@ const DropTables = {
             dropArray.push([ShardIDs[i], essenceMin, essenceMax, rarityArray[i]]);
         }
         return DropTables.Table(tableRarity, dropArray);
-    }
+    },
 }
+
+const UncutGemIDs = {
+    UNCUT_OPAL: 636,
+    UNCUT_TOPAZ: 638,
+    UNCUT_QUARTZ: 640,
+    UNCUT_JADE: 642,
+    UNCUT_AMBER: 644,
+    UNCUT_SAPPHIRE: 646,
+    UNCUT_AMETHYST: 648,
+    UNCUT_EMERALD: 650,
+    UNCUT_RUBY: 652,
+    UNCUT_ONYX: 654,
+    UNCUT_DIAMOND: 656,
+};
 
 const Recipes = {
     Dough : () => {
@@ -183,7 +197,7 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: spriteModelID,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.9 },
+                    position: { x: 0, y: 0.75 },
                     rotation: 0,
                     UIModel: null,
                 },
@@ -278,7 +292,9 @@ const ItemGetter = {
             }],
         };
     },
-    CutGem: (id, name, gemcuttingBaseLevel, incinerateLevel, value, tier, state, baseEnchantCharge, spriteIndex, amuletID) => {
+    CutGem: (id, name, gemcuttingBaseLevel, incinerateLevel, value, tier, state, baseEnchantCharge, spriteIndex, cutGemID) => {        
+        const necklaceBaseLevel = 20;
+        const ringBaseLevel = 2;
         return {
             id,
             name,
@@ -303,21 +319,89 @@ const ItemGetter = {
                 id: 9,
                 name: 'Craft',
                 entityType: Entity.EntityType.INVENTORY_ITEM,
-                entityID: 674,
+                entityID: 524,
                 actionInterval: 4,
                 flags: ['REPEAT_ACTION'],
                 steps: [
-                    [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [id, 1] }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [674, 1] }),
+                    [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] })],
+                    [buildStep(StepType.HAS_INVENTORY_ITEM, { 
+                        params: [674, 1], // Gold Chain
+                        stepResultFail: StepResult.NEXT_STEP_LIST
+                    }),
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
-                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + 5] }),
-                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1] }),
+                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + necklaceBaseLevel] }),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] }),
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [674, 1] }),
-                    buildStep(StepType.GIVE_XP, { params: [21, 25 * tier] }),
-                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [amuletID, 1] })] //ItemStates.ENCHANTED_GEM.build(-1, Getter.CalculateGemCapacity(tier, state.def.quality))
-                ]
+                    buildStep(StepType.GIVE_XP, { params: [21, 50 + (25 * tier)] }),
+                    //buildStep(StepType.GIVE_XP, { params: [15, 25 + (12 * tier)] }),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [cutGemID, 1, 'ITEM_STATE'] })]
+                    [buildStep(StepType.HAS_INVENTORY_ITEM, { 
+                        params: [799, 1], // Gold ring
+                    }),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
+                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + ringBaseLevel] }),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] }),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [799, 1] }),
+                    buildStep(StepType.GIVE_XP, { params: [21, 5 + (25 * tier)] }),
+                    //buildStep(StepType.GIVE_XP, { params: [15, 2 + (12 * tier)] }),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [cutGemID, 1, 'ITEM_STATE'] })]
+                ] 
             }]
         };
+    },
+    BaseRing: function(id, notedID, name, value, spriteIndex) {
+        let ring = {
+            id,
+            name,
+            noted: false,
+            value,
+            stackable: false,
+            description: 'A ring',
+            spriteIndex,
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            actions: [{
+                interfaceID: 5,
+                id: 4,
+                name: 'Equip Right',
+                steps: [
+                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [7, 'ITEM_ID', 'ITEM_STATE'] })]
+                ]
+            }, {
+                interfaceID: 5,
+                id: 5,
+                name: 'Equip Left',
+                steps: [
+                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [8, 'ITEM_ID', 'ITEM_STATE'] })]
+                ]
+            }],
+        };
+        if (notedID) {
+            ring.notedID = notedID;
+        }
+        return ring;
+    },
+    GoldRing: function(id, notedID, name, craftingLevel, incinerateLevel, value, spriteIndex) {
+        let ring = this.BaseRing(id, notedID, name, value, spriteIndex);
+        ring.requirements = ItemDetail.build([
+            ItemDetail.levelSkillDetail(craftingLevel, 14, 'CRAFT'),
+            ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
+        ]);
+        ring.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
+        ring.description = 'A simple gold ring';
+        return ring;
+    },
+    GemRing: function(id, name, gemcuttingLevel, incinerateLevel, value, tier, state, spriteIndex) {
+        let ring = this.BaseRing(id, null, name, value, spriteIndex);
+        ring.requirements = ItemDetail.build([
+            ItemDetail.levelSkillDetail(gemcuttingLevel, 21, 'CRAFT'),
+            ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
+        ]);
+        delete ring.notedID;
+        ring.essenceValue = EssenceValue(incinerateLevel, 4 * tier, [ShardCatalog.VOID(tier), ShardCatalog.EARTH(3 * tier), ShardCatalog.AIR(8 + (tier * 4))]); // TODO: Jaegar picks
+        ring.description = 'A gold ring powered by an enchanted gem';
+        ring.tier = tier;
+        ring.state = state;
+        return ring;
     },
     BaseNecklace: function(id, notedID, name, value, spriteIndex) {
         let necklace = {
@@ -328,16 +412,38 @@ const ItemGetter = {
             stackable: false,
             description: 'A necklace',
             spriteIndex,
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            model: {
+                NECK_WORN: {
+                    id: 'NECK_WORN',
+                    asset: 'neckParts',
+                    sprite: 'necklaceWolf',
+                    parent: 'HEAD',
+                    spriteID: 0,
+                    anchor: { x: 0.5, y: 0.3 },
+                    position: { x: 0, y: 0 },
+                    rotation: 0,
+                    UIModel: null,
+                },
+            },
+            actions: [{
+                interfaceID: 5,
+                id: 3,
+                name: 'Equip',
+                steps: [
+                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                ]
+            }],
         };
         if (notedID) {
             necklace.notedID = notedID;
         }
         return necklace;
     },
-    GoldChain: function(id, notedID, name, smithingLevel, incinerateLevel, value, spriteIndex) {
+    GoldChain: function(id, notedID, name, craftingLevel, incinerateLevel, value, spriteIndex) {
         let necklace = this.BaseNecklace(id, notedID, name, value, spriteIndex);
         necklace.requirements = ItemDetail.build([
-            ItemDetail.levelSkillDetail(smithingLevel, 14, 'CRAFT'),
+            ItemDetail.levelSkillDetail(craftingLevel, 14, 'CRAFT'),
             ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
         ]);
         necklace.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
@@ -345,16 +451,16 @@ const ItemGetter = {
         return necklace;
     },
     Amulet: function(id, name, gemcuttingLevel, incinerateLevel, value, tier, state, spriteIndex) {
-        let necklace = this.BaseNecklace(id, undefined, name, value, spriteIndex);
-        // necklace.requirements = ItemDetail.build([
-        //     ItemDetail.levelSkillDetail(gemcuttingLevel, 21, 'CRAFT'),
-        //     ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
-        // ]);
+        let necklace = this.BaseNecklace(id, null, name, value, spriteIndex);
+        necklace.requirements = ItemDetail.build([
+            ItemDetail.levelSkillDetail(gemcuttingLevel, 21, 'CRAFT'),
+            ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
+        ]);
         delete necklace.notedID;
         necklace.essenceValue = EssenceValue(incinerateLevel, 4 * tier, [ShardCatalog.VOID(tier), ShardCatalog.EARTH(3 * tier), ShardCatalog.AIR(8 + (tier * 4))]); // TODO: Jaegar picks
         necklace.description = 'A gold amulet powered by an enchanted gem';
         necklace.tier = tier;
-        necklace.stat = state;
+        necklace.state = state;
         return necklace;
     },
     Item: function(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable = false) {
@@ -385,6 +491,10 @@ const ItemGetter = {
             result.notedID = notedId;
         }
         return result;
+    },
+    Mold: function(id, notedId, fullName, value, spriteIndex, description, essenceValue) {
+        let item = this.Item(id, notedId, fullName, value, spriteIndex, description, essenceValue, false);
+        return item;
     },
     MixableCookingItem: function(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable, recipe) {
         let item = this.Item(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable);
@@ -439,8 +549,8 @@ const ItemGetter = {
         }];
         return item;
     },
-    BucketOfHerbs: function(id, notedId, fullName, value, spriteIndex, description, incinerateLevel, essenceValue) {
-        let bucket = this.FullBucket(id, notedId, fullName, value, spriteIndex, description, incinerateLevel, essenceValue, false);
+    BucketOfHerbs: function(id, notedId, fullName, value, spriteIndex, description, essenceValue) {
+        let bucket = this.FullBucket(id, notedId, fullName, value, spriteIndex, description, essenceValue, false);
         
         bucket.actions.push({
             interfaceID: 5,
@@ -517,6 +627,21 @@ const ItemGetter = {
             spriteIndex: spriteIndex,
         };
     },
+    GoldBar: function (id, notedId, fullName, value, spriteIndex, tier) {
+        let bar = this.Bar(id, notedId, fullName, value, spriteIndex, tier);
+        bar.useActions = [{
+            interfaceID: 5,
+            id: 9,
+            name: 'Craft',
+            entityType: Entity.EntityType.INVENTORY_ITEM,
+            entityID: 524,
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[271, 272]] })]
+            ],
+        }];
+        return bar;
+    },
     Helmet: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 16 + (tier * 6);
         return {
@@ -541,8 +666,8 @@ const ItemGetter = {
                     sprite: 'medHelm',
                     parent: 'HEAD',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0.95 },
-                    position: { x: 0, y: -0.15 },
+                    anchor: { x: 0.5, y: 0.9 },
+                    position: {x: 0, y: 0.1},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -582,8 +707,8 @@ const ItemGetter = {
                     sprite: 'fullHelm',
                     parent: 'HEAD',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0.95 },
-                    position: { x: 0, y: -0.15 },
+                    anchor: { x: 0.5, y: 0.9 },
+                    position: {x: 0, y: 0.1},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -617,25 +742,25 @@ const ItemGetter = {
             spriteIndex: spriteIndex,
             equipmentStats: stats,
             model: {
-                LEFT_LEG_WORN: {
-                    id: 'LEFT_LEG_WORN',
+                LEFT_THIGH_WORN: {
+                    id: 'LEFT_THIGH_WORN',
                     asset: 'legParts',
                     sprite: 'platelegLeftThigh',
-                    parent: 'LEFT_LEG',
+                    parent: 'LEFT_THIGH',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: (4/7), y: 0.1 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
-                RIGHT_LEG_WORN: {
-                    id: 'RIGHT_LEG_WORN',
+                RIGHT_THIGH_WORN: {
+                    id: 'RIGHT_THIGH_WORN',
                     asset: 'legParts',
                     sprite: 'platelegRightThigh',
-                    parent: 'RIGHT_LEG',
+                    parent: 'RIGHT_THIGH',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 1-(4/7), y: 0.1 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -646,7 +771,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -657,7 +782,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -672,22 +797,6 @@ const ItemGetter = {
                 ]
             }],
         };
-    },
-    GoblinPlatelegs: function (id, notedId, fullName, tier, value, spriteIndex, equipLevel, stats) {
-        let platelegs = this.Platelegs(id, notedId, fullName, tier, value, spriteIndex, 0, equipLevel, stats);
-        platelegs.model.RIGHT_LEG_WORN.sprite = "plateLegsRightLeg";
-        platelegs.model.LEFT_LEG_WORN.sprite = "plateLegsLeftLeg";
-        delete platelegs.model.RIGHT_SHIN_WORN;
-        delete platelegs.model.LEFT_SHIN_WORN;
-        return platelegs;
-    },
-    GoblinChainlegs: function (id, notedId, fullName, tier, value, spriteIndex, equipLevel, stats) {
-        let platelegs = this.Chainlegs(id, notedId, fullName, tier, value, spriteIndex, 0, equipLevel, stats);
-        platelegs.model.RIGHT_LEG_WORN.sprite = "chainLegsRightLeg";
-        platelegs.model.LEFT_LEG_WORN.sprite = "chainLegsLeftLeg";
-        delete platelegs.model.RIGHT_SHIN_WORN;
-        delete platelegs.model.LEFT_SHIN_WORN;
-        return platelegs;
     },
     Platebody: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 36 + (tier * 4);
@@ -707,28 +816,6 @@ const ItemGetter = {
             spriteIndex: spriteIndex,
             equipmentStats: stats,
             model: {
-                RIGHT_ARM_WORN: {
-                    id: 'RIGHT_ARM_WORN',
-                    asset: 'armParts',
-                    sprite: 'platebodyRightShoulder',
-                    parent: 'RIGHT_ARM',
-                    spriteID: tier,
-                    anchor: { x: 0.85, y: 0.15 },
-                    position: { x: 0, y: 0 },
-                    rotation: 0,
-                    UIModel: null,
-                },
-                LEFT_ARM_WORN: {
-                    id: 'LEFT_ARM_WORN',
-                    asset: 'armParts',
-                    sprite: 'platebodyLeftShoulder',
-                    parent: 'LEFT_ARM',
-                    spriteID: tier,
-                    anchor: { x: 0.15, y: 0.15 },
-                    position: { x: 0, y: 0 },
-                    rotation: 0,
-                    UIModel: null,
-                },
                 CHEST_WORN: {
                     id: 'CHEST_WORN',
                     asset: 'chestParts',
@@ -736,7 +823,29 @@ const ItemGetter = {
                     parent: 'CHEST',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.65 },
-                    position: { x: 0, y: 0 },
+                    position: { x: 0, y: 0.0 },
+                    rotation: 0,
+                    UIModel: null,
+                },
+                RIGHT_SHOULDER_WORN: {
+                    id: 'RIGHT_SHOULDER_WORN',
+                    asset: 'armParts',
+                    sprite: 'platebodyRightShoulder',
+                    parent: 'RIGHT_SHOULDER',
+                    spriteID: tier,
+                    anchor: { x: 0.75, y: 0.18 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                LEFT_SHOULDER_WORN: {
+                    id: 'LEFT_SHOULDER_WORN',
+                    asset: 'armParts',
+                    sprite: 'platebodyLeftShoulder',
+                    parent: 'LEFT_SHOULDER',
+                    spriteID: tier,
+                    anchor: { x: 0.25, y: 0.18 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -746,8 +855,8 @@ const ItemGetter = {
                     sprite: 'platebodyRightForearm',
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: {x: (3/8), y: 0.05},
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -757,8 +866,8 @@ const ItemGetter = {
                     sprite: 'platebodyLeftForearm',
                     parent: 'LEFT_FOREARM',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: {x: 1-(3/8), y: 0.05},
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -773,14 +882,6 @@ const ItemGetter = {
                 ]
             }],
         };
-    },
-    GoblinPlatebody: function (id, notedId, fullName, tier, value, spriteIndex, equipLevel, stats) {
-        let platelegs = this.Platebody(id, notedId, fullName, tier, value, spriteIndex, 0, equipLevel, stats);
-        platelegs.model.RIGHT_ARM_WORN.sprite = "plateBodyRightArm";
-        platelegs.model.LEFT_ARM_WORN.sprite = "plateBodyLeftArm";
-        delete platelegs.model.RIGHT_FOREARM_WORN;
-        delete platelegs.model.LEFT_FOREARM_WORN;
-        return platelegs;
     },
     ChainHelm: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 14 + (tier * 4);
@@ -806,8 +907,8 @@ const ItemGetter = {
                     sprite: 'chainHelm',
                     parent: 'HEAD',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0.95 },
-                    position: { x: 0, y: -0.15 },
+                    anchor: { x: 0.5, y: 0.9 },
+                    position: {x: 0, y: 0.1},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -841,25 +942,25 @@ const ItemGetter = {
             spriteIndex: spriteIndex,
             equipmentStats: stats,
             model: {
-                LEFT_LEG_WORN: {
-                    id: 'LEFT_LEG_WORN',
+                LEFT_THIGH_WORN: {
+                    id: 'LEFT_THIGH_WORN',
                     asset: 'legParts',
                     sprite: 'chainLeftThigh',
-                    parent: 'LEFT_LEG',
+                    parent: 'LEFT_THIGH',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: (4/7), y: 0.15 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
-                RIGHT_LEG_WORN: {
-                    id: 'RIGHT_LEG_WORN',
+                RIGHT_THIGH_WORN: {
+                    id: 'RIGHT_THIGH_WORN',
                     asset: 'legParts',
                     sprite: 'chainRightThigh',
-                    parent: 'RIGHT_LEG',
+                    parent: 'RIGHT_THIGH',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 1-(4/7), y: 0.15 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -870,7 +971,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -881,7 +982,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -922,29 +1023,29 @@ const ItemGetter = {
                     parent: 'CHEST',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.65 },
-                    position: { x: 0, y: 0 },
+                    position: { x: 0, y: 0.0 },
                     rotation: 0,
                     UIModel: null,
                 },
-                RIGHT_ARM_WORN: {
-                    id: 'RIGHT_ARM_WORN',
+                RIGHT_SHOULDER_WORN: {
+                    id: 'RIGHT_SHOULDER_WORN',
                     asset: 'armParts',
                     sprite: 'chainbodyRightShoulder',
-                    parent: 'RIGHT_ARM',
+                    parent: 'RIGHT_SHOULDER',
                     spriteID: tier,
-                    anchor: { x: 0.85, y: 0.15 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.75, y: 0.18 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
-                LEFT_ARM_WORN: {
-                    id: 'LEFT_ARM_WORN',
+                LEFT_SHOULDER_WORN: {
+                    id: 'LEFT_SHOULDER_WORN',
                     asset: 'armParts',
                     sprite: 'chainbodyLeftShoulder',
-                    parent: 'LEFT_ARM',
+                    parent: 'LEFT_SHOULDER',
                     spriteID: tier,
-                    anchor: { x: 0.15, y: 0.15 },
-                    position: { x: 0, y: 0 },
+                    anchor: {x: 0.25, y: 0.18},
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -954,8 +1055,8 @@ const ItemGetter = {
                     sprite: 'chainbodyRightForearm',
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: {x: (3/8), y: 0.05},
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -965,8 +1066,8 @@ const ItemGetter = {
                     sprite: 'chainbodyLeftForearm',
                     parent: 'LEFT_FOREARM',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: {x: 1-(3/8), y: 0.05},
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1010,7 +1111,7 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.9 },
+                    position: { x: 0, y: 0.75 },
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1021,7 +1122,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [0, equipLevel] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_ARM_SHEATH'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_SHOULDER_SHEATH'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1047,7 +1148,7 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: 666,
                     anchor: {x: 0.95, y: 0.5},
-                    position: {x: 0, y: 0.9},
+                    position: { x: 0, y: 0.75 },
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1058,7 +1159,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [0, 0] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_ARM_SHEATH'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_SHOULDER_SHEATH'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1084,9 +1185,9 @@ const ItemGetter = {
                     sprite: 'maxLevelStandard',
                     parent: 'LEFT_FOREARM',
                     spriteID: skillID,
-                    anchor: { x: 0.45, y: 0.7 },
-                    position: { x: 0, y: 0.9 },
-                    rotation: 0,
+                    anchor: { x: 0.5, y: 0.75 },
+                    position: { x: 0, y: 0.75 },
+                    rotation: 5 * (Math.PI / 180),
                     UIModel: null,
                 },
             },
@@ -1096,7 +1197,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [skillID, 100] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEFT_ARM_SHEATH'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEFT_SHOULDER_SHEATH'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [2, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1130,8 +1231,8 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.9 },
-                    rotation: 0,
+                    position: { x: 0, y: 0.75 },
+                    rotation: 5 * Math.PI / 180,
                     UIModel: null,
                 },
             },
@@ -1141,7 +1242,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [0, equipLevel] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_ARM_SHEATH'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_SHOULDER_SHEATH'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1247,8 +1348,8 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.9 },
-                    rotation: 0,
+                    position: { x: 0.5, y: 0.9 },
+                    rotation: 8 * Math.PI / 180,
                     UIModel: null,
                 },
             },
@@ -1258,7 +1359,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [0, equipLevel] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_ARM_SHEATH'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_SHOULDER_SHEATH'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }
@@ -1297,8 +1398,8 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.9 },
-                    rotation: 0,
+                    position: { x: 0.5, y: 0.75 },
+                    rotation: 3 * Math.PI / 180,
                     UIModel: null,
                 },
             },
@@ -1308,7 +1409,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [0, equipLevel] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_ARM_SHEATH'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_SHOULDER_SHEATH'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1344,8 +1445,8 @@ const ItemGetter = {
                     sprite: modelSprite,
                     parent: 'HEAD',
                     spriteID: 0,
-                    anchor: { x: 0.5, y: 0.95 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.5, y: 0.9 },
+                    position: { x: 0, y: 0.05 },
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1364,7 +1465,7 @@ const ItemGetter = {
     Logs: function (id, notedId, woodName, value, spriteIndex, levelTier) {
         let tier = 1 + Math.floor(levelTier / 10);
         let incinerateLevel = levelTier;
-        let name = woodName != undefined ? woodName + " Logs" : "Logs";
+        let name = woodName != null ? woodName + " Logs" : "Logs";
         let descriptionName = name.toLowerCase();
         return {
             id: id,
@@ -1386,8 +1487,8 @@ const ItemGetter = {
     },
     UnstrungBow: function (id, notedId, woodName, value, spriteIndex, levelRequired, strungBowId, xp, tier) {
         let incinerateLevel = 7 + Math.floor(levelRequired / 2);
-        let name = woodName == undefined ? 'Unstrung Bow' : 'Unstrung ' + woodName + ' Bow';
-        let descriptionName = (woodName == undefined ? 'bow' : woodName + ' bow').toLowerCase();
+        let name = woodName == null ? 'Unstrung Bow' : 'Unstrung ' + woodName + ' Bow';
+        let descriptionName = (woodName == null ? 'bow' : woodName + ' bow').toLowerCase();
         return {
             id: id,
             name: name,
@@ -1452,8 +1553,8 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.5 },
-                    position: { x: 0, y: 0.9 },
-                    rotation: -(Math.PI / 4),
+                    position: { x: 0.35, y: 0.5 },
+                    rotation:  -60 * Math.PI / 180,
                     UIModel: null,
                 },
             },
@@ -1463,15 +1564,15 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [3, levelRequirement] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_ARM_BACK'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_SHOULDER_BACK'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
                     //has enough space to unequip 2 left and right
                 ]
             }],
         };
     },
-    Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = undefined) {
-        let armSpriteName = armSpriteNameOverride == undefined ? sprite : armSpriteNameOverride;
+    Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null) {
+        let armSpriteName = armSpriteNameOverride == null ? sprite : armSpriteNameOverride;
         return {
             id: id,
             name: name,
@@ -1488,25 +1589,25 @@ const ItemGetter = {
             spriteIndex: itemSpriteIndex,
             equipmentStats: [1, 1, 1, 1, 1, 1, 1, 1, 1],
             model: {
-                RIGHT_ARM_WORN: {
-                    id: 'RIGHT_ARM_WORN',
+                RIGHT_SHOULDER_WORN: {
+                    id: 'RIGHT_SHOULDER_WORN',
                     asset: 'armParts',
                     sprite: armSpriteName + 'RightShoulder',
-                    parent: 'RIGHT_ARM',
+                    parent: 'RIGHT_SHOULDER',
                     spriteID: spriteId,
-                    anchor: { x: 0.85, y: 0.15 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.75, y: 0.18 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
-                LEFT_ARM_WORN: {
-                    id: 'LEFT_ARM_WORN',
+                LEFT_SHOULDER_WORN: {
+                    id: 'LEFT_SHOULDER_WORN',
                     asset: 'armParts',
                     sprite: armSpriteName + 'LeftShoulder',
-                    parent: 'LEFT_ARM',
+                    parent: 'LEFT_SHOULDER',
                     spriteID: spriteId,
-                    anchor: { x: 0.15, y: 0.15 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.25, y: 0.18 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1517,7 +1618,7 @@ const ItemGetter = {
                     parent: 'CHEST',
                     spriteID: spriteId,
                     anchor: { x: 0.5, y: 0.65 },
-                    position: { x: 0, y: 0 },
+                    position: { x: 0, y: 0.0 },
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1527,8 +1628,8 @@ const ItemGetter = {
                     sprite:  armSpriteName + 'RightForearm',
                     parent: 'RIGHT_FOREARM',
                     spriteID: spriteId,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: {x: (3/8), y: 0.05},
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1538,8 +1639,8 @@ const ItemGetter = {
                     sprite: armSpriteName + 'LeftForearm',
                     parent: 'LEFT_FOREARM',
                     spriteID: spriteId,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: {x: 1-(3/8), y: 0.05},
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1563,9 +1664,9 @@ const ItemGetter = {
         let robe = this.Shirt(id, notedId, name, itemspriteIndex, 'robe', spriteId, value);
         robe.essenceValue = EssenceValue(incinerateLevel, 20 + (10 * tier), [ShardCatalog.AIR(20 + tier * 40), ShardCatalog.EARTH(60 + tier * 30), ShardCatalog.NATURE(tier * 50), ShardCatalog.BIND(tier * 150)]);
         robe.equipmentStats = equipmentStats;
-        robe.model.RIGHT_ARM_WORN.sprite = 'robeRightShoulder';
+        robe.model.RIGHT_SHOULDER_WORN.sprite = 'robeRightShoulder';
         robe.model.RIGHT_FOREARM_WORN.sprite = 'robeRightForearm';
-        robe.model.LEFT_ARM_WORN.sprite = 'robeLeftShoulder';
+        robe.model.LEFT_SHOULDER_WORN.sprite = 'robeLeftShoulder';
         robe.model.LEFT_FOREARM_WORN.sprite = 'robeLeftForearm';
         robe.actions = [{
             interfaceID: 5,
@@ -1595,25 +1696,25 @@ const ItemGetter = {
             essenceValue: EssenceValue(4, 8, [ShardCatalog.AIR(5), ShardCatalog.WATER(5), ShardCatalog.EARTH(5), ShardCatalog.NATURE(2), ShardCatalog.BIND(10)]),
             equipmentStats: [1, 1, 1, 1, 1, 1, 1, 1, 1],
             model: {
-                LEFT_LEG_WORN: {
-                    id: 'LEFT_LEG_WORN',
+                LEFT_THIGH_WORN: {
+                    id: 'LEFT_THIGH_WORN',
                     asset: 'legParts',
                     sprite: spriteName + 'LeftThigh',
-                    parent: 'LEFT_LEG',
+                    parent: 'LEFT_THIGH',
                     spriteID: colorSpriteId,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: (4/7), y: 0.1 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
-                RIGHT_LEG_WORN: {
-                    id: 'RIGHT_LEG_WORN',
+                RIGHT_THIGH_WORN: {
+                    id: 'RIGHT_THIGH_WORN',
                     asset: 'legParts',
                     sprite: spriteName + 'RightThigh',
-                    parent: 'RIGHT_LEG',
+                    parent: 'RIGHT_THIGH',
                     spriteID: colorSpriteId,
-                    anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 1-(4/7), y: 0.1 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1624,7 +1725,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: colorSpriteId,
                     anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1635,7 +1736,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: colorSpriteId,
                     anchor: { x: 0.5, y: 0 },
-                    position: { x: 0, y: 0 },
+                    position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1692,7 +1793,7 @@ const ItemGetter = {
                     id: 'LEFT_TOOL',
                     asset: 'heldParts',
                     sprite: 'shield',
-                    parent: 'LEFT_ARM',
+                    parent: 'LEFT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.5 },
                     position: { x: 0, y: 0.9 },
@@ -2177,7 +2278,7 @@ const Interface = {
             return fl;
         },
         SmeltBar: function (id, fullName, barName, requiredLevel, requiredOreId, barId, xp, optionalCoalAmount, oreAmount = 2) {
-            if (optionalCoalAmount == undefined || optionalCoalAmount == 0) {
+            if (optionalCoalAmount == null || optionalCoalAmount == 0) {
                 return {
                     id: id,
                     name: fullName,
@@ -2391,7 +2492,8 @@ const Interface = {
                 name: 'Talk To',
                 actionInterval: -1,
                 steps: [
-                    [buildStepList(StepList.WALK_ADJACENT),
+                    [buildStepList(StepList.WALK_ADJACENT)],
+                    [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.OPEN_DIALOG_INTERFACE),
                     buildStep(StepType.SHOW_DIALOG, { params: [dialogID] })]
                 ],
@@ -3157,6 +3259,24 @@ const WorldObject = {
                     params: [1, dropTableParams],
                     stepResultFail: StepResult.NEXT_STEP,
                 })],
+                [buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                    params: [10, 13, 2.5, true, 0.1, 0],
+                    stepResultFail: 'NEXT_STEP_LIST'
+                }),
+                buildStep(StepType.ROLL_SKILL_DROP_TABLE, { 
+                    params: [10, 10, [[UncutGemIDs.UNCUT_OPAL, 1, 1, 1000, 10]
+                    , [UncutGemIDs.UNCUT_TOPAZ, 1, 1, 800, 10]
+                    , [UncutGemIDs.UNCUT_QUARTZ, 1, 1, 600, 10]
+                    , [UncutGemIDs.UNCUT_JADE, 1, 1, 400, 10]
+                    , [UncutGemIDs.UNCUT_AMBER, 1, 1, 200, 10]
+                    , [UncutGemIDs.UNCUT_SAPPHIRE, 1, 1, 0, 10]
+                    , [UncutGemIDs.UNCUT_AMETHYST, 1, 1, -200, 10]
+                    , [UncutGemIDs.UNCUT_EMERALD, 1, 1, -400, 10]
+                    , [UncutGemIDs.UNCUT_RUBY, 1, 1, -600, 10]
+                    , [UncutGemIDs.UNCUT_ONYX, 1, 1, -800, 10]
+                    , [UncutGemIDs.UNCUT_DIAMOND, 1, 1, -950, 10]
+                    ]],
+                })],
             ];
 
             if (Number.isInteger(fragmentNeckID)) {
@@ -3227,8 +3347,8 @@ const WorldObject = {
             }
         },
         Tree: function (id, logId, woodName, requiredLevel, spriteIndex, successRollBase, successRoleBestChance, xp, despawnRoll, spawnTimer, description) {
-            let name = woodName == undefined ? "Tree" : woodName + " Tree";
-            let logName = (woodName == undefined ? "logs" : woodName + " logs").toLowerCase();
+            let name = woodName == null ? "Tree" : woodName + " Tree";
+            let logName = (woodName == null ? "logs" : woodName + " logs").toLowerCase();
             return {
                 id: id,
                 name: name,
@@ -3290,7 +3410,7 @@ const WorldObject = {
             };
         },
         TutorialTree: function(id, logId, woodName, requiredLevel, spriteIndex, successRollBase, successRoleBestChance, xp, despawnRoll, spawnTimer, description) {
-            let tree = this.Tree(id, 5, undefined, 1, 0, 15, 4, 25, 5, 16, 'Use your axe on the tree to get logs.');
+            let tree = this.Tree(id, 5, null, 1, 0, 15, 4, 25, 5, 16, 'Use your axe on the tree to get logs.');
             let name = "Tree";
             let logName = "logs";
             tree.actions = [{
@@ -3345,8 +3465,8 @@ const WorldObject = {
             return tree;
         },
         LumberCamp: function (id, woodName, woodId, woTreeId, spriteIndex, xpMultiplier, campLevel, skillLevel) {
-            let name = woodName == undefined ? 'Lumber Camp' : woodName + ' Lumber Camp';
-            let treeName = woodName == undefined ? 'trees' : woodName.toLowerCase() + ' trees';
+            let name = woodName == null ? 'Lumber Camp' : woodName + ' Lumber Camp';
+            let treeName = woodName == null ? 'trees' : woodName.toLowerCase() + ' trees';
             return {
                 id: id,
                 name: name,
@@ -3825,7 +3945,7 @@ const Model = {
     }
 
 const Character = {
-    Rat : function(id, name, spriteIndex, modelParams, stats = null, drops = null ) {
+    Rat : function(id, name, spriteIndex, stats = null, drops = null ) {
         if (stats == null) {
             stats = [[11, 2], [0, 3]]; ////2hp, 3atk
         }
@@ -3835,11 +3955,58 @@ const Character = {
         return {
             id: id,
             name: name,
-            modelName: 'RAT',
+            modelName: 'FOUR_LEGGED_MAMMAL',
             spriteIndex: spriteIndex,
             stats: stats,
             drops: drops,
-            modelParams: modelParams,
+            modelParams: {
+                HEAD: {
+                    sprite: 'largeRatHead',
+                    position: {x: -0.4, y: 0.15},
+                },
+                CHEST: {
+                    sprite: 'largeRatBody',
+                },
+                HIDDEN_CHEST: {
+                    sprite: 'largeRatBody',
+                },
+                TAIL: {
+                    sprite: 'largeRatTail',
+                    position: {x: 0.7, y: -0.25},
+                },
+                THIGH_HIDDEN_FRONT: { 
+                    sprite: 'largeRatThigh', 
+                    position: {x: -0.15, y: 0.3},
+                },
+                THIGH_VISIBLE_FRONT: { 
+                    sprite: 'largeRatThigh', 
+                    position: {x: -0.3, y: 0.4},
+                },
+                THIGH_HIDDEN_BACK: { 
+                    sprite: 'largeRatThigh', 
+                    position: {x: 0.35, y: 0.25},
+                },      
+                THIGH_VISIBLE_BACK: { 
+                    sprite: 'largeRatThigh', 
+                    position: {x: 0.2, y: 0.35},
+                },
+                SHIN_HIDDEN_FRONT: { 
+                    sprite: 'largeRatShin', 
+                    anchor: {x: 5/8, y: 0.1},
+                },
+                SHIN_VISIBLE_FRONT: { 
+                    sprite: 'largeRatShin', 
+                    anchor: {x: 5/8, y: 0.1},
+                },
+                SHIN_HIDDEN_BACK: { 
+                    sprite: 'largeRatShin', 
+                    anchor: {x: 05/8, y: 0.1},
+                },
+                SHIN_VISIBLE_BACK: { 
+                    sprite: 'largeRatShin', 
+                    anchor: {x: 5/8, y: 0.1},
+                },
+            },
             actions: [{
                 interfaceID: 0,
                 id: 6,
@@ -3847,17 +4014,40 @@ const Character = {
             }],
         };
     },
+    SmallRat : function(id, name, spriteIndex ) {
+        let rat = this.Rat(id, name, spriteIndex);
+        rat.modelName = 'RAT_SMALL'
+        rat.modelParams = null;
+        return rat;
+    },
+    MediumRat : function(id, name, spriteIndex, stats, drops ) {
+        let rat = this.Rat(id, name, spriteIndex, null, stats, drops);
+        rat.modelName = 'RAT_SMALL'
+        rat.modelParams = {
+            LEGS : {
+                sprite : 'mediumRatLegs'
+            },
+            CHEST : {
+                sprite : 'mediumRatBody'
+            },
+            TAIL : {
+                sprite : 'mediumRatTail'
+            },
+        };
+        return rat;
+    },
     Duck : function(id, name, spriteIndex ) {
         return {
             id: id,
             name: name,
-            modelName: 'DUCK',
+            modelName: 'CHICKEN',
             spriteIndex: spriteIndex,
             stats: [[11, 2], [0, 3]], ////2hp, 3atk,
             drops: [],
             modelParams: {
-                CHEST: { spriteID: spriteIndex},
-                HEAD: { spriteID: spriteIndex},
+                CHEST: { sprite: 'duckBody', spriteID: spriteIndex},
+                HEAD: { sprite: 'duckHead', spriteID: spriteIndex},
+                LEGS: {sprite: 'duckLegs', spriteID: spriteIndex }
             },
             actions: [{
                 interfaceID: 0,
@@ -3866,29 +4056,69 @@ const Character = {
             }]
         };
     },
-    Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, actions = []) {
-        let human = {
+    Humanoid: function(id, name, spriteID, speciesSpriteName, faceId = null) {
+        if (faceId == null) {
+            faceId = spriteID;
+        }
+        return {
             id: id,
             name: name,
-            modelName: 'HUMAN',
+            modelName: 'HUMANOID',
             spriteIndex: 1,
             animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
             characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
-            equipmentModel: equipmentModel, //head, right, left, chest, legs,
             modelParams: {
-                CHEST: { spriteID: spriteID},
-                HEAD: { spriteID: spriteID},
-                RIGHT_ARM: { spriteID: spriteID},
-                RIGHT_FOREARM: { spriteID: spriteID},
-                LEFT_ARM: { spriteID: spriteID},
-                LEFT_FOREARM: { spriteID: spriteID},
-                RIGHT_LEG: { spriteID: spriteID},
-                RIGHT_SHIN: { spriteID: spriteID},
-                LEFT_LEG: { spriteID: spriteID},
-                LEFT_SHIN: { spriteID: spriteID},
+                CHEST: {
+                     spriteID: spriteID,
+                     sprite: speciesSpriteName + 'Chest'
+                },
+                FACE: {
+                     spriteID: faceId,
+                     sprite: speciesSpriteName + 'Face'
+                },
+                HEAD: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'Head'
+                },
+                RIGHT_SHOULDER: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'RightShoulder'
+                },
+                RIGHT_FOREARM: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'RightForearm'
+                },
+                LEFT_SHOULDER: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'LeftShoulder'
+                },
+                LEFT_FOREARM: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'LeftForearm'
+                },
+                RIGHT_THIGH: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'RightThigh'
+                },
+                RIGHT_SHIN: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'RightShin'
+                },
+                LEFT_THIGH: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'LeftThigh'
+                },
+                LEFT_SHIN: { 
+                    spriteID: spriteID,
+                    sprite: speciesSpriteName + 'LeftShin'
+                },
             },
-            actions: actions
         };
+    },
+    Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, actions = []) {
+        let human = this.Humanoid(id, name, spriteID, 'human');
+        human.actions = actions;
+        human.equipmentModel = equipmentModel;
         if (hairStyleId != 0) {
             human.modelParams.HAIR = {
                 id: 'HAIR',
@@ -3897,7 +4127,7 @@ const Character = {
                 parent: 'HEAD',
                 spriteID: hairColor,
                 anchor: {x: 0.5, y: 0.95},
-                position: {x: 0, y: -0.15},
+                position: {x: 0, y: 0.1},
                 rotation: 0,
                 UIModel: null,
             };
@@ -3916,7 +4146,8 @@ const Character = {
             name: 'Talk To',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.SHOW_DIALOG, {params: [talkToDialog]})],
+                [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {params: [talkToDialog]})],
             ],
         }, {
             interfaceID: 0,
@@ -3986,7 +4217,8 @@ const Character = {
                 name: 'Talk To',
                 steps: [
                     buildStepList(StepList.WALK_ADJACENT),
-                    [buildStep(StepType.SHOW_DIALOG, {params: [5]})]
+                    [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, {params: [5]})]
                 ],
             }
         ]);
@@ -3998,7 +4230,8 @@ const Character = {
         return {
             id,
             name,
-            modelName: 'HUMAN',
+            modelName: 'HUMANOID',
+            modelOverrideName: 'GOLEM',
             spriteIndex: 1,
             levelMultiplier,
             doNotRespawn: true,
@@ -4009,10 +4242,10 @@ const Character = {
             equipmentModel: [0, 0, 0, 0, 0], //head, right, left, chest, legs,
             modelParams: {
                 HEAD: { sprite: "golemHead", spriteID: spriteID, anchor : {x : 0.5, y : 0.975}, position : { x : 0.025, y : -0.5}},
-                RIGHT_ARM: { sprite: "golemArmRight", spriteID: spriteID, anchor : {x : 0.5, y : 0.025}, position : { x : -0.3, y : -0.55}},
-                LEFT_ARM: { sprite: "golemArmLeft", spriteID: spriteID, anchor : {x : 0.5, y : 0.025}, position : { x : 0.35, y : -0.58}},
-                RIGHT_LEG: {sprite: "golemThighRight",  spriteID: spriteID, anchor : {x : 0.5, y : 0}, position : { x : -0.1, y : 0.2}},
-                LEFT_LEG: { sprite: "golemThighLeft", spriteID: spriteID, anchor : {x : 0.5}, position : { x : 0.15, y :0.45}},
+                RIGHT_SHOULDER: { sprite: "golemArmRight", spriteID: spriteID, anchor : {x : 0.5, y : 0.025}, position : { x : -0.3, y : -0.55}},
+                LEFT_SHOULDER: { sprite: "golemArmLeft", spriteID: spriteID, anchor : {x : 0.5, y : 0.025}, position : { x : 0.35, y : -0.58}},
+                RIGHT_THIGH: {sprite: "golemThighRight",  spriteID: spriteID, anchor : {x : 0.5, y : 0}, position : { x : -0.1, y : 0.2}},
+                LEFT_THIGH: { sprite: "golemThighLeft", spriteID: spriteID, anchor : {x : 0.5}, position : { x : 0.15, y :0.45}},
                 RIGHT_SHIN: {sprite: "golemShinRight",  spriteID: spriteID, anchor : {x : 0.5, y : 0}, position : { x : -0.2, y : 0.6}},
                 LEFT_SHIN: { sprite: "golemShinLeft", spriteID: spriteID, anchor : {x : 0.5, y : 0}, position : { x : 0.1, y : 0.2}},
                 CHEST: { sprite : "golemBody", spriteID: spriteID},
@@ -4031,24 +4264,24 @@ const Character = {
         let golem = this.Golem(id, name, spriteID, levelMultiplier, ore, pickaxe, fragment, chunk);
         golem.modelParams.CHEST.sprite += "Clay";
         golem.modelParams.HEAD.sprite += "Clay";
-        golem.modelParams.RIGHT_ARM.sprite += "Clay";
-        golem.modelParams.LEFT_ARM.sprite += "Clay";
+        golem.modelParams.RIGHT_SHOULDER.sprite += "Clay";
+        golem.modelParams.LEFT_SHOULDER.sprite += "Clay";
         golem.modelParams.RIGHT_SHIN.sprite += "Clay";
         golem.modelParams.LEFT_SHIN.sprite += "Clay";
-        golem.modelParams.RIGHT_LEG.sprite += "Clay";
-        golem.modelParams.LEFT_LEG.sprite += "Clay";
+        golem.modelParams.RIGHT_THIGH.sprite += "Clay";
+        golem.modelParams.LEFT_THIGH.sprite += "Clay";
         return golem;
     },
     CoalGolem : function(id, name, spriteID, levelMultiplier, ore, pickaxe, fragment, chunk) {
         let golem = this.Golem(id, name, spriteID, levelMultiplier, ore, pickaxe, fragment, chunk);
         golem.modelParams.CHEST.sprite += "Coal";
         golem.modelParams.HEAD.sprite += "Coal";
-        golem.modelParams.RIGHT_ARM.sprite += "Coal";
-        golem.modelParams.LEFT_ARM.sprite += "Coal";
+        golem.modelParams.RIGHT_SHOULDER.sprite += "Coal";
+        golem.modelParams.LEFT_SHOULDER.sprite += "Coal";
         golem.modelParams.RIGHT_SHIN.sprite += "Coal";
         golem.modelParams.LEFT_SHIN.sprite += "Coal";
-        golem.modelParams.RIGHT_LEG.sprite += "Coal";
-        golem.modelParams.LEFT_LEG.sprite += "Coal";
+        golem.modelParams.RIGHT_THIGH.sprite += "Coal";
+        golem.modelParams.LEFT_THIGH.sprite += "Coal";
         return golem;
     },
     Cavecrawler : function(id, name, spriteId, stats, drops) {
@@ -4059,12 +4292,12 @@ const Character = {
             modelParams: {
                 CHEST: { spriteID: spriteId},
                 HEAD: { spriteID: spriteId},
-                RIGHT_ARM: { spriteID: spriteId},
-                LEFT_ARM: { spriteID: spriteId},
-                OUTER_RIGHT_LEG: { spriteID: spriteId},
-                OUTER_LEFT_LEG: { spriteID: spriteId},
-                INNER_RIGHT_LEG: { spriteID: spriteId},
-                INNER_LEFT_LEG: { spriteID: spriteId},
+                RIGHT_SHOULDER: { spriteID: spriteId},
+                LEFT_SHOULDER: { spriteID: spriteId},
+                OUTER_RIGHT_THIGH: { spriteID: spriteId},
+                OUTER_LEFT_THIGH: { spriteID: spriteId},
+                INNER_RIGHT_THIGH: { spriteID: spriteId},
+                INNER_LEFT_THIGH: { spriteID: spriteId},
             },
             stats: stats,
             drops: drops,
@@ -4081,7 +4314,7 @@ const Character = {
                 id: 5,
                 name: 'Trade',
                 steps: [
-                    [buildStep(StepType.PLAY_ANIMATION, { params: ['TALK_INVOKE'] }),
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
                     buildStep(StepType.OPEN_SHOP_INTERFACE, { params: [shopsMenuInterfaceID] })]
                 ],
             }]);
@@ -4090,7 +4323,8 @@ const Character = {
             return {
                 id: id,
                 name: name,
-                modelName: 'HUMAN',
+                modelName: 'HUMANOID',
+                modelOverrideName : 'SKELETON',
                 modelParams: {
                     CHEST: {
                         sprite: 'skeletonChest',
@@ -4100,13 +4334,13 @@ const Character = {
                         sprite: 'skeletonHead',
                         spriteID: headSpriteID == null ? spriteID : headSpriteID
                     },
-                    RIGHT_ARM: {
+                    RIGHT_SHOULDER: {
                         sprite: 'skeletonRightShoulder',
                         spriteID: spriteID,
                         anchor: {x: 0.85, y: 0.1},
                         position: {x: -0.4, y: -0.4},
                     },
-                    LEFT_ARM: {
+                    LEFT_SHOULDER: {
                         sprite: 'skeletonLeftShoulder',
                         spriteID: spriteID,
                         anchor: {x: 0.15, y: 0.1},
@@ -4124,12 +4358,12 @@ const Character = {
                         anchor: {x: 0.5, y: 0.15},
                         position: {x: 0.7, y: 0.85},
                     },
-                    RIGHT_LEG: {
+                    RIGHT_THIGH: {
                         sprite: 'skeletonRightThigh',
                         spriteID: spriteID,
                         anchor: {x: 0.85, y: 0.15},
                     },
-                    LEFT_LEG: {
+                    LEFT_THIGH: {
                         sprite: 'skeletonLeftThigh',
                         spriteID: spriteID,
                         anchor: {x: 0.15, y: 0.15},
@@ -4167,18 +4401,18 @@ const Character = {
             return {
                 id: id,
                 name: name,
-                modelName: 'HUMAN',
+                modelName: 'HUMANOID',
                 modelParams: {
                     CHEST: { spriteID },
                     HEAD: {
                         spriteID: headSpriteID == null ? spriteID : headSpriteID
                     },
-                    RIGHT_ARM: { spriteID },
-                    LEFT_ARM: { spriteID },
+                    RIGHT_SHOULDER: { spriteID },
+                    LEFT_SHOULDER: { spriteID },
                     RIGHT_FOREARM: { spriteID },
                     LEFT_FOREARM: { spriteID },
-                    RIGHT_LEG: { spriteID },
-                    LEFT_LEG: { spriteID },
+                    RIGHT_THIGH: { spriteID },
+                    LEFT_THIGH: { spriteID },
                     RIGHT_SHIN: { spriteID },
                     LEFT_SHIN: { spriteID },
                 },
@@ -4197,58 +4431,101 @@ const Character = {
                 }],
             };
         },
-        Goblin: function (id, name, spriteID, stats, drops, equipmentModel, headSpriteID = null) {
-            return {
-                id: id,
-                name: name,
-                modelName: 'GOBLIN',
-                modelParams: {
-                    CHEST: {
-                        spriteID: spriteID
-                    },
-                    HEAD: {
-                        spriteID: headSpriteID == null ? spriteID : headSpriteID
-                    },
-                    RIGHT_ARM: {
-                        spriteID: spriteID
-                    },
-                    LEFT_ARM: {
-                        spriteID: spriteID
-                    },
-                    RIGHT_LEG: {
-                        spriteID: spriteID
-                    },
-                    LEFT_LEG: {
-                        spriteID: spriteID
-                    },
-                },
-                stats: stats, //5hp, 5atk, 5pow, 3def
-                drops: drops, //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-                spriteIndex: 4,
-                animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-                characterModel: [2, 2, 2, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
-                equipmentModel: equipmentModel, //head, right, left, chest, legs
-                actions: [{
-                    interfaceID: 0,
-                    id: 6,
-                    name: 'Attack'
-                }],
-            };
+        Goblin: function (id, name, spriteID, stats, drops, weaponId, headSpriteID = null) {
+            let goblin = this.Humanoid(id, name, spriteID, 'goblin');
+            goblin.modelParams.FACE = { spriteID: 9001 };
+            goblin.stats = stats;
+            goblin.drops = drops;
+            goblin.equipmentModel = [null, weaponId, null, null, null];
+            if (headSpriteID != null) {
+                goblin.modelParams.HEAD.spriteID = headSpriteID;
+            }
+
+            goblin.modelParams.CORE = { spriteID : 1 }
+            goblin.modelParams.HEAD.position = {x: 0.05, y: -0.55};
+            goblin.modelParams.CHEST.position =  {x: 0, y: -0.2},
+
+            goblin.modelParams.RIGHT_SHOULDER.position = {x: -0.42, y: -0.5};
+            goblin.modelParams.LEFT_SHOULDER.position = {x: 0.48, y: -0.5};
+
+            goblin.modelParams.RIGHT_FOREARM.position =  {x: -0.45, y: 0.7},
+            goblin.modelParams.LEFT_FOREARM.position =  {x: 0.45, y: 0.7},
+
+            goblin.modelParams.RIGHT_THIGH.position = {x: -0.18, y: 0.35},
+            goblin.modelParams.LEFT_THIGH.position = {x: 0.22, y: 0.35},
+
+            goblin.modelParams.RIGHT_SHIN.position = {x: -0.2, y: 0.825};
+            goblin.modelParams.LEFT_SHIN.position = {x: 0.2, y: 0.825};
+            goblin.actions = [{
+                interfaceID: 0,
+                id: 6,
+                name: 'Attack'
+            }];
+            return goblin;
         },
-        GoblinRanged: function (id, name, spriteID, stats, drops, equipmentModel, attackRange, headSpriteID = null) {
-            let goblin = this.Goblin(id, name, spriteID, stats, drops, equipmentModel, headSpriteID);
+        Orc: function (id, name, spriteID, stats, drops, weaponId, headSpriteID = null) {
+            let goblin = this.Humanoid(id, name, spriteID, 'orc');
+            goblin.modelParams.FACE = { spriteID: 9001 };
+            goblin.stats = stats;
+            goblin.drops = drops;
+            goblin.modelOverrideName = 'ORC';
+            goblin.equipmentModel = [null, weaponId, null, null, null];
+            if (headSpriteID != null) {
+                goblin.modelParams.HEAD.spriteID = headSpriteID;
+            }
+
+            goblin.modelParams.CHEST.position =  {x: 0, y: -0.2},
+            goblin.modelParams.HEAD.anchor = {x : 0.5, y : 0.8};
+            goblin.modelParams.HEAD.position = {x: 0, y: -0.5};
+
+            goblin.modelParams.RIGHT_SHOULDER.position = {x: -0.5, y: -0.32};
+            goblin.modelParams.RIGHT_SHOULDER.anchor = { x : 0.8, y : 0.7 };
+            goblin.modelParams.RIGHT_FOREARM.position =  {x: -0.2, y: 0.20},
+
+            goblin.modelParams.LEFT_SHOULDER.position = {x: 0.5, y: -0.32};
+            goblin.modelParams.LEFT_SHOULDER.anchor = { x : 0.2, y : 0.7 };
+            goblin.modelParams.LEFT_FOREARM.position =  {x: 0.2, y: 0.22},
+
+            goblin.modelParams.RIGHT_THIGH.anchor = {x : 0.65, y : 0.2};
+            goblin.modelParams.RIGHT_THIGH.position = {x: -0.18, y: 0.3},
+            goblin.modelParams.RIGHT_SHIN.anchor = {x : 0.65, y : 0.15};
+            goblin.modelParams.RIGHT_SHIN.position = {x: -0.25, y: 0.8};
+
+            goblin.modelParams.LEFT_THIGH.anchor = {x : 0.35, y : 0.2};
+            goblin.modelParams.LEFT_THIGH.position = {x: 0.18, y: 0.3},
+            goblin.modelParams.LEFT_SHIN.anchor = {x : 0.35, y : 0.15};
+            goblin.modelParams.LEFT_SHIN.position = {x: 0.25, y: 0.8};
+
+
+            goblin.actions = [{
+                interfaceID: 0,
+                id: 6,
+                name: 'Attack'
+            }];
+            return goblin;
+        },
+        GoblinOrOrc: function (id, name, spriteID, stats, drops, equipmentModel, headSpriteID = null) {
+            if (name.includes('oblin')) {
+                return this.Goblin(id, name, spriteID, stats, drops, equipmentModel, headSpriteID);
+            }
+            else {
+                return this.Orc(id, name, spriteID, stats, drops, equipmentModel, headSpriteID);
+            }
+        },
+        GoblinOrcRanged: function (id, name, spriteID, stats, drops, equipmentModel, attackRange, headSpriteID = null) {
+            let goblin = this.GoblinOrOrc(id, name, spriteID, stats, drops, equipmentModel, headSpriteID);
             goblin.combatStyle = Combat.CombatStyle.RANGE;
             goblin.attackRange = attackRange;
             return goblin;
         },
-        GoblinMage: function (id, name, spriteID, stats, drops, equipmentModel, attackRange, headSpriteID = null) {
-            let goblin = this.Goblin(id, name, spriteID, stats, drops, equipmentModel, headSpriteID);
+        GoblinOrcMage: function (id, name, spriteID, stats, drops, equipmentModel, attackRange, headSpriteID = null) {
+            let goblin = this.GoblinOrOrc(id, name, spriteID, stats, drops, equipmentModel, headSpriteID);
             goblin.combatStyle = Combat.CombatStyle.MAGIC;
             goblin.attackRange = attackRange;
             return goblin;
         },
-        GoblinRangeMelee: function (id, name, spriteID, stats, drops, equipmentModel, attackRange, headSpriteID = null) {
-            let goblin = this.Goblin(id, name, spriteID, stats, drops, equipmentModel, headSpriteID);
+        GoblinOrcRangeMelee: function (id, name, spriteID, stats, drops, equipmentModel, attackRange, headSpriteID = null) {
+            let goblin = this.GoblinOrOrc(id, name, spriteID, stats, drops, equipmentModel, headSpriteID);
             goblin.combatStyle = Combat.CombatStyle.MELEE;
             goblin.attackRange = 1;
             goblin.secondaryCombatStyle = Combat.CombatStyle.RANGE;
@@ -4268,7 +4545,7 @@ const Character = {
             return {
                 id: id,
                 name: name,
-                modelName: 'GHOST',
+                modelName: 'HUMANOID',
                 stats: stats,
                 spriteIndex: spriteId,
                 drops: [[[1, 100], [essenceIdToDrop, minAmountToDrop, maxAmountToDrop, 100]]],
@@ -4277,14 +4554,25 @@ const Character = {
                 attackRange : 12,*/
                 modelParams: {
                     CHEST: {
-                        spriteID: spriteId
+                        spriteID: spriteId,
+                        sprite: 'ghostChest'
                     },
-                    RIGHT_ARM: {
-                        spriteID: spriteId
+                    RIGHT_SHOULDER: {
+                        spriteID: spriteId,
+                        sprite: 'ghostRightArm'
                     },
-                    LEFT_ARM: {
-                        spriteID: spriteId
+                    LEFT_SHOULDER: {
+                        spriteID: spriteId,
+                        sprite: 'ghostLeftArm'
                     },
+                    HEAD: { spriteID: 0, },
+                    FACE: {sprite: 9000,},
+                    LEFT_FOREARM: { spriteID: 0, },
+                    RIGHT_FOREARM: { spriteID: 0, },
+                    RIGHT_THIGH: { spriteID: 0, },
+                    LEFT_THIGH: { spriteID: 0, },
+                    RIGHT_SHIN: { spriteID: 0, },
+                    LEFT_SHIN: { spriteID: 0, },
                 },
                 actions: [{
                     interfaceID: 0,
@@ -4309,7 +4597,7 @@ const Character = {
             FIGHT_THE_BULL : 2,
             COMPLETE : 3
         }
-        let childGoblin = this.Goblin(id, name, 4,  [[0, 10], [1, 10], [2, 50], [3, 10]], [[]], [null, null, null, 331, 483]);
+        let childGoblin = this.Goblin(id, name, 1,  [[0, 10], [1, 10], [2, 50], [3, 10]], [[]], null, 4);
         childGoblin.cannotDie = true;
         childGoblin.actions = [{
             interfaceID: 0,
@@ -4324,6 +4612,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [44],
                     stepResultPass: 'END_ACTION',
@@ -4348,6 +4637,7 @@ const Character = {
                 }),
                 buildStep(StepType.GIVE_OWNER_EQUIPMENT_ITEM, {params: [1, 13, null]}),
                 buildStep(StepType.GIVE_OWNER_EQUIPMENT_ITEM, {params: [0, 21, null]}),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [42],
                     stepResultPass: 'END_ACTION',
@@ -4362,6 +4652,7 @@ const Character = {
                 }),
                 buildStep(StepType.REMOVE_OWNER_EQUIPMENT_ITEM, {params: [1]}),
                 buildStep(StepType.REMOVE_OWNER_EQUIPMENT_ITEM, {params: [0]}),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [43],
                     stepResultPass: 'END_ACTION',
@@ -4374,6 +4665,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [45],
                     stepResultPass: 'END_ACTION',
@@ -4386,6 +4678,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [41],
                     stepResultPass: 'END_ACTION',
@@ -4410,6 +4703,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [2],
                     stepResultPass: 'END_ACTION',
@@ -4422,6 +4716,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [13],
                     stepResultPass: 'END_ACTION',
@@ -4439,6 +4734,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [14],
                     stepResultPass: 'END_ACTION',
@@ -4457,6 +4753,7 @@ const Character = {
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
                 buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [51, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [15],
                     stepResultPass: 'END_ACTION',
@@ -4475,6 +4772,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [39],
                     stepResultPass: 'END_ACTION',
@@ -4493,6 +4791,7 @@ const Character = {
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
                 buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [730, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [16],
                     stepResultPass: 'END_ACTION',
@@ -4505,6 +4804,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [17],
                     stepResultPass: 'END_ACTION',
@@ -4517,6 +4817,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [18],
                     stepResultPass: 'END_ACTION',
@@ -4529,6 +4830,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [19],
                     stepResultPass: 'END_ACTION',
@@ -4541,6 +4843,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [20],
                     stepResultPass: 'END_ACTION',
@@ -4554,6 +4857,7 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [22],
                     stepResultPass: 'END_ACTION',
@@ -4573,7 +4877,8 @@ const Character = {
             id: 4,
             name: 'Talk To',
             steps: [
-                [buildStep(StepType.SHOW_DIALOG, {params: [33]})],
+                [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {params: [33]})],
             ],
         }] );
         kiaso.stats = [[0, 40], [1, 40], [2, 40], [3, 40], [4, 40], [5, 40], [6, 40], [7, 40], [8, 40], [11, 40],];
@@ -4592,14 +4897,14 @@ const Character = {
                 CHEST: { sprite: spriteNamePrefix + 'Body', spriteID: spriteIndex},
                 HIDDEN_CHEST: { sprite: spriteNamePrefix + 'Body', spriteID: spriteIndex},
                 HEAD: { sprite: spriteNamePrefix + 'Head', spriteID: spriteIndex},
-                BACK_VISIBLE_THIGH: { sprite: spriteNamePrefix + 'ThighBack', spriteID: spriteIndex},
-                BACK_HIDDEN_THIGH: { sprite: spriteNamePrefix + 'ThighBack', spriteID: spriteIndex},
-                BACK_VISIBLE_SHIN: { sprite: spriteNamePrefix + 'ShinBack', spriteID: spriteIndex},
-                BACK_HIDDEN_SHIN: { sprite: spriteNamePrefix + 'ShinBack', spriteID: spriteIndex},
-                FRONT_VISIBLE_THIGH: { sprite: spriteNamePrefix + 'ThighFront', spriteID: spriteIndex},
-                FRONT_HIDDEN_THIGH: { sprite: spriteNamePrefix + 'ThighFront', spriteID: spriteIndex},
-                FRONT_VISIBLE_SHIN: { sprite: spriteNamePrefix + 'ShinFront', spriteID: spriteIndex},
-                FRONT_HIDDEN_SHIN: { sprite: spriteNamePrefix + 'ShinFront', spriteID: spriteIndex},
+                THIGH_VISIBLE_BACK: { sprite: spriteNamePrefix + 'ThighBack', spriteID: spriteIndex},
+                THIGH_HIDDEN_BACK: { sprite: spriteNamePrefix + 'ThighBack', spriteID: spriteIndex},
+                SHIN_VISIBLE_BACK: { sprite: spriteNamePrefix + 'ShinBack', spriteID: spriteIndex},
+                SHIN_HIDDEN_BACK: { sprite: spriteNamePrefix + 'ShinBack', spriteID: spriteIndex},
+                THIGH_VISIBLE_FRONT: { sprite: spriteNamePrefix + 'ThighFront', spriteID: spriteIndex},
+                THIGH_HIDDEN_FRONT: { sprite: spriteNamePrefix + 'ThighFront', spriteID: spriteIndex},
+                SHIN_VISIBLE_FRONT: { sprite: spriteNamePrefix + 'ShinFront', spriteID: spriteIndex},
+                SHIN_HIDDEN_FRONT: { sprite: spriteNamePrefix + 'ShinFront', spriteID: spriteIndex},
                 TAIL: { sprite: spriteNamePrefix + 'Tail', spriteID: spriteIndex},
             },
             actions: [{
@@ -4613,10 +4918,10 @@ const Character = {
         let wolf = this.FourLeggedMammalWithTail(id, name, 'wolf', spriteIndex, stats);
         wolf.drops = drops;
         wolf.modelParams.HEAD.position = {x: -0.35, y: -0.15};
-        wolf.modelParams.BACK_VISIBLE_SHIN.anchor = {x: 0.75, y: 0.2};
-        wolf.modelParams.BACK_HIDDEN_SHIN.anchor = {x: 0.75, y: 0.2};
-        wolf.modelParams.FRONT_HIDDEN_SHIN.anchor = {x: 0.75, y: 0.2};
-        wolf.modelParams.FRONT_VISIBLE_SHIN.anchor = {x: 0.75, y: 0.2};
+        wolf.modelParams.SHIN_VISIBLE_BACK.anchor = {x: 0.75, y: 0.2};
+        wolf.modelParams.SHIN_HIDDEN_BACK.anchor = {x: 0.75, y: 0.2};
+        wolf.modelParams.SHIN_HIDDEN_FRONT.anchor = {x: 0.75, y: 0.2};
+        wolf.modelParams.SHIN_VISIBLE_FRONT.anchor = {x: 0.75, y: 0.2};
         if (spriteIndex == 2) {
             wolf.modelParams['BOW'] = {
                 id: 'BOW',
@@ -4639,6 +4944,7 @@ const Character = {
         let cookingSkillId = 13;
         let cookingSkillLevel = 1;
         let rawSteakId = 752;
+        cow.modelOverrideName = 'COW';
        
         cow.actions = [{
                 interfaceID: 0,
@@ -4725,23 +5031,23 @@ const Character = {
     Cat: function(id, spriteIndex, name = 'Cat', stats = [], meowDialog = 47) {
         let cat = this.FourLeggedMammalWithTail(id, name, 'Cat', spriteIndex,  stats);
         cat.modelParams.HEAD.position = {x: -0.35, y: -0.1};
-        cat.modelParams.BACK_HIDDEN_THIGH.anchor = {x: 0.8, y: 0.15};
-        cat.modelParams.BACK_VISIBLE_THIGH.anchor = {x: 0.8, y: 0.15};
-        cat.modelParams.BACK_HIDDEN_SHIN.anchor = {x: 0.75, y: 0.15};
-        cat.modelParams.BACK_VISIBLE_SHIN.anchor = {x: 0.75, y: 0.15};
-        cat.modelParams.FRONT_HIDDEN_THIGH.anchor = {x: 0.5, y: 0.15};
-        cat.modelParams.FRONT_VISIBLE_THIGH.anchor = {x: 0.5, y: 0.15};
-        cat.modelParams.FRONT_HIDDEN_SHIN.anchor = {x: 0.75, y: 0.15};
-        cat.modelParams.FRONT_VISIBLE_SHIN.anchor = {x: 0.75, y: 0.15};
+        cat.modelParams.THIGH_HIDDEN_BACK.anchor = {x: 0.8, y: 0.15};
+        cat.modelParams.THIGH_VISIBLE_BACK.anchor = {x: 0.8, y: 0.15};
+        cat.modelParams.SHIN_HIDDEN_BACK.anchor = {x: 0.75, y: 0.15};
+        cat.modelParams.SHIN_VISIBLE_BACK.anchor = {x: 0.75, y: 0.15};
+        cat.modelParams.THIGH_HIDDEN_FRONT.anchor = {x: 0.5, y: 0.15};
+        cat.modelParams.THIGH_VISIBLE_FRONT.anchor = {x: 0.5, y: 0.15};
+        cat.modelParams.SHIN_HIDDEN_FRONT.anchor = {x: 0.75, y: 0.15};
+        cat.modelParams.SHIN_VISIBLE_FRONT.anchor = {x: 0.75, y: 0.15};
 
-        cat.modelParams.BACK_HIDDEN_THIGH.position = {x: 0.6, y: 0.15};
-        cat.modelParams.BACK_VISIBLE_THIGH.position = {x: 0.5, y: 0.3};
-        cat.modelParams.BACK_HIDDEN_SHIN.position = {x:  0.0, y: 0.7};
-        cat.modelParams.BACK_VISIBLE_SHIN.position = {x: 0.0, y: 0.7};
-        cat.modelParams.FRONT_HIDDEN_THIGH.position = {x: -0.05, y: 0.2};
-        cat.modelParams.FRONT_VISIBLE_THIGH.position = {x: -0.2, y: 0.3};
-        cat.modelParams.FRONT_HIDDEN_SHIN.position = {x: -0.2, y: 0.6};
-        cat.modelParams.FRONT_VISIBLE_SHIN.position = {x: -0.2, y: 0.6};
+        cat.modelParams.THIGH_HIDDEN_BACK.position = {x: 0.6, y: 0.15};
+        cat.modelParams.THIGH_VISIBLE_BACK.position = {x: 0.5, y: 0.3};
+        cat.modelParams.SHIN_HIDDEN_BACK.position = {x:  0.0, y: 0.7};
+        cat.modelParams.SHIN_VISIBLE_BACK.position = {x: 0.0, y: 0.7};
+        cat.modelParams.THIGH_HIDDEN_FRONT.position = {x: -0.05, y: 0.2};
+        cat.modelParams.THIGH_VISIBLE_FRONT.position = {x: -0.2, y: 0.3};
+        cat.modelParams.SHIN_HIDDEN_FRONT.position = {x: -0.2, y: 0.6};
+        cat.modelParams.SHIN_VISIBLE_FRONT.position = {x: -0.2, y: 0.6};
 
         cat.modelParams.TAIL.anchor = {x: 0.1, y: 0.5};
         cat.modelParams.TAIL.position = {x: 0.5, y: 0.1};
@@ -4752,12 +5058,10 @@ const Character = {
             name: 'Pet',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-
-                [buildStep(StepType.SHOW_DIALOG, {
-                    params: [meowDialog],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
+                [
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['PET']}),
+                    buildStep(StepType.SAY_MESSAGE, { params: ['♥'],})
+                ],
             ]
         }
         ];

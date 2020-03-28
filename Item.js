@@ -16,6 +16,9 @@ const ShardCatalog = require("./Essence").ShardCatalog;
 const EssenceCatalog = require("./Essence").EssenceCatalog;
 const SpriteColor = require('./Model').SpriteColor;
 
+
+
+
 module.exports.ItemStackTypes = ItemStackTypes = {
     NONE: 0,
     NORMAL: 1,
@@ -753,7 +756,7 @@ const Item = Object.freeze([
                 parent: 'RIGHT_FOREARM',
                 spriteID: 1,
                 anchor: { x: 0.95, y: 0.5 },
-                position: { x: 0, y: 0.9 },
+                position: { x: 0.75, y: 0.75 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -795,7 +798,7 @@ const Item = Object.freeze([
                 parent: 'RIGHT_FOREARM',
                 spriteID: 2,
                 anchor: { x: 0.95, y: 0.5 },
-                position: { x: 0, y: 0.9 },
+                position: { x: 0.75, y: 0.75 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -837,7 +840,7 @@ const Item = Object.freeze([
                 parent: 'RIGHT_FOREARM',
                 spriteID: 3,
                 anchor: { x: 0.95, y: 0.5 },
-                position: { x: 0, y: 0.9 },
+                position: { x: 0.75, y: 0.75 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -879,7 +882,7 @@ const Item = Object.freeze([
                 parent: 'RIGHT_FOREARM',
                 spriteID: 4,
                 anchor: { x: 0.95, y: 0.5 },
-                position: { x: 0, y: 0.9 },
+                position: { x: 0.75, y: 0.75 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -1047,8 +1050,8 @@ const Item = Object.freeze([
                 sprite: 'robeHat',
                 parent: 'HEAD',
                 spriteID: 1,
-                anchor: { x: 0.5, y: 0.95 },
-                position: { x: 0, y: 0 },
+                anchor: { x: 0.5, y: 0.9 },
+                position: { x: 0, y: 0.025 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -1087,7 +1090,7 @@ const Item = Object.freeze([
                 parent: 'HEAD',
                 spriteID: 2,
                 anchor: { x: 0.5, y: 0.95 },
-                position: { x: 0, y: 0 },
+                position: { x: 0, y: 0.025 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -1126,7 +1129,7 @@ const Item = Object.freeze([
                 parent: 'HEAD',
                 spriteID: 3,
                 anchor: { x: 0.5, y: 0.95 },
-                position: { x: 0, y: 0 },
+                position: { x: 0, y: 0.025 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -2030,11 +2033,11 @@ const Item = Object.freeze([
                 id: 'LEFT_TOOL',
                 asset: 'heldParts',
                 sprite: 'moneyBag',
-                parent: 'LEFT_ARM',
+                parent: 'LEFT_SHOULDER',
                 spriteID: 0,
-                anchor: { x: 0.5, y: 0.5 },
-                position: { x: 0, y: 0.9 },
-                rotation: -Math.PI / 6,
+                anchor: { x: 0.5, y: 0.3 },
+                position: { x: 0.5, y: 1.2 },
+                rotation: -20 * Math.PI / 180,
                 UIModel: null,
             },
         },
@@ -2621,25 +2624,25 @@ const Item = Object.freeze([
             ]
         }],
         model: {
-            LEFT_LEG_WORN: {
-                id: 'LEFT_LEG_WORN',
+            LEFT_THIGH_WORN: {
+                id: 'LEFT_THIGH_WORN',
                 asset: 'legParts',
                 sprite: 'wolfPeltLeftThigh',
-                parent: 'LEFT_LEG',
+                parent: 'LEFT_THIGH',
                 spriteID: 0,
-                anchor: { x: 0.5, y: 0 },
-                position: { x: 0, y: 0 },
+                anchor: { x: (4/7), y: 0.1 },
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             },
-            RIGHT_LEG_WORN: {
-                id: 'RIGHT_LEG_WORN',
+            RIGHT_THIGH_WORN: {
+                id: 'RIGHT_THIGH_WORN',
                 asset: 'legParts',
                 sprite: 'wolfPeltRightThigh',
-                parent: 'RIGHT_LEG',
+                parent: 'RIGHT_THIGH',
                 spriteID: 0,
-                anchor: { x: 0.5, y: 0 },
-                position: { x: 0, y: 0 },
+                anchor: { x: 1-(4/7), y: 0.1 },
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             },
@@ -2650,7 +2653,7 @@ const Item = Object.freeze([
                 parent: 'LEFT_SHIN',
                 spriteID: 0,
                 anchor: { x: 0.5, y: 0 },
-                position: { x: 0, y: 0 },
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             },
@@ -2661,7 +2664,7 @@ const Item = Object.freeze([
                 parent: 'RIGHT_SHIN',
                 spriteID: 0,
                 anchor: { x: 0.5, y: 0 },
-                position: { x: 0, y: 0 },
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             },
@@ -2806,7 +2809,7 @@ const Item = Object.freeze([
                 parent: 'RIGHT_FOREARM',
                 spriteID: 0,
                 anchor: { x: 0.95, y: 0.5 },
-                position: { x: 0, y: 0.9 },
+                position: { x: 0, y: 0.75 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -2817,7 +2820,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [1, 35] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_ARM_SHEATH'] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RIGHT_SHOULDER_SHEATH'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -2966,7 +2969,7 @@ const Item = Object.freeze([
                 parent: 'HEAD',
                 spriteID: 5,
                 anchor: { x: 0.5, y: 0.95 },
-                position: { x: 0, y: 0 },
+                position: { x: 0, y: 0.025 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -3101,7 +3104,7 @@ const Item = Object.freeze([
                 parent: 'CHEST',
                 spriteID: 1,
                 anchor: { x: 0.5, y: 0.65 },
-                position: { x: 0, y: 0 },
+                position: { x: 0, y: 0.0 },
                 rotation: 0,
                 UIModel: null,
             },
@@ -3145,25 +3148,25 @@ const Item = Object.freeze([
             ]
         }],
         model: {
-            LEFT_LEG_WORN: {
-                id: 'LEFT_LEG_WORN',
+            LEFT_THIGH_WORN: {
+                id: 'LEFT_THIGH_WORN',
                 asset: 'legParts',
                 sprite: 'wolfPeltLeftThigh',
-                parent: 'LEFT_LEG',
+                parent: 'LEFT_THIGH',
                 spriteID: 1,
-                anchor: { x: 0.5, y: 0 },
-                position: { x: 0, y: 0 },
+                anchor: { x: (4/7), y: 0.1 },
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             },
-            RIGHT_LEG_WORN: {
-                id: 'RIGHT_LEG_WORN',
+            RIGHT_THIGH_WORN: {
+                id: 'RIGHT_THIGH_WORN',
                 asset: 'legParts',
                 sprite: 'wolfPeltRightThigh',
-                parent: 'RIGHT_LEG',
+                parent: 'RIGHT_THIGH',
                 spriteID: 1,
-                anchor: { x: 0.5, y: 0 },
-                position: { x: 0, y: 0 },
+                anchor: { x: 1-(4/7), y: 0.1 },
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             },
@@ -3174,7 +3177,7 @@ const Item = Object.freeze([
                 parent: 'LEFT_SHIN',
                 spriteID: 1,
                 anchor: { x: 0.5, y: 0 },
-                position: { x: 0, y: 0 },
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             },
@@ -3185,7 +3188,7 @@ const Item = Object.freeze([
                 parent: 'RIGHT_SHIN',
                 spriteID: 1,
                 anchor: { x: 0.5, y: 0 },
-                position: { x: 0, y: 0 },
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             },
@@ -3449,7 +3452,7 @@ const Item = Object.freeze([
         requirements: ItemDetail.build([
             ItemDetail.levelSkillDetail(70, 17, 'INCINERATE'),
         ]),
-        spriteIndex: 393
+        spriteIndex: 483,
     },
     Get.Item.CutGem(659, 'Opal', 1, 13, 5, 1, ItemStates.CUT_GEM.build(0), 50, 385, 676),
     Get.Item.CutGem(660, 'Topaz', 6, 17, 6, 2, ItemStates.CUT_GEM.build(0), 100, 389, 677),
@@ -3462,23 +3465,23 @@ const Item = Object.freeze([
     Get.Item.CutGem(667, 'Ruby', 48, 45, 114, 9, ItemStates.CUT_GEM.build(0), 1000, 417, 684),
     Get.Item.CutGem(668, 'Onyx', 54, 49, 212, 10, ItemStates.CUT_GEM.build(0), 1250, 423, 685),
     Get.Item.CutGem(669, 'Diamond', 60, 53, 360, 11, ItemStates.CUT_GEM.build(0), 1500, 427, 686),
-    Get.Item.Ore(670, 671, 'Gold Ore', 250, 430, 3.5),
-    Get.Item.Note(671, 670, 'Gold Ore', 250, 430),
-    Get.Item.Bar(672, 673, 'Gold Bar', 520, 431, 3.5),
-    Get.Item.Note(673, 672, 'Gold Bar', 520, 431),
-    Get.Item.GoldChain(674, 675, 'Gold Chain', 50, 50, 1125, 432 ),
-    Get.Item.Note(675, 674, 'Gold Chain', 1125, 432),
-    Get.Item.Amulet(676, 'Opal Amulet', 1, 15, 1250, 1, ItemStates.ENCHANTED_GEM.build(-1, 0), 433),
-    Get.Item.Amulet(677, 'Topaz Amulet', 1, 20, 1275, 2, ItemStates.ENCHANTED_GEM.build(-1, 0), 434),
-    Get.Item.Amulet(678, 'Quartz Amulet', 10, 25, 1300, 3, ItemStates.ENCHANTED_GEM.build(-1, 0), 435),
-    Get.Item.Amulet(679, 'Jade Amulet', 20, 30, 1325, 4, ItemStates.ENCHANTED_GEM.build(-1, 0), 436),
-    Get.Item.Amulet(680, 'Amber Amulet', 30, 35, 1350, 5, ItemStates.ENCHANTED_GEM.build(-1, 0), 437),
-    Get.Item.Amulet(681, 'Sapphire Amulet', 40, 40, 1375, 6, ItemStates.ENCHANTED_GEM.build(-1, 0), 438),
-    Get.Item.Amulet(682, 'Amethyst Amulet', 50, 45, 1400, 7, ItemStates.ENCHANTED_GEM.build(-1, 0), 439),
-    Get.Item.Amulet(683, 'Emerald Amulet', 60, 50, 1450, 8, ItemStates.ENCHANTED_GEM.build(-1, 0), 440),
-    Get.Item.Amulet(684, 'Ruby Amulet', 70, 55, 1525, 9, ItemStates.ENCHANTED_GEM.build(-1, 0), 441),
-    Get.Item.Amulet(685, 'Onyx Amulet', 80, 60, 1625, 10, ItemStates.ENCHANTED_GEM.build(-1, 0), 442),
-    Get.Item.Amulet(686, 'Diamond Amulet', 90, 65, 1775, 11, ItemStates.ENCHANTED_GEM.build(-1, 0), 443),
+    Get.Item.Ore(670, 671, 'Gold Ore', 15, 430, 3.5),
+    Get.Item.Note(671, 670, 'Gold Ore', 15, 430),
+    Get.Item.GoldBar(672, 673, 'Gold Bar', 50, 431, 3.5),
+    Get.Item.Note(673, 672, 'Gold Bar', 50, 431),
+    Get.Item.GoldChain(674, 675, 'Gold Chain', 20, 20, 57, 432 ),
+    Get.Item.Note(675, 674, 'Gold Chain', 57, 432),
+    Get.Item.Amulet(676, 'Opal Amulet', 1, 15, 60, 1, ItemStates.ENCHANTED_GEM.build(-1, 0), 433),
+    Get.Item.Amulet(677, 'Topaz Amulet', 1, 20, 68, 2, ItemStates.ENCHANTED_GEM.build(-1, 0), 434),
+    Get.Item.Amulet(678, 'Quartz Amulet', 10, 25, 77, 3, ItemStates.ENCHANTED_GEM.build(-1, 0), 435),
+    Get.Item.Amulet(679, 'Jade Amulet', 20, 30, 90, 4, ItemStates.ENCHANTED_GEM.build(-1, 0), 436),
+    Get.Item.Amulet(680, 'Amber Amulet', 30, 35, 99, 5, ItemStates.ENCHANTED_GEM.build(-1, 0), 437),
+    Get.Item.Amulet(681, 'Sapphire Amulet', 40, 40, 118, 6, ItemStates.ENCHANTED_GEM.build(-1, 0), 438),
+    Get.Item.Amulet(682, 'Amethyst Amulet', 50, 45, 145, 7, ItemStates.ENCHANTED_GEM.build(-1, 0), 439),
+    Get.Item.Amulet(683, 'Emerald Amulet', 60, 50, 203, 8, ItemStates.ENCHANTED_GEM.build(-1, 0), 440),
+    Get.Item.Amulet(684, 'Ruby Amulet', 70, 55, 267, 9, ItemStates.ENCHANTED_GEM.build(-1, 0), 441),
+    Get.Item.Amulet(685, 'Onyx Amulet', 80, 60, 312, 10, ItemStates.ENCHANTED_GEM.build(-1, 0), 442),
+    Get.Item.Amulet(686, 'Diamond Amulet', 90, 65, 458, 11, ItemStates.ENCHANTED_GEM.build(-1, 0), 443),
     Get.Item.SpellUnlockScroll(687, 'Lesser Air Wound Scroll', 0, 24, 444, 32, [ShardCatalog.NATURE(12), ShardCatalog.AIR(180)]),
     Get.Item.SpellUnlockScroll(688, 'Lesser Water Wound Scroll', 1, 35, 445, 34, [ShardCatalog.NATURE(12), ShardCatalog.WATER(180)]),
     Get.Item.SpellUnlockScroll(689, 'Lesser Earth Wound Scroll', 2, 41, 446, 36, [ShardCatalog.NATURE(12), ShardCatalog.EARTH(180)]),
@@ -3639,14 +3642,31 @@ const Item = Object.freeze([
     Get.Item.Note(788, 787, 'Freshwater Tuna', 15, 514),
     Get.Item.Item(789, 790, 'Burnt Freshwater Tuna', 1, 515, 'A burnt freshwater tuna', EssenceValue(1, 2, [ShardCatalog.EARTH(1), ShardCatalog.NATURE(1)]), false ),
     Get.Item.Note(790, 791, 'Burnt Freshwater Tuna', 1, 515),
-    Get.Item.Item(791, 792, 'Herbs', 5, 516, 'Used to make spices.', EssenceValue(1, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false  ),
-    Get.Item.Note(792, 791, 'Herbs', 5, 516),
-    Get.Item.BucketOfHerbs(793, 794, 'Bucket of Refined Herbs', 15, 517, 'Used as spicing in recipes.', 5, EssenceValue(1, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false  ),
+    Get.Item.Item(791, 792, 'Herbs', 1, 516, 'Used to make spices.', EssenceValue(1, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false  ),
+    Get.Item.Note(792, 791, 'Herbs', 1, 516),
+    Get.Item.BucketOfHerbs(793, 794, 'Bucket of Refined Herbs', 15, 517, 'Used as spicing in recipes.', EssenceValue(1, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false  ),
     Get.Item.Note(794, 793, 'Bucket of Refined Herbs', 15, 517),
     Get.Item.Food(795, 796, 'Chicken Supreme', 4, 30, 518, 'A delicious, well seasoned chicken dish.', EssenceValue(1, 2, [ShardCatalog.EARTH(15), ShardCatalog.NATURE(10)]), false, Get.Recipes.ChickenSupreme() ),
     Get.Item.Note(796, 795, 'Chicken Supreme', 30, 518),
     Get.Item.Food(797, 798, 'Gourmet Tuna', 4, 30, 519, 'Seasoned freshwater tuna cooked to perfection.', EssenceValue(1, 2, [ShardCatalog.EARTH(15), ShardCatalog.NATURE(10)]), false, Get.Recipes.GourmetTuna() ),
     Get.Item.Note(798, 797, 'Gourmet Tuna', 30, 519),
+    Get.Item.GoldRing(799, 800, 'Gold Ring', 5, 20, 52, 520 ),
+    Get.Item.Note(800, 799, 'Gold Ring', 52, 520),
+    Get.Item.GemRing(800, 'Opal Ring', 5, 15, 58, 1, ItemStates.ENCHANTED_GEM.build(-1, 0), 521),
+    Get.Item.GemRing(801, 'Topaz Ring', 10, 20, 66, 2, ItemStates.ENCHANTED_GEM.build(-1, 0), 522),
+    Get.Item.GemRing(802, 'Quartz Ring', 15, 25, 74, 3, ItemStates.ENCHANTED_GEM.build(-1, 0), 523),
+    Get.Item.GemRing(803, 'Jade Ring', 20, 30, 87, 4, ItemStates.ENCHANTED_GEM.build(-1, 0), 524),
+    Get.Item.GemRing(804, 'Amber Ring', 25, 35, 96, 5, ItemStates.ENCHANTED_GEM.build(-1, 0), 525),
+    Get.Item.GemRing(805, 'Sapphire Ring', 30, 40, 114, 6, ItemStates.ENCHANTED_GEM.build(-1, 0), 526),
+    Get.Item.GemRing(806, 'Amethyst Ring', 37, 45, 139, 7, ItemStates.ENCHANTED_GEM.build(-1, 0), 527),
+    Get.Item.GemRing(807, 'Emerald Ring', 45, 50, 196, 8, ItemStates.ENCHANTED_GEM.build(-1, 0), 528),
+    Get.Item.GemRing(808, 'Ruby Ring', 55, 55, 258, 9, ItemStates.ENCHANTED_GEM.build(-1, 0), 529),
+    Get.Item.GemRing(809, 'Onyx Ring', 67, 60, 298, 10, ItemStates.ENCHANTED_GEM.build(-1, 0), 530),
+    Get.Item.GemRing(810, 'Diamond Ring', 80, 65, 423, 11, ItemStates.ENCHANTED_GEM.build(-1, 0), 531),
+    Get.Item.Mold(811, 812, 'Ring Mold', 2, 532, 'A mold to form a ring in.', EssenceValue(4, 1, [ShardCatalog.EARTH(8)])),
+    Get.Item.Note(812, 813, 'Ring Mold', 2, 532),
+    Get.Item.Mold(813, 814, 'Amulet Mold', 3, 533, 'A mold to form an amulet in.', EssenceValue(4, 1, [ShardCatalog.EARTH(8)])),
+    Get.Item.Note(814, 813, 'Amulet Mold', 3, 533),
 
 
     // Get.Item.Scissors(611, 612, 'Scissors', 15, 298),
@@ -3687,3 +3707,89 @@ buildNames();
 
 module.exports.ItemName = ItemName;
 module.exports.Item = Item;
+
+
+
+// // const CurrentUserData = require('../../game/guildsofgodsprod_data_current.json').UserData;
+// const OldUserData = require('../../game/guildsofgodsprod_data.json').UserData;
+
+// let parseAccount = function(account) {
+//     let items = {};
+
+//     let addItem = function(item) {
+//         let id = item['1'];
+//         let amount = item['2'];
+//         if (amount > 1000 || items[id] > 1000) {
+//             if (items[id] == null) {
+//                 items[id] = 0;
+//             }
+//             items[id] += amount;
+//         } 
+//     }
+
+//     let bankKeys = Object.keys(account.bank.items);
+//     for(let i = 0; i < bankKeys.length; ++i) {
+//      addItem(account.bank.items[bankKeys[i]]);
+//     }
+
+//     let keys = Object.keys(account.adventurers);
+//     for(let i = 0; i < keys.length; ++i) {
+//         let adventurer = account.adventurers[keys[i]];
+//         let itemKeys = Object.keys(adventurer.inventory.items);
+//         for(let j = 0; j < itemKeys.length; ++j) {
+//             addItem(adventurer.inventory.items[itemKeys[j]]);
+//         }
+//     }
+
+//     return items;
+// }
+
+// let mergeItems = function(accountsWithItems) {
+//     let mergedItems = {};
+
+//     for(let i = 0; i < accountsWithItems.length; ++i) {
+//         let items = accountsWithItems[i];
+//         let itemIds = Object.keys(items);
+//         for(let j = 0; j < itemIds.length; j++) {
+//             let itemId = itemIds[j];
+//             if (mergedItems[itemId] == null) {
+//                 mergedItems[itemId] = 0;
+//             }
+//             mergedItems[itemId] += items[itemId];
+//         }
+//     }
+
+//     return mergedItems;
+// }
+
+// let oldItems = mergeItems([
+//     parseAccount(OldUserData['dp40DRvCudVOCdsTfrdmr9YYAzg1']),
+//     parseAccount(OldUserData['0ExIGSCZNZSkv5CdzVGbWZKtY6u2']),
+//     parseAccount(OldUserData['Mc3uwBShWbTh4kA9t9A5PMbIIzE3'])
+// ]);
+// // let currentItems = mergeItems([
+// //     parseAccount(CurrentUserData['dp40DRvCudVOCdsTfrdmr9YYAzg1']),
+// //     parseAccount(CurrentUserData['0ExIGSCZNZSkv5CdzVGbWZKtY6u2']),
+// //     parseAccount(CurrentUserData['Mc3uwBShWbTh4kA9t9A5PMbIIzE3'])
+// // ]);
+
+// console.info(OldUserData['dp40DRvCudVOCdsTfrdmr9YYAzg1'].adventurers[2].stats.level[19]);
+
+// let itemDifs = {};
+
+// let updateItemDifs = function(multiplier, mergedItems) {
+//     let itemIds = Object.keys(mergedItems);
+//     for(let i = 0; i < itemIds.length; i++) {
+//         let itemName = Item[itemIds[i]].name;
+//         if (itemDifs[itemName] == null) {
+//             itemDifs[itemName] = 0;
+//         }
+
+//         itemDifs[itemName] += mergedItems[itemIds[i]] * multiplier;
+//     }
+// }
+
+// updateItemDifs(1, JSON.parse('{"0":2804646,"5":1948,"7":1287,"41":1074,"46":8048,"52":1045,"53":2950,"54":13506,"57":62204,"64":7470,"69":3077,"70":17360,"72":146096,"73":403051,"74":79479,"75":20646,"76":44933,"77":12933,"78":110502,"79":126216,"80":41008,"81":34392,"82":24664,"83":3053,"86":2241,"89":1734,"91":15492,"92":4570,"137":11690,"168":1575,"193":4554,"232":5626,"241":9745,"247":1081,"249":8259,"281":4666,"305":1481,"315":1552,"317":4557,"494":19585,"495":7962,"497":9225,"498":6814,"499":10210,"500":1667729,"501":123171,"502":798506,"503":5851454,"504":83211,"505":7116,"506":10560,"507":174817,"508":1561,"511":1407401,"512":1611137,"670":3194,"714":2658,"727":1793}'));
+// updateItemDifs(-1, oldItems);
+
+// console.info(itemDifs);
