@@ -36,7 +36,7 @@ module.exports.Interface = [
                 id: 4,
                 name: 'Talk To', //talk to npc
                 actionInterval: 0,
-                steps: [buildStepList(StepList.WALK_ADJACENT)],
+                steps: [buildStepList(StepList.WALK_ADJACENT), [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']})]],
             },
             {
                 id: 5,
@@ -1728,6 +1728,36 @@ module.exports.Interface = [
                     params: [1, [null, 2] ]
                 }),
             ]),
+            {
+                id: 271,
+                name: 'Craft Gold Chain (20 Crafting)',
+                flags: ['REPEAT_ACTION'],
+                actionInterval: 5,
+                steps: [
+                    [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [672, 1]}),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, {params: [524, 1]}),
+                    buildStep(StepType.HAS_SKILL_LEVEL, {params: [15, 20]}),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [672, 1]}),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [674, 1]}),
+                    buildStep(StepType.GIVE_XP, {params: [15, 55]}),
+                    buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You make a gold chain.']})]
+                ],
+            },
+            {
+                id: 272,
+                name: 'Craft Gold Ring (5 Crafting)',
+                flags: ['REPEAT_ACTION'],
+                actionInterval: 4,
+                steps: [
+                    [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [672, 1]}),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, {params: [524, 1]}),
+                    buildStep(StepType.HAS_SKILL_LEVEL, {params: [15, 5]}),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [672, 1]}),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [799, 1]}),
+                    buildStep(StepType.GIVE_XP, {params: [15, 35]}),
+                    buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You make a gold ring.']})]
+                ],
+            },
         ],
     },
     {

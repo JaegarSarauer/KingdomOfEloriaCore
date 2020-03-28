@@ -595,9 +595,16 @@ module.exports.StepType = StepType = {
     },
     ROLL_DROP_TABLE: {
         id: 'ROLL_DROP_TABLE',
-        stepResultFail: 'END_ACTION',
+        stepResultFail: 'NEXT_STEP',
         stepResultPass: 'NEXT_STEP',
         paramTypes: ['number', 'Array'], //tableRollChance, 2D Array of drop tables [[itemID, itemMinAmount, itemMaxAmount, rollWeight], [...]]
+        params: [],
+    },
+    ROLL_SKILL_DROP_TABLE: {
+        id: 'ROLL_SKILL_DROP_TABLE',
+        stepResultFail: 'NEXT_STEP',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'Array'], //tableRollChance, skillID, 2D Array of drop tables [[itemID, itemMinAmount, itemMaxAmount, baseWeight, weightIncreasePerLevel], [...]]
         params: [],
     },
     CREATE_GROUND_ITEM: {
@@ -1013,6 +1020,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number'], //npcToBeAttacking, npcToGetAttacked
         params: [],
     },
+    SAY_MESSAGE: {
+        id: 'SAY_MESSAGE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['string'], //message
+        params: [],
+    },
 };
 
 module.exports.buildStep = buildStep = (sType, newDataObject = {}) => {
@@ -1104,7 +1118,7 @@ module.exports.StepList = StepList;
 
 module.exports.buildStepList = buildStepList = (sList, newDataObject = {}) => {
     let list = Object.assign({}, StepList[sList.id], newDataObject);
-    for (let i = 0; i < list.steps.length && i < list.params.length; i++) {
+    for  (let i = 0; i < list.steps.length && i < list.params.length; i++) {
         list.steps[i].params = list.params[i];
     }
     return list.steps;
@@ -1288,6 +1302,7 @@ try {
     const StepGiveXp = require('../internal/Steps/StepGiveXp');
     const StepSetPosition = require('../internal/Steps/StepSetPosition');
     const StepRollDropTable = require('../internal/Steps/StepRollDropTable');
+    const StepRollSkillDropTable = require('../internal/Steps/StepRollSkillDropTable');        
     const StepCreateGroundItem = require('../internal/Steps/StepCreateGroundItem');
     const StepOpenStorageInterface = require('../internal/Steps/StepOpenStorageInterface');
     const StepOpenDialogInterface = require('../internal/Steps/StepOpenDialogInterface');
@@ -1349,16 +1364,22 @@ try {
     const StepIsInArea = require('../internal/Steps/StepIsInArea');
     const StepJoinMinigame = require('../internal/Steps/StepJoinMinigame');
     const StepLeaveMinigame = require('../internal/Steps/StepLeaveMinigame');
-    const StepStyleHair = require('../internal/Steps/StepStyleHair');
+    const StepStyleHair = require('../internal/Steps/StepStyleHair') ;
     const StepAddMarketBuyOffer = require('../internal/Steps/StepAddMarketBuyOffer');
     const StepAddMarketSellOffer = require('../internal/Steps/StepAddMarketSellOffer');
     const StepMakeClosestNPCAttackClosestNPC = require('../internal/Steps/StepMakeClosestNPCAttackClosestNPC');
     const StepSetUserGoalState = require('../internal/Steps/StepSetUserGoalState');
+    const StepSayMessage = require('../internal/Steps/StepSayMessage');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSendClientMessage.StepSendClientMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        SAY_MESSAGE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSayMessage.StepSayMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SEND_GLOBAL_MESSAGE: {
@@ -1814,6 +1835,11 @@ try {
         ROLL_DROP_TABLE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepRollDropTable.StepRollDropTable(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        ROLL_SKILL_DROP_TABLE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepRollSkillDropTable.StepRollSkillDropTable(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         CREATE_GROUND_ITEM: {
