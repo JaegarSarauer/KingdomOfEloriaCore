@@ -14,15 +14,8 @@ const Entity = require('../typedef/Entity');
 const Combat = require('../internal/Combat');
 const SpriteColor = require("./Model").SpriteColor;
 const HairStyle = require("./Model").HairStyle;
-var KingdomOfEloria = null;
+const KingdomOfEloria = require('../KingdomOfEloria');
 const GroundItemDef = require('../def/GroundItemDef').GroundItemDef;
-try {
-    KingdomOfEloria = require('../KingdomOfEloria');
-} catch (e) {
-    if (e.code !== 'MODULE_NOT_FOUND') {
-        throw e;
-    }
-}
 
 module.exports.Character = Character = [{
     id: 0,
@@ -48,7 +41,7 @@ module.exports.Character = Character = [{
             return 30;
         })
     }
-},
+}, 
 Get.Character.Human(1, 'Banker', 4, [null, null, null, 100, 104], HairStyle.LeftSideSwipe, SpriteColor.Black, [{
     interfaceID: 0,
     id: 7,
@@ -220,21 +213,21 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
                 stepResultPass: StepResult.END_AND_REPEAT_ACTION,
                 stepResultFail: StepResult.END_AND_REPEAT_ACTION,
             })],
-            [buildStep(StepType.ROLL_DROP_TABLE, {
+            [buildStep(StepType.ROLL_DROP_TABLE, { 
                 params: [1, [[0, 4, 16, 50], [0, 15, 28, 25], [0, 25, 48, 20], [0, 60, 80, 5]]],
                 stepResultFail: StepResult.NEXT_STEP
             }),
-            buildStep(StepType.ROLL_DROP_TABLE, {
+            buildStep(StepType.ROLL_DROP_TABLE, { 
                 params: [1, [[13, 1, 1, 25], [14, 1, 1, 20], [15, 1, 1, 15], [73, 2, 4, 10], [22, 1, 1, 5]]],
                 stepResultFail: StepResult.NEXT_STEP
             }),
             buildStep(StepType.GIVE_XP, { params: [20, 50] }),
-            buildStep(StepType.SEND_CLIENT_MESSAGE, {
+            buildStep(StepType.SEND_CLIENT_MESSAGE, { 
                 params: ['You find some items in the guard\'s pocket.'],
                 stepResultPass: StepResult.END_AND_GOTO_LIST_1,
             }),
-            ],
         ],
+    ],
     }],
 },
 {
@@ -294,7 +287,7 @@ Get.Character.Ghost(32, 'Ghost ', 3, [[11, 70], [6, 28], [7, 50], [2, 75], [8, 1
 Get.Character.ElementalGhost(33, 'Elemental Ghost ', 4, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81], 1, 960),// Elemental - [150hp, 40mfocus, 99mpower, 99def, 1 mdef, 99 range defence]
 Get.Character.Cavecrawler(34, "Cave Crawler", 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81] ),
 Get.Character.HumanShopOwner(35, 'Clothing Store Owner', 6, [null, null, null, 395, 491], HairStyle.Scruffy, SpriteColor.Black, 10),
-Get.Character.Osaik(36),
+Get.Character.Osaik(36), 
 {
     id: 37,
     name: 'Mysterious Man',
@@ -361,13 +354,13 @@ Get.Character.Osaik(36),
         ],
     }],
 },
-Get.Character.Wolf(38, 'Wolf', [[0, 60], [1, 40], [2, 40], [3, 1], [4, 1], [5, 30], [6, 1], [7, 1], [8, 50], [11, 60],],
-    [[[1, 100], [515, 1, 1, 100]], [[1, 100], [0, 10, 50, 20], [551, 2, 5, 60], [551, 5, 10, 20]]], 1),
+Get.Character.Wolf(38, 'Wolf', [[0, 60], [1, 40], [2, 40], [3, 1], [4, 1], [5, 30], [6, 1], [7, 1], [8, 50], [11, 60],], 
+[[[1, 100], [515, 1, 1, 100]], [[1, 100], [0, 10, 50, 20], [551, 2, 5, 60], [551, 5, 10, 20]]], 1),
 (() => {//[[0, 20], [1, 12], [2, 14], [3, 10], [4, 10], [5, 8], [6, 1], [7, 1], [8, 11], [11, 25],], 
-    let aWolf = Get.Character.Wolf(39, 'Alpha Wolf', [[0, 200], [1, 120], [2, 140], [3, 100], [4, 100], [5, 80], [6, 1], [7, 1], [8, 110], [11, 250],],
-        [[[1, 100], [552, 1, 1, 100]], [[1, 140], [551, 10, 20, 55], [551, 20, 50, 55], [537, 1, 1, 5], [0, 100, 500, 5], [90, 1, 3, 10], [89, 2, 5, 10]],
+    let aWolf = Get.Character.Wolf(39, 'Alpha Wolf', [[0, 200], [1, 120], [2, 140], [3, 100], [4, 100], [5, 80], [6, 1], [7, 1], [8, 110], [11, 250],], 
+        [[[1, 100], [552, 1, 1, 100]], [[1, 140], [551, 10, 20, 55], [551, 20, 50, 55], [537, 1, 1, 5], [0, 100, 500, 5], [90, 1, 3, 10], [89, 2, 5, 10]], 
         [[128, 100], [537, 2, 4, 30], [551, 50, 250, 10], [559, 1, 1, 50]], Get.DropTables.LesserWoundSpellPages(512), Get.DropTables.WoundSpellPages(750)
-            , Get.DropTables.ItemPickupPages(128)], 2);
+        , Get.DropTables.ItemPickupPages(128)], 2);
 
     aWolf.isMultiTarget = true;
 
@@ -384,7 +377,7 @@ Get.Character.Wolf(38, 'Wolf', [[0, 60], [1, 40], [2, 40], [3, 1], [4, 1], [5, 3
     id: 40,
     name: 'Crab',
     modelName: 'SEA_CREATURE',
-    stats: [[11, 30], [0, 30], [1, 30], [2, 30], [5, 30]],
+    stats: [[11, 30], [0, 30], [1, 30], [2, 30], [5, 30]], 
     drops: [[[1, 100], [0, 5, 10, 10], [0, 8, 20, 10], [55, 1, 2, 10], [13, 1, 1, 10], [87, 1, 1, 20], [88, 1, 1, 5], [47, 1, 2, 20], [48, 1, 1, 15]], [[512, 10], [536, 1, 1, 10]]],
     combatStyle: CombatStyle.MELEE,
     attackRange: 1,
@@ -398,7 +391,7 @@ Get.Character.Wolf(38, 'Wolf', [[0, 60], [1, 40], [2, 40], [3, 1], [4, 1], [5, 3
     id: 41,
     name: 'Rockshell Crab',
     modelName: 'SEA_CREATURE',
-    stats: [[11, 60], [0, 25], [1, 35], [2, 55], [5, 60]],
+    stats: [[11, 60], [0, 25], [1, 35], [2, 55], [5, 60]], 
     drops: [[[1, 1], [549, 1, 3, 1]], [[1, 100], [0, 5, 15, 10], [0, 10, 25, 10], [55, 1, 1, 10], [56, 1, 1, 15], [87, 1, 2, 20], [88, 1, 1, 10], [47, 1, 2, 15], [48, 1, 1, 10]], [[364, 10], [536, 1, 1, 10]]],
     modelParams: {
         HEAD: { spriteID: 2},
@@ -419,7 +412,7 @@ Get.Character.Wolf(38, 'Wolf', [[0, 60], [1, 40], [2, 40], [3, 1], [4, 1], [5, 3
     id: 42,
     name: 'Spiky Crab',
     modelName: 'SEA_CREATURE',
-    stats: [[11, 55], [0, 35], [1, 55], [2, 40], [5, 45]],
+    stats: [[11, 55], [0, 35], [1, 55], [2, 40], [5, 45]], 
     drops: [[[1, 1], [549, 3, 9, 1]], [[1, 100], [0, 5, 20, 10], [0, 20, 30, 10], [56, 1, 1, 10], [57, 1, 1, 10], [87, 1, 2, 20], [88, 1, 1, 15], [47, 1, 2, 10], [48, 1, 1, 10], [49, 1, 1, 5]], [[256, 10], [536, 1, 1, 10]]],
     modelParams: {
         HEAD: { spriteID: 3},
@@ -440,7 +433,7 @@ Get.Character.Wolf(38, 'Wolf', [[0, 60], [1, 40], [2, 40], [3, 1], [4, 1], [5, 3
     id: 43,
     name: 'Box Turtle',
     modelName: 'SEA_CREATURE',
-    stats: [[11, 80], [0, 50], [1, 50], [2, 50], [5, 20], [8, 20]],
+    stats: [[11, 80], [0, 50], [1, 50], [2, 50], [5, 20], [8, 20]], 
     drops: [[[1, 100], [0, 10, 20, 10], [0, 20, 50, 10], [501, 10, 20, 20], [502, 5, 10, 10], [89, 1, 1, 5], [53, 1, 1, 5], [68, 1, 7, 15], [69, 1, 3, 15], [59, 1, 1, 10]], [[196, 10], [536, 1, 1, 10]]],
     modelParams: {
         HEAD: { spriteID: 4},
@@ -502,7 +495,7 @@ Get.Character.Skeleton(45, 'Skeleton', 1,
     [[11, 40], [0, 40], [1, 60], [2, 50], [5, 50], [8, 15], ],
     [[[1, 100], [0, 8, 30, 20], [18, 1, 1, 20], [2, 1, 1, 10], [39, 1, 1, 1], [78, 1, 1, 9], [76, 5, 12, 17], [88, 1, 1, 10], [87, 1, 2, 8]], Get.DropTables.LesserWoundSpellPages(512), Get.DropTables.ItemPickupPages(128)],
     [22, 15, null, null, null]), //head, right, left, chest, legs
-Get.Character.SkeletonRanged(46, 'Skeleton', 1,
+Get.Character.SkeletonRanged(46, 'Skeleton', 1,  
     [[11, 75], [2, 65], [3, 75], [4, 85], [5, 75], [8, 25]],
     [[[1, 100], [0, 8, 30, 20], [37, 1, 1, 20], [38, 1, 1, 10], [39, 1, 1, 1], [69, 3, 8, 9], [68, 2, 5, 17], [68, 4, 10, 10], [87, 1, 1, 8]], Get.DropTables.LesserWoundSpellPages(512), Get.DropTables.ItemPickupPages(128)],
     [106, 39, null, null, null], //head, right, left, chest, legs
@@ -515,7 +508,7 @@ Get.Character.GoblinOrcRanged(48, 'Orc', 2,
     [[11, 136], [2, 100], [3, 120], [4, 100], [5, 120], [8, 80]],
     [[[1, 100], [0, 5, 15, 100]]],
     321, 12, 3),
-Get.Character.Wizard(49, 'Dark Wizard', 3,
+Get.Character.Wizard(49, 'Dark Wizard', 3,  
     [[11, 125], [2, 65], [5, 60], [6, 140], [7, 145], [8, 90]],
     [[[1, 1], [76, 1, 1, 1]],[[1, 100], [0, 30, 100, 20], [90, 1, 3, 20], [537, 1, 1, 10], [16, 1, 1, 10], [78, 8, 16, 10], [79, 5, 10, 10], [81, 6, 15, 10], [126, 1, 2, 10]], Get.DropTables.EssenceShards(32, 100, 1000, [100, 100, 100, 100, 60, 60, 60, 60, 40, 40, 40, 40]), Get.DropTables.LesserWoundSpellPages(250), Get.DropTables.WoundSpellPages(500), Get.DropTables.GreaterWoundSpellPages(1000)],
     [null, 86, null, 100, 104],
@@ -568,7 +561,7 @@ Get.Character.Human(63, "Indie Dev", 2, [null, null, null, 437, 483], HairStyle.
             [buildStep(StepType.ATTACK_OWNER, {params: [100000, 100000, false]})],
         ],
     }],
-},
+}, 
 Get.Character.Patreoner(65, 'Sandwich', 2, [108, null, 630, 116, 112], HairStyle.Bald, SpriteColor.Black, 200 + 182, 8),
 Get.Character.Patreoner(66, 'Redd', 2, [313, 299, 632, null, null], HairStyle.Messy, SpriteColor.Brown, 105 + 70, 9),
 Get.Character.Patreoner(67, 'Aiden', 2, [null, 4, null, 385, 483], HairStyle.LeftSideSwipe, SpriteColor.Black, 220 + 0, 10),

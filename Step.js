@@ -1039,11 +1039,11 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.IS_ADJACENT, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.WALK_ADJACENT, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1053,11 +1053,11 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.IS_ON_TOP, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.WALK_ON_TOP, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1067,11 +1067,11 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.HAS_LINE_OF_SIGHT, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.WALK_ADJACENT, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1081,15 +1081,15 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.HAS_LINE_OF_SIGHT, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.CAN_ATTACK_OWNER, {
-                stepResultPass: 'NEXT_STEP',
+                stepResultPass: 'NEXT_STEP', 
                 stepResultFail: 'END_ACTION'
             }),
             buildStep(StepType.WALK_ADJACENT, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -1099,15 +1099,15 @@ const StepList = {
         params: [[], []],
         steps: [
             buildStep(StepType.OWNER_IN_ATTACK_RANGE, {
-                stepResultPass: 'NEXT_STEP_LIST',
+                stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
             buildStep(StepType.OWNER_IN_WALK_BOUNDS, {
-                stepResultPass: 'NEXT_STEP',
+                stepResultPass: 'NEXT_STEP', 
                 stepResultFail: 'END_ACTION'
             }),
             buildStep(StepType.WALK_ADJACENT, {
-                stepResultPass: 'END_AND_REPEAT_STEP_LIST',
+                stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
         ],
@@ -2097,4 +2097,4 @@ try {
     if (e.code !== 'MODULE_NOT_FOUND') {
         throw e;
     }
-}
+};
