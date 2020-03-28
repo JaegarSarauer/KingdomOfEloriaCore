@@ -1,5 +1,5 @@
 const TWEEN = require('@tweenjs/tween.js');
-const Get = require('./Getter.js').Get;
+const animationsRaw = require('../../../dist/assets/animations/HUMAN.json');
 
 const HairStyle = {
     Bald : 0,
@@ -27,17 +27,116 @@ const SpriteColor = {
     Brown : 10
 };
 
-module.exports.Model = Model = {
-    HUMAN : {
-        id: "HUMAN",
+const Model = {
+    HUMANOID : {
+        id: "HUMANOID",
+        CORE: {
+            id: 'CORE',
+            asset: 'chestParts',
+            parent: null,
+            sprite: 'blankChest',
+            spriteID: 2,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
         CHEST : {
             id: 'CHEST',
             asset: 'chestParts',
             sprite: 'humanChest',
-            parent: null,
+            parent: 'CORE',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.65},
-            position: {x: 0, y: -16},
+            position: {x: 0, y: -0.35},
+            rotation: 0,
+            UIModel: null,
+        },
+        RIGHT_THIGH: {
+            id: 'RIGHT_THIGH',
+            asset: 'legParts',
+            sprite: 'humanRightThigh',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: 1-(4/7), y: 0.15},
+            position: {x: -(5/16), y: 0.4},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEFT_THIGH: {
+            id: 'LEFT_THIGH',
+            asset: 'legParts',
+            sprite: 'humanLeftThigh',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: (4/7), y: 0.15},
+            position: {x: (5/16), y: 0.4},
+            rotation: 0,
+            UIModel: null,
+        },
+        RIGHT_SHIN: {
+            id: 'RIGHT_SHIN',
+            asset: 'legParts',
+            sprite: 'humanRightShin',
+            parent: 'RIGHT_THIGH',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0.05, y: 0.75},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEFT_SHIN: {
+            id: 'LEFT_SHIN',
+            asset: 'legParts',
+            sprite: 'humanLeftShin',
+            parent: 'LEFT_THIGH',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: -0.05, y: 0.75},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEFT_SHOULDER: {
+            id: 'LEFT_SHOULDER',
+            asset: 'armParts',
+            sprite: 'humanLeftShoulder',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: 0.25, y: 0.18},
+            position: {x: 0.4, y: -0.47},
+            rotation: 0,
+            UIModel: null,
+        },
+        RIGHT_SHOULDER: {
+            id: 'RIGHT_SHOULDER',
+            asset: 'armParts',
+            sprite: 'humanRightShoulder',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: 0.75, y: 0.18},
+            position: {x: -0.4, y: -0.47},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEFT_FOREARM: {
+            id: 'LEFT_FOREARM',
+            asset: 'armParts',
+            sprite: 'humanLeftForearm',
+            parent: 'LEFT_SHOULDER',
+            spriteID: 1,
+            anchor: {x: 1-(3/8), y: 0.05},
+            position: {x: (5/8), y: 0.75},
+            rotation: 0,
+            UIModel: null,
+        },
+        RIGHT_FOREARM: {
+            id: 'RIGHT_FOREARM',
+            asset: 'armParts',
+            sprite: 'humanRightForearm',
+            parent: 'RIGHT_SHOULDER',
+            spriteID: 1,
+            anchor: {x: (3/8), y: 0.05},
+            position: {x: -(5/8), y: 0.75},
             rotation: 0,
             UIModel: null,
         },
@@ -48,7 +147,7 @@ module.exports.Model = Model = {
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.9},
-            position: {x: 0, y: -0.55},
+            position: {x: 0, y: -0.7},
             rotation: 0,
             UIModel: null,
         },
@@ -59,197 +158,163 @@ module.exports.Model = Model = {
             parent: 'HEAD',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: -0.44},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEFT_ARM: {
-            id: 'LEFT_ARM',
-            asset: 'armParts',
-            sprite: 'humanLeftShoulder',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.15, y: 0.15},
-            position: {x: 0.32, y: -0.52},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_ARM: {
-            id: 'RIGHT_ARM',
-            asset: 'armParts',
-            sprite: 'humanRightShoulder',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.85, y: 0.15},
-            position: {x: -0.32, y: -0.52},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_LEG: {
-            id: 'RIGHT_LEG',
-            asset: 'legParts',
-            sprite: 'humanRightThigh',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0},
-            position: {x: -0.22, y: 0.22},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEFT_LEG: {
-            id: 'LEFT_LEG',
-            asset: 'legParts',
-            sprite: 'humanLeftThigh',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0},
-            position: {x: 0.22, y: 0.22},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEFT_FOREARM: {
-            id: 'LEFT_FOREARM',
-            asset: 'armParts',
-            sprite: 'humanLeftForearm',
-            parent: 'LEFT_ARM',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0},
-            position: {x: 0.55, y: 0.65},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_FOREARM: {
-            id: 'RIGHT_FOREARM',
-            asset: 'armParts',
-            sprite: 'humanRightForearm',
-            parent: 'RIGHT_ARM',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0},
-            position: {x: -0.55, y: 0.65},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_SHIN: {
-            id: 'RIGHT_SHIN',
-            asset: 'legParts',
-            sprite: 'humanRightShin',
-            parent: 'RIGHT_LEG',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0},
-            position: {x: -0.095, y: 0.8},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEFT_SHIN: {
-            id: 'LEFT_SHIN',
-            asset: 'legParts',
-            sprite: 'humanLeftShin',
-            parent: 'LEFT_LEG',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0},
-            position: {x: 0.095, y: 0.8},
+            position: {x: 0, y: -0.3},
             rotation: 0,
             UIModel: null,
         },
     },
-    GOBLIN: {
-        id: "GOBLIN",
+    FOUR_LEGGED_MAMMAL: {
+        id: 'FOUR_LEGGED_MAMMAL',
+        CORE: {
+            id: 'CORE',
+            asset: 'chestParts',
+            parent: null,
+            sprite: 'blankChest',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
+        HIDDEN_CHEST: {
+            id: 'HIDDEN_CHEST',
+            asset: 'chestParts',
+            parent: 'CORE',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: -0.25},
+            rotation: 0,
+            UIModel: null,
+        },
+        THIGH_HIDDEN_FRONT: {
+            id: 'THIGH_HIDDEN_FRONT',
+            asset: 'legParts',
+            parent: 'HIDDEN_CHEST',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: -0.15, y: 0.1},
+            rotation: 0.0,
+            UIModel: null,
+        },
+        SHIN_HIDDEN_FRONT: {
+            id: 'SHIN_HIDDEN_FRONT',
+            asset: 'legParts',
+            parent: 'THIGH_HIDDEN_FRONT',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0.05, y: 0.9},
+            rotation: 0.0,
+            UIModel: null,
+        },
+        THIGH_HIDDEN_BACK: {
+            id: 'THIGH_HIDDEN_BACK',
+            asset: 'legParts',
+            parent: 'HIDDEN_CHEST',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0.35, y: 0.05},
+            rotation: 0.0,
+            UIModel: null,
+        },
+        SHIN_HIDDEN_BACK: {
+            id: 'SHIN_HIDDEN_BACK',
+            asset: 'legParts',
+            parent: 'THIGH_HIDDEN_BACK',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0.1, y: 0.9},
+            rotation: 0.0,
+            UIModel: null,
+        },
         CHEST: {
             id: 'CHEST',
             asset: 'chestParts',
-            sprite: 'goblinChest',
-            parent: null,
-            spriteID: 0,
+            parent: 'CORE',
+            spriteID: 1,
             anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: -16},
+            position: {x: 0, y: -0.25},
             rotation: 0,
             UIModel: null,
         },
         HEAD: {
             id: 'HEAD',
             asset: 'headParts',
-            sprite: 'goblinHead',
             parent: 'CHEST',
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0.95},
-            position: {x: 0, y: -0.5},
+            spriteID: 1,
+            anchor: {x: 0.85, y: 0.85},
+            position: {x: -0.45, y: -0.05},
             rotation: 0,
             UIModel: null,
         },
-        RIGHT_ARM: {
-            id: 'RIGHT_ARM',
-            asset: 'armParts',
-            sprite: 'goblinRightArm',
+        THIGH_VISIBLE_FRONT: {
+            id: 'THIGH_VISIBLE_FRONT',
+            asset: 'legParts',
             parent: 'CHEST',
-            spriteID: 0,
+            spriteID: 1,
             anchor: {x: 0.5, y: 0.1},
-            position: {x: -0.5, y: -0.38},
-            rotation: 0,
+            position: {x: -0.3, y: 0.2},
+            rotation: 0.0,
             UIModel: null,
         },
-        LEFT_ARM: {
-            id: 'LEFT_ARM',
-            asset: 'armParts',
-            sprite: 'goblinLeftArm',
-            parent: 'CHEST',
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0},
-            position: {x: 0.5, y: -0.38},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEFT_FOREARM: {
-            id: 'LEFT_FOREARM',
-            asset: 'armParts',
-            sprite: '',
-            parent: 'LEFT_ARM',
-            spriteID: 0,
-            anchor: {x: 0, y: 0},
-            position: {x: 0.25, y: 0.55},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_FOREARM: {
-            id: 'RIGHT_FOREARM',
-            asset: 'armParts',
-            sprite: '',
-            parent: 'RIGHT_ARM',
-            spriteID: 0,
-            anchor: {x: 0, y: 0.8},
-            position: {x: -0.25, y: 0.55},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_LEG: {
-            id: 'RIGHT_LEG',
+        SHIN_VISIBLE_FRONT: {
+            id: 'SHIN_VISIBLE_FRONT',
             asset: 'legParts',
-            sprite: 'goblinRightLeg',
-            parent: 'CHEST',
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0},
-            position: {x: -0.16, y: 0.44},
-            rotation: 0,
+            parent: 'THIGH_VISIBLE_FRONT',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0.05, y: 0.9},
+            rotation: 0.0,
             UIModel: null,
         },
-        LEFT_LEG: {
-            id: 'LEFT_LEG',
+        THIGH_VISIBLE_BACK: {
+            id: 'THIGH_VISIBLE_BACK',
             asset: 'legParts',
-            sprite: 'goblinLeftLeg',
             parent: 'CHEST',
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0},
-            position: {x: 0.16, y: 0.44},
-            rotation: 0,
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0.2, y: 0.15},
+            rotation: 0.0,
+            UIModel: null,
+        },
+        SHIN_VISIBLE_BACK: {
+            id: 'SHIN_VISIBLE_BACK',
+            asset: 'legParts',
+            parent: 'THIGH_VISIBLE_BACK',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0.1, y: 0.9},
+            rotation: 0.0,
+            UIModel: null,
+        },
+        TAIL: {
+            id: 'TAIL',
+            asset: 'tailParts',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0.5, y: -0.25},
+            rotation: -0.15,
             UIModel: null,
         },
     },
     CHICKEN: {
         id: 'CHICKEN',
+        CORE: {
+            id: 'CORE',
+            asset: 'chestParts',
+            parent: null,
+            sprite: 'blankChest',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
         CHEST: {
             id: 'CHEST',
             asset: 'chestParts',
             sprite: 'chickenBody',
-            parent: null,
+            parent: 'CORE',
             spriteID: 0,
             anchor: {x: 0.5, y: 0.5},
             position: {x: 0, y: 0},
@@ -279,162 +344,24 @@ module.exports.Model = Model = {
             UIModel: null,
         },
     },
-    PINATA: {
-        id: 'PINATA',
-        CHEST: {
-            id: 'CHEST',
-            asset: 'chestParts',
-            sprite: 'pinataBody',
-            parent: null,
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        HEAD: {
-            id: 'HEAD',
-            asset: 'headParts',
-            sprite: 'pinataHead',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.75, y: 0.75},
-            position: {x: -0.5, y: -0.25},
-            rotation: 0,
-            UIModel: null,
-        },
-        UPPER_LEG_1: {
-            id: 'UPPER_LEG_1',
-            asset: 'legParts',
-            sprite: 'pinataUpperLeg',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.0},
-            position: {x: -0.35, y: 0.32},
-            rotation: 0.45,
-            UIModel: null,
-        },
-        LOWER_LEG_1: {
-            id: 'LOWER_LEG_1',
-            asset: 'legParts',
-            sprite: 'pinataBottomLeg',
-            parent: 'UPPER_LEG_1',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.0},
-            position: {x: 0, y: 0.9},
-            rotation: -0.45,
-            UIModel: null,
-        },
-        UPPER_LEG_2: {
-            id: 'UPPER_LEG_2',
-            asset: 'legParts',
-            sprite: 'pinataUpperLeg',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.0},
-            position: {x: -0.15, y: 0.35},
-            rotation: 0.45,
-            UIModel: null,
-        },
-        LOWER_LEG_2: {
-            id: 'LOWER_LEG_2',
-            asset: 'legParts',
-            sprite: 'pinataBottomLeg',
-            parent: 'UPPER_LEG_2',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.0},
-            position: {x: 0, y: 0.9},
-            rotation: -0.45,
-            UIModel: null,
-        },
-        UPPER_LEG_3: {
-            id: 'UPPER_LEG_3',
-            asset: 'legParts',
-            sprite: 'pinataUpperLeg',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.0},
-            position: {x: 0.15, y: 0.35},
-            rotation: 0.45,
-            UIModel: null,
-        },
-        LOWER_LEG_3: {
-            id: 'LOWER_LEG_3',
-            asset: 'legParts',
-            sprite: 'pinataBottomLeg',
-            parent: 'UPPER_LEG_3',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.0},
-            position: {x: 0, y: 0.9},
-            rotation: -0.45,
-            UIModel: null,
-        },
-        UPPER_LEG_4: {
-            id: 'UPPER_LEG_4',
-            asset: 'legParts',
-            sprite: 'pinataUpperLeg',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.0},
-            position: {x: 0.35, y: 0.35},
-            rotation: 0.45,
-            UIModel: null,
-        },
-        LOWER_LEG_4: {
-            id: 'LOWER_LEG_4',
-            asset: 'legParts',
-            sprite: 'pinataBottomLeg',
-            parent: 'UPPER_LEG_4',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.0},
-            position: {x: 0, y: 0.9},
-            rotation: -0.45,
-            UIModel: null,
-        },
-        TAIL: {
-            id: 'TAIL',
-            asset: 'tailParts',
-            sprite: 'pinataTail',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.185, y: 0.185},
-            position: {x: 0.45, y: 0.0},
-            rotation: -0.25,
-            UIModel: null,
-        },
-    },
-    DUCK: {
-        id: 'DUCK',
-        CHEST: {
-            id: 'CHEST',
-            asset: 'chestParts',
-            sprite: 'duckBody',
-            parent: null,
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        HEAD: {
-            id: 'HEAD',
-            asset: 'headParts',
-            sprite: 'duckHead',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.75, y: 0.75},
-            position: {x: -0.35, y: -0.45},
-            rotation: 0,
-            UIModel: null,
-        },
-    },
     SEA_CREATURE: {
         id: 'SEA_CREATURE',
+        CORE: {
+            id: 'CORE',
+            asset: 'chestParts',
+            parent: null,
+            sprite: 'blankChest',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
         HEAD: {
             id: 'HEAD',
             asset: 'headParts',
             sprite: 'crabHead',
-            parent: null,
+            parent: 'CORE',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.75},
             position: {x: 0, y: 0},
@@ -488,11 +415,22 @@ module.exports.Model = Model = {
     },
     CHICK: {
         id: 'CHICK',
+        CORE: {
+            id: 'CORE',
+            asset: 'chestParts',
+            parent: null,
+            sprite: 'blankChest',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
         CHEST: {
             id: 'CHEST',
             asset: 'chestParts',
             sprite: 'chickBody',
-            parent: null,
+            parent: 'CORE',
             spriteID: 0,
             anchor: {x: 0.5, y: 0.5},
             position: {x: 0, y: 0},
@@ -511,85 +449,24 @@ module.exports.Model = Model = {
             UIModel: null,
         },
     },
-    RAT: {
-        id: "RAT",
-        CHEST: {
-            id: 'CHEST',
-            asset: 'chestParts',
-            sprite: 'mediumRatBody',
-            parent: null,
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEGS: {
-            id: 'LEGS',
-            asset: 'legParts',
-            sprite: 'mediumRatLegs',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0, y: 0.45},
-            rotation: 0,
-            UIModel: null,
-        },
-        TAIL: {
-            id: 'TAIL',
-            asset: 'tailParts',
-            sprite: 'mediumRatTail',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.1, y: 0.5},
-            position: {x: 0.25, y: 0.15},
-            rotation: 0,
-            UIModel: null,
-        },
-    },
-    GHOST: {
-        id: 'GHOST',
-        CHEST: {
-            id: 'CHEST',
-            asset: 'chestParts',
-            sprite: 'ghostChest',
-            parent: null,
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_ARM: {
-            id: 'RIGHT_ARM',
-            asset: 'armParts',
-            sprite: 'ghostRightArm',
-            parent: 'CHEST',
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0.15},
-            position: {x: -0.5, y: -0.38},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEFT_ARM: {
-            id: 'LEFT_ARM',
-            asset: 'armParts',
-            sprite: 'ghostLeftArm',
-            parent: 'CHEST',
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0.15},
-            position: {x: 0.5, y: -0.38},
-            rotation: 0,
-            UIModel: null,
-        },
-    },
     CAVECRAWLER : {
         id: "CAVECRAWLER",
+        CORE: {
+            id: 'CORE',
+            asset: 'chestParts',
+            parent: null,
+            sprite: 'blankChest',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
         CHEST: {
             id: 'CHEST',
             asset: 'chestParts',
             sprite: 'caveCrawlerChest',
-            parent: null,
+            parent: 'CORE',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.5},
             position: {x: 0, y: 0},
@@ -607,8 +484,8 @@ module.exports.Model = Model = {
             rotation: 0,
             UIModel: null,
         },
-        RIGHT_ARM: {
-            id: 'RIGHT_ARM',
+        RIGHT_SHOULDER: {
+            id: 'RIGHT_SHOULDER',
             asset: 'armParts',
             sprite: 'caveCrawlerRightArm',
             parent: 'CHEST',
@@ -618,8 +495,8 @@ module.exports.Model = Model = {
             rotation: 0,
             UIModel: null,
         },
-        LEFT_ARM: {
-            id: 'LEFT_ARM',
+        LEFT_SHOULDER: {
+            id: 'LEFT_SHOULDER',
             asset: 'armParts',
             sprite: 'caveCrawlerLeftArm',
             parent: 'CHEST',
@@ -629,8 +506,8 @@ module.exports.Model = Model = {
             rotation: 0,
             UIModel: null,
         },
-        INNER_RIGHT_LEG: {
-            id: 'INNER_RIGHT_LEG',
+        INNER_RIGHT_THIGH: {
+            id: 'INNER_RIGHT_THIGH',
             asset: 'legParts',
             sprite: 'caveCrawlerInnerRightLeg',
             parent: 'CHEST',
@@ -640,8 +517,8 @@ module.exports.Model = Model = {
             rotation: 0,
             UIModel: null,
         },
-        OUTER_RIGHT_LEG: {
-            id: 'OUTER_RIGHT_LEG',
+        OUTER_RIGHT_THIGH: {
+            id: 'OUTER_RIGHT_THIGH',
             asset: 'legParts',
             sprite: 'caveCrawlerOuterRightLeg',
             parent: 'CHEST',
@@ -651,8 +528,8 @@ module.exports.Model = Model = {
             rotation: 0,
             UIModel: null,
         },
-        INNER_LEFT_LEG: {
-            id: 'INNER_LEFT_LEG',
+        INNER_LEFT_THIGH: {
+            id: 'INNER_LEFT_THIGH',
             asset: 'legParts',
             sprite: 'caveCrawlerInnerLeftLeg',
             parent: 'CHEST',
@@ -662,14 +539,61 @@ module.exports.Model = Model = {
             rotation: 0,
             UIModel: null,
         },
-        OUTER_LEFT_LEG: {
-            id: 'OUTER_LEFT_LEG',
+        OUTER_LEFT_THIGH: {
+            id: 'OUTER_LEFT_THIGH',
             asset: 'legParts',
             sprite: 'caveCrawlerOuterLeftLeg',
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.2, y: 0.2},
             position: {x: 0.25, y: 0.02},
+            rotation: 0,
+            UIModel: null,
+        },
+    },
+    RAT_SMALL: {
+        id: 'RAT_SMALL',
+        CORE: {
+            id: 'CORE',
+            asset: 'chestParts',
+            parent: null,
+            sprite: 'blankChest',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
+        CHEST: {
+            id: 'CHEST',
+            asset: 'chestParts',
+            sprite: 'smallRatBody',
+            parent: 'CORE',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEGS: {
+            id: 'LEGS',
+            asset: 'legParts',
+            sprite: 'smallRatLegs',
+            parent: 'CHEST',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0, y: 0.45},
+            rotation: 0,
+            UIModel: null,
+        },
+        TAIL: {
+            id: 'TAIL',
+            asset: 'tailParts',
+            sprite: 'smallRatTail',
+            parent: 'CHEST',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.1},
+            position: {x: 0, y: 0.45},
             rotation: 0,
             UIModel: null,
         },
@@ -805,139 +729,6 @@ module.exports.Model = Model = {
             UIModel: null,
         }
     },
-    FOUR_LEGGED_MAMMAL: {
-        id: 'FOUR_LEGGED_MAMMAL',
-        CORE: {
-            id: 'CORE',
-            asset: 'chestParts',
-            parent: null,
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        HIDDEN_CHEST: {
-            id: 'HIDDEN_CHEST',
-            asset: 'chestParts',
-            parent: 'CORE',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        FRONT_HIDDEN_THIGH: {
-            id: 'FRONT_HIDDEN_THIGH',
-            asset: 'legParts',
-            parent: 'HIDDEN_CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: -0.15, y: 0.1},
-            rotation: 0.0,
-            UIModel: null,
-        },
-        FRONT_HIDDEN_SHIN: {
-            id: 'FRONT_HIDDEN_SHIN',
-            asset: 'legParts',
-            parent: 'FRONT_HIDDEN_THIGH',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.05, y: 0.9},
-            rotation: 0.0,
-            UIModel: null,
-        },
-        BACK_HIDDEN_THIGH: {
-            id: 'BACK_HIDDEN_THIGH',
-            asset: 'legParts',
-            parent: 'HIDDEN_CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.35, y: 0.05},
-            rotation: 0.0,
-            UIModel: null,
-        },
-        BACK_HIDDEN_SHIN: {
-            id: 'BACK_HIDDEN_SHIN',
-            asset: 'legParts',
-            parent: 'BACK_HIDDEN_THIGH',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.1, y: 0.9},
-            rotation: 0.0,
-            UIModel: null,
-        },
-        CHEST: {
-            id: 'CHEST',
-            asset: 'chestParts',
-            parent: 'CORE',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        HEAD: {
-            id: 'HEAD',
-            asset: 'headParts',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.85, y: 0.85},
-            position: {x: -0.45, y: -0.05},
-            rotation: 0,
-            UIModel: null,
-        },
-        FRONT_VISIBLE_THIGH: {
-            id: 'FRONT_VISIBLE_THIGH',
-            asset: 'legParts',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: -0.3, y: 0.2},
-            rotation: 0.0,
-            UIModel: null,
-        },
-        FRONT_VISIBLE_SHIN: {
-            id: 'FRONT_VISIBLE_SHIN',
-            asset: 'legParts',
-            parent: 'FRONT_VISIBLE_THIGH',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.05, y: 0.9},
-            rotation: 0.0,
-            UIModel: null,
-        },
-        BACK_VISIBLE_THIGH: {
-            id: 'BACK_VISIBLE_THIGH',
-            asset: 'legParts',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.2, y: 0.15},
-            rotation: 0.0,
-            UIModel: null,
-        },
-        BACK_VISIBLE_SHIN: {
-            id: 'BACK_VISIBLE_SHIN',
-            asset: 'legParts',
-            parent: 'BACK_VISIBLE_THIGH',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.1, y: 0.9},
-            rotation: 0.0,
-            UIModel: null,
-        },
-        TAIL: {
-            id: 'TAIL',
-            asset: 'tailParts',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.5, y: -0.25},
-            rotation: -0.15,
-            UIModel: null,
-        },
-    },
 };
 
 module.exports.ModelPart = ModelPart = {
@@ -979,6 +770,7 @@ const AnimationHelper = class AnimationHelper {
                     )
                 )
             ).start();
+            break;
             case 5:
             new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
                 new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
@@ -989,6 +781,7 @@ const AnimationHelper = class AnimationHelper {
                     )
                 )
             ).start();
+            break;
             case 6:
             new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
                 new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
@@ -996,6 +789,78 @@ const AnimationHelper = class AnimationHelper {
                         new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
                             new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
                                 new AnimationDef(source, transforms[5], millisecondsDuration[5])
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
+            case 7:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6])
+                                )
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
+            case 8:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6]).chain(
+                                        new AnimationDef(source, transforms[7], millisecondsDuration[7])
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
+            case 9:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6]).chain(
+                                        new AnimationDef(source, transforms[7], millisecondsDuration[7]).chain(
+                                            new AnimationDef(source, transforms[8], millisecondsDuration[8])
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
+            case 10:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6]).chain(
+                                        new AnimationDef(source, transforms[7], millisecondsDuration[7]).chain(
+                                            new AnimationDef(source, transforms[8], millisecondsDuration[8]).chain(
+                                                new AnimationDef(source, transforms[9], millisecondsDuration[9])
+                                            )
+                                        )
+                                    )
+                                )
                             )
                         )
                     )
@@ -1076,7 +941,7 @@ const HumanAnimationHelper = class {
 
     RightArmUp(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_ARM,
+            Part : this.modelParts.RIGHT_SHOULDER,
             Transform : this.transforms.RIGHT_SHOULDER.STRAIGHT_UP,
             Speed : speed
         });
@@ -1085,7 +950,7 @@ const HumanAnimationHelper = class {
 
     RightArmAngleUp(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_ARM,
+            Part : this.modelParts.RIGHT_SHOULDER,
             Transform : this.transforms.RIGHT_SHOULDER.ANGLE_UP,
             Speed : speed
         });
@@ -1094,7 +959,7 @@ const HumanAnimationHelper = class {
 
     RightArmAngleDown(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_ARM,
+            Part : this.modelParts.RIGHT_SHOULDER,
             Transform : this.transforms.RIGHT_SHOULDER.ANGLE_DOWN,
             Speed : speed
         });
@@ -1103,7 +968,7 @@ const HumanAnimationHelper = class {
 
     RightArmAngleBack(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_ARM,
+            Part : this.modelParts.RIGHT_SHOULDER,
             Transform : this.transforms.RIGHT_SHOULDER.ANGLE_BACK,
             Speed : speed
         });
@@ -1112,7 +977,7 @@ const HumanAnimationHelper = class {
 
     LeftArmAngleUp(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_ARM,
+            Part : this.modelParts.LEFT_SHOULDER,
             Transform : this.transforms.LEFT_SHOULDER.ANGLE_UP,
             Speed : speed
         });
@@ -1121,7 +986,7 @@ const HumanAnimationHelper = class {
 
     LeftArmAngleDown(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_ARM,
+            Part : this.modelParts.LEFT_SHOULDER,
             Transform : this.transforms.LEFT_SHOULDER.ANGLE_DOWN,
             Speed : speed
         });
@@ -1130,7 +995,7 @@ const HumanAnimationHelper = class {
 
     LeftArmAngleBack(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_ARM,
+            Part : this.modelParts.LEFT_SHOULDER,
             Transform : this.transforms.LEFT_SHOULDER.ANGLE_BACK,
             Speed : speed
         });
@@ -1139,7 +1004,7 @@ const HumanAnimationHelper = class {
     
     RightArmStraight(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_ARM,
+            Part : this.modelParts.RIGHT_SHOULDER,
             Transform : this.transforms.RIGHT_SHOULDER.STRAIGHT_FORWARD,
             Speed : speed
         });
@@ -1148,7 +1013,7 @@ const HumanAnimationHelper = class {
     
     RightArmRelax(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_ARM,
+            Part : this.modelParts.RIGHT_SHOULDER,
             Transform : this.transforms.RIGHT_SHOULDER.NEUTRAL,
             Speed : speed
         });
@@ -1212,7 +1077,7 @@ const HumanAnimationHelper = class {
 
     LeftArmUp(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_ARM,
+            Part : this.modelParts.LEFT_SHOULDER,
             Transform : this.transforms.LEFT_SHOULDER.STRAIGHT_UP,
             Speed : speed
         });
@@ -1221,7 +1086,7 @@ const HumanAnimationHelper = class {
     
     LeftArmStraight(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_ARM,
+            Part : this.modelParts.LEFT_SHOULDER,
             Transform : this.transforms.LEFT_SHOULDER.STRAIGHT_FORWARD,
             Speed : speed
         });
@@ -1230,7 +1095,7 @@ const HumanAnimationHelper = class {
     
     LeftArmRelax(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_ARM,
+            Part : this.modelParts.LEFT_SHOULDER,
             Transform : this.transforms.LEFT_SHOULDER.NEUTRAL,
             Speed : speed
         });
@@ -1239,7 +1104,7 @@ const HumanAnimationHelper = class {
 
     LeftThighRelax(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_LEG,
+            Part : this.modelParts.LEFT_THIGH,
             Transform : this.transforms.LEFT_THIGH.NEUTRAL,
             Speed : speed
         });
@@ -1248,7 +1113,7 @@ const HumanAnimationHelper = class {
 
     LeftThighAngleDown(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_LEG,
+            Part : this.modelParts.LEFT_THIGH,
             Transform : this.transforms.LEFT_THIGH.ANGLE_DOWN,
             Speed : speed
         });
@@ -1257,7 +1122,7 @@ const HumanAnimationHelper = class {
 
     LeftThighStraight(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_LEG,
+            Part : this.modelParts.LEFT_THIGH,
             Transform : this.transforms.LEFT_THIGH.STRAIGHT,
             Speed : speed
         });
@@ -1266,7 +1131,7 @@ const HumanAnimationHelper = class {
 
     LeftThighAngleUp(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_LEG,
+            Part : this.modelParts.LEFT_THIGH,
             Transform : this.transforms.LEFT_THIGH.ANGLE_UP,
             Speed : speed
         });
@@ -1275,7 +1140,7 @@ const HumanAnimationHelper = class {
 
     LeftThighAngleBack(speed) {
         this.animations.push({
-            Part : this.modelParts.LEFT_LEG,
+            Part : this.modelParts.LEFT_THIGH,
             Transform : this.transforms.LEFT_THIGH.ANGLE_BACK,
             Speed : speed
         });
@@ -1285,7 +1150,7 @@ const HumanAnimationHelper = class {
 
     RightThighRelax(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_LEG,
+            Part : this.modelParts.RIGHT_THIGH,
             Transform : this.transforms.RIGHT_THIGH.NEUTRAL,
             Speed : speed
         });
@@ -1294,7 +1159,7 @@ const HumanAnimationHelper = class {
 
     RightThighAngleDown(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_LEG,
+            Part : this.modelParts.RIGHT_THIGH,
             Transform : this.transforms.RIGHT_THIGH.ANGLE_DOWN,
             Speed : speed
         });
@@ -1303,7 +1168,7 @@ const HumanAnimationHelper = class {
 
     RightThighStraight(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_LEG,
+            Part : this.modelParts.RIGHT_THIGH,
             Transform : this.transforms.RIGHT_THIGH.STRAIGHT,
             Speed : speed
         });
@@ -1312,7 +1177,7 @@ const HumanAnimationHelper = class {
 
     RightThighAngleUp(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_LEG,
+            Part : this.modelParts.RIGHT_THIGH,
             Transform : this.transforms.RIGHT_THIGH.ANGLE_UP,
             Speed : speed
         });
@@ -1321,7 +1186,7 @@ const HumanAnimationHelper = class {
 
     RightThighAngleBack(speed) {
         this.animations.push({
-            Part : this.modelParts.RIGHT_LEG,
+            Part : this.modelParts.RIGHT_THIGH,
             Transform : this.transforms.RIGHT_THIGH.ANGLE_BACK,
             Speed : speed
         });
@@ -1370,315 +1235,13 @@ const HumanAnimationHelper = class {
     }
 }
 
-const FourLeggedAnimationHelper = class {
-    constructor(millisecondDuration) {
-        this.millisecondDuration = millisecondDuration;
-        this.animations = [];
-        this.part = null;
-        this.angleMultiplier = 1;
-    }
-
-    SetAngleMultiplier(multiplier) {
-        this.angleMultiplier = multiplier;
-        return this;
-    }
-
-    SetPart(part) {
-        this.part = part;
-        return this;
-    }
-
-    ChestNeutral(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation : 0, x : 0, y: 0},
-            Speed : speed
-        });
-        return this;
-    }
-
-    TailNeutral(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation : 0},
-            Speed : speed
-        });
-        return this;
-    }
-
-    TailUp(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation: toRadians(-120) * this.angleMultiplier },
-            Speed : speed
-        });
-        return this;
-    }
-
-    ChestUp(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation: toRadians(70) * this.angleMultiplier, x : 15 * this.angleMultiplier, y: -10 },
-            Speed : speed
-        });
-        return this;
-    }
-
-
-    ThighForwardReach(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation: toRadians(70) * this.angleMultiplier},
-            Speed : speed
-        });
-        return this;
-    }
-
-    ThighForward(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation: toRadians(30) * this.angleMultiplier},
-            Speed : speed
-        });
-        return this;
-    }
-
-    ThighBackwards(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation: toRadians(-30) * this.angleMultiplier},
-            Speed : speed
-        });
-        return this;
-    }
-    ThighNeutral(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation : 0},
-            Speed : speed
-        });
-        return this;
-    }
-    ShinNeutral(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation : 0},
-            Speed : speed
-        });
-        return this;
-    }
-    ShinBend(speed) {
-        this.animations.push({
-            Part : this.part,
-            Transform : {rotation: toRadians(-30) * this.angleMultiplier},
-            Speed : speed
-        });
-        return this;
-    }
-
-    Start() {
-        let now = new Date().getTime();
-        let part = this.part;
-        if (!part.lockedUntil || part.lockedUntil <= now) {
-            let speedToValue = function(speed) {
-                switch(speed) {
-                    case "FAST":
-                    return 1;
-                    case "SLOW":
-                    return 3;
-                }
-                return 0;
-            }
-    
-            let totalSpeedCount = 0;
-            for(let i = 0; i < this.animations.length; ++i) {
-                totalSpeedCount += speedToValue(this.animations[i].Speed);
-            }
-    
-            let speedToMilliseconds = function(speed, millisecondDuration) {
-                let percent = speedToValue(speed) / totalSpeedCount;
-                return percent * millisecondDuration;
-            }
-    
-            let endTransforms = [];
-            let endMilliseconds = [];
-    
-            for(let i = 0; i < this.animations.length; ++i) {
-                endTransforms.push(this.animations[i].Transform);
-                endMilliseconds.push(speedToMilliseconds(this.animations[i].Speed, this.millisecondDuration));
-            }
-    
-            let helper = new AnimationHelper();
-            helper.getAnimationChain(this.animations[0].Part, endTransforms, endMilliseconds);
-
-            this.animations = [];
-            part.lockedUntil = now + this.millisecondDuration;
-            this.part = null;
-            this.angleMultiplier = 1;
-        }
-    }
-}
-
 const Animation = {
-    FOUR_LEGGED_MAMMAL: {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
-            
-            modelParts.CORE.ownerSprite.reset();
-            modelParts.CORE.x -= xChange;
-            modelParts.CORE.y -= yChange;
-            modelParts.CHEST.scale.x = Math.abs(modelParts.CORE.scale.x) * dir;
-            modelParts.HIDDEN_CHEST.scale.x = Math.abs(modelParts.CORE.scale.x) * dir;
-            new AnimationDef(modelParts.CORE, {
-                x: modelParts.CORE.x + xChange,
-                y: modelParts.CORE.y + yChange,
-            }, 500).start();
-
-            let helper = new FourLeggedAnimationHelper(492);
-            helper.SetPart(modelParts.FRONT_VISIBLE_THIGH).ThighForward('FAST').ThighNeutral('FAST').ThighBackwards('FAST').ThighNeutral('FAST').Start();
-            helper.SetPart(modelParts.FRONT_VISIBLE_SHIN).ShinBend('FAST').ShinNeutral('FAST').Start();
-
-            helper.SetPart(modelParts.FRONT_HIDDEN_THIGH).ThighBackwards('FAST').ThighNeutral('FAST').ThighForward('FAST').ThighNeutral('FAST').Start();
-            helper.SetPart(modelParts.FRONT_HIDDEN_SHIN).ShinNeutral('FAST').ShinBend('FAST').ShinNeutral('FAST').Start();
-            
-            helper.SetPart(modelParts.BACK_HIDDEN_THIGH).ThighForward('FAST').ThighNeutral('FAST').ThighBackwards('FAST').ThighNeutral('FAST').Start();
-            helper.SetPart(modelParts.BACK_HIDDEN_SHIN).ShinBend('FAST').ShinNeutral('FAST').Start();
-
-            helper.SetPart(modelParts.BACK_VISIBLE_THIGH).ThighBackwards('FAST').ThighNeutral('FAST').ThighForward('FAST').ThighNeutral('FAST').Start();
-            helper.SetPart(modelParts.BACK_VISIBLE_SHIN).ShinNeutral('FAST').ShinBend('FAST').ShinNeutral('FAST').Start();
-
-            new AnimationDef(modelParts.HEAD, {rotation: Math.PI / 8}, 500 / 2).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.TAIL, {rotation: -Math.PI / 8}, 500 / 4).repeat(2).yoyo(true).start();
-        },
-        ATTACK_MELEE: (modelParts, params) => {
-            let helper = new FourLeggedAnimationHelper(492);
-
-            // Facing right
-            if (params.x > 0) {
-                modelParts.CHEST.scale.x =  -1;
-                modelParts.HIDDEN_CHEST.scale.x = -1;
-
-                helper.SetPart(modelParts.CHEST).SetAngleMultiplier(-1).ChestUp('FAST').ChestUp('SLOW').ChestNeutral('FAST').Start();
-                helper.SetPart(modelParts.HIDDEN_CHEST).SetAngleMultiplier(-1).ChestUp('FAST').ChestUp('SLOW').ChestNeutral('FAST').Start();
-            }
-            // Facing left
-            else {
-                modelParts.CHEST.scale.x =  1;
-                modelParts.HIDDEN_CHEST.scale.x = 1;
-                
-                helper.SetPart(modelParts.CHEST).ChestUp('FAST').ChestUp('SLOW').ChestNeutral('FAST').Start();
-                helper.SetPart(modelParts.HIDDEN_CHEST).ChestUp('FAST').ChestUp('SLOW').ChestNeutral('FAST').Start();
-            }
-
-            helper.SetPart(modelParts.FRONT_VISIBLE_THIGH).ThighForwardReach('FAST').ThighForwardReach('SLOW').ThighNeutral('FAST').Start();
-            helper.SetPart(modelParts.FRONT_HIDDEN_THIGH).ThighForwardReach('FAST').ThighForwardReach('FAST').ThighNeutral('FAST').Start();
-
-            helper.SetPart(modelParts.BACK_VISIBLE_THIGH).ThighBackwards('FAST').ThighBackwards('FAST').ThighNeutral('FAST').Start();
-            helper.SetPart(modelParts.BACK_HIDDEN_THIGH).ThighBackwards('FAST').ThighBackwards('FAST').ThighNeutral('FAST').Start();
-            
-            helper.SetPart(modelParts.BACK_VISIBLE_SHIN).ShinBend('FAST').ShinBend('FAST').ShinNeutral('FAST').Start();
-            helper.SetPart(modelParts.BACK_HIDDEN_SHIN).ShinBend('FAST').ShinBend('FAST').ShinNeutral('FAST').Start();
-        },
-        ATTACK_RANGE: (modelParts, params) => {
-            let helper = new FourLeggedAnimationHelper(492);
-            helper.SetPart(modelParts.TAIL).TailUp('FAST').TailNeutral('FAST').TailNeutral('SLOW').TailNeutral('SLOW').Start();
-        },
-    },
-    HUMAN: {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            modelParts.CHEST.ownerSprite.reset();
-            modelParts.CHEST.x -= xChange;
-            modelParts.CHEST.y -= yChange;
-            new AnimationDef(modelParts.CHEST, {
-                x: modelParts.CHEST.x + xChange,
-                y: modelParts.CHEST.y + yChange,
-            }, 500).start();
-            let helper = new AnimationHelper();
-
-            if (Math.abs(xChange) > 0) {
-                let dir = xChange < 0 ? 1 : -1; //going left rotate left, going right rotate right
-                let stepSize = Math.PI / 10;//(Math.abs(params.xTileChange) + Math.abs(params.yTileChange)) > 1 ? Math.PI / 6: Math.PI / 8;
-
-                let firstFoot = xChange < 0 ? modelParts.RIGHT_LEG : modelParts.LEFT_LEG;
-                helper.createRotationAnimationChain(firstFoot, [dir * stepSize,- dir * stepSize * 0.75,- dir * stepSize,0], 125);
-                let firstShin = xChange < 0 ? modelParts.RIGHT_SHIN : modelParts.LEFT_SHIN;
-                helper.createRotationAnimationChain(firstShin, [-dir * stepSize / 4, -dir * stepSize, -dir * stepSize * 1.25, 0], 125);
-                // let firstArm = xChange < 0 ? modelParts.RIGHT_ARM : modelParts.LEFT_ARM;
-                // helper.createRotationAnimationChain(firstArm, [-dir * stepSize * 1.5, dir * stepSize * 0.75, dir * stepSize * 1.5, 0 ], 125);
-                // let firstForearm = xChange < 0 ? modelParts.RIGHT_FOREARM : modelParts.LEFT_FOREARM;
-                // helper.createRotationAnimationChain(firstForearm, [0,  dir * stepSize, dir * stepSize / 2, 0], 125); //(150, 250, 100)
-                let secondFoot = xChange < 0 ? modelParts.LEFT_LEG : modelParts.RIGHT_LEG;
-                helper.createRotationAnimationChain(secondFoot,  [-dir * stepSize * 0.75, dir * stepSize * 1.5, dir * stepSize * 1.5, 0 ], 125);
-                let secondShin = xChange < 0 ? modelParts.LEFT_SHIN : modelParts.RIGHT_SHIN;
-                helper.createRotationAnimationChain(secondShin,  [-dir * stepSize,-dir * stepSize * 1.75, -dir * stepSize * 2.5, 0 ], 125);
-                // let secondArm = xChange < 0 ? modelParts.LEFT_ARM : modelParts.RIGHT_ARM;
-                // helper.createRotationAnimationChain(secondArm,  [dir * stepSize * 1.5,-dir * stepSize * 0.75, -dir * stepSize * 1.5, 0 ], 125);
-                // let secondForearm = xChange < 0 ? modelParts.LEFT_FOREARM : modelParts.RIGHT_FOREARM;
-                // helper.createRotationAnimationChain(secondForearm,  [dir * stepSize, dir * stepSize / 2, 0, 0 ], 125);
-            }
-            // Walking vertically
-            else if (Math.abs(yChange) > 0) {
-            
-                let firstFoot = yChange < 0 ? modelParts.RIGHT_LEG : modelParts.LEFT_LEG;
-                helper.createPropertyAnimationChain(firstFoot.scale, "y", [1.25, 1, 0.75, 1.0], 125);
-                // let secondArm = yChange < 0 ? modelParts.LEFT_ARM : modelParts.RIGHT_ARM;
-                // helper.createPropertyAnimationChain(secondArm.scale, "y", [1.25, 1, 0.75, 1.0], 125);
-                let secondFoot = yChange < 0 ? modelParts.LEFT_LEG : modelParts.RIGHT_LEG;
-                helper.createPropertyAnimationChain(secondFoot.scale, "y", [0.75, 1, 1.25, 1.0], 125);
-                // let firstArm = yChange < 0 ? modelParts.RIGHT_ARM : modelParts.LEFT_ARM;
-                // helper.createPropertyAnimationChain(firstArm.scale, "y", [0.75, 1, 1.25, 1.0], 125);
-            }
-            
-        },
-        ATTACK_MELEE: (modelParts, params) => {
-            modelParts.LEFT_ARM.reset();
-            modelParts.LEFT_FOREARM.reset();
-            modelParts.RIGHT_ARM.reset();
-            modelParts.RIGHT_FOREARM.reset();
-
-            let helper = new AnimationHelper();
-
-            helper.createRotationAnimationChain(modelParts.RIGHT_ARM, [- Math.PI / 4, Math.PI / 8, 3 * Math.PI / 4,  0 ], 100);
-            helper.createRotationAnimationChain(modelParts.RIGHT_FOREARM, [2 * Math.PI / 4, Math.PI / 4, Math.PI / 8, 0 ], 100);
-            helper.createRotationAnimationChain(modelParts.LEFT_ARM, [Math.PI / 8, Math.PI / 4, Math.PI / 8, 0 ], 100);
-
-        },
+    FOUR_LEGGED_MAMMAL: {},
+    HUMANOID: {
         ACTION: (modelParts, params) => {
             let helper = new HumanAnimationHelper(modelParts, params, 300);
             helper.LeftElbowBendAcute("FAST").LeftElbowRelax("FAST").Start();
             helper.RightElbowBendAcute("FAST").RightElbowRelax("FAST").Start();
-        },
-        DEFEND: (modelParts, params) => {
-            modelParts.LEFT_FOREARM.reset();
-            modelParts.LEFT_ARM.reset();
-            new AnimationDef(modelParts.LEFT_ARM, {rotation: Math.PI / 4}, 250).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.LEFT_FOREARM, {rotation: Math.PI / 8}, 200).repeat(1).yoyo(true).start();
-        },
-        ATTACK_RANGE: (modelParts, params) => {
-            let helper = new HumanAnimationHelper(modelParts, params, 500);
-            helper.RightArmAngleUp("FAST").RightArmAngleUp("SLOW").RightArmRelax("FAST").Start();
-            helper.LeftElbowBendAcute("FAST").LeftElbowBendObtuse("SLOW").LeftElbowBendAcute("FAST").LeftElbowRelax("FAST").Start();
-            helper.LeftArmAngleBack("FAST").LeftArmAngleDown("SLOW").LeftArmRelax("FAST").Start();
-        },
-        ATTACK_MAGIC: (modelParts, params) => {
-            let helper = new HumanAnimationHelper(modelParts, params, 500);
-            helper.LeftElbowBendObtuse("SLOW").LeftElbowRelax("FAST").Start();
-            helper.RightArmStraight("FAST").RightArmStraight("SLOW").RightElbowRelax("SLOW").Start();
-        },
-        WOODCUT: (modelParts, params) => {
-            let helper = new HumanAnimationHelper(modelParts, params, 500);
-            let animationHelper = new AnimationHelper();
-            helper.RightArmStraight("FAST").RightArmUp("SLOW").RightArmAngleUp("FAST").RightArmAngleUp("SLOW").RightArmRelax("SLOW").Start();
-            animationHelper.createPropertyAnimationChain(modelParts.RIGHT_FOREARM.scale, "x", [0.9, 0.65, 0.9, 1.0], 100);
-        },
-        MINE: (modelParts, params) => {
-            let helper = new HumanAnimationHelper(modelParts, params, 500);
-            helper.RightArmStraight("SLOW").RightArmUp("SLOW").RightArmStraight("FAST").RightArmRelax("FAST").Start();
-            helper.RightElbowBendAcute("SLOW").RightElbowRelax("FAST").Start();
         },
         SMELT: (modelParts, params) => { //Skipped
             let helper = new HumanAnimationHelper(modelParts, params, 300);
@@ -1695,93 +1258,24 @@ const Animation = {
             helper.LeftArmAngleDown("FAST").LeftArmAngleDown("SLOW").LeftArmRelax("SLOW").Start();
             helper.LeftElbowBendObtuse("FAST").LeftElbowRelax("FAST").LeftElbowBendAcute("FAST").LeftElbowRelax("SLOW").Start();
         },
-        TALK_INVOKE: (modelParts, params) => {
-            let helper = new HumanAnimationHelper(modelParts, params, 500);
-            helper.LeftElbowBendAcute("SLOW").LeftElbowRelax("FAST").Start();
-            helper.LeftArmAngleUp("SLOW").LeftArmRelax("SLOW").Start();
-            helper.RightElbowBendAcute("SLOW").RightElbowRelax("FAST").Start();
-            helper.RightArmAngleUp("SLOW").RightArmRelax("SLOW").Start();
-        },
-        EQUIP_RIGHT_ARM_SHEATH: (modelParts, params) => {
+        EQUIP_RIGHT_SHOULDER_SHEATH: (modelParts, params) => {
             let helper = new HumanAnimationHelper(modelParts, params, 500);
             helper.RightArmAngleBack("FAST").RightArmAngleUp("SLOW").RightArmRelax("SLOW").Start();
         },
-        EQUIP_RIGHT_ARM_BACK: (modelParts, params) => {
+        EQUIP_RIGHT_SHOULDER_BACK: (modelParts, params) => {
             let helper = new HumanAnimationHelper(modelParts, params, 500);
             helper.RightArmUp("FAST").RightArmAngleDown("SLOW").RightArmRelax("SLOW").Start();
             helper.RightElbowBendObtuse("FAST").RightElbowBendAcute("SLOW").RightArmRelax("SLOW").Start();
         },
-        EQUIP_LEFT_ARM_SHEATH: (modelParts, params) => {
+        EQUIP_LEFT_SHOULDER_SHEATH: (modelParts, params) => {
             let helper = new HumanAnimationHelper(modelParts, params, 500);
             helper.LeftArmAngleBack("FAST").LeftArmAngleUp("SLOW").LeftArmRelax("SLOW").Start();
         },
-        EQUIP_LEFT_ARM_BACK: (modelParts, params) => {
+        EQUIP_LEFT_SHOULDER_BACK: (modelParts, params) => {
             let helper = new HumanAnimationHelper(modelParts, params, 500);
             helper.LeftArmUp("FAST").LeftArmAngleDown("SLOW").LeftArmRelax("SLOW").Start();
             helper.LeftElbowBendObtuse("FAST").LeftElbowBendAcute("SLOW").LeftArmRelax("SLOW").Start();
         },
-    },
-    GOBLIN: {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            modelParts.CHEST.ownerSprite.reset();
-            modelParts.CHEST.x -= xChange;
-            modelParts.CHEST.y -= yChange;
-            new AnimationDef(modelParts.CHEST, {
-                x: modelParts.CHEST.x + xChange,
-                y: modelParts.CHEST.y + yChange,
-            }, 500).start();
-
-            if (Math.abs(xChange) > 0) {
-                let dir = xChange < 0 ? 1 : -1; //going left rotate left, going right rotate right
-                let firstFoot = xChange < 0 ? modelParts.RIGHT_LEG : modelParts.LEFT_LEG;
-                let secondFoot = xChange < 0 ? modelParts.LEFT_LEG : modelParts.RIGHT_LEG;
-
-                let stepSize = Math.PI / 8;//(Math.abs(params.xTileChange) + Math.abs(params.yTileChange)) > 1 ? Math.PI / 6: Math.PI / 8;
-                new AnimationDef(firstFoot, {rotation: dir * stepSize }, 125).chain( // Swing out fast (100)
-                    new AnimationDef(firstFoot, {rotation: -dir * stepSize}, 250).chain( // Resistance met on ground til foot behind (250)
-                        new AnimationDef(firstFoot, {rotation: 0}, 125) // Return to stationary (500)
-                    )
-                ).start();
-                new AnimationDef(secondFoot, {rotation: -dir * stepSize}, 125).chain( // Wait til first foot is out (75) then swing fast (150)
-                    new AnimationDef(secondFoot, {rotation: dir * stepSize}, 250).chain( //Swing down to ground fast (200)
-                        new AnimationDef(secondFoot, {rotation: 0}, 125)
-                    )
-                ).start();
-            }
-            // Walking vertically
-            else if (Math.abs(yChange) > 0) {
-                let firstFoot = yChange < 0 ? modelParts.RIGHT_LEG : modelParts.LEFT_LEG;
-                let secondFoot = yChange < 0 ? modelParts.LEFT_LEG : modelParts.RIGHT_LEG;
-                
-                new AnimationDef(firstFoot.scale, { y : 1.25 }, 125).chain( // Swing out fast (100)
-                    new AnimationDef(firstFoot.scale, { y : 0.75 }, 250).chain( // Swing out fast (100)
-                        new AnimationDef(firstFoot.scale, { y : 1.0 }, 125)
-                    )
-                ).start();
-
-                new AnimationDef(secondFoot.scale, { y : 0.75 }, 125).chain( // Swing out fast (100)
-                    new AnimationDef(secondFoot.scale, { y : 1.25 }, 250).chain( // Swing out fast (100)
-                        new AnimationDef(secondFoot.scale, { y : 1.0 }, 125)
-                    )
-                ).start();
-            }
-            
-        },
-        ATTACK_MELEE: (modelParts, params) => {
-            modelParts.RIGHT_ARM.reset();
-            new AnimationDef(modelParts.RIGHT_ARM, {rotation: 3 * Math.PI / 4}, 250).repeat(1).yoyo(true).start();
-
-        },
-        ACTION: (modelParts, params) => {
-            modelParts.RIGHT_ARM.reset();
-            new AnimationDef(modelParts.RIGHT_ARM, {rotation: 3 * Math.PI / 4}, 250).repeat(1).yoyo(true).start();
-        },
-        DEFEND: (modelParts, params) => {
-            modelParts.LEFT_ARM.reset();
-            new AnimationDef(modelParts.LEFT_ARM, {rotation: Math.PI / 4}, 250).repeat(1).yoyo(true).start();
-        }
     },
     CAVECRAWLER: {
         WALK: (modelParts, params) => {
@@ -1797,10 +1291,10 @@ const Animation = {
 
             if (Math.abs(xChange) > 0) {
                 let dir = xChange < 0 ? 1 : -1; //going left rotate left, going right rotate right
-                let firstFoot = xChange < 0 ? modelParts.INNER_RIGHT_LEG : modelParts.INNER_LEFT_LEG;
-                let secondFoot = xChange < 0 ? modelParts.INNER_LEFT_LEG : modelParts.INNER_RIGHT_LEG;
-                let firstFoot2 = xChange < 0 ? modelParts.OUTER_RIGHT_LEG : modelParts.OUTER_LEFT_LEG;
-                let secondFoot2 = xChange < 0 ? modelParts.OUTER_LEFT_LEG : modelParts.OUTER_RIGHT_LEG;
+                let firstFoot = xChange < 0 ? modelParts.INNER_RIGHT_THIGH : modelParts.INNER_LEFT_THIGH;
+                let secondFoot = xChange < 0 ? modelParts.INNER_LEFT_THIGH : modelParts.INNER_RIGHT_THIGH;
+                let firstFoot2 = xChange < 0 ? modelParts.OUTER_RIGHT_THIGH : modelParts.OUTER_LEFT_THIGH;
+                let secondFoot2 = xChange < 0 ? modelParts.OUTER_LEFT_THIGH : modelParts.OUTER_RIGHT_THIGH;
 
                 let stepSize = Math.PI / 8;//(Math.abs(params.xTileChange) + Math.abs(params.yTileChange)) > 1 ? Math.PI / 6: Math.PI / 8;
                 new AnimationDef(firstFoot, {rotation: dir * stepSize }, 125).chain( // Swing out fast (100)
@@ -1826,10 +1320,10 @@ const Animation = {
             }
             // Walking vertically
             else if (Math.abs(yChange) > 0) {
-                let firstFoot = xChange < 0 ? modelParts.INNER_RIGHT_LEG : modelParts.INNER_LEFT_LEG;
-                let secondFoot = xChange < 0 ? modelParts.INNER_LEFT_LEG : modelParts.INNER_RIGHT_LEG;
-                let firstFoot2 = xChange < 0 ? modelParts.OUTER_RIGHT_LEG : modelParts.OUTER_LEFT_LEG;
-                let secondFoot2 = xChange < 0 ? modelParts.OUTER_LEFT_LEG : modelParts.OUTER_RIGHT_LEG;
+                let firstFoot = xChange < 0 ? modelParts.INNER_RIGHT_THIGH : modelParts.INNER_LEFT_THIGH;
+                let secondFoot = xChange < 0 ? modelParts.INNER_LEFT_THIGH : modelParts.INNER_RIGHT_THIGH;
+                let firstFoot2 = xChange < 0 ? modelParts.OUTER_RIGHT_THIGH : modelParts.OUTER_LEFT_THIGH;
+                let secondFoot2 = xChange < 0 ? modelParts.OUTER_LEFT_THIGH : modelParts.OUTER_RIGHT_THIGH;
                 
                 new AnimationDef(firstFoot.scale, { y : 1.25 }, 125).chain( // Swing out fast (100)
                     new AnimationDef(firstFoot.scale, { y : 0.75 }, 250).chain( // Swing out fast (100)
@@ -1857,129 +1351,51 @@ const Animation = {
             
         },
         ATTACK_MELEE: (modelParts, params) => {
-            modelParts.RIGHT_ARM.reset();
-            modelParts.LEFT_ARM.reset();
-            new AnimationDef(modelParts.RIGHT_ARM, {rotation: 3 * Math.PI / 4}, 100).chain(
-                new AnimationDef(modelParts.RIGHT_ARM, {rotation: 0}, 175).chain(
-                    new AnimationDef(modelParts.RIGHT_ARM, {rotation: 3 * Math.PI / 4}, 75).chain(
-                        new AnimationDef(modelParts.RIGHT_ARM, {rotation: 0}, 200)
+            modelParts.RIGHT_SHOULDER.reset();
+            modelParts.LEFT_SHOULDER.reset();
+            new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: 3 * Math.PI / 4}, 100).chain(
+                new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: 0}, 175).chain(
+                    new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: 3 * Math.PI / 4}, 75).chain(
+                        new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: 0}, 200)
                     )
                 )
             ).start();
-            new AnimationDef(modelParts.LEFT_ARM, {rotation: -3 * Math.PI / 4}, 125).chain(
-                new AnimationDef(modelParts.LEFT_ARM, {rotation: 0}, 160).chain(
-                    new AnimationDef(modelParts.LEFT_ARM, {rotation: -3 * Math.PI / 4}, 50).chain(
-                        new AnimationDef(modelParts.LEFT_ARM, {rotation: 0}, 150)
+            new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: -3 * Math.PI / 4}, 125).chain(
+                new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: 0}, 160).chain(
+                    new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: -3 * Math.PI / 4}, 50).chain(
+                        new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: 0}, 150)
                     )
                 )
             ).start();
 
         },
         ACTION: (modelParts, params) => {
-            modelParts.RIGHT_ARM.reset();
-            modelParts.LEFT_ARM.reset();
-            new AnimationDef(modelParts.RIGHT_ARM, {rotation: 3 * Math.PI / 4}, 100).chain(
-                new AnimationDef(modelParts.RIGHT_ARM, {rotation: 0}, 175).chain(
-                    new AnimationDef(modelParts.RIGHT_ARM, {rotation: 3 * Math.PI / 4}, 75).chain(
-                        new AnimationDef(modelParts.RIGHT_ARM, {rotation: 0}, 200)
+            modelParts.RIGHT_SHOULDER.reset();
+            modelParts.LEFT_SHOULDER.reset();
+            new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: 3 * Math.PI / 4}, 100).chain(
+                new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: 0}, 175).chain(
+                    new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: 3 * Math.PI / 4}, 75).chain(
+                        new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: 0}, 200)
                     )
                 )
             ).start();
-            new AnimationDef(modelParts.LEFT_ARM, {rotation: -3 * Math.PI / 4}, 125).chain(
-                new AnimationDef(modelParts.LEFT_ARM, {rotation: 0}, 160).chain(
-                    new AnimationDef(modelParts.LEFT_ARM, {rotation: -3 * Math.PI / 4}, 50).chain(
-                        new AnimationDef(modelParts.LEFT_ARM, {rotation: 0}, 150)
+            new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: -3 * Math.PI / 4}, 125).chain(
+                new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: 0}, 160).chain(
+                    new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: -3 * Math.PI / 4}, 50).chain(
+                        new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: 0}, 150)
                     )
                 )
             ).start();
         },
         DEFEND: (modelParts, params) => {
-            modelParts.LEFT_ARM.reset();
-            modelParts.RIGHT_ARM.reset();
-            new AnimationDef(modelParts.LEFT_ARM, {rotation: Math.PI / 3}, 250).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.RIGHT_ARM, {rotation: -Math.PI / 3}, 250).repeat(1).yoyo(true).start();
+            modelParts.LEFT_SHOULDER.reset();
+            modelParts.RIGHT_SHOULDER.reset();
+            new AnimationDef(modelParts.LEFT_SHOULDER, {rotation: Math.PI / 3}, 250).repeat(1).yoyo(true).start();
+            new AnimationDef(modelParts.RIGHT_SHOULDER, {rotation: -Math.PI / 3}, 250).repeat(1).yoyo(true).start();
         }
     },
-    CHICKEN: {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
-            
-            modelParts.CHEST.ownerSprite.reset();
-            modelParts.CHEST.x -= xChange;
-            modelParts.CHEST.y -= yChange;
-            modelParts.CHEST.scale.x = Math.abs(modelParts.CHEST.scale.x) * dir;
-            new AnimationDef(modelParts.CHEST, {
-                x: modelParts.CHEST.x + xChange,
-                y: modelParts.CHEST.y + yChange,
-            }, 500).start();
-            new AnimationDef(modelParts.LEGS, {rotation: dir * Math.PI / 4}, 125).repeat(3).yoyo(true).start();
-            new AnimationDef(modelParts.HEAD, {rotation: dir * Math.PI / 8}, 200).repeat(2).yoyo(true).start();
-        },
-    },
-    PINATA: {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
-            
-            modelParts.CHEST.ownerSprite.reset();
-            modelParts.CHEST.x -= xChange;
-            modelParts.CHEST.y -= yChange;
-            modelParts.CHEST.scale.x = Math.abs(modelParts.CHEST.scale.x) * dir;
-            new AnimationDef(modelParts.CHEST, {
-                x: modelParts.CHEST.x + xChange,
-                y: modelParts.CHEST.y + yChange,
-            }, 500).start();
-            new AnimationDef(modelParts.UPPER_LEG_1, {rotation: dir * Math.PI / 1}, 250).repeat(1).yoyo(true).start(); 
-            new AnimationDef(modelParts.UPPER_LEG_2, {rotation: dir * Math.PI / 2}, 374).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.UPPER_LEG_3, {rotation: -dir * Math.PI / 2}, 374).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.UPPER_LEG_4, {rotation: -dir * Math.PI / 2}, 250).repeat(1).yoyo(true).start();
-
-            new AnimationDef(modelParts.LOWER_LEG_1, {rotation: dir * - Math.PI / 2}, 250).repeat(1).yoyo(true).start(); 
-            new AnimationDef(modelParts.LOWER_LEG_2, {rotation: dir * - Math.PI / 1}, 374).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.LOWER_LEG_3, {rotation: -dir * - Math.PI / 1}, 374).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.LOWER_LEG_4, {rotation: -dir * - Math.PI / 1}, 250).repeat(1).yoyo(true).start();
-            // new AnimationDef(modelParts.LOWER_LEG, {rotation: dir * Math.PI / 6}, 125).repeat(3).yoyo(true).start();
-            new AnimationDef(modelParts.HEAD, {rotation: dir * Math.PI / 8}, 200).repeat(2).yoyo(true).start();
-            new AnimationDef(modelParts.TAIL, {rotation: - dir * Math.PI / 4}, 150).repeat(3).yoyo(true).start();
-        },
-    },
-    DUCK: {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
-            
-            modelParts.CHEST.ownerSprite.reset();
-            modelParts.CHEST.x -= xChange;
-            modelParts.CHEST.y -= yChange;
-            modelParts.CHEST.scale.x = Math.abs(modelParts.CHEST.scale.x) * dir;
-            new AnimationDef(modelParts.CHEST, {
-                x: modelParts.CHEST.x + xChange,
-                y: modelParts.CHEST.y + yChange,
-            }, 500).start();
-            new AnimationDef(modelParts.HEAD, {rotation: dir * Math.PI / 8}, 200).repeat(2).yoyo(true).start();
-        },
-    },
-    CHICK: {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
-            
-            modelParts.CHEST.ownerSprite.reset();
-            modelParts.CHEST.x -= xChange;
-            modelParts.CHEST.y -= yChange;
-            modelParts.CHEST.scale.x = Math.abs(modelParts.CHEST.scale.x) * dir;
-            new AnimationDef(modelParts.CHEST, {
-                x: modelParts.CHEST.x + xChange,
-                y: modelParts.CHEST.y + yChange,
-            }, 500).start();
-            new AnimationDef(modelParts.HEAD, {rotation: dir * Math.PI / 8}, 200).repeat(2).yoyo(true).start();
-        },
-    },
+    CHICKEN: {},
+    CHICK: {},
     SEA_CREATURE: {
         WALK: (modelParts, params) => {
             let xChange = (params.xTileChange || 0) * 64;
@@ -1997,25 +1413,21 @@ const Animation = {
             //new AnimationDef(modelParts.HEAD, {rotation: dir * Math.PI / 8}, 200).repeat(1).yoyo(true).start();
         },
     },
-    WOLF: {
-        WALK: (modelParts, params) => {
+    PROJECTILE: {
+        WALK_HORIZONTAL: (modelParts, params) => {
             let xChange = (params.xTileChange || 0) * 64;
             let yChange = (params.yTileChange || 0) * 64;
-            let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
             
-            modelParts.HEAD.ownerSprite.reset();
-            modelParts.HEAD.x -= xChange;
-            modelParts.HEAD.y -= yChange;
-            modelParts.HEAD.scale.x = Math.abs(modelParts.HEAD.scale.x) * dir;
-            new AnimationDef(modelParts.HEAD, {
-                x: modelParts.HEAD.x + xChange,
-                y: modelParts.HEAD.y + yChange,
+            modelParts.BASE.ownerSprite.reset();
+            modelParts.BASE.x -= xChange;
+            modelParts.BASE.y -= yChange;
+            modelParts.BASE.rotation = Math.atan2(yChange, xChange) + (Math.PI / 2);
+            new AnimationDef(modelParts.BASE, {
+                x: modelParts.BASE.x + xChange,
+                y: modelParts.BASE.y + yChange,
             }, 500).start();
-            //new AnimationDef(modelParts.HEAD, {rotation: dir * Math.PI / 8}, 200).repeat(1).yoyo(true).start();
         },
-    },
-    PROJECTILE: {
-        WALK: (modelParts, params) => {
+        WALK_VERTICAL: (modelParts, params) => {
             let xChange = (params.xTileChange || 0) * 64;
             let yChange = (params.yTileChange || 0) * 64;
             
@@ -2029,61 +1441,737 @@ const Animation = {
             }, 500).start();
         },
     },
-    RAT: {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
-            
-            modelParts.CHEST.ownerSprite.reset();
-            modelParts.CHEST.x -= xChange;
-            modelParts.CHEST.y -= yChange;
-            modelParts.CHEST.scale.x = Math.abs(modelParts.CHEST.scale.x) * dir;
-            new AnimationDef(modelParts.CHEST, {
-                x: modelParts.CHEST.x + xChange,
-                y: modelParts.CHEST.y + yChange,
-            }, 500).start();
-            new AnimationDef(modelParts.LEGS, {rotation: dir * Math.PI / 20}, 80).repeat(4).yoyo(true).start();
-            new AnimationDef(modelParts.TAIL, {rotation: dir * Math.PI / 6}, 125).repeat(3).yoyo(true).start();
-        },
-    },
-    GHOST : {
-        WALK: (modelParts, params) => {
-            let xChange = (params.xTileChange || 0) * 64;
-            let yChange = (params.yTileChange || 0) * 64;
-            let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
-            
-            modelParts.CHEST.ownerSprite.reset();
-            modelParts.CHEST.x -= xChange;
-            modelParts.CHEST.y -= yChange;
-            modelParts.CHEST.scale.x = Math.abs(modelParts.CHEST.scale.x) * dir;
-            new AnimationDef(modelParts.CHEST, {
-                x: modelParts.CHEST.x + xChange,
-                y: modelParts.CHEST.y + yChange,
-            }, 500).start();
-        },
-        ATTACK_MELEE: (modelParts, params) => {
-            modelParts.RIGHT_ARM.reset();
-            modelParts.LEFT_ARM.reset();
-            new AnimationDef(modelParts.RIGHT_ARM, {rotation: 3 * Math.PI / 4}, 250).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.LEFT_ARM, {rotation: -3 * Math.PI / 4}, 250).repeat(1).yoyo(true).start();
-        },
-        DEFEND: (modelParts, params) => {
-            modelParts.LEFT_ARM.reset();
-            modelParts.RIGHT_ARM.reset();
-            new AnimationDef(modelParts.LEFT_ARM, {rotation: Math.PI / 4}, 250).repeat(1).yoyo(true).start();
-            new AnimationDef(modelParts.RIGHT_ARM, {rotation: -Math.PI / 4}, 250).repeat(1).yoyo(true).start();
-        }
-    },
 };
 
-const degToRad = (deg) => {
-    return (deg / 180) * Math.PI;
+
+function CreateAnimationChain(source, transforms, waitDelay = 0) {
+    switch(transforms.length) {
+        case 1:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).start();
+        case 2:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration)
+        )
+        case 3:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration)
+            )
+        )
+        case 4:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration)
+                )
+            )
+        )
+        case 5:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration)
+                    )
+                )
+            )
+        )
+        case 6:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration)
+                        )
+                    )
+                )
+            )
+        )
+        case 7:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration).chain(
+                                new AnimationDef(source, transforms[6], transforms[6].duration)
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        case 8:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration).chain(
+                                new AnimationDef(source, transforms[6], transforms[6].duration).chain(
+                                    new AnimationDef(source, transforms[7], transforms[7].duration)
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        case 9:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration).chain(
+                                new AnimationDef(source, transforms[6], transforms[6].duration).chain(
+                                    new AnimationDef(source, transforms[7], transforms[7].duration).chain(
+                                        new AnimationDef(source, transforms[8], transforms[8].duration)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        case 10:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration).chain(
+                                new AnimationDef(source, transforms[6], transforms[6].duration).chain(
+                                    new AnimationDef(source, transforms[7], transforms[7].duration).chain(
+                                        new AnimationDef(source, transforms[8], transforms[8].duration).chain(
+                                            new AnimationDef(source, transforms[9], transforms[9].duration)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    }
 }
 
-const radToDeg = (rad) => {
-    return (rad * 180) / Math.PI;
+let GetHierarchyFromAnimation = function(animation) {
+    let objRefParentIdToObjTimelineId = {};
+    let boneRefIdToBoneRefParentId = {};
+    let timelineBoneIdToBoneName = {};
+    let timelineIdToBoneObjId = {};
+    let timelineIdToObjRefParentId = {};
+
+    let startingKey = animation.mainline.key[0];
+    if (startingKey) {
+        for(let j = 0; j < startingKey.object_ref.length; j++) {
+            let objRef = startingKey.object_ref[j];
+            let timelineId = parseInt( objRef.timeline );
+            objRefParentIdToObjTimelineId[objRef.parent] = timelineId;
+            timelineIdToObjRefParentId[timelineId] = objRef.parent;
+        }
+        for(let j = 0; j < startingKey.bone_ref.length; j++) {
+            let boneRef = startingKey.bone_ref[j];
+            if (boneRef.parent != null) {
+                boneRefIdToBoneRefParentId[boneRef.id] = boneRef.parent;
+            }
+        }
+    }
+
+    let objKeyByTimelineId = {};
+    for(let i = 0; i < animation.timeline.length; ++i) {
+        if (animation.timeline[i].object_type != 'bone') {
+            if (!animation.timeline[i].obj) {
+                objKeyByTimelineId[animation.timeline[i].id] = animation.timeline[i].name;
+            }
+        }
+        else {
+            timelineIdToBoneObjId[animation.timeline[i].obj] = animation.timeline[i].id;
+            timelineBoneIdToBoneName[animation.timeline[i].id] = animation.timeline[i].name;
+        }
+    }
+
+    return {
+        objRefParentIdToObjTimelineId,
+        boneRefIdToBoneRefParentId: boneRefIdToBoneRefParentId,
+        objKeyByTimelineId: objKeyByTimelineId,
+        timelineBoneIdToBoneName: timelineBoneIdToBoneName,
+        timelineIdToBoneObjId: timelineIdToBoneObjId,
+        timelineIdToObjRefParentId: timelineIdToObjRefParentId
+    };
 }
+
+let GetModelRelationships = function(animation) {
+    let boneRefById = {};
+    let objectRefByTimelineId = {};
+    let timelineDataById = {};
+    let timelineIdByKey = {};
+    let partKeys = [];
+
+    let startingKey = animation.mainline.key[0];
+    if (startingKey) {
+
+        // Bone Reference table
+        for(let j = 0; j < startingKey.bone_ref.length; j++) {
+            let boneRef = startingKey.bone_ref[j];
+            boneRefById[boneRef.id] = {
+                id : boneRef.id,
+                parentBoneRefId : boneRef.parent,
+                timelineId : boneRef.timeline
+            };
+        }
+
+        // Object Reference table
+        for(let j = 0; j < startingKey.object_ref.length; j++) {
+            let objRef = startingKey.object_ref[j];
+            let timelineId = parseInt(objRef.timeline);
+            objectRefByTimelineId[timelineId] = {
+                id : objRef.id,
+                parentBoneRefId : objRef.parent,
+                timelineId : timelineId
+            };
+        }
+
+    }
+
+    // Timeline reference table
+    for(let i = 0; i < animation.timeline.length; ++i) {
+        let timeline = animation.timeline[i];
+
+        timelineIdByKey[timeline.name] = timeline.id;
+
+        if (timeline.object_type == 'bone') {
+            timelineDataById[timeline.id] = timeline.key[0].bone;
+        }
+        else {
+            timelineDataById[timeline.id] = timeline.key[0].object;
+            partKeys.push(timeline.name);
+        }
+    }
+
+    return {
+        boneRefById,
+        objectRefByTimelineId,
+        timelineDataById,
+        timelineIdByKey,
+        partKeys,
+    };
+}
+
+const AnimationsClaim = {
+    HUMANOID : {
+        WALK_HORIZONTAL : ['LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_THIGH', 'RIGHT_SHIN'],
+        WALK_VERTICAL : ['LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_THIGH', 'RIGHT_SHIN'],
+        ATTACK_MELEE : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        ATTACK_MELEE_WEAPON : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        ATTACK_MELEE_RANGE : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        ATTACK_MELEE_MAGIC : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+    }
+};
+
+let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
+    let timelines = animation.timeline;
+
+    let spriterHierarchy = GetHierarchyFromAnimation(animation);
+    let objKeyByTimelineId = spriterHierarchy.objKeyByTimelineId;
+    let objRefParentIdToObjTimelineId = spriterHierarchy.objRefParentIdToObjTimelineId;
+
+
+    // Calculate angles
+    let allTransformsByPart = {};
+
+    for(let i = 0; i < timelines.length; ++i) {
+        if (timelines[i].object_type == 'bone') {
+            let lastTime = 0;
+            let transforms = [];
+            let _angles_ = []; // For debugging, non-modified stats
+
+            let initialTransform = { angle : 0, x : 0, y : 0 }
+            if (timelines[i].key[0].bone) {
+                initialTransform = {
+                    angle : timelines[i].key[0].bone.angle,
+                    x : timelines[i].key[0].bone.x,
+                    y : timelines[i].key[0].bone.y
+                };
+            }
+
+            for(let j = 1; j < timelines[i].key.length; ++j) {
+                let key = timelines[i].key[j];
+                if (key.bone ) {
+                    let bone = {
+                        x : key.bone.x, 
+                        y : key.bone.y,
+                        angle : key.bone.angle,
+                        time : key.time
+                    }
+                    _angles_.push({angle : initialTransform.angle - key.bone.angle, byPoint : key.time - lastTime});
+                    
+                    // TODO: Bones can have a x/y value that never changes. Should only add if never changes, not necessarily if its set.
+                    if (key.bone) {
+                        let transform = {
+                            duration : bone.time - lastTime
+                        };
+                        if (bone.angle != null) {
+                            //// TODO: This is a hacky fix. If the angle is -300, we mean 60. If its 300, we mean -60. Spriters angles are different
+                            let angle = initialTransform.angle - bone.angle;
+                            if (angle > 250) { 
+                                angle -= 360;
+                            }
+                            else if (angle < -250) {
+                                angle += 360;
+                            }
+                            ////
+                            transform.radians = toRadians(angle); 
+                        }
+                        if (bone.x != null && initialTransform.x != null) {
+                            transform.x = initialTransform.x - bone.x;
+                        }
+                        if (bone.y != null && initialTransform.y != null) {
+                            transform.y = initialTransform.y - bone.y;
+                        }
+
+                        transforms.push( transform );
+                        lastTime = bone.time;
+                    }
+                }
+            }
+
+            let key = objKeyByTimelineId[objRefParentIdToObjTimelineId[timelines[i].obj]];
+
+            if (transforms.length > 0 && key) {
+                transforms.push({ 
+                    radians : 0, 
+                    x : 0,
+                    y : 0,
+                    duration : animation.length - lastTime 
+                });
+                _angles_.push({angle : 0, byPoint : animation.length - lastTime}); 
+                allTransformsByPart[objKeyByTimelineId[ objRefParentIdToObjTimelineId[timelines[i].obj]]] = {
+                    transforms : transforms,
+                    angles : _angles_,
+                    fullDuration : animation.length
+                };
+            }
+        }
+    }
+
+    let animationName = animation.name;
+
+    return (modelParts, params, activeAnimations) => {
+        let partsToClaim = [];
+        if (activeAnimations.id && AnimationsClaim[activeAnimations.id] && AnimationsClaim[activeAnimations.id][animationName]) {
+            partsToClaim = AnimationsClaim[activeAnimations.id][animationName];
+        }
+
+        let transformsByPart = allTransformsByPart;
+        let swapParts = {};
+
+        let offsets = {
+            x : 0,
+            y : 0
+        }
+
+        if (animationName == 'WOODCUT') {
+            console.info("MADE", modelParts, params, transformsByPart)
+        }
+
+        if (animationName.includes('WALK')) {
+            let xChange = offsets.x = (params.xTileChange || 0) * 64;
+            let yChange = offsets.y = (params.yTileChange || 0) * 64;
+            modelParts.CORE.ownerSprite.reset();
+            modelParts.CORE.x -= xChange;
+            modelParts.CORE.y -= yChange;
+            new AnimationDef(modelParts.CORE, {
+                x: modelParts.CORE.x + xChange,
+                y: modelParts.CORE.y + yChange,
+            }, 500).start(); // 500ms = 1 server tick
+        }
+
+        if (params.xDirection > 0) {
+            transformsByPart = JSON.parse(JSON.stringify(allTransformsByPart));
+            let keys = Object.keys(transformsByPart);
+            let faceCameraDirectly = false; // Faces a direction instead of the camera
+            for(let i = 0; i < keys.length; ++i) {
+                if (keys[i].includes('LEFT')) {
+                    faceCameraDirectly = true;
+                    swapParts[keys[i]] = keys[i].replace('LEFT', 'RIGHT');
+                }
+                if (keys[i].includes('RIGHT')) {
+                    faceCameraDirectly = true;
+                    swapParts[keys[i]] = keys[i].replace('RIGHT', 'LEFT');
+                }
+                if (keys[i].includes('HIDDEN') && keys[i] != 'HIDDEN_CHEST') {
+                    swapParts[keys[i]] = keys[i].replace('HIDDEN', 'VISIBLE');
+                }
+                if (keys[i].includes('VISIBLE')) {
+                    swapParts[keys[i]] = keys[i].replace('VISIBLE', 'HIDDEN');
+                }
+            }
+
+            if (faceCameraDirectly) {
+                // Forward-facing things like people flip chest rotations
+                let chest = transformsByPart['CHEST'];
+                if (chest) {
+                    let chestTransforms = chest.transforms;
+                    if (chestTransforms) {
+                        for(let i = 0; i < chestTransforms.length; ++i) {
+                            if (chestTransforms[i].radians != null) {
+                                chestTransforms[i].radians = -chestTransforms[i].radians;
+                            }
+                        }
+                    }
+                }
+                else {
+                    console.info('No chest on animation ', animation.name, transformsByPart);
+                }
+            }
+            else {
+                // Side-facing things like animals flip x scale
+                modelParts.CHEST.scale.x = -Math.abs(modelParts.CORE.scale.x);
+                if (modelParts.HIDDEN_CHEST) {
+                    modelParts.HIDDEN_CHEST.scale.x = -Math.abs(modelParts.CORE.scale.x);
+                }
+            }
+        }
+
+        let keys = Object.keys(transformsByPart);
+        for(let i = 0; i < keys.length; ++i) {
+            let partKey = keys[i];
+            let part = (swapParts[partKey]) ? modelParts[swapParts[partKey]] : modelParts[partKey];
+            if (part) {
+                let claimedDuration = 0;
+                if (activeAnimations[partKey] != null) {
+                    let animationsActive = activeAnimations[partKey];
+                    if (animationsActive.claimed) {
+                        if (partsToClaim.includes(partKey)) {
+                            claimedDuration = activeAnimations[partKey].remainingDuration;
+                        }
+                        else {
+                            continue; // Someone else is claiming a part that this animation does not find essential
+                        }
+                    }
+                    else {
+                        animationsActive.animations.forEach(x => {
+                            x.stop();
+                            // TODO: Does x.stop call oncomplete? If not, do garbage collecting code here
+                        });
+                    }
+                }
+
+
+                let fractionDurationRemaining = (transformsByPart[partKey].fullDuration - claimedDuration) / transformsByPart[partKey].fullDuration;
+
+                // If we only have less than 60% of the time to do the animation than we should, dont bother
+                if (fractionDurationRemaining < 0.60) {
+                    continue;
+                }
+
+                let transforms = [];
+                // let fullDuration = ;
+                // let currentDuration = 0;
+                for(let j = 0; j < transformsByPart[partKey].transforms.length; ++j) {
+                    let oldTransform = transformsByPart[partKey].transforms[j];
+                    let transform = { duration : oldTransform.duration * fractionDurationRemaining };
+
+                    // currentDuration += oldTransform.duration;
+
+                    // NOTE: X and Y coordinates are swapped between Spriter and PIXIJS
+                    if (oldTransform.y != null) { 
+                        transform.x = part.x + oldTransform.y; 
+                    }
+                    if (oldTransform.x != null) { 
+                        transform.y = part.y + oldTransform.x; 
+                    }
+                    if (oldTransform.radians != null) { transform.rotation = oldTransform.radians; }
+                    
+                    if (swapParts[partKey]) {
+                        if (transform.rotation) {transform.rotation = -transform.rotation;}
+                        // Does not work for x?
+                    }
+                    
+
+                    transforms.push(transform);
+                }
+
+                let animation = CreateAnimationChain(part, transforms, claimedDuration);
+                animation.start();
+                let animations = [
+                    animation
+                ];
+                if (partKey == 'CHEST' && modelParts.HIDDEN_CHEST) {
+                    // TODO: Special case injected structure to support layering before game does. Remove when:
+                    // * Version on testing supporters reordering part z orders
+                    // * Models are loaded from Spriter files
+                    let hiddenChestAnim = CreateAnimationChain( modelParts.HIDDEN_CHEST, transforms, claimedDuration);
+                    hiddenChestAnim.start();
+                    animations.push(hiddenChestAnim);
+                }
+
+                activeAnimations[partKey] = {
+                    claimed : partsToClaim.includes(partKey),
+                    remainingDuration : transformsByPart[partKey].fullDuration,
+                    animations : animations
+                }
+            }
+        }
+    }
+}
+
+let SpriterOverrideAnimations = function() {
+    let entities = animationsRaw.entity;
+    for(let i = 0; i < entities.length; ++i) {
+        let entity = entities[i];
+        if (entity && entity.name && entity.animation) { // We have a Entity that has the same as a model
+            if (!Animation[entity.name]) {
+                Animation[entity.name] = {};
+            }
+            for(let j = 0; j < entity.animation.length; ++j) {
+                let animation = entity.animation[j];
+
+                // if (entity.name == 'FOUR_LEGGED_MAMMAL' && animation.name == 'WALK_HORIZONTAL') {
+                    let animationCallback = CreatePIXIJSAnimationFromSpriterAnimation(animation);
+
+                    Animation[entity.name][animation.name] = animationCallback;
+                // }
+            }
+        }
+    }
+}
+SpriterOverrideAnimations();
+
+let CreatePartDef = function(id, filePath, parent, anchor, position, rotation ) {
+    let folderParts = filePath.split('/');
+    let asset = folderParts[0];
+    let spriteWithId = folderParts[1].replace(/\.[^/.]+$/, "");
+    let spriteID = '';
+    let sprite = '';
+    let i = spriteWithId.length - 1;
+    for(; i >= 0; --i) {
+        if (parseInt(spriteWithId[i])) {
+            spriteID += spriteWithId[i];
+        }
+        else {
+            break;
+        }
+    }
+    for(; i >= 0; --i) {
+        sprite += spriteWithId[i];
+    }
+    spriteID = spriteID.split('').reverse().join('');
+    sprite = sprite.split('').reverse().join('');
+
+    if (!parent) {
+        parent = 'CORE';
+    }
+
+    return {
+        id,
+        asset,
+        spriteID : parseInt(spriteID),
+        sprite,
+        anchor,
+        parent,
+        position,
+        rotation : 0,
+        UIModel : null
+    };
+}
+
+
+let CreatePIXIJSModelFromSpriterAnimation = function(modelId, animation, folders) {
+    let model = null; 
+    let startingKey = animation.mainline.key[0];
+    if (startingKey) {
+       let partHierarchy = GetHierarchyFromAnimation(animation);
+       let objRefParentIdToObjTimelineId = partHierarchy.objRefParentIdToObjTimelineId;
+       let boneRefIdToBoneRefParentId = partHierarchy.boneRefIdToBoneRefParentId;
+       let timelinePartIdToPartKey = partHierarchy.objKeyByTimelineId;
+       //// let boneIdToBoneName = partHierarchy.boneIdToBoneName;
+       //// let objIdToBoneId = partHierarchy.objIdToBoneId;
+       //// let objRefIdToParentId = partHierarchy.objRefIdToParentId;
+    ////    let partKeyToBoneId = {};
+       let partKeyToParentKey = {};
+       //// let nameToReadonlyKeyframe = {};
+
+       let boneIds = Object.keys(objRefParentIdToObjTimelineId);
+       for(let i = 0; i < boneIds.length; ++i) {
+           let partKey = timelinePartIdToPartKey[objRefParentIdToObjTimelineId[boneIds[i]]];
+        //    partKeyToBoneId[partKey] = boneIds[i];
+           let parentBoneId = boneRefIdToBoneRefParentId[boneIds[i]];
+           if (parentBoneId != null && parentBoneId != undefined) {
+               partKeyToParentKey[partKey] = timelinePartIdToPartKey[objRefParentIdToObjTimelineId[parentBoneId]];
+           }
+           else {
+               partKeyToParentKey[partKey] = null;
+           }
+       }
+
+       //// for(let i = 0; i < animation.timeline.length; ++i) {
+       ////     if (animation.timeline[i].object_type == 'bone') {
+       ////         nameToReadonlyKeyframe[animation.timeline[i].name] = animation.timeline[i].key[0].bone
+       ////     }
+       ////     else {
+       ////         nameToReadonlyKeyframe[animation.timeline[i].name] = animation.timeline[i].key[0].object
+       ////     };
+       //// }
+
+        let modelRelationships = GetModelRelationships(animation);
+        let boneRefById = modelRelationships.boneRefById;
+        let objectRefByTimelineId = modelRelationships.objectRefByTimelineId;
+        let timelineDataById = modelRelationships.timelineDataById;
+        let timelineIdByKey = modelRelationships.timelineIdByKey;
+        let partKeys = modelRelationships.partKeys;
+
+        console.info(modelRelationships);
+
+        model = {
+            id : modelId,
+            CORE: {
+                id : 'CORE',
+                asset : 'chestParts',
+                spriteID : 1,
+                anchor : {x: 0.5, y: 0.5},
+                parent : null,
+                position : {x: 0, y: 0},
+                rotation : 0,
+                UIModel : null
+            }
+        };
+
+        //// let partIds = Object.keys(timelinePartIdToPartKey);
+        //// let partKeyToTimelinePartId = {};
+
+        //// for(let i = 0; i < partIds.length; ++i) {
+        ////     partKeyToTimelinePartId[timelinePartIdToPartKey[partIds[i]]] = partIds[i];
+        //// }
+        //// console.info(partKeyToTimelinePartId);
+
+        // /**
+        //  * Part keys are offset by their parent bone key positions
+        //  * Bone keys are offset by their parent positions
+        //  * Bone keys without a starting position are the original one
+        //  * 
+        //  * Algo:
+        //  * 
+        //  * headPosition.X = headKey.x - headBone.x - chestBone.x
+        //  * 
+        //  * Seriously this should be it.... I definitely implemented wrong.
+        //  * Maybe rewrite the logic :( Has old pre-epiphany funny business
+        //  * 
+        //  */
+
+
+        // let defData = {};
+
+        let coreAngle = 0;
+
+        partKeys.forEach(initialKey => {
+            let __safeguard = 0;
+
+
+            // First case is object, rest recusively do bones. Always will have first case.
+            let timelineId = timelineIdByKey[initialKey];
+            let partTimelineData = timelineDataById[timelineId];
+            let datas = [
+                {
+                    x : partTimelineData.x,
+                    y : partTimelineData.y,
+                    angle : partTimelineData.angle// - 270
+                }
+            ];
+            let objectRef = objectRefByTimelineId[timelineId];
+
+
+            let boneRef = boneRefById[objectRef.parentBoneRefId];
+            while(boneRef != null && __safeguard++ < 20) {
+                datas.push(timelineDataById[boneRef.timelineId]);
+                boneRef = boneRefById[boneRef.parentBoneRefId];
+            }
+
+            let log = initialKey + ' : ';
+            let position = {x : 0, y : 0};
+            let angleToAdd = coreAngle;
+
+            datas.reverse();
+
+            let doLog = (initialKey == 'LEFT_SHOULDER' || initialKey == 'RIGHT_SHOULDER');
+
+            let lastAngle = 0;
+            datas.forEach(data => {
+                let xFactor = 1;
+                let yFactor = 1;
+                let x = 0;
+                let y = 0;
+
+                let angle = ((data.angle != null) ? data.angle : 0);
+
+                xFactor = Math.sin(toRadians(angle - lastAngle));
+                yFactor = Math.cos(toRadians(angle - lastAngle));
+
+
+                if (data.x != null) { 
+                    x += Math.round(data.x * xFactor);
+                    y += Math.round(data.x * yFactor);
+                }
+                if (data.y != null) {
+                    x += Math.round(data.y * xFactor);
+                    y += Math.round(data.y * yFactor);
+                }
+
+                if (doLog) {
+                    console.info(angle, data.x, data.y)
+                }
+                log += ((angle - lastAngle) % 360) + 'deg, x:' + x + ', y:' + y + ' | '
+
+                position.x += x;
+                position.y += y;
+                lastAngle = angle;
+                // angleToAdd += angle;
+            });
+
+            if (doLog) {
+                console.info(log, position);
+            }
+
+            let file = folders[partTimelineData.folder].file[partTimelineData.file];
+            let assetWithId = file.name;
+
+            let anchor = {
+                x : partTimelineData.pivot_x != null ? partTimelineData.pivot_x : file.pivot_x,
+                y : partTimelineData.pivot_y != null ? partTimelineData.pivot_y : file.pivot_y,
+            }
+            let parentKey = partKeyToParentKey[initialKey];
+            model[initialKey] = CreatePartDef(initialKey, assetWithId, parentKey, anchor, { x : position.x / 10, y : position.y / 10 } );
+            
+            // console.info(initialKey, position, datas, initialAngle);
+        });
+
+        console.info(model);
+    }
+
+    return model;
+}
+let SpriterOverrideModels = function() {
+    let entities = animationsRaw.entity;
+    for(let i = 0; i < entities.length; ++i) {
+        let entity = entities[i];
+        if (entity && entity.name && Model[entity.name] && entity.animation) { // We have a Entity that has the same name as a model
+            for(let j = 0; j < entity.animation.length; ++j) {
+                if (entity.animation[j].name == 'DEFAULT') {
+                    let newModel = CreatePIXIJSModelFromSpriterAnimation(entity.name, entity.animation[j], animationsRaw.folder, entity.obj_info);
+                    if (newModel) {
+                        Model[entity.name] = newModel;
+                    }
+                }
+            }
+        }
+    }
+}
+// SpriterOverrideModels();
 
 module.exports.buildModelPart = buildModelPart = (modelPartDef) => {
     return {
@@ -2120,10 +2208,15 @@ module.exports.buildModel = buildModel = (modelDef, modelPartsObj = {}) => {
 }
 
 class AnimationDef extends TWEEN.Tween {
-    constructor(modelPart, end, duration) {
+    constructor(modelPart, end, duration, waitDelay = 0) {
         super(modelPart);
         this.end = end;
         this.duration = duration;
+
+        if (waitDelay > 0) {
+            this.delay(waitDelay);
+        }
+
         this.to(this.end, duration);
 
         this.onComplete((modelPart) => {
@@ -2133,9 +2226,11 @@ class AnimationDef extends TWEEN.Tween {
     }
 }
 
+
 module.exports.AnimationDef = AnimationDef;
 module.exports.AnimationHelper = AnimationHelper;
 module.exports.Animation = Animation;
+module.exports.Model = Model;
 module.exports.HumanAnimationHelper = HumanAnimationHelper;
 module.exports.HairStyle = HairStyle;
 module.exports.SpriteColor = SpriteColor;

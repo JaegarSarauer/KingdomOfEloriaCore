@@ -1,4 +1,4 @@
-module.exports.Timer = [
+export const Timer = [
     {
         id: 0,
         name: 'Entity Current Action',
@@ -66,13 +66,5 @@ module.exports.Timer = [
     {
         id: 16,
         name: 'Random Event Rest',
-    },
-    {
-        id: 17,
-        name: 'Generic Entity Behavior Loop',
-    },
-    {
-        id: 18,
-        name: 'Test Step Loop',
     }
 ];

@@ -14,8 +14,15 @@ const Entity = require('../typedef/Entity');
 const Combat = require('../internal/Combat');
 const SpriteColor = require("./Model").SpriteColor;
 const HairStyle = require("./Model").HairStyle;
-const KingdomOfEloria = require('../KingdomOfEloria');
 const GroundItemDef = require('../def/GroundItemDef').GroundItemDef;
+var KingdomOfEloria = null;
+try {	
+    KingdomOfEloria = require('../KingdomOfEloria');	
+} catch (e) {	
+    if (e.code !== 'MODULE_NOT_FOUND') {	
+        throw e;	
+    }	
+}
 
 module.exports.Character = Character = [{
     id: 0,
@@ -64,7 +71,7 @@ Get.Character.Goblin(12, 'Goblin', 1,
 {
     id: 13,
     name: 'Wizard',
-    modelName: 'HUMAN',
+    modelName: 'HUMANOID',
     stats: [[11, 8], [2, 8], [5, 5], [6, 10], [7, 10], [8, 10]], //8hp, 8 atk def, 5 range def, 10 magic attack focus, 10 magic strength, 10 magic defense
     drops: [[[1, 100], [0, 10, 10, 10], [0, 20, 50, 20], [87, 2, 3, 50], [88, 1, 1, 10], [126, 1, 2, 10]], [[1, 100], [78, 2, 6, 60], [126, 1, 2, 20], [79, 1, 3, 20]], [[2, 100], [80, 2, 3, 75], [81, 1, 2, 25]], [[100, 100], [80, 1, 2, 70], [81, 1, 1, 30]], Get.DropTables.ItemPickupPages(150), Get.DropTables.EssenceShards(4, 50, 120, [100, 100, 100, 100, 40, 60, 60, 60, 5, 0, 0, 0]), Get.DropTables.LesserWoundSpellPages(1024)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     spriteIndex: 3,
@@ -102,7 +109,7 @@ Get.Character.Goblin(12, 'Goblin', 1,
 {
     id: 15,
     name: 'Emperor',
-    modelName: 'HUMAN',
+    modelName: 'HUMANOID',
     spriteIndex: 7,
     stats: [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],],
     animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
@@ -167,7 +174,7 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
         ItemDetail.levelSkillDetail(1, 1, 'BOUNTY'),
         ItemDetail.levelSkillDetail(30, 20, 'STEAL'),
     ]),
-    modelName: 'HUMAN',
+    modelName: 'HUMANOID',
     spriteIndex: 7,
     stats: [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[64, 1], [327, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
@@ -233,7 +240,7 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
 {
     id: 26,
     name: 'Emperor Guard',
-    modelName: 'HUMAN',
+    modelName: 'HUMANOID',
     spriteIndex: 7,
     stats: [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
@@ -249,7 +256,7 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
 {
     id: 27,
     name: 'Mayor',
-    modelName: 'HUMAN',
+    modelName: 'HUMANOID',
     spriteIndex: 7,
     stats: [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
@@ -266,7 +273,7 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
 {
     id: 28,
     name: 'Player Guard',
-    modelName: 'HUMAN',
+    modelName: 'HUMANOID',
     spriteIndex: 7,
     stats: [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
@@ -291,7 +298,7 @@ Get.Character.Osaik(36),
 {
     id: 37,
     name: 'Mysterious Man',
-    modelName: 'HUMAN',
+    modelName: 'HUMANOID',
     stats: [[0, 30], [1, 40], [2, 40], [3, 30], [4, 40], [5, 40], [6, 30], [7, 40], [8, 40], [11, 40],],
     characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [null, null, null, 100, 104], //head, right, left, chest, legs
@@ -453,7 +460,7 @@ Get.Character.Wolf(38, 'Wolf', [[0, 60], [1, 40], [2, 40], [3, 1], [4, 1], [5, 3
 {
     id: 44,
     name: 'Cavern Supervisor',
-    modelName: 'HUMAN',
+    modelName: 'HUMANOID',
     stats: [[0, 20], [1, 20], [2, 20], [3, 10], [4, 10], [5, 10], [6, 1], [7, 1], [8, 1], [11, 20],],
     characterModel: [1, 1, 1, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [null, 10, 530, 347, 475], //head, right, left, chest, legs
@@ -577,6 +584,6 @@ Get.Character.HumanShopOwner(75, 'Farming Store Owner', 3, [null, 610, null, 331
 Get.Character.QuestChildGoblin(76, 'Child Goblin'),
 Get.Character.Bull(77),
 Get.Character.Sheep(78, 1),
-Get.Character.PatreonQuestCat(79, true, 220),
-Get.Character.PatreonQuestCat(80, false, 220),
+Get.Character.PatreonQuestCat(79, true, 224),
+Get.Character.PatreonQuestCat(80, false, 224),
 ];
