@@ -41,6 +41,7 @@ const Model = {
             position: {x: 0, y: 0},
             rotation: 0,
             UIModel: null,
+            z: 0,
         },
         CHEST : {
             id: 'CHEST',
@@ -52,6 +53,7 @@ const Model = {
             position: {x: 0, y: -0.35},
             rotation: 0,
             UIModel: null,
+            z: 0,
         },
         RIGHT_THIGH: {
             id: 'RIGHT_THIGH',
@@ -63,6 +65,7 @@ const Model = {
             position: {x: -(5/16), y: 0.4},
             rotation: 0,
             UIModel: null,
+            z: -1,
         },
         LEFT_THIGH: {
             id: 'LEFT_THIGH',
@@ -74,6 +77,7 @@ const Model = {
             position: {x: (5/16), y: 0.4},
             rotation: 0,
             UIModel: null,
+            z: -1,
         },
         RIGHT_SHIN: {
             id: 'RIGHT_SHIN',
@@ -85,6 +89,7 @@ const Model = {
             position: {x: 0.05, y: 0.75},
             rotation: 0,
             UIModel: null,
+            z: 0,
         },
         LEFT_SHIN: {
             id: 'LEFT_SHIN',
@@ -96,6 +101,7 @@ const Model = {
             position: {x: -0.05, y: 0.75},
             rotation: 0,
             UIModel: null,
+            z: 0,
         },
         LEFT_SHOULDER: {
             id: 'LEFT_SHOULDER',
@@ -104,9 +110,10 @@ const Model = {
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.25, y: 0.18},
-            position: {x: 0.4, y: -0.47},
+            position: {x: 0.45, y: -0.47},
             rotation: 0,
             UIModel: null,
+            z: 1,
         },
         RIGHT_SHOULDER: {
             id: 'RIGHT_SHOULDER',
@@ -115,9 +122,10 @@ const Model = {
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.75, y: 0.18},
-            position: {x: -0.4, y: -0.47},
+            position: {x: -0.45, y: -0.47},
             rotation: 0,
             UIModel: null,
+            z: 1,
         },
         LEFT_FOREARM: {
             id: 'LEFT_FOREARM',
@@ -129,6 +137,7 @@ const Model = {
             position: {x: (5/8), y: 0.75},
             rotation: 0,
             UIModel: null,
+            z: 0,
         },
         RIGHT_FOREARM: {
             id: 'RIGHT_FOREARM',
@@ -140,6 +149,7 @@ const Model = {
             position: {x: -(5/8), y: 0.75},
             rotation: 0,
             UIModel: null,
+            z: 0,
         },
         HEAD: {
             id: 'HEAD',
@@ -151,6 +161,7 @@ const Model = {
             position: {x: 0, y: -0.7},
             rotation: 0,
             UIModel: null,
+            z: 1,
         },
         FACE: {
             id: 'FACE',
@@ -162,6 +173,7 @@ const Model = {
             position: {x: 0, y: -0.3},
             rotation: 0,
             UIModel: null,
+            z: 0,
         },
     },
     FOUR_LEGGED_MAMMAL: {
@@ -345,8 +357,8 @@ const Model = {
             UIModel: null,
         },
     },
-    SEA_CREATURE: {
-        id: 'SEA_CREATURE',
+    CRAB: {
+        id: 'CRAB',
         CORE: {
             id: 'CORE',
             asset: 'chestParts',
@@ -358,14 +370,58 @@ const Model = {
             rotation: 0,
             UIModel: null,
         },
-        HEAD: {
-            id: 'HEAD',
+        CHEST: {
+            id: 'CHEST',
             asset: 'headParts',
             sprite: 'crabHead',
             parent: 'CORE',
             spriteID: 1,
-            anchor: {x: 0.5, y: 0.75},
+            anchor: {x: 0.5, y: 0.5},
             position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEG_RIGHT_INNER: {
+            id: 'LEG_RIGHT_INNER',
+            asset: 'legParts',
+            sprite: 'crabRightLeg',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.10},
+            position: {x: -0.2, y: 0.4},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEG_LEFT_INNER: {
+            id: 'LEG_LEFT_INNER',
+            asset: 'legParts',
+            sprite: 'crabLeftLeg',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.10},
+            position: {x: 0.2, y: 0.4},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEG_RIGHT_OUTER: {
+            id: 'LEG_RIGHT_OUTER',
+            asset: 'legParts',
+            sprite: 'crabRightLeg',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.10},
+            position: {x: -0.45, y: 0.1},
+            rotation: 0,
+            UIModel: null,
+        },
+        LEG_LEFT_OUTER: {
+            id: 'LEG_LEFT_OUTER',
+            asset: 'legParts',
+            sprite: 'crabLeftLeg',
+            parent: 'CHEST',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.10},
+            position: {x: 0.45, y: 0.1},
             rotation: 0,
             UIModel: null,
         },
@@ -373,9 +429,9 @@ const Model = {
             id: 'CLAW_RIGHT',
             asset: 'armParts',
             sprite: 'crabClawRight',
-            parent: 'HEAD',
+            parent: 'CHEST',
             spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
+            anchor: {x: 0.9, y: 0.1},
             position: {x: -0.4, y: 0},
             rotation: 0,
             UIModel: null,
@@ -384,32 +440,10 @@ const Model = {
             id: 'CLAW_LEFT',
             asset: 'armParts',
             sprite: 'crabClawLeft',
-            parent: 'HEAD',
+            parent: 'CHEST',
             spriteID: 1,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.3, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEG_RIGHT: {
-            id: 'LEG_RIGHT',
-            asset: 'legParts',
-            sprite: 'crabRightLeg',
-            parent: 'HEAD',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.10},
-            position: {x: -0.30, y: 0.08},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEG_LEFT: {
-            id: 'LEG_LEFT',
-            asset: 'legParts',
-            sprite: 'crabLeftLeg',
-            parent: 'HEAD',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.10},
-            position: {x: 0.22, y: 0.08},
+            anchor: {x: 0.1, y: 0.1},
+            position: {x: 0.4, y: 0},
             rotation: 0,
             UIModel: null,
         },
@@ -450,108 +484,6 @@ const Model = {
             UIModel: null,
         },
     },
-    CAVECRAWLER : {
-        id: "CAVECRAWLER",
-        CORE: {
-            id: 'CORE',
-            asset: 'chestParts',
-            parent: null,
-            sprite: 'blankChest',
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        CHEST: {
-            id: 'CHEST',
-            asset: 'chestParts',
-            sprite: 'caveCrawlerChest',
-            parent: 'CORE',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: 0},
-            rotation: 0,
-            UIModel: null,
-        },
-        HEAD: {
-            id: 'HEAD',
-            asset: 'headParts',
-            sprite: 'caveCrawlerHead',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.5, y: 0.9},
-            position: {x: 0, y: -0.35},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_SHOULDER: {
-            id: 'RIGHT_SHOULDER',
-            asset: 'armParts',
-            sprite: 'caveCrawlerRightArm',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.9, y: 0.5},
-            position: {x: -0.2, y: -0.25},
-            rotation: 0,
-            UIModel: null,
-        },
-        LEFT_SHOULDER: {
-            id: 'LEFT_SHOULDER',
-            asset: 'armParts',
-            sprite: 'caveCrawlerLeftArm',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.1, y: 0.5},
-            position: {x: 0.2, y: -0.25},
-            rotation: 0,
-            UIModel: null,
-        },
-        INNER_RIGHT_THIGH: {
-            id: 'INNER_RIGHT_THIGH',
-            asset: 'legParts',
-            sprite: 'caveCrawlerInnerRightLeg',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.8, y: 0.2},
-            position: {x: -0.15, y: 0.15},
-            rotation: 0,
-            UIModel: null,
-        },
-        OUTER_RIGHT_THIGH: {
-            id: 'OUTER_RIGHT_THIGH',
-            asset: 'legParts',
-            sprite: 'caveCrawlerOuterRightLeg',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.8, y: 0.2},
-            position: {x: -0.25, y: 0.02},
-            rotation: 0,
-            UIModel: null,
-        },
-        INNER_LEFT_THIGH: {
-            id: 'INNER_LEFT_THIGH',
-            asset: 'legParts',
-            sprite: 'caveCrawlerInnerLeftLeg',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.2, y: 0.2},
-            position: {x: 0.15, y: 0.15},
-            rotation: 0,
-            UIModel: null,
-        },
-        OUTER_LEFT_THIGH: {
-            id: 'OUTER_LEFT_THIGH',
-            asset: 'legParts',
-            sprite: 'caveCrawlerOuterLeftLeg',
-            parent: 'CHEST',
-            spriteID: 1,
-            anchor: {x: 0.2, y: 0.2},
-            position: {x: 0.25, y: 0.02},
-            rotation: 0,
-            UIModel: null,
-        },
-    },
     RAT_SMALL: {
         id: 'RAT_SMALL',
         CORE: {
@@ -570,7 +502,7 @@ const Model = {
             asset: 'chestParts',
             sprite: 'smallRatBody',
             parent: 'CORE',
-            spriteID: 0,
+            spriteID: 1,
             anchor: {x: 0.5, y: 0.5},
             position: {x: 0, y: 0},
             rotation: 0,
@@ -581,7 +513,7 @@ const Model = {
             asset: 'legParts',
             sprite: 'smallRatLegs',
             parent: 'CHEST',
-            spriteID: 0,
+            spriteID: 1,
             anchor: {x: 0.5, y: 0.1},
             position: {x: 0, y: 0.45},
             rotation: 0,
@@ -592,9 +524,9 @@ const Model = {
             asset: 'tailParts',
             sprite: 'smallRatTail',
             parent: 'CHEST',
-            spriteID: 0,
-            anchor: {x: 0.5, y: 0.1},
-            position: {x: 0, y: 0.45},
+            spriteID: 1,
+            anchor: {x: 0.1, y: 0.66},
+            position: {x: 0.5, y: 0},
             rotation: 0,
             UIModel: null,
         },
@@ -1248,39 +1180,6 @@ try {
                 helper.LeftElbowBendAcute("FAST").LeftElbowRelax("FAST").Start();
                 helper.RightElbowBendAcute("FAST").RightElbowRelax("FAST").Start();
             },
-            SMELT: (modelParts, params) => { //Skipped
-                let helper = new HumanAnimationHelper(modelParts, params, 300);
-                helper.LeftElbowBendAcute("SLOW").LeftElbowRelax("FAST").Start();
-                helper.RightElbowBendObtuse("SLOW").RightElbowRelax("FAST").Start();
-            },
-            STRIKE_ANVIL: (modelParts, params) => {
-                let helper = new HumanAnimationHelper(modelParts, params, 500);
-                helper.RightArmStraight("SLOW").RightArmUp("SLOW").RightArmStraight("FAST").RightArmRelax("FAST").Start();
-                helper.RightElbowBendAcute("SLOW").RightElbowRelax("FAST").Start();
-            },
-            FLETCH: (modelParts, params) => {
-                let helper = new HumanAnimationHelper(modelParts, params, 500);
-                helper.LeftArmAngleDown("FAST").LeftArmAngleDown("SLOW").LeftArmRelax("SLOW").Start();
-                helper.LeftElbowBendObtuse("FAST").LeftElbowRelax("FAST").LeftElbowBendAcute("FAST").LeftElbowRelax("SLOW").Start();
-            },
-            EQUIP_RIGHT_SHOULDER_SHEATH: (modelParts, params) => {
-                let helper = new HumanAnimationHelper(modelParts, params, 500);
-                helper.RightArmAngleBack("FAST").RightArmAngleUp("SLOW").RightArmRelax("SLOW").Start();
-            },
-            EQUIP_RIGHT_SHOULDER_BACK: (modelParts, params) => {
-                let helper = new HumanAnimationHelper(modelParts, params, 500);
-                helper.RightArmUp("FAST").RightArmAngleDown("SLOW").RightArmRelax("SLOW").Start();
-                helper.RightElbowBendObtuse("FAST").RightElbowBendAcute("SLOW").RightArmRelax("SLOW").Start();
-            },
-            EQUIP_LEFT_SHOULDER_SHEATH: (modelParts, params) => {
-                let helper = new HumanAnimationHelper(modelParts, params, 500);
-                helper.LeftArmAngleBack("FAST").LeftArmAngleUp("SLOW").LeftArmRelax("SLOW").Start();
-            },
-            EQUIP_LEFT_SHOULDER_BACK: (modelParts, params) => {
-                let helper = new HumanAnimationHelper(modelParts, params, 500);
-                helper.LeftArmUp("FAST").LeftArmAngleDown("SLOW").LeftArmRelax("SLOW").Start();
-                helper.LeftElbowBendObtuse("FAST").LeftElbowBendAcute("SLOW").LeftArmRelax("SLOW").Start();
-            },
         },
         CAVECRAWLER: {
             WALK: (modelParts, params) => {
@@ -1401,23 +1300,7 @@ try {
         },
         CHICKEN: {},
         CHICK: {},
-        SEA_CREATURE: {
-            WALK: (modelParts, params) => {
-                let xChange = (params.xTileChange || 0) * 64;
-                let yChange = (params.yTileChange || 0) * 64;
-                let dir = xChange <= 0 ? 1 : -1; //going left rotate left, going right rotate right
-                
-                modelParts.HEAD.ownerSprite.reset();
-                modelParts.HEAD.x -= xChange;
-                modelParts.HEAD.y -= yChange;
-                modelParts.HEAD.scale.x = Math.abs(modelParts.HEAD.scale.x) * dir;
-                new AnimationDef(modelParts.HEAD, {
-                    x: modelParts.HEAD.x + xChange,
-                    y: modelParts.HEAD.y + yChange,
-                }, 500).start();
-                //new AnimationDef(modelParts.HEAD, {rotation: dir * Math.PI / 8}, 200).repeat(1).yoyo(true).start();
-            },
-        },
+    CRAB: {},
         PROJECTILE: {
             WALK_HORIZONTAL: (modelParts, params) => {
                 let xChange = (params.xTileChange || 0) * 64;
@@ -1675,6 +1558,37 @@ try {
             ATTACK_MELEE_WEAPON : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
             ATTACK_MELEE_RANGE : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
             ATTACK_MELEE_MAGIC : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        EQUIP_RIGHT_SHOULDER_SHEATH : ['RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        EQUIP_LEFT_SHOULDER_SHEATH : ['RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        EQUIP_RIGHT_SHOULDER_BACK : ['RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        EQUIP_LEFT_SHOULDER_BACK : ['RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        MINE : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        STRIKE_ANVIL : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        FLETCH : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        WOODCUT : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        DEATH : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM', 'CHEST', 'RIGHT_THIGH', 'LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_SHIN'],
+    },
+    FOUR_LEGGED_MAMMAL : {
+        WALK_HORIZONTAL : ['THIGH_VISIBLE_FRONT', 'THIGH_VISIBLE_BACK', 'THIGH_HIDDEN_FRONT', 'THIGH_HIDDEN_BACK', 'SHIN_HIDDEN_FRONT', 'SHIN_HIDDEN_BACK', 'SHIN_VISIBLE_FRONT', 'SHIN_VISIBLE_BACK'],
+        WALK_VERTICAL : ['THIGH_VISIBLE_FRONT', 'THIGH_VISIBLE_BACK', 'THIGH_HIDDEN_FRONT', 'THIGH_HIDDEN_BACK', 'SHIN_HIDDEN_FRONT', 'SHIN_HIDDEN_BACK', 'SHIN_VISIBLE_FRONT', 'SHIN_VISIBLE_BACK'],
+        ATTACK_MELEE : ['CHEST', 'THIGH_VISIBLE_FRONT', 'THIGH_VISIBLE_BACK', 'THIGH_HIDDEN_FRONT', 'THIGH_HIDDEN_BACK', 'SHIN_HIDDEN_FRONT', 'SHIN_HIDDEN_BACK', 'SHIN_VISIBLE_FRONT', 'SHIN_VISIBLE_BACK'],
+        ATTACK_RANGE : ['CHEST' ],
+        ATTACK_MAGIC : ['CHEST' ],
+        DEATH : ['CHEST', 'HEAD', 'TAIL', 'THIGH_VISIBLE_FRONT', 'THIGH_VISIBLE_BACK', 'THIGH_HIDDEN_FRONT', 'THIGH_HIDDEN_BACK', 'SHIN_HIDDEN_FRONT', 'SHIN_HIDDEN_BACK', 'SHIN_VISIBLE_FRONT', 'SHIN_VISIBLE_BACK'],
+    },
+    CRAB : {
+        WALK_HORIZONTAL : ['LEG_INNER_RIGHT', 'LEG_INNER_LEFT', 'LEG_OUTER_LEFT', 'LEG_OUTER_RIGHT'],
+        WALK_VERTICAL : ['LEG_INNER_RIGHT', 'LEG_INNER_LEFT', 'LEG_OUTER_LEFT', 'LEG_OUTER_RIGHT'],
+        ATTACK_MELEE : ['CLAW_RIGHT', 'CLAW_LEFT', 'CHEST'],
+        ATTACK_RANGE : ['CLAW_RIGHT', 'CLAW_LEFT', 'CHEST' ],
+        ATTACK_MAGIC : ['CLAW_RIGHT', 'CLAW_LEFT', 'CHEST' ],
+        DEATH : ['LEG_INNER_RIGHT', 'LEG_INNER_LEFT', 'LEG_OUTER_LEFT', 'LEG_OUTER_RIGHT', 'CHEST', 'CLAW_RIGHT', 'CLAW_LEFT'],
+    },
+    CHICKEN : {
+        WALK_HORIZONTAL : ['LEGS'],
+        WALK_VERTICAL : ['LEGS'],
+        ATTACK_MELEE : ['CHEST', 'HEAD'],
+        DEATH : ['LEGS', 'CHEST', 'HEAD'],
         }
     };
 
