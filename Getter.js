@@ -4505,9 +4505,12 @@ const Character = {
                 goblin.modelParams.HEAD.spriteID = headSpriteID;
             }
 
-            goblin.modelParams.CHEST.position =  {x: 0, y: -0.2},
+            goblin.modelParams.CHEST.position =  {x: 0, y: -0.4},
             goblin.modelParams.HEAD.anchor = {x : 0.5, y : 0.8};
             goblin.modelParams.HEAD.position = {x: 0, y: -0.5};
+            if (name.includes('King')) {
+                goblin.modelParams.HEAD.position.y -= 0.1;
+            }
 
             goblin.modelParams.RIGHT_SHOULDER.position = {x: -0.5, y: -0.32};
             goblin.modelParams.RIGHT_SHOULDER.anchor = { x : 0.8, y : 0.7 };
@@ -4520,12 +4523,12 @@ const Character = {
             goblin.modelParams.RIGHT_THIGH.anchor = {x : 0.65, y : 0.2};
             goblin.modelParams.RIGHT_THIGH.position = {x: -0.18, y: 0.3},
             goblin.modelParams.RIGHT_SHIN.anchor = {x : 0.65, y : 0.15};
-            goblin.modelParams.RIGHT_SHIN.position = {x: -0.25, y: 0.8};
+            goblin.modelParams.RIGHT_SHIN.position = {x: -0.15, y: 0.7};
 
             goblin.modelParams.LEFT_THIGH.anchor = {x : 0.35, y : 0.2};
             goblin.modelParams.LEFT_THIGH.position = {x: 0.18, y: 0.3},
             goblin.modelParams.LEFT_SHIN.anchor = {x : 0.35, y : 0.15};
-            goblin.modelParams.LEFT_SHIN.position = {x: 0.25, y: 0.8};
+            goblin.modelParams.LEFT_SHIN.position = {x: 0.15, y: 0.7};
 
 
             goblin.actions = [{
