@@ -16,9 +16,6 @@ const ShardCatalog = require("./Essence").ShardCatalog;
 const EssenceCatalog = require("./Essence").EssenceCatalog;
 const SpriteColor = require('./Model').SpriteColor;
 
-
-
-
 module.exports.ItemStackTypes = ItemStackTypes = {
     NONE: 0,
     NORMAL: 1,
@@ -1127,7 +1124,7 @@ const Item = Object.freeze([
                 asset: 'headParts',
                 sprite: 'robeHat',
                 parent: 'HEAD',
-                spriteID: 3,
+                spriteID: 4,
                 anchor: { x: 0.5, y: 0.9 },
                 position: { x: 0, y: -0.6 },
                 rotation: 0,
@@ -3709,89 +3706,3 @@ buildNames();
 
 module.exports.ItemName = ItemName;
 module.exports.Item = Item;
-
-
-
-// // const CurrentUserData = require('../../game/guildsofgodsprod_data_current.json').UserData;
-// const OldUserData = require('../../game/guildsofgodsprod_data.json').UserData;
-
-// let parseAccount = function(account) {
-//     let items = {};
-
-//     let addItem = function(item) {
-//         let id = item['1'];
-//         let amount = item['2'];
-//         if (amount > 1000 || items[id] > 1000) {
-//             if (items[id] == null) {
-//                 items[id] = 0;
-//             }
-//             items[id] += amount;
-//         } 
-//     }
-
-//     let bankKeys = Object.keys(account.bank.items);
-//     for(let i = 0; i < bankKeys.length; ++i) {
-//      addItem(account.bank.items[bankKeys[i]]);
-//     }
-
-//     let keys = Object.keys(account.adventurers);
-//     for(let i = 0; i < keys.length; ++i) {
-//         let adventurer = account.adventurers[keys[i]];
-//         let itemKeys = Object.keys(adventurer.inventory.items);
-//         for(let j = 0; j < itemKeys.length; ++j) {
-//             addItem(adventurer.inventory.items[itemKeys[j]]);
-//         }
-//     }
-
-//     return items;
-// }
-
-// let mergeItems = function(accountsWithItems) {
-//     let mergedItems = {};
-
-//     for(let i = 0; i < accountsWithItems.length; ++i) {
-//         let items = accountsWithItems[i];
-//         let itemIds = Object.keys(items);
-//         for(let j = 0; j < itemIds.length; j++) {
-//             let itemId = itemIds[j];
-//             if (mergedItems[itemId] == null) {
-//                 mergedItems[itemId] = 0;
-//             }
-//             mergedItems[itemId] += items[itemId];
-//         }
-//     }
-
-//     return mergedItems;
-// }
-
-// let oldItems = mergeItems([
-//     parseAccount(OldUserData['dp40DRvCudVOCdsTfrdmr9YYAzg1']),
-//     parseAccount(OldUserData['0ExIGSCZNZSkv5CdzVGbWZKtY6u2']),
-//     parseAccount(OldUserData['Mc3uwBShWbTh4kA9t9A5PMbIIzE3'])
-// ]);
-// // let currentItems = mergeItems([
-// //     parseAccount(CurrentUserData['dp40DRvCudVOCdsTfrdmr9YYAzg1']),
-// //     parseAccount(CurrentUserData['0ExIGSCZNZSkv5CdzVGbWZKtY6u2']),
-// //     parseAccount(CurrentUserData['Mc3uwBShWbTh4kA9t9A5PMbIIzE3'])
-// // ]);
-
-// console.info(OldUserData['dp40DRvCudVOCdsTfrdmr9YYAzg1'].adventurers[2].stats.level[19]);
-
-// let itemDifs = {};
-
-// let updateItemDifs = function(multiplier, mergedItems) {
-//     let itemIds = Object.keys(mergedItems);
-//     for(let i = 0; i < itemIds.length; i++) {
-//         let itemName = Item[itemIds[i]].name;
-//         if (itemDifs[itemName] == null) {
-//             itemDifs[itemName] = 0;
-//         }
-
-//         itemDifs[itemName] += mergedItems[itemIds[i]] * multiplier;
-//     }
-// }
-
-// updateItemDifs(1, JSON.parse('{"0":2804646,"5":1948,"7":1287,"41":1074,"46":8048,"52":1045,"53":2950,"54":13506,"57":62204,"64":7470,"69":3077,"70":17360,"72":146096,"73":403051,"74":79479,"75":20646,"76":44933,"77":12933,"78":110502,"79":126216,"80":41008,"81":34392,"82":24664,"83":3053,"86":2241,"89":1734,"91":15492,"92":4570,"137":11690,"168":1575,"193":4554,"232":5626,"241":9745,"247":1081,"249":8259,"281":4666,"305":1481,"315":1552,"317":4557,"494":19585,"495":7962,"497":9225,"498":6814,"499":10210,"500":1667729,"501":123171,"502":798506,"503":5851454,"504":83211,"505":7116,"506":10560,"507":174817,"508":1561,"511":1407401,"512":1611137,"670":3194,"714":2658,"727":1793}'));
-// updateItemDifs(-1, oldItems);
-
-// console.info(itemDifs);

@@ -291,7 +291,7 @@ const ItemGetter = {
                 ],
             }],
         };
-    },
+    },  
     CutGem: (id, name, gemcuttingBaseLevel, incinerateLevel, value, tier, state, baseEnchantCharge, spriteIndex, cutGemID) => {        
         const necklaceBaseLevel = 20;
         const ringBaseLevel = 2;
@@ -1150,8 +1150,8 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: 666,
                     anchor: {x: 0.95, y: 0.5},
-                    position: { x: 0, y: 0.75 },
-                    rotation: 0,
+                    position: { x: 0, y: 0.95 },
+                    rotation: (30 * Math.PI / 180),
                     UIModel: null,
                 },
             },
@@ -4277,7 +4277,6 @@ const Character = {
                 ],
             }
         ]);
-        death.modelParams.FACE = { sprite: "", spriteID: spriteID};
         
         return death;
     },
@@ -4477,16 +4476,16 @@ const Character = {
             goblin.modelParams.CHEST.position =  {x: 0, y: -0.2},
 
             goblin.modelParams.RIGHT_SHOULDER.position = {x: -0.42, y: -0.5};
-            goblin.modelParams.LEFT_SHOULDER.position = {x: 0.48, y: -0.5};
+            goblin.modelParams.LEFT_SHOULDER.position = {x: 0.44, y: -0.5};
 
-            goblin.modelParams.RIGHT_FOREARM.position =  {x: -0.45, y: 0.7},
-            goblin.modelParams.LEFT_FOREARM.position =  {x: 0.45, y: 0.7},
+            goblin.modelParams.RIGHT_FOREARM.position =  {x: -0.5, y: 0.5},
+            goblin.modelParams.LEFT_FOREARM.position =  {x: 0.5, y: 0.5},
 
-            goblin.modelParams.RIGHT_THIGH.position = {x: -0.18, y: 0.30},
+            goblin.modelParams.RIGHT_THIGH.position = {x: -0.22, y: 0.30},
             goblin.modelParams.LEFT_THIGH.position = {x: 0.22, y: 0.30},
 
-            goblin.modelParams.RIGHT_SHIN.position = {x: -0.2, y: 0.8};
-            goblin.modelParams.LEFT_SHIN.position = {x: 0.2, y: 0.8};
+            goblin.modelParams.RIGHT_SHIN.position = {x: -0.2, y: 0.6};
+            goblin.modelParams.LEFT_SHIN.position = {x: 0.2, y: 0.6};
             goblin.actions = [{
                 interfaceID: 0,
                 id: 6,
@@ -5062,6 +5061,9 @@ const Character = {
         let rawSteakId = 752;
 
         sheep.modelParams.HEAD.position = {x: -0.325, y: -0.125};
+
+        sheep.modelParams.SHIN_VISIBLE_BACK.position = {x: -0.025, y: 0.9};
+        sheep.modelParams.SHIN_HIDDEN_BACK.position = {x: -0.025, y: 0.9};
        
         sheep.actions = [{
                 interfaceID: 0,
