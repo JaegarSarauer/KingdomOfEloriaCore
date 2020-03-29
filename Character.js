@@ -212,7 +212,7 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
             buildStep(StepType.SET_ACTION_INTERVAL, { params: [6] })],
             [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 30] }),
             buildStep(StepList.WALK_ADJACENT),
-            buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION', {repeat: 6}] }),
+            buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND', {repeat: 6}] }),
             buildStep(StepType.ROLL_SKILL_SUCCESS, {
                 params: [20, 35, 3, false, 0.5, 0.5],
                 stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST

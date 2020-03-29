@@ -1837,7 +1837,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [levelReqID, levelRequirement] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEFT_SHOULDER_BACK'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [2, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -2321,6 +2321,7 @@ const Interface = {
                         buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [requiredOreId, oreAmount] }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [barId, 1] }),
                         buildStep(StepType.GIVE_XP, { params: [14, xp] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['SMELT'] }),
                         buildStep(StepType.MAP_ACTION_PARAMETER, { params: ['XP_MULTIPLIER', 0] }),
                         buildStep(StepType.DEPLETE_WORLD_OBJECT_USES, {
                             params: [1],
@@ -2578,7 +2579,7 @@ const Interface = {
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [emptyBucketId, 1]}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [bucketOfYId, 1]}),
                     buildStep(StepType.GIVE_XP, {params: [13, xp]}),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: [clientMessage]}),
                     buildStep(StepType.PLAY_SOUND, {params: [29]})]
                 ],
@@ -2596,7 +2597,7 @@ const Interface = {
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [xItemId, xItemAmount]}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [yItemId, yItemAmount]}),
                     buildStep(StepType.GIVE_XP, {params: [skillID, xp]}),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You turned ' + xName + ' into ' + yName + '.']}),
                     buildStep(StepType.PLAY_SOUND, {params: [29]})]
                 ],
@@ -2631,7 +2632,7 @@ const Action = {
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [46, 1] }),
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [logId, 1] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [17, requiredLevel] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['LIGHT_FIRE'] }),
                     buildStep(StepType.ROLL_SKILL_SUCCESS, {
                         params: [17, baseRollSuccessChancehance, 1, false, 0.5, 0.5],
                         stepResultFail: 'NEXT_STEP',
@@ -2754,7 +2755,7 @@ const Action = {
                 entityID: entityId,
                 steps: [
                     buildStepList(StepList.WALK_ADJACENT),
-                    [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['SWAY'] }),
                     buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [menuParamArray] })]
                 ],
             };
@@ -2862,7 +2863,7 @@ const WorldObject = {
                 name: 'Grind',
                 steps: [
                     buildStepList(StepList.WALK_ADJACENT),
-                    [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                     buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[262, 268]] })]
                 ],
             }],
@@ -3096,7 +3097,7 @@ const WorldObject = {
                         buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
                         buildStep(StepType.INVENTORY_HAS_ROOM),
                         buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
-                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                         buildStep(StepType.PLAY_SOUND, { params: [35] }),
                         buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
                             params: [5, 105, 12, 0.15, true, 0.1],
@@ -3159,7 +3160,7 @@ const WorldObject = {
                     buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
                     buildStep(StepType.INVENTORY_HAS_ROOM),
                     buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                     buildStep(StepType.PLAY_SOUND, { params: [35] }),
                     buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
                         params: [5, 105, 12, 0.15, true, 0.1],
@@ -3219,7 +3220,7 @@ const WorldObject = {
                         buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
                         buildStep(StepType.INVENTORY_HAS_ROOM),
                         buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
-                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                         buildStep(StepType.PLAY_SOUND, { params: [35] }),
                         buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
                             params: [5, 105, 12, 0.15, true, 0.1],
@@ -3816,7 +3817,7 @@ const WorldObject = {
                         [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You forage for some ' + name + '.'] }),
                         buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
                         [buildStep(StepType.INVENTORY_HAS_ROOM),
-                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION', {repeat: 2}] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS', {repeat: 2}] }),
                         buildStep(StepType.ROLL_SKILL_SUCCESS, {
                             params: [skillID, 10, 2, false, 0.25, 0],
                             stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
@@ -3861,7 +3862,7 @@ const WorldObject = {
                     buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
                     buildStep(StepType.INVENTORY_HAS_ROOM),
                     buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                     buildStep(StepType.PLAY_SOUND, { params: [35] }),
                     buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
                         params: [5, 105, 12, 0.15, true, 0.1],
@@ -4214,7 +4215,7 @@ const Character = {
                 buildStep(StepType.SET_ACTION_INTERVAL, { params: [6] })],
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, skillLevel] }),
                 buildStep(StepList.WALK_ADJACENT),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION', {repeat: 6}] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND', {repeat: 6}] }),
                 buildStep(StepType.ROLL_SKILL_SUCCESS, {
                     params: [20, 20, 2, false, 0.5, 0.5],
                     stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
@@ -4998,7 +4999,7 @@ const Character = {
                         buildStep(StepType.HAS_INVENTORY_SPACE, {  params: [milkBucketId, 1] }),
                         buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [emptyBucketId, 1] }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, {  params: [milkBucketId, 1] }),
-                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You milked a Cow'],
                             stepResultPass: StepResult.END_AND_REPEAT_STEP_LIST
@@ -5079,7 +5080,7 @@ const Character = {
                         buildStep(StepType.HAS_INVENTORY_ITEM, {  params: [sheerId, 1] }),
                         buildStep(StepType.INVENTORY_HAS_ROOM),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, {  params: [woolId, 1] }),
-                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND'] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You sheered a sheep'],
                             stepResultPass: StepResult.END_AND_GOTO_LIST_1

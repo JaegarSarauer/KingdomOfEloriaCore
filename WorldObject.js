@@ -73,7 +73,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Smelt',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['SMELT'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['SWAY'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[8, 9, 10, 256, 11, 116, 129]] })]
             ],
         }, {
@@ -82,7 +82,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Fire',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[74]] })]
             ],
         }, {
@@ -91,7 +91,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Upgrade',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[102]] })]
             ],
         }],
@@ -166,7 +166,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Spin',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[266, 270, 60, 154]] })]
             ],
         }],
@@ -201,7 +201,7 @@ module.exports.WorldObject = WorldObject = [
                 buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [2] }),
                 buildStep(StepType.INVENTORY_HAS_ROOM),
                 buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [10, 2] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION', {repeat: 2}] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['MINE', {repeat: 2}] }),
                 buildStep(StepType.PLAY_SOUND, { params: [22] }),
                 buildStep(StepType.ROLL_SKILL_SUCCESS, {
                     params: [10, 15, 4, true, 0.5, 0.5],
@@ -263,7 +263,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Craft',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[73]] })]
             ],
         }, {
@@ -272,7 +272,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Upgrade',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[109]] })]
             ],
         }],
@@ -314,7 +314,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Smelt',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['SMELT'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['SWAY'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[8, 9, 10, 256, 11, 116, 129]] })]
             ],
         }, {
@@ -323,7 +323,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Fire',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[74]] })]
             ],
         },
@@ -369,7 +369,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Craft',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[73]] })]
             ],
         },
@@ -409,7 +409,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Upgrade',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[205]] })]
             ],
         }],
@@ -529,7 +529,7 @@ module.exports.WorldObject = WorldObject = [
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to open the chest.'] }),
                 buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 1] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION', {repeat: 2}] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['STEAL_CHEST', {repeat: 2}] }),
                 buildStep(StepType.ROLL_SKILL_SUCCESS, {
                     params: [20, 10, 1, false, 0.25, 0.25],
                     stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
@@ -659,7 +659,7 @@ module.exports.WorldObject = WorldObject = [
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to open the chest.'] }),
                 buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 20] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION', {repeat: 2}] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['STEAL_CHEST', {repeat: 2}] }),
                 buildStep(StepType.ROLL_SKILL_SUCCESS, {
                     params: [20, 15, 2, false, 0.25, 0.25],
                     stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
@@ -789,7 +789,7 @@ module.exports.WorldObject = WorldObject = [
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to open the chest.'] }),
                 buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 40] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION', {repeat: 2}] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['STEAL_CHEST', {repeat: 2}] }),
                 buildStep(StepType.ROLL_SKILL_SUCCESS, {
                     params: [20, 2000, 1000, false, 10, 0],
                     stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
@@ -1104,7 +1104,7 @@ module.exports.WorldObject = WorldObject = [
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to open the chest.'] }),
                 buildStep(StepType.SET_ACTION_INTERVAL, { params: [3] })],
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 50] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION', {repeat: 2}] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['STEAL_CHEST', {repeat: 2}] }),
                 buildStep(StepType.ROLL_SKILL_SUCCESS, {
                     params: [20, 40, 1.5, false, 0.5, 0.5],
                     stepResultPass: StepResult.NEXT_STEP_LIST,
