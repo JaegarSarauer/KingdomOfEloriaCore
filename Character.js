@@ -114,7 +114,7 @@ Get.Character.Goblin(12, 'Goblin', 1,
     stats: [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],],
     animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
     characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
-    equipmentModel: [null, 301, null, 291, 295], //head, right, left, chest, legs
+    equipmentModel: [null, 301, null, 291, 289], //head, right, left, chest, legs
     modelParams: {
         CHEST: { spriteID: 1},
         HEAD: { spriteID: 1},
@@ -124,8 +124,8 @@ Get.Character.Goblin(12, 'Goblin', 1,
             sprite: 'fullHelm',
             parent: 'HEAD',
             spriteID: 'Emperor',
-            anchor: {x: 0.40, y: 0.925},
-            position: {x: 0, y: 0.0},
+            anchor: { x: 9/24, y: 0.8 },
+            position: {x: 0, y: -0.1},
             rotation: 0,
             UIModel: null,
         },
