@@ -73,7 +73,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Smelt',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['SMELT'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[8, 9, 10, 256, 11, 116, 129]] })]
             ],
         }, {
@@ -314,7 +314,7 @@ module.exports.WorldObject = WorldObject = [
             name: 'Smelt',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION'] }),
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['SMELT'] }),
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[8, 9, 10, 256, 11, 116, 129]] })]
             ],
         }, {

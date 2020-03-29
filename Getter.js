@@ -666,8 +666,8 @@ const ItemGetter = {
                     sprite: 'medHelm',
                     parent: 'HEAD',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0.9 },
-                    position: {x: 0, y: 0.1},
+                    anchor: { x: 0.5, y: 0.8 },
+                    position: {x: 0, y: -0.15},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -707,8 +707,8 @@ const ItemGetter = {
                     sprite: 'fullHelm',
                     parent: 'HEAD',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0.9 },
-                    position: {x: 0, y: 0.1},
+                    anchor: { x: 9/24, y: 0.8 },
+                    position: {x: 0, y: -0.1},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -748,7 +748,7 @@ const ItemGetter = {
                     sprite: 'platelegLeftThigh',
                     parent: 'LEFT_THIGH',
                     spriteID: tier,
-                    anchor: { x: (4/7), y: 0.1 },
+                    anchor: { x: (6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
@@ -759,7 +759,7 @@ const ItemGetter = {
                     sprite: 'platelegRightThigh',
                     parent: 'RIGHT_THIGH',
                     spriteID: tier,
-                    anchor: { x: 1-(4/7), y: 0.1 },
+                    anchor: { x: 1-(6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
@@ -770,8 +770,8 @@ const ItemGetter = {
                     sprite: 'platelegLeftShin',
                     parent: 'LEFT_SHIN',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: 0.5, y: 0.1 },
+                    position: {x: 0, y: 0.1},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -781,8 +781,8 @@ const ItemGetter = {
                     sprite: 'platelegRightShin',
                     parent: 'RIGHT_SHIN',
                     spriteID: tier,
-                    anchor: { x: 0.5, y: 0 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: 0.5, y: 0.1 },
+                    position: {x: 0, y: 0.1},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -823,9 +823,10 @@ const ItemGetter = {
                     parent: 'CHEST',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.65 },
-                    position: { x: 0, y: 0.0 },
+                    position: { x: 0, y: 0.15 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
                 RIGHT_SHOULDER_WORN: {
                     id: 'RIGHT_SHOULDER_WORN',
@@ -833,8 +834,8 @@ const ItemGetter = {
                     sprite: 'platebodyRightShoulder',
                     parent: 'RIGHT_SHOULDER',
                     spriteID: tier,
-                    anchor: { x: 0.75, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: 9/11, y: 0.18 },
+                    position: {x: 0.4, y: -0.05},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -844,8 +845,8 @@ const ItemGetter = {
                     sprite: 'platebodyLeftShoulder',
                     parent: 'LEFT_SHOULDER',
                     spriteID: tier,
-                    anchor: { x: 0.25, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: 1-9/11, y: 0.18 },
+                    position: {x: -0.4, y: -0.05},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -855,8 +856,8 @@ const ItemGetter = {
                     sprite: 'platebodyRightForearm',
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
-                    anchor: {x: (3/8), y: 0.05},
-                    position: {x: 0, y: 0},
+                    anchor: {x: 1-4/7, y: 0.05},
+                    position: {x: 0.05, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -866,8 +867,8 @@ const ItemGetter = {
                     sprite: 'platebodyLeftForearm',
                     parent: 'LEFT_FOREARM',
                     spriteID: tier,
-                    anchor: {x: 1-(3/8), y: 0.05},
-                    position: {x: 0, y: 0},
+                    anchor: {x: 4/7, y: 0.05},
+                    position: {x: -0.05, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1026,6 +1027,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.0 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
                 RIGHT_SHOULDER_WORN: {
                     id: 'RIGHT_SHOULDER_WORN',
@@ -1621,6 +1623,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.0 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
                 RIGHT_FOREARM_WORN: {
                     id: 'RIGHT_FOREARM_WORN',
@@ -1702,7 +1705,7 @@ const ItemGetter = {
                     sprite: spriteName + 'LeftThigh',
                     parent: 'LEFT_THIGH',
                     spriteID: colorSpriteId,
-                    anchor: { x: (4/7), y: 0.1 },
+                    anchor: { x: (6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
@@ -1713,7 +1716,7 @@ const ItemGetter = {
                     sprite: spriteName + 'RightThigh',
                     parent: 'RIGHT_THIGH',
                     spriteID: colorSpriteId,
-                    anchor: { x: 1-(4/7), y: 0.1 },
+                    anchor: { x: 1-(6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
@@ -1724,7 +1727,7 @@ const ItemGetter = {
                     sprite: spriteName + 'LeftShin',
                     parent: 'LEFT_SHIN',
                     spriteID: colorSpriteId,
-                    anchor: { x: 0.5, y: 0 },
+                    anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
@@ -1735,7 +1738,7 @@ const ItemGetter = {
                     sprite: spriteName + 'RightShin',
                     parent: 'RIGHT_SHIN',
                     spriteID: colorSpriteId,
-                    anchor: { x: 0.5, y: 0 },
+                    anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0},
                     rotation: 0,
                     UIModel: null,
@@ -1757,6 +1760,33 @@ const ItemGetter = {
         let robe = this.Pants(id, notedId, name, "robe", spriteId, itemspriteIndex, value);
         robe.essenceValue = EssenceValue(incinerateLevel, 20 + (10 * tier), [ShardCatalog.AIR(100 + tier * 30), ShardCatalog.WATER(20 + tier * 20), ShardCatalog.EARTH(60 + tier * 20), ShardCatalog.NATURE(tier * 40), ShardCatalog.BIND(tier * 100)]);
         robe.equipmentStats = equipmentStats;
+        robe.model.LEFT_SHIN_WORN.position.y += 0.1;
+        robe.model.LEFT_SHIN_WORN.position.x += -0.05;
+        robe.model.RIGHT_SHIN_WORN.position.x += 0.05;
+        robe.model.RIGHT_SHIN_WORN.position.y += 0.1;
+
+        robe.model.TOP_UNDER =  {
+            id: 'TOP_UNDER',
+            asset: 'legParts',
+            sprite: 'robeTopUnder',
+            parent: 'CHEST',
+            spriteID: spriteId,
+            anchor: { x: 0.5, y: 0 },
+            position: { x: 0, y: 0.4 },
+            z : -10,
+        };
+
+        robe.model.BOTTOM_UNDER =  {
+            id: 'BOTTOM_UNDER',
+            asset: 'legParts',
+            sprite: 'robeBottomUnder',
+            parent: 'CHEST',
+            spriteID: spriteId,
+            anchor: { x: 0.5, y: 0 },
+            position: { x: 0, y: 0.75 },
+            z : -10,
+        };
+
         robe.actions = [{
             interfaceID: 5,
             id: 7,
@@ -4036,6 +4066,31 @@ const Character = {
         };
         return rat;
     },
+    Crab : function(id, name, spriteID, stats, drops) {
+        return  {
+            id,
+            name,
+            modelName: 'CRAB',
+            stats, 
+            drops,
+            combatStyle: Combat.CombatStyle.MELEE,
+            attackRange: 1,
+            actions: [{
+                interfaceID: 0,
+                id: 6,
+                name: 'Attack'
+            }],
+            modelParams: {
+                CHEST: { spriteID} ,
+                CLAW_RIGHT: { spriteID },
+                CLAW_LEFT: { spriteID },
+                LEG_RIGHT_INNER: { spriteID },
+                LEG_LEFT_OUTER: { spriteID },
+                LEG_RIGHT_OUTER: { spriteID },
+                LEG_LEFT_INNER: { spriteID },
+            },
+        };
+    },
     Duck : function(id, name, spriteIndex ) {
         return {
             id: id,
@@ -4284,30 +4339,6 @@ const Character = {
         golem.modelParams.LEFT_THIGH.sprite += "Coal";
         return golem;
     },
-    Cavecrawler : function(id, name, spriteId, stats, drops) {
-        return {
-            id: id,
-            name: name,
-            modelName: 'CAVECRAWLER',
-            modelParams: {
-                CHEST: { spriteID: spriteId},
-                HEAD: { spriteID: spriteId},
-                RIGHT_SHOULDER: { spriteID: spriteId},
-                LEFT_SHOULDER: { spriteID: spriteId},
-                OUTER_RIGHT_THIGH: { spriteID: spriteId},
-                OUTER_LEFT_THIGH: { spriteID: spriteId},
-                INNER_RIGHT_THIGH: { spriteID: spriteId},
-                INNER_LEFT_THIGH: { spriteID: spriteId},
-            },
-            stats: stats,
-            drops: drops,
-            actions: [{
-                interfaceID: 0,
-                id: 6,
-                name: 'Attack'
-            }],
-        };
-    },
     HumanShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, shopsMenuInterfaceID) {
         return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
                 interfaceID: 0,
@@ -4451,11 +4482,11 @@ const Character = {
             goblin.modelParams.RIGHT_FOREARM.position =  {x: -0.45, y: 0.7},
             goblin.modelParams.LEFT_FOREARM.position =  {x: 0.45, y: 0.7},
 
-            goblin.modelParams.RIGHT_THIGH.position = {x: -0.18, y: 0.35},
-            goblin.modelParams.LEFT_THIGH.position = {x: 0.22, y: 0.35},
+            goblin.modelParams.RIGHT_THIGH.position = {x: -0.18, y: 0.30},
+            goblin.modelParams.LEFT_THIGH.position = {x: 0.22, y: 0.30},
 
-            goblin.modelParams.RIGHT_SHIN.position = {x: -0.2, y: 0.825};
-            goblin.modelParams.LEFT_SHIN.position = {x: 0.2, y: 0.825};
+            goblin.modelParams.RIGHT_SHIN.position = {x: -0.2, y: 0.8};
+            goblin.modelParams.LEFT_SHIN.position = {x: 0.2, y: 0.8};
             goblin.actions = [{
                 interfaceID: 0,
                 id: 6,
@@ -4980,6 +5011,37 @@ const Character = {
         cow.drops = [[[1, 100], [rawSteakId, 1, 1, 100]]];
 
         return cow;
+    },
+    Pinata: function(id, spriteIndex, name = 'Pinata') {
+        let pinata = this.FourLeggedMammalWithTail(id, name, 'pinata', spriteIndex,  [[0, 5], [1, 5], [2, 5], [3, 5]]);
+        pinata.modelOverrideName = 'PINATA',
+        pinata.stats = [[11, 20], [2, 0], [5, 0], [8, 0]], //20hp
+
+        pinata.modelParams.THIGH_VISIBLE_BACK.sprite = 'pinataUpperLeg';
+        pinata.modelParams.THIGH_HIDDEN_BACK.sprite='pinataUpperLeg';
+        pinata.modelParams.SHIN_VISIBLE_BACK.sprite= 'pinataBottomLeg';
+        pinata.modelParams.SHIN_HIDDEN_BACK.sprite= 'pinataBottomLeg';
+        pinata.modelParams.THIGH_VISIBLE_FRONT.sprite= 'pinataUpperLeg';
+        pinata.modelParams.THIGH_HIDDEN_FRONT.sprite= 'pinataUpperLeg';
+        pinata.modelParams.SHIN_VISIBLE_FRONT.sprite= 'pinataBottomLeg';
+        pinata.modelParams.SHIN_HIDDEN_FRONT.sprite= 'pinataBottomLeg';
+        pinata.modelParams.TAIL.position = {x: 0.5, y: 0}
+        
+        pinata.actions = [{
+            interfaceID: 0,
+            id: 11,
+            name: 'Whack',
+            flags: ['REPEAT_ACTION'],
+            actionInterval: 0,
+            steps: [
+                buildStepList(StepList.WALK_IN_ATTACK_LINE_OF_SIGHT),
+                buildStepList(StepList.WALK_IN_ATTACK_RANGE),
+                [buildStep(StepType.CAN_ATTACK_OWNER)],
+                [buildStep(StepType.ATTACK_OWNER, {params: [100000, 100000, false]})],
+            ],
+        }];
+
+        return pinata;
     },
     Bull: function(id) {
         let cow = this.Cow(id, 2, 'Bull');

@@ -114,10 +114,21 @@ Get.Character.Goblin(12, 'Goblin', 1,
     stats: [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],],
     animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
     characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
-    equipmentModel: [287, 301, null, 291, 295], //head, right, left, chest, legs
+    equipmentModel: [null, 301, null, 291, 295], //head, right, left, chest, legs
     modelParams: {
         CHEST: { spriteID: 1},
         HEAD: { spriteID: 1},
+        HEAD_WORN: {
+            id: 'HEAD_WORN',
+            asset: 'headParts',
+            sprite: 'fullHelm',
+            parent: 'HEAD',
+            spriteID: 'Emperor',
+            anchor: {x: 0.40, y: 0.925},
+            position: {x: 0, y: 0.0},
+            rotation: 0,
+            UIModel: null,
+        },
         RIGHT_SHOULDER: { spriteID: 1},
         LEFT_SHOULDER: { spriteID: 1},
         RIGHT_FOREARM: { spriteID: 1},
@@ -292,7 +303,7 @@ Get.Character.Ghost(30, 'Ghost ', 1, [[11, 18], [6, 10], [7, 15], [2, 25], [8, 1
 Get.Character.Ghost(31, 'Ghost ', 2, [[11, 40], [6, 18], [7, 28], [2, 50], [8, 1], [5, 50]], 80, 1, 80),// Earth - [40hp, 18mfocus, 28mpower, 50def, 1 mdef, 50 range defence]
 Get.Character.Ghost(32, 'Ghost ', 3, [[11, 70], [6, 28], [7, 50], [2, 75], [8, 1], [5, 75]], 81, 1, 240),// Fire - [70hp, 28mfocus, 50mpower, 75def, 1 mdef, 75 range defence]
 Get.Character.ElementalGhost(33, 'Elemental Ghost ', 4, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81], 1, 960),// Elemental - [150hp, 40mfocus, 99mpower, 99def, 1 mdef, 99 range defence]
-Get.Character.Cavecrawler(34, "Cave Crawler", 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81] ),
+Get.Character.Crab(34, 'Cave Crawler', 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81] ),
 Get.Character.HumanShopOwner(35, 'Clothing Store Owner', 6, [null, null, null, 395, 491], HairStyle.Scruffy, SpriteColor.Black, 10),
 Get.Character.Osaik(36), 
 {
@@ -380,83 +391,11 @@ Get.Character.Wolf(38, 'Wolf', [[0, 60], [1, 40], [2, 40], [3, 1], [4, 1], [5, 3
     aWolf.secondaryAttackRange = 20;
 
     return aWolf;
-})(), {
-    id: 40,
-    name: 'Crab',
-    modelName: 'SEA_CREATURE',
-    stats: [[11, 30], [0, 30], [1, 30], [2, 30], [5, 30]], 
-    drops: [[[1, 100], [0, 5, 10, 10], [0, 8, 20, 10], [55, 1, 2, 10], [13, 1, 1, 10], [87, 1, 1, 20], [88, 1, 1, 5], [47, 1, 2, 20], [48, 1, 1, 15]], [[512, 10], [536, 1, 1, 10]]],
-    combatStyle: CombatStyle.MELEE,
-    attackRange: 1,
-    actions: [{
-        interfaceID: 0,
-        id: 6,
-        name: 'Attack'
-    }],
-},
-{
-    id: 41,
-    name: 'Rockshell Crab',
-    modelName: 'SEA_CREATURE',
-    stats: [[11, 60], [0, 25], [1, 35], [2, 55], [5, 60]], 
-    drops: [[[1, 1], [549, 1, 3, 1]], [[1, 100], [0, 5, 15, 10], [0, 10, 25, 10], [55, 1, 1, 10], [56, 1, 1, 15], [87, 1, 2, 20], [88, 1, 1, 10], [47, 1, 2, 15], [48, 1, 1, 10]], [[364, 10], [536, 1, 1, 10]]],
-    modelParams: {
-        HEAD: { spriteID: 2},
-        CLAW_RIGHT: { spriteID: 2},
-        CLAW_LEFT: { spriteID: 2},
-        LEG_RIGHT: { spriteID: 2},
-        LEG_LEFT: { spriteID: 2},
-    },
-    combatStyle: CombatStyle.MELEE,
-    attackRange: 1,
-    actions: [{
-        interfaceID: 0,
-        id: 6,
-        name: 'Attack'
-    }],
-},
-{
-    id: 42,
-    name: 'Spiky Crab',
-    modelName: 'SEA_CREATURE',
-    stats: [[11, 55], [0, 35], [1, 55], [2, 40], [5, 45]], 
-    drops: [[[1, 1], [549, 3, 9, 1]], [[1, 100], [0, 5, 20, 10], [0, 20, 30, 10], [56, 1, 1, 10], [57, 1, 1, 10], [87, 1, 2, 20], [88, 1, 1, 15], [47, 1, 2, 10], [48, 1, 1, 10], [49, 1, 1, 5]], [[256, 10], [536, 1, 1, 10]]],
-    modelParams: {
-        HEAD: { spriteID: 3},
-        CLAW_RIGHT: { spriteID: 3},
-        CLAW_LEFT: { spriteID: 3},
-        LEG_RIGHT: { spriteID: 3},
-        LEG_LEFT: { spriteID: 3},
-    },
-    combatStyle: CombatStyle.MELEE,
-    attackRange: 1,
-    actions: [{
-        interfaceID: 0,
-        id: 6,
-        name: 'Attack'
-    }],
-},
-{
-    id: 43,
-    name: 'Box Turtle',
-    modelName: 'SEA_CREATURE',
-    stats: [[11, 80], [0, 50], [1, 50], [2, 50], [5, 20], [8, 20]], 
-    drops: [[[1, 100], [0, 10, 20, 10], [0, 20, 50, 10], [501, 10, 20, 20], [502, 5, 10, 10], [89, 1, 1, 5], [53, 1, 1, 5], [68, 1, 7, 15], [69, 1, 3, 15], [59, 1, 1, 10]], [[196, 10], [536, 1, 1, 10]]],
-    modelParams: {
-        HEAD: { spriteID: 4},
-        CLAW_RIGHT: { spriteID: 4},
-        CLAW_LEFT: { spriteID: 4},
-        LEG_RIGHT: { spriteID: 4},
-        LEG_LEFT: { spriteID: 4},
-    },
-    combatStyle: CombatStyle.MELEE,
-    attackRange: 1,
-    actions: [{
-        interfaceID: 0,
-        id: 6,
-        name: 'Attack'
-    }],
-},
+})(), 
+Get.Character.Crab(40, 'Crab', 1,  [[11, 30], [0, 30], [1, 30], [2, 30], [5, 30]],[[[1, 100], [0, 5, 10, 10], [0, 8, 20, 10], [55, 1, 2, 10], [13, 1, 1, 10], [87, 1, 1, 20], [88, 1, 1, 5], [47, 1, 2, 20], [48, 1, 1, 15]], [[512, 10], [536, 1, 1, 10]]] ),
+Get.Character.Crab(41, 'Rockshell Crab', 2,  [[11, 60], [0, 25], [1, 35], [2, 55], [5, 60]],[[[1, 1], [549, 1, 3, 1]], [[1, 100], [0, 5, 15, 10], [0, 10, 25, 10], [55, 1, 1, 10], [56, 1, 1, 15], [87, 1, 2, 20], [88, 1, 1, 10], [47, 1, 2, 15], [48, 1, 1, 10]], [[364, 10], [536, 1, 1, 10]]] ),
+Get.Character.Crab(42, 'Spiky Crab', 3,  [[11, 55], [0, 35], [1, 55], [2, 40], [5, 45]],[[[1, 1], [549, 3, 9, 1]], [[1, 100], [0, 5, 20, 10], [0, 20, 30, 10], [56, 1, 1, 10], [57, 1, 1, 10], [87, 1, 2, 20], [88, 1, 1, 15], [47, 1, 2, 10], [48, 1, 1, 10], [49, 1, 1, 5]], [[256, 10], [536, 1, 1, 10]]] ),
+Get.Character.Crab(43, 'Box Turtle', 4,  [[11, 80], [0, 50], [1, 50], [2, 50], [5, 20], [8, 20]], [[[1, 100], [0, 10, 20, 10], [0, 20, 50, 10], [501, 10, 20, 20], [502, 5, 10, 10], [89, 1, 1, 5], [53, 1, 1, 5], [68, 1, 7, 15], [69, 1, 3, 15], [59, 1, 1, 10]], [[196, 10], [536, 1, 1, 10]]] ),
 {
     id: 44,
     name: 'Cavern Supervisor',
@@ -546,29 +485,7 @@ Get.Character.Human(63, "Indie Dev", 2, [null, null, null, 437, 483], HairStyle.
         name: 'Take Brochure From',
     }
 ]),
-{
-    id: 64,
-    name: 'Pinata',
-    modelName: 'FOUR_LEGGED_MAMMALS',
-    modelOverrideName: 'PINATA',
-    stats: [[11, 20], [2, 0], [5, 0], [8, 0]], //20hp
-    spriteIndex: 5, //might not be needed (1 model)
-    animations: [[0, 6], [1, 7], [2, 7], [3, 6], [4, 6]], //animations needed
-    characterModel: [1, 1, 1], //head, body, legs
-    actions: [{
-        interfaceID: 0,
-        id: 11,
-        name: 'Whack',
-        flags: ['REPEAT_ACTION'],
-        actionInterval: 0,
-        steps: [
-            buildStepList(StepList.WALK_IN_ATTACK_LINE_OF_SIGHT),
-            buildStepList(StepList.WALK_IN_ATTACK_RANGE),
-            [buildStep(StepType.CAN_ATTACK_OWNER)],
-            [buildStep(StepType.ATTACK_OWNER, {params: [100000, 100000, false]})],
-        ],
-    }],
-}, 
+Get.Character.Pinata(64, 1, 'Pinata'),
 Get.Character.Patreoner(65, 'Sandwich', 2, [108, null, 630, 116, 112], HairStyle.Bald, SpriteColor.Black, 200 + 182, 8),
 Get.Character.Patreoner(66, 'Redd', 2, [313, 299, 632, null, null], HairStyle.Messy, SpriteColor.Brown, 105 + 70, 9),
 Get.Character.Patreoner(67, 'Aiden', 2, [null, 4, null, 385, 483], HairStyle.LeftSideSwipe, SpriteColor.Black, 220 + 0, 10),
@@ -587,3 +504,5 @@ Get.Character.Sheep(78, 1),
 Get.Character.PatreonQuestCat(79, true, 224),
 Get.Character.PatreonQuestCat(80, false, 224),
 ];
+
+
