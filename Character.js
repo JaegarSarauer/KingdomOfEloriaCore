@@ -303,7 +303,7 @@ Get.Character.Ghost(30, 'Ghost ', 1, [[11, 18], [6, 10], [7, 15], [2, 25], [8, 1
 Get.Character.Ghost(31, 'Ghost ', 2, [[11, 40], [6, 18], [7, 28], [2, 50], [8, 1], [5, 50]], 80, 1, 80),// Earth - [40hp, 18mfocus, 28mpower, 50def, 1 mdef, 50 range defence]
 Get.Character.Ghost(32, 'Ghost ', 3, [[11, 70], [6, 28], [7, 50], [2, 75], [8, 1], [5, 75]], 81, 1, 240),// Fire - [70hp, 28mfocus, 50mpower, 75def, 1 mdef, 75 range defence]
 Get.Character.ElementalGhost(33, 'Elemental Ghost ', 4, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81], 1, 960),// Elemental - [150hp, 40mfocus, 99mpower, 99def, 1 mdef, 99 range defence]
-Get.Character.Crab(34, 'Cave Crawler', 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81] ),
+Get.Character.Crab(34, 'Cave Crawler', 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], null),
 Get.Character.HumanShopOwner(35, 'Clothing Store Owner', 6, [null, null, null, 395, 491], HairStyle.Scruffy, SpriteColor.Black, 10),
 Get.Character.Osaik(36), 
 {
