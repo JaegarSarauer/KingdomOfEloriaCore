@@ -1726,7 +1726,6 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
         }
 
         if (params.xDirection > 0) {
-            transformsByPart = JSON.parse(JSON.stringify(allTransformsByPart));
             let keys = Object.keys(transformsByPart);
             let faceCameraDirectly = false; // Faces a direction instead of the camera
             for(let i = 0; i < keys.length; ++i) {
@@ -1773,7 +1772,6 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
             }
         }
         else if (params.xDirection < 0 ) {
-            transformsByPart = JSON.parse(JSON.stringify(allTransformsByPart));
             let keys = Object.keys(transformsByPart);
             let isFourLeggedMammal = false; // Faces a direction instead of the camera
             for(let i = 0; i < keys.length; ++i) {
