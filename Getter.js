@@ -2110,7 +2110,7 @@ const ItemGetter = {
                 flags: [],
                 actionInterval: 1,
                 steps: [
-                    [buildStep(StepType.STYLE_HAIR, {params: [-1, dyeNo]})]
+                    [buildStep(StepType.CHANGE_APPEARANCE, {params: [-1, -1, dyeNo]})]
                 ],
             }],
         };
@@ -2136,7 +2136,7 @@ const ItemGetter = {
                 flags: [],
                 actionInterval: 1,
                 steps: [
-                    [buildStep(StepType.STYLE_HAIR, {params: [spriteIndex, -1]})]
+                    [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[196, 197, 198, 199]] })]
                 ],
             }],
         };
@@ -2588,7 +2588,7 @@ const Interface = {
                 ],
             };
         },
-        StyleHair(id, name, hairSpriteIndex) {
+        StyleHair(id, name, hairSpriteIndex, hairColorIndex, cost = 0) {
             return {
                 id,
                 name,
@@ -2596,7 +2596,20 @@ const Interface = {
                 actionInterval: 1,
                 steps: [
                     [
-                        buildStep(StepType.STYLE_HAIR, {params: [hairSpriteIndex]})
+                        buildStep(StepType.CHANGE_APPEARANCE, {params: [-1, hairSpriteIndex, hairColorIndex]})
+                    ]
+                ],
+            };
+        },
+        DyeHair(id, name, hairDyeIndex) {
+            return {
+                id,
+                name,
+                flags: [],
+                actionInterval: 1,
+                steps: [
+                    [
+                        buildStep(StepType.CHANGE_APPEARANCE, {params: [-1, -1, hairDyeIndex]})
                     ]
                 ],
             };
