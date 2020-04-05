@@ -83,21 +83,58 @@ module.exports.AppearanceShops = AppearanceShops = [
         name: 'Customize Your Adventurer',
         id: 1,
         shopData : [
-            {
-                appearanceType: 'Hair Color',
-                ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
-                price: 0
-            },
-            {
-                appearanceType: 'Hair Style',
-                ids: [HairStyle.Bald, HairStyle.Buzzed, HairStyle.LeftSideSwipe, HairStyle.Messy, HairStyle.Scruffy],
-                price: 0
-            }, 
-            {
-                appearanceType: 'Skin Tone',
-                ids: [1, 2, 3, 4, 5, 6],
-                price: 0
-            }
+            [
+                {
+                    appearanceType: 'Hair Style',
+                    ids: [HairStyle.Bald, HairStyle.Buzzed, HairStyle.LeftSideSwipe, HairStyle.Messy, HairStyle.Scruffy],
+                    price: 0,
+                    controlType: 'ScrollSelect',
+                    itemWidth: 24,
+                }, 
+                {
+                    appearanceType: 'Hair Color',
+                    ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
+                    price: 0,
+                    controlType: 'ScrollSelect',
+                    itemWidth: 24,
+                }
+            ],
+            [
+                {
+                    appearanceType: 'Skin Tone',
+                    ids: [1, 2, 3, 4, 5, 6],
+                    price: 0,
+                    controlType: 'Button',
+                    itemWidth: 24,
+                }, 
+                {
+
+                }
+            ],
+            [
+                {
+
+                }, 
+                {
+
+                }
+            ],
+            [
+                {
+
+                }, 
+                {
+                    
+                }
+            ],
+            [
+                {
+
+                }, 
+                {
+
+                }
+            ],
         ]
     }
 ]

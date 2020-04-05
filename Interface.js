@@ -2064,5 +2064,18 @@ module.exports.Interface = [
             ],
         },
     ],
-}
-];
+},
+{   
+    id: 27,
+    name: 'Appearance',
+    actions: [
+        {
+            id: 0,
+            name: 'Confirm',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.CHANGE_APPEARANCE, {params: ['SKIN_TONE', 'HAIR_STYLE', 'HAIR_COLOR', 'GENDER', 'EYE_COLOR', 'FACE', 'FACE_COLOR', 'SHIRT', 'PANTS']})]
+            ],
+        },
+    ],
+}];
