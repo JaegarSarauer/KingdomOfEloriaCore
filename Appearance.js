@@ -2,13 +2,14 @@ const SpriteColor = require('./Model').SpriteColor;
 const HairStyle = require('./Model').HairStyle;
 
 module.exports.AppearanceType = {
+    SKIN_TONE: 'Skin Tone',
+    GENDER: 'Gender',
+    FACIAL: 'Facial',
+    EYE_COLOR: 'Eye Color',
     HAIR_COLOR: 'Hair Color',
     HAIR_STYLE: 'Hair Style',
-    SKIN_TONE: 'Skin Tone',
-    FACE: 'Face',
     SHIRT_STYLE: 'Shirt Style',
     SHIRT_COLOR: 'Shirt Color',
-    PANTS_STYLE: 'Pants Style',
     PANTS_COLOR: 'Pants Color',
 };
 
@@ -85,6 +86,22 @@ module.exports.AppearanceShops = AppearanceShops = [
         shopData : [
             [
                 {
+                    appearanceType: 'Skin Tone',
+                    ids: [1, 2, 3, 4, 5, 6],
+                    price: 0,
+                    controlType: 'Button',
+                    itemWidth: 24,
+                }, 
+                {
+                    appearanceType: 'Gender',
+                    ids: ['Male', 'Female'],
+                    price: 0,
+                    controlType: 'Button',
+                    itemWidth: 32,
+                },
+            ],
+            [
+                {
                     appearanceType: 'Hair Style',
                     ids: [HairStyle.Bald, HairStyle.Buzzed, HairStyle.LeftSideSwipe, HairStyle.Messy, HairStyle.Scruffy],
                     price: 0,
@@ -101,38 +118,45 @@ module.exports.AppearanceShops = AppearanceShops = [
             ],
             [
                 {
-                    appearanceType: 'Skin Tone',
+                    appearanceType: 'Facial',
                     ids: [1, 2, 3, 4, 5, 6],
                     price: 0,
-                    controlType: 'Button',
+                    controlType: 'ScrollSelect',
                     itemWidth: 24,
                 }, 
                 {
-
+                    appearanceType: 'Eye Color',
+                    ids: [1, 2, 3, 4, 5, 6],
+                    price: 0,
+                    controlType: 'ScrollSelect',
+                    itemWidth: 24,
                 }
             ],
             [
                 {
-
+                    appearanceType: 'Shirt Style',
+                    ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                    price: 0,
+                    controlType: 'ScrollSelect',
+                    itemWidth: 24,
                 }, 
                 {
-
+                    appearanceType: 'Shirt Color',
+                    ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
+                    price: 0,
+                    controlType: 'ScrollSelect',
+                    itemWidth: 24,
                 }
             ],
             [
                 {
-
+                    appearanceType: 'Pants Color',
+                    ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
+                    price: 0,
+                    controlType: 'ScrollSelect',
+                    itemWidth: 24,
                 }, 
                 {
-                    
-                }
-            ],
-            [
-                {
-
-                }, 
-                {
-
                 }
             ],
         ]
