@@ -8,6 +8,8 @@ const buildStep = require('./Step').buildStep;
 const buildStepList = require('./Step').buildStepList;
 const Get = require('./Getter').Get;
 const EssenceCatalog = require('./Essence').EssenceCatalog;
+const HairStyle = require('./Model').HairStyle;
+const SpriteColor = require('./Model').SpriteColor;
 
 module.exports.Interface = [
     {
@@ -427,6 +429,11 @@ module.exports.Interface = [
             {
                 id: 63,
                 name: 'Approach',
+                actionInterval: 0,
+            },
+            {
+                id: 64, // Open interface 3
+                name: 'Hair Styling From',
                 actionInterval: 0,
             },
         ],

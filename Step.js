@@ -1041,11 +1041,18 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], //minigameID
         params: [],
     },
-    STYLE_HAIR: {
-        id: 'STYLE_HAIR',
+    CHANGE_APPEARANCE: {
+        id: 'CHANGE_APPEARANCE',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number'], //hairStyleId, dyedColorId
+        paramTypes: ['number', 'number', 'number'], //skinToneID, hairStyleId, hairColorId, price
+        params: [],
+    },
+    OPEN_APPEARANCE_INTERFACE: {
+        id: 'OPEN_APPEARANCE_INTERFACE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //submenu
         params: [],
     },
     MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {
@@ -1315,6 +1322,22 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
         id: 'ACTION_ID',
         type: 'number',
     },
+    SKIN_TONE: {
+        id: 'SKIN_TONE',
+        type: 'number'
+    },
+    HAIR_STYLE: {
+        id: 'HAIR_STYLE',
+        type: 'number'
+    },
+    HAIR_COLOR: {
+        id: 'HAIR_COLOR',
+        type: 'number'
+    },
+    PRICE: {
+        id: 'PRICE',
+        type: 'number'
+    }
 };
 
 try {

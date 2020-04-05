@@ -2162,19 +2162,25 @@ class AnimationDef extends TWEEN.Tween {
     }
 };
 
-module.exports.buildModelPart = buildModelPart = (modelPartDef) => {
-    return {
-        id: modelPartDef.id,
-        asset: modelPartDef.asset,
-        sprite: modelPartDef.sprite,
-        parent: modelPartDef.parent || null,
-        anchor: modelPartDef.anchor || {x: 0.5, y: 0.5},
-        position: modelPartDef.position || {x: 0, y: 0},
-        rotation: modelPartDef.rotation || 0,
-        spriteID: modelPartDef.spriteID || 0,
-        UIModel: modelPartDef.UIModel || null,
-        z : modelPartDef.z || 0
+module.exports.buildModelPart = buildModelPart = (oldPartDef, newPartDef) => {
+    oldPartDef = oldPartDef || {};
+    newPartDef = newPartDef || {};
+    let result = {
+        id: newPartDef.id || oldPartDef.id,
+        asset: newPartDef.asset || oldPartDef.asset,
+        sprite: newPartDef.sprite || oldPartDef.sprite,
+        parent: newPartDef.parent || oldPartDef.parent ||null,
+        anchor: newPartDef.anchor || oldPartDef.anchor || {x: 0.5, y: 0.5},
+        position: newPartDef.position || oldPartDef.position || {x: 0, y: 0},
+        rotation: newPartDef.rotation || oldPartDef.rotation || 0,
+        spriteID: newPartDef.spriteID || oldPartDef.spriteID || 0,
+        UIModel: newPartDef.UIModel || oldPartDef.UIModel || null,
+        z : newPartDef.z || oldPartDef.z || 0
     };
+    if (!result.id) {
+        let hit = true;
+    }
+    return result;
 }
 
 module.exports.buildModel = buildModel = (modelDef, modelPartsObj = {}) => {
