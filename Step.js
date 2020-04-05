@@ -1052,7 +1052,7 @@ module.exports.StepType = StepType = {
         id: 'OPEN_APPEARANCE_INTERFACE',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number'], //submenu
+        paramTypes: ['number'], // appearance shop id
         params: [],
     },
     MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {
@@ -1483,7 +1483,7 @@ try {
     const StepIsInArea = require('../internal/Steps/StepIsInArea');
     const StepJoinMinigame = require('../internal/Steps/StepJoinMinigame');
     const StepLeaveMinigame = require('../internal/Steps/StepLeaveMinigame');
-    const StepStyleHair = require('../internal/Steps/StepStyleHair') ;
+    const StepOpenAppearanceInterface = require('../internal/Steps/StepOpenAppearanceInterface') ;
     const StepAddMarketBuyOffer = require('../internal/Steps/StepAddMarketBuyOffer');
     const StepAddMarketSellOffer = require('../internal/Steps/StepAddMarketSellOffer');
     const StepMakeClosestNPCAttackClosestNPC = require('../internal/Steps/StepMakeClosestNPCAttackClosestNPC');
@@ -2259,9 +2259,9 @@ try {
                 return new StepLeaveMinigame.StepLeaveMinigame(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
-        STYLE_HAIR: {
+        CHANGE_APPEARANCE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepStyleHair.StepStyleHair(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+                return new StepOpenAppearanceInterface.StepOpenAppearanceInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {
