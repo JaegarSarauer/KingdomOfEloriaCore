@@ -4203,6 +4203,10 @@ const Character = {
                      spriteID: faceId,
                      sprite: speciesSpriteName + 'Face'
                 },
+                EYES: {
+                     spriteID: spriteID,
+                     sprite: speciesSpriteName + 'Eyes'
+                },
                 HEAD: { 
                     spriteID: spriteID,
                     sprite: speciesSpriteName + 'Head'
