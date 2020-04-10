@@ -1041,6 +1041,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], //minigameID
         params: [],
     },
+    OPEN_CHANGE_APPEARANCE: {
+        id: 'OPEN_CHANGE_APPEARANCE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //shopID
+        params: [],
+    },
     CHANGE_APPEARANCE: {
         id: 'CHANGE_APPEARANCE',
         stepResultFail: 'END_ACTION',
@@ -1497,6 +1504,7 @@ try {
     const StepAddJewelryCraftItem = require('../internal/Steps/StepAddJewelryCraftItem');
     const StepRemoveJewelryCraftItem = require('../internal/Steps/StepRemoveJewelryCraftItem');
     const StepRemoveEnchantmentItem = require('../internal/Steps/StepRemoveEnchantmentItem');
+    const StepChangeAppearance = require('../internal/StepChangeAppearance');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
@@ -2259,9 +2267,14 @@ try {
                 return new StepLeaveMinigame.StepLeaveMinigame(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
-        CHANGE_APPEARANCE: {
+        OPEN_CHANGE_APPEARANCE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepOpenAppearanceInterface.StepOpenAppearanceInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CHANGE_APPEARANCE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepChangeAppearance.StepChangeAppearance(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {
