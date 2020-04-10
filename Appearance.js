@@ -11,6 +11,10 @@ module.exports.AppearanceType = {
     SHIRT_STYLE: 'Shirt Style',
     SHIRT_COLOR: 'Shirt Color',
     PANTS_COLOR: 'Pants Color',
+    EMOTE_GREETING: 'Greeting',
+    EMOTE_FUN: 'Fun',
+    EMOTE_TAUNT: 'Taunt',
+    NA : 'NA'
 };
 
 let getSkinModel = function(id, skinToneID) {
@@ -83,35 +87,61 @@ module.exports.AppearanceShops = AppearanceShops = [
     {
         name: 'Customize Your Adventurer',
         id: 1,
+        usesReset : false,
+        usesClose : false,
         shopData : [
             [
                 {
-                    appearanceType: 'Skin Tone',
-                    ids: [1, 2, 3, 4, 5, 6],
-                    price: 0,
-                    controlType: 'Button',
-                    itemWidth: 24,
-                }, 
+                    controlType: 'Preview',
+                    columnWidth: 128,
+                    rowSpan : 2,
+                },
                 {
                     appearanceType: 'Gender',
                     ids: ['Male', 'Female'],
-                    price: 0,
                     controlType: 'Button',
                     itemWidth: 32,
+                    columnWidth: (32 + 16) * 2,
                 },
+                {
+                    appearanceType: 'Skin Tone',
+                    ids: [1, 2, 3, 4, 5, 6],
+                    controlType: 'Button',
+                    itemWidth: 24,
+                    columnWeight: 1
+                }, 
             ],
+            // [
+            //     {
+            //         appearanceType: 'Greeting',
+            //         ids: [1, 2, 3],
+            //         controlType: 'Emote'
+            //     },
+            //     {
+            //         appearanceType: 'Fun',
+            //         ids: [1, 2, 3],
+            //         controlType: 'Emote'
+            //     },
+            //     {
+            //         appearanceType: 'Taunt',
+            //         ids: [1, 2, 3],
+            //         controlType: 'Emote'
+            //     }
+            // ],
             [
+                {
+                    controlType: 'Placeholder',
+                    columnWidth: 128
+                },
                 {
                     appearanceType: 'Hair Style',
                     ids: [HairStyle.Bald, HairStyle.Buzzed, HairStyle.LeftSideSwipe, HairStyle.Messy, HairStyle.Scruffy],
-                    price: 0,
                     controlType: 'ScrollSelect',
                     itemWidth: 24,
                 }, 
                 {
                     appearanceType: 'Hair Color',
-                    ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
-                    price: 0,
+                    ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.Green, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
                     controlType: 'ScrollSelect',
                     itemWidth: 24,
                 }
@@ -120,14 +150,12 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     appearanceType: 'Facial',
                     ids: [1, 2, 3, 4, 5, 6],
-                    price: 0,
                     controlType: 'ScrollSelect',
                     itemWidth: 24,
                 }, 
                 {
                     appearanceType: 'Eye Color',
                     ids: [1, 2, 3, 4, 5, 6],
-                    price: 0,
                     controlType: 'ScrollSelect',
                     itemWidth: 24,
                 }
@@ -136,14 +164,12 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     appearanceType: 'Shirt Style',
                     ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                    price: 0,
                     controlType: 'ScrollSelect',
                     itemWidth: 24,
                 }, 
                 {
                     appearanceType: 'Shirt Color',
                     ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
-                    price: 0,
                     controlType: 'ScrollSelect',
                     itemWidth: 24,
                 }
@@ -152,12 +178,9 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     appearanceType: 'Pants Color',
                     ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
-                    price: 0,
                     controlType: 'ScrollSelect',
                     itemWidth: 24,
                 }, 
-                {
-                }
             ],
         ]
     }

@@ -173,6 +173,18 @@ const Model = {
             UIModel: null,
             z: 0,
         },
+        EYES: {
+            id: 'EYES',
+            asset: 'headParts',
+            sprite: 'humanEyes',
+            parent: 'HEAD',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: -0.375},
+            rotation: 0,
+            UIModel: null,
+            z: 0,
+        },
     },
     FOUR_LEGGED_MAMMAL: {
         id: 'FOUR_LEGGED_MAMMAL',
