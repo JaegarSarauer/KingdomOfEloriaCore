@@ -2065,6 +2065,26 @@ module.exports.Interface = [
         },
     ],
 },
+{
+    id : 22,
+    name : 'Placeholder'
+},
+{
+    id : 23,
+    name : 'Placeholder'
+},
+{
+    id : 24,
+    name : 'Placeholder'
+},
+{
+    id : 25,
+    name : 'Placeholder'
+},
+{
+    id : 26,
+    name : 'Placeholder'
+},
 {   
     id: 27,
     name: 'Appearance',
