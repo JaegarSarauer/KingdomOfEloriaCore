@@ -101,8 +101,9 @@ module.exports.WorldObject = WorldObject = [
             name: 'Craft',
             entityType: Entity.EntityType.INVENTORY_ITEM,
             entityID: 672,
-            actionInterval: -1,
+            actionInterval: 0,
             steps: [
+                buildStepList(StepList.WALK_ADJACENT),
                 [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[271, 272]] })]
             ],
         }],

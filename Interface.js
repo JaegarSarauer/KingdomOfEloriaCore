@@ -1730,31 +1730,37 @@ module.exports.Interface = [
             ]),
             {
                 id: 271,
-                name: 'Craft Gold Chain (20 Crafting)',
+                name: 'Craft Gold Amulet (20 Smithing, 20 Crafting)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 5,
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [672, 1]}),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, {params: [524, 1]}),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, {params: [814, 1]}),
+                    buildStep(StepType.HAS_SKILL_LEVEL, {params: [14, 20]}),
                     buildStep(StepType.HAS_SKILL_LEVEL, {params: [15, 20]}),
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [672, 1]}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [674, 1]}),
-                    buildStep(StepType.GIVE_XP, {params: [15, 55]}),
-                    buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You make a gold chain.']})]
+                    buildStep(StepType.GIVE_XP, {params: [14, 28]}),
+                    buildStep(StepType.GIVE_XP, {params: [15, 28]}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
+                    buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You make a gold amulet.']})]
                 ],
             },
             {
                 id: 272,
-                name: 'Craft Gold Ring (5 Crafting)',
+                name: 'Craft Gold Ring (5 Smithing, 5 Crafting)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [672, 1]}),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, {params: [524, 1]}),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, {params: [812, 1]}),
+                    buildStep(StepType.HAS_SKILL_LEVEL, {params: [14, 5]}),
                     buildStep(StepType.HAS_SKILL_LEVEL, {params: [15, 5]}),
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [672, 1]}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [799, 1]}),
-                    buildStep(StepType.GIVE_XP, {params: [15, 35]}),
+                    buildStep(StepType.GIVE_XP, {params: [14, 17]}),
+                    buildStep(StepType.GIVE_XP, {params: [15, 17]}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You make a gold ring.']})]
                 ],
             },
@@ -1945,6 +1951,78 @@ module.exports.Interface = [
                 [buildStep(StepType.CAST_SPELL, {params: ['SPELL_ID', null, 'SLOT_ID']})]
             ],
         },
+    ],
+}, {
+    id: 22,
+    name: 'Goals Interface',
+    actions: [],
+}, {
+    id: 23,
+    name: 'Jewelry Craft Interface',
+    actions: [
+        {
+            id: 0,
+            name: 'Craft',
+            actionInterval: 4,
+            steps: [
+                [buildStep(StepType.CRAFT_JEWELRY_ITEM, {params: ['ITEM_AMOUNT']})]
+            ],
+        },
+        {
+            id: 1,
+            name: 'Remove',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.REMOVE_JEWELRY_CRAFT_ITEM, {params: ['SLOT_ID']})]
+            ],
+        },
+    ],
+}, {
+    id: 24,
+    name: 'Jewelry Craft Inventory Interface',
+    actions: [
+        {
+            id: 0,
+            name: 'Add',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.ADD_JEWELRY_CRAFT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE'],})],
+            ],
+        },
+    ],
+}, {
+    id: 25,
+    name: 'Enchantment Interface',
+    actions: [
+        // {
+        //     id: 0,
+        //     name: 'Cast',
+        //     actionInterval: 4,
+        //     steps: [
+        //         [buildStep(StepType.CAST_ENCHANTMENT, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+        //     ],
+        // },
+        // {
+        //     id: 1,
+        //     name: 'Remove',
+        //     actionInterval: -1,
+        //     steps: [
+        //         [buildStep(StepType.REMOVE_ENCHANTMENT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+        //     ],
+        // },
+    ],
+}, {
+    id: 26,
+    name: 'Inventory Enchantment Interface',
+    actions: [
+        // {
+        //     id: 0,
+        //     name: 'Select',
+        //     actionInterval: -1,
+        //     steps: [
+        //         [buildStep(StepType.SELECT_ENCHANTMENT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+        //     ],
+        // },
     ],
 }
 ];

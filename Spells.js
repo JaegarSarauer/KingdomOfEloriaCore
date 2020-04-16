@@ -120,7 +120,24 @@ const SpellBuilder = {
                 steps: [teleportSteps],
             }],
         };
-    }
+    },
+    SHOW_ENCHANTMENT_INTERFACE: (id, name, spellIconIndex) => {
+        return {
+            id,
+            name,
+            type: SpellType.PICKUP_AREA,
+            spellIconIndex,
+            actions: [{
+                name: 'Cast',
+                interfaceID: 19,
+                id: 0,
+                actionInterval: 1,
+                steps: [
+                    [buildStep(StepType.OPEN_ENCHANTMENT_INTERFACE)]
+                ],
+            }],
+        };
+    },
 };
 
 const SpellType = {
@@ -178,6 +195,8 @@ module.exports.Spells = [
     
     SpellBuilder.ITEM_PICKUP_AREA(23, 10, 'Pickup 3x3', [[22, 1]], [EssenceCatalog.AIR(3), EssenceCatalog.EARTH(3)], 3, 23),
     SpellBuilder.ITEM_PICKUP_AREA(24, 30, 'Pickup 5x5', [[22, 30]], [EssenceCatalog.AIR(5), EssenceCatalog.EARTH(5)], 5, 24),
+
+    SpellBuilder.SHOW_ENCHANTMENT_INTERFACE(25, 'Enchant...', 25),
 
     //SpellBuilder.ENCHANT(5, 'Enchant Fortify Ranged Defense', [[22, 22]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(2)], 5, 5),
     //SpellBuilder.ENCHANT(6, 'Enchant Fortify Magic Defense', [[22, 26]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(2)], 8, 6),

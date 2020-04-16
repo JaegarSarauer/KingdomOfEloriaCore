@@ -49,6 +49,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['string', 'number'], //purchase key, amount
         params: [],
     },
+    OPEN_ENCHANTMENT_INTERFACE: {
+        id: 'OPEN_ENCHANTMENT_INTERFACE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     CONVERT_TO_NOTE: {
         id: 'CONVERT_TO_NOTE',
         stepResultFail: 'END_ACTION',
@@ -89,6 +96,13 @@ module.exports.StepType = StepType = {
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
         paramTypes: ['number', 'Array'], //goalID, stateArray
+        params: [],
+    },
+    OPEN_JEWELRY_CRAFT_INTERFACE: {
+        id: 'OPEN_JEWELRY_CRAFT_INTERFACE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [], //
         params: [],
     },
     CREATE_BARRICADE: {
@@ -1027,6 +1041,41 @@ module.exports.StepType = StepType = {
         paramTypes: ['string'], //message
         params: [],
     },
+    CAST_ENCHANTMENT: {
+        id: 'CAST_ENCHANTMENT',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number'], //slotID, itemID
+        params: [],
+    },
+    SELECT_ENCHANTMENT_ITEM: {
+        id: 'SELECT_ENCHANTMENT_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number'], //slotID, itemID
+        params: [],
+    },
+    CRAFT_JEWELRY_ITEM: {
+        id: 'CRAFT_JEWELRY_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //craftAmount
+        params: [],
+    },
+    ADD_JEWELRY_CRAFT_ITEM: {
+        id: 'ADD_JEWELRY_CRAFT_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'null|object'], //itemID, itemAmount, itemStateDef
+        params: [],
+    },
+    REMOVE_JEWELRY_CRAFT_ITEM: {
+        id: 'REMOVE_JEWELRY_CRAFT_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number'], //slotID
+        params: [],
+    },
 };
 
 module.exports.buildStep = buildStep = (sType, newDataObject = {}) => {
@@ -1349,6 +1398,7 @@ try {
     const StepHasPermit = require('../internal/Steps/StepHasPermit');
     const StepPurchaseItem = require('../internal/Steps/StepPurchaseItem');
     const StepWithdrawPurchase = require('../internal/Steps/StepWithdrawPurchase');
+    const StepOpenEnchantmentInterface = require('../internal/Steps/StepOpenEnchantmentInterface');
     const StepOpenPurchasesInterface = require('../internal/Steps/StepOpenPurchasesInterface');
     const StepOpenDropPartyMinigameChestInterface = require('../internal/Steps/StepOpenDropPartyMinigameChestInterface');
     const StepOwnerInWalkBounds = require('../internal/Steps/StepOwnerInWalkBounds');
@@ -1369,7 +1419,13 @@ try {
     const StepAddMarketSellOffer = require('../internal/Steps/StepAddMarketSellOffer');
     const StepMakeClosestNPCAttackClosestNPC = require('../internal/Steps/StepMakeClosestNPCAttackClosestNPC');
     const StepSetUserGoalState = require('../internal/Steps/StepSetUserGoalState');
+    const StepOpenJewelryCraftInterface = require('../internal/Steps/StepOpenJewelryCraftInterface');
     const StepSayMessage = require('../internal/Steps/StepSayMessage');
+    const StepCastEnchantment = require('../internal/Steps/StepCastEnchantment');
+    const StepSelectEnchantmentItem = require('../internal/Steps/StepSelectEnchantmentItem');
+    const StepCraftJewelryItem = require('../internal/Steps/StepCraftJewelryItem');
+    const StepAddJewelryCraftItem = require('../internal/Steps/StepAddJewelryCraftItem');
+    const StepRemoveJewelryCraftItem = require('../internal/Steps/StepRemoveJewelryCraftItem');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
@@ -1380,6 +1436,31 @@ try {
         SAY_MESSAGE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSayMessage.StepSayMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CAST_ENCHANTMENT: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepCastEnchantment.StepCastEnchantment(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        SELECT_ENCHANTMENT_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSelectEnchantmentItem.StepSelectEnchantmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CRAFT_JEWELRY_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepCraftJewelryItem.StepCraftJewelryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        ADD_JEWELRY_CRAFT_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepAddJewelryCraftItem.StepAddJewelryCraftItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        REMOVE_JEWELRY_CRAFT_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepRemoveJewelryCraftItem.StepRemoveJewelryCraftItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SEND_GLOBAL_MESSAGE: {
@@ -1450,6 +1531,11 @@ try {
         WITHDRAW_PURCHASE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepWithdrawPurchase.StepWithdrawPurchase(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        OPEN_ENCHANTMENT_INTERFACE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepOpenEnchantmentInterface.StepOpenEnchantmentInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         WALK_ADJACENT: {
@@ -2091,10 +2177,26 @@ try {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSetUserGoalState.StepSetUserGoalState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
+        },
+        OPEN_JEWELRY_CRAFT_INTERFACE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepOpenJewelryCraftInterface.StepOpenJewelryCraftInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
         }
     };
 } catch (e) {
     if (e.code !== 'MODULE_NOT_FOUND') {
         throw e;
+    }
+    try {
+        const ENV = require('../../index').ENV;
+        if (ENV && ENV.isServer) {
+            e.oldE = true;
+            throw e;
+        }
+    } catch (e) {
+        if (e.oldE) {
+            throw e;
+        }
     }
 };

@@ -81,6 +81,23 @@ const UncutGemIDs = {
     UNCUT_DIAMOND: 656,
 };
 
+const CutGemIDs = {
+    OPAL: 659,
+    TOPAZ: 660,
+    QUARTZ: 661,
+    JADE: 662,
+    AMBER: 663,
+    SAPPHIRE: 664,
+    AMETHYST: 665,
+    EMERALD: 666,
+    RUBY: 667,
+    ONYX: 668,
+    DIAMOND: 669,
+};
+
+module.exports.UncutGemIDs = UncutGemIDs;
+module.exports.CutGemIDs = CutGemIDs;
+
 const Recipes = {
     Dough : () => {
         return  {
@@ -325,7 +342,7 @@ const ItemGetter = {
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] })],
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { 
-                        params: [674, 1], // Gold Chain
+                        params: [674, 1], // Gold Amulet
                         stepResultFail: StepResult.NEXT_STEP_LIST
                     }),
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
@@ -386,6 +403,20 @@ const ItemGetter = {
             ItemDetail.levelSkillDetail(craftingLevel, 14, 'CRAFT'),
             ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
         ]);
+        let jewelryCraftLevels = [8, 65];
+        ring.jewelryCraftLevels = jewelryCraftLevels;
+        ring.useActions = [{
+            interfaceID: 5,
+            id: 9,
+            name: 'Craft',
+            entityType: Entity.EntityType.INVENTORY_ITEM,
+            entityID: 524,
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.OPEN_JEWELRY_CRAFT_INTERFACE, {params: [jewelryCraftLevels],}),
+                buildStep(StepType.ADD_JEWELRY_CRAFT_ITEM, {params: [id, 1, null],})],
+            ],
+        }];
         ring.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
         ring.description = 'A simple gold ring';
         return ring;
@@ -440,14 +471,28 @@ const ItemGetter = {
         }
         return necklace;
     },
-    GoldChain: function(id, notedID, name, craftingLevel, incinerateLevel, value, spriteIndex) {
+    GoldAmulet: function(id, notedID, name, craftingLevel, incinerateLevel, value, spriteIndex) {
         let necklace = this.BaseNecklace(id, notedID, name, value, spriteIndex);
         necklace.requirements = ItemDetail.build([
             ItemDetail.levelSkillDetail(craftingLevel, 14, 'CRAFT'),
             ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
         ]);
         necklace.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
-        necklace.description = 'A simple gold chain';
+        necklace.description = 'A simple gold amulet';
+        let jewelryCraftLevels = [22, 62, 94];
+        necklace.jewelryCraftLevels = jewelryCraftLevels;
+        necklace.useActions = [{
+            interfaceID: 5,
+            id: 9,
+            name: 'Craft',
+            entityType: Entity.EntityType.INVENTORY_ITEM,
+            entityID: 524,
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.OPEN_JEWELRY_CRAFT_INTERFACE, {params: [jewelryCraftLevels],}),
+                buildStep(StepType.ADD_JEWELRY_CRAFT_ITEM, {params: [id, 1, null],})],
+            ],
+        }];
         return necklace;
     },
     Amulet: function(id, name, gemcuttingLevel, incinerateLevel, value, tier, state, spriteIndex) {
@@ -629,17 +674,6 @@ const ItemGetter = {
     },
     GoldBar: function (id, notedId, fullName, value, spriteIndex, tier) {
         let bar = this.Bar(id, notedId, fullName, value, spriteIndex, tier);
-        bar.useActions = [{
-            interfaceID: 5,
-            id: 9,
-            name: 'Craft',
-            entityType: Entity.EntityType.INVENTORY_ITEM,
-            entityID: 524,
-            actionInterval: -1,
-            steps: [
-                [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[271, 272]] })]
-            ],
-        }];
         return bar;
     },
     Helmet: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
@@ -5254,6 +5288,4 @@ const Get = {
     Recipes
 }
 
-module.exports = {
-        Get: Get
-    }
+module.exports.Get = Get;
