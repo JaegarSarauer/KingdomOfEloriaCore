@@ -29,6 +29,10 @@ const CalculateGemCapacity = (tier, grade) => {
 }
 module.exports.CalculateGemCapacity = CalculateGemCapacity;
 
+const coloredShirtIdsByStyleAndColor = {};
+const coloredShirtStyleAndColorById = {};
+const coloredPantsIdsByColor = {};
+
 const DropTables = {
     // Table rarity refers to denominator of the roll. (Math.random() < 1 / tableRarity)
     // Drop array: [[id, min, max, amount], [...]]
@@ -1717,6 +1721,8 @@ const ItemGetter = {
         };
     },
     ColoredShirt: function (id, notedId, name, itemSpriteIndex, shirtStyleNumber, colorSpriteId, value) {
+        coloredShirtStyleAndColorById[id] = shirtStyleNumber * 1000 + colorSpriteId;
+        coloredShirtIdsByStyleAndColor[shirtStyleNumber * 1000 + colorSpriteId] = id;
         return this.Shirt(id, notedId, name, itemSpriteIndex, 'shirt' + shirtStyleNumber, colorSpriteId, value, 'Everyday clothing', 'shirt' );
     },
     RobeChest: function (id, notedId, name, itemspriteIndex, spriteId, value, equipmentStats, minEquipLevelId) {
@@ -1811,6 +1817,11 @@ const ItemGetter = {
                 ]
             }],
         };
+    },
+    ColoredPants: function(id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value) {
+        let pants = this.Pants(id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value);
+        coloredPantsIdsByColor[colorSpriteId] = id;
+        return pants;
     },
     RobeLegs: function (id, notedId, name, itemspriteIndex, spriteId, value, equipmentStats, minEquipLevelId) {
         let tier = 1 + Math.floor(minEquipLevelId / 10);
@@ -4246,7 +4257,7 @@ const Character = {
             },
         };
     },
-    Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, actions = []) {
+    Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0xff0000, actions = []) {
         let human = this.Humanoid(id, name, spriteID, 'human');
         human.actions = actions;
         human.equipmentModel = equipmentModel;
@@ -4256,7 +4267,8 @@ const Character = {
                 asset: 'headParts',
                 sprite: 'hairStyle' + hairStyleId + '_',
                 parent: 'HEAD',
-                spriteID: hairColor,
+                spriteID : 0,
+                tint:  hairColor,
                 anchor: {x: 0.5, y: 0.95},
                 position: {x: 0, y: 0.1},
                 rotation: 0,
@@ -5329,4 +5341,25 @@ const Get = {
     Recipes
 }
 
-module.exports.Get = Get;
+module.exports = {
+        Get: Get,
+        ColoredClothes: {
+            GetShirtStyleAndColorFromId : (id) => {
+                let styleAndColor = coloredShirtStyleAndColorById[id];
+                return {
+                    shirtStyleID : Math.floor( styleAndColor / 1000 ),
+                    shirtColorID : styleAndColor % 1000
+                };
+            },
+            GetShirtIdFromStyleAndColor : (shirtStyleId, shirtColorId) => coloredShirtIdsByStyleAndColor[shirtStyleId * 1000 + shirtColorId],
+            GetPantsIdFromColor : (pantColorId) => coloredPantsIdsByColor[pantColorId],
+            GetPantsColorFromId : (id) => {
+                let colors = Object.keys(coloredPantsIdsByColor);
+                for(let i = 0; i < colors.length; ++i) {
+                    if (coloredPantsIdsByColor[colors[i]] == id) {
+                        return Number( colors[i] );
+                    }
+                }
+            },
+        }
+    }

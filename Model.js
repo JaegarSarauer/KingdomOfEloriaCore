@@ -26,6 +26,41 @@ const SpriteColor = {
     Brown : 10
 };
 
+const HexColors = {
+    0 : 0xffffff,
+    1 : 0xee3322,
+    2 : 0xee9922,
+    3 : 0xeeee22, 
+    4 : 0x33ff33,
+    5 : 0x3333ff,
+    6 : 0xff33ff,
+    7 : 0x666666,
+    8 : 0xaaaaaa,
+    9 : 0x333333,
+    10 : 0xaa7722
+};
+
+const TintColors = {
+    White : 0xffffff,
+    Red : 0xee3322,
+    Orange : 0xee9922,
+    Yellow : 0xeeee22, 
+    Green : 0x33ff33,
+    Blue : 0x3333ff,
+    Purple : 0xff33ff,
+    DarkGray : 0x666666,
+    LightGray : 0xaaaaaa,
+    Black : 0x333333,
+    Brown : 0xaa7722,
+    a : 0x3333ff,
+    b : 0xff33ff,
+    c : 0x666666,
+    d : 0xaaaaaa,
+    e : 0x333333,
+    f : 0xaa7722
+};
+
+
 const Model = {
     HUMANOID : {
         id: "HUMANOID",
@@ -2219,3 +2254,5 @@ module.exports.buildModel = buildModel = (modelDef, modelPartsObj = {}) => {
 module.exports.Model = Model;
 module.exports.HairStyle = HairStyle;
 module.exports.SpriteColor = SpriteColor;
+module.exports.TintColors = TintColors;
+module.exports.HexColors = HexColors;
