@@ -26,6 +26,18 @@ const SpriteColor = {
     Brown : 10
 };
 
+const SpriteClothesColors = {
+    Red : 1,
+    Orange : 2,
+    Yellow : 3,
+    Green : 4, 
+    Blue : 5,
+    Purple : 6,
+    White : 7,
+    LightGray : 8,
+    DarkGray : 9
+}
+
 const HexColors = {
     0 : 0xffffff,
     1 : 0xee3322,
@@ -2254,5 +2266,6 @@ module.exports.buildModel = buildModel = (modelDef, modelPartsObj = {}) => {
 module.exports.Model = Model;
 module.exports.HairStyle = HairStyle;
 module.exports.SpriteColor = SpriteColor;
+module.exports.SpriteClothesColors = SpriteClothesColors;
 module.exports.TintColors = TintColors;
 module.exports.HexColors = HexColors;
