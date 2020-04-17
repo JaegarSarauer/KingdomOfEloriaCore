@@ -60,7 +60,6 @@ const TintColors = {
     f : 0xaa7722
 };
 
-
 const Model = {
     HUMANOID : {
         id: "HUMANOID",
@@ -2222,7 +2221,8 @@ module.exports.buildModelPart = buildModelPart = (oldPartDef, newPartDef) => {
         rotation: newPartDef.rotation || oldPartDef.rotation || 0,
         spriteID: newPartDef.spriteID || oldPartDef.spriteID || 0,
         UIModel: newPartDef.UIModel || oldPartDef.UIModel || null,
-        z : newPartDef.z || oldPartDef.z || 0
+        z : newPartDef.z || oldPartDef.z || 0,
+        tint : newPartDef.tint || oldPartDef.tint || null,
     };
     if (!result.id) {
         let hit = true;

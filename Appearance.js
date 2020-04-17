@@ -1,4 +1,5 @@
 const SpriteColor = require('./Model').SpriteColor;
+const TintColors = require('./Model').TintColors;
 const HairStyle = require('./Model').HairStyle;
 
 module.exports.AppearanceType = {
@@ -66,6 +67,25 @@ let getSkinModel = function(id, skinToneID) {
     };
 }
 
+            // [
+            //     {
+            //         appearanceType: 'Greeting',
+            //         ids: [1, 2, 3],
+            //         controlType: 'Emote'
+            //     },
+            //     {
+            //         appearanceType: 'Fun',
+            //         ids: [1, 2, 3],
+            //         controlType: 'Emote'
+            //     },
+            //     {
+            //         appearanceType: 'Taunt',
+            //         ids: [1, 2, 3],
+            //         controlType: 'Emote'
+            //     }
+            // ],
+
+                    // columnWeight: 1
 
 module.exports.AppearanceShops = AppearanceShops = [
     {
@@ -92,96 +112,132 @@ module.exports.AppearanceShops = AppearanceShops = [
         shopData : [
             [
                 {
+                    title: 'Skin Tone',
+                    preview: {
+                        parts : ['HEAD', 'EYES'],
+                    },
+                    editorParams : [{
+                        override: 'skinToneID',
+                        ids: [1, 2, 3, 4, 5, 6],
+                        controlType: 'Button',
+                        parts: ['HEAD', 'EYES'],
+                        itemWidth: 48,
+                    }],
+                }, 
+                {
                     controlType: 'Preview',
-                    columnWidth: 128,
-                    rowSpan : 2,
+                    columnWidth: 256,
+                    rowSpan : 3,
                 },
                 {
-                    appearanceType: 'Gender',
-                    ids: ['Male', 'Female'],
-                    controlType: 'Button',
-                    itemWidth: 32,
-                    columnWidth: (32 + 16) * 2,
-                },
-                {
-                    appearanceType: 'Skin Tone',
-                    ids: [1, 2, 3, 4, 5, 6],
-                    controlType: 'Button',
-                    itemWidth: 24,
-                    columnWeight: 1
+                    title: 'Hair',
+                    preview: {
+                      parts: ['HEAD', 'EYES', 'HAIR'],
+                    },
+                    editorParams: [{
+                        override: 'hairStyleID',
+                        ids: Object.values(HairStyle),
+                        controlType: 'ScrollSelect',
+                        parts: ['HEAD', 'EYES', 'HAIR'],
+                        itemWidth: 48
+                    }, {
+                        override: 'hairColor',
+                        ids: Object.values(TintColors),
+                        controlType: 'ScrollSelect',
+                        parts: ['HEAD', 'EYES', 'HAIR'],
+                        itemWidth: 48,
+                    }],
+
                 }, 
             ],
-            // [
-            //     {
-            //         appearanceType: 'Greeting',
-            //         ids: [1, 2, 3],
-            //         controlType: 'Emote'
-            //     },
-            //     {
-            //         appearanceType: 'Fun',
-            //         ids: [1, 2, 3],
-            //         controlType: 'Emote'
-            //     },
-            //     {
-            //         appearanceType: 'Taunt',
-            //         ids: [1, 2, 3],
-            //         controlType: 'Emote'
-            //     }
-            // ],
+            [
+                {
+                    title: 'Face',
+                    preview: {
+                        parts: ['HEAD', 'EYES', 'FACE']
+                    },
+                    editorParams: [{
+                        override: 'eyeColor',
+                        ids:  Object.values(TintColors),
+                        controlType: 'ScrollSelect',
+                        parts: ['HEAD', 'EYES'],
+                        itemWidth: 48,
+                    }, {
+                        override: 'faceID',
+                        ids: [1, 2, 3, 4, 5, 6],
+                        controlType: 'ScrollSelect',
+                        parts: ['HEAD', 'EYES', 'FACE'],
+                        itemWidth: 48,
+                    }]
+                },
+                {
+                    controlType: 'Placeholder',
+                    columnWidth: 256
+                },
+                {
+                    title: 'Shirt',
+                    preview: {
+                        parts: ['SHIRT']
+                    },
+                    editorParams: [{ 
+                        override: 'shirtStyleID',
+                        ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                        controlType: 'ScrollSelect',
+                        parts: ['SHIRT'],
+                        itemWidth: 64,
+                    }, {
+                        override: 'shirtColorID',
+                        ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
+                        controlType: 'ScrollSelect',
+                        parts: ['SHIRT'],
+                        itemWidth: 64,
+                    }],
+                }, 
+            ],
+            [
+                {
+                    title: 'Body',
+                    preview: {
+                        parts: ['PREVIEW'],
+                        options: { hairStyleID : HairStyle.Bald, faceID : 0 },
+                    },
+                    editorParams: [{
+                        override: 'genderID',
+                        ids: ['Male', 'Female'],
+                        controlType: 'Button',
+                        parts: ['PREVIEW'],
+                        itemWidth: 128,
+                    }],
+                },
+                {
+                    controlType: 'Placeholder',
+                    columnWidth: 256
+                },
+                {
+                    title: 'Pants',
+                    preview: {
+                        parts: ['PANTS'],
+                    },
+                    editorParams: [ {
+                        override: 'pantsID',
+                        ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
+                        controlType: 'ScrollSelect',
+                        itemWidth: 64,
+                    }],
+                }, 
+            ],
+            [
+                {
+                    title: 'Edit',
+                    controlType: 'Editor',
+                    rowSpan: 2,
+                }, 
+            ],
             [
                 {
                     controlType: 'Placeholder',
-                    columnWidth: 128
-                },
-                {
-                    appearanceType: 'Hair Style',
-                    ids: [HairStyle.Bald, HairStyle.Buzzed, HairStyle.LeftSideSwipe, HairStyle.Messy, HairStyle.Scruffy],
-                    controlType: 'ScrollSelect',
-                    itemWidth: 24,
-                }, 
-                {
-                    appearanceType: 'Hair Color',
-                    ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.Green, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
-                    controlType: 'ScrollSelect',
-                    itemWidth: 24,
                 }
-            ],
-            [
-                {
-                    appearanceType: 'Facial',
-                    ids: [1, 2, 3, 4, 5, 6],
-                    controlType: 'ScrollSelect',
-                    itemWidth: 24,
-                }, 
-                {
-                    appearanceType: 'Eye Color',
-                    ids: [1, 2, 3, 4, 5, 6],
-                    controlType: 'ScrollSelect',
-                    itemWidth: 24,
-                }
-            ],
-            [
-                {
-                    appearanceType: 'Shirt Style',
-                    ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                    controlType: 'ScrollSelect',
-                    itemWidth: 24,
-                }, 
-                {
-                    appearanceType: 'Shirt Color',
-                    ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
-                    controlType: 'ScrollSelect',
-                    itemWidth: 24,
-                }
-            ],
-            [
-                {
-                    appearanceType: 'Pants Color',
-                    ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
-                    controlType: 'ScrollSelect',
-                    itemWidth: 24,
-                }, 
-            ],
+            ]
         ]
     }
 ]
