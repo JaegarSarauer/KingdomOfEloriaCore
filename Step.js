@@ -1052,7 +1052,7 @@ module.exports.StepType = StepType = {
         id: 'CHANGE_APPEARANCE',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number', 'number', 'number', 'number', 'number', 'number' ], //skinToneID, hairStyleId, hairColor, genderID, eyeColor, face, faceColor
+        paramTypes: ['number', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number' ], //skinToneID, hairStyleId, hairColor, genderID, eyeColor, face, faceColor, shirt, pants
         params: [],
     },
     OPEN_APPEARANCE_INTERFACE: {
@@ -1361,6 +1361,14 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
         id: 'FACE_COLOR',
         type: 'number'
     },
+    SHIRT: {
+        id: 'SHIRT',
+        type: 'number'
+    },
+    PANTS: {
+        id: 'PANTS',
+        type: 'number'
+    }
 };
 
 try {
