@@ -702,6 +702,20 @@ const ItemGetter = {
     },
     GoldBar: function (id, notedId, fullName, value, spriteIndex, tier) {
         let bar = this.Bar(id, notedId, fullName, value, spriteIndex, tier);
+<<<<<<< HEAD
+=======
+        bar.useActions = [{
+            interfaceID: 5,
+            id: 9,
+            name: 'Craft',
+            entityType: Entity.EntityType.INVENTORY_ITEM,
+            entityID: 524,
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[271, 272]] })]
+            ],
+        }];
+>>>>>>> Brought back files that were removed in rebase...
         return bar;
     },
     Helmet: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
