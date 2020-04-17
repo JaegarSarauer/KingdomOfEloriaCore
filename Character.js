@@ -13,6 +13,7 @@ const ItemDetail = require("./ItemDetail").ItemDetail;
 const Entity = require('../typedef/Entity');
 const Combat = require('../internal/Combat');
 const SpriteColor = require("./Model").SpriteColor;
+const HexColors = require("./Model").HexColors;
 const HairStyle = require("./Model").HairStyle;
 const GroundItemDef = require('../def/GroundItemDef').GroundItemDef;
 var KingdomOfEloria = null;
@@ -49,21 +50,21 @@ module.exports.Character = Character = [{
         })
     }
 }, 
-Get.Character.Human(1, 'Banker', 4, [null, null, null, 100, 104], HairStyle.LeftSideSwipe, SpriteColor.Black, [{
+Get.Character.Human(1, 'Banker', 4, [null, null, null, 100, 104], HairStyle.LeftSideSwipe,  HexColors[SpriteColor.Black], [{
     interfaceID: 0,
     id: 7,
     name: 'Bank',
 }]),
-Get.Character.HumanShopOwner(2, 'General Store Owner', 1, [21, null, null, 42, 29], HairStyle.Bald, SpriteColor.Black, 0),
-Get.Character.HumanShopOwner(3, 'Woodcutting Store Owner', 1, [null, 4, null, 97, 101], HairStyle.RightSideSwipe, SpriteColor.Green, 1),
-Get.Character.HumanShopOwner(4, 'Fishing Store Owner', 3, [null, null, null, 97, 101], HairStyle.RightSideSwipe, SpriteColor.Blue, 2),
-Get.Character.HumanShopOwner(5, 'Metalsmith Store Owner', 3, [22, 12, null, 43, 30], HairStyle.Bald, SpriteColor.Orange, 3),
-Get.Character.HumanShopOwner(6, 'Mining Store Owner', 1, [null, 12, null, 42, 29], HairStyle.RightSideSwipe, SpriteColor.Red, 4),
-Get.Character.HumanShopOwner(7, 'Crafting Store Owner', 1, [null, null, null, 113, 109], HairStyle.Scruffy, SpriteColor.DarkGray, 5),
-Get.Character.HumanShopOwner(8, 'Alchemy Store Owner', 4, [95, 86, null, 99, 103], HairStyle.Bald, SpriteColor.Black, 6),
-Get.Character.HumanShopOwner(9, 'Melee Store Owner', 1, [null, 20, null, 44, 31], HairStyle.RightSideSwipe, SpriteColor.DarkGray, 7),
-Get.Character.HumanShopOwner(10, 'Archery Store Owner', 1, [106, 38, null, 114, 110], HairStyle.RightSideSwipe, SpriteColor.LightGray, 8),
-Get.Character.HumanShopOwner(11, 'Magic Store Owner', 4, [96, 84, null, 100, 104], HairStyle.Bald, SpriteColor.Purple, 9),
+Get.Character.HumanShopOwner(2, 'General Store Owner', 1, [21, null, null, 42, 29], HairStyle.Bald, HexColors[SpriteColor.Black], 0),
+Get.Character.HumanShopOwner(3, 'Woodcutting Store Owner', 1, [null, 4, null, 97, 101], HairStyle.RightSideSwipe, HexColors[SpriteColor.Green], 1),
+Get.Character.HumanShopOwner(4, 'Fishing Store Owner', 3, [null, null, null, 97, 101], HairStyle.RightSideSwipe, HexColors[SpriteColor.Blue], 2),
+Get.Character.HumanShopOwner(5, 'Metalsmith Store Owner', 3, [22, 12, null, 43, 30], HairStyle.Bald, HexColors[SpriteColor.Orange], 3),
+Get.Character.HumanShopOwner(6, 'Mining Store Owner', 1, [null, 12, null, 42, 29], HairStyle.RightSideSwipe, HexColors[SpriteColor.Red], 4),
+Get.Character.HumanShopOwner(7, 'Crafting Store Owner', 1, [null, null, null, 113, 109], HairStyle.Scruffy, HexColors[SpriteColor.DarkGray], 5),
+Get.Character.HumanShopOwner(8, 'Alchemy Store Owner', 4, [95, 86, null, 99, 103], HairStyle.Bald, HexColors[SpriteColor.Black], 6),
+Get.Character.HumanShopOwner(9, 'Melee Store Owner', 1, [null, 20, null, 44, 31], HairStyle.RightSideSwipe, HexColors[SpriteColor.DarkGray], 7),
+Get.Character.HumanShopOwner(10, 'Archery Store Owner', 1, [106, 38, null, 114, 110], HairStyle.RightSideSwipe, HexColors[SpriteColor.LightGray], 8),
+Get.Character.HumanShopOwner(11, 'Magic Store Owner', 4, [96, 84, null, 100, 104], HairStyle.Bald, HexColors[SpriteColor.Purple], 9),
 Get.Character.Goblin(12, 'Goblin', 1,  
     [[11, 5], [0, 5], [1, 5], [2, 3]], ////5hp, 5atk, 5pow, 3def
     [[[1, 100], [0, 3, 10, 76], [13, 1, 1, 20], [127, 1, 1, 4],], [[10, 100], [79, 1, 3, 30], [87, 1, 1, 50], [126, 1, 1, 20],]], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
@@ -304,7 +305,7 @@ Get.Character.Ghost(31, 'Ghost ', 2, [[11, 40], [6, 18], [7, 28], [2, 50], [8, 1
 Get.Character.Ghost(32, 'Ghost ', 3, [[11, 70], [6, 28], [7, 50], [2, 75], [8, 1], [5, 75]], 81, 1, 240),// Fire - [70hp, 28mfocus, 50mpower, 75def, 1 mdef, 75 range defence]
 Get.Character.ElementalGhost(33, 'Elemental Ghost ', 4, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81], 1, 960),// Elemental - [150hp, 40mfocus, 99mpower, 99def, 1 mdef, 99 range defence]
 Get.Character.Crab(34, 'Cave Crawler', 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], null),
-Get.Character.HumanShopOwner(35, 'Clothing Store Owner', 6, [null, null, null, 395, 491], HairStyle.Scruffy, SpriteColor.Black, 10),
+Get.Character.HumanShopOwner(35, 'Clothing Store Owner', 6, [null, null, null, 395, 491], HairStyle.Scruffy,HexColors[SpriteColor.Black], 10),
 Get.Character.Osaik(36), 
 {
     id: 37,
@@ -319,7 +320,8 @@ Get.Character.Osaik(36),
             asset: 'headParts',
             sprite: 'hairStyle' + HairStyle.MidlifeCrisis + '_',
             parent: 'HEAD',
-            spriteID: SpriteColor.LightGray,
+            spriteID : 0,
+            tint:  0xEEEEEE,
             anchor: {x: 0.5, y: 0.95},
             position: {x: 0, y: 0.1},
             rotation: 0,
@@ -409,7 +411,8 @@ Get.Character.Crab(43, 'Box Turtle', 4,  [[11, 80], [0, 50], [1, 50], [2, 50], [
             asset: 'headParts',
             sprite: 'hairStyle' + HairStyle.Buzzed + '_',
             parent: 'HEAD',
-            spriteID: SpriteColor.Black,
+            spriteID : 0,
+            tint:  0x333333,
             anchor: {x: 0.5, y: 0.95},
             position: {x: 0, y: 0.1},
             rotation: 0,
@@ -475,10 +478,10 @@ Get.Character.Golem(56, 'Nelenite Golem', 3, 2.15, 187, 12, 589, 592), // Fragme
 Get.Character.Golem(57, 'Gothite Golem', 4, 2.5, 254, 279, 595, 598), // Fragment, Chunk
 Get.Character.Golem(58, 'Osmium Golem', 5, 3.0, 282, 307, 601, 604), // Fragment, Chunk
 Get.Character.Death(59, "Death", 666, [null, 610, null, 347, 491]),
-Get.Character.PickPocketableHuman(60, 'Man', 2, [null, null, null, 455, 487], HairStyle.RightSideSwipe, SpriteColor.Black, 1),
-Get.Character.PickPocketableHuman(61, 'Man', 2, [null, null, null, 449, 487], HairStyle.Scruffy, SpriteColor.DarkGray, 2),
-Get.Character.PickPocketableHuman(62, 'Man', 2, [null, null, null, 451, 491], HairStyle.Mohawk, SpriteColor.Red, 5),
-Get.Character.Human(63, "Indie Dev", 2, [null, null, null, 437, 483], HairStyle.Messy, SpriteColor.Purple, [
+Get.Character.PickPocketableHuman(60, 'Man', 2, [null, null, null, 455, 487], HairStyle.RightSideSwipe, HexColors[SpriteColor.Black], 1),
+Get.Character.PickPocketableHuman(61, 'Man', 2, [null, null, null, 449, 487], HairStyle.Scruffy, HexColors[SpriteColor.DarkGray], 2),
+Get.Character.PickPocketableHuman(62, 'Man', 2, [null, null, null, 451, 491], HairStyle.Mohawk, HexColors[SpriteColor.Red], 5),
+Get.Character.Human(63, "Indie Dev", 2, [null, null, null, 437, 483], HairStyle.Messy, HexColors[SpriteColor.Purple], [
     {
         interfaceID: 0,
         id: 45,
@@ -486,18 +489,18 @@ Get.Character.Human(63, "Indie Dev", 2, [null, null, null, 437, 483], HairStyle.
     }
 ]),
 Get.Character.Pinata(64, 1, 'Pinata'),
-Get.Character.Patreoner(65, 'Sandwich', 2, [108, null, 630, 116, 112], HairStyle.Bald, SpriteColor.Black, 200 + 182, 8),
-Get.Character.Patreoner(66, 'Redd', 2, [313, 299, 632, null, null], HairStyle.Messy, SpriteColor.Brown, 105 + 70, 9),
-Get.Character.Patreoner(67, 'Aiden', 2, [null, 4, null, 385, 483], HairStyle.LeftSideSwipe, SpriteColor.Black, 220 + 0, 10),
-Get.Character.Patreoner(68, 'WeSkillNow', 2, [null, null, null, 429, 487], HairStyle.Messy, SpriteColor.Red, 45 + 8, 11),
-Get.Character.Patreoner(69, 'Thomas', 2, [93, 3, null, 393, 481], HairStyle.RightSideSwipe, SpriteColor.Brown, 50 + 18, 12),
+Get.Character.Patreoner(65, 'Sandwich', 2, [108, null, 630, 116, 112], HairStyle.Bald, HexColors[SpriteColor.Black], 200 + 182, 8),
+Get.Character.Patreoner(66, 'Redd', 2, [313, 299, 632, null, null], HairStyle.Messy, HexColors[SpriteColor.Brown], 105 + 70, 9),
+Get.Character.Patreoner(67, 'Aiden', 2, [null, 4, null, 385, 483], HairStyle.LeftSideSwipe, HexColors[SpriteColor.Black], 220 + 0, 10),
+Get.Character.Patreoner(68, 'WeSkillNow', 2, [null, null, null, 429, 487], HairStyle.Messy, HexColors[SpriteColor.Red], 45 + 8, 11),
+Get.Character.Patreoner(69, 'Thomas', 2, [93, 3, null, 393, 481], HairStyle.RightSideSwipe, HexColors[SpriteColor.Brown], 50 + 18, 12),
 Get.Character.Rat(70, 'Mouserat', 1, [[11, 3], [0, 0], [1, 0.25], [2, 1]], //3hp, 0atk, .5pow, 2def
     [[[1, 100], [730, 1, 1, 100]]]),
 Get.Character.Kiaso(71),
 Get.Character.Duck(72, 'Male Duck', 1),
 Get.Character.Duck(73, 'Female Duck', 2),
 Get.Character.Cow(74, 1),
-Get.Character.HumanShopOwner(75, 'Farming Store Owner', 3, [null, 610, null, 331, 483], HairStyle.MidlifeCrisis, SpriteColor.Yellow, 11),
+Get.Character.HumanShopOwner(75, 'Farming Store Owner', 3, [null, 610, null, 331, 483], HairStyle.MidlifeCrisis, HexColors[SpriteColor.Yellow], 11),
 Get.Character.QuestChildGoblin(76, 'Child Goblin'),
 Get.Character.Bull(77),
 Get.Character.Sheep(78, 1),

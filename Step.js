@@ -1052,7 +1052,7 @@ module.exports.StepType = StepType = {
         id: 'CHANGE_APPEARANCE',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number', 'number'], //skinToneID, hairStyleId, hairColorId, price
+        paramTypes: ['number', 'number', 'number', 'number', 'number', 'number', 'number' ], //skinToneID, hairStyleId, hairColor, genderID, eyeColor, face, faceColor
         params: [],
     },
     OPEN_APPEARANCE_INTERFACE: {
@@ -1344,7 +1344,23 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
     PRICE: {
         id: 'PRICE',
         type: 'number'
-    }
+    },
+    GENDER: {
+        id: 'GENDER',
+        type: 'number'
+    },
+    EYE_COLOR: {
+        id: 'EYE_COLOR',
+        type: 'number'
+    },
+    FACE: {
+        id: 'FACE',
+        type: 'number'
+    },
+    FACE_COLOR: {
+        id: 'FACE_COLOR',
+        type: 'number'
+    },
 };
 
 try {
@@ -1504,7 +1520,7 @@ try {
     const StepAddJewelryCraftItem = require('../internal/Steps/StepAddJewelryCraftItem');
     const StepRemoveJewelryCraftItem = require('../internal/Steps/StepRemoveJewelryCraftItem');
     const StepRemoveEnchantmentItem = require('../internal/Steps/StepRemoveEnchantmentItem');
-    const StepChangeAppearance = require('../internal/StepChangeAppearance');
+    const StepChangeAppearance = require('../internal/Steps/StepChangeAppearance');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
