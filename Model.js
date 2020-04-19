@@ -92,7 +92,7 @@ const Model = {
             asset: 'chestParts',
             sprite: 'humanChest',
             parent: 'CORE',
-            spriteID: 1,
+            spriteID: 21,
             anchor: {x: 0.5, y: 0.65},
             position: {x: 0, y: -0.35},
             rotation: 0,
@@ -2235,10 +2235,8 @@ module.exports.buildModelPart = buildModelPart = (oldPartDef, newPartDef) => {
         UIModel: newPartDef.UIModel || oldPartDef.UIModel || null,
         z : newPartDef.z || oldPartDef.z || 0,
         tint : newPartDef.tint || oldPartDef.tint || null,
+        hideParts : newPartDef.hideParts || [],
     };
-    if (!result.id) {
-        let hit = true;
-    }
     return result;
 }
 

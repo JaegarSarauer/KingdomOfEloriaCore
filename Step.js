@@ -1055,13 +1055,6 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number' ], //skinToneID, hairStyleId, hairColor, genderID, eyeColor, face, faceColor, shirt, pants
         params: [],
     },
-    OPEN_APPEARANCE_INTERFACE: {
-        id: 'OPEN_APPEARANCE_INTERFACE',
-        stepResultFail: 'END_ACTION',
-        stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number'], // appearance shop id
-        params: [],
-    },
     MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {
         id: 'MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC',
         stepResultFail: 'END_ACTION',

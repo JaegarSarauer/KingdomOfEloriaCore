@@ -746,6 +746,7 @@ const ItemGetter = {
                     position: {x: 0, y: -0.15},
                     rotation: 0,
                     UIModel: null,
+                    hideParts : ['HAIR'],
                 },
             },
             actions: [{
@@ -787,6 +788,7 @@ const ItemGetter = {
                     position: {x: 0, y: -0.1},
                     rotation: 0,
                     UIModel: null,
+                    hideParts : ['HAIR'],
                 },
             },
             actions: [{
@@ -988,6 +990,7 @@ const ItemGetter = {
                     position: {x: 0, y: 0.1},
                     rotation: 0,
                     UIModel: null,
+                    hideParts : ['HAIR'],
                 },
             },
             actions: [{
@@ -4212,6 +4215,10 @@ const Character = {
         if (faceId == null) {
             faceId = spriteID;
         }
+        let limbsSpriteID = spriteID;
+        if (speciesSpriteName == 'human') {
+            limbsSpriteID = spriteID % 10;
+        }
         return {
             id: id,
             name: name,
@@ -4229,43 +4236,43 @@ const Character = {
                      sprite: speciesSpriteName + 'Face'
                 },
                 EYES: {
-                     spriteID: spriteID,
+                     spriteID: limbsSpriteID,
                      sprite: speciesSpriteName + 'Eyes'
                 },
                 HEAD: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'Head'
                 },
                 RIGHT_SHOULDER: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'RightShoulder'
                 },
                 RIGHT_FOREARM: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'RightForearm'
                 },
                 LEFT_SHOULDER: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'LeftShoulder'
                 },
                 LEFT_FOREARM: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'LeftForearm'
                 },
                 RIGHT_THIGH: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'RightThigh'
                 },
                 RIGHT_SHIN: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'RightShin'
                 },
                 LEFT_THIGH: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'LeftThigh'
                 },
                 LEFT_SHIN: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'LeftShin'
                 },
             },
@@ -4283,8 +4290,8 @@ const Character = {
                 parent: 'HEAD',
                 spriteID : 0,
                 tint:  hairColor,
-                anchor: {x: 0.5, y: 0.95},
-                position: {x: 0, y: 0.1},
+                anchor: {x: 0.5, y: 25/38},
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             };
@@ -4530,6 +4537,7 @@ const Character = {
             return def;
         },
         Wizard: function (id, name, spriteID, stats, drops, equipmentModel, attackRange, headSpriteID = null) {
+            let limbsSpriteID = spriteID % 10;
             return {
                 id: id,
                 name: name,
@@ -4537,16 +4545,16 @@ const Character = {
                 modelParams: {
                     CHEST: { spriteID },
                     HEAD: {
-                        spriteID: headSpriteID == null ? spriteID : headSpriteID
+                        spriteID: headSpriteID == null ? limbsSpriteID : headSpriteID
                     },
-                    RIGHT_SHOULDER: { spriteID },
-                    LEFT_SHOULDER: { spriteID },
-                    RIGHT_FOREARM: { spriteID },
-                    LEFT_FOREARM: { spriteID },
-                    RIGHT_THIGH: { spriteID },
-                    LEFT_THIGH: { spriteID },
-                    RIGHT_SHIN: { spriteID },
-                    LEFT_SHIN: { spriteID },
+                    RIGHT_SHOULDER: { limbsSpriteID },
+                    LEFT_SHOULDER: { limbsSpriteID },
+                    RIGHT_FOREARM: { limbsSpriteID },
+                    LEFT_FOREARM: { limbsSpriteID },
+                    RIGHT_THIGH: { limbsSpriteID },
+                    LEFT_THIGH: { limbsSpriteID },
+                    RIGHT_SHIN: { limbsSpriteID },
+                    LEFT_SHIN: { limbsSpriteID },
                 },
                 stats: stats,
                 drops: drops,
@@ -5002,12 +5010,12 @@ const Character = {
                 [buildStep(StepType.SHOW_DIALOG, {params: [2]})],
             ],
         }];
-        let osaik = this.Human(id, 'Osaik', 1, [null, 16, null, 413, 477], HairStyle.Scruffy, SpriteColor.Yellow, actions );
+        let osaik = this.Human(id, 'Osaik', 11, [null, 16, null, 413, 477], HairStyle.Scruffy, SpriteColor.Yellow, actions );
         osaik.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
         return osaik;
     },
     Kiaso : function(id) {
-        let kiaso = this.Human(id, 'Kiaso', 2, [null, 301, null, 405, 485], HairStyle.Scruffy, SpriteColor.Red, [{
+        let kiaso = this.Human(id, 'Kiaso', 12, [null, 301, null, 405, 485], HairStyle.Scruffy, SpriteColor.Red, [{
             interfaceID: 0,
             id: 4,
             name: 'Talk To',
@@ -5365,7 +5373,13 @@ module.exports = {
                     shirtColorID : styleAndColor % 1000
                 };
             },
-            GetShirtIdFromStyleAndColor : (shirtStyleId, shirtColorId) => coloredShirtIdsByStyleAndColor[shirtStyleId * 1000 + shirtColorId],
+            GetShirtIdFromStyleAndColor : (shirtStyleId, shirtColorId) => {
+                let result = coloredShirtIdsByStyleAndColor[shirtStyleId * 1000 + shirtColorId];
+                if (result == null) {
+                    console.info(shirtStyleId, shirtColorId, coloredShirtIdsByStyleAndColor);
+                }
+                return result;
+            },
             GetPantsIdFromColor : (pantColorId) => coloredPantsIdsByColor[pantColorId],
             GetPantsColorFromId : (id) => {
                 let colors = Object.keys(coloredPantsIdsByColor);

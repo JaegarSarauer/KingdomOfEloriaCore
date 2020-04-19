@@ -1,6 +1,7 @@
 const SpriteColor = require('./Model').SpriteColor;
 const TintColors = require('./Model').TintColors;
 const HairStyle = require('./Model').HairStyle;
+const SpriteClothesColors = require('./Model').SpriteClothesColors;
 
 module.exports.AppearanceType = {
     SKIN_TONE: 'Skin Tone',
@@ -139,13 +140,16 @@ module.exports.AppearanceShops = AppearanceShops = [
                         ids: Object.values(HairStyle),
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'HAIR'],
-                        itemWidth: 48
+                        itemWidth: 48,
+                        extra : { y : -26 }
                     }, {
                         override: 'hairColor',
                         ids: Object.values(TintColors),
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'HAIR'],
                         itemWidth: 48,
+                        extra : { y : 18 },
+                        disableIf : { 'hairStyleID' : 0 }
                     }],
 
                 }, 
@@ -162,17 +166,19 @@ module.exports.AppearanceShops = AppearanceShops = [
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES'],
                         itemWidth: 48,
+                        extra : { y : -14 }
                     }, {
                         override: 'faceID',
                         ids: [1, 2, 3, 4, 5, 6],
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'FACE'],
                         itemWidth: 48,
+                        extra : { y : 10 }
                     }]
                 },
                 {
                     controlType: 'Placeholder',
-                    columnWidth: 256
+                    columnWidth: 256,
                 },
                 {
                     title: 'Shirt',
@@ -181,16 +187,18 @@ module.exports.AppearanceShops = AppearanceShops = [
                     },
                     editorParams: [{ 
                         override: 'shirtStyleID',
-                        ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                        ids: [0, 2, 3, 4, 5, 6, 7, 8],
                         controlType: 'ScrollSelect',
                         parts: ['SHIRT'],
-                        itemWidth: 64,
+                        itemWidth: 32,
+                        extra : { x: -24, spacing : 16, y : -14 }
                     }, {
                         override: 'shirtColorID',
-                        ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
+                        ids: Object.values(SpriteClothesColors),
                         controlType: 'ScrollSelect',
                         parts: ['SHIRT'],
-                        itemWidth: 64,
+                        itemWidth: 32,
+                        extra : { x : -24, spacing : 16, y : 10 },
                     }],
                 }, 
             ],
@@ -198,15 +206,16 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Body',
                     preview: {
-                        parts: ['PREVIEW'],
+                        parts: ['BODY'],
                         options: { hairStyleID : HairStyle.Bald, faceID : 0 },
                     },
                     editorParams: [{
                         override: 'genderID',
-                        ids: ['Male', 'Female'],
+                        ids: [1, 2, 3],
                         controlType: 'Button',
-                        parts: ['PREVIEW'],
-                        itemWidth: 128,
+                        parts: ['BODY'],
+                        itemWidth: 96,
+                        extra : { spacing : 16 }
                     }],
                 },
                 {
@@ -220,9 +229,11 @@ module.exports.AppearanceShops = AppearanceShops = [
                     },
                     editorParams: [ {
                         override: 'pantsID',
-                        ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.White, SpriteColor.LightGray, SpriteColor.DarkGray, SpriteColor.Black],
+                        ids: Object.values(SpriteClothesColors),
                         controlType: 'ScrollSelect',
-                        itemWidth: 64,
+                        parts: ['PANTS'],
+                        itemWidth: 32,
+                        extra : { x : -16, spacing : 16 }
                     }],
                 }, 
             ],
