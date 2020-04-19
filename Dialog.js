@@ -12,6 +12,7 @@ const Dialogs = Object.freeze([{
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+        buildStep(StepType.OPEN_CHANGE_APPEARANCE, {params: [1]}),
     ]],
 }, {
     id: 1,
