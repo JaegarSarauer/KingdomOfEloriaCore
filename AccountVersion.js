@@ -4,7 +4,7 @@ const AccountVersion = [{
 }, {
     id: 1,
     upgrade: (userDef) => {
-        userDef.forEachAdventurer((adv) => {
+        userDef.forAllAdventurers((adv) => {
             // UNCOMMENT WHEN RELEASE IS READY
             // const obInterfaces = [27];
             // adv.appearanceState.setEntityAtSlot(1);
@@ -20,7 +20,7 @@ const upgradeAccount = (userDef) => {
         if (version.id > userDef.accountVersion) {
             userDef.accountVersion = version.id;
             upgraded = true;
-            upgrade(userDef);
+            version.upgrade(userDef);
         }
     }
     return upgraded;
