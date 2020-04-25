@@ -702,20 +702,6 @@ const ItemGetter = {
     },
     GoldBar: function (id, notedId, fullName, value, spriteIndex, tier) {
         let bar = this.Bar(id, notedId, fullName, value, spriteIndex, tier);
-<<<<<<< HEAD
-=======
-        bar.useActions = [{
-            interfaceID: 5,
-            id: 9,
-            name: 'Craft',
-            entityType: Entity.EntityType.INVENTORY_ITEM,
-            entityID: 524,
-            actionInterval: -1,
-            steps: [
-                [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[271, 272]] })]
-            ],
-        }];
->>>>>>> Brought back files that were removed in rebase...
         return bar;
     },
     Helmet: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
@@ -829,6 +815,7 @@ const ItemGetter = {
                     anchor: { x: (6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_THIGH_WORN: {
@@ -840,6 +827,7 @@ const ItemGetter = {
                     anchor: { x: 1-(6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 LEFT_SHIN_WORN: {
@@ -851,6 +839,7 @@ const ItemGetter = {
                     anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0.1},
                     rotation: 0,
+                    hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_SHIN_WORN: {
@@ -862,6 +851,7 @@ const ItemGetter = {
                     anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0.1},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
             },
@@ -904,6 +894,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.15 },
                     rotation: 0,
                     UIModel: null,
+                    hideParts: ['CHEST_WORN_SHIRT'],
                     z: -1,
                 },
                 RIGHT_SHOULDER_WORN: {
@@ -915,6 +906,7 @@ const ItemGetter = {
                     anchor: { x: 9/11, y: 0.18 },
                     position: {x: 0.4, y: -0.05},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_SHOULDER_WORN: {
@@ -926,6 +918,7 @@ const ItemGetter = {
                     anchor: { x: 1-9/11, y: 0.18 },
                     position: {x: -0.4, y: -0.05},
                     rotation: 0,
+                    hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 RIGHT_FOREARM_WORN: {
@@ -937,6 +930,7 @@ const ItemGetter = {
                     anchor: {x: 1-4/7, y: 0.05},
                     position: {x: 0.05, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_FOREARM_WORN: {
@@ -948,6 +942,7 @@ const ItemGetter = {
                     anchor: {x: 4/7, y: 0.05},
                     position: {x: -0.05, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
             },
@@ -1031,6 +1026,7 @@ const ItemGetter = {
                     anchor: { x: (4/7), y: 0.15 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_THIGH_WORN: {
@@ -1042,6 +1038,7 @@ const ItemGetter = {
                     anchor: { x: 1-(4/7), y: 0.15 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 LEFT_SHIN_WORN: {
@@ -1053,6 +1050,7 @@ const ItemGetter = {
                     anchor: { x: 0.5, y: 0 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_SHIN_WORN: {
@@ -1064,6 +1062,7 @@ const ItemGetter = {
                     anchor: { x: 0.5, y: 0 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
             },
@@ -1106,6 +1105,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.0 },
                     rotation: 0,
                     UIModel: null,
+                    hideParts: ['CHEST_WORN_SHIRT'],
                     z: -1,
                 },
                 RIGHT_SHOULDER_WORN: {
@@ -1117,6 +1117,7 @@ const ItemGetter = {
                     anchor: { x: 0.75, y: 0.18 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_SHOULDER_WORN: {
@@ -1128,6 +1129,7 @@ const ItemGetter = {
                     anchor: {x: 0.25, y: 0.18},
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 RIGHT_FOREARM_WORN: {
@@ -1139,6 +1141,7 @@ const ItemGetter = {
                     anchor: {x: (3/8), y: 0.05},
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_FOREARM_WORN: {
@@ -1150,6 +1153,7 @@ const ItemGetter = {
                     anchor: {x: 1-(3/8), y: 0.05},
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
             },
@@ -1654,7 +1658,7 @@ const ItemGetter = {
     },
     Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null, isArmour = false) {
         let armSpriteName = armSpriteNameOverride == null ? sprite : armSpriteNameOverride;
-        return {
+        let shirt = {
             id: id,
             name: name,
             noted: false,
@@ -1668,8 +1672,19 @@ const ItemGetter = {
             ]),
             essenceValue: EssenceValue(4, 8, [ShardCatalog.AIR(5), ShardCatalog.WATER(5), ShardCatalog.EARTH(5), ShardCatalog.NATURE(2), ShardCatalog.BIND(10)]),
             spriteIndex: itemSpriteIndex,
-            equipmentStats: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            model: {
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            actions: [{
+                interfaceID: 5,
+                id: 6,
+                name: 'Equip',
+                steps: [
+                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 3 : 9, 'ITEM_ID'] })]
+                ]
+            }],
+        };
+
+        if (isArmour) {
+            shirt.model = {
                 RIGHT_SHOULDER_WORN: {
                     id: 'RIGHT_SHOULDER_WORN',
                     asset: 'armParts',
@@ -1679,6 +1694,7 @@ const ItemGetter = {
                     anchor: { x: 0.75, y: 0.18 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_SHOULDER_WORN: {
@@ -1690,6 +1706,7 @@ const ItemGetter = {
                     anchor: { x: 0.25, y: 0.18 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 CHEST_WORN: {
@@ -1702,6 +1719,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.0 },
                     rotation: 0,
                     UIModel: null,
+                    hideParts: ['CHEST_WORN_SHIRT'],
                     z: -1,
                 },
                 RIGHT_FOREARM_WORN: {
@@ -1713,6 +1731,7 @@ const ItemGetter = {
                     anchor: {x: (3/8), y: 0.05},
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_FOREARM_WORN: {
@@ -1724,18 +1743,72 @@ const ItemGetter = {
                     anchor: {x: 1-(3/8), y: 0.05},
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
-            },
-            actions: [{
-                interfaceID: 5,
-                id: 6,
-                name: 'Equip',
-                steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 3 : 9, 'ITEM_ID'] })]
-                ]
-            }],
-        };
+            };
+        }
+        else {
+            shirt.model = {
+                RIGHT_SHOULDER_WORN_SHIRT: {
+                    id: 'RIGHT_SHOULDER_WORN_SHIRT',
+                    asset: 'armParts',
+                    sprite: armSpriteName + 'RightShoulder',
+                    parent: 'RIGHT_SHOULDER',
+                    spriteID: spriteId,
+                    anchor: { x: 0.75, y: 0.18 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                LEFT_SHOULDER_WORN_SHIRT: {
+                    id: 'LEFT_SHOULDER_WORN_SHIRT',
+                    asset: 'armParts',
+                    sprite: armSpriteName + 'LeftShoulder',
+                    parent: 'LEFT_SHOULDER',
+                    spriteID: spriteId,
+                    anchor: { x: 0.25, y: 0.18 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                CHEST_WORN_SHIRT: {
+                    id: 'CHEST_WORN_SHIRT',
+                    asset: 'chestParts',
+                    sprite: sprite + 'Chest',
+                    parent: 'CHEST',
+                    spriteID: spriteId,
+                    anchor: { x: 0.5, y: 0.65 },
+                    position: { x: 0, y: 0.0 },
+                    rotation: 0,
+                    UIModel: null,
+                    z: -1,
+                },
+                RIGHT_FOREARM_WORN_SHIRT: {
+                    id: 'RIGHT_FOREARM_WORN_SHIRT',
+                    asset: 'armParts',
+                    sprite:  armSpriteName + 'RightForearm',
+                    parent: 'RIGHT_FOREARM',
+                    spriteID: spriteId,
+                    anchor: {x: (3/8), y: 0.05},
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                LEFT_FOREARM_WORN_SHIRT: {
+                    id: 'LEFT_FOREARM_WORN_SHIRT',
+                    asset: 'armParts',
+                    sprite: armSpriteName + 'LeftForearm',
+                    parent: 'LEFT_FOREARM',
+                    spriteID: spriteId,
+                    anchor: {x: 1-(3/8), y: 0.05},
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+            };
+        }
+        return shirt;
     },
     ColoredShirt: function (id, notedId, name, itemSpriteIndex, shirtStyleNumber, colorSpriteId, value) {
         coloredShirtStyleAndColorById[id] = shirtStyleNumber * 1000 + colorSpriteId;
@@ -1745,7 +1818,7 @@ const ItemGetter = {
     RobeChest: function (id, notedId, name, itemspriteIndex, spriteId, value, equipmentStats, minEquipLevelId) {
         let tier = 1 + Math.floor(minEquipLevelId / 10);
         let incinerateLevel = 12 + Math.floor(minEquipLevelId / 2);
-        let robe = this.Shirt(id, notedId, name, itemspriteIndex, 'robe', spriteId, value);
+        let robe = this.Shirt(id, notedId, name, itemspriteIndex, 'robe', spriteId, value, 'A wizard robe.', null, true);
         robe.essenceValue = EssenceValue(incinerateLevel, 20 + (10 * tier), [ShardCatalog.AIR(20 + tier * 40), ShardCatalog.EARTH(60 + tier * 30), ShardCatalog.NATURE(tier * 50), ShardCatalog.BIND(tier * 150)]);
         robe.equipmentStats = equipmentStats;
         robe.model.RIGHT_SHOULDER_WORN.sprite = 'robeRightShoulder';
@@ -1764,7 +1837,7 @@ const ItemGetter = {
         return robe;
     },
     Pants: function (id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value, isArmour = false) {
-        return {
+        let pants = {
             id: id,
             name: fullName,
             noted: false,
@@ -1778,8 +1851,19 @@ const ItemGetter = {
                 ItemDetail.levelSkillDetail(4, 17, 'INCINERATE'),
             ]),
             essenceValue: EssenceValue(4, 8, [ShardCatalog.AIR(5), ShardCatalog.WATER(5), ShardCatalog.EARTH(5), ShardCatalog.NATURE(2), ShardCatalog.BIND(10)]),
-            equipmentStats: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            model: {
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            actions: [{
+                interfaceID: 5,
+                id: 6,
+                name: 'Equip',
+                steps: [
+                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 4 : 10, 'ITEM_ID'] })]
+                ]
+            }],
+        };
+
+        if (isArmour) {
+            pants.model = {
                 LEFT_THIGH_WORN: {
                     id: 'LEFT_THIGH_WORN',
                     asset: 'legParts',
@@ -1789,6 +1873,7 @@ const ItemGetter = {
                     anchor: { x: (6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_THIGH_WORN: {
@@ -1800,6 +1885,7 @@ const ItemGetter = {
                     anchor: { x: 1-(6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 LEFT_SHIN_WORN: {
@@ -1811,6 +1897,7 @@ const ItemGetter = {
                     anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_SHIN_WORN: {
@@ -1822,18 +1909,60 @@ const ItemGetter = {
                     anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
-            },
-            actions: [{
-                interfaceID: 5,
-                id: 6,
-                name: 'Equip',
-                steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 4 : 10, 'ITEM_ID'] })]
-                ]
-            }],
-        };
+            };
+        }
+        else {
+            pants.model = {
+                LEFT_THIGH_WORN_PANTS: {
+                    id: 'LEFT_THIGH_WORN_PANTS',
+                    asset: 'legParts',
+                    sprite: spriteName + 'LeftThigh',
+                    parent: 'LEFT_THIGH',
+                    spriteID: colorSpriteId,
+                    anchor: { x: (6/9), y: 0.2 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                RIGHT_THIGH_WORN_PANTS: {
+                    id: 'RIGHT_THIGH_WORN_PANTS',
+                    asset: 'legParts',
+                    sprite: spriteName + 'RightThigh',
+                    parent: 'RIGHT_THIGH',
+                    spriteID: colorSpriteId,
+                    anchor: { x: 1-(6/9), y: 0.2 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                LEFT_SHIN_WORN_PANTS: {
+                    id: 'LEFT_SHIN_WORN_PANTS',
+                    asset: 'legParts',
+                    sprite: spriteName + 'LeftShin',
+                    parent: 'LEFT_SHIN',
+                    spriteID: colorSpriteId,
+                    anchor: { x: 0.5, y: 0.1 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                RIGHT_SHIN_WORN_PANTS: {
+                    id: 'RIGHT_SHIN_WORN_PANTS',
+                    asset: 'legParts',
+                    sprite: spriteName + 'RightShin',
+                    parent: 'RIGHT_SHIN',
+                    spriteID: colorSpriteId,
+                    anchor: { x: 0.5, y: 0.1 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+            };
+        }
+        return pants;
     },
     ColoredPants: function(id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value) {
         let pants = this.Pants(id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value);
@@ -1843,7 +1972,7 @@ const ItemGetter = {
     RobeLegs: function (id, notedId, name, itemspriteIndex, spriteId, value, equipmentStats, minEquipLevelId) {
         let tier = 1 + Math.floor(minEquipLevelId / 10);
         let incinerateLevel = 12 + Math.floor(minEquipLevelId / 2);
-        let robe = this.Pants(id, notedId, name, "robe", spriteId, itemspriteIndex, value);
+        let robe = this.Pants(id, notedId, name, "robe", spriteId, itemspriteIndex, value, true);
         robe.essenceValue = EssenceValue(incinerateLevel, 20 + (10 * tier), [ShardCatalog.AIR(100 + tier * 30), ShardCatalog.WATER(20 + tier * 20), ShardCatalog.EARTH(60 + tier * 20), ShardCatalog.NATURE(tier * 40), ShardCatalog.BIND(tier * 100)]);
         robe.equipmentStats = equipmentStats;
         robe.model.LEFT_SHIN_WORN.position.y += 0.1;

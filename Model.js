@@ -64,12 +64,6 @@ const TintColors = {
     LightGray : 0xaaaaaa,
     Black : 0x333333,
     Brown : 0xaa7722,
-    a : 0x3333ff,
-    b : 0xff33ff,
-    c : 0x666666,
-    d : 0xaaaaaa,
-    e : 0x333333,
-    f : 0xaa7722
 };
 
 const Model = {
