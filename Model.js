@@ -52,18 +52,38 @@ const HexColors = {
     10 : 0xaa7722
 };
 
+const HairColors = {
+    Brown: 0x735940,
+    Blond: 0xe2dc6d,
+    Ginger: 0xe27634,
+    Black: 0x2d2723,
+    Gray: 0x919191,
+    White: 0xdfdfdf,
+    Green: 0x529c4a,
+    Blue: 0x34789c,
+    Purple: 0x6a4e9c,
+    Pink: 0xbf467b
+};
+const EyeColors = {
+    Blue: 0x34789c,
+    Green: 0x529c4a,
+    Brown: 0x735940,
+    Ginger: 0xe27634,
+    Red: 0x325321,
+    Purple: 0x6a4e9c,
+};
+
 const TintColors = {
-    White : 0xffffff,
-    Red : 0xee3322,
-    Orange : 0xee9922,
-    Yellow : 0xeeee22, 
-    Green : 0x33ff33,
-    Blue : 0x3333ff,
-    Purple : 0xff33ff,
-    DarkGray : 0x666666,
-    LightGray : 0xaaaaaa,
-    Black : 0x333333,
-    Brown : 0xaa7722,
+    Brown: 0x735940,
+    Blond: 0xe2dc6d,
+    Ginger: 0xe27634,
+    Black: 0x2d2723,
+    Gray: 0x919191,
+    White: 0xdfdfdf,
+    Green: 0x529c4a,
+    Blue: 0x34789c,
+    Purple: 0x6a4e9c,
+    Pink: 0xbf467b
 };
 
 const Model = {
@@ -2260,4 +2280,6 @@ module.exports.HairStyle = HairStyle;
 module.exports.SpriteColor = SpriteColor;
 module.exports.SpriteClothesColors = SpriteClothesColors;
 module.exports.TintColors = TintColors;
+module.exports.HairColors = HairColors;
+module.exports.EyeColors = EyeColors;
 module.exports.HexColors = HexColors;

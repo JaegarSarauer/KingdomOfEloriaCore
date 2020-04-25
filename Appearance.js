@@ -1,5 +1,6 @@
 const SpriteColor = require('./Model').SpriteColor;
-const TintColors = require('./Model').TintColors;
+const HairColors = require('./Model').HairColors;
+const EyeColors = require('./Model').EyeColors;
 const HairStyle = require('./Model').HairStyle;
 const SpriteClothesColors = require('./Model').SpriteClothesColors;
 
@@ -90,19 +91,78 @@ let getSkinModel = function(id, skinToneID) {
 
 module.exports.AppearanceShops = AppearanceShops = [
     {
-        name: 'Barber Shop',
+        name : 'Barber Shop',
         id: 0,
         shopData : [
-            {
-                appearanceType: 'Hair Color',
-                ids: [SpriteColor.Yellow, SpriteColor.Orange, SpriteColor.Red, SpriteColor.Purple, SpriteColor.Blue, SpriteColor.Green, SpriteColor.Black],
-                price: [15, 15, 15, 30, 30, 30, 15]
-            },
-            {
-                appearanceType: 'Hair Style',
-                ids: [HairStyle.Bald, HairStyle.Buzzed, HairStyle.Dreads, HairStyle.LeftSideSwipe, HairStyle.RightSideSwipe, HairStyle.Scruffy, HairStyle.Messy, HairStyle.Mohawk, HairStyle.MidlifeCrisis],
-                prices: [10, 10, 35, 20, 20, 20, 15, 25, 420]
-            }
+            [
+                {
+                    title: 'Face',
+                    preview: {
+                        parts: ['HEAD', 'EYES', 'FACE']
+                    },
+                    price: 15,
+                    editorParams: [{
+                        override: 'faceID',
+                        ids: [1, 2, 3, 4, 5, 6],
+                        controlType: 'ScrollSelect',
+                        parts: ['HEAD', 'EYES', 'FACE'],
+                        itemWidth: 48,
+                        extra : { y : 10 }
+                    }],
+                    rowSpan: 3
+                },
+                {
+                    controlType: 'Preview',
+                    columnWidth: 256,
+                    rowSpan: 3
+                },
+                {
+                    title: 'Hair',
+                    preview: {
+                      parts: ['HEAD', 'EYES', 'HAIR'],
+                    },
+                    price: 20,
+                    editorParams: [{
+                        override: 'hairStyleID',
+                        ids: Object.values(HairStyle),
+                        controlType: 'ScrollSelect',
+                        parts: ['HEAD', 'EYES', 'HAIR'],
+                        itemWidth: 48,
+                        extra : { y : -26 }
+                    }, {
+                        override: 'hairColor',
+                        ids: Object.values(HairColors),
+                        controlType: 'ScrollSelect',
+                        parts: ['HEAD', 'EYES', 'HAIR'],
+                        itemWidth: 48,
+                        extra : { y : 18 },
+                        disableIf : { 'hairStyleID' : 0 }
+                    }],
+                    rowSpan: 3
+                }, 
+            ],
+            [
+                { controlType: 'Placeholder', },
+                { controlType: 'Placeholder', columnWidth: 256,},
+                { controlType: 'Placeholder', },
+            ],
+            [
+                { controlType: 'Placeholder', },
+                { controlType: 'Placeholder', columnWidth: 256,},
+                { controlType: 'Placeholder', },
+            ],
+            [
+                {
+                    title: 'Edit',
+                    controlType: 'Editor',
+                    rowSpan: 2
+                }, 
+            ],
+            [
+                { controlType: 'Placeholder', },
+                { controlType: 'Placeholder', columnWidth: 256,},
+                { controlType: 'Placeholder', },
+            ],
         ]
     },
     {
@@ -142,7 +202,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         extra : { y : -26 }
                     }, {
                         override: 'hairColor',
-                        ids: Object.values(TintColors),
+                        ids: Object.values(HairColors),
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'HAIR'],
                         itemWidth: 48,
@@ -160,14 +220,14 @@ module.exports.AppearanceShops = AppearanceShops = [
                     },
                     editorParams: [{
                         override: 'eyeColor',
-                        ids:  Object.values(TintColors),
+                        ids:  Object.values(EyeColors),
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES'],
                         itemWidth: 48,
                         extra : { y : -14 }
                     }, {
                         override: 'faceID',
-                        ids: [1, 2, 3, 4, 5, 6],
+                        ids: [0, 1, 2, 3, 4, 5, 6],
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'FACE'],
                         itemWidth: 48,
@@ -246,7 +306,83 @@ module.exports.AppearanceShops = AppearanceShops = [
                 { controlType: 'Placeholder', }
             ],
         ]
-    }
+    },
+    {
+        name : 'Clothing Shop',
+        id: 2,
+        shopData : [
+            [
+                {
+                    controlType: 'Preview',
+                    columnWidth: 256,
+                    rowSpan : 3,
+                },
+                {
+                    title: 'Shirt',
+                    preview: {
+                        parts: ['SHIRT'],
+                        itemWidth: 64,
+                    },
+                    price: 25,
+                    editorParams: [{ 
+                        override: 'shirtStyleID',
+                        ids: [0, 2, 3, 4, 5, 6, 7, 8],
+                        controlType: 'ScrollSelect',
+                        parts: ['SHIRT'],
+                        itemWidth: 32,
+                        extra : { x: -24, spacing : 16, y : -14 }
+                    }, {
+                        override: 'shirtColorID',
+                        ids: Object.values(SpriteClothesColors),
+                        controlType: 'ScrollSelect',
+                        parts: ['SHIRT'],
+                        itemWidth: 32,
+                        extra : { x : -24, spacing : 16, y : 10 },
+                    }],
+                    rowSpan : 3,
+                }, 
+                {
+                    title: 'Pants',
+                    preview: {
+                        parts: ['PANTS'],
+                        itemWidth: 64,
+                    },
+                    price: 20,
+                    editorParams: [ {
+                        override: 'pantsID',
+                        ids: Object.values(SpriteClothesColors),
+                        controlType: 'ScrollSelect',
+                        parts: ['PANTS'],
+                        itemWidth: 32,
+                        extra : { x : -16, spacing : 16 }
+                    }],
+                    rowSpan : 3,
+                }, 
+            ],
+            [
+                { controlType: 'Placeholder', columnWidth: 256,},
+                { controlType: 'Placeholder', },
+                { controlType: 'Placeholder', },
+            ],
+            [
+                { controlType: 'Placeholder', columnWidth: 256,},
+                { controlType: 'Placeholder', },
+                { controlType: 'Placeholder', },
+            ],
+            [
+                {
+                    title: 'Edit',
+                    controlType: 'Editor',
+                    rowSpan: 2
+                }, 
+            ],
+            [
+                { controlType: 'Placeholder', },
+                { controlType: 'Placeholder', },
+                { controlType: 'Placeholder', },
+            ],
+        ]
+    },
 ]
 
 module.exports.HumanSkinModel = HumanSkinModel = {
