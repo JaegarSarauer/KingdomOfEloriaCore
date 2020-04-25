@@ -106,10 +106,8 @@ module.exports.AppearanceShops = AppearanceShops = [
         ]
     },
     {
-        name: 'Customize Your Adventurer',
+        name : 'Customize Your Adventurer',
         id: 1,
-        usesReset : false,
-        usesClose : false,
         shopData : [
             [
                 {
@@ -245,10 +243,8 @@ module.exports.AppearanceShops = AppearanceShops = [
                 }, 
             ],
             [
-                {
-                    controlType: 'Placeholder',
-                }
-            ]
+                { controlType: 'Placeholder', }
+            ],
         ]
     }
 ]
