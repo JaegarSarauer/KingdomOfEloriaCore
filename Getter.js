@@ -1652,7 +1652,7 @@ const ItemGetter = {
             }],
         };
     },
-    Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null) {
+    Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null, isArmour = false) {
         let armSpriteName = armSpriteNameOverride == null ? sprite : armSpriteNameOverride;
         return {
             id: id,
@@ -1732,7 +1732,7 @@ const ItemGetter = {
                 id: 6,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID'] })]
+                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 3 : 9, 'ITEM_ID'] })]
                 ]
             }],
         };
@@ -1763,7 +1763,7 @@ const ItemGetter = {
         }];
         return robe;
     },
-    Pants: function (id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value) {
+    Pants: function (id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value, isArmour = false) {
         return {
             id: id,
             name: fullName,
@@ -1830,7 +1830,7 @@ const ItemGetter = {
                 id: 6,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID'] })]
+                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 4 : 10, 'ITEM_ID'] })]
                 ]
             }],
         };
