@@ -38,52 +38,48 @@ const SpriteClothesColors = {
     DarkGray : 9
 }
 
-const HexColors = {
-    0 : 0xffffff,
-    1 : 0xee3322,
-    2 : 0xee9922,
-    3 : 0xeeee22, 
-    4 : 0x33ff33,
-    5 : 0x3333ff,
-    6 : 0xff33ff,
-    7 : 0x666666,
-    8 : 0xaaaaaa,
-    9 : 0x333333,
-    10 : 0xaa7722
-};
+const FacialStyles = {
+    EyeLinerLipstick : { id : 1 },
+    EyeLinerLipstick_Purple : { id : 2 },
+    RosyCheeks_Purple : { id : 3 },
+    RosyCheeks_Pink : { id : 4 },
+    Freckles : { id : 5 },
+    Beard_Short : { id : 6, hairTint : true },
+    Beard_Medium : { id : 7, hairTint : true  },
+    Beard_Elder : { id : 8, hairTint : true },
+    RightScar : { id : 9 },
+    LeftScar : { id : 10 },
+    GoldEarings : { id : 11 },
+    SilverEarings : { id : 12 },
+    GothiteEarings : { id : 13 },
+    GoldEarStud : { id : 14 },
+    SilverEarStud : { id : 15 },
+    GothiteEarStud : { id : 16 },
+}
 
 const HairColors = {
-    Brown: 0x735940,
-    Blond: 0xe2dc6d,
-    Ginger: 0xe27634,
     Black: 0x2d2723,
-    Gray: 0x919191,
+    DarkBrown: 0x4f3822,
+    Brown: 0x735940,
+    CheeryRed: 0xc13340,
+    Ginger: 0xe27634,
+    Blond: 0xe2dc6d,
     White: 0xdfdfdf,
+    Gray: 0x919191,
     Green: 0x529c4a,
     Blue: 0x34789c,
     Purple: 0x6a4e9c,
     Pink: 0xbf467b
 };
+
 const EyeColors = {
     Blue: 0x34789c,
     Green: 0x529c4a,
     Brown: 0x735940,
+    DarkBrown: 0x73502e,
     Ginger: 0xe27634,
     Red: 0x325321,
     Purple: 0x6a4e9c,
-};
-
-const TintColors = {
-    Brown: 0x735940,
-    Blond: 0xe2dc6d,
-    Ginger: 0xe27634,
-    Black: 0x2d2723,
-    Gray: 0x919191,
-    White: 0xdfdfdf,
-    Green: 0x529c4a,
-    Blue: 0x34789c,
-    Purple: 0x6a4e9c,
-    Pink: 0xbf467b
 };
 
 const Model = {
@@ -171,7 +167,7 @@ const Model = {
             position: {x: 0.45, y: -0.47},
             rotation: 0,
             UIModel: null,
-            z: 1,
+            z: 10,
         },
         RIGHT_SHOULDER: {
             id: 'RIGHT_SHOULDER',
@@ -183,7 +179,7 @@ const Model = {
             position: {x: -0.45, y: -0.47},
             rotation: 0,
             UIModel: null,
-            z: 1,
+            z: 10,
         },
         LEFT_FOREARM: {
             id: 'LEFT_FOREARM',
@@ -228,7 +224,7 @@ const Model = {
             parent: 'HEAD',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: -0.3},
+            position: {x: 0, y: -0.35},
             rotation: 0,
             UIModel: null,
             z: 0,
@@ -2274,12 +2270,10 @@ module.exports.buildModel = buildModel = (modelDef, modelPartsObj = {}) => {
     return newModel;
 }
 
-
 module.exports.Model = Model;
 module.exports.HairStyle = HairStyle;
 module.exports.SpriteColor = SpriteColor;
 module.exports.SpriteClothesColors = SpriteClothesColors;
-module.exports.TintColors = TintColors;
 module.exports.HairColors = HairColors;
+module.exports.FacialStyles = FacialStyles;
 module.exports.EyeColors = EyeColors;
-module.exports.HexColors = HexColors;

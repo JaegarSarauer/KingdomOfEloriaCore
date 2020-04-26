@@ -620,6 +620,20 @@ const Dialogs = Object.freeze([{
             stepResultFail: 'END_ACTION',
         })
     ]],
+},
+{
+    id: 60, 
+    title: '<b>Cupcake Kaity</b>',
+    message: 'Baking cakes is easy!\n\n' +
+            
+            'Just take a<note>Pan</note>, <note>Raw Dough</note>, ann <note>Egg</note> and a <note>Bucket of Milk</note>. \n\n' +
+
+            'Put all the ingredients into the pan, then cook your new <note>Uncooked Cake</note> on a <note>Range</note>! \n\n' + 
+            
+            'You\'re going to love it!',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
 },]);
 
 module.exports.Dialogs = Dialogs;

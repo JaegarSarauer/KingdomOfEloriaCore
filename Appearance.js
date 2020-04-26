@@ -89,6 +89,8 @@ let getSkinModel = function(id, skinToneID) {
 
                     // columnWeight: 1
 
+const allFaceIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+
 module.exports.AppearanceShops = AppearanceShops = [
     {
         name : 'Barber Shop',
@@ -103,7 +105,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                     price: 15,
                     editorParams: [{
                         override: 'faceID',
-                        ids: [1, 2, 3, 4, 5, 6],
+                        ids: allFaceIds,
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'FACE'],
                         itemWidth: 48,
@@ -168,6 +170,7 @@ module.exports.AppearanceShops = AppearanceShops = [
     {
         name : 'Customize Your Adventurer',
         id: 1,
+        usesReset: false,
         shopData : [
             [
                 {
@@ -227,7 +230,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         extra : { y : -14 }
                     }, {
                         override: 'faceID',
-                        ids: [0, 1, 2, 3, 4, 5, 6],
+                        ids: allFaceIds,
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'FACE'],
                         itemWidth: 48,
@@ -380,6 +383,91 @@ module.exports.AppearanceShops = AppearanceShops = [
                 { controlType: 'Placeholder', },
                 { controlType: 'Placeholder', },
                 { controlType: 'Placeholder', },
+            ],
+        ]
+    },
+    {
+        name : 'Wizard Surgeon Shop',
+        id: 3,
+        shopData : [
+            [
+                {
+                    title: 'Skin Tone',
+                    preview: {
+                        parts : ['HEAD', 'EYES'],
+                    },
+                    price: 50,
+                    editorParams : [{
+                        override: 'skinToneID',
+                        ids: [1, 2, 3, 4, 5, 6],
+                        controlType: 'Button',
+                        parts: ['HEAD', 'EYES'],
+                        itemWidth: 48,
+                    }],
+                    rowSpan : 1,
+                }, 
+                {
+                    controlType: 'Preview',
+                    columnWidth: 256,
+                    rowSpan : 3,
+                },
+                {
+                    title: 'Body',
+                    preview: {
+                        parts: ['BODY'],
+                        options: { hairStyleID : HairStyle.Bald, faceID : 0 },
+                    },
+                    price: 50,
+                    editorParams: [{
+                        override: 'genderID',
+                        ids: [1, 2, 3],
+                        controlType: 'Button',
+                        parts: ['BODY'],
+                        itemWidth: 96,
+                        extra : { spacing : 16 }
+                    }],
+                    rowSpan : 2,
+                },
+            ],
+            [
+                {
+                    title: 'Eye Color',
+                    preview: {
+                        parts: ['HEAD', 'EYES']
+                    },
+                    price: 50,
+                    editorParams: [{
+                        override: 'eyeColor',
+                        ids:  Object.values(EyeColors),
+                        controlType: 'ScrollSelect',
+                        parts: ['HEAD', 'EYES'],
+                        itemWidth: 48,
+                        extra : { y : -14 }
+                    }]
+                },
+                {
+                    controlType: 'Placeholder',
+                    columnWidth: 256
+                },
+                { controlType: 'Placeholder', }
+            ],
+            [
+                { controlType: 'Placeholder', },
+                {
+                    controlType: 'Placeholder',
+                    columnWidth: 256
+                },
+                { controlType: 'Placeholder', }
+            ],
+            [
+                {
+                    title: 'Edit',
+                    controlType: 'Editor',
+                    rowSpan: 2,
+                }, 
+            ],
+            [
+                { controlType: 'Placeholder', }
             ],
         ]
     },
