@@ -90,6 +90,7 @@ let getSkinModel = function(id, skinToneID) {
                     // columnWeight: 1
 
 const allFaceIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+const allSkinToneIds = [1, 2, 3, 4, 5, 6, 7]
 
 module.exports.AppearanceShops = AppearanceShops = [
     {
@@ -180,7 +181,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                     },
                     editorParams : [{
                         override: 'skinToneID',
-                        ids: [1, 2, 3, 4, 5, 6],
+                        ids: allSkinToneIds,
                         controlType: 'Button',
                         parts: ['HEAD', 'EYES'],
                         itemWidth: 48,
@@ -399,7 +400,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                     price: 50,
                     editorParams : [{
                         override: 'skinToneID',
-                        ids: [1, 2, 3, 4, 5, 6],
+                        ids: allSkinToneIds,
                         controlType: 'Button',
                         parts: ['HEAD', 'EYES'],
                         itemWidth: 48,
