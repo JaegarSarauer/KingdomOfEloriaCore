@@ -5,11 +5,11 @@ const HairStyle = {
     Scruffy : 1,
     LeftSideSwipe : 2,
     RightSideSwipe : 3,
-    Messy : 4,
-    Buzzed : 5,
-    Mohawk : 6, 
-    Dreads : 7,
-    MidlifeCrisis : 8
+    Messy : 1,
+    Buzzed : 3,
+    Mohawk : 8, 
+    Dreads : 8,
+    MidlifeCrisis : 4
 };
 
 const SpriteColor = {
@@ -61,7 +61,7 @@ const HairColors = {
     Black: 0x2d2723,
     DarkBrown: 0x4f3822,
     Brown: 0x735940,
-    CheeryRed: 0xc13340,
+    CherryRed: 0xc13340,
     Ginger: 0xe27634,
     Blond: 0xe2dc6d,
     White: 0xdfdfdf,
@@ -215,14 +215,14 @@ const Model = {
             position: {x: 0, y: -0.7},
             rotation: 0,
             UIModel: null,
-            z: 1,
+            z: 15,
         },
         FACE: {
             id: 'FACE',
             asset: 'headParts',
             sprite: 'humanFace',
             parent: 'HEAD',
-            spriteID: 1,
+            spriteID: 0,
             anchor: {x: 0.5, y: 0.5},
             position: {x: 0, y: -0.35},
             rotation: 0,

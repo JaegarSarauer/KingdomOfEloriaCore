@@ -13,8 +13,10 @@ const ItemDetail = require("./ItemDetail").ItemDetail;
 const EssenceValue = require("./Essence").EssenceValue;
 const ShardCatalog = require("./Essence").ShardCatalog;
 const EssenceCatalog = require("./Essence").EssenceCatalog;
-const SpriteColor = require("./Model").SpriteColor;
+const HairColors = require("./Model").HairColors;
 const HairStyle = require("./Model").HairStyle;
+const FacialStyles = require("./Model").FacialStyles;
+const EyeColors = require("./Model").EyeColors;
 const ShardIDs = require("./Essence").ShardIDs;
 const EssenceIDs = require("./Essence").EssenceIDs;
 
@@ -27,6 +29,16 @@ const CalculateGemCapacity = (tier, grade) => {
     let multiplier = 1 + (grade * 0.5);
     return base * multiplier;
 }
+
+
+let faceIDsToTint = {};
+let faceEnumKeys = Object.keys(FacialStyles);
+for(let i = 0; i < faceEnumKeys.length; ++i) {
+    if (FacialStyles[faceEnumKeys[i]].hairTint) {
+        faceIDsToTint[FacialStyles[faceEnumKeys[i]].id] = true;
+    }
+}
+
 module.exports.CalculateGemCapacity = CalculateGemCapacity;
 
 const coloredShirtIdsByStyleAndColor = {};
@@ -4340,14 +4352,22 @@ const Character = {
             }]
         };
     },
-    Humanoid: function(id, name, spriteID, speciesSpriteName, faceId = null) {
+    Humanoid: function(id, name, spriteID, speciesSpriteName, faceId = null, eyeTint = 0x4f3822) {
+        let eyesId = 0;
         if (faceId == null) {
-            faceId = spriteID;
+            faceId = 0;
         }
         let limbsSpriteID = spriteID;
-        if (speciesSpriteName == 'human' && spriteID != 666) {
+        if (speciesSpriteName == 'human') {
+            if (eyesId == 0) {
+                eyesID = 1;
+            }
             limbsSpriteID = spriteID % 10;
-        
+        }
+
+        if (spriteID == 666) {
+            eyesID = 0;
+            limbsSpriteID = faceId = spriteID;
         }
 
         let result = {
@@ -4367,8 +4387,9 @@ const Character = {
                      sprite: speciesSpriteName + 'Face'
                 },
                 EYES: {
-                     spriteID: limbsSpriteID,
-                     sprite: speciesSpriteName + 'Eyes'
+                     spriteID: eyesID,
+                     sprite: speciesSpriteName + 'Eyes',
+                     tint: eyeTint,
                 },
                 HEAD: { 
                     spriteID: limbsSpriteID,
@@ -4408,13 +4429,10 @@ const Character = {
                 },
             },
         };
-        if (spriteID == 22) {
-            console.info(result);
-        }
         return result;
     },
-    Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0xff0000, actions = []) {
-        let human = this.Humanoid(id, name, spriteID, 'human');
+    Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0xff0000, actions = [], faceId = null, eyeColor = 0x4f3822) {
+        let human = this.Humanoid(id, name, spriteID, 'human', faceId, eyeColor);
         human.actions = actions;
         human.equipmentModel = equipmentModel;
         if (hairStyleId != 0) {
@@ -4431,8 +4449,11 @@ const Character = {
                 UIModel: null,
             };
         }
+        if (faceIDsToTint[faceId]) {
+            human.modelParams.FACE.tint = hairColor;
+        }
         let genderID = Math.floor(spriteID / 10);
-        if (genderID >= 1 && genderID <= 3 && genderID != 2) {
+        if (spriteID != 666 && genderID >= 1 && genderID <= 3 && genderID != 2) {
             human.modelParams.CHEST_OVERLAY = {
                 id: 'CHEST_OVERLAY',
                 asset: 'chestParts',
@@ -4448,7 +4469,7 @@ const Character = {
         }
         return human;
     },
-    PickPocketableHuman : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, tier, talkToDialog = 6) {
+    PickPocketableHuman : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, tier, talkToDialog = 6, faceId = null, eyeColor = 0x4f3822) {
         let skillLevel = 5 + tier * 5;
         let actions = [{
             interfaceID: 0,
@@ -4508,7 +4529,7 @@ const Character = {
             ],
         ],
         }];
-        let human = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, actions);
+        let human = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, actions, faceId, eyeColor);
         human.requirements = ItemDetail.build([
             ItemDetail.levelSkillDetail(skillLevel, 20, 'STEAL'),
         ]);
@@ -4525,8 +4546,7 @@ const Character = {
     },
     KaityPatreon: function(id, amountDonated, talkToDialog) {
         let result = this.Patreoner(id, 'Cupcake Kaity', 33, [null, null, null, 379, 491], 5, 0x4f3822, amountDonated, talkToDialog);
-        result.modelParams.FACE.spriteID = 7;
-        result.modelParams.FACE.tint = 0x73502e
+        result.modelParams.FACE.spriteID = 1;
         result.modelParams.EYES.spriteID = 1;
         result.modelParams.EYES.tint = 0x73502e
         return result;
@@ -4605,7 +4625,7 @@ const Character = {
         golem.modelParams.LEFT_THIGH.sprite += "Coal";
         return golem;
     },
-    HumanShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, shopsMenuInterfaceID) {
+    HumanShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, shopsMenuInterfaceID) {
         return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
                 interfaceID: 0,
                 id: 5,
@@ -4614,9 +4634,9 @@ const Character = {
                     [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
                     buildStep(StepType.OPEN_SHOP_INTERFACE, { params: [shopsMenuInterfaceID] })]
                 ],
-            }]);
+            }], faceId, eyeColor);
         },
-    HumanAppearanceShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, appearanceShopMenuID) {
+    HumanAppearanceShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, appearanceShopMenuID) {
         return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
                 interfaceID: 0,
                 id: 5,
@@ -4625,7 +4645,7 @@ const Character = {
                     [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
                     buildStep(StepType.OPEN_CHANGE_APPEARANCE, { params: [appearanceShopMenuID] })]
                 ],
-            }]);
+            }], faceId, eyeColor);
         },
         Skeleton: function (id, name, spriteID, stats, drops, equipmentModel, headSpriteID = null) {
             return {
@@ -4724,6 +4744,7 @@ const Character = {
                     LEFT_THIGH: { limbsSpriteID },
                     RIGHT_SHIN: { limbsSpriteID },
                     LEFT_SHIN: { limbsSpriteID },
+                    EYES: { tint : EyeColors.Blue }
                 },
                 stats: stats,
                 drops: drops,
@@ -4879,6 +4900,7 @@ const Character = {
                     },
                     HEAD: { spriteID: 0, },
                     FACE: {sprite: 9000,},
+                    EYES: {spriteID: 0},
                     LEFT_FOREARM: { spriteID: 0, },
                     RIGHT_FOREARM: { spriteID: 0, },
                     RIGHT_THIGH: { spriteID: 0, },
@@ -5179,12 +5201,12 @@ const Character = {
                 [buildStep(StepType.SHOW_DIALOG, {params: [2]})],
             ],
         }];
-        let osaik = this.Human(id, 'Osaik', 11, [null, 16, null, 413, 477], HairStyle.Scruffy, SpriteColor.Yellow, actions );
+        let osaik = this.Human(id, 'Osaik', 11, [null, 16, null, 413, 477], HairStyle.Scruffy, HairColors.Blond, actions, 6, EyeColors.Blue );
         osaik.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
         return osaik;
     },
     Kiaso : function(id) {
-        let kiaso = this.Human(id, 'Kiaso', 12, [null, 301, null, 405, 485], HairStyle.Scruffy, SpriteColor.Red, [{
+        let kiaso = this.Human(id, 'Kiaso', 12, [null, 301, null, 405, 485], HairStyle.Scruffy, HairColors.CherryRed, [{
             interfaceID: 0,
             id: 4,
             name: 'Talk To',
@@ -5192,7 +5214,7 @@ const Character = {
                 [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {params: [33]})],
             ],
-        }] );
+        }], 7, EyeColors.Purple);
         kiaso.stats = [[0, 40], [1, 40], [2, 40], [3, 40], [4, 40], [5, 40], [6, 40], [7, 40], [8, 40], [11, 40],];
         return kiaso;
     },
