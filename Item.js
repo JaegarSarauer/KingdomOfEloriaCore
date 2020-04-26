@@ -2983,7 +2983,7 @@ const Item = Object.freeze([
         }],
     },
     Get.Item.Note(540, 539, 'Red Wizard Hat', 760, 312),
-    Get.Item.RobeChest(541, 542, 'Red Wizard Top', 313, 5, 1420, [0, 0, 0, 0, 0, -10, 20, 20, 50], 30),
+    Get.Item.RobeChest(541, 542, 'Red Wizard Top', 313, 5, 1420, [0, 0, 0, 0, 0, -10, 20, 20, 50], 40),
     Get.Item.Note(542, 541, 'Red Wizard Top', 1420, 313),
     Get.Item.RobeLegs(543, 544, 'Red Wizard Bottom', 314, 5, 1175, [0, 0, 0, 0, 0, -5, 15, 15, 40], 40),
     Get.Item.Note(544, 543, 'Red Wizard Bottom', 1175, 314),

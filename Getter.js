@@ -1656,7 +1656,7 @@ const ItemGetter = {
             }],
         };
     },
-    Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null, isArmour = false) {
+    Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null, isArmour = false, itemDetail = null) {
         let armSpriteName = armSpriteNameOverride == null ? sprite : armSpriteNameOverride;
         let shirt = {
             id: id,
@@ -1667,7 +1667,7 @@ const ItemGetter = {
             cannotRedirectTome: true,
             stackable: false,
             description: description,
-            requirements: ItemDetail.build([
+            requirements: itemDetail || ItemDetail.build([
                 ItemDetail.levelSkillDetail(4, 17, 'INCINERATE'),
             ]),
             essenceValue: EssenceValue(4, 8, [ShardCatalog.AIR(5), ShardCatalog.WATER(5), ShardCatalog.EARTH(5), ShardCatalog.NATURE(2), ShardCatalog.BIND(10)]),
@@ -1692,7 +1692,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHOULDER',
                     spriteID: spriteId,
                     anchor: { x: 0.75, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0.05, y: 0},
                     rotation: 0,
                     hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
@@ -1704,7 +1704,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: spriteId,
                     anchor: { x: 0.25, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    position: {x: -0.05, y: 0},
                     rotation: 0,
                     hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
@@ -1729,7 +1729,7 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: spriteId,
                     anchor: {x: (3/8), y: 0.05},
-                    position: {x: 0, y: 0},
+                    position: {x: 0.05, y: -0.2},
                     rotation: 0,
                     hideParts: ['RIGHT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
@@ -1741,7 +1741,7 @@ const ItemGetter = {
                     parent: 'LEFT_FOREARM',
                     spriteID: spriteId,
                     anchor: {x: 1-(3/8), y: 0.05},
-                    position: {x: 0, y: 0},
+                    position: {x: -0.05, y: -0.2},
                     rotation: 0,
                     hideParts: ['LEFT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
@@ -1757,7 +1757,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHOULDER',
                     spriteID: spriteId,
                     anchor: { x: 0.75, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0.05, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1768,7 +1768,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: spriteId,
                     anchor: { x: 0.25, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    position: {x: -0.05, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1791,7 +1791,7 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: spriteId,
                     anchor: {x: (3/8), y: 0.05},
-                    position: {x: 0, y: 0},
+                    position: {x: 0.15, y: -0.15},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1802,7 +1802,7 @@ const ItemGetter = {
                     parent: 'LEFT_FOREARM',
                     spriteID: spriteId,
                     anchor: {x: 1-(3/8), y: 0.05},
-                    position: {x: 0, y: 0},
+                    position: {x: -0.15, y: -0.15},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -4345,10 +4345,12 @@ const Character = {
             faceId = spriteID;
         }
         let limbsSpriteID = spriteID;
-        if (speciesSpriteName == 'human') {
+        if (speciesSpriteName == 'human' && spriteID != 666) {
             limbsSpriteID = spriteID % 10;
+        
         }
-        return {
+
+        let result = {
             id: id,
             name: name,
             modelName: 'HUMANOID',
@@ -4406,6 +4408,10 @@ const Character = {
                 },
             },
         };
+        if (spriteID == 22) {
+            console.info(result);
+        }
+        return result;
     },
     Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0xff0000, actions = []) {
         let human = this.Humanoid(id, name, spriteID, 'human');
@@ -4423,6 +4429,21 @@ const Character = {
                 position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
+            };
+        }
+        let genderID = Math.floor(spriteID / 10);
+        if (genderID >= 1 && genderID <= 3 && genderID != 2) {
+            human.modelParams.CHEST_OVERLAY = {
+                id: 'CHEST_OVERLAY',
+                asset: 'chestParts',
+                sprite: 'humanChestOverlay',
+                parent: 'CHEST',
+                spriteID: genderID,
+                anchor: {x: 0.5, y: 0.65 },
+                position: {x: 0, y: 0},
+                rotation: 0,
+                UIModel: null,
+                z: 5
             };
         }
         return human;
@@ -4501,6 +4522,14 @@ const Character = {
         tier = Math.round( amountDonated / 50);
         patreoner.stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
         return patreoner;
+    },
+    KaityPatreon: function(id, amountDonated, talkToDialog) {
+        let result = this.Patreoner(id, 'Cupcake Kaity', 33, [null, null, null, 379, 491], 5, 0x4f3822, amountDonated, talkToDialog);
+        result.modelParams.FACE.spriteID = 7;
+        result.modelParams.FACE.tint = 0x73502e
+        result.modelParams.EYES.spriteID = 1;
+        result.modelParams.EYES.tint = 0x73502e
+        return result;
     },
     Death : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0]) {
         let death = this.Human(id, name, spriteID, equipmentModel, 0, 0, [
@@ -4584,6 +4613,17 @@ const Character = {
                 steps: [
                     [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
                     buildStep(StepType.OPEN_SHOP_INTERFACE, { params: [shopsMenuInterfaceID] })]
+                ],
+            }]);
+        },
+    HumanAppearanceShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, appearanceShopMenuID) {
+        return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
+                interfaceID: 0,
+                id: 5,
+                name: 'Trade',
+                steps: [
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
+                    buildStep(StepType.OPEN_CHANGE_APPEARANCE, { params: [appearanceShopMenuID] })]
                 ],
             }]);
         },
