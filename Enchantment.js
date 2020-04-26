@@ -1,10 +1,5 @@
 const EssenceCatalog = require('./Essence').EssenceCatalog;
 
-const SpellType = {
-    COMBAT: 0,      // Requires: equipmentStats, 
-    OTHER: 2,      // Requires: steps
-};
-
 module.exports.Enchantment = [{
     id: 0,
     name: 'Fortify Melee Focus',
@@ -105,11 +100,31 @@ module.exports.Enchantment = [{
     id: 12,
     name: 'Item Collection',
     enchantCost: 0.03,
-    minimumCapacity: 400,
     consumable: true,
     steps: [
         [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
         buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] })]
     ],
 }, {
+    id: 13,
+    name: 'Party Room Teleport',
+    gemBonuses: [1.3, 1.1, 0.9, 0.8, 0.9, 0.9, 0.9, 1, 1.2, 1.6, 2.1],
+    enchantCost: 15,
+    consumable: true,
+    steps: [
+        [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
+        buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }),
+        buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] })]
+    ],
+}, {
+    id: 14,
+    name: 'Patreon Palace Teleport',
+    gemBonuses: [1.3, 1.2, 1.1, 1.2, 1.3, 1, 1, 1, 1.2, 1.6, 2.1],
+    enchantCost: 20,
+    consumable: true,
+    steps: [
+        [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
+        buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }),
+        buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] })]
+    ],
 }];

@@ -822,7 +822,7 @@ module.exports.Interface = [
     },
     {   
         id: 11,
-        name: 'Adventurer Spellbook',
+        name: 'UNUSED',
     },
     {   
         id: 12,
@@ -1994,35 +1994,48 @@ module.exports.Interface = [
     id: 25,
     name: 'Enchantment Interface',
     actions: [
-        // {
-        //     id: 0,
-        //     name: 'Cast',
-        //     actionInterval: 4,
-        //     steps: [
-        //         [buildStep(StepType.CAST_ENCHANTMENT, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
-        //     ],
-        // },
-        // {
-        //     id: 1,
-        //     name: 'Remove',
-        //     actionInterval: -1,
-        //     steps: [
-        //         [buildStep(StepType.REMOVE_ENCHANTMENT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
-        //     ],
-        // },
+        {
+            id: 0,
+            name: 'Cast Enchantment',
+            actionInterval: 4,
+            flags: ['REPEAT_ACTION'],
+            steps: [
+                [buildStep(StepType.CAST_ENCHANTMENT, {params: ['ITEM_AMOUNT']}),
+                buildStep(StepType.PLAY_ANIMATION, {
+                    params: ['TALK_TO'],
+                    stepResultPass: StepResult.END_AND_REPEAT_ACTION
+                })] //change
+            ],
+        },
+        {
+            id: 1,
+            name: 'Remove',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.REMOVE_ENCHANTMENT_ITEM, {params: ['SLOT_ID', 'ITEM_AMOUNT']})]
+            ],
+        },
+        {
+            id: 2,
+            name: 'Select',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.SELECT_ENCHANTMENT, {params: ['SPELL_ID']})]
+            ],
+        },
     ],
 }, {
     id: 26,
     name: 'Inventory Enchantment Interface',
     actions: [
-        // {
-        //     id: 0,
-        //     name: 'Select',
-        //     actionInterval: -1,
-        //     steps: [
-        //         [buildStep(StepType.SELECT_ENCHANTMENT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
-        //     ],
-        // },
+        {
+            id: 0,
+            name: 'Select',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.SELECT_ENCHANTMENT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+            ],
+        },
     ],
 }
 ];

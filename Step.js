@@ -1045,14 +1045,21 @@ module.exports.StepType = StepType = {
         id: 'CAST_ENCHANTMENT',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number'], //slotID, itemID
+        paramTypes: ['number'], //itemAmount
         params: [],
     },
     SELECT_ENCHANTMENT_ITEM: {
         id: 'SELECT_ENCHANTMENT_ITEM',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number'], //slotID, itemID
+        paramTypes: ['number', 'number', 'null|object'], //gemItemID, gemAmount, gemStateDef
+        params: [],
+    },
+    SELECT_ENCHANTMENT: {
+        id: 'SELECT_ENCHANTMENT',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //spellID
         params: [],
     },
     CRAFT_JEWELRY_ITEM: {
@@ -1073,7 +1080,14 @@ module.exports.StepType = StepType = {
         id: 'REMOVE_JEWELRY_CRAFT_ITEM',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number'], //slotID
+        paramTypes: ['number'], //slotID
+        params: [],
+    },
+    REMOVE_ENCHANTMENT_ITEM: {
+        id: 'REMOVE_ENCHANTMENT_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //slotID
         params: [],
     },
 };
@@ -1423,9 +1437,11 @@ try {
     const StepSayMessage = require('../internal/Steps/StepSayMessage');
     const StepCastEnchantment = require('../internal/Steps/StepCastEnchantment');
     const StepSelectEnchantmentItem = require('../internal/Steps/StepSelectEnchantmentItem');
+    const StepSelectEnchantment = require('../internal/Steps/StepSelectEnchantment');
     const StepCraftJewelryItem = require('../internal/Steps/StepCraftJewelryItem');
     const StepAddJewelryCraftItem = require('../internal/Steps/StepAddJewelryCraftItem');
     const StepRemoveJewelryCraftItem = require('../internal/Steps/StepRemoveJewelryCraftItem');
+    const StepRemoveEnchantmentItem = require('../internal/Steps/StepRemoveEnchantmentItem');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
@@ -1448,6 +1464,11 @@ try {
                 return new StepSelectEnchantmentItem.StepSelectEnchantmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
+        SELECT_ENCHANTMENT: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSelectEnchantment.StepSelectEnchantment(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
         CRAFT_JEWELRY_ITEM: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepCraftJewelryItem.StepCraftJewelryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
@@ -1461,6 +1482,11 @@ try {
         REMOVE_JEWELRY_CRAFT_ITEM: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepRemoveJewelryCraftItem.StepRemoveJewelryCraftItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        REMOVE_ENCHANTMENT_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepRemoveEnchantmentItem.StepRemoveEnchantmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SEND_GLOBAL_MESSAGE: {

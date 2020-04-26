@@ -49,28 +49,16 @@ const SpellBuilder = {
             spellIconIndex,
             actions: [{
                 name: 'Cast',
-                interfaceID: 19,
+                interfaceID: 21,
                 id: 0,
                 actionInterval: 1,
                 steps: [steps],
             }],
         };
     },
-    ENCHANT: (id, xpGain, name, magicLevelReq, essenceRequirement, enchantmentID, spellIconIndex) => {
+    ENCHANT: (id, name, magicLevelReq, essenceRequirement, enchantmentID, spellIconIndex) => {
         let enchantSteps = [];
-        for (let i = 0; i < essenceRequirement.length; i++) {
-            enchantSteps.push(buildStep(StepType.HAS_INVENTORY_ITEM, { params: [essenceRequirement[i][0], essenceRequirement[i][1]] }));
-        }
-        for (let i = 0; i < magicLevelReq.length; i++) {
-            enchantSteps.push(buildStep(StepType.HAS_SKILL_LEVEL, { params: [magicLevelReq[i][0], magicLevelReq[i][1]] }));
-        }
-        for (let i = 0; i < essenceRequirement.length; i++) {
-            enchantSteps.push(buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [essenceRequirement[i][0], essenceRequirement[i][1]] }));
-        }
-        enchantSteps.push(buildStep(StepType.SEND_CLIENT_MESSAGE, { params: [''] }));
-        
-        enchantSteps.push(buildStep(StepType.IS_TIMER_EXPIRED, { params: [0] }));
-        enchantSteps.push(buildStep(StepType.GIVE_XP, { params: [22, xpGain] })); //hardcoded env. magic xp
+        enchantSteps.push(buildStep(StepType.SELECT_ENCHANTMENT, { params: [id] }));
 
         return {
             id,
@@ -81,9 +69,9 @@ const SpellBuilder = {
             spellIconIndex,
             enchantmentID,
             actions: [{
-                name: 'Cast',
-                interfaceID: 19,
-                id: 0,
+                name: 'Select',
+                interfaceID: 25,
+                id: 2,
                 steps: [enchantSteps],
             }],
         };
@@ -115,7 +103,7 @@ const SpellBuilder = {
             spellIconIndex,
             actions: [{
                 name: 'Cast',
-                interfaceID: 19,
+                interfaceID: 21,
                 id: 0,
                 steps: [teleportSteps],
             }],
@@ -125,11 +113,11 @@ const SpellBuilder = {
         return {
             id,
             name,
-            type: SpellType.PICKUP_AREA,
+            type: SpellType.OTHER,
             spellIconIndex,
             actions: [{
                 name: 'Cast',
-                interfaceID: 19,
+                interfaceID: 21,
                 id: 0,
                 actionInterval: 1,
                 steps: [
@@ -141,30 +129,11 @@ const SpellBuilder = {
 };
 
 const SpellType = {
-    COMBAT: {
-        id: 0,
-        spellbookActionIDs: [2, 1],
-        buildActions: () => {
-
-        }
-        // Requires: equipmentStats, 
-    },      
-    ENCHANT: {
-        id: 1,
-        spellbookActionIDs: [3],
-    },        
-    TELEPORT: {
-        id: 2,
-        spellbookActionIDs: [3],
-    },        
-    OTHER: {
-        id: 3,
-        spellbookActionIDs: null, // Requires custom steps array.
-    },   
-    PICKUP_AREA: {
-        id: 4,
-        spellbookActionIDs: [3],
-    }
+    COMBAT: 0,     
+    ENCHANT: 1,        
+    TELEPORT: 2,        
+    OTHER: 3,   
+    PICKUP_AREA: 4,
 };
 
 module.exports.Spells = [
@@ -198,21 +167,23 @@ module.exports.Spells = [
 
     SpellBuilder.SHOW_ENCHANTMENT_INTERFACE(25, 'Enchant...', 25),
 
-    //SpellBuilder.ENCHANT(5, 'Enchant Fortify Ranged Defense', [[22, 22]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(2)], 5, 5),
-    //SpellBuilder.ENCHANT(6, 'Enchant Fortify Magic Defense', [[22, 26]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(2)], 8, 6),
-    //SpellBuilder.ENCHANT(7, 'Enchant Fortify Melee Defense', [[22, 30]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(2)], 2, 7),
+    SpellBuilder.ENCHANT(26, 'Enchant Fortify Ranged Defense', [[22, 22]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(2)], 5, 34),
+    SpellBuilder.ENCHANT(27, 'Enchant Fortify Magic Defense', [[22, 26]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(2)], 8, 37),
+    SpellBuilder.ENCHANT(28, 'Enchant Fortify Melee Defense', [[22, 30]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(2)], 2, 31),
 
-    //SpellBuilder.ENCHANT(8, 'Enchant Fortify Ranged Focus', [[22, 28]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(3)], 3, 8),
-    //SpellBuilder.ENCHANT(9, 'Enchant Fortify Magic Focus', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(3)], 6, 9),
-    //SpellBuilder.ENCHANT(10, 'Enchant Fortify Melee Focus', [[22, 36]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(3)], 0, 10),
+    SpellBuilder.ENCHANT(29, 'Enchant Fortify Ranged Focus', [[22, 28]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(3)], 3, 32),
+    SpellBuilder.ENCHANT(30, 'Enchant Fortify Magic Focus', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(3)], 6, 35),
+    SpellBuilder.ENCHANT(31, 'Enchant Fortify Melee Focus', [[22, 36]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(3)], 0, 29),
 
-    //SpellBuilder.ENCHANT(11, 'Enchant Fortify Ranged Power', [[22, 34]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(4)], 4, 11),
-    //SpellBuilder.ENCHANT(12, 'Enchant Fortify Magic Power', [[22, 38]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(4)], 7, 12),
-    //SpellBuilder.ENCHANT(13, 'Enchant Fortify Melee Power', [[22, 42]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(4)], 1, 13),
+    SpellBuilder.ENCHANT(32, 'Enchant Fortify Ranged Power', [[22, 34]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(4)], 4, 33),
+    SpellBuilder.ENCHANT(33, 'Enchant Fortify Magic Power', [[22, 38]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(4)], 7, 36),
+    SpellBuilder.ENCHANT(34, 'Enchant Fortify Melee Power', [[22, 42]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(4)], 1, 30),
 
-    //SpellBuilder.ENCHANT(14, 'Enchant Goblin Camp Teleport', [[22, 12]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.VOID(3)], 9, 14),
-    //SpellBuilder.ENCHANT(15, 'Enchant Volcano Teleport', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.EARTH(7), EssenceCatalog.VOID(3)], 10, 15),
-    //SpellBuilder.ENCHANT(16, 'Enchant Wizard Tower Teleport', [[22, 44]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.VOID(3)], 11, 16),
+    SpellBuilder.ENCHANT(35, 'Enchant Goblin Camp Teleport', [[22, 12]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.VOID(3)], 9, 26),
+    SpellBuilder.ENCHANT(36, 'Enchant Volcano Teleport', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.EARTH(7), EssenceCatalog.VOID(3)], 10, 17),
+    SpellBuilder.ENCHANT(37, 'Enchant Wizard Tower Teleport', [[22, 44]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.VOID(3)], 11, 21),
+    SpellBuilder.ENCHANT(37, 'Enchant Drop Party Teleport', [[22, 16]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.VOID(3)], 13, 27),
+    SpellBuilder.ENCHANT(37, 'Enchant Patreon Palace Teleport', [[22, 20]], [EssenceCatalog.NATURE(3), EssenceCatalog.WATER(4), EssenceCatalog.VOID(3)], 14, 28),
 
 ];
 
