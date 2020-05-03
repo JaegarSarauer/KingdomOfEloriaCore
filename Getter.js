@@ -4552,7 +4552,7 @@ const Character = {
         return result;
     },
     PatreonPim : function(id) {
-        let result = this.Human(id, 'Pim', 13, [null, null, null, 377, 489], 4, HairColors.CherryRed );
+        let result = this.Human(id, 'Patreon Pim', 13, [null, null, null, 377, 489], 4, HairColors.CherryRed );
         result.actions = [
             {
                 interfaceID: 0,
@@ -4566,11 +4566,14 @@ const Character = {
                             stepResultPass: StepResult.NEXT_STEP,
                             stepResultFail: StepResult.NEXT_STEP_LIST,
                         }),
-                        buildStep(StepType.SHOW_DIALOG, {params: [5]}) // You are a Patreon supporter, offer a teleport
+                        buildStep(StepType.SHOW_DIALOG, {
+                            params: [62],
+                            stepResultPass: StepResult.END_ACTION,
+                        }) // You are a Patreon supporter, offer a teleport
                     ],
                     [
                         
-                        buildStep(StepType.SHOW_DIALOG, {params: [6]}), // Heres what Patreon is about
+                        buildStep(StepType.SHOW_DIALOG, {params: [61]}), // Heres what Patreon is about
                     ]
                 ],
             }

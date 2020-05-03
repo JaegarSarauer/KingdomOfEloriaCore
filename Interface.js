@@ -1787,6 +1787,11 @@ module.exports.Interface = [
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You make a gold ring.']})]
                 ],
             },
+            Get.Interface.AskNPCQuestion(273, 'What is Patreon Palace', 64),
+            Get.Interface.AskNPCQuestion(274, 'How can I become a Patron?', 65),
+            Get.Interface.AskNPCQuestion(275, 'Thank you', 66),
+            Get.Interface.AskNPCQuestion(276, 'Off to the palace!', 63),
+            Get.Interface.AskNPCQuestion(277, 'Thank you, but I will stay here', 66),
         ],
     },
     {
