@@ -634,6 +634,80 @@ const Dialogs = Object.freeze([{
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
+},
+{
+    id: 61, 
+    title: '<b>Patreon Pim</b>',
+    message: 'Hello traveler. Welcome to <note>The Patreon Embassy</note>\n\n' +
+
+            '<note>Patreon Palace</note> is a luxurious palace devoted to those who keep the Elorian Treasury full.\n\n' +
+
+            'This embassy acts as the gateway between <note>Eloria</note> and <note>Patreon Palace</note>. \n\n' + 
+            
+            'Patrons come to me for assistance in getting to their palace.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[273, 274, 275]] }),
+    ]],
+},
+{
+    id: 62, 
+    title: '<b>Patreon Pim</b>',
+    message: 'Welcome!\n\n' + 
+    
+            'Thank you for being a devoted Patreon supporter.\n\n' +
+            
+            'Would you like me to teleport you to <note>Patreon Palace</note>?',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[276, 277]] }),
+        
+    ]],
+},
+{
+    id: 63, 
+    title: '<b>Patreon Pim</b>',
+    message: 'Have a safe trip!',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.TELEPORT, {params: [0, 20, 32, 22, 39, 0] }),
+    ]],
+},
+{
+    id: 64, 
+    title: '<b>Patreon Pim</b>',
+    message: '<note>Patreon Palace</note> is a small kingdom created for Patreon supporters.\n\n' +
+            
+            'These supporters keep the Elorian Teasury full and help forge these beautiful lands.\n\n' +
+            
+            'Patrons can visit <note>Patreon Palace</note> whenever they please.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[274, 275]] }),
+    ]],
+},
+{
+    id: 65, 
+    title: '<b>Patreon Pim</b>',
+    message: 'You can become a Patron by donating monthly to Guilds of Gods at Patreon.com/GuildsOfGods.\n\n' +
+            
+            'There are rewards in placed based on the donated amount.\n\n' +
+            
+            'A Patreon subscription of any tier will give you access to <note>Patreon Palace</note>!\n\n' +
+            
+            '<note>Money Bag</note> donations will contribute towards your donated amount when reaching <note>Patreon</note> reward goals.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[273, 275]] }),
+    ]],
+},
+{
+    id: 66, 
+    title: '<b>Patreon Pim</b>',
+    message: 'You are most welcome.', 
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
 },]);
 
 module.exports.Dialogs = Dialogs;
