@@ -4580,6 +4580,24 @@ const Character = {
         ];
         return result;
     },
+    PatreonTat : function(id) {
+        let result = this.Human(id, 'Patreon Tat', 13, [null, null, null, 375, 487], 3, HairColors.CherryRed );
+        result.actions = [
+            {
+                interfaceID: 0,
+                id: 4,
+                name: 'Talk To',
+                steps: [
+                    buildStepList(StepList.WALK_ADJACENT),
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                        buildStep(StepType.SHOW_DIALOG, { params: [67], })
+                    ]
+                ],
+            }
+        ];
+        return result;
+    },
     Death : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0]) {
         let death = this.Human(id, name, spriteID, equipmentModel, 0, 0, [
             {
