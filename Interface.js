@@ -1792,6 +1792,8 @@ module.exports.Interface = [
             Get.Interface.AskNPCQuestion(275, 'Thank you', 66),
             Get.Interface.AskNPCQuestion(276, 'Off to the palace!', 63),
             Get.Interface.AskNPCQuestion(277, 'Thank you, but I will stay here', 66),
+            Get.Interface.AskNPCQuestion(278, 'Send me back please', 68),
+            Get.Interface.AskNPCQuestion(279, 'Thank you, but I will stay here', 69),
         ],
     },
     {

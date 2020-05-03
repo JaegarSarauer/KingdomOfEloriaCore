@@ -640,14 +640,12 @@ const Dialogs = Object.freeze([{
     title: '<b>Patreon Pim</b>',
     message: 'Hello traveler. Welcome to <note>The Patreon Embassy</note>\n\n' +
 
-            '<note>Patreon Palace</note> is a luxurious palace devoted to those who keep the Elorian Treasury full.\n\n' +
-
-            'This embassy acts as the gateway between <note>Eloria</note> and <note>Patreon Palace</note>. \n\n' + 
+            '<note>Patreon Palace</note> is a luxurious palace devoted to those who keep the Elorian Treasury full. This embassy acts as the gateway between <note>Eloria</note> and <note>Patreon Palace</note>.\n\n' + 
             
-            'Patrons come to me for assistance in getting to their palace.',
+            'How can I help you today?',
     continueSteps: [[
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[273, 274, 275]] }),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 },
 {
@@ -659,8 +657,8 @@ const Dialogs = Object.freeze([{
             
             'Would you like me to teleport you to <note>Patreon Palace</note>?',
     continueSteps: [[
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[276, 277]] }),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         
     ]],
 },
@@ -670,7 +668,7 @@ const Dialogs = Object.freeze([{
     message: 'Have a safe trip!',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.TELEPORT, {params: [0, 20, 32, 22, 39, 0] }),
+        buildStep(StepType.TELEPORT, {params: [2, 152, 40, 154, 42, 0] }),
     ]],
 },
 {
@@ -682,8 +680,8 @@ const Dialogs = Object.freeze([{
             
             'Patrons can visit <note>Patreon Palace</note> whenever they please.',
     continueSteps: [[
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[274, 275]] }),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 },
 {
@@ -691,20 +689,46 @@ const Dialogs = Object.freeze([{
     title: '<b>Patreon Pim</b>',
     message: 'You can become a Patron by donating monthly to Guilds of Gods at Patreon.com/GuildsOfGods.\n\n' +
             
-            'There are rewards in placed based on the donated amount.\n\n' +
-            
-            'A Patreon subscription of any tier will give you access to <note>Patreon Palace</note>!\n\n' +
+            'There are rewards in placed based on the tiers and total amounts donated. A subscription of any tier will give you access to <note>Patreon Palace</note>!\n\n' +
             
             '<note>Money Bag</note> donations will contribute towards your donated amount when reaching <note>Patreon</note> reward goals.',
     continueSteps: [[
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[273, 275]] }),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 },
 {
     id: 66, 
     title: '<b>Patreon Pim</b>',
     message: 'You are most welcome.', 
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 67, 
+    title: '<b>Patreon Tat</b>',
+    message: 'Thank you for visiting!\n\n' +
+
+            'Would you like for me to teleport you to the <note>Patreon Embassy</note>?', 
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[278, 279]] }),
+    ]],
+},
+{
+    id: 68, 
+    title: '<b>Patreon Tat</b>',
+    message: 'Have a safe trip and come again!', 
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.TELEPORT, {params: [0, 251, 127, 253, 130, 0] }),
+    ]],
+},
+{
+    id: 69, 
+    title: '<b>Patreon Tat</b>',
+    message: 'Just let me know whenever you are ready to go home.', 
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],

@@ -504,6 +504,7 @@ Get.Character.HumanAppearanceShopOwner(81, 'Barber', 13, [null, null, null, 393,
 Get.Character.KaityPatreon(82, 20, 60),
 Get.Character.HumanAppearanceShopOwner(83, 'Wizard Surgeon', 13, [539, null, null, 541, 543], 4, HairColors.Blue, null, EyeColors.DarkBrown, 3),
 Get.Character.PatreonPim(84),
+Get.Character.PatreonTat(85),
 ];
 
 
