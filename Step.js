@@ -161,6 +161,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number', 'null|object', 'boolean'], //itemID, itemAmount, itemStateDef, sendMissingItemMessage
         params: [],
     },
+    IS_PATREON_SUPPORTER: {
+        id: 'IS_PATREON_SUPPORTER',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     SET_CHARACTER_STATE: {
         id: 'SET_CHARACTER_STATE',
         stepResultFail: 'END_ACTION',
@@ -1522,6 +1529,7 @@ try {
     const StepRemoveJewelryCraftItem = require('../internal/Steps/StepRemoveJewelryCraftItem');
     const StepRemoveEnchantmentItem = require('../internal/Steps/StepRemoveEnchantmentItem');
     const StepChangeAppearance = require('../internal/Steps/StepChangeAppearance');
+    const StepIsPatreonSupporter = require('../internal/Steps/StepIsPatreonSupporter');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
@@ -1707,6 +1715,11 @@ try {
         HAS_INVENTORY_ITEM: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepHasInventoryItem.StepHasInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        IS_PATREON_SUPPORTER : {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepIsPatreonSupporter.StepIsPatreonSupporter(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SET_CHARACTER_STATE: {

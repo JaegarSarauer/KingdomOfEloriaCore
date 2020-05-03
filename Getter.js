@@ -4551,6 +4551,32 @@ const Character = {
         result.modelParams.EYES.tint = 0x73502e
         return result;
     },
+    PatreonPim : function(id) {
+        let result = this.Human(id, 'Pim', 13, [null, null, null, 377, 489], 4, HairColors.CherryRed );
+        result.actions = [
+            {
+                interfaceID: 0,
+                id: 4,
+                name: 'Talk To',
+                steps: [
+                    buildStepList(StepList.WALK_ADJACENT),
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                        buildStep(StepType.IS_PATREON_SUPPORTER, {
+                            stepResultPass: StepResult.NEXT_STEP,
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.SHOW_DIALOG, {params: [5]}) // You are a Patreon supporter, offer a teleport
+                    ],
+                    [
+                        
+                        buildStep(StepType.SHOW_DIALOG, {params: [6]}), // Heres what Patreon is about
+                    ]
+                ],
+            }
+        ];
+        return result;
+    },
     Death : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0]) {
         let death = this.Human(id, name, spriteID, equipmentModel, 0, 0, [
             {
