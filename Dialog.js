@@ -732,6 +732,11 @@ const Dialogs = Object.freeze([{
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
-},]);
+},
+{
+    id: 70, // Aeronic
+    title: '<b>Aeronic</b>',
+    message: 'I hope you like my musical additions and suggestions for GoG! Remember to stand for the Elorian Anthem!',
+}]);
 
 module.exports.Dialogs = Dialogs;

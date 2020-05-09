@@ -476,10 +476,11 @@ const ItemGetter = {
                     sprite: 'necklaceWolf',
                     parent: 'HEAD',
                     spriteID: 0,
-                    anchor: { x: 0.5, y: 0.3 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.5, y: 0.2 },
+                    position: { x: 0, y: 0.2 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
             },
             actions: [{
@@ -2131,10 +2132,11 @@ const ItemGetter = {
                     sprite: 'necklaceMineFragment',
                     parent: 'HEAD',
                     spriteID: modelSpriteID,
-                    anchor: { x: 0.5, y: 0.3 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.525, y: 0.2 },
+                    position: { x: 0, y: 0.3 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
             },
             actions: [{
@@ -2209,10 +2211,11 @@ const ItemGetter = {
                     sprite: 'necklaceMineChunk',
                     parent: 'HEAD',
                     spriteID: modelSpriteID,
-                    anchor: { x: 0.5, y: 0.3 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.525, y: 0.2 },
+                    position: { x: 0, y: 0.3 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
             },
             actions: [{
@@ -4537,9 +4540,17 @@ const Character = {
         human.stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
         return human;
     },
-    Patreoner : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, amountDonated, talkToDialog) {
+    Patreoner : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, eyeColor, facial, amountDonated, talkToDialog) {
         let tier = Math.min(10, Math.max(1, Math.round( amountDonated / 75)));
+        console.info(tier);
         let patreoner = this.PickPocketableHuman(id, name, spriteID, equipmentModel, hairStyleId, hairColor, tier, talkToDialog);
+        patreoner.modelParams.EYES.tint = eyeColor;
+        if (facial != null ) {
+            patreoner.modelParams.FACE.spriteID = facial.id;
+            if (facial.hairTint != null) {
+                patreoner.modelParams.FACE.tint = hairColor;
+            }
+        }
         tier = Math.round( amountDonated / 50);
         patreoner.stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
         return patreoner;

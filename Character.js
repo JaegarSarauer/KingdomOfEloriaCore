@@ -16,6 +16,7 @@ const SpriteColor = require("./Model").SpriteColor;
 const HairColors = require("./Model").HairColors;
 const EyeColors = require("./Model").EyeColors;
 const HairStyle = require("./Model").HairStyle;
+const FacialStyles = require("./Model").FacialStyles;
 const GroundItemDef = require('../def/GroundItemDef').GroundItemDef;
 var KingdomOfEloria = null;
 try {	
@@ -483,11 +484,11 @@ Get.Character.Human(63, "Indie Dev", 22, [null, null, null, 437, 483], HairStyle
     }
 ]),
 Get.Character.Pinata(64, 1, 'Pinata'),
-Get.Character.Patreoner(65, 'Sandwich', 22, [108, null, 630, 116, 112], HairStyle.Bald, HairColors.Black, 200 + 182, 8),
-Get.Character.Patreoner(66, 'Redd', 22, [313, 299, 632, null, null], 2, HairColors.DarkBrown, 105 + 70, 9),
-Get.Character.Patreoner(67, 'Aiden', 22, [null, 4, null, 385, 483], 1, HairColors.Black, 220 + 0, 10),
-Get.Character.Patreoner(68, 'WeSkillNow', 22, [null, null, null, 429, 487], 1, HairColors.CherryRed, 45 + 8, 11),
-Get.Character.Patreoner(69, 'Thomas', 22, [93, 3, null, 393, 481], 1, HairColors.Brown, 50 + 18, 12),
+Get.Character.Patreoner(65, 'Sandwich', 22, [null, null, 630, 357, 489], 4, HairColors.White, EyeColors.Brown, FacialStyles.Beard_Elder, 220 + 182, 8),
+Get.Character.Patreoner(66, 'Redd', 22, [313, 299, 632, null, null], 8, HairColors.Blue, EyeColors.Brown, FacialStyles.Beard_Medium, 125 + 70, 9),
+Get.Character.Patreoner(67, 'Aiden', 22, [null, 4, null, 385, 483], 1, HairColors.Black, EyeColors.Brown, FacialStyles.Freckles, 280 + 0, 10),
+Get.Character.Patreoner(68, 'WeSkillNow', 22, [null, null, null, 429, 477], 1, HairColors.CherryRed, EyeColors.Green, null, 55 + 8, 11),
+Get.Character.Patreoner(69, 'Thomas', 22, [93, 3, null, 393, 481], 1, HairColors.Brown, EyeColors.Brown, FacialStyles.Freckles, 65 + 18, 12),
 Get.Character.Rat(70, 'Mouserat', 1, [[11, 3], [0, 0], [1, 0.25], [2, 1]], //3hp, 0atk, .5pow, 2def
     [[[1, 100], [730, 1, 1, 100]]]),
 Get.Character.Kiaso(71),
@@ -501,10 +502,11 @@ Get.Character.Sheep(78, 1),
 Get.Character.PatreonQuestCat(79, true, 224),
 Get.Character.PatreonQuestCat(80, false, 224),
 Get.Character.HumanAppearanceShopOwner(81, 'Barber', 13, [null, null, null, 393, 489], HairStyle.MidlifeCrisis, HairColors.Brown, null, EyeColors.Blue, 0),
-Get.Character.KaityPatreon(82, 20, 60),
+Get.Character.KaityPatreon(82, 50, 60),
 Get.Character.HumanAppearanceShopOwner(83, 'Wizard Surgeon', 13, [539, null, null, 541, 543], 4, HairColors.Blue, null, EyeColors.DarkBrown, 3),
 Get.Character.PatreonPim(84),
 Get.Character.PatreonTat(85),
+Get.Character.Patreoner(86, 'Aeronic', 22, [null, null, null, 407, 479], 8, HairColors.Brown, EyeColors.Brown, FacialStyles.Beard_Short, 40 + 6, 70),
 ];
 
 

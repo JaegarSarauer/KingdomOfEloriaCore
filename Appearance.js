@@ -127,7 +127,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                     price: 20,
                     editorParams: [{
                         override: 'hairStyleID',
-                        ids: Object.values(HairStyle),
+                        ids: [1, 2, 3, 4, 5, 6, 7, 8],
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'HAIR'],
                         itemWidth: 48,
@@ -199,7 +199,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                     },
                     editorParams: [{
                         override: 'hairStyleID',
-                        ids: Object.values(HairStyle),
+                        ids: [1, 2, 3, 4, 5, 6, 7, 8],
                         controlType: 'ScrollSelect',
                         parts: ['HEAD', 'EYES', 'HAIR'],
                         itemWidth: 48,
