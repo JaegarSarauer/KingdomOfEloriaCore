@@ -475,7 +475,7 @@ const ItemGetter = {
                     asset: 'neckParts',
                     sprite,
                     parent: 'HEAD',
-                    spriteID: 0,
+                    spriteID,
                     anchor: { x: 0.5, y: 0.2 },
                     position: { x: 0, y: 0.2 },
                     rotation: 0,

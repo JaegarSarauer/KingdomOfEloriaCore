@@ -3251,7 +3251,7 @@ const Item = Object.freeze([
                 sprite: 'necklaceWolf',
                 parent: 'HEAD',
                 spriteID: 0,
-                anchor: { x: 0.6, y: 0.15 },
+                anchor: { x: 0.5, y: 0.15 },
                 position: { x: 0, y: 0.2 },
                 rotation: 0,
                 UIModel: null,

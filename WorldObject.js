@@ -1077,7 +1077,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.TutorialShallowFishingPool(79),
     Get.WorldObject.Rock(80, 'Gold Rock', 25, [10, 32, 7, true, 0.5, 0.5], [[670, 1, 1, 100]], 85, 8, 120, 10, 'There appears to be gold in this rock.', 9.5),
     Get.WorldObject.Door(81, 'Door', 9, 70, 1, null, 0, { x : 341, y : 47}, { x: 341, y: 46 }, 'Through the door cracks you see an exclusive woodcutting area.' ),
-    Get.WorldObject.Door(82, 'Door', 10, 65, 1, null, 0, { x : 65, y : 338}, { x: 65, y: 337 }, 'Through the door cracks you see an exclusive mining area.' ),
+    Get.WorldObject.Door(82, 'Door', 10, 65, 1, null, 1, { x : 47, y : 363}, { x: 47, y: 362 }, 'Through the door cracks you see an exclusive mining area.' ),
     Get.WorldObject.Rock(83, 'Pure Coal Rock', 40, [10, 30, 3, true, 0.33, 0.33], [[57, 1, 1, 90], [57, 1, 2, 10]], 75, 3, 50, 20, 'There appears to be extra coal in this rock.', 8, 584, 587), 
     Get.WorldObject.MiningCamp(84, 'Gold', 670, [[1, 80]], 3, 18, 25, 35),
     Get.WorldObject.Door(85, 'Door', 20, 70, 1, null, 0, { x : 232, y : 270}, { x: 232, y: 269 }, 'Through the door cracks you see goblins protecting many chests.' ),
