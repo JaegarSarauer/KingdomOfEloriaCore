@@ -240,8 +240,11 @@ const ItemGetter = {
                 id: 4,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, magicFocusLevel] }),
-                    buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RINGS'] }),
+                        buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, magicFocusLevel] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })
+                    ]
                 ]
             }],
         };
@@ -488,7 +491,8 @@ const ItemGetter = {
                 id: 3,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_NECKLACE'] }),
+                    buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
         };
@@ -754,6 +758,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -796,6 +801,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -874,6 +880,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -965,6 +972,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1007,6 +1015,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1085,6 +1094,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1176,6 +1186,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1409,6 +1420,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [3, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_ARROW'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [5, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1555,6 +1567,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1691,8 +1704,10 @@ const ItemGetter = {
                 id: 6,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 3 : 9, 'ITEM_ID'] })]
-                ]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 3 : 9, 'ITEM_ID'] })]
+                    ]
             }],
         };
 
@@ -1844,6 +1859,7 @@ const ItemGetter = {
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, minEquipLevelId] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID'] })]
             ]
         }];
@@ -1870,7 +1886,10 @@ const ItemGetter = {
                 id: 6,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 4 : 10, 'ITEM_ID'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 4 : 10, 'ITEM_ID'] })
+                    ]
                 ]
             }],
         };
@@ -2021,6 +2040,7 @@ const ItemGetter = {
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, minEquipLevelId] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }];
@@ -2144,7 +2164,10 @@ const ItemGetter = {
                 id: 3,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_NECKLACE'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })
+                    ]
                 ]
             }],
         };
@@ -2223,7 +2246,9 @@ const ItemGetter = {
                 id: 3,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_NECKLACE'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
         };
@@ -4542,7 +4567,9 @@ const Character = {
     },
     Patreoner : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, eyeColor, facial, amountDonated, talkToDialog) {
         let tier = Math.min(10, Math.max(1, Math.round( amountDonated / 75)));
-        console.info(tier);
+        if (!Number.isInteger(tier) || tier <= 0) {
+            tier = 1;
+        }
         let patreoner = this.PickPocketableHuman(id, name, spriteID, equipmentModel, hairStyleId, hairColor, tier, talkToDialog);
         patreoner.modelParams.EYES.tint = eyeColor;
         if (facial != null ) {
@@ -4552,6 +4579,9 @@ const Character = {
             }
         }
         tier = Math.round( amountDonated / 50);
+        if (!Number.isInteger(tier) || tier <= 0) {
+            tier = 1;
+        }
         patreoner.stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
         return patreoner;
     },
