@@ -764,6 +764,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_SPELL'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -806,6 +807,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_SPELL'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -848,6 +850,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, 20] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_SPELL'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -890,6 +893,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, 30] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_SPELL'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1059,6 +1063,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1098,6 +1103,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1137,6 +1143,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 20] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1176,6 +1183,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 30] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -2044,7 +2052,8 @@ const Item = Object.freeze([
             id: 5,
             name: 'Equip',
             steps: [
-                [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [2, 'ITEM_ID', 'ITEM_STATE'] })]
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_MONEYBAG'] }),
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [2, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
         useActions: [{
@@ -2576,6 +2585,7 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, 30] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -2618,6 +2628,7 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, 30] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -2978,6 +2989,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 40] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -3115,6 +3127,7 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, 50] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -3143,6 +3156,7 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, 50] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -3264,7 +3278,8 @@ const Item = Object.freeze([
             id: 3,
             name: 'Equip',
             steps: [
-                [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_NECKLACE'] }),
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
     },
