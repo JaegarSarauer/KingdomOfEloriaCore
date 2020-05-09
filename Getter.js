@@ -459,7 +459,7 @@ const ItemGetter = {
         ring.state = state;
         return ring;
     },
-    BaseNecklace: function(id, notedID, name, value, spriteIndex) {
+    BaseNecklace: function(id, notedID, name, value, spriteIndex, sprite = 'necklaceWolf', spriteID = 0) {
         let necklace = {
             id,
             name,
@@ -473,7 +473,7 @@ const ItemGetter = {
                 NECK_WORN: {
                     id: 'NECK_WORN',
                     asset: 'neckParts',
-                    sprite: 'necklaceWolf',
+                    sprite,
                     parent: 'HEAD',
                     spriteID: 0,
                     anchor: { x: 0.5, y: 0.2 },
@@ -498,7 +498,7 @@ const ItemGetter = {
         return necklace;
     },
     GoldAmulet: function(id, notedID, name, craftingLevel, incinerateLevel, value, spriteIndex) {
-        let necklace = this.BaseNecklace(id, notedID, name, value, spriteIndex);
+        let necklace = this.BaseNecklace(id, notedID, name, value, spriteIndex, 'amulet', 0);
         necklace.requirements = ItemDetail.build([
             ItemDetail.levelSkillDetail(craftingLevel, 14, 'CRAFT'),
             ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
@@ -530,7 +530,7 @@ const ItemGetter = {
         return necklace;
     },
     Amulet: function(id, name, gemcuttingLevel, incinerateLevel, value, tier, state, spriteIndex) {
-        let necklace = this.BaseNecklace(id, null, name, value, spriteIndex);
+        let necklace = this.BaseNecklace(id, null, name, value, spriteIndex, 'amulet', tier);
         necklace.requirements = ItemDetail.build([
             ItemDetail.levelSkillDetail(gemcuttingLevel, 21, 'CRAFT'),
             ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
