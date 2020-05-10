@@ -16,9 +16,8 @@ const Item = require('./Item');
 
 const MAP_WIDTH = 400;
 const SOLID_SQUARE_ID = 60;
-const EMPTY_IDS = [0, 1024]
+const EMPTY_IDS = [0, 1024];
 const COMPRESS = false;
-
 
 class TileData {
     constructor(x, y) {
@@ -243,10 +242,14 @@ function loadItemSpawns(JSONMap) {
         let y = Math.floor(obj.y / (obj.height * 2)) - 1;
         let itemAmount = obj.properties && obj.properties.itemAmount || 1;
         let isNoted = obj.properties && obj.properties.isNoted || false;
-        if (isNoted) {
-            id = Item.Item[id].notedID || id;
-        } else {
-            id = Item.Item[id].unnotedID || id;
+        try {
+            if (isNoted) {
+                id = Item.Item[id].notedID || id;
+            } else {
+                id = Item.Item[id].unnotedID || id;
+            } 
+        } catch(e) {
+            console.info( 'Failed to create World Object from Tiled at position', obj.x / 64, obj.y / 64, e);
         }
         entitiesArray.push([id, itemAmount, x, y]);
     }
@@ -297,6 +300,7 @@ function getWalls(wallDataArray, detailWall, worldObjectsObjectArray, worldObjec
 
     return result;
 }
+
 function loadMusicAreas(JSONMap) {
     let entityObjects = getLayer(JSONMap, "Music").objects
     let musicAreas = {};
