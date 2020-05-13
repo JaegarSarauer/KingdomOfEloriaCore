@@ -296,10 +296,10 @@ const ItemGetter = {
                         stepResultPass: StepResult.NEXT_STEP_LIST,
                         stepResultFail: StepResult.NEXT_STEP,
                     }),
-                    buildStep(StepType.GIVE_XP, {params: [21, Math.floor(xpEarned / 8)]}),
+                    buildStep(StepType.GIVE_XP, {params: [21, Math.floor(xpEarned * 4)]}),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You crush the gem into shards.']}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {
-                        params: [658, tier * 2],
+                        params: [658, tier * 4],
                         stepResultPass: StepResult.END_AND_REPEAT_ACTION,
                         stepResultFail: StepResult.END_AND_REPEAT_ACTION,
                     })],
@@ -3301,7 +3301,7 @@ const WorldObject = {
                 spriteIndex: 60,
             };
         },
-        Rock: function (id, name, skillLevelToMine, rollSuccessParams, dropTableParams, xp, spriteIndex, spawnTimer, despawnRoll, description, fragmentNeckID = null, chunkNeckID = null) {
+        Rock: function (id, name, skillLevelToMine, rollSuccessParams, dropTableParams, xp, spriteIndex, spawnTimer, despawnRoll, description, gemMineChance = 10, fragmentNeckID = null, chunkNeckID = null) {
             let oreName = name.split(' ').length > 0 ? name.split(' ')[0].toLowerCase() : '';
             let actionsSteps = [
                 buildStepList(StepList.WALK_ADJACENT),
@@ -3330,7 +3330,7 @@ const WorldObject = {
                     stepResultFail: 'NEXT_STEP_LIST'
                 }),
                 buildStep(StepType.ROLL_SKILL_DROP_TABLE, { 
-                    params: [10, 10, [[UncutGemIDs.UNCUT_OPAL, 1, 1, 1000, 10]
+                    params: [gemMineChance, 10, [[UncutGemIDs.UNCUT_OPAL, 1, 1, 1000, 10]
                     , [UncutGemIDs.UNCUT_TOPAZ, 1, 1, 800, 10]
                     , [UncutGemIDs.UNCUT_QUARTZ, 1, 1, 600, 10]
                     , [UncutGemIDs.UNCUT_JADE, 1, 1, 400, 10]
