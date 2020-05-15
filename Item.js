@@ -1946,11 +1946,11 @@ const Item = Object.freeze([
     Get.Item.Pickaxe(307, 308, 'Osmium Pickaxe', 1650, 173, 21, 50, 23, 50, [6, 30, 0, 0, 0, 0, 0, 0, -6], 6),
     Get.Item.Note(308, 307, 'Osmium Pickaxe', 1650, 173),
     // Holiday Hats
-    Get.Item.BigHat(309, 310, 'Santa Hat', 174, 117, 'hat_santa'),
+    Get.Item.BigHat(309, 310, 'Santa Hat', 174, 'hat_santa'),
     Get.Item.Note(310, 309, 'Santa Hat', 0, 174),
-    Get.Item.BigHat(311, 312, 'Helper Hat', 175, 119, 'hat_helper'),
+    Get.Item.BigHat(311, 312, 'Helper Hat', 175, 'hat_helper'),
     Get.Item.Note(312, 311, 'Helper Hat', 0, 175),
-    Get.Item.BigHat(313, 314, 'Reindeer Hat', 176, 121, 'hat_reinedeer'),
+    Get.Item.BigHat(313, 314, 'Reindeer Hat', 176, 'hat_reinedeer'),
     Get.Item.Note(314, 313, 'Reindeer Hat', 0, 176),
     // Logs
     Get.Item.Logs(315, 316, 'King Maple', 40, 177, 40),
