@@ -1537,7 +1537,7 @@ const ItemGetter = {
             spriteIndex: spriteIndex,
         };
     },
-    BigHat: function (id, notedId, fullName, spriteIndex, cmlTopLeftIndex, modelSprite) {
+    BigHat: function (id, notedId, fullName, spriteIndex, modelSprite) {
         return {
             id: id,
             name: fullName,
