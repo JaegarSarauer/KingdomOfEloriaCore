@@ -462,7 +462,7 @@ const ItemGetter = {
         ring.state = state;
         return ring;
     },
-    BaseNecklace: function(id, notedID, name, value, spriteIndex, sprite = 'necklaceWolf', spriteID = 0) {
+    BaseNecklace: function(id, notedID, name, value, spriteIndex, sprite, spriteID = 0) {
         let necklace = {
             id,
             name,
@@ -4480,7 +4480,9 @@ const Character = {
             human.modelParams.FACE.tint = hairColor;
         }
         let genderID = Math.floor(spriteID / 10);
-        if (spriteID != 666 && genderID >= 1 && genderID <= 3 && genderID != 2) {
+
+        // If male or female, add overlay
+        if (genderID == 1 || genderID == 3) {
             human.modelParams.CHEST_OVERLAY = {
                 id: 'CHEST_OVERLAY',
                 asset: 'chestParts',
@@ -4493,7 +4495,7 @@ const Character = {
                 UIModel: null,
                 z: 5
             };
-        }
+        };
         return human;
     },
     PickPocketableHuman : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, tier, talkToDialog = 6, faceId = null, eyeColor = 0x4f3822) {
@@ -5640,31 +5642,30 @@ const Get = {
     Recipes
 }
 
-module.exports = {
-    Get: Get,
-    ColoredClothes: {
-        GetShirtStyleAndColorFromId : (id) => {
-            let styleAndColor = coloredShirtStyleAndColorById[id];
-            return {
-                shirtStyleID : Math.floor( styleAndColor / 1000 ),
-                shirtColorID : styleAndColor % 1000
-            };
-        },
-        GetShirtIdFromStyleAndColor : (shirtStyleId, shirtColorId) => {
-            let result = coloredShirtIdsByStyleAndColor[shirtStyleId * 1000 + shirtColorId];
-            if (result == null) {
-                console.info(shirtStyleId, shirtColorId, coloredShirtIdsByStyleAndColor);
+module.exports.Get = Get;
+module.exports.ColoredClothes = {
+    GetShirtStyleAndColorFromId : (id) => {
+        let styleAndColor = coloredShirtStyleAndColorById[id];
+        return {
+            shirtStyleID : Math.floor( styleAndColor / 1000 ),
+            shirtColorID : styleAndColor % 1000
+        };
+    },
+    GetShirtIdFromStyleAndColor : (shirtStyleId, shirtColorId) => {
+        let result = coloredShirtIdsByStyleAndColor[shirtStyleId * 1000 + shirtColorId];
+        if (result == null) {
+            console.info(shirtStyleId, shirtColorId, coloredShirtIdsByStyleAndColor);
+        }
+        return result;
+    },
+    GetPantsIdFromColor : (pantColorId) => coloredPantsIdsByColor[pantColorId],
+    GetPantsColorFromId : (id) => {
+        let colors = Object.keys(coloredPantsIdsByColor);
+        for(let i = 0; i < colors.length; ++i) {
+            if (coloredPantsIdsByColor[colors[i]] == id) {
+                return Number( colors[i] );
             }
-            return result;
-        },
-        GetPantsIdFromColor : (pantColorId) => coloredPantsIdsByColor[pantColorId],
-        GetPantsColorFromId : (id) => {
-            let colors = Object.keys(coloredPantsIdsByColor);
-            for(let i = 0; i < colors.length; ++i) {
-                if (coloredPantsIdsByColor[colors[i]] == id) {
-                    return Number( colors[i] );
-                }
-            }
-        },
-    }
-}
+        }
+    },
+};
+

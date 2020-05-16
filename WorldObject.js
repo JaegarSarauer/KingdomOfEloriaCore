@@ -732,7 +732,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                spriteID: 2,
+                spriteID: 7,
             }
         },
         actions: [{
