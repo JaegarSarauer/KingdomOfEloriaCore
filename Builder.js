@@ -6,7 +6,6 @@ class CharacterBuilder {
         this.equipmentModel = [null, null, null, null, null]
         this.spriteIndex = 0 // deprecated?
         this.animations = [] // deprecated?
-        this.characterModel = [] // deprecated? head,
     }
 
     
@@ -61,7 +60,6 @@ class CharacterBuilder {
             modelName : this.modelName,
             spriteIndex : this.spriteIndex,
             animations : this.animations,
-            characterModel : this.characterModel,
             equipmentModel : this.equipmentModel,
 
             stats : this.stats,

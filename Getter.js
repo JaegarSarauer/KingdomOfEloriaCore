@@ -4404,7 +4404,6 @@ const Character = {
             modelName: 'HUMANOID',
             spriteIndex: 1,
             animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-            characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
             modelParams: {
                 CHEST: {
                      spriteID: spriteID,
@@ -4586,7 +4585,7 @@ const Character = {
         return patreoner;
     },
     KaityPatreon: function(id, amountDonated, talkToDialog) {
-        let result = this.Patreoner(id, 'Cupcake Kaity', 33, [null, null, null, 379, 483], 5, 0x4f3822, amountDonated, talkToDialog);
+        let result = this.Patreoner(id, 'Babyshark', 33, [null, null, null, 379, 483], 5, 0x4f3822, amountDonated, talkToDialog);
         result.modelParams.FACE.spriteID = 'Kaity';
         result.modelParams.EYES.tint = 0x523000;
         result.modelParams.HEAD.spriteID = 'Kaity';
@@ -4668,9 +4667,7 @@ const Character = {
             levelMultiplier,
             doNotRespawn: true,
             drops: [[[1, 100], [fragment, 1, 1, 2], [chunk, 1, 1, 2], [ore, 10, 25, 25], [ore, 20, 35, 25], [ore, 25, 50, 25], [pickaxe, 1, 3, 21]]],
-            characterModel: [2, 2, 2, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
             animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-            characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
             equipmentModel: [0, 0, 0, 0, 0], //head, right, left, chest, legs,
             modelParams: {
                 HEAD: { sprite: "golemHead", spriteID: spriteID, anchor : {x : 0.5, y : 0.975}, position : { x : 0.025, y : -0.5}},
@@ -4801,7 +4798,6 @@ const Character = {
                 stats: stats,
                 drops: drops,
                 spriteIndex: 4,
-                characterModel: [2, 2, 2, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
                 equipmentModel: equipmentModel,
                 actions: [{
                     interfaceID: 0,
@@ -4843,7 +4839,6 @@ const Character = {
                 combatStyle: Combat.CombatStyle.MAGIC,
                 attackRange,
                 animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-                characterModel: [2, 2, 2, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
                 equipmentModel: equipmentModel, //head, right, left, chest, legs
                 actions: [{
                     interfaceID: 0,
@@ -5646,30 +5641,30 @@ const Get = {
 }
 
 module.exports = {
-        Get: Get,
-        ColoredClothes: {
-            GetShirtStyleAndColorFromId : (id) => {
-                let styleAndColor = coloredShirtStyleAndColorById[id];
-                return {
-                    shirtStyleID : Math.floor( styleAndColor / 1000 ),
-                    shirtColorID : styleAndColor % 1000
-                };
-            },
-            GetShirtIdFromStyleAndColor : (shirtStyleId, shirtColorId) => {
-                let result = coloredShirtIdsByStyleAndColor[shirtStyleId * 1000 + shirtColorId];
-                if (result == null) {
-                    console.info(shirtStyleId, shirtColorId, coloredShirtIdsByStyleAndColor);
+    Get: Get,
+    ColoredClothes: {
+        GetShirtStyleAndColorFromId : (id) => {
+            let styleAndColor = coloredShirtStyleAndColorById[id];
+            return {
+                shirtStyleID : Math.floor( styleAndColor / 1000 ),
+                shirtColorID : styleAndColor % 1000
+            };
+        },
+        GetShirtIdFromStyleAndColor : (shirtStyleId, shirtColorId) => {
+            let result = coloredShirtIdsByStyleAndColor[shirtStyleId * 1000 + shirtColorId];
+            if (result == null) {
+                console.info(shirtStyleId, shirtColorId, coloredShirtIdsByStyleAndColor);
+            }
+            return result;
+        },
+        GetPantsIdFromColor : (pantColorId) => coloredPantsIdsByColor[pantColorId],
+        GetPantsColorFromId : (id) => {
+            let colors = Object.keys(coloredPantsIdsByColor);
+            for(let i = 0; i < colors.length; ++i) {
+                if (coloredPantsIdsByColor[colors[i]] == id) {
+                    return Number( colors[i] );
                 }
-                return result;
-            },
-            GetPantsIdFromColor : (pantColorId) => coloredPantsIdsByColor[pantColorId],
-            GetPantsColorFromId : (id) => {
-                let colors = Object.keys(coloredPantsIdsByColor);
-                for(let i = 0; i < colors.length; ++i) {
-                    if (coloredPantsIdsByColor[colors[i]] == id) {
-                        return Number( colors[i] );
-                    }
-                }
-            },
-        }
+            }
+        },
     }
+}

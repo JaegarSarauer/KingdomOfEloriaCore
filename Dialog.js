@@ -623,7 +623,7 @@ const Dialogs = Object.freeze([{
 },
 {
     id: 60, 
-    title: '<b>Cupcake Kaity</b>',
+    title: '<b>Babyshark</b>',
     message: 'Baking cakes is easy!\n\n' +
             
             'Just take a<note>Pan</note>, <note>Raw Dough</note>, ann <note>Egg</note> and a <note>Bucket of Milk</note>. \n\n' +
