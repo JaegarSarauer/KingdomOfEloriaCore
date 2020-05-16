@@ -212,7 +212,7 @@ const Model = {
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.9},
-            position: {x: 0, y: -0.7},
+            position: {x: 0, y: -0.675 },
             rotation: 0,
             UIModel: null,
             z: 15,

@@ -35,7 +35,6 @@ module.exports.Character = Character = [{
     drops: [[[1, 1], [738, 1, 1, 1]], [[1, 100], [73, 5, 15, 100]], [[100, 100], [78, 1, 2, 100]]], //5-15 feathers, and 1 in 10 chance for 1-2 air essence //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     spriteIndex: 5,
     animations: [[0, 6], [1, 7], [2, 7], [3, 6], [4, 6]],
-    characterModel: [1, 1, 1], //head, body, legs
     actions: [{
         interfaceID: 0,
         id: 6,
@@ -82,7 +81,6 @@ Get.Character.Wizard(13, 'Wizard', 13,
     modelName: 'CHICK',
     spriteIndex: 6,
     animations: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8]],
-    characterModel: [3],
     actions: [],
 },
 {
@@ -92,7 +90,6 @@ Get.Character.Wizard(13, 'Wizard', 13,
     spriteIndex: 7,
     stats: [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],],
     animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [null, 301, null, 291, 289], //head, right, left, chest, legs
     modelParams: {
         CHEST: { spriteID: 11},
@@ -169,7 +166,6 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     spriteIndex: 7,
     stats: [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[64, 1], [327, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     isGuard: true,
     entityGuildType: 'GUARD',
@@ -238,7 +234,6 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     spriteIndex: 7,
     stats: [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     entityGuildType: 'EMPEROR_GUARD',
     modelParams : {
@@ -257,7 +252,6 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     spriteIndex: 7,
     stats: [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     isGuard: true,
     entityGuildType: 'MAYOR',
@@ -277,7 +271,6 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     spriteIndex: 7,
     stats: [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     isGuard: true,
     entityGuildType: 'PLAYER_GUARD',
@@ -303,7 +296,6 @@ Get.Character.Osaik(36),
     name: 'Mysterious Man',
     modelName: 'HUMANOID',
     stats: [[0, 30], [1, 40], [2, 40], [3, 30], [4, 40], [5, 40], [6, 30], [7, 40], [8, 40], [11, 40],],
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [null, null, null, 100, 104], //head, right, left, chest, legs
     modelParams: {
         HAIR: {
@@ -397,7 +389,6 @@ Get.Character.Crab(43, 'Box Turtle', 4,  [[11, 80], [0, 50], [1, 50], [2, 50], [
     name: 'Cavern Supervisor',
     modelName: 'HUMANOID',
     stats: [[0, 20], [1, 20], [2, 20], [3, 10], [4, 10], [5, 10], [6, 1], [7, 1], [8, 1], [11, 20],],
-    characterModel: [1, 1, 1, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [null, 10, 530, 347, 475], //head, right, left, chest, legs
     modelParams: {
         HAIR: {
