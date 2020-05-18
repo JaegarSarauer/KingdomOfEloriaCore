@@ -296,10 +296,10 @@ const ItemGetter = {
                         stepResultPass: StepResult.NEXT_STEP_LIST,
                         stepResultFail: StepResult.NEXT_STEP,
                     }),
-                    buildStep(StepType.GIVE_XP, {params: [21, Math.floor(xpEarned / 8)]}),
+                    buildStep(StepType.GIVE_XP, {params: [21, Math.floor(xpEarned * 4)]}),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You crush the gem into shards.']}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {
-                        params: [658, tier * 2],
+                        params: [658, tier * 4],
                         stepResultPass: StepResult.END_AND_REPEAT_ACTION,
                         stepResultFail: StepResult.END_AND_REPEAT_ACTION,
                     })],
@@ -329,41 +329,42 @@ const ItemGetter = {
             ]),
             essenceValue: EssenceValue(incinerateLevel, 4 * tier, [ShardCatalog.VOID(tier), ShardCatalog.EARTH(3 * tier), ShardCatalog.AIR(8 + (tier * 4))]),
             spriteIndex: (item) => {
-                return item.getStateValue('quality') % 10 + spriteIndex;
+                return Math.min(item.getStateValue('quality'), 2) + spriteIndex;
             },
-            useActions: [{
-                interfaceID: 5,
-                id: 9,
-                name: 'Craft',
-                entityType: Entity.EntityType.INVENTORY_ITEM,
-                entityID: 524,
-                actionInterval: 4,
-                flags: ['REPEAT_ACTION'],
-                steps: [
-                    [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] })],
-                    [buildStep(StepType.HAS_INVENTORY_ITEM, { 
-                        params: [674, 1], // Gold Amulet
-                        stepResultFail: StepResult.NEXT_STEP_LIST
-                    }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
-                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + necklaceBaseLevel] }),
-                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] }),
-                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [674, 1] }),
-                    buildStep(StepType.GIVE_XP, { params: [21, 50 + (25 * tier)] }),
-                    //buildStep(StepType.GIVE_XP, { params: [15, 25 + (12 * tier)] }),
-                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [cutGemID, 1, 'ITEM_STATE'] })]
-                    [buildStep(StepType.HAS_INVENTORY_ITEM, { 
-                        params: [799, 1], // Gold ring
-                    }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
-                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + ringBaseLevel] }),
-                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] }),
-                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [799, 1] }),
-                    buildStep(StepType.GIVE_XP, { params: [21, 5 + (25 * tier)] }),
-                    //buildStep(StepType.GIVE_XP, { params: [15, 2 + (12 * tier)] }),
-                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [cutGemID, 1, 'ITEM_STATE'] })]
-                ] 
-            }]
+            // useActions: [{
+            //     interfaceID: 5,
+            //     id: 9,
+            //     name: 'Craft',
+            //     entityType: Entity.EntityType.INVENTORY_ITEM,
+            //     entityID: 524,
+            //     actionInterval: -1,
+            //     flags: ['REPEAT_ACTION'],
+            //     steps: [
+            //         [buildStep(StepType.OPEN_ENCHANTMENT_INTERFACE)]
+            //         // [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] })],
+            //         // [buildStep(StepType.HAS_INVENTORY_ITEM, { 
+            //         //     params: [674, 1], // Gold Amulet
+            //         //     stepResultFail: StepResult.NEXT_STEP_LIST
+            //         // }),
+            //         // buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
+            //         // buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + necklaceBaseLevel] }),
+            //         // buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] }),
+            //         // buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [674, 1] }),
+            //         // buildStep(StepType.GIVE_XP, { params: [21, 50 + (25 * tier)] }),
+            //         // //buildStep(StepType.GIVE_XP, { params: [15, 25 + (12 * tier)] }),
+            //         // buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [cutGemID, 1, 'ITEM_STATE'] })]
+            //         // [buildStep(StepType.HAS_INVENTORY_ITEM, { 
+            //         //     params: [799, 1], // Gold ring
+            //         // }),
+            //         // buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
+            //         // buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + ringBaseLevel] }),
+            //         // buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] }),
+            //         // buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [799, 1] }),
+            //         // buildStep(StepType.GIVE_XP, { params: [21, 5 + (25 * tier)] }),
+            //         // //buildStep(StepType.GIVE_XP, { params: [15, 2 + (12 * tier)] }),
+            //         // buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [cutGemID, 1, 'ITEM_STATE'] })]
+            //     ] 
+            // }]
         };
     },
     BaseRing: function(id, notedID, name, value, spriteIndex) {
@@ -413,12 +414,20 @@ const ItemGetter = {
             entityID: 524,
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.OPEN_JEWELRY_CRAFT_INTERFACE, {params: [jewelryCraftLevels],}),
+                [buildStep(StepType.OPEN_JEWELRY_CRAFT_INTERFACE, {params: []}),
                 buildStep(StepType.ADD_JEWELRY_CRAFT_ITEM, {params: [id, 1, null],})],
             ],
         }];
         ring.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
         ring.description = 'A simple gold ring';
+        ring.baseSpriteIndex = spriteIndex;
+        ring.spriteIndex = (item) => {
+            if (item.getStateValue('id') == 'MULTI_ENCHANTMENT') {
+                return item.getStateValue('spriteIndex') || spriteIndex;
+            } else {
+                return spriteIndex;
+            }
+        };
         return ring;
     },
     GemRing: function(id, name, gemcuttingLevel, incinerateLevel, value, tier, state, spriteIndex) {
@@ -479,6 +488,14 @@ const ItemGetter = {
         ]);
         necklace.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
         necklace.description = 'A simple gold amulet';
+        necklace.baseSpriteIndex = spriteIndex;
+        necklace.spriteIndex = (item) => {
+            if (item.getStateValue('id') == 'MULTI_ENCHANTMENT') {
+                return item.getStateValue('spriteIndex') || spriteIndex;
+            } else {
+                return spriteIndex;
+            }
+        };
         let jewelryCraftLevels = [22, 62, 94];
         necklace.jewelryCraftLevels = jewelryCraftLevels;
         necklace.useActions = [{
@@ -540,6 +557,13 @@ const ItemGetter = {
     Mold: function(id, notedId, fullName, value, spriteIndex, description, essenceValue) {
         let item = this.Item(id, notedId, fullName, value, spriteIndex, description, essenceValue, false);
         return item;
+    },
+    NullItem: (id) => {
+        return {
+            id,
+            name: 'null item',
+            cannotRedirectTome: true,
+        }
     },
     MixableCookingItem: function(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable, recipe) {
         let item = this.Item(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable);
@@ -3300,7 +3324,7 @@ const WorldObject = {
                 spriteIndex: 60,
             };
         },
-        Rock: function (id, name, skillLevelToMine, rollSuccessParams, dropTableParams, xp, spriteIndex, spawnTimer, despawnRoll, description, fragmentNeckID = null, chunkNeckID = null) {
+        Rock: function (id, name, skillLevelToMine, rollSuccessParams, dropTableParams, xp, spriteIndex, spawnTimer, despawnRoll, description, gemMineChance = 10, fragmentNeckID = null, chunkNeckID = null) {
             let oreName = name.split(' ').length > 0 ? name.split(' ')[0].toLowerCase() : '';
             let actionsSteps = [
                 buildStepList(StepList.WALK_ADJACENT),
@@ -3329,7 +3353,7 @@ const WorldObject = {
                     stepResultFail: 'NEXT_STEP_LIST'
                 }),
                 buildStep(StepType.ROLL_SKILL_DROP_TABLE, { 
-                    params: [10, 10, [[UncutGemIDs.UNCUT_OPAL, 1, 1, 1000, 10]
+                    params: [gemMineChance, 10, [[UncutGemIDs.UNCUT_OPAL, 1, 1, 1000, 10]
                     , [UncutGemIDs.UNCUT_TOPAZ, 1, 1, 800, 10]
                     , [UncutGemIDs.UNCUT_QUARTZ, 1, 1, 600, 10]
                     , [UncutGemIDs.UNCUT_JADE, 1, 1, 400, 10]
