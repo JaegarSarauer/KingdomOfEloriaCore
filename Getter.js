@@ -4400,7 +4400,7 @@ const Character = {
         }
 
         let headType = 'Male';
-        if (Math.floor( spriteID / 10 ) >= 3 ) {
+        if (Math.floor( spriteID / 10 ) == 3 ) {
             headType = 'Female';
         }
 
