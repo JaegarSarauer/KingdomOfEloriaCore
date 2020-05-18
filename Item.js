@@ -764,6 +764,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_SPELL'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -806,6 +807,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_SPELL'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -848,6 +850,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, 20] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_SPELL'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -890,6 +893,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, 30] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_SPELL'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1059,6 +1063,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1098,6 +1103,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1137,6 +1143,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 20] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1176,6 +1183,7 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 30] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -1938,11 +1946,11 @@ const Item = Object.freeze([
     Get.Item.Pickaxe(307, 308, 'Osmium Pickaxe', 1650, 173, 21, 50, 23, 50, [6, 30, 0, 0, 0, 0, 0, 0, -6], 6),
     Get.Item.Note(308, 307, 'Osmium Pickaxe', 1650, 173),
     // Holiday Hats
-    Get.Item.BigHat(309, 310, 'Santa Hat', 174, 117, 'hat_santa'),
+    Get.Item.BigHat(309, 310, 'Santa Hat', 174, 'hat_santa'),
     Get.Item.Note(310, 309, 'Santa Hat', 0, 174),
-    Get.Item.BigHat(311, 312, 'Helper Hat', 175, 119, 'hat_helper'),
+    Get.Item.BigHat(311, 312, 'Helper Hat', 175, 'hat_helper'),
     Get.Item.Note(312, 311, 'Helper Hat', 0, 175),
-    Get.Item.BigHat(313, 314, 'Reindeer Hat', 176, 121, 'hat_reinedeer'),
+    Get.Item.BigHat(313, 314, 'Reindeer Hat', 176, 'hat_reinedeer'),
     Get.Item.Note(314, 313, 'Reindeer Hat', 0, 176),
     // Logs
     Get.Item.Logs(315, 316, 'King Maple', 40, 177, 40),
@@ -2044,7 +2052,8 @@ const Item = Object.freeze([
             id: 5,
             name: 'Equip',
             steps: [
-                [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [2, 'ITEM_ID', 'ITEM_STATE'] })]
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_MONEYBAG'] }),
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [2, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
         useActions: [{
@@ -2274,23 +2283,23 @@ const Item = Object.freeze([
     Get.Item.Note(472, 471, 'Shirt', 5, 266),
     Get.Item.ColoredShirt(473, 474, 'Shirt', 267, '8', SpriteColor.Black, 5, false),
     Get.Item.Note(474, 473, 'Shirt', 5, 267),
-    Get.Item.Pants(475, 476, 'Pants', 'pant', SpriteColor.Red, 268, 5),
+    Get.Item.ColoredPants(475, 476, 'Pants', 'pant', SpriteColor.Red, 268, 5),
     Get.Item.Note(476, 475, 'Pants', 5, 268),
-    Get.Item.Pants(477, 478, 'Pants', 'pant', SpriteColor.Orange, 269, 5),
+    Get.Item.ColoredPants(477, 478, 'Pants', 'pant', SpriteColor.Orange, 269, 5),
     Get.Item.Note(478, 477, 'Pants', 5, 269),
-    Get.Item.Pants(479, 480, 'Pants', 'pant', SpriteColor.Yellow, 270, 5),
+    Get.Item.ColoredPants(479, 480, 'Pants', 'pant', SpriteColor.Yellow, 270, 5),
     Get.Item.Note(480, 479, 'Pants', 5, 270),
-    Get.Item.Pants(481, 482, 'Pants', 'pant', SpriteColor.Green, 271, 5),
+    Get.Item.ColoredPants(481, 482, 'Pants', 'pant', SpriteColor.Green, 271, 5),
     Get.Item.Note(482, 481, 'Pants', 5, 271),
-    Get.Item.Pants(483, 484, 'Pants', 'pant', SpriteColor.Blue, 272, 5),
+    Get.Item.ColoredPants(483, 484, 'Pants', 'pant', SpriteColor.Blue, 272, 5),
     Get.Item.Note(484, 483, 'Pants', 5, 272),
-    Get.Item.Pants(485, 486, 'Pants', 'pant', SpriteColor.Purple, 273, 5),
+    Get.Item.ColoredPants(485, 486, 'Pants', 'pant', SpriteColor.Purple, 273, 5),
     Get.Item.Note(486, 485, 'Pants', 5, 273),
-    Get.Item.Pants(487, 488, 'Pants', 'pant', SpriteColor.DarkGray, 274, 5),
+    Get.Item.ColoredPants(487, 488, 'Pants', 'pant', SpriteColor.DarkGray, 274, 5),
     Get.Item.Note(488, 487, 'Pants', 5, 274),
-    Get.Item.Pants(489, 490, 'Pants', 'pant', SpriteColor.LightGray, 275, 5),
+    Get.Item.ColoredPants(489, 490, 'Pants', 'pant', SpriteColor.LightGray, 275, 5),
     Get.Item.Note(490, 489, 'Pants', 5, 275),
-    Get.Item.Pants(491, 492, 'Pants', 'pant', SpriteColor.Black, 276, 5),
+    Get.Item.ColoredPants(491, 492, 'Pants', 'pant', SpriteColor.Black, 276, 5),
     Get.Item.Note(492, 491, 'Pants', 5, 276),
     {
         id: 493,
@@ -2576,6 +2585,7 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, 30] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -2618,6 +2628,7 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, 30] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -2978,12 +2989,13 @@ const Item = Object.freeze([
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 40] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
     },
     Get.Item.Note(540, 539, 'Red Wizard Hat', 760, 312),
-    Get.Item.RobeChest(541, 542, 'Red Wizard Top', 313, 5, 1420, [0, 0, 0, 0, 0, -10, 20, 20, 50], 30),
+    Get.Item.RobeChest(541, 542, 'Red Wizard Top', 313, 5, 1420, [0, 0, 0, 0, 0, -10, 20, 20, 50], 40),
     Get.Item.Note(542, 541, 'Red Wizard Top', 1420, 313),
     Get.Item.RobeLegs(543, 544, 'Red Wizard Bottom', 314, 5, 1175, [0, 0, 0, 0, 0, -5, 15, 15, 40], 40),
     Get.Item.Note(544, 543, 'Red Wizard Bottom', 1175, 314),
@@ -3115,6 +3127,7 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, 50] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -3143,6 +3156,7 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, 50] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
@@ -3251,10 +3265,11 @@ const Item = Object.freeze([
                 sprite: 'necklaceWolf',
                 parent: 'HEAD',
                 spriteID: 0,
-                anchor: { x: 0.5, y: 0.3 },
-                position: { x: 0, y: 0 },
+                anchor: { x: 0.5, y: 0.15 },
+                position: { x: 0, y: 0.2 },
                 rotation: 0,
                 UIModel: null,
+                z: -1,
             },
         },
         reaggressionChance: 3,
@@ -3263,7 +3278,8 @@ const Item = Object.freeze([
             id: 3,
             name: 'Equip',
             steps: [
-                [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                [buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_NECKLACE'] }),
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }],
     },

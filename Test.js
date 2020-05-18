@@ -27,6 +27,10 @@ const TestType = {
         id: 'CUT_BANKED_GEMS',
         executeString: 'cut_gems'
     },
+    WALK_RANDOM: {
+        id: 'WALK_RANDOM',
+        executeString: 'walk'
+    },
 };
 module.exports.TestType = TestType;
 
@@ -35,6 +39,7 @@ const TestKillAlphaWolf = require('../internal/Tests/TestKillAlphaWolf');
 const TestMineCopperOre = require('../internal/Tests/TestMineCopperOre');
 const TestMineToMax = require('../internal/Tests/TestMineToMax');
 const TestCutBankedGems = require('../internal/Tests/TestCutBankedGems');
+const TestWalkRandom = require('../internal/Tests/TestWalkRandom');
 
 module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     INCINERATE_ALL_ITEMS: {
@@ -60,6 +65,11 @@ module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     CUT_BANKED_GEMS: {
         build: (parameters) => {
             return new TestCutBankedGems.TestCutBankedGems(...parameters);
+        },
+    },
+    WALK_RANDOM: {
+        build: (parameters) => {
+            return new TestWalkRandom.TestWalkRandom(...parameters);
         },
     },
 };

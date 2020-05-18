@@ -161,6 +161,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number', 'null|object', 'boolean'], //itemID, itemAmount, itemStateDef, sendMissingItemMessage
         params: [],
     },
+    IS_PATREON_SUPPORTER: {
+        id: 'IS_PATREON_SUPPORTER',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     SET_CHARACTER_STATE: {
         id: 'SET_CHARACTER_STATE',
         stepResultFail: 'END_ACTION',
@@ -1041,11 +1048,18 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], //minigameID
         params: [],
     },
-    STYLE_HAIR: {
-        id: 'STYLE_HAIR',
+    OPEN_CHANGE_APPEARANCE: {
+        id: 'OPEN_CHANGE_APPEARANCE',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number'], //hairStyleId, dyedColorId
+        paramTypes: ['number'], //shopID
+        params: [],
+    },
+    CHANGE_APPEARANCE: {
+        id: 'CHANGE_APPEARANCE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number' ], //skinToneID, hairStyleId, hairColor, genderID, eyeColor, face, faceColor, shirt, pants
         params: [],
     },
     MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {
@@ -1315,6 +1329,46 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
         id: 'ACTION_ID',
         type: 'number',
     },
+    SKIN_TONE: {
+        id: 'SKIN_TONE',
+        type: 'number'
+    },
+    HAIR_STYLE: {
+        id: 'HAIR_STYLE',
+        type: 'number'
+    },
+    HAIR_COLOR: {
+        id: 'HAIR_COLOR',
+        type: 'number'
+    },
+    PRICE: {
+        id: 'PRICE',
+        type: 'number'
+    },
+    GENDER: {
+        id: 'GENDER',
+        type: 'number'
+    },
+    EYE_COLOR: {
+        id: 'EYE_COLOR',
+        type: 'number'
+    },
+    FACE: {
+        id: 'FACE',
+        type: 'number'
+    },
+    FACE_COLOR: {
+        id: 'FACE_COLOR',
+        type: 'number'
+    },
+    SHIRT: {
+        id: 'SHIRT',
+        type: 'number'
+    },
+    PANTS: {
+        id: 'PANTS',
+        type: 'number'
+    }
 };
 
 try {
@@ -1460,7 +1514,7 @@ try {
     const StepIsInArea = require('../internal/Steps/StepIsInArea');
     const StepJoinMinigame = require('../internal/Steps/StepJoinMinigame');
     const StepLeaveMinigame = require('../internal/Steps/StepLeaveMinigame');
-    const StepStyleHair = require('../internal/Steps/StepStyleHair') ;
+    const StepOpenAppearanceInterface = require('../internal/Steps/StepOpenAppearanceInterface') ;
     const StepAddMarketBuyOffer = require('../internal/Steps/StepAddMarketBuyOffer');
     const StepAddMarketSellOffer = require('../internal/Steps/StepAddMarketSellOffer');
     const StepMakeClosestNPCAttackClosestNPC = require('../internal/Steps/StepMakeClosestNPCAttackClosestNPC');
@@ -1474,6 +1528,8 @@ try {
     const StepAddJewelryCraftItem = require('../internal/Steps/StepAddJewelryCraftItem');
     const StepRemoveJewelryCraftItem = require('../internal/Steps/StepRemoveJewelryCraftItem');
     const StepRemoveEnchantmentItem = require('../internal/Steps/StepRemoveEnchantmentItem');
+    const StepChangeAppearance = require('../internal/Steps/StepChangeAppearance');
+    const StepIsPatreonSupporter = require('../internal/Steps/StepIsPatreonSupporter');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
@@ -1659,6 +1715,11 @@ try {
         HAS_INVENTORY_ITEM: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepHasInventoryItem.StepHasInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        IS_PATREON_SUPPORTER : {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepIsPatreonSupporter.StepIsPatreonSupporter(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SET_CHARACTER_STATE: {
@@ -2236,9 +2297,14 @@ try {
                 return new StepLeaveMinigame.StepLeaveMinigame(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
-        STYLE_HAIR: {
+        OPEN_CHANGE_APPEARANCE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepStyleHair.StepStyleHair(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+                return new StepOpenAppearanceInterface.StepOpenAppearanceInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CHANGE_APPEARANCE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepChangeAppearance.StepChangeAppearance(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC: {

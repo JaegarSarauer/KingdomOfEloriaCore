@@ -13,8 +13,10 @@ const ItemDetail = require("./ItemDetail").ItemDetail;
 const EssenceValue = require("./Essence").EssenceValue;
 const ShardCatalog = require("./Essence").ShardCatalog;
 const EssenceCatalog = require("./Essence").EssenceCatalog;
-const SpriteColor = require("./Model").SpriteColor;
+const HairColors = require("./Model").HairColors;
 const HairStyle = require("./Model").HairStyle;
+const FacialStyles = require("./Model").FacialStyles;
+const EyeColors = require("./Model").EyeColors;
 const ShardIDs = require("./Essence").ShardIDs;
 const EssenceIDs = require("./Essence").EssenceIDs;
 
@@ -27,7 +29,21 @@ const CalculateGemCapacity = (tier, grade) => {
     let multiplier = 1 + (grade * 0.5);
     return base * multiplier;
 }
+
+
+let faceIDsToTint = {};
+let faceEnumKeys = Object.keys(FacialStyles);
+for(let i = 0; i < faceEnumKeys.length; ++i) {
+    if (FacialStyles[faceEnumKeys[i]].hairTint) {
+        faceIDsToTint[FacialStyles[faceEnumKeys[i]].id] = true;
+    }
+}
+
 module.exports.CalculateGemCapacity = CalculateGemCapacity;
+
+const coloredShirtIdsByStyleAndColor = {};
+const coloredShirtStyleAndColorById = {};
+const coloredPantsIdsByColor = {};
 
 const DropTables = {
     // Table rarity refers to denominator of the roll. (Math.random() < 1 / tableRarity)
@@ -224,8 +240,11 @@ const ItemGetter = {
                 id: 4,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, magicFocusLevel] }),
-                    buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RINGS'] }),
+                        buildStep(StepType.HAS_SKILL_LEVEL, { params: [6, magicFocusLevel] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [1, 'ITEM_ID', 'ITEM_STATE'] })
+                    ]
                 ]
             }],
         };
@@ -443,7 +462,7 @@ const ItemGetter = {
         ring.state = state;
         return ring;
     },
-    BaseNecklace: function(id, notedID, name, value, spriteIndex) {
+    BaseNecklace: function(id, notedID, name, value, spriteIndex, sprite, spriteID = 0) {
         let necklace = {
             id,
             name,
@@ -457,13 +476,14 @@ const ItemGetter = {
                 NECK_WORN: {
                     id: 'NECK_WORN',
                     asset: 'neckParts',
-                    sprite: 'necklaceWolf',
+                    sprite,
                     parent: 'HEAD',
-                    spriteID: 0,
-                    anchor: { x: 0.5, y: 0.3 },
-                    position: { x: 0, y: 0 },
+                    spriteID,
+                    anchor: { x: 0.5, y: 0.2 },
+                    position: { x: 0, y: 0.2 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
             },
             actions: [{
@@ -471,7 +491,8 @@ const ItemGetter = {
                 id: 3,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_NECKLACE'] }),
+                    buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
         };
@@ -481,7 +502,7 @@ const ItemGetter = {
         return necklace;
     },
     GoldAmulet: function(id, notedID, name, craftingLevel, incinerateLevel, value, spriteIndex) {
-        let necklace = this.BaseNecklace(id, notedID, name, value, spriteIndex);
+        let necklace = this.BaseNecklace(id, notedID, name, value, spriteIndex, 'amulet', 0);
         necklace.requirements = ItemDetail.build([
             ItemDetail.levelSkillDetail(craftingLevel, 14, 'CRAFT'),
             ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
@@ -513,7 +534,7 @@ const ItemGetter = {
         return necklace;
     },
     Amulet: function(id, name, gemcuttingLevel, incinerateLevel, value, tier, state, spriteIndex) {
-        let necklace = this.BaseNecklace(id, null, name, value, spriteIndex);
+        let necklace = this.BaseNecklace(id, null, name, value, spriteIndex, 'amulet', tier);
         necklace.requirements = ItemDetail.build([
             ItemDetail.levelSkillDetail(gemcuttingLevel, 21, 'CRAFT'),
             ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE'),
@@ -728,6 +749,7 @@ const ItemGetter = {
                     position: {x: 0, y: -0.15},
                     rotation: 0,
                     UIModel: null,
+                    hideParts : ['HAIR'],
                 },
             },
             actions: [{
@@ -736,6 +758,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -766,9 +789,10 @@ const ItemGetter = {
                     parent: 'HEAD',
                     spriteID: tier,
                     anchor: { x: 9/24, y: 0.8 },
-                    position: {x: 0, y: -0.1},
+                    position: {x: -0.01, y: -0.11},
                     rotation: 0,
                     UIModel: null,
+                    hideParts : ['HAIR'],
                 },
             },
             actions: [{
@@ -777,6 +801,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -809,6 +834,7 @@ const ItemGetter = {
                     anchor: { x: (6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_THIGH_WORN: {
@@ -820,6 +846,7 @@ const ItemGetter = {
                     anchor: { x: 1-(6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 LEFT_SHIN_WORN: {
@@ -829,9 +856,11 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.1 },
-                    position: {x: 0, y: 0.1},
+                    position: {x: 0, y: 0.09},
                     rotation: 0,
+                    hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
+                    z: 5,
                 },
                 RIGHT_SHIN_WORN: {
                     id: 'RIGHT_SHIN_WORN',
@@ -840,9 +869,11 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.1 },
-                    position: {x: 0, y: 0.1},
+                    position: {x: 0, y: 0.09},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
+                    z: 5,
                 },
             },
             actions: [{
@@ -851,6 +882,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -884,6 +916,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.15 },
                     rotation: 0,
                     UIModel: null,
+                    hideParts: ['CHEST_WORN_SHIRT'],
                     z: -1,
                 },
                 RIGHT_SHOULDER_WORN: {
@@ -893,8 +926,9 @@ const ItemGetter = {
                     parent: 'RIGHT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 9/11, y: 0.18 },
-                    position: {x: 0.4, y: -0.05},
+                    position: {x: 0.38, y: -0.05},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_SHOULDER_WORN: {
@@ -904,8 +938,9 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 1-9/11, y: 0.18 },
-                    position: {x: -0.4, y: -0.05},
+                    position: {x: -0.38, y: -0.05},
                     rotation: 0,
+                    hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 RIGHT_FOREARM_WORN: {
@@ -915,8 +950,9 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: {x: 1-4/7, y: 0.05},
-                    position: {x: 0.05, y: 0},
+                    position: {x: 0.06, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_FOREARM_WORN: {
@@ -926,8 +962,9 @@ const ItemGetter = {
                     parent: 'LEFT_FOREARM',
                     spriteID: tier,
                     anchor: {x: 4/7, y: 0.05},
-                    position: {x: -0.05, y: 0},
+                    position: {x: -0.06, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
             },
@@ -937,6 +974,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -970,6 +1008,7 @@ const ItemGetter = {
                     position: {x: 0, y: 0.1},
                     rotation: 0,
                     UIModel: null,
+                    hideParts : ['HAIR'],
                 },
             },
             actions: [{
@@ -978,6 +1017,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1007,9 +1047,10 @@ const ItemGetter = {
                     sprite: 'chainLeftThigh',
                     parent: 'LEFT_THIGH',
                     spriteID: tier,
-                    anchor: { x: (4/7), y: 0.15 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: (4/7), y: 0.185 },
+                    position: {x: -0.08, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_THIGH_WORN: {
@@ -1018,9 +1059,10 @@ const ItemGetter = {
                     sprite: 'chainRightThigh',
                     parent: 'RIGHT_THIGH',
                     spriteID: tier,
-                    anchor: { x: 1-(4/7), y: 0.15 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: 1-(4/7), y: 0.185 },
+                    position: {x: 0.08, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 LEFT_SHIN_WORN: {
@@ -1030,8 +1072,9 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0.08, y: -0.125},
                     rotation: 0,
+                    hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_SHIN_WORN: {
@@ -1041,8 +1084,9 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: {x: 0, y: 0},
+                    position: {x: -0.08, y: -0.125},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
             },
@@ -1052,6 +1096,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1085,6 +1130,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.0 },
                     rotation: 0,
                     UIModel: null,
+                    hideParts: ['CHEST_WORN_SHIRT'],
                     z: -1,
                 },
                 RIGHT_SHOULDER_WORN: {
@@ -1094,8 +1140,9 @@ const ItemGetter = {
                     parent: 'RIGHT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 0.75, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0, y: 0.05},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_SHOULDER_WORN: {
@@ -1105,8 +1152,9 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: tier,
                     anchor: {x: 0.25, y: 0.18},
-                    position: {x: 0, y: 0},
+                    position: {x: 0, y: 0.05},
                     rotation: 0,
+                    hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 RIGHT_FOREARM_WORN: {
@@ -1118,6 +1166,7 @@ const ItemGetter = {
                     anchor: {x: (3/8), y: 0.05},
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_FOREARM_WORN: {
@@ -1129,6 +1178,7 @@ const ItemGetter = {
                     anchor: {x: 1-(3/8), y: 0.05},
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
             },
@@ -1138,6 +1188,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [5, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1371,6 +1422,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [3, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_ARROW'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [5, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1487,7 +1539,7 @@ const ItemGetter = {
             spriteIndex: spriteIndex,
         };
     },
-    BigHat: function (id, notedId, fullName, spriteIndex, cmlTopLeftIndex, modelSprite) {
+    BigHat: function (id, notedId, fullName, spriteIndex, modelSprite) {
         return {
             id: id,
             name: fullName,
@@ -1517,6 +1569,7 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
@@ -1631,9 +1684,9 @@ const ItemGetter = {
             }],
         };
     },
-    Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null) {
+    Shirt: function (id, notedId, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null, isArmour = false, itemDetail = null) {
         let armSpriteName = armSpriteNameOverride == null ? sprite : armSpriteNameOverride;
-        return {
+        let shirt = {
             id: id,
             name: name,
             noted: false,
@@ -1642,13 +1695,26 @@ const ItemGetter = {
             cannotRedirectTome: true,
             stackable: false,
             description: description,
-            requirements: ItemDetail.build([
+            requirements: itemDetail || ItemDetail.build([
                 ItemDetail.levelSkillDetail(4, 17, 'INCINERATE'),
             ]),
             essenceValue: EssenceValue(4, 8, [ShardCatalog.AIR(5), ShardCatalog.WATER(5), ShardCatalog.EARTH(5), ShardCatalog.NATURE(2), ShardCatalog.BIND(10)]),
             spriteIndex: itemSpriteIndex,
-            equipmentStats: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            model: {
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            actions: [{
+                interfaceID: 5,
+                id: 6,
+                name: 'Equip',
+                steps: [
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 3 : 9, 'ITEM_ID'] })]
+                    ]
+            }],
+        };
+
+        if (isArmour) {
+            shirt.model = {
                 RIGHT_SHOULDER_WORN: {
                     id: 'RIGHT_SHOULDER_WORN',
                     asset: 'armParts',
@@ -1656,8 +1722,9 @@ const ItemGetter = {
                     parent: 'RIGHT_SHOULDER',
                     spriteID: spriteId,
                     anchor: { x: 0.75, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0.05, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_SHOULDER_WORN: {
@@ -1667,8 +1734,9 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: spriteId,
                     anchor: { x: 0.25, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    position: {x: -0.05, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
                 CHEST_WORN: {
@@ -1681,6 +1749,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.0 },
                     rotation: 0,
                     UIModel: null,
+                    hideParts: ['CHEST_WORN_SHIRT'],
                     z: -1,
                 },
                 RIGHT_FOREARM_WORN: {
@@ -1690,8 +1759,9 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: spriteId,
                     anchor: {x: (3/8), y: 0.05},
-                    position: {x: 0, y: 0},
+                    position: {x: 0.05, y: -0.2},
                     rotation: 0,
+                    hideParts: ['RIGHT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
                 },
                 LEFT_FOREARM_WORN: {
@@ -1701,28 +1771,84 @@ const ItemGetter = {
                     parent: 'LEFT_FOREARM',
                     spriteID: spriteId,
                     anchor: {x: 1-(3/8), y: 0.05},
-                    position: {x: 0, y: 0},
+                    position: {x: -0.05, y: -0.2},
+                    rotation: 0,
+                    hideParts: ['LEFT_FOREARM_WORN_SHIRT'],
+                    UIModel: null,
+                },
+            };
+        }
+        else {
+            shirt.model = {
+                RIGHT_SHOULDER_WORN_SHIRT: {
+                    id: 'RIGHT_SHOULDER_WORN_SHIRT',
+                    asset: 'armParts',
+                    sprite: armSpriteName + 'RightShoulder',
+                    parent: 'RIGHT_SHOULDER',
+                    spriteID: spriteId,
+                    anchor: { x: 0.75, y: 0.18 },
+                    position: {x: 0.05, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
-            },
-            actions: [{
-                interfaceID: 5,
-                id: 6,
-                name: 'Equip',
-                steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID'] })]
-                ]
-            }],
-        };
+                LEFT_SHOULDER_WORN_SHIRT: {
+                    id: 'LEFT_SHOULDER_WORN_SHIRT',
+                    asset: 'armParts',
+                    sprite: armSpriteName + 'LeftShoulder',
+                    parent: 'LEFT_SHOULDER',
+                    spriteID: spriteId,
+                    anchor: { x: 0.25, y: 0.18 },
+                    position: {x: -0.05, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                CHEST_WORN_SHIRT: {
+                    id: 'CHEST_WORN_SHIRT',
+                    asset: 'chestParts',
+                    sprite: sprite + 'Chest',
+                    parent: 'CHEST',
+                    spriteID: spriteId,
+                    anchor: { x: 0.5, y: 0.65 },
+                    position: { x: 0, y: -0.05 },
+                    rotation: 0,
+                    UIModel: null,
+                    z: -1,
+                },
+                RIGHT_FOREARM_WORN_SHIRT: {
+                    id: 'RIGHT_FOREARM_WORN_SHIRT',
+                    asset: 'armParts',
+                    sprite:  armSpriteName + 'RightForearm',
+                    parent: 'RIGHT_FOREARM',
+                    spriteID: spriteId,
+                    anchor: {x: (3/8), y: 0.05},
+                    position: {x: 0.10, y: -0.15},
+                    rotation: -2.5 / 180 * Math.PI,
+                    UIModel: null,
+                },
+                LEFT_FOREARM_WORN_SHIRT: {
+                    id: 'LEFT_FOREARM_WORN_SHIRT',
+                    asset: 'armParts',
+                    sprite: armSpriteName + 'LeftForearm',
+                    parent: 'LEFT_FOREARM',
+                    spriteID: spriteId,
+                    anchor: {x: 1-(3/8), y: 0.05},
+                    position: {x: -0.1, y: -0.15},
+                    rotation: 2.5 / 180 * Math.PI,
+                    UIModel: null,
+                },
+            };
+        }
+        return shirt;
     },
     ColoredShirt: function (id, notedId, name, itemSpriteIndex, shirtStyleNumber, colorSpriteId, value) {
+        coloredShirtStyleAndColorById[id] = shirtStyleNumber * 1000 + colorSpriteId;
+        coloredShirtIdsByStyleAndColor[shirtStyleNumber * 1000 + colorSpriteId] = id;
         return this.Shirt(id, notedId, name, itemSpriteIndex, 'shirt' + shirtStyleNumber, colorSpriteId, value, 'Everyday clothing', 'shirt' );
     },
     RobeChest: function (id, notedId, name, itemspriteIndex, spriteId, value, equipmentStats, minEquipLevelId) {
         let tier = 1 + Math.floor(minEquipLevelId / 10);
         let incinerateLevel = 12 + Math.floor(minEquipLevelId / 2);
-        let robe = this.Shirt(id, notedId, name, itemspriteIndex, 'robe', spriteId, value);
+        let robe = this.Shirt(id, notedId, name, itemspriteIndex, 'robe', spriteId, value, 'A wizard robe.', null, true);
         robe.essenceValue = EssenceValue(incinerateLevel, 20 + (10 * tier), [ShardCatalog.AIR(20 + tier * 40), ShardCatalog.EARTH(60 + tier * 30), ShardCatalog.NATURE(tier * 50), ShardCatalog.BIND(tier * 150)]);
         robe.equipmentStats = equipmentStats;
         robe.model.RIGHT_SHOULDER_WORN.sprite = 'robeRightShoulder';
@@ -1735,13 +1861,14 @@ const ItemGetter = {
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, minEquipLevelId] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID'] })]
             ]
         }];
         return robe;
     },
-    Pants: function (id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value) {
-        return {
+    Pants: function (id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value, isArmour = false) {
+        let pants = {
             id: id,
             name: fullName,
             noted: false,
@@ -1755,8 +1882,22 @@ const ItemGetter = {
                 ItemDetail.levelSkillDetail(4, 17, 'INCINERATE'),
             ]),
             essenceValue: EssenceValue(4, 8, [ShardCatalog.AIR(5), ShardCatalog.WATER(5), ShardCatalog.EARTH(5), ShardCatalog.NATURE(2), ShardCatalog.BIND(10)]),
-            equipmentStats: [1, 1, 1, 1, 1, 1, 1, 1, 1],
-            model: {
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            actions: [{
+                interfaceID: 5,
+                id: 6,
+                name: 'Equip',
+                steps: [
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [isArmour ? 4 : 10, 'ITEM_ID'] })
+                    ]
+                ]
+            }],
+        };
+
+        if (isArmour) {
+            pants.model = {
                 LEFT_THIGH_WORN: {
                     id: 'LEFT_THIGH_WORN',
                     asset: 'legParts',
@@ -1766,6 +1907,7 @@ const ItemGetter = {
                     anchor: { x: (6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_THIGH_WORN: {
@@ -1777,6 +1919,7 @@ const ItemGetter = {
                     anchor: { x: 1-(6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
                 },
                 LEFT_SHIN_WORN: {
@@ -1788,6 +1931,7 @@ const ItemGetter = {
                     anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
                 RIGHT_SHIN_WORN: {
@@ -1799,23 +1943,70 @@ const ItemGetter = {
                     anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0},
                     rotation: 0,
+                    hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
                 },
-            },
-            actions: [{
-                interfaceID: 5,
-                id: 6,
-                name: 'Equip',
-                steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID'] })]
-                ]
-            }],
-        };
+            };
+        }
+        else {
+            pants.model = {
+                LEFT_THIGH_WORN_PANTS: {
+                    id: 'LEFT_THIGH_WORN_PANTS',
+                    asset: 'legParts',
+                    sprite: spriteName + 'LeftThigh',
+                    parent: 'LEFT_THIGH',
+                    spriteID: colorSpriteId,
+                    anchor: { x: (6/9), y: 0.2 },
+                    position: {x: 0.025, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                RIGHT_THIGH_WORN_PANTS: {
+                    id: 'RIGHT_THIGH_WORN_PANTS',
+                    asset: 'legParts',
+                    sprite: spriteName + 'RightThigh',
+                    parent: 'RIGHT_THIGH',
+                    spriteID: colorSpriteId,
+                    anchor: { x: 1-(6/9), y: 0.2 },
+                    position: {x: -0.025, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                LEFT_SHIN_WORN_PANTS: {
+                    id: 'LEFT_SHIN_WORN_PANTS',
+                    asset: 'legParts',
+                    sprite: spriteName + 'LeftShin',
+                    parent: 'LEFT_SHIN',
+                    spriteID: colorSpriteId,
+                    anchor: { x: 0.5, y: 0.1 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+                RIGHT_SHIN_WORN_PANTS: {
+                    id: 'RIGHT_SHIN_WORN_PANTS',
+                    asset: 'legParts',
+                    sprite: spriteName + 'RightShin',
+                    parent: 'RIGHT_SHIN',
+                    spriteID: colorSpriteId,
+                    anchor: { x: 0.5, y: 0.1 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    UIModel: null,
+                },
+            };
+        }
+        return pants;
+    },
+    ColoredPants: function(id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value) {
+        let pants = this.Pants(id, notedId, fullName, spriteName, colorSpriteId, spriteIndex, value);
+        coloredPantsIdsByColor[colorSpriteId] = id;
+        return pants;
     },
     RobeLegs: function (id, notedId, name, itemspriteIndex, spriteId, value, equipmentStats, minEquipLevelId) {
         let tier = 1 + Math.floor(minEquipLevelId / 10);
         let incinerateLevel = 12 + Math.floor(minEquipLevelId / 2);
-        let robe = this.Pants(id, notedId, name, "robe", spriteId, itemspriteIndex, value);
+        let robe = this.Pants(id, notedId, name, "robe", spriteId, itemspriteIndex, value, true);
         robe.essenceValue = EssenceValue(incinerateLevel, 20 + (10 * tier), [ShardCatalog.AIR(100 + tier * 30), ShardCatalog.WATER(20 + tier * 20), ShardCatalog.EARTH(60 + tier * 20), ShardCatalog.NATURE(tier * 40), ShardCatalog.BIND(tier * 100)]);
         robe.equipmentStats = equipmentStats;
         robe.model.LEFT_SHIN_WORN.position.y += 0.1;
@@ -1851,6 +2042,7 @@ const ItemGetter = {
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, minEquipLevelId] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
                 buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }];
@@ -1884,9 +2076,10 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.5 },
-                    position: { x: 0, y: 0.9 },
-                    rotation: -Math.PI / 6,
+                    position: { x: 0, y: 1.0 },
+                    rotation: -90 / 180 * Math.PI,
                     UIModel: null,
+                    z: 20,
                 },
             },
             actions: [{
@@ -1962,10 +2155,11 @@ const ItemGetter = {
                     sprite: 'necklaceMineFragment',
                     parent: 'HEAD',
                     spriteID: modelSpriteID,
-                    anchor: { x: 0.5, y: 0.3 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.525, y: 0.2 },
+                    position: { x: 0, y: 0.3 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
             },
             actions: [{
@@ -1973,7 +2167,10 @@ const ItemGetter = {
                 id: 3,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_NECKLACE'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })
+                    ]
                 ]
             }],
         };
@@ -2040,10 +2237,11 @@ const ItemGetter = {
                     sprite: 'necklaceMineChunk',
                     parent: 'HEAD',
                     spriteID: modelSpriteID,
-                    anchor: { x: 0.5, y: 0.3 },
-                    position: { x: 0, y: 0 },
+                    anchor: { x: 0.525, y: 0.2 },
+                    position: { x: 0, y: 0.3 },
                     rotation: 0,
                     UIModel: null,
+                    z: -1,
                 },
             },
             actions: [{
@@ -2051,7 +2249,9 @@ const ItemGetter = {
                 id: 3,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_NECKLACE'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [6, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
             }],
         };
@@ -2110,7 +2310,7 @@ const ItemGetter = {
                 flags: [],
                 actionInterval: 1,
                 steps: [
-                    [buildStep(StepType.STYLE_HAIR, {params: [-1, dyeNo]})]
+                    [buildStep(StepType.CHANGE_APPEARANCE, {params: [-1, -1, dyeNo]})]
                 ],
             }],
         };
@@ -2136,7 +2336,7 @@ const ItemGetter = {
                 flags: [],
                 actionInterval: 1,
                 steps: [
-                    [buildStep(StepType.STYLE_HAIR, {params: [spriteIndex, -1]})]
+                    [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[196, 197, 198, 199]] })]
                 ],
             }],
         };
@@ -2588,7 +2788,7 @@ const Interface = {
                 ],
             };
         },
-        StyleHair(id, name, hairSpriteIndex) {
+        StyleHair(id, name, hairSpriteIndex, hairColorIndex, cost = 0) {
             return {
                 id,
                 name,
@@ -2596,7 +2796,20 @@ const Interface = {
                 actionInterval: 1,
                 steps: [
                     [
-                        buildStep(StepType.STYLE_HAIR, {params: [hairSpriteIndex]})
+                        buildStep(StepType.CHANGE_APPEARANCE, {params: [-1, hairSpriteIndex, hairColorIndex]})
+                    ]
+                ],
+            };
+        },
+        DyeHair(id, name, hairDyeIndex) {
+            return {
+                id,
+                name,
+                flags: [],
+                actionInterval: 1,
+                steps: [
+                    [
+                        buildStep(StepType.CHANGE_APPEARANCE, {params: [-1, -1, hairDyeIndex]})
                     ]
                 ],
             };
@@ -4170,17 +4383,39 @@ const Character = {
             }]
         };
     },
-    Humanoid: function(id, name, spriteID, speciesSpriteName, faceId = null) {
+    Humanoid: function(id, name, spriteID, speciesSpriteName, faceId = null, eyeTint = 0x4f3822) {
+        let eyesId = 0;
         if (faceId == null) {
-            faceId = spriteID;
+            faceId = 0;
         }
-        return {
+        let limbsSpriteID = spriteID;
+        let genderType = '';
+
+
+        if (speciesSpriteName == 'human') {
+            if (eyesId == 0) {
+                eyesID = 1;
+            }
+            limbsSpriteID = spriteID % 10;
+            
+            genderType = 'Male';
+            if (Math.floor( spriteID / 10 ) == 3 ) {
+                genderType = 'Female';
+            }
+        }
+
+        if (spriteID == 666) {
+            eyesID = 0;
+            limbsSpriteID = faceId = spriteID;
+        }
+
+
+        let result = {
             id: id,
             name: name,
             modelName: 'HUMANOID',
             spriteIndex: 1,
             animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-            characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
             modelParams: {
                 CHEST: {
                      spriteID: spriteID,
@@ -4190,47 +4425,53 @@ const Character = {
                      spriteID: faceId,
                      sprite: speciesSpriteName + 'Face'
                 },
+                EYES: {
+                     spriteID: eyesID,
+                     sprite: speciesSpriteName + 'Eyes',
+                     tint: eyeTint,
+                },
                 HEAD: { 
-                    spriteID: spriteID,
-                    sprite: speciesSpriteName + 'Head'
+                    spriteID: limbsSpriteID,
+                    sprite: speciesSpriteName + 'Head' + genderType
                 },
                 RIGHT_SHOULDER: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'RightShoulder'
                 },
                 RIGHT_FOREARM: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'RightForearm'
                 },
                 LEFT_SHOULDER: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'LeftShoulder'
                 },
                 LEFT_FOREARM: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'LeftForearm'
                 },
                 RIGHT_THIGH: { 
-                    spriteID: spriteID,
-                    sprite: speciesSpriteName + 'RightThigh'
+                    spriteID: limbsSpriteID,
+                    sprite: speciesSpriteName + genderType + 'RightThigh'
                 },
                 RIGHT_SHIN: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'RightShin'
                 },
                 LEFT_THIGH: { 
-                    spriteID: spriteID,
-                    sprite: speciesSpriteName + 'LeftThigh'
+                    spriteID: limbsSpriteID,
+                    sprite: speciesSpriteName + genderType + 'LeftThigh'
                 },
                 LEFT_SHIN: { 
-                    spriteID: spriteID,
+                    spriteID: limbsSpriteID,
                     sprite: speciesSpriteName + 'LeftShin'
                 },
             },
         };
+        return result;
     },
-    Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, actions = []) {
-        let human = this.Humanoid(id, name, spriteID, 'human');
+    Human : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0xff0000, actions = [], faceId = null, eyeColor = 0x4f3822) {
+        let human = this.Humanoid(id, name, spriteID, 'human', faceId, eyeColor);
         human.actions = actions;
         human.equipmentModel = equipmentModel;
         if (hairStyleId != 0) {
@@ -4239,16 +4480,37 @@ const Character = {
                 asset: 'headParts',
                 sprite: 'hairStyle' + hairStyleId + '_',
                 parent: 'HEAD',
-                spriteID: hairColor,
-                anchor: {x: 0.5, y: 0.95},
-                position: {x: 0, y: 0.1},
+                spriteID : 0,
+                tint:  hairColor,
+                anchor: {x: 0.5, y: 25/38},
+                position: {x: 0, y: 0},
                 rotation: 0,
                 UIModel: null,
             };
         }
+        if (faceIDsToTint[faceId]) {
+            human.modelParams.FACE.tint = hairColor;
+        }
+        let genderID = Math.floor(spriteID / 10);
+
+        // If male or female, add overlay
+        if (genderID == 1 || genderID == 3) {
+            human.modelParams.CHEST_OVERLAY = {
+                id: 'CHEST_OVERLAY',
+                asset: 'chestParts',
+                sprite: 'humanChestOverlay',
+                parent: 'CHEST',
+                spriteID: genderID,
+                anchor: {x: 0.5, y: 0.65 },
+                position: {x: 0, y: 0},
+                rotation: 0,
+                UIModel: null,
+                z: 5
+            };
+        };
         return human;
     },
-    PickPocketableHuman : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, tier, talkToDialog = 6) {
+    PickPocketableHuman : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, tier, talkToDialog = 6, faceId = null, eyeColor = 0x4f3822) {
         let skillLevel = 5 + tier * 5;
         let actions = [{
             interfaceID: 0,
@@ -4308,7 +4570,7 @@ const Character = {
             ],
         ],
         }];
-        let human = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, actions);
+        let human = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, actions, faceId, eyeColor);
         human.requirements = ItemDetail.build([
             ItemDetail.levelSkillDetail(skillLevel, 20, 'STEAL'),
         ]);
@@ -4316,12 +4578,82 @@ const Character = {
         human.stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
         return human;
     },
-    Patreoner : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, amountDonated, talkToDialog) {
+    Patreoner : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, eyeColor, facial, amountDonated, talkToDialog) {
         let tier = Math.min(10, Math.max(1, Math.round( amountDonated / 75)));
+        if (!Number.isInteger(tier) || tier <= 0) {
+            tier = 1;
+        }
         let patreoner = this.PickPocketableHuman(id, name, spriteID, equipmentModel, hairStyleId, hairColor, tier, talkToDialog);
+        patreoner.modelParams.EYES.tint = eyeColor;
+        if (facial != null ) {
+            patreoner.modelParams.FACE.spriteID = facial.id;
+            if (facial.hairTint != null) {
+                patreoner.modelParams.FACE.tint = hairColor;
+            }
+        }
         tier = Math.round( amountDonated / 50);
+        if (!Number.isInteger(tier) || tier <= 0) {
+            tier = 1;
+        }
         patreoner.stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
         return patreoner;
+    },
+    KaityPatreon: function(id, amountDonated, talkToDialog) {
+        let result = this.Patreoner(id, 'Babyshark', 33, [null, null, null, 379, 483], 5, 0x4f3822, amountDonated, talkToDialog);
+        result.modelParams.FACE.spriteID = 'Kaity';
+        result.modelParams.EYES.tint = 0x523000;
+        result.modelParams.HEAD.spriteID = 'Kaity';
+        result.modelParams.HAIR.sprite = 'hairStyle';
+        result.modelParams.HAIR.spriteID = 'Kaity';
+        result.modelParams.HAIR.tint = 0x523000;
+        return result;
+    },
+    PatreonPim : function(id) {
+        let result = this.Human(id, 'Patreon Pim', 13, [null, null, null, 377, 489], 4, HairColors.CherryRed );
+        result.actions = [
+            {
+                interfaceID: 0,
+                id: 4,
+                name: 'Talk To',
+                steps: [
+                    buildStepList(StepList.WALK_ADJACENT),
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                        buildStep(StepType.IS_PATREON_SUPPORTER, {
+                            stepResultPass: StepResult.NEXT_STEP,
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.SHOW_DIALOG, {
+                            params: [62],
+                            stepResultPass: StepResult.END_ACTION,
+                        }) // You are a Patreon supporter, offer a teleport
+                    ],
+                    [
+                        
+                        buildStep(StepType.SHOW_DIALOG, {params: [61]}), // Heres what Patreon is about
+                    ]
+                ],
+            }
+        ];
+        return result;
+    },
+    PatreonTat : function(id) {
+        let result = this.Human(id, 'Patreon Tat', 13, [null, null, null, 375, 487], 3, HairColors.CherryRed );
+        result.actions = [
+            {
+                interfaceID: 0,
+                id: 4,
+                name: 'Talk To',
+                steps: [
+                    buildStepList(StepList.WALK_ADJACENT),
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                        buildStep(StepType.SHOW_DIALOG, { params: [67], })
+                    ]
+                ],
+            }
+        ];
+        return result;
     },
     Death : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0]) {
         let death = this.Human(id, name, spriteID, equipmentModel, 0, 0, [
@@ -4349,9 +4681,7 @@ const Character = {
             levelMultiplier,
             doNotRespawn: true,
             drops: [[[1, 100], [fragment, 1, 1, 2], [chunk, 1, 1, 2], [ore, 10, 25, 25], [ore, 20, 35, 25], [ore, 25, 50, 25], [pickaxe, 1, 3, 21]]],
-            characterModel: [2, 2, 2, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
             animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-            characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
             equipmentModel: [0, 0, 0, 0, 0], //head, right, left, chest, legs,
             modelParams: {
                 HEAD: { sprite: "golemHead", spriteID: spriteID, anchor : {x : 0.5, y : 0.975}, position : { x : 0.025, y : -0.5}},
@@ -4397,7 +4727,7 @@ const Character = {
         golem.modelParams.LEFT_THIGH.sprite += "Coal";
         return golem;
     },
-    HumanShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, shopsMenuInterfaceID) {
+    HumanShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, shopsMenuInterfaceID) {
         return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
                 interfaceID: 0,
                 id: 5,
@@ -4406,7 +4736,18 @@ const Character = {
                     [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
                     buildStep(StepType.OPEN_SHOP_INTERFACE, { params: [shopsMenuInterfaceID] })]
                 ],
-            }]);
+            }], faceId, eyeColor);
+        },
+    HumanAppearanceShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, appearanceShopMenuID) {
+        return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
+                interfaceID: 0,
+                id: 5,
+                name: 'Trade',
+                steps: [
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
+                    buildStep(StepType.OPEN_CHANGE_APPEARANCE, { params: [appearanceShopMenuID] })]
+                ],
+            }], faceId, eyeColor);
         },
         Skeleton: function (id, name, spriteID, stats, drops, equipmentModel, headSpriteID = null) {
             return {
@@ -4471,7 +4812,6 @@ const Character = {
                 stats: stats,
                 drops: drops,
                 spriteIndex: 4,
-                characterModel: [2, 2, 2, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
                 equipmentModel: equipmentModel,
                 actions: [{
                     interfaceID: 0,
@@ -4487,6 +4827,7 @@ const Character = {
             return def;
         },
         Wizard: function (id, name, spriteID, stats, drops, equipmentModel, attackRange, headSpriteID = null) {
+            let limbsSpriteID = spriteID % 10;
             return {
                 id: id,
                 name: name,
@@ -4494,16 +4835,17 @@ const Character = {
                 modelParams: {
                     CHEST: { spriteID },
                     HEAD: {
-                        spriteID: headSpriteID == null ? spriteID : headSpriteID
+                        spriteID: headSpriteID == null ? limbsSpriteID : headSpriteID
                     },
-                    RIGHT_SHOULDER: { spriteID },
-                    LEFT_SHOULDER: { spriteID },
-                    RIGHT_FOREARM: { spriteID },
-                    LEFT_FOREARM: { spriteID },
-                    RIGHT_THIGH: { spriteID },
-                    LEFT_THIGH: { spriteID },
-                    RIGHT_SHIN: { spriteID },
-                    LEFT_SHIN: { spriteID },
+                    RIGHT_SHOULDER: { limbsSpriteID },
+                    LEFT_SHOULDER: { limbsSpriteID },
+                    RIGHT_FOREARM: { limbsSpriteID },
+                    LEFT_FOREARM: { limbsSpriteID },
+                    RIGHT_THIGH: { limbsSpriteID },
+                    LEFT_THIGH: { limbsSpriteID },
+                    RIGHT_SHIN: { limbsSpriteID },
+                    LEFT_SHIN: { limbsSpriteID },
+                    EYES: { tint : EyeColors.Blue }
                 },
                 stats: stats,
                 drops: drops,
@@ -4511,7 +4853,6 @@ const Character = {
                 combatStyle: Combat.CombatStyle.MAGIC,
                 attackRange,
                 animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-                characterModel: [2, 2, 2, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
                 equipmentModel: equipmentModel, //head, right, left, chest, legs
                 actions: [{
                     interfaceID: 0,
@@ -4659,6 +5000,7 @@ const Character = {
                     },
                     HEAD: { spriteID: 0, },
                     FACE: {sprite: 9000,},
+                    EYES: {spriteID: 0},
                     LEFT_FOREARM: { spriteID: 0, },
                     RIGHT_FOREARM: { spriteID: 0, },
                     RIGHT_THIGH: { spriteID: 0, },
@@ -4959,12 +5301,12 @@ const Character = {
                 [buildStep(StepType.SHOW_DIALOG, {params: [2]})],
             ],
         }];
-        let osaik = this.Human(id, 'Osaik', 1, [null, 16, null, 413, 477], HairStyle.Scruffy, SpriteColor.Yellow, actions );
+        let osaik = this.Human(id, 'Osaik', 11, [null, 16, null, 413, 477], HairStyle.Scruffy, HairColors.Blond, actions, 6, EyeColors.Blue );
         osaik.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
         return osaik;
     },
     Kiaso : function(id) {
-        let kiaso = this.Human(id, 'Kiaso', 2, [null, 301, null, 405, 485], HairStyle.Scruffy, SpriteColor.Red, [{
+        let kiaso = this.Human(id, 'Kiaso', 12, [null, 301, null, 405, 485], HairStyle.Scruffy, HairColors.CherryRed, [{
             interfaceID: 0,
             id: 4,
             name: 'Talk To',
@@ -4972,7 +5314,7 @@ const Character = {
                 [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {params: [33]})],
             ],
-        }] );
+        }], 7, EyeColors.Purple);
         kiaso.stats = [[0, 40], [1, 40], [2, 40], [3, 40], [4, 40], [5, 40], [6, 40], [7, 40], [8, 40], [11, 40],];
         return kiaso;
     },
@@ -5313,3 +5655,29 @@ const Get = {
 }
 
 module.exports.Get = Get;
+module.exports.ColoredClothes = {
+    GetShirtStyleAndColorFromId : (id) => {
+        let styleAndColor = coloredShirtStyleAndColorById[id];
+        return {
+            shirtStyleID : Math.floor( styleAndColor / 1000 ),
+            shirtColorID : styleAndColor % 1000
+        };
+    },
+    GetShirtIdFromStyleAndColor : (shirtStyleId, shirtColorId) => {
+        let result = coloredShirtIdsByStyleAndColor[shirtStyleId * 1000 + shirtColorId];
+        if (result == null) {
+            console.info(shirtStyleId, shirtColorId, coloredShirtIdsByStyleAndColor);
+        }
+        return result;
+    },
+    GetPantsIdFromColor : (pantColorId) => coloredPantsIdsByColor[pantColorId],
+    GetPantsColorFromId : (id) => {
+        let colors = Object.keys(coloredPantsIdsByColor);
+        for(let i = 0; i < colors.length; ++i) {
+            if (coloredPantsIdsByColor[colors[i]] == id) {
+                return Number( colors[i] );
+            }
+        }
+    },
+};
+

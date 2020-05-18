@@ -12,6 +12,7 @@ const Dialogs = Object.freeze([{
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+        buildStep(StepType.OPEN_CHANGE_APPEARANCE, {params: [1]}),
     ]],
 }, {
     id: 1,
@@ -619,6 +620,123 @@ const Dialogs = Object.freeze([{
             stepResultFail: 'END_ACTION',
         })
     ]],
-},]);
+},
+{
+    id: 60, 
+    title: '<b>Babyshark</b>',
+    message: 'Baking cakes is easy!\n\n' +
+            
+            'Just take a<note>Pan</note>, <note>Raw Dough</note>, ann <note>Egg</note> and a <note>Bucket of Milk</note>. \n\n' +
+
+            'Put all the ingredients into the pan, then cook your new <note>Uncooked Cake</note> on a <note>Range</note>! \n\n' + 
+            
+            'You\'re going to love it!',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 61, 
+    title: '<b>Patreon Pim</b>',
+    message: 'Hello traveler. Welcome to <note>The Patreon Embassy</note>\n\n' +
+
+            '<note>Patreon Palace</note> is a luxurious palace devoted to those who keep the Elorian Treasury full. This embassy acts as the gateway between <note>Eloria</note> and <note>Patreon Palace</note>.\n\n' + 
+            
+            'How can I help you today?',
+    continueSteps: [[
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[273, 274, 275]] }),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 62, 
+    title: '<b>Patreon Pim</b>',
+    message: 'Welcome!\n\n' + 
+    
+            'Thank you for being a devoted Patreon supporter.\n\n' +
+            
+            'Would you like me to teleport you to <note>Patreon Palace</note>?',
+    continueSteps: [[
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[276, 277]] }),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        
+    ]],
+},
+{
+    id: 63, 
+    title: '<b>Patreon Pim</b>',
+    message: 'Have a safe trip!',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.TELEPORT, {params: [2, 152, 40, 154, 42, 0] }),
+    ]],
+},
+{
+    id: 64, 
+    title: '<b>Patreon Pim</b>',
+    message: '<note>Patreon Palace</note> is a small kingdom created for Patreon supporters.\n\n' +
+            
+            'These supporters keep the Elorian Teasury full and help forge these beautiful lands.\n\n' +
+            
+            'Patrons can visit <note>Patreon Palace</note> whenever they please.',
+    continueSteps: [[
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[274, 275]] }),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 65, 
+    title: '<b>Patreon Pim</b>',
+    message: 'You can become a Patron by donating monthly to Guilds of Gods at Patreon.com/GuildsOfGods.\n\n' +
+            
+            'There are rewards in placed based on the tiers and total amounts donated. A subscription of any tier will give you access to <note>Patreon Palace</note>!\n\n' +
+            
+            '<note>Money Bag</note> donations will contribute towards your donated amount when reaching <note>Patreon</note> reward goals.',
+    continueSteps: [[
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[273, 275]] }),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 66, 
+    title: '<b>Patreon Pim</b>',
+    message: 'You are most welcome.', 
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 67, 
+    title: '<b>Patreon Tat</b>',
+    message: 'Thank you for visiting!\n\n' +
+
+            'Would you like for me to teleport you to the <note>Patreon Embassy</note>?', 
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[278, 279]] }),
+    ]],
+},
+{
+    id: 68, 
+    title: '<b>Patreon Tat</b>',
+    message: 'Have a safe trip and come again!', 
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.TELEPORT, {params: [0, 251, 127, 253, 130, 0] }),
+    ]],
+},
+{
+    id: 69, 
+    title: '<b>Patreon Tat</b>',
+    message: 'Just let me know whenever you are ready to go home.', 
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 70, // Aeronic
+    title: '<b>Aeronic</b>',
+    message: 'I hope you like my musical additions and suggestions for GoG! Remember to stand for the Elorian Anthem!',
+}]);
 
 module.exports.Dialogs = Dialogs;
