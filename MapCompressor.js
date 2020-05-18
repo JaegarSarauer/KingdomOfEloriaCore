@@ -163,11 +163,22 @@ function getOptimizedDataArray(layerDataArray, blockingTilesArray ) {
                 if (result[x] == null) {
                     result[x] = {};
                 }
+
                 if (tileDatas[x][y].ids.length == 1) {
                     result[x][y] = tileDatas[x][y].ids[0];
                 }
                 else {
-                    result[x][y] = tileDatas[x][y].ids;
+                    let optimizedIds = [];
+                    let ids = tileDatas[x][y].ids;
+
+                    for(let i = ids.length - 1; i >= 0; --i) {
+                        optimizedIds.push(ids[i]);
+                        if (blockingTiles[ids[i]] != null) {
+                            break;
+                        }
+                    }
+
+                    result[x][y] = optimizedIds;
                 }
             }
         }
