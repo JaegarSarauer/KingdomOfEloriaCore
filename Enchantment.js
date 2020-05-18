@@ -65,7 +65,7 @@ module.exports.Enchantment = [{
     consumable: false,
 }, {
     id: 9,
-    name: 'Goblin Camp Teleport',
+    name: 'Goblin Outpost Teleport',
     gemBonuses: [1, 0.8, 0.7, 1.4, 0.6, 0.8, 0.7, 0.9, 1.3, 1.5, 1.6],
     enchantCost: 20,
     consumable: true,
@@ -77,7 +77,7 @@ module.exports.Enchantment = [{
         steps: [
             [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
             buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }),
-            buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] }),
+            buildStep(StepType.TELEPORT, { params: [0, 209, 265, 215, 270, 3] }),
             buildStep(StepType.USE_ENCHANTMENT_CHARGE, { params: [9, 1] })]
         ],
     }],
@@ -95,7 +95,7 @@ module.exports.Enchantment = [{
         steps: [
             [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
             buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }),
-            buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] }),
+            buildStep(StepType.TELEPORT, { params: [0, 131, 90, 136, 93, 3] }),
             buildStep(StepType.USE_ENCHANTMENT_CHARGE, { params: [10, 1] })]
         ],
     }],
@@ -113,7 +113,7 @@ module.exports.Enchantment = [{
         steps: [
             [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
             buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }),
-            buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] }),
+            buildStep(StepType.TELEPORT, { params: [0, 67, 93, 68, 94, 3] }),
             buildStep(StepType.USE_ENCHANTMENT_CHARGE, { params: [11, 1] })]
         ],
     }],
@@ -140,7 +140,7 @@ module.exports.Enchantment = [{
         steps: [
             [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
             buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }),
-            buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] }),
+            buildStep(StepType.TELEPORT, { params: [0, 59, 157, 62, 159, 3] }),
             buildStep(StepType.USE_ENCHANTMENT_CHARGE, { params: [13, 1] })]
         ],
     }],
@@ -158,7 +158,7 @@ module.exports.Enchantment = [{
         steps: [
             [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
             buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }),
-            buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] }),
+            buildStep(StepType.TELEPORT, { params: [0, 250, 123, 254, 126, 3] }),
             buildStep(StepType.USE_ENCHANTMENT_CHARGE, { params: [14, 1] })]
         ],
     }],
