@@ -122,10 +122,7 @@ module.exports.Enchantment = [{
     name: 'Item Collection',
     enchantCost: 0.03,
     consumable: true,
-    steps: [
-        [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You rub the gem and begin the teleport...'] }),
-        buildStep(StepType.TELEPORT, { params: [0, 30, 34, 33, 37, 3] })]
-    ],
+    itemDefStateParams: ['ITEM_ID'],
 }, {
     id: 13,
     name: 'Party Room Teleport',
