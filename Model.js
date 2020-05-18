@@ -208,7 +208,7 @@ const Model = {
         HEAD: {
             id: 'HEAD',
             asset: 'headParts',
-            sprite: 'humanHead',
+            sprite: 'humanHeadMale',
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.9},
