@@ -170,7 +170,7 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     isGuard: true,
     entityGuildType: 'GUARD',
     modelParams : {
-        EYES : { tint : EyeColors.Blue }
+        EYES : { tint : EyeColors.Blue },
     },
     actions: [{
         interfaceID: 0,
