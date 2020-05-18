@@ -420,6 +420,14 @@ const ItemGetter = {
         }];
         ring.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
         ring.description = 'A simple gold ring';
+        ring.baseSpriteIndex = spriteIndex;
+        ring.spriteIndex = (item) => {
+            if (item.getStateValue('id') == 'MULTI_ENCHANTMENT') {
+                return item.getStateValue('spriteIndex') || spriteIndex;
+            } else {
+                return spriteIndex;
+            }
+        };
         return ring;
     },
     GemRing: function(id, name, gemcuttingLevel, incinerateLevel, value, tier, state, spriteIndex) {
@@ -480,6 +488,14 @@ const ItemGetter = {
         ]);
         necklace.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
         necklace.description = 'A simple gold amulet';
+        necklace.baseSpriteIndex = spriteIndex;
+        necklace.spriteIndex = (item) => {
+            if (item.getStateValue('id') == 'MULTI_ENCHANTMENT') {
+                return item.getStateValue('spriteIndex') || spriteIndex;
+            } else {
+                return spriteIndex;
+            }
+        };
         let jewelryCraftLevels = [22, 62, 94];
         necklace.jewelryCraftLevels = jewelryCraftLevels;
         necklace.useActions = [{
@@ -541,6 +557,13 @@ const ItemGetter = {
     Mold: function(id, notedId, fullName, value, spriteIndex, description, essenceValue) {
         let item = this.Item(id, notedId, fullName, value, spriteIndex, description, essenceValue, false);
         return item;
+    },
+    NullItem: (id) => {
+        return {
+            id,
+            name: 'null item',
+            cannotRedirectTome: true,
+        }
     },
     MixableCookingItem: function(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable, recipe) {
         let item = this.Item(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable);

@@ -1,4 +1,5 @@
 const EssenceCatalog = require('./Essence').EssenceCatalog;
+const ShardCatalog = require('./Essence').ShardCatalog;
 const StepResult = require('./Step').StepResult;
 const StepType = require('./Step').StepType;
 
@@ -56,13 +57,14 @@ const SpellBuilder = {
             }],
         };
     },
-    ENCHANT: (id, name, magicLevelReq, essenceRequirement, enchantmentID, spellIconIndex) => {
+    ENCHANT: (id, xpEarned, name, magicLevelReq, essenceRequirement, enchantmentID, spellIconIndex) => {
         let enchantSteps = [];
         enchantSteps.push(buildStep(StepType.SELECT_ENCHANTMENT, { params: [id] }));
 
         return {
             id,
             name,
+            xpEarned,
             type: SpellType.ENCHANT,
             magicLevelReq,
             essenceRequirement,
@@ -104,6 +106,7 @@ const SpellBuilder = {
             actions: [{
                 name: 'Cast',
                 interfaceID: 21,
+                actionInterval: -1,
                 id: 0,
                 steps: [teleportSteps],
             }],
@@ -119,9 +122,34 @@ const SpellBuilder = {
                 name: 'Cast',
                 interfaceID: 21,
                 id: 0,
-                actionInterval: 1,
+                actionInterval: -1,
                 steps: [
                     [buildStep(StepType.OPEN_ENCHANTMENT_INTERFACE)]
+                ],
+            }],
+        };
+    },
+    SYPHON_ESSENCE: (id, name, xpGain, carbonAmountReq, magicLevelReq, essenceShardID, spellIconIndex) => {
+        return {
+            id,
+            name,
+            type: SpellType.OTHER,
+            spellIconIndex,
+            magicLevelReq: [[22, magicLevelReq]],
+            carbonRequirement: carbonAmountReq,
+            actions: [{
+                name: 'Cast',
+                interfaceID: 21,
+                id: 0,
+                flags: ['REPEAT_ACTION'],
+                actionInterval: 3,
+                steps: [
+                    [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [512, carbonAmountReq] }),
+                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [22, magicLevelReq] }),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [512, carbonAmountReq] }),
+                    buildStep(StepType.SET_SYPHON_SHARD_ITEM_AMOUNT, { params: [essenceShardID] }),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [essenceShardID, 'ITEM_AMOUNT'] }),
+                    buildStep(StepType.GIVE_XP, { params: [22, xpGain] }),]
                 ],
             }],
         };
@@ -167,24 +195,35 @@ module.exports.Spells = [
 
     SpellBuilder.SHOW_ENCHANTMENT_INTERFACE(25, 'Enchant...', 25),
 
-    SpellBuilder.ENCHANT(26, 'Enchant Fortify Ranged Defense', [[22, 22]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(2)], 5, 34),
-    SpellBuilder.ENCHANT(27, 'Enchant Fortify Magic Defense', [[22, 26]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(2)], 8, 37),
-    SpellBuilder.ENCHANT(28, 'Enchant Fortify Melee Defense', [[22, 30]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(2)], 2, 31),
+    SpellBuilder.ENCHANT(26, 55, 'Enchant Fortify Ranged Defense', [[22, 22]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(2)], 5, 34),
+    SpellBuilder.ENCHANT(27, 65, 'Enchant Fortify Magic Defense', [[22, 26]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(2)], 8, 37),
+    SpellBuilder.ENCHANT(28, 75, 'Enchant Fortify Melee Defense', [[22, 30]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(2)], 2, 31),
 
-    SpellBuilder.ENCHANT(29, 'Enchant Fortify Ranged Focus', [[22, 28]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(3)], 3, 32),
-    SpellBuilder.ENCHANT(30, 'Enchant Fortify Magic Focus', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(3)], 6, 35),
-    SpellBuilder.ENCHANT(31, 'Enchant Fortify Melee Focus', [[22, 36]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(3)], 0, 29),
+    SpellBuilder.ENCHANT(29, 70, 'Enchant Fortify Ranged Focus', [[22, 28]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(3)], 3, 32),
+    SpellBuilder.ENCHANT(30, 80, 'Enchant Fortify Magic Focus', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(3)], 6, 35),
+    SpellBuilder.ENCHANT(31, 90, 'Enchant Fortify Melee Focus', [[22, 36]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(3)], 0, 29),
 
-    SpellBuilder.ENCHANT(32, 'Enchant Fortify Ranged Power', [[22, 34]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(4)], 4, 33),
-    SpellBuilder.ENCHANT(33, 'Enchant Fortify Magic Power', [[22, 38]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(4)], 7, 36),
-    SpellBuilder.ENCHANT(34, 'Enchant Fortify Melee Power', [[22, 42]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(4)], 1, 30),
+    SpellBuilder.ENCHANT(32, 85, 'Enchant Fortify Ranged Power', [[22, 34]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.SOUL(4)], 4, 33),
+    SpellBuilder.ENCHANT(33, 90, 'Enchant Fortify Magic Power', [[22, 38]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(4)], 7, 36),
+    SpellBuilder.ENCHANT(34, 105, 'Enchant Fortify Melee Power', [[22, 42]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(4)], 1, 30),
 
-    SpellBuilder.ENCHANT(35, 'Enchant Goblin Camp Teleport', [[22, 12]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.VOID(3)], 9, 26),
-    SpellBuilder.ENCHANT(36, 'Enchant Volcano Teleport', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.EARTH(7), EssenceCatalog.VOID(3)], 10, 17),
-    SpellBuilder.ENCHANT(37, 'Enchant Wizard Tower Teleport', [[22, 44]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.VOID(3)], 11, 21),
-    SpellBuilder.ENCHANT(37, 'Enchant Drop Party Teleport', [[22, 16]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.VOID(3)], 13, 27),
-    SpellBuilder.ENCHANT(37, 'Enchant Patreon Palace Teleport', [[22, 20]], [EssenceCatalog.NATURE(3), EssenceCatalog.WATER(4), EssenceCatalog.VOID(3)], 14, 28),
-
+    SpellBuilder.ENCHANT(35, 30, 'Enchant Goblin Camp Teleport', [[22, 12]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.VOID(3)], 9, 26),
+    SpellBuilder.ENCHANT(36, 80, 'Enchant Volcano Teleport', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.EARTH(7), EssenceCatalog.VOID(3)], 10, 17),
+    SpellBuilder.ENCHANT(37, 110, 'Enchant Wizard Tower Teleport', [[22, 44]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.VOID(3)], 11, 21),
+    SpellBuilder.ENCHANT(38, 40, 'Enchant Drop Party Teleport', [[22, 16]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.VOID(3)], 13, 27),
+    SpellBuilder.ENCHANT(39, 50, 'Enchant Patreon Palace Teleport', [[22, 20]], [EssenceCatalog.NATURE(3), EssenceCatalog.WATER(4), EssenceCatalog.VOID(3)], 14, 28),
+    SpellBuilder.SYPHON_ESSENCE(40, "Syphon Air Essence", 5, 100, 1, ShardCatalog.AIR(1)[0], 40),
+    SpellBuilder.SYPHON_ESSENCE(41, "Syphon Water Essence", 6, 100, 3, ShardCatalog.WATER(1)[0], 41),
+    SpellBuilder.SYPHON_ESSENCE(42, "Syphon Earth Essence", 7, 100, 6, ShardCatalog.EARTH(1)[0], 42),
+    SpellBuilder.SYPHON_ESSENCE(43, "Syphon Fire Essence", 8, 100, 10, ShardCatalog.FIRE(1)[0], 43),
+    SpellBuilder.SYPHON_ESSENCE(44, "Syphon Void Essence", 16, 200, 50, ShardCatalog.VOID(1)[0], 44),
+    SpellBuilder.SYPHON_ESSENCE(45, "Syphon Metal Essence", 9, 100, 16, ShardCatalog.METAL(1)[0], 45),
+    SpellBuilder.SYPHON_ESSENCE(46, "Syphon Force Essence", 13, 150, 28, ShardCatalog.FORCE(1)[0], 46),
+    SpellBuilder.SYPHON_ESSENCE(47, "Syphon Sharp Essence", 6, 100, 20, ShardCatalog.SHARP(1)[0], 47),
+    SpellBuilder.SYPHON_ESSENCE(48, "Syphon Poison Essence", 6, 150, 34, ShardCatalog.POISON(1)[0], 48),
+    SpellBuilder.SYPHON_ESSENCE(49, "Syphon Bind Essence", 6, 200, 70, ShardCatalog.BIND(1)[0], 49),
+    SpellBuilder.SYPHON_ESSENCE(50, "Syphon Soul Essence", 6, 200, 80, ShardCatalog.SOUL(1)[0], 50),
+    SpellBuilder.SYPHON_ESSENCE(51, "Syphon Nature Essence", 6, 200, 50, ShardCatalog.NATURE(1)[0], 51),
 ];
 
 module.exports.SpellType = SpellType;

@@ -56,6 +56,20 @@ module.exports.StepType = StepType = {
         paramTypes: [],
         params: [],
     },
+    USE_ENCHANTMENT_CHARGE: {
+        id: 'USE_ENCHANTMENT_CHARGE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number'], // enchantmentID, chargeUseAmount
+        params: [],
+    },
+    USE_ENCHANTMENT: {
+        id: 'USE_ENCHANTMENT',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], // enchantmentID
+        params: [],
+    },
     CONVERT_TO_NOTE: {
         id: 'CONVERT_TO_NOTE',
         stepResultFail: 'END_ACTION',
@@ -563,6 +577,13 @@ module.exports.StepType = StepType = {
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
         paramTypes: ['number'], //timerID
+        params: [],
+    },
+    SET_SYPHON_SHARD_ITEM_AMOUNT: {
+        id: 'SET_SYPHON_SHARD_ITEM_AMOUNT',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'object|null'], //shardID
         params: [],
     },
     GIVE_INVENTORY_ITEM: {
@@ -1285,7 +1306,15 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
     ENTITY_REF_ID: {
         id: 'ENTITY_REF_ID',
         type: 'number',
-    }
+    },
+    ENCHANTMENT_ID: {
+        id: 'ENCHANTMENT_ID',
+        type: 'number',
+    },
+    ACTION_ID: {
+        id: 'ACTION_ID',
+        type: 'number',
+    },
 };
 
 try {
@@ -1358,6 +1387,7 @@ try {
     const StepChangeAttackStyle = require('../internal/Steps/StepChangeAttackStyle');
     const StepChangeCombatRetaliation = require('../internal/Steps/StepChangeCombatRetaliation');
     const StepClearTimer = require('../internal/Steps/StepClearTimer');
+    const StepSetSyphonShardItemAmount = require('../internal/Steps/StepSetSyphonShardItemAmount');
     const StepGiveInventoryItem = require('../internal/Steps/StepGiveInventoryItem');
     const StepGiveStorageItem = require('../internal/Steps/StepGiveStorageItem');
     const StepGiveEquipmentItem = require('../internal/Steps/StepGiveEquipmentItem');
@@ -1413,6 +1443,8 @@ try {
     const StepPurchaseItem = require('../internal/Steps/StepPurchaseItem');
     const StepWithdrawPurchase = require('../internal/Steps/StepWithdrawPurchase');
     const StepOpenEnchantmentInterface = require('../internal/Steps/StepOpenEnchantmentInterface');
+    const StepUseEnchantmentCharge = require('../internal/Steps/StepUseEnchantmentCharge');
+    const StepUseEnchantment = require('../internal/Steps/StepUseEnchantment');
     const StepOpenPurchasesInterface = require('../internal/Steps/StepOpenPurchasesInterface');
     const StepOpenDropPartyMinigameChestInterface = require('../internal/Steps/StepOpenDropPartyMinigameChestInterface');
     const StepOwnerInWalkBounds = require('../internal/Steps/StepOwnerInWalkBounds');
@@ -1562,6 +1594,16 @@ try {
         OPEN_ENCHANTMENT_INTERFACE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepOpenEnchantmentInterface.StepOpenEnchantmentInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        USE_ENCHANTMENT_CHARGE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepUseEnchantmentCharge.StepUseEnchantmentCharge(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        USE_ENCHANTMENT: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepUseEnchantment.StepUseEnchantment(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         WALK_ADJACENT: {
@@ -1902,6 +1944,11 @@ try {
         CLEAR_TIMER: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepClearTimer.StepClearTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        SET_SYPHON_SHARD_ITEM_AMOUNT: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSetSyphonShardItemAmount.StepSetSyphonShardItemAmount(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         GIVE_INVENTORY_ITEM: {
