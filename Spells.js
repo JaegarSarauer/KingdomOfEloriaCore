@@ -207,7 +207,7 @@ module.exports.Spells = [
     SpellBuilder.ENCHANT(33, 90, 'Enchant Fortify Magic Power', [[22, 38]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.SOUL(4)], 7, 36),
     SpellBuilder.ENCHANT(34, 105, 'Enchant Fortify Melee Power', [[22, 42]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.SOUL(4)], 1, 30),
 
-    SpellBuilder.ENCHANT(35, 30, 'Enchant Goblin Camp Teleport', [[22, 12]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.VOID(3)], 9, 26),
+    SpellBuilder.ENCHANT(35, 30, 'Enchant Goblin Outpost Teleport', [[22, 12]], [EssenceCatalog.NATURE(2), EssenceCatalog.WATER(7), EssenceCatalog.VOID(3)], 9, 26),
     SpellBuilder.ENCHANT(36, 80, 'Enchant Volcano Teleport', [[22, 32]], [EssenceCatalog.NATURE(2), EssenceCatalog.EARTH(7), EssenceCatalog.VOID(3)], 10, 17),
     SpellBuilder.ENCHANT(37, 110, 'Enchant Wizard Tower Teleport', [[22, 44]], [EssenceCatalog.NATURE(2), EssenceCatalog.FIRE(7), EssenceCatalog.VOID(3)], 11, 21),
     SpellBuilder.ENCHANT(38, 40, 'Enchant Drop Party Teleport', [[22, 16]], [EssenceCatalog.NATURE(2), EssenceCatalog.AIR(7), EssenceCatalog.VOID(3)], 13, 27),
@@ -224,6 +224,8 @@ module.exports.Spells = [
     SpellBuilder.SYPHON_ESSENCE(49, "Syphon Bind Essence", 6, 200, 70, ShardCatalog.BIND(1)[0], 49),
     SpellBuilder.SYPHON_ESSENCE(50, "Syphon Soul Essence", 6, 200, 80, ShardCatalog.SOUL(1)[0], 50),
     SpellBuilder.SYPHON_ESSENCE(51, "Syphon Nature Essence", 6, 200, 50, ShardCatalog.NATURE(1)[0], 51),
+    SpellBuilder.ENCHANT(52, 170, 'Enchant Item Collection', [[22, 65]], [EssenceCatalog.NATURE(5), EssenceCatalog.EARTH(16), EssenceCatalog.SOUL(6)], 12, 38),
+    SpellBuilder.ENCHANT(53, 200, 'Enchant Auto Consume', [[22, 80]], [EssenceCatalog.NATURE(5), EssenceCatalog.WATER(20), EssenceCatalog.VOID(9)], 15, 39),
 ];
 
 module.exports.SpellType = SpellType;
