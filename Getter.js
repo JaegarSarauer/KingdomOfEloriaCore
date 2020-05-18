@@ -789,7 +789,7 @@ const ItemGetter = {
                     parent: 'HEAD',
                     spriteID: tier,
                     anchor: { x: 9/24, y: 0.8 },
-                    position: {x: 0, y: -0.1},
+                    position: {x: -0.01, y: -0.11},
                     rotation: 0,
                     UIModel: null,
                     hideParts : ['HAIR'],
@@ -856,10 +856,11 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.1 },
-                    position: {x: 0, y: 0.1},
+                    position: {x: 0, y: 0.09},
                     rotation: 0,
                     hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
+                    z: 5,
                 },
                 RIGHT_SHIN_WORN: {
                     id: 'RIGHT_SHIN_WORN',
@@ -868,10 +869,11 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.1 },
-                    position: {x: 0, y: 0.1},
+                    position: {x: 0, y: 0.09},
                     rotation: 0,
                     hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
+                    z: 5,
                 },
             },
             actions: [{
@@ -924,7 +926,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 9/11, y: 0.18 },
-                    position: {x: 0.4, y: -0.05},
+                    position: {x: 0.38, y: -0.05},
                     rotation: 0,
                     hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
@@ -936,7 +938,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 1-9/11, y: 0.18 },
-                    position: {x: -0.4, y: -0.05},
+                    position: {x: -0.38, y: -0.05},
                     rotation: 0,
                     hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
@@ -948,7 +950,7 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: {x: 1-4/7, y: 0.05},
-                    position: {x: 0.05, y: 0},
+                    position: {x: 0.06, y: 0},
                     rotation: 0,
                     hideParts: ['RIGHT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
@@ -960,7 +962,7 @@ const ItemGetter = {
                     parent: 'LEFT_FOREARM',
                     spriteID: tier,
                     anchor: {x: 4/7, y: 0.05},
-                    position: {x: -0.05, y: 0},
+                    position: {x: -0.06, y: 0},
                     rotation: 0,
                     hideParts: ['LEFT_FOREARM_WORN_SHIRT'],
                     UIModel: null,
@@ -1045,8 +1047,8 @@ const ItemGetter = {
                     sprite: 'chainLeftThigh',
                     parent: 'LEFT_THIGH',
                     spriteID: tier,
-                    anchor: { x: (4/7), y: 0.15 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: (4/7), y: 0.185 },
+                    position: {x: -0.08, y: 0},
                     rotation: 0,
                     hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
@@ -1057,8 +1059,8 @@ const ItemGetter = {
                     sprite: 'chainRightThigh',
                     parent: 'RIGHT_THIGH',
                     spriteID: tier,
-                    anchor: { x: 1-(4/7), y: 0.15 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: 1-(4/7), y: 0.185 },
+                    position: {x: 0.08, y: 0},
                     rotation: 0,
                     hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
@@ -1070,7 +1072,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0.08, y: -0.125},
                     rotation: 0,
                     hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
@@ -1082,7 +1084,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: {x: 0, y: 0},
+                    position: {x: -0.08, y: -0.125},
                     rotation: 0,
                     hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
@@ -1138,7 +1140,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 0.75, y: 0.18 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0, y: 0.05},
                     rotation: 0,
                     hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
@@ -1150,7 +1152,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: tier,
                     anchor: {x: 0.25, y: 0.18},
-                    position: {x: 0, y: 0},
+                    position: {x: 0, y: 0.05},
                     rotation: 0,
                     hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
@@ -1807,7 +1809,7 @@ const ItemGetter = {
                     parent: 'CHEST',
                     spriteID: spriteId,
                     anchor: { x: 0.5, y: 0.65 },
-                    position: { x: 0, y: 0.0 },
+                    position: { x: 0, y: -0.05 },
                     rotation: 0,
                     UIModel: null,
                     z: -1,
@@ -1819,8 +1821,8 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: spriteId,
                     anchor: {x: (3/8), y: 0.05},
-                    position: {x: 0.15, y: -0.15},
-                    rotation: 0,
+                    position: {x: 0.10, y: -0.15},
+                    rotation: -2.5 / 180 * Math.PI,
                     UIModel: null,
                 },
                 LEFT_FOREARM_WORN_SHIRT: {
@@ -1830,8 +1832,8 @@ const ItemGetter = {
                     parent: 'LEFT_FOREARM',
                     spriteID: spriteId,
                     anchor: {x: 1-(3/8), y: 0.05},
-                    position: {x: -0.15, y: -0.15},
-                    rotation: 0,
+                    position: {x: -0.1, y: -0.15},
+                    rotation: 2.5 / 180 * Math.PI,
                     UIModel: null,
                 },
             };
@@ -1955,7 +1957,7 @@ const ItemGetter = {
                     parent: 'LEFT_THIGH',
                     spriteID: colorSpriteId,
                     anchor: { x: (6/9), y: 0.2 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0.025, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -1966,7 +1968,7 @@ const ItemGetter = {
                     parent: 'RIGHT_THIGH',
                     spriteID: colorSpriteId,
                     anchor: { x: 1-(6/9), y: 0.2 },
-                    position: {x: 0, y: 0},
+                    position: {x: -0.025, y: 0},
                     rotation: 0,
                     UIModel: null,
                 },
@@ -2074,9 +2076,10 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.5 },
-                    position: { x: 0, y: 0.9 },
-                    rotation: -Math.PI / 6,
+                    position: { x: 0, y: 1.0 },
+                    rotation: -90 / 180 * Math.PI,
                     UIModel: null,
+                    z: 20,
                 },
             },
             actions: [{
@@ -4386,12 +4389,19 @@ const Character = {
             faceId = 0;
         }
         let limbsSpriteID = spriteID;
+        let genderType = '';
+
 
         if (speciesSpriteName == 'human') {
             if (eyesId == 0) {
                 eyesID = 1;
             }
             limbsSpriteID = spriteID % 10;
+            
+            genderType = 'Male';
+            if (Math.floor( spriteID / 10 ) == 3 ) {
+                genderType = 'Female';
+            }
         }
 
         if (spriteID == 666) {
@@ -4399,10 +4409,6 @@ const Character = {
             limbsSpriteID = faceId = spriteID;
         }
 
-        let headType = 'Male';
-        if (Math.floor( spriteID / 10 ) == 3 ) {
-            headType = 'Female';
-        }
 
         let result = {
             id: id,
@@ -4426,7 +4432,7 @@ const Character = {
                 },
                 HEAD: { 
                     spriteID: limbsSpriteID,
-                    sprite: speciesSpriteName + 'Head' + headType
+                    sprite: speciesSpriteName + 'Head' + genderType
                 },
                 RIGHT_SHOULDER: { 
                     spriteID: limbsSpriteID,
@@ -4446,7 +4452,7 @@ const Character = {
                 },
                 RIGHT_THIGH: { 
                     spriteID: limbsSpriteID,
-                    sprite: speciesSpriteName + 'RightThigh'
+                    sprite: speciesSpriteName + genderType + 'RightThigh'
                 },
                 RIGHT_SHIN: { 
                     spriteID: limbsSpriteID,
@@ -4454,7 +4460,7 @@ const Character = {
                 },
                 LEFT_THIGH: { 
                     spriteID: limbsSpriteID,
-                    sprite: speciesSpriteName + 'LeftThigh'
+                    sprite: speciesSpriteName + genderType + 'LeftThigh'
                 },
                 LEFT_SHIN: { 
                     spriteID: limbsSpriteID,
