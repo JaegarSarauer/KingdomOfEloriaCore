@@ -159,4 +159,10 @@ module.exports.Enchantment = [{
             buildStep(StepType.USE_ENCHANTMENT_CHARGE, { params: [14, 1] })]
         ],
     }],
+}, {
+    id: 15,
+    name: 'Auto Consume',
+    enchantCost: 0.03,
+    consumable: true,
+    itemDefStateParams: ['ITEM_ID'],
 }];

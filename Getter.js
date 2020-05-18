@@ -233,7 +233,7 @@ const ItemGetter = {
     SpellUnlockScroll: (id, name, spellID, value, spriteIndex, incinerateLevel, essenceValue) => {
         let result = {
             id,
-            name,
+            name: name + ' Scroll',
             noted: false,
             value,
             stackable: true,
