@@ -5,11 +5,11 @@ const HairStyle = {
     Scruffy : 1,
     LeftSideSwipe : 2,
     RightSideSwipe : 3,
-    Messy : 4,
-    Buzzed : 5,
-    Mohawk : 6, 
-    Dreads : 7,
-    MidlifeCrisis : 8
+    Messy : 1,
+    Buzzed : 3,
+    Mohawk : 8, 
+    Dreads : 8,
+    MidlifeCrisis : 4
 };
 
 const SpriteColor = {
@@ -24,6 +24,62 @@ const SpriteColor = {
     LightGray : 8,
     Black : 9,
     Brown : 10
+};
+
+const SpriteClothesColors = {
+    Red : 1,
+    Orange : 2,
+    Yellow : 3,
+    Green : 4, 
+    Blue : 5,
+    Purple : 6,
+    White : 7,
+    LightGray : 8,
+    DarkGray : 9
+}
+
+const FacialStyles = {
+    EyeLinerLipstick : { id : 1 },
+    EyeLinerLipstick_Purple : { id : 2 },
+    RosyCheeks_Purple : { id : 3 },
+    RosyCheeks_Pink : { id : 4 },
+    Freckles : { id : 5 },
+    Beard_Short : { id : 6, hairTint : true },
+    Beard_Medium : { id : 7, hairTint : true  },
+    Beard_Elder : { id : 8, hairTint : true },
+    RightScar : { id : 9 },
+    LeftScar : { id : 10 },
+    GoldEarings : { id : 11 },
+    SilverEarings : { id : 12 },
+    GothiteEarings : { id : 13 },
+    GoldEarStud : { id : 14 },
+    SilverEarStud : { id : 15 },
+    GothiteEarStud : { id : 16 },
+}
+
+const HairColors = {
+    Black: 0x2d2723,
+    DarkBrown: 0x4f3822,
+    Brown: 0x735940,
+    CherryRed: 0xc13340,
+    Ginger: 0xe27634,
+    Blond: 0xe2dc6d,
+    White: 0xdfdfdf,
+    Gray: 0x919191,
+    Green: 0x529c4a,
+    Blue: 0x34789c,
+    Purple: 0x6a4e9c,
+    Pink: 0xbf467b
+};
+
+const EyeColors = {
+    Blue: 0x34789c,
+    Green: 0x529c4a,
+    Brown: 0x735940,
+    DarkBrown: 0x73502e,
+    Ginger: 0xe27634,
+    Red: 0x325321,
+    Purple: 0x6a4e9c,
 };
 
 const Model = {
@@ -46,7 +102,7 @@ const Model = {
             asset: 'chestParts',
             sprite: 'humanChest',
             parent: 'CORE',
-            spriteID: 1,
+            spriteID: 21,
             anchor: {x: 0.5, y: 0.65},
             position: {x: 0, y: -0.35},
             rotation: 0,
@@ -56,11 +112,11 @@ const Model = {
         RIGHT_THIGH: {
             id: 'RIGHT_THIGH',
             asset: 'legParts',
-            sprite: 'humanRightThigh',
+            sprite: 'humanMaleRightThigh',
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 1-(4/7), y: 0.15},
-            position: {x: -(5/16), y: 0.3},
+            position: {x: -(5/16), y: 0.27},
             rotation: 0,
             UIModel: null,
             z: -1,
@@ -68,11 +124,11 @@ const Model = {
         LEFT_THIGH: {
             id: 'LEFT_THIGH',
             asset: 'legParts',
-            sprite: 'humanLeftThigh',
+            sprite: 'humanMaleLeftThigh',
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: (4/7), y: 0.15},
-            position: {x: (5/16), y: 0.3},
+            position: {x: (5/16), y: 0.27},
             rotation: 0,
             UIModel: null,
             z: -1,
@@ -84,7 +140,7 @@ const Model = {
             parent: 'RIGHT_THIGH',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.1},
-            position: {x: 0.05, y: 0.75},
+            position: {x: 0.05, y: 0.9},
             rotation: 0,
             UIModel: null,
             z: 0,
@@ -96,7 +152,7 @@ const Model = {
             parent: 'LEFT_THIGH',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.1},
-            position: {x: -0.05, y: 0.75},
+            position: {x: -0.05, y: 0.9},
             rotation: 0,
             UIModel: null,
             z: 0,
@@ -108,10 +164,10 @@ const Model = {
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.25, y: 0.18},
-            position: {x: 0.45, y: -0.47},
+            position: {x: 0.475, y: -0.5},
             rotation: 0,
             UIModel: null,
-            z: 1,
+            z: 10,
         },
         RIGHT_SHOULDER: {
             id: 'RIGHT_SHOULDER',
@@ -120,10 +176,10 @@ const Model = {
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.75, y: 0.18},
-            position: {x: -0.45, y: -0.47},
+            position: {x: -0.475, y: -0.5},
             rotation: 0,
             UIModel: null,
-            z: 1,
+            z: 10,
         },
         LEFT_FOREARM: {
             id: 'LEFT_FOREARM',
@@ -152,23 +208,35 @@ const Model = {
         HEAD: {
             id: 'HEAD',
             asset: 'headParts',
-            sprite: 'humanHead',
+            sprite: 'humanHeadMale',
             parent: 'CHEST',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.9},
-            position: {x: 0, y: -0.7},
+            position: {x: 0, y: -0.675 },
             rotation: 0,
             UIModel: null,
-            z: 1,
+            z: 15,
         },
         FACE: {
             id: 'FACE',
             asset: 'headParts',
             sprite: 'humanFace',
             parent: 'HEAD',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: -0.35},
+            rotation: 0,
+            UIModel: null,
+            z: 0,
+        },
+        EYES: {
+            id: 'EYES',
+            asset: 'headParts',
+            sprite: 'humanEyes',
+            parent: 'HEAD',
             spriteID: 1,
             anchor: {x: 0.5, y: 0.5},
-            position: {x: 0, y: -0.3},
+            position: {x: 0, y: -0.375},
             rotation: 0,
             UIModel: null,
             z: 0,
@@ -1726,7 +1794,6 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
         }
 
         if (params.xDirection > 0) {
-            transformsByPart = JSON.parse(JSON.stringify(allTransformsByPart));
             let keys = Object.keys(transformsByPart);
             let faceCameraDirectly = false; // Faces a direction instead of the camera
             for(let i = 0; i < keys.length; ++i) {
@@ -1773,7 +1840,6 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
             }
         }
         else if (params.xDirection < 0 ) {
-            transformsByPart = JSON.parse(JSON.stringify(allTransformsByPart));
             let keys = Object.keys(transformsByPart);
             let isFourLeggedMammal = false; // Faces a direction instead of the camera
             for(let i = 0; i < keys.length; ++i) {
@@ -2164,19 +2230,24 @@ class AnimationDef extends TWEEN.Tween {
     }
 };
 
-module.exports.buildModelPart = buildModelPart = (modelPartDef) => {
-    return {
-        id: modelPartDef.id,
-        asset: modelPartDef.asset,
-        sprite: modelPartDef.sprite,
-        parent: modelPartDef.parent || null,
-        anchor: modelPartDef.anchor || {x: 0.5, y: 0.5},
-        position: modelPartDef.position || {x: 0, y: 0},
-        rotation: modelPartDef.rotation || 0,
-        spriteID: modelPartDef.spriteID || 0,
-        UIModel: modelPartDef.UIModel || null,
-        z : modelPartDef.z || 0
+module.exports.buildModelPart = buildModelPart = (oldPartDef, newPartDef) => {
+    oldPartDef = oldPartDef || {};
+    newPartDef = newPartDef || {};
+    let result = {
+        id: newPartDef.id || oldPartDef.id,
+        asset: newPartDef.asset || oldPartDef.asset,
+        sprite: newPartDef.sprite || oldPartDef.sprite,
+        parent: newPartDef.parent || oldPartDef.parent ||null,
+        anchor: newPartDef.anchor || oldPartDef.anchor || {x: 0.5, y: 0.5},
+        position: newPartDef.position || oldPartDef.position || {x: 0, y: 0},
+        rotation: newPartDef.rotation || oldPartDef.rotation || 0,
+        spriteID: newPartDef.spriteID || oldPartDef.spriteID || 0,
+        UIModel: newPartDef.UIModel || oldPartDef.UIModel || null,
+        z : newPartDef.z || oldPartDef.z || 0,
+        tint : newPartDef.tint || oldPartDef.tint || null,
+        hideParts : newPartDef.hideParts || [],
     };
+    return result;
 }
 
 module.exports.buildModel = buildModel = (modelDef, modelPartsObj = {}) => {
@@ -2199,7 +2270,10 @@ module.exports.buildModel = buildModel = (modelDef, modelPartsObj = {}) => {
     return newModel;
 }
 
-
 module.exports.Model = Model;
 module.exports.HairStyle = HairStyle;
 module.exports.SpriteColor = SpriteColor;
+module.exports.SpriteClothesColors = SpriteClothesColors;
+module.exports.HairColors = HairColors;
+module.exports.FacialStyles = FacialStyles;
+module.exports.EyeColors = EyeColors;

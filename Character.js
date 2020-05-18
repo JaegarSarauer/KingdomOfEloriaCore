@@ -13,7 +13,10 @@ const ItemDetail = require("./ItemDetail").ItemDetail;
 const Entity = require('../typedef/Entity');
 const Combat = require('../internal/Combat');
 const SpriteColor = require("./Model").SpriteColor;
+const HairColors = require("./Model").HairColors;
+const EyeColors = require("./Model").EyeColors;
 const HairStyle = require("./Model").HairStyle;
+const FacialStyles = require("./Model").FacialStyles;
 const GroundItemDef = require('../def/GroundItemDef').GroundItemDef;
 var KingdomOfEloria = null;
 try {	
@@ -32,7 +35,6 @@ module.exports.Character = Character = [{
     drops: [[[1, 1], [738, 1, 1, 1]], [[1, 100], [73, 5, 15, 100]], [[100, 100], [78, 1, 2, 100]]], //5-15 feathers, and 1 in 10 chance for 1-2 air essence //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     spriteIndex: 5,
     animations: [[0, 6], [1, 7], [2, 7], [3, 6], [4, 6]],
-    characterModel: [1, 1, 1], //head, body, legs
     actions: [{
         interfaceID: 0,
         id: 6,
@@ -49,61 +51,36 @@ module.exports.Character = Character = [{
         })
     }
 }, 
-Get.Character.Human(1, 'Banker', 4, [null, null, null, 100, 104], HairStyle.LeftSideSwipe, SpriteColor.Black, [{
+Get.Character.Human(1, 'Banker', 24, [null, null, null, 100, 104], HairStyle.LeftSideSwipe, HairColors.Black, [{
     interfaceID: 0,
     id: 7,
     name: 'Bank',
 }]),
-Get.Character.HumanShopOwner(2, 'General Store Owner', 1, [21, null, null, 42, 29], HairStyle.Bald, SpriteColor.Black, 0),
-Get.Character.HumanShopOwner(3, 'Woodcutting Store Owner', 1, [null, 4, null, 97, 101], HairStyle.RightSideSwipe, SpriteColor.Green, 1),
-Get.Character.HumanShopOwner(4, 'Fishing Store Owner', 3, [null, null, null, 97, 101], HairStyle.RightSideSwipe, SpriteColor.Blue, 2),
-Get.Character.HumanShopOwner(5, 'Metalsmith Store Owner', 3, [22, 12, null, 43, 30], HairStyle.Bald, SpriteColor.Orange, 3),
-Get.Character.HumanShopOwner(6, 'Mining Store Owner', 1, [null, 12, null, 42, 29], HairStyle.RightSideSwipe, SpriteColor.Red, 4),
-Get.Character.HumanShopOwner(7, 'Crafting Store Owner', 1, [null, null, null, 113, 109], HairStyle.Scruffy, SpriteColor.DarkGray, 5),
-Get.Character.HumanShopOwner(8, 'Alchemy Store Owner', 4, [95, 86, null, 99, 103], HairStyle.Bald, SpriteColor.Black, 6),
-Get.Character.HumanShopOwner(9, 'Melee Store Owner', 1, [null, 20, null, 44, 31], HairStyle.RightSideSwipe, SpriteColor.DarkGray, 7),
-Get.Character.HumanShopOwner(10, 'Archery Store Owner', 1, [106, 38, null, 114, 110], HairStyle.RightSideSwipe, SpriteColor.LightGray, 8),
-Get.Character.HumanShopOwner(11, 'Magic Store Owner', 4, [96, 84, null, 100, 104], HairStyle.Bald, SpriteColor.Purple, 9),
+Get.Character.HumanShopOwner(2, 'General Store Owner', 11, [21, null, null, 42, 29], HairStyle.Bald, HairColors.Black, null, EyeColors.DarkBrown, 0),
+Get.Character.HumanShopOwner(3, 'Woodcutting Store Owner', 11, [null, 4, null, 417, 477], HairStyle.RightSideSwipe, HairColors.DarkBrown, 6, EyeColors.DarkBrown, 1),
+Get.Character.HumanShopOwner(4, 'Fishing Store Owner', 13, [null, null, null, 353, 477], 1, HairColors.Ginger, null, EyeColors.Blue, 2),
+Get.Character.HumanShopOwner(5, 'Metalsmith Store Owner', 13, [22, 12, null, 43, 30], HairStyle.Bald,HairColors.Ginger, null, EyeColors.DarkBrown, 3),
+Get.Character.HumanShopOwner(6, 'Mining Store Owner', 11, [null, 12, null, 42, 29], HairStyle.RightSideSwipe, HairColors.CherryRed, 7, EyeColors.Ginger, 4),
+Get.Character.HumanShopOwner(7, 'Crafting Store Owner', 23, [null, null, null, 389, 487], HairStyle.Bald, HairColors.Gray, 7, EyeColors.Green, 5),
+Get.Character.HumanShopOwner(8, 'Alchemy Store Owner', 14, [95, 86, null, 99, 103], HairStyle.Bald, HairColors.Black, null, EyeColors.DarkBrown, 6),
+Get.Character.HumanShopOwner(9, 'Melee Store Owner', 11, [null, 20, null, 44, 31], HairStyle.RightSideSwipe, HairColors.Gray, 9, EyeColors.Blue, 7),
+Get.Character.HumanShopOwner(10, 'Archery Store Owner', 11, [106, 38, null, 114, 110], HairStyle.RightSideSwipe, HairColors.White, 10, EyeColors.Green, 8),
+Get.Character.HumanShopOwner(11, 'Magic Store Owner', 14, [96, 84, null, 100, 104], 3, HairColors.CherryRed, 8, EyeColors.Purple, 9),
 Get.Character.Goblin(12, 'Goblin', 1,  
     [[11, 5], [0, 5], [1, 5], [2, 3]], ////5hp, 5atk, 5pow, 3def
     [[[1, 100], [0, 3, 10, 76], [13, 1, 1, 20], [127, 1, 1, 4],], [[10, 100], [79, 1, 3, 30], [87, 1, 1, 50], [126, 1, 1, 20],]], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     null),
+Get.Character.Wizard(13, 'Wizard', 13,  
+    [[11, 8], [2, 8], [5, 5], [6, 10], [7, 10], [8, 10]], //8hp, 8 atk def, 5 range def, 10 magic attack focus, 10 magic strength, 10 magic defense
+    [[[1, 100], [0, 10, 10, 10], [0, 20, 50, 20], [87, 2, 3, 50], [88, 1, 1, 10], [126, 1, 2, 10]], [[1, 100], [78, 2, 6, 60], [126, 1, 2, 20], [79, 1, 3, 20]], [[2, 100], [80, 2, 3, 75], [81, 1, 2, 25]], [[100, 100], [80, 1, 2, 70], [81, 1, 1, 30]], Get.DropTables.ItemPickupPages(150), Get.DropTables.EssenceShards(4, 50, 120, [100, 100, 100, 100, 40, 60, 60, 60, 5, 0, 0, 0]), Get.DropTables.LesserWoundSpellPages(1024)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    [93, 83, null, 97, 101], //head, right, left, chest, legs
+    8), //head, right, left, chest, legs
 {
-    id: 13,
-    name: 'Wizard',
-    modelName: 'HUMANOID',
-    stats: [[11, 8], [2, 8], [5, 5], [6, 10], [7, 10], [8, 10]], //8hp, 8 atk def, 5 range def, 10 magic attack focus, 10 magic strength, 10 magic defense
-    drops: [[[1, 100], [0, 10, 10, 10], [0, 20, 50, 20], [87, 2, 3, 50], [88, 1, 1, 10], [126, 1, 2, 10]], [[1, 100], [78, 2, 6, 60], [126, 1, 2, 20], [79, 1, 3, 20]], [[2, 100], [80, 2, 3, 75], [81, 1, 2, 25]], [[100, 100], [80, 1, 2, 70], [81, 1, 1, 30]], Get.DropTables.ItemPickupPages(150), Get.DropTables.EssenceShards(4, 50, 120, [100, 100, 100, 100, 40, 60, 60, 60, 5, 0, 0, 0]), Get.DropTables.LesserWoundSpellPages(1024)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    spriteIndex: 3,
-    animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
-    equipmentModel: [93, 83, null, 97, 101], //head, right, left, chest, legs
-    modelParams: {
-        CHEST: { spriteID: 2},
-        HEAD: { spriteID: 2},
-        RIGHT_SHOULDER: { spriteID: 2},
-        LEFT_SHOULDER: { spriteID: 2},
-        RIGHT_FOREARM: { spriteID: 2},
-        LEFT_FOREARM: { spriteID: 2},
-        RIGHT_THIGH: { spriteID: 2},
-        LEFT_THIGH: { spriteID: 2},
-        RIGHT_SHIN: { spriteID: 2},
-        LEFT_SHIN: { spriteID: 2},
-    },
-    combatStyle: CombatStyle.MAGIC,
-    attackRange: 8,
-    actions: [{
-        interfaceID: 0,
-        id: 6,
-        name: 'Attack'
-    }],
-}, {
     id: 14,
     name: 'Chick',
     modelName: 'CHICK',
     spriteIndex: 6,
     animations: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8]],
-    characterModel: [3],
     actions: [],
 },
 {
@@ -113,10 +90,9 @@ Get.Character.Goblin(12, 'Goblin', 1,
     spriteIndex: 7,
     stats: [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],],
     animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [null, 301, null, 291, 289], //head, right, left, chest, legs
     modelParams: {
-        CHEST: { spriteID: 1},
+        CHEST: { spriteID: 11},
         HEAD: { spriteID: 1},
         HEAD_WORN: {
             id: 'HEAD_WORN',
@@ -137,6 +113,7 @@ Get.Character.Goblin(12, 'Goblin', 1,
         LEFT_THIGH: { spriteID: 1},
         RIGHT_SHIN: { spriteID: 1},
         LEFT_SHIN: { spriteID: 1},
+        EYES: { tint: HairColors.CherryRed }
     },
     entityGuildType: 'EMPEROR',
     actions: [{
@@ -189,10 +166,12 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     spriteIndex: 7,
     stats: [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[64, 1], [327, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     isGuard: true,
     entityGuildType: 'GUARD',
+    modelParams : {
+        EYES : { tint : EyeColors.Blue },
+    },
     actions: [{
         interfaceID: 0,
         id: 6,
@@ -255,9 +234,11 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     spriteIndex: 7,
     stats: [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     entityGuildType: 'EMPEROR_GUARD',
+    modelParams : {
+        EYES : { tint : EyeColors.Blue }
+    },
     actions: [{
         interfaceID: 0,
         id: 6,
@@ -271,10 +252,12 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     spriteIndex: 7,
     stats: [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     isGuard: true,
     entityGuildType: 'MAYOR',
+    modelParams : {
+        EYES : { tint : EyeColors.Blue }
+    },
     actions: [{
         interfaceID: 0,
         id: 6,
@@ -288,10 +271,12 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     spriteIndex: 7,
     stats: [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]],
     drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     isGuard: true,
     entityGuildType: 'PLAYER_GUARD',
+    modelParams : {
+        EYES : { tint : EyeColors.Green }
+    },
     actions: [{
         interfaceID: 0,
         id: 6,
@@ -304,14 +289,13 @@ Get.Character.Ghost(31, 'Ghost ', 2, [[11, 40], [6, 18], [7, 28], [2, 50], [8, 1
 Get.Character.Ghost(32, 'Ghost ', 3, [[11, 70], [6, 28], [7, 50], [2, 75], [8, 1], [5, 75]], 81, 1, 240),// Fire - [70hp, 28mfocus, 50mpower, 75def, 1 mdef, 75 range defence]
 Get.Character.ElementalGhost(33, 'Elemental Ghost ', 4, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81], 1, 960),// Elemental - [150hp, 40mfocus, 99mpower, 99def, 1 mdef, 99 range defence]
 Get.Character.Crab(34, 'Cave Crawler', 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], null),
-Get.Character.HumanShopOwner(35, 'Clothing Store Owner', 6, [null, null, null, 395, 491], HairStyle.Scruffy, SpriteColor.Black, 10),
+Get.Character.HumanAppearanceShopOwner(35, 'Clothing Store Owner', 36, [null, null, null, 395, 491], HairStyle.Scruffy, HairColors.Black, 1, EyeColors.Purple, 2),
 Get.Character.Osaik(36), 
 {
     id: 37,
     name: 'Mysterious Man',
     modelName: 'HUMANOID',
     stats: [[0, 30], [1, 40], [2, 40], [3, 30], [4, 40], [5, 40], [6, 30], [7, 40], [8, 40], [11, 40],],
-    characterModel: [0, 0, 0, 0, 0, 0], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [null, null, null, 100, 104], //head, right, left, chest, legs
     modelParams: {
         HAIR: {
@@ -319,13 +303,17 @@ Get.Character.Osaik(36),
             asset: 'headParts',
             sprite: 'hairStyle' + HairStyle.MidlifeCrisis + '_',
             parent: 'HEAD',
-            spriteID: SpriteColor.LightGray,
-            anchor: {x: 0.5, y: 0.95},
-            position: {x: 0, y: 0.1},
+            spriteID : 4,
+            tint:  HairColors.DarkBrown,
+            anchor: {x: 0.5, y: 25/38},
+            position: {x: 0, y: 0},
             rotation: 0,
             UIModel: null,
         },
-        CHEST: { spriteID: 1},
+        FACE: {
+            spriteID : 8
+        },
+        CHEST: { spriteID: 21},
         HEAD: { spriteID: 1},
         RIGHT_SHOULDER: { spriteID: 1},
         LEFT_SHOULDER: { spriteID: 1},
@@ -401,7 +389,6 @@ Get.Character.Crab(43, 'Box Turtle', 4,  [[11, 80], [0, 50], [1, 50], [2, 50], [
     name: 'Cavern Supervisor',
     modelName: 'HUMANOID',
     stats: [[0, 20], [1, 20], [2, 20], [3, 10], [4, 10], [5, 10], [6, 1], [7, 1], [8, 1], [11, 20],],
-    characterModel: [1, 1, 1, 1, 1, 1], //head, torso, left leg, right leg, left arm, right arm
     equipmentModel: [null, 10, 530, 347, 475], //head, right, left, chest, legs
     modelParams: {
         HAIR: {
@@ -409,13 +396,14 @@ Get.Character.Crab(43, 'Box Turtle', 4,  [[11, 80], [0, 50], [1, 50], [2, 50], [
             asset: 'headParts',
             sprite: 'hairStyle' + HairStyle.Buzzed + '_',
             parent: 'HEAD',
-            spriteID: SpriteColor.Black,
-            anchor: {x: 0.5, y: 0.95},
-            position: {x: 0, y: 0.1},
+            spriteID : 0,
+            tint:  0x333333,
+            anchor: {x: 0.5, y: 25/38},
+            position: {x: 0, y: 0},
             rotation: 0,
             UIModel: null,
         },
-        CHEST: { spriteID: 2},
+        CHEST: { spriteID: 12},
         HEAD: { spriteID: 2},
         RIGHT_SHOULDER: { spriteID: 2},
         LEFT_SHOULDER: { spriteID: 2},
@@ -425,6 +413,7 @@ Get.Character.Crab(43, 'Box Turtle', 4,  [[11, 80], [0, 50], [1, 50], [2, 50], [
         LEFT_THIGH: { spriteID: 2},
         RIGHT_SHIN: { spriteID: 2},
         LEFT_SHIN: { spriteID: 2},
+        EYES: { tint : SpriteColor.Brown }
     },
     actions: [{
         interfaceID: 0,
@@ -454,7 +443,7 @@ Get.Character.GoblinOrcRanged(48, 'Orc', 2,
     [[11, 136], [2, 100], [3, 120], [4, 100], [5, 120], [8, 80]],
     [[[1, 100], [0, 5, 15, 100]]],
     321, 12, 3),
-Get.Character.Wizard(49, 'Dark Wizard', 3,  
+Get.Character.Wizard(49, 'Dark Wizard', 13,  
     [[11, 125], [2, 65], [5, 60], [6, 140], [7, 145], [8, 90]],
     [[[1, 1], [76, 1, 1, 1]],[[1, 100], [0, 30, 100, 20], [90, 1, 3, 20], [537, 1, 1, 10], [16, 1, 1, 10], [78, 8, 16, 10], [79, 5, 10, 10], [81, 6, 15, 10], [126, 1, 2, 10]], Get.DropTables.EssenceShards(32, 100, 1000, [100, 100, 100, 100, 60, 60, 60, 60, 40, 40, 40, 40]), Get.DropTables.LesserWoundSpellPages(250), Get.DropTables.WoundSpellPages(500), Get.DropTables.GreaterWoundSpellPages(1000)],
     [null, 86, null, 100, 104],
@@ -475,10 +464,10 @@ Get.Character.Golem(56, 'Nelenite Golem', 3, 2.15, 187, 12, 589, 592), // Fragme
 Get.Character.Golem(57, 'Gothite Golem', 4, 2.5, 254, 279, 595, 598), // Fragment, Chunk
 Get.Character.Golem(58, 'Osmium Golem', 5, 3.0, 282, 307, 601, 604), // Fragment, Chunk
 Get.Character.Death(59, "Death", 666, [null, 610, null, 347, 491]),
-Get.Character.PickPocketableHuman(60, 'Man', 2, [null, null, null, 455, 487], HairStyle.RightSideSwipe, SpriteColor.Black, 1),
-Get.Character.PickPocketableHuman(61, 'Man', 2, [null, null, null, 449, 487], HairStyle.Scruffy, SpriteColor.DarkGray, 2),
-Get.Character.PickPocketableHuman(62, 'Man', 2, [null, null, null, 451, 491], HairStyle.Mohawk, SpriteColor.Red, 5),
-Get.Character.Human(63, "Indie Dev", 2, [null, null, null, 437, 483], HairStyle.Messy, SpriteColor.Purple, [
+Get.Character.PickPocketableHuman(60, 'Man', 22, [null, null, null, 455, 487], HairStyle.RightSideSwipe, HairColors.Black, 1),
+Get.Character.PickPocketableHuman(61, 'Man', 22, [null, null, null, 345, 491], HairStyle.Scruffy, HairColors.Gray, 2),
+Get.Character.PickPocketableHuman(62, 'Man', 12, [null, null, null, 429, 477], HairStyle.Mohawk, HairColors.CherryRed, 5),
+Get.Character.Human(63, "Indie Dev", 22, [null, null, null, 437, 483], HairStyle.Messy,  HairColors.Purple, [
     {
         interfaceID: 0,
         id: 45,
@@ -486,23 +475,29 @@ Get.Character.Human(63, "Indie Dev", 2, [null, null, null, 437, 483], HairStyle.
     }
 ]),
 Get.Character.Pinata(64, 1, 'Pinata'),
-Get.Character.Patreoner(65, 'Sandwich', 2, [108, null, 630, 116, 112], HairStyle.Bald, SpriteColor.Black, 200 + 182, 8),
-Get.Character.Patreoner(66, 'Redd', 2, [313, 299, 632, null, null], HairStyle.Messy, SpriteColor.Brown, 105 + 70, 9),
-Get.Character.Patreoner(67, 'Aiden', 2, [null, 4, null, 385, 483], HairStyle.LeftSideSwipe, SpriteColor.Black, 220 + 0, 10),
-Get.Character.Patreoner(68, 'WeSkillNow', 2, [null, null, null, 429, 487], HairStyle.Messy, SpriteColor.Red, 45 + 8, 11),
-Get.Character.Patreoner(69, 'Thomas', 2, [93, 3, null, 393, 481], HairStyle.RightSideSwipe, SpriteColor.Brown, 50 + 18, 12),
+Get.Character.Patreoner(65, 'Sandwich', 22, [null, null, 630, 357, 489], 4, HairColors.White, EyeColors.Brown, FacialStyles.Beard_Elder, 220 + 182, 8),
+Get.Character.Patreoner(66, 'Redd', 22, [313, 299, 632, null, null], 8, HairColors.Blue, EyeColors.Brown, FacialStyles.Beard_Medium, 125 + 70, 9),
+Get.Character.Patreoner(67, 'Aiden', 22, [null, 4, null, 385, 483], 1, HairColors.Black, EyeColors.Brown, FacialStyles.Freckles, 280 + 0, 10),
+Get.Character.Patreoner(68, 'WeSkillNow', 22, [null, null, null, 429, 477], 1, HairColors.CherryRed, EyeColors.Green, null, 55 + 8, 11),
+Get.Character.Patreoner(69, 'Thomas', 22, [93, 3, null, 393, 481], 1, HairColors.Brown, EyeColors.Brown, FacialStyles.Freckles, 65 + 18, 12),
 Get.Character.Rat(70, 'Mouserat', 1, [[11, 3], [0, 0], [1, 0.25], [2, 1]], //3hp, 0atk, .5pow, 2def
     [[[1, 100], [730, 1, 1, 100]]]),
 Get.Character.Kiaso(71),
 Get.Character.Duck(72, 'Male Duck', 1),
 Get.Character.Duck(73, 'Female Duck', 2),
 Get.Character.Cow(74, 1),
-Get.Character.HumanShopOwner(75, 'Farming Store Owner', 3, [null, 610, null, 331, 483], HairStyle.MidlifeCrisis, SpriteColor.Yellow, 11),
+Get.Character.HumanShopOwner(75, 'Farming Store Owner', 13, [null, 610, null, 331, 483], HairStyle.MidlifeCrisis, HairColors.Blond, null, EyeColors.DarkBrown, 11),
 Get.Character.QuestChildGoblin(76, 'Child Goblin'),
 Get.Character.Bull(77),
 Get.Character.Sheep(78, 1),
 Get.Character.PatreonQuestCat(79, true, 224),
 Get.Character.PatreonQuestCat(80, false, 224),
+Get.Character.HumanAppearanceShopOwner(81, 'Barber', 13, [null, null, null, 393, 489], HairStyle.MidlifeCrisis, HairColors.Brown, null, EyeColors.Blue, 0),
+Get.Character.KaityPatreon(82, 50, 60),
+Get.Character.HumanAppearanceShopOwner(83, 'Wizard Surgeon', 13, [539, null, null, 541, 543], 4, HairColors.Blue, null, EyeColors.DarkBrown, 3),
+Get.Character.PatreonPim(84),
+Get.Character.PatreonTat(85),
+Get.Character.Patreoner(86, 'Aeronic', 22, [null, null, null, 407, 479], 8, HairColors.Brown, EyeColors.Brown, FacialStyles.Beard_Short, 40 + 6, 70),
 ];
 
 

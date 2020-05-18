@@ -732,7 +732,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                spriteID: 2,
+                spriteID: 7,
             }
         },
         actions: [{
@@ -744,13 +744,13 @@ module.exports.WorldObject = WorldObject = [
                 [
                     buildStep(StepType.IS_IN_AREA, {
                         stepResultFail: StepResult.NEXT_STEP_LIST,
-                        params: [true, 141, 149, 141, 151]
+                        params: [true, 141, 151, 141, 151]
                     }),
                     buildStep(StepType.JOIN_MINIGAME, {
                         stepResultFail: StepResult.END_ACTION,
                         params: [0]
                     }),
-                    buildStep(StepType.TELEPORT, {params: [1, 139, 150, 139, 150, 1]})
+                    buildStep(StepType.TELEPORT, {params: [1, 139, 151, 139, 151, 1]})
                 ], [
                     buildStep(StepType.IS_IN_AREA, {
                         stepResultFail: StepResult.END_ACTION,
@@ -760,7 +760,7 @@ module.exports.WorldObject = WorldObject = [
                         stepResultFail: StepResult.END_ACTION,
                         params: [0]
                     }),
-                    buildStep(StepType.TELEPORT, {params: [1, 141, 150, 141, 150, 1]})
+                    buildStep(StepType.TELEPORT, {params: [1, 141, 151, 141, 151, 1]})
                 ]
             ],
         }],
@@ -1077,7 +1077,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.TutorialShallowFishingPool(79),
     Get.WorldObject.Rock(80, 'Gold Rock', 25, [10, 32, 7, true, 0.5, 0.5], [[670, 1, 1, 100]], 85, 8, 120, 10, 'There appears to be gold in this rock.', 9.5),
     Get.WorldObject.Door(81, 'Door', 9, 70, 1, null, 0, { x : 341, y : 47}, { x: 341, y: 46 }, 'Through the door cracks you see an exclusive woodcutting area.' ),
-    Get.WorldObject.Door(82, 'Door', 10, 65, 1, null, 0, { x : 65, y : 338}, { x: 65, y: 337 }, 'Through the door cracks you see an exclusive mining area.' ),
+    Get.WorldObject.Door(82, 'Door', 10, 65, 1, null, 1, { x : 47, y : 363}, { x: 47, y: 362 }, 'Through the door cracks you see an exclusive mining area.' ),
     Get.WorldObject.Rock(83, 'Pure Coal Rock', 40, [10, 30, 3, true, 0.33, 0.33], [[57, 1, 1, 90], [57, 1, 2, 10]], 75, 3, 50, 20, 'There appears to be extra coal in this rock.', 8, 584, 587), 
     Get.WorldObject.MiningCamp(84, 'Gold', 670, [[1, 80]], 3, 18, 25, 35),
     Get.WorldObject.Door(85, 'Door', 20, 70, 1, null, 0, { x : 232, y : 270}, { x: 232, y: 269 }, 'Through the door cracks you see goblins protecting many chests.' ),
@@ -1150,5 +1150,6 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.CatQuestVixenRecipe(92),
     Get.WorldObject.CatQuestHerbs(93),
     Get.WorldObject.CatQuestViosSign(94),
-    Get.WorldObject.Door(95, 'Door', 1, 1, 1, null, 1, { x : 174, y : 70}, { x: 174, y: 69 }, 'Through the cracks you see a scary wolf. The <note>Alpha Wolf</note>.' ),
+    Get.WorldObject.Door(95, 'Door', 1, 1, 1, null, 1, { x : 174, y : 70}, { x: 174, y: 69 }, 'Through the cracks you see a scary wolf. The Alpha Wolf.' ),
+    Get.WorldObject.Door(96, 'Door', 10, 35, 1, null, 0, { x : 65, y : 338}, { x: 65, y: 337 }, 'Through the door is a exclusive mining area.' ),
 ];
