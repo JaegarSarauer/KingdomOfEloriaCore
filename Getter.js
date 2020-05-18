@@ -4386,6 +4386,7 @@ const Character = {
             faceId = 0;
         }
         let limbsSpriteID = spriteID;
+
         if (speciesSpriteName == 'human') {
             if (eyesId == 0) {
                 eyesID = 1;
@@ -4396,6 +4397,11 @@ const Character = {
         if (spriteID == 666) {
             eyesID = 0;
             limbsSpriteID = faceId = spriteID;
+        }
+
+        let headType = 'Male';
+        if (Math.floor( spriteID / 10 ) >= 3 ) {
+            headType = 'Female';
         }
 
         let result = {
@@ -4420,7 +4426,7 @@ const Character = {
                 },
                 HEAD: { 
                     spriteID: limbsSpriteID,
-                    sprite: speciesSpriteName + 'Head'
+                    sprite: speciesSpriteName + 'Head' + headType
                 },
                 RIGHT_SHOULDER: { 
                     spriteID: limbsSpriteID,
