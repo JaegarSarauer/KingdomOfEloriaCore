@@ -744,13 +744,13 @@ module.exports.WorldObject = WorldObject = [
                 [
                     buildStep(StepType.IS_IN_AREA, {
                         stepResultFail: StepResult.NEXT_STEP_LIST,
-                        params: [true, 141, 149, 141, 151]
+                        params: [true, 141, 151, 141, 151]
                     }),
                     buildStep(StepType.JOIN_MINIGAME, {
                         stepResultFail: StepResult.END_ACTION,
                         params: [0]
                     }),
-                    buildStep(StepType.TELEPORT, {params: [1, 139, 150, 139, 150, 1]})
+                    buildStep(StepType.TELEPORT, {params: [1, 139, 151, 139, 151, 1]})
                 ], [
                     buildStep(StepType.IS_IN_AREA, {
                         stepResultFail: StepResult.END_ACTION,
@@ -760,7 +760,7 @@ module.exports.WorldObject = WorldObject = [
                         stepResultFail: StepResult.END_ACTION,
                         params: [0]
                     }),
-                    buildStep(StepType.TELEPORT, {params: [1, 141, 150, 141, 150, 1]})
+                    buildStep(StepType.TELEPORT, {params: [1, 141, 151, 141, 151, 1]})
                 ]
             ],
         }],
@@ -1150,5 +1150,6 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.CatQuestVixenRecipe(92),
     Get.WorldObject.CatQuestHerbs(93),
     Get.WorldObject.CatQuestViosSign(94),
-    Get.WorldObject.Door(95, 'Door', 1, 1, 1, null, 1, { x : 174, y : 70}, { x: 174, y: 69 }, 'Through the cracks you see a scary wolf. The <note>Alpha Wolf</note>.' ),
+    Get.WorldObject.Door(95, 'Door', 1, 1, 1, null, 1, { x : 174, y : 70}, { x: 174, y: 69 }, 'Through the cracks you see a scary wolf. The Alpha Wolf.' ),
+    Get.WorldObject.Door(96, 'Door', 10, 35, 1, null, 0, { x : 65, y : 338}, { x: 65, y: 337 }, 'Through the door is a exclusive mining area.' ),
 ];
