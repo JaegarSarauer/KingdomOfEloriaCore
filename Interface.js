@@ -8,6 +8,8 @@ const buildStep = require('./Step').buildStep;
 const buildStepList = require('./Step').buildStepList;
 const Get = require('./Getter').Get;
 const EssenceCatalog = require('./Essence').EssenceCatalog;
+const HairStyle = require('./Model').HairStyle;
+const SpriteColor = require('./Model').SpriteColor;
 
 module.exports.Interface = [
     {
@@ -427,6 +429,11 @@ module.exports.Interface = [
             {
                 id: 63,
                 name: 'Approach',
+                actionInterval: 0,
+            },
+            {
+                id: 64, // Open interface 3
+                name: 'Hair Styling From',
                 actionInterval: 0,
             },
         ],
@@ -1780,6 +1787,13 @@ module.exports.Interface = [
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You make a gold ring.']})]
                 ],
             },
+            Get.Interface.AskNPCQuestion(273, 'What is Patreon Palace', 64),
+            Get.Interface.AskNPCQuestion(274, 'How can I become a Patron?', 65),
+            Get.Interface.AskNPCQuestion(275, 'Thank you', 66),
+            Get.Interface.AskNPCQuestion(276, 'Off to the palace!', 63),
+            Get.Interface.AskNPCQuestion(277, 'Thank you, but I will stay here', 66),
+            Get.Interface.AskNPCQuestion(278, 'Send me back please', 68),
+            Get.Interface.AskNPCQuestion(279, 'Thank you, but I will stay here', 69),
         ],
     },
     {
@@ -2057,5 +2071,18 @@ module.exports.Interface = [
             ],
         },
     ],
-}
-];
+},
+{   
+    id: 27,
+    name: 'Appearance',
+    actions: [
+        {
+            id: 0,
+            name: 'Confirm',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.CHANGE_APPEARANCE, {params: ['SKIN_TONE', 'HAIR_STYLE', 'HAIR_COLOR', 'GENDER', 'EYE_COLOR', 'FACE', 'FACE_COLOR', 'SHIRT', 'PANTS']})]
+            ],
+        },
+    ],
+}];
