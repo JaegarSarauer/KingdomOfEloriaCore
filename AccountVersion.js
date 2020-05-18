@@ -1,14 +1,19 @@
+// NOTE: upgrade for a ID means upgrading to that ID
 const AccountVersion = [{
     id: 0, //versionID
-    upgrade: (userDef) => {}
+    upgrade: (userDef) => userDef // all accounts start at zero
 }, {
     id: 1,
     upgrade: (userDef) => {
+        // Upgrading from 0 to 1 means upgrading pre-customization. Force a customization
+        
+        const obInterfaces = [0, 5, 9, 10, 16, 17, 21, 22, 27];
         userDef.forAllAdventurers((adv) => {
-            // UNCOMMENT WHEN RELEASE IS READY
-            // const obInterfaces = [27];
-            // adv.appearanceState.setEntityAtSlot(1);
-            // adv.interfaces.enableInterfaces(obInterfaces);
+            let tutorialState = adv.state.getState(4);
+            if (tutorialState == 0) {
+                adv.appearanceState.setEntityAtSlot(1);
+                adv.interfaces.enableInterfaces(obInterfaces);
+            }
         })
     }
 }];
