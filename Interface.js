@@ -830,7 +830,10 @@ module.exports.Interface = [
                 name: 'Unequip',
                 actionInterval: -1,
                 steps: [
-                    [buildStep(StepType.REMOVE_EQUIPMENT_ITEM, {params: ['SLOT_ID']})]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
+                        buildStep(StepType.REMOVE_EQUIPMENT_ITEM, {params: ['SLOT_ID']})
+                    ]
                 ],
             },
             {
@@ -838,7 +841,10 @@ module.exports.Interface = [
                 name: 'Cast',
                 actionInterval: 0,
                 steps: [
-                    [buildStep(StepType.USE_ENCHANTMENT, { params: ['ENCHANTMENT_ID'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
+                        buildStep(StepType.USE_ENCHANTMENT, { params: ['ENCHANTMENT_ID'] })
+                    ]
                 ],
             },
         ],

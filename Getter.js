@@ -401,14 +401,20 @@ const ItemGetter = {
                 id: 4,
                 name: 'Equip Right',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [7, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RINGS'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [7, 'ITEM_ID', 'ITEM_STATE'] })
+                    ]
                 ]
             }, {
                 interfaceID: 5,
                 id: 5,
                 name: 'Equip Left',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [8, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RINGS'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [8, 'ITEM_ID', 'ITEM_STATE'] })
+                    ]
                 ]
             }],
         };
