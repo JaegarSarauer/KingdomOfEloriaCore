@@ -5354,6 +5354,36 @@ const Character = {
             }]
         };
     },
+    BabyDragon: function(id, name, spriteIndex, stats) {
+        let spriteNamePrefix = 'BabyDragon';
+        return {
+            id: id,
+            name: name,
+            modelName: 'BABY_DRAGON',
+            stats,
+            spriteIndex: spriteIndex,
+            // animations: [[0, 6], [1, 7], [2, 7], [3, 6], [4, 6]], //animations needed
+            modelParams: {
+                CORE: { sprite: 'blankChest', spriteID: 1},
+                CHEST: { sprite: spriteNamePrefix + 'Body', spriteID: spriteIndex},
+                HIDDEN_CHEST: { sprite: spriteNamePrefix + 'Body', spriteID: spriteIndex},
+                HEAD: { sprite: spriteNamePrefix + 'Head', spriteID: spriteIndex},
+                LEG_VISIBLE_BACK: { sprite: spriteNamePrefix + 'RearLeftLeg', spriteID: spriteIndex},
+                LEG_HIDDEN_BACK: { sprite: spriteNamePrefix + 'RearRightLeg', spriteID: spriteIndex},
+                LEG_VISIBLE_FRONT: { sprite: spriteNamePrefix + 'FrontLeftLeg', spriteID: spriteIndex},
+                LEG_HIDDEN_FRONT: { sprite: spriteNamePrefix + 'FrontRightLeg', spriteID: spriteIndex},
+                TAIL_BASE: { sprite: spriteNamePrefix + 'TailBase', spriteID: spriteIndex},
+                TAIL_TIP: { sprite: spriteNamePrefix + 'TailTip', spriteID: spriteIndex},
+                WING_HIDDEN: { sprite: spriteNamePrefix + 'RightWing', spriteID: spriteIndex},
+                WING_VISIBLE: { sprite: spriteNamePrefix + 'LeftWing', spriteID: spriteIndex},
+            },
+            actions: [{
+                interfaceID: 0,
+                id: 6,
+                name: 'Attack'
+            }]
+        };
+    },
     Wolf: function(id, name, stats, drops, spriteIndex) {
         let wolf = this.FourLeggedMammalWithTail(id, name, 'wolf', spriteIndex, stats);
         wolf.drops = drops;
