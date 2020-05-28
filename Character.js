@@ -499,7 +499,7 @@ Get.Character.PatreonPim(84),
 Get.Character.PatreonTat(85),
 Get.Character.Patreoner(86, 'Aeronic', 22, [null, null, null, 407, 479], 8, HairColors.Brown, EyeColors.Brown, FacialStyles.Beard_Short, 40 + 6, 70),
 Get.Character.BabyDragon(87, 'Baby Blue Dragon', 1, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
-Get.Character.BabyDragon(88, 'Baby Green Dragon', 2, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
+Get.Character.AdolescentDragon(88, 'Adolescent Blue Dragon', 2, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
 Get.Character.BabyDragon(89, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
 ];
 
