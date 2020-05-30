@@ -20,7 +20,7 @@ const AccountVersion = [{
 
 const upgradeAccount = (userDef) => {
     let upgraded = false;
-    for (let i = 0, le = AccountVersion.length; i < le; ++i) {
+    for (let i = userDef.accountVersion, le = AccountVersion.length; i < le; ++i) {
         let version = AccountVersion[i];
         if (version.id > userDef.accountVersion) {
             userDef.accountVersion = version.id;

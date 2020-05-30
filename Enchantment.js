@@ -120,6 +120,7 @@ module.exports.Enchantment = [{
 }, {
     id: 12,
     name: 'Item Collection',
+    gemBonuses: [0.0, 0.0, 0.1, 0.3, 0.7, 0.6, 0.9, 1, 1, 1.5, 1.2],
     enchantCost: 0.03,
     consumable: true,
     itemDefStateParams: ['ITEM_ID'],
@@ -162,6 +163,7 @@ module.exports.Enchantment = [{
 }, {
     id: 15,
     name: 'Auto Consume',
+    gemBonuses: [0.1, 0.0, 0.2, 0.3, 0.5, 0.8, 1, 0.9, 1.1, 1.2, 1.8],
     enchantCost: 0.03,
     consumable: true,
     itemDefStateParams: ['ITEM_ID'],

@@ -328,9 +328,7 @@ const ItemGetter = {
             }],
         };
     },  
-    CutGem: (id, name, gemcuttingBaseLevel, incinerateLevel, value, tier, state, baseEnchantCharge, spriteIndex, cutGemID) => {        
-        const necklaceBaseLevel = 20;
-        const ringBaseLevel = 2;
+    CutGem: (id, name, gemcuttingBaseLevel, incinerateLevel, value, tier, state, baseEnchantCharge, spriteIndex, cutGemID) => {      
         return {
             id,
             name,
@@ -350,6 +348,21 @@ const ItemGetter = {
             spriteIndex: (item) => {
                 return Math.min(item.getStateValue('quality'), 2) + spriteIndex;
             },
+            useActions: [{
+                interfaceID: 5,
+                id: 22,
+                entityType: Entity.EntityType.INVENTORY_ITEM,
+                entityID: -1, //sorted on client
+                actionInterval: -1,
+                name: 'Bind',
+                steps: [
+                    [buildStep(StepType.ASSERT_ITEM_STATE, {
+                        params: ['SLOT_ID', 'ITEM_ID', 'itemID', 'LESS_EQUALS', -1],
+                        stepResultFail: StepResult.NEXT_STEP_LIST
+                    }),
+                    buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[280]] })],
+                ],
+            }],
             // useActions: [{
             //     interfaceID: 5,
             //     id: 9,

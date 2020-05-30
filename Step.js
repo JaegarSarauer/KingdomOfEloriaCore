@@ -301,6 +301,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], //itemID
         params: [],
     },
+    BIND_ENCHANTMENT_ITEM: {
+        id: 'BIND_ENCHANTMENT_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //itemID
+        params: [],
+    },
     DEPOSIT_BAG_ITEM: {
         id: 'DEPOSIT_BAG_ITEM',
         stepResultFail: 'END_ACTION',
@@ -1405,6 +1412,7 @@ try {
     const StepIsOnTop = require('../internal/Steps/StepIsOnTop');
     const StepDepositBagItem = require('../internal/Steps/StepDepositBagItem');
     const StepBindBagItem = require('../internal/Steps/StepBindBagItem');
+    const StepBindEnchantmentItem = require('../internal/Steps/StepBindEnchantmentItem');
     const StepWithdrawBagItem = require('../internal/Steps/StepWithdrawBagItem');
     const StepRepairBag = require('../internal/Steps/StepRepairBag');
     const StepIncinerateItem = require('../internal/Steps/StepIncinerateItem');
@@ -1820,6 +1828,11 @@ try {
         BIND_BAG_ITEM: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepBindBagItem.StepBindBagItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        BIND_ENCHANTMENT_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepBindEnchantmentItem.StepBindEnchantmentItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         DEPOSIT_BAG_ITEM: {
