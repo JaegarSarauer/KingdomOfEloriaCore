@@ -50,8 +50,7 @@ const Dialogs = Object.freeze([{
 }, {
     id: 3,
     title: '<b>Mysterious Man</b>',
-    message: 'Hello. I can help alter the magic of some objects, for a fee of course.\n\n'+
-    'Hand me a tome and have 1,000 coins on you and I will redirect the focus of the tome.',
+    message: 'Leave me to my experiments unless you are looking for a Level 100 Standard.\n\n',
 }, {
     id: 4,
     title: '<b>Cavern Supervisor</b>',

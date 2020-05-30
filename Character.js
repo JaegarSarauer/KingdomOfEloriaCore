@@ -133,23 +133,23 @@ Get.Character.GoblinOrcRanged(16, 'Goblin', 1,
     37, 8, 2), // attack range
 Get.Character.GoblinOrOrc(17, 'Orc', 1,  
     [[11, 4], [2, 2], [3, 6], [4, 6]], //4hp, 2 melee def, 6 range focus, 6 range power
-    [[[1, 100], [0, 20, 50, 70], [14, 1, 1, 20], [17, 1, 1, 10]], [[10, 100], [79, 3, 8, 90], [30, 1, 1, 2], [127, 1, 1, 8]], [[512, 1], [327, 1, 1, 1]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    [[[1, 100], [0, 20, 50, 70], [14, 1, 1, 20], [17, 1, 1, 10]], [[10, 100], [79, 3, 8, 90], [30, 1, 1, 2], [127, 1, 1, 8]], [[512, 1], [636, 1, 1, 1]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     18, 2), //head, right, left, chest, legs
 Get.Character.GoblinOrcRanged(18, 'Orc', 1,  
     [[11, 18], [2, 8], [3, 16], [4, 16], [5, 10], [8, 12]], //18hp, 8 melee def, 16 range focus, 16 range power, 10rangedef, 12magicdefence
-    [[[1, 100], [0, 20, 45, 70], [38, 1, 1, 19], [39, 1, 1, 1], [127, 1, 1, 5], [168, 1, 1, 5]], [[1, 100], [68, 3, 12, 50], [69, 2, 7, 40], [70, 1, 4, 10]], [[512, 1], [327, 1, 1, 1]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    [[[1, 100], [0, 20, 45, 70], [38, 1, 1, 19], [39, 1, 1, 1], [127, 1, 1, 5], [168, 1, 1, 5]], [[1, 100], [68, 3, 12, 50], [69, 2, 7, 40], [70, 1, 4, 10]], [[512, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     39, 8, 2), // Attack range
 Get.Character.GoblinOrOrc(19, 'King Orc', 3,  
     [[11, 100], [0, 100], [1, 60], [2, 50], [5, 60], [8, 40]], //99hp, 45atk, 45pow, 35meleedef, 45rangedef, 30magicdefence
-    [[[1, 100], [0, 50, 150, 100]], [[1, 100], [89, 1, 2, 50], [90, 1, 2, 50]], [[10, 100], [79, 5, 20, 50], [30, 1, 1, 5], [127, 1, 1, 15], [26, 1, 1, 15], [19, 1, 1, 15]], [[128, 1], [327, 1, 1, 1]], Get.DropTables.TeleportScrolls(256), Get.DropTables.ItemPickupPages(80)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    [[[1, 100], [0, 50, 150, 100]], [[1, 100], [89, 1, 2, 50], [90, 1, 2, 50]], [[10, 100], [79, 5, 20, 50], [30, 1, 1, 5], [127, 1, 1, 15], [26, 1, 1, 15], [19, 1, 1, 15]], [[128, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.TeleportScrolls(256), Get.DropTables.ItemPickupPages(80)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     19, 4), // head sprite ID
 Get.Character.GoblinOrcMage(20, 'Elder Goblin', 1,  
     [[11, 30], [2, 15], [5, 10], [6, 30], [7, 40], [8, 25]], //30hp, 15 atk def, 10 range def, 30 magic attack focus, 40 magic strength, 25 magic defense
-    [[[1, 100], [0, 10, 30, 100]], [[8, 100], [89, 1, 1, 55], [90, 1, 1, 45]], [[10, 100], [127, 1, 1, 25], [126, 1, 1, 35], [79, 5, 10, 10], [78, 5, 10, 10], [80, 5, 10, 10], [81, 5, 10, 10]], [[256, 1], [327, 1, 1, 1]], Get.DropTables.TeleportScrolls(400), Get.DropTables.ItemPickupPages(100)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    [[[1, 100], [0, 10, 30, 100]], [[8, 100], [89, 1, 1, 55], [90, 1, 1, 45]], [[10, 100], [127, 1, 1, 25], [126, 1, 1, 35], [79, 5, 10, 10], [78, 5, 10, 10], [80, 5, 10, 10], [81, 5, 10, 10]], [[256, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.TeleportScrolls(400), Get.DropTables.ItemPickupPages(100)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     85, 8 /* Attack range */ , 3 /* head sprite ID */),
 Get.Character.GoblinOrcMage(21, 'Elder Goblin', 1,  
     [[11, 26], [2, 15], [5, 10], [6, 45], [7, 35], [8, 25]], //30hp, 15 atk def, 10 range def, 30 magic attack focus, 40 magic strength, 25 magic defense
-    [[[1, 100], [0, 15, 35, 100]], [[8, 100], [89, 1, 1, 45], [90, 1, 1, 55]], [[10, 100], [127, 1, 1, 35], [126, 1, 1, 25], [79, 5, 10, 10], [78, 5, 10, 10], [80, 5, 10, 10], [81, 5, 10, 10]], [[256, 1], [327, 1, 1, 1]], Get.DropTables.TeleportScrolls(400), Get.DropTables.ItemPickupPages(100)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    [[[1, 100], [0, 15, 35, 100]], [[8, 100], [89, 1, 1, 45], [90, 1, 1, 55]], [[10, 100], [127, 1, 1, 35], [126, 1, 1, 25], [79, 5, 10, 10], [78, 5, 10, 10], [80, 5, 10, 10], [81, 5, 10, 10]], [[256, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.TeleportScrolls(400), Get.DropTables.ItemPickupPages(100)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     86, 8 /* Attack range */ , 3 /* head sprite ID */),
 Get.Character.SmallRat(22, 'Small Rat', 1),
 Get.Character.MediumRat(23, 'Rat', 1, [[11, 3], [0, 5], [1, 2], [2, 2]], [[[1, 100], [0, 5, 15, 100]]]), ////3hp, 5atk, 2pow, 2def),
@@ -165,7 +165,7 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     modelName: 'HUMANOID',
     spriteIndex: 7,
     stats: [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]],
-    drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[64, 1], [327, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[128, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
     isGuard: true,
     entityGuildType: 'GUARD',
@@ -339,24 +339,6 @@ Get.Character.Osaik(36),
         actionInterval: 0,
         steps: [
             [buildStep(StepType.SHOW_DIALOG, {params: [7]})],
-        ],
-    }],
-    useActions: [{
-        interfaceID: 0,
-        id: 11,
-        name: '',
-        entityType: Entity.EntityType.INVENTORY_ITEM,
-        entityID: 327,
-        actionInterval: -1,
-        steps: [
-            buildStepList(StepList.WALK_ADJACENT),
-            [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [0, 1000]}),
-            buildStep(StepType.RANDOMIZE_ITEM_STATE_ITEMID, {params: ['SLOT_ID_OTHER', 327]}),
-            buildStep(StepType.REMOVE_INVENTORY_ITEM, {
-                params: [0, 1000],
-                stepResultPass: 'END_ACTION',
-                stepResultFail: 'END_ACTION',
-            })],
         ],
     }],
 },
