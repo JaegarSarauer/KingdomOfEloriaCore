@@ -754,7 +754,7 @@ module.exports.WorldObject = WorldObject = [
                 ], [
                     buildStep(StepType.IS_IN_AREA, {
                         stepResultFail: StepResult.END_ACTION,
-                        params: [true, 139, 149, 139, 151]
+                        params: [true, 139, 151, 139, 151]
                     }),
                     buildStep(StepType.LEAVE_MINIGAME, {
                         stepResultFail: StepResult.END_ACTION,
