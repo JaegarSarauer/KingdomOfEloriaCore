@@ -363,40 +363,6 @@ const ItemGetter = {
                     buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[280]] })],
                 ],
             }],
-            // useActions: [{
-            //     interfaceID: 5,
-            //     id: 9,
-            //     name: 'Craft',
-            //     entityType: Entity.EntityType.INVENTORY_ITEM,
-            //     entityID: 524,
-            //     actionInterval: -1,
-            //     flags: ['REPEAT_ACTION'],
-            //     steps: [
-            //         [buildStep(StepType.OPEN_ENCHANTMENT_INTERFACE)]
-            //         // [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] })],
-            //         // [buildStep(StepType.HAS_INVENTORY_ITEM, { 
-            //         //     params: [674, 1], // Gold Amulet
-            //         //     stepResultFail: StepResult.NEXT_STEP_LIST
-            //         // }),
-            //         // buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
-            //         // buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + necklaceBaseLevel] }),
-            //         // buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] }),
-            //         // buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [674, 1] }),
-            //         // buildStep(StepType.GIVE_XP, { params: [21, 50 + (25 * tier)] }),
-            //         // //buildStep(StepType.GIVE_XP, { params: [15, 25 + (12 * tier)] }),
-            //         // buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [cutGemID, 1, 'ITEM_STATE'] })]
-            //         // [buildStep(StepType.HAS_INVENTORY_ITEM, { 
-            //         //     params: [799, 1], // Gold ring
-            //         // }),
-            //         // buildStep(StepType.HAS_INVENTORY_ITEM, { params: [524, 1] }),
-            //         // buildStep(StepType.HAS_SKILL_LEVEL, { params: [21, gemcuttingBaseLevel + ringBaseLevel] }),
-            //         // buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1, 'ITEM_STATE'] }),
-            //         // buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [799, 1] }),
-            //         // buildStep(StepType.GIVE_XP, { params: [21, 5 + (25 * tier)] }),
-            //         // //buildStep(StepType.GIVE_XP, { params: [15, 2 + (12 * tier)] }),
-            //         // buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [cutGemID, 1, 'ITEM_STATE'] })]
-            //     ] 
-            // }]
         };
     },
     BaseRing: function(id, notedID, name, value, spriteIndex) {
@@ -414,14 +380,20 @@ const ItemGetter = {
                 id: 4,
                 name: 'Equip Right',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [7, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RINGS'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [7, 'ITEM_ID', 'ITEM_STATE'] })
+                    ]
                 ]
             }, {
                 interfaceID: 5,
                 id: 5,
                 name: 'Equip Left',
                 steps: [
-                    [buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [8, 'ITEM_ID', 'ITEM_STATE'] })]
+                    [
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_RINGS'] }),
+                        buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [8, 'ITEM_ID', 'ITEM_STATE'] })
+                    ]
                 ]
             }],
         };
@@ -1061,7 +1033,7 @@ const ItemGetter = {
                     parent: 'LEFT_THIGH',
                     spriteID: tier,
                     anchor: { x: (4/7), y: 0.185 },
-                    position: {x: -0.08, y: 0},
+                    position: {x: -0.1, y: 0.15},
                     rotation: 0,
                     hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
@@ -1073,7 +1045,7 @@ const ItemGetter = {
                     parent: 'RIGHT_THIGH',
                     spriteID: tier,
                     anchor: { x: 1-(4/7), y: 0.185 },
-                    position: {x: 0.08, y: 0},
+                    position: {x: 0.1, y: 0.15},
                     rotation: 0,
                     hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
@@ -1085,7 +1057,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: {x: 0.08, y: -0.125},
+                    position: {x: 0.025, y: -0.11},
                     rotation: 0,
                     hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
@@ -1097,7 +1069,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0 },
-                    position: {x: -0.08, y: -0.125},
+                    position: {x: -0.025, y: -0.11},
                     rotation: 0,
                     hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
@@ -1140,7 +1112,7 @@ const ItemGetter = {
                     parent: 'CHEST',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.65 },
-                    position: { x: 0, y: 0.0 },
+                    position: { x: 0, y: -0.05 },
                     rotation: 0,
                     UIModel: null,
                     hideParts: ['CHEST_WORN_SHIRT'],
@@ -1153,8 +1125,8 @@ const ItemGetter = {
                     parent: 'RIGHT_SHOULDER',
                     spriteID: tier,
                     anchor: { x: 0.75, y: 0.18 },
-                    position: {x: 0, y: 0.05},
-                    rotation: 0,
+                    position: {x: 0.06, y: 0},
+                    rotation: -1 / 180 * Math.PI,
                     hideParts: ['RIGHT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
@@ -1165,8 +1137,8 @@ const ItemGetter = {
                     parent: 'LEFT_SHOULDER',
                     spriteID: tier,
                     anchor: {x: 0.25, y: 0.18},
-                    position: {x: 0, y: 0.05},
-                    rotation: 0,
+                    position: {x: -0.06, y: 0},
+                    rotation: 1 / 180 * Math.PI,
                     hideParts: ['LEFT_SHOULDER_WORN_SHIRT'],
                     UIModel: null,
                 },
@@ -1917,7 +1889,7 @@ const ItemGetter = {
                     sprite: spriteName + 'LeftThigh',
                     parent: 'LEFT_THIGH',
                     spriteID: colorSpriteId,
-                    anchor: { x: (6/9), y: 0.2 },
+                    anchor: { x: (6/9), y: 0.15 },
                     position: {x: 0, y: 0},
                     rotation: 0,
                     hideParts: ['LEFT_THIGH_WORN_PANTS'],
@@ -1929,7 +1901,7 @@ const ItemGetter = {
                     sprite: spriteName + 'RightThigh',
                     parent: 'RIGHT_THIGH',
                     spriteID: colorSpriteId,
-                    anchor: { x: 1-(6/9), y: 0.2 },
+                    anchor: { x: 1-(6/9), y: 0.15 },
                     position: {x: 0, y: 0},
                     rotation: 0,
                     hideParts: ['RIGHT_THIGH_WORN_PANTS'],
@@ -1941,8 +1913,8 @@ const ItemGetter = {
                     sprite: spriteName + 'LeftShin',
                     parent: 'LEFT_SHIN',
                     spriteID: colorSpriteId,
-                    anchor: { x: 0.5, y: 0.1 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: 0.52, y: 0.1 },
+                    position: {x: 0, y: -0.05},
                     rotation: 0,
                     hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
@@ -1953,8 +1925,8 @@ const ItemGetter = {
                     sprite: spriteName + 'RightShin',
                     parent: 'RIGHT_SHIN',
                     spriteID: colorSpriteId,
-                    anchor: { x: 0.5, y: 0.1 },
-                    position: {x: 0, y: 0},
+                    anchor: { x: 0.48, y: 0.1 },
+                    position: {x: 0, y: -0.05},
                     rotation: 0,
                     hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
