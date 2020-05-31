@@ -1881,11 +1881,11 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
                         }
                     }
                     else {
-                        animationsActive.animations.forEach(x => {
-                            x.stop();
-                            
-                            // TODO: Does x.stop call oncomplete? If not, do garbage collecting code here
-                        });
+                        for(let j = 0; j < animationsActive.animations.length; ++j) {
+                            animationsActive.animations[j].stop();
+                            TWEEN.remove(animationsActive.animations[j]);
+                        }
+                        animationsActive.animations = [];
                     }
                 }
 
