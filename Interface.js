@@ -77,6 +77,7 @@ module.exports.Interface = [
                     [buildStep(StepType.CAN_PICKUP_GROUNDITEM),
                     buildStep(StepType.HAS_INVENTORY_SPACE, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']}),
                     buildStep(StepType.DESPAWN_OWNER),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['PET'] }),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']}),
                     buildStep(StepType.PLAY_SOUND, {params: [18]})],
                 ],
@@ -753,7 +754,10 @@ module.exports.Interface = [
                 name: 'Cast',
                 actionInterval: 0,
                 steps: [
-                    [buildStep(StepType.USE_ENCHANTMENT, { params: ['ENCHANTMENT_ID'] })]
+                    [
+                        buildStep(StepType.USE_ENCHANTMENT, { params: ['ENCHANTMENT_ID'] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] })
+                    ]
                 ],
             },
             // {
@@ -1974,8 +1978,11 @@ module.exports.Interface = [
             name: 'Set Autocast',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.CAN_CAST_SPELL, {params: ['SPELL_ID', true, false]}),
-                buildStep(StepType.SET_AUTOCAST_SPELL, {params: ['SPELL_ID']})]
+                [
+                    buildStep(StepType.CAN_CAST_SPELL, {params: ['SPELL_ID', true, false]}),
+                    buildStep(StepType.SET_AUTOCAST_SPELL, {params: ['SPELL_ID']}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND'] })
+                ]
             ],
         },
         {
@@ -1983,7 +1990,10 @@ module.exports.Interface = [
             name: 'Cast on Entity',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.CAST_SPELL, {params: ['SPELL_ID', 'SLOT_ID', null]})]
+                [
+                    buildStep(StepType.CAST_SPELL, {params: ['SPELL_ID', 'SLOT_ID', null]}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] })
+                ]
             ],
         },
         {
@@ -1991,7 +2001,10 @@ module.exports.Interface = [
             name: 'Cast on Item',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.CAST_SPELL, {params: ['SPELL_ID', null, 'SLOT_ID']})]
+                [
+                    buildStep(StepType.CAST_SPELL, {params: ['SPELL_ID', null, 'SLOT_ID']}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] })
+                ]
             ],
         },
     ],
@@ -2021,7 +2034,10 @@ module.exports.Interface = [
             name: 'Remove',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.REMOVE_JEWELRY_CRAFT_ITEM, {params: ['SLOT_ID']})]
+                [
+                    buildStep(StepType.REMOVE_JEWELRY_CRAFT_ITEM, {params: ['SLOT_ID']}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] })
+                ]
             ],
         },
     ],
@@ -2034,7 +2050,10 @@ module.exports.Interface = [
             name: 'Add',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.ADD_JEWELRY_CRAFT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE'],})],
+                [
+                    buildStep(StepType.ADD_JEWELRY_CRAFT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE'],}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] })
+                ],
             ],
         },
     ],
@@ -2060,7 +2079,10 @@ module.exports.Interface = [
             name: 'Remove',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.REMOVE_ENCHANTMENT_ITEM, {params: ['SLOT_ID', 'ITEM_AMOUNT']})]
+                [
+                    buildStep(StepType.REMOVE_ENCHANTMENT_ITEM, {params: ['SLOT_ID', 'ITEM_AMOUNT']}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] })
+                ]
             ],
         },
         {
@@ -2068,7 +2090,10 @@ module.exports.Interface = [
             name: 'Select',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.SELECT_ENCHANTMENT, {params: ['SPELL_ID']})]
+                [
+                    buildStep(StepType.SELECT_ENCHANTMENT, {params: ['SPELL_ID']}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_LEFTHAND'] })
+                ]
             ],
         },
     ],
@@ -2081,7 +2106,10 @@ module.exports.Interface = [
             name: 'Select',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.SELECT_ENCHANTMENT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+                [
+                    buildStep(StepType.SELECT_ENCHANTMENT_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] })
+                ]
             ],
         },
     ],
@@ -2095,7 +2123,10 @@ module.exports.Interface = [
             name: 'Confirm',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.CHANGE_APPEARANCE, {params: ['SKIN_TONE', 'HAIR_STYLE', 'HAIR_COLOR', 'GENDER', 'EYE_COLOR', 'FACE', 'FACE_COLOR', 'SHIRT', 'PANTS']})]
+                [
+                    buildStep(StepType.CHANGE_APPEARANCE, {params: ['SKIN_TONE', 'HAIR_STYLE', 'HAIR_COLOR', 'GENDER', 'EYE_COLOR', 'FACE', 'FACE_COLOR', 'SHIRT', 'PANTS']}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] })
+                ]
             ],
         },
     ],
