@@ -77,7 +77,7 @@ const upgradeAccount = (userDef) => {
     let upgradesCompleted = [];
     for (let i = userDef.accountVersion, le = AccountVersion.length; i < le; ++i) {
         let version = AccountVersion[i];
-        console.info('Account version: ', userDef.username, userDef.accountVersion, i, version.id);
+        console.info('Account version upgrading... ', userDef.username, userDef.accountVersion, i, version.id);
         if (version.id > userDef.accountVersion) {
             userDef.accountVersion = version.id;
             version.upgradeData(userDef);
