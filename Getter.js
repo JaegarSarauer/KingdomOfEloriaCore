@@ -495,6 +495,7 @@ const ItemGetter = {
         necklace.essenceValue = EssenceValue(incinerateLevel, 4, [ShardCatalog.METAL(20), ShardCatalog.EARTH(3)]);
         necklace.description = 'A simple gold amulet';
         necklace.baseSpriteIndex = spriteIndex;
+        //necklace.model.NECK_WORN.spriteID = spriteIndex - 
         necklace.spriteIndex = (item) => {
             if (item.getStateValue('id') == 'MULTI_ENCHANTMENT') {
                 return item.getStateValue('spriteIndex') || spriteIndex;
