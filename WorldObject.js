@@ -750,7 +750,7 @@ module.exports.WorldObject = WorldObject = [
                         stepResultFail: StepResult.END_ACTION,
                         params: [0]
                     }),
-                    buildStep(StepType.TELEPORT, {params: [1, 139, 151, 139, 151, 1]})
+                    buildStep(StepType.TELEPORT, {params: [1, 139, 151, 139, 151, 1]}),
                 ], [
                     buildStep(StepType.IS_IN_AREA, {
                         stepResultFail: StepResult.END_ACTION,
@@ -760,7 +760,7 @@ module.exports.WorldObject = WorldObject = [
                         stepResultFail: StepResult.END_ACTION,
                         params: [0]
                     }),
-                    buildStep(StepType.TELEPORT, {params: [1, 141, 151, 141, 151, 1]})
+                    buildStep(StepType.TELEPORT, {params: [1, 141, 151, 141, 151, 1]}),
                 ]
             ],
         }],

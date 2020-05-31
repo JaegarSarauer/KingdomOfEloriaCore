@@ -4019,7 +4019,7 @@ const WorldObject = {
                                 stepResultFail: StepResult.END_ACTION,
                             }),
                             buildStep(StepType.TELEPORT, {
-                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, mapID],
+                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, 0],
                                 stepResultPass: StepResult.END_ACTION,
                             })
                         ], 
@@ -4033,10 +4033,10 @@ const WorldObject = {
                                 stepResultFail: StepResult.END_ACTION,
                             }),
                             buildStep(StepType.TELEPORT, {
-                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, mapID,
+                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, 0,
                                 [
                                     [buildStep(StepType.TELEPORT, {
-                                        params: [mapID, entryPoint.x, entryPoint.y, entryPoint.x, entryPoint.y, mapID],
+                                        params: [mapID, entryPoint.x, entryPoint.y, entryPoint.x, entryPoint.y, 0],
                                         stepResultPass: StepResult.END_ACTION,
                                     })]
                                 ]],
