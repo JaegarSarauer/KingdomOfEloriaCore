@@ -1,3 +1,5 @@
+const ItemState = require('../def/interface/ItemStateDef');
+
 // NOTE: upgrade for a ID means upgrading to that ID
 const AccountVersion = [{
     id: 0, //versionID
@@ -21,8 +23,34 @@ const AccountVersion = [{
         // Add Alpha shirt to bank
         userDef.bank.addItem(725, 1, null);
 
+        // Replace all tomes of collection with enchanted opals.
+        for (let i = 0, le = userDef.bank.items.length; i < le; ++i) {
+            let item = userDef.bank.items[i];
+            if (item == null) {
+                continue;
+            }
+            if (item.id == 327) {
+                let tomeState = item.getStateObject();
+                let gemState = ItemState.ItemStates.ENCHANTED_GEM_ITEM_ID.build(12, tomeState.itemID, tomeState.charges, 2);
+                userDef.bank.setEntityAtSlot(item.slotID, [659, item.itemAmount, gemState.itemStateDef]);
+            }
+        }
+
         const obInterfaces = [0, 5, 9, 10, 16, 17, 21, 22, 27];
         userDef.forAllAdventurers((adv) => {
+            // Replace all tomes of collection with enchanted opals.
+            for (let i = 0, le = adv.inventory.items.length; i < le; ++i) {
+                let item = adv.inventory.items[i];
+                if (item == null) {
+                    continue;
+                }
+                if (item.id == 327) {
+                    let tomeState = item.getStateObject();
+                    let gemState = ItemState.ItemStates.ENCHANTED_GEM_ITEM_ID.build(12, tomeState.itemID, tomeState.charges, 2);
+                    adv.inventory.setEntityAtSlot(item.slotID, [659, item.itemAmount, gemState]);
+                }
+            }
+
             // Migrate colored shirts from armor chest layer to clothing chest layer
             if (adv.equipment.equipmentSlots[3] != null && shirtIdsToMigrate.includes(adv.equipment.equipmentSlots[3].id)) {
                 adv.equipment.equipmentSlots[9] = adv.equipment.equipmentSlots[3];
