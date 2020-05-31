@@ -1781,7 +1781,7 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
             y : 0
         }
 
-        if (animationName.includes('WALK')) {
+        if (animationName.includes('WALK') || animationName.includes('RUN')) {
             let xChange = offsets.x = (params.xTileChange || 0) * 64;
             let yChange = offsets.y = (params.yTileChange || 0) * 64;
             modelParts.CORE.ownerSprite.reset();
