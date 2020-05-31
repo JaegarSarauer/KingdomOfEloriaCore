@@ -1827,7 +1827,7 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
                     }
                 }
                 else {
-                    console.info('No chest on animation ', animation.name, transformsByPart);
+                    console.info('No chest on animation ', animationName, transformsByPart);
                 }
             }
             else {
@@ -1946,6 +1946,7 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
             }
         }
     }
+
 }
 
 let SpriterOverrideAnimations = function() {
@@ -1959,11 +1960,8 @@ let SpriterOverrideAnimations = function() {
             for(let j = 0; j < entity.animation.length; ++j) {
                 let animation = entity.animation[j];
 
-                // if (entity.name == 'FOUR_LEGGED_MAMMAL' && animation.name == 'WALK_HORIZONTAL') {
-                    let animationCallback = CreatePIXIJSAnimationFromSpriterAnimation(animation);
-
-                    Animation[entity.name][animation.name] = animationCallback;
-                // }
+                let animationCallback = CreatePIXIJSAnimationFromSpriterAnimation(animation);
+                Animation[entity.name][animation.name] = animationCallback;
             }
         }
     }

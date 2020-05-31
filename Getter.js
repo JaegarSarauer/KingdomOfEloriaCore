@@ -4589,13 +4589,11 @@ const Character = {
         return patreoner;
     },
     KaityPatreon: function(id, amountDonated, talkToDialog) {
-        let result = this.Patreoner(id, 'Babyshark', 33, [null, null, null, 379, 483], 5, 0x4f3822, amountDonated, talkToDialog);
+        let result = this.Patreoner(id, 'Babyshark', 33, [null, null, null, 379, 483], 5, 0x523000, 0x523000, 0, amountDonated, talkToDialog);
         result.modelParams.FACE.spriteID = 'Kaity';
-        result.modelParams.EYES.tint = 0x523000;
         result.modelParams.HEAD.spriteID = 'Kaity';
         result.modelParams.HAIR.sprite = 'hairStyle';
         result.modelParams.HAIR.spriteID = 'Kaity';
-        result.modelParams.HAIR.tint = 0x523000;
         return result;
     },
     PatreonPim : function(id) {
