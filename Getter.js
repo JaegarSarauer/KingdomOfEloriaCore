@@ -1825,6 +1825,11 @@ const ItemGetter = {
         }
         return shirt;
     },
+    SpecialShirt: function (id, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride = null, isArmour = false, itemDetail = null, untradable = false) {
+        let shirt = this.Shirt(id, null, name, itemSpriteIndex, sprite, spriteId, value, description, armSpriteNameOverride, false, itemDetail );
+        shirt.untradeable = true;
+        return shirt;
+    },
     ColoredShirt: function (id, notedId, name, itemSpriteIndex, shirtStyleNumber, colorSpriteId, value) {
         coloredShirtStyleAndColorById[id] = shirtStyleNumber * 1000 + colorSpriteId;
         coloredShirtIdsByStyleAndColor[shirtStyleNumber * 1000 + colorSpriteId] = id;

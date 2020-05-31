@@ -18,6 +18,9 @@ const AccountVersion = [{
             pantIdsToMigrate.push(i);
         }
 
+        // Add Alpha shirt to bank
+        userDef.bank.addItem(725, 1, null);
+
         const obInterfaces = [0, 5, 9, 10, 16, 17, 21, 22, 27];
         userDef.forAllAdventurers((adv) => {
             // Migrate colored shirts from armor chest layer to clothing chest layer
