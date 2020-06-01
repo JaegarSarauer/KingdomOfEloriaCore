@@ -39,15 +39,15 @@ const AccountVersion = [{
         const obInterfaces = [0, 5, 9, 10, 16, 17, 21, 22, 27];
         userDef.forAllAdventurers((adv) => {
             // Replace all tomes of collection with enchanted opals.
-            for (let i = 0, le = adv.inventory.items.length; i < le; ++i) {
-                let item = adv.inventory.items[i];
+            for (let i = 0, le = userDef.bank.items.length; i < le; ++i) {
+                let item = userDef.bank.items[i];
                 if (item == null) {
                     continue;
                 }
                 if (item.id == 327) {
                     let tomeState = item.getStateObject();
                     let gemState = ItemState.ItemStates.ENCHANTED_GEM_ITEM_ID.build(12, tomeState.itemID, tomeState.charges, 2);
-                    adv.inventory.setEntityAtSlot(item.slotID, [659, item.itemAmount, gemState]);
+                    userDef.bank.setEntityAtSlot(item.slotID, [659, item.itemAmount, gemState.itemStateDef]);
                 }
             }
 
