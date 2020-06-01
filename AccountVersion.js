@@ -73,7 +73,7 @@ const AccountVersion = [{
     },
 }];
 
-export const upgradeAccount = (userDef) => {
+const upgradeAccount = (userDef) => {
     let upgradesCompleted = [];
     for (let i = userDef.accountVersion, le = AccountVersion.length; i < le; ++i) {
         let version = AccountVersion[i];
@@ -86,8 +86,8 @@ export const upgradeAccount = (userDef) => {
     return upgradesCompleted;
 }
 
-export const LatestVersion = AccountVersion.length - 1;
+const LatestVersion = AccountVersion.length - 1;
 
-// module.exports.upgradeAccount = upgradeAccount;
-// module.exports.LatestVersion = LatestVersion;
+module.exports.upgradeAccount = upgradeAccount;
+module.exports.LatestVersion = LatestVersion;
 //module.exports.AccountVersion = AccountVersion;
