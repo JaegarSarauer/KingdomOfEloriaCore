@@ -91,7 +91,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
         }
 
         if (defData.atkNPC != null) {
-            npcDef.isAggressive = [defData.atkNPC];
+            npcDef.isAggressiveTo = [defData.atkNPC];
         }
 
         let baseDefCopy = JSON.parse(JSON.stringify(npcDef.def));
