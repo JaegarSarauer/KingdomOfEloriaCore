@@ -4727,6 +4727,118 @@ const Character = {
                 ],
             }], faceId, eyeColor);
         },
+    Guard: function(id, name, spriteID = null, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822,) {
+        if (spriteID == null) {
+            let skinTone = Math.floor(Math.random() * 6) + 1;
+            let genderID = Math.floor(Math.random() * 3) + 1;
+            spriteID = genderID * 10 + skinTone;
+        }
+        let human = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, faceId, eyeColor );
+        human.requirements = ItemDetail.build([
+            ItemDetail.levelSkillDetail(1, 1, 'BOUNTY'),
+            ItemDetail.levelSkillDetail(30, 20, 'STEAL'),
+        ]);
+        human.stats = [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]];
+        human.drops =  [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[128, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)]; //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+        human.isGuard = true;
+        human.actions = [{
+            interfaceID: 0,
+            id: 6,
+            name: 'Attack',
+            steps: [
+                [buildStep(StepType.SET_BOUNTY, {
+                    params: [false, 120],
+                })]
+            ],
+        }, {
+            interfaceID: 0,
+            id: 30,
+            name: 'Steal',
+            steps: [
+                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 30] }),
+                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to steal from the guard.'] }),
+                buildStep(StepType.SET_ACTION_INTERVAL, { params: [6] })],
+                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 30] }),
+                buildStep(StepList.WALK_ADJACENT),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND', {repeat: 6}] }),
+                buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                    params: [20, 35, 3, false, 0.5, 0.5],
+                    stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
+                })],
+                [buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                    params: [20, 10, 1000, false, -4, -4],
+                    stepResultPass: StepResult.NEXT_STEP,
+                    stepResultFail: StepResult.NEXT_STEP_LIST,
+                }),
+                buildStep(StepType.SET_BOUNTY, {
+                    params: [false, 300],
+                }),
+                buildStep(StepType.DAMAGE, {params: [2]}),
+                buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                    params: ['You were caught stealing from the guard!'],
+                    stepResultPass: StepResult.END_AND_REPEAT_ACTION,
+                    stepResultFail: StepResult.END_AND_REPEAT_ACTION,
+                })],
+                [buildStep(StepType.ROLL_DROP_TABLE, { 
+                    params: [1, [[0, 4, 16, 50], [0, 15, 28, 25], [0, 25, 48, 20], [0, 60, 80, 5]]],
+                    stepResultFail: StepResult.NEXT_STEP
+                }),
+                buildStep(StepType.ROLL_DROP_TABLE, { 
+                    params: [1, [[13, 1, 1, 25], [14, 1, 1, 20], [15, 1, 1, 15], [73, 2, 4, 10], [22, 1, 1, 5]]],
+                    stepResultFail: StepResult.NEXT_STEP
+                }),
+                buildStep(StepType.GIVE_XP, { params: [20, 50] }),
+                buildStep(StepType.SEND_CLIENT_MESSAGE, { 
+                    params: ['You find some items in the guard\'s pocket.'],
+                    stepResultPass: StepResult.END_AND_GOTO_LIST_1,
+                }),
+            ],
+        ],
+        }];
+        return human;
+    },
+    MeleeGuard: function(id, name, tier, spriteID = null) {
+        let guard = this.Guard(id, name, spriteID);
+        tier = Math.min(6, Math.max(1, tier));
+        guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
+        switch(tier) {
+            case 1:
+                guard.equipmentModel = [21, 17, null, 42, 29];
+                break;
+            case 2:
+                guard.equipmentModel = [22, 18, null, 43, 30];
+                break;
+            case 3:
+                guard.equipmentModel = [23, 19, null, 44, 31];
+                break;
+            case 4:
+                guard.equipmentModel = [24, 20, null, 45, 32];
+                break;
+            case 5:
+                guard.equipmentModel = [259, 273, 271, 263, 261];
+                break;
+            case 6:
+                guard.equipmentModel = [287, 301, 299, 291, 289];
+                break;
+        }
+        return guard;
+    },
+    EmperorMeleeGuard: function(id, name, tier) {
+        let guard = this.MeleeGuard(id, name, tier, 666);
+        guard.isEmperorGuard = true;
+        return guard;
+    },
+    King: function(id, name, guildID) {
+        let human = this.Human(id, name, 13, [23, 19, null, 44, 31]);
+        human.actions = [{
+            interfaceID: 0,
+            id: 6,
+            name: 'Attack'
+        }];
+        human.stats = [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]];
+        human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
+        return human;
+    },
     HumanAppearanceShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, appearanceShopMenuID) {
         return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
                 interfaceID: 0,

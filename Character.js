@@ -155,115 +155,8 @@ Get.Character.SmallRat(22, 'Small Rat', 1),
 Get.Character.MediumRat(23, 'Rat', 1, [[11, 3], [0, 5], [1, 2], [2, 2]], [[[1, 100], [0, 5, 15, 100]]]), ////3hp, 5atk, 2pow, 2def),
 Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3hp, 5atk, 2pow, 2def),
     [[[1, 100], [0, 45, 80, 100]]]),
-{
-    id: 25,
-    name: 'Guard',
-    requirements: ItemDetail.build([
-        ItemDetail.levelSkillDetail(1, 1, 'BOUNTY'),
-        ItemDetail.levelSkillDetail(30, 20, 'STEAL'),
-    ]),
-    modelName: 'HUMANOID',
-    spriteIndex: 7,
-    stats: [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]],
-    drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[128, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
-    isGuard: true,
-    entityGuildType: 'GUARD',
-    modelParams : {
-        EYES : { tint : EyeColors.Blue },
-    },
-    actions: [{
-        interfaceID: 0,
-        id: 6,
-        name: 'Attack',
-        steps: [
-            [buildStep(StepType.SET_BOUNTY, {
-                params: [false, 120],
-            })]
-        ],
-    }, {
-        interfaceID: 0,
-        id: 30,
-        name: 'Steal',
-        steps: [
-            [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 30] }),
-            buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to steal from the guard.'] }),
-            buildStep(StepType.SET_ACTION_INTERVAL, { params: [6] })],
-            [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 30] }),
-            buildStep(StepList.WALK_ADJACENT),
-            buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND', {repeat: 6}] }),
-            buildStep(StepType.ROLL_SKILL_SUCCESS, {
-                params: [20, 35, 3, false, 0.5, 0.5],
-                stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
-            })],
-            [buildStep(StepType.ROLL_SKILL_SUCCESS, {
-                params: [20, 10, 1000, false, -4, -4],
-                stepResultPass: StepResult.NEXT_STEP,
-                stepResultFail: StepResult.NEXT_STEP_LIST,
-            }),
-            buildStep(StepType.SET_BOUNTY, {
-                params: [false, 300],
-            }),
-            buildStep(StepType.DAMAGE, {params: [2]}),
-            buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                params: ['You were caught stealing from the guard!'],
-                stepResultPass: StepResult.END_AND_REPEAT_ACTION,
-                stepResultFail: StepResult.END_AND_REPEAT_ACTION,
-            })],
-            [buildStep(StepType.ROLL_DROP_TABLE, { 
-                params: [1, [[0, 4, 16, 50], [0, 15, 28, 25], [0, 25, 48, 20], [0, 60, 80, 5]]],
-                stepResultFail: StepResult.NEXT_STEP
-            }),
-            buildStep(StepType.ROLL_DROP_TABLE, { 
-                params: [1, [[13, 1, 1, 25], [14, 1, 1, 20], [15, 1, 1, 15], [73, 2, 4, 10], [22, 1, 1, 5]]],
-                stepResultFail: StepResult.NEXT_STEP
-            }),
-            buildStep(StepType.GIVE_XP, { params: [20, 50] }),
-            buildStep(StepType.SEND_CLIENT_MESSAGE, { 
-                params: ['You find some items in the guard\'s pocket.'],
-                stepResultPass: StepResult.END_AND_GOTO_LIST_1,
-            }),
-        ],
-    ],
-    }],
-},
-{
-    id: 26,
-    name: 'Emperor Guard',
-    modelName: 'HUMANOID',
-    spriteIndex: 7,
-    stats: [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]],
-    drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
-    entityGuildType: 'EMPEROR_GUARD',
-    modelParams : {
-        EYES : { tint : EyeColors.Blue }
-    },
-    actions: [{
-        interfaceID: 0,
-        id: 6,
-        name: 'Attack',
-    }],
-},
-{
-    id: 27,
-    name: 'Mayor',
-    modelName: 'HUMANOID',
-    spriteIndex: 7,
-    stats: [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]],
-    drops: [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]], //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
-    equipmentModel: [23, 19, null, 44, 31], //head, right, left, chest, legs
-    isGuard: true,
-    entityGuildType: 'MAYOR',
-    modelParams : {
-        EYES : { tint : EyeColors.Blue }
-    },
-    actions: [{
-        interfaceID: 0,
-        id: 6,
-        name: 'Attack'
-    }],
-},
+Get.Character.MeleeGuard(86, 'Guard', 3),
+Get.Character.King(27, 'King', 0),
 {
     id: 28,
     name: 'Player Guard',
@@ -480,6 +373,17 @@ Get.Character.HumanAppearanceShopOwner(83, 'Wizard Surgeon', 13, [539, null, nul
 Get.Character.PatreonPim(84),
 Get.Character.PatreonTat(85),
 Get.Character.Patreoner(86, 'Aeronic', 22, [null, null, null, 407, 479], 8, HairColors.Brown, EyeColors.Brown, FacialStyles.Beard_Short, 40 + 6, 70),
+Get.Character.MeleeGuard(87, 'Guard', 3),
+Get.Character.MeleeGuard(88, 'Guard', 4),
+Get.Character.MeleeGuard(89, 'Elite Guard', 5),
+Get.Character.MeleeGuard(90, 'Elite Guard', 6),
+Get.Character.EmperorMeleeGuard(91, 'Emperor\'s Guard', 3),
+Get.Character.EmperorMeleeGuard(92, 'Emperor\'s Guard', 4),
+Get.Character.EmperorMeleeGuard(93, 'Emperor\'s Elite Guard', 5),
+Get.Character.EmperorMeleeGuard(94, 'Emperor\'s Elite Guard', 6),
+Get.Character.King(95, 'King of Tergaron', 0), // Mining
+Get.Character.King(96, 'King of Salmo', 1), // Fishing
+Get.Character.King(97, 'King of Acernis', 2), // Woodcutting
 ];
 
 
