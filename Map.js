@@ -19,14 +19,6 @@ const MapCompressor = require('./MapCompressor');
 const MAP_WIDTH = 400;
 const SOLID_SQUARE_ID = 60;
 
-module.exports.GetEntityDataFromMap = function(tiledID, mapID) {
-    if (objectMapData[mapID] && objectMapData[mapID][tiledID]) {
-        return objectMapData[mapID][tiledID];
-    }
-    return null;
-}
-
-
 let mapData = [
     MapCompressor.getMapData(0, 'Overworld'),
     MapCompressor.getMapData(1, 'Underworld'),
@@ -40,42 +32,39 @@ function wallDataToMapWalls(wallData) {
     return wallData;
 }
 
-let objectMapData = {}
-function entityDataToMapEntities(worldObjectData, npcData, mapID) {
-    let overrideData = {};
+function entityDataToMapEntities(worldObjectData, charData, mapID) {
     let entitiesArray = [];
+    let overrideDef = null;
 
     for(let i = 0; i < worldObjectData.length; ++i) {
-        let data = worldObjectData[i];
-        let x = data[0];
-        let y = data[1];
-        let id = data[2];
+        let defData = worldObjectData[i];
+        let x = defData[0];
+        let y = defData[1];
+        let id = defData[2];
         entitiesArray.push(new WorldObjectDef(id, x, y));
     }
 
-    let entityData = npcData;
-    for(let i = 0; i < entityData.length; ++i) {
-        let data = entityData[i];
+    for(let i = 0; i < charData.length; ++i) {
+        let defData = charData[i];
 
-        let x = data.x;
-        let y = data.y;
-        let id = data.id;
+        let x = defData.x;
+        let y = defData.y;
+        let id = defData.id;
         let bounds = null;
-        if (data.b != null) {
-            bounds = new Bounds().copyFrom(data.b);
+        if (defData.b != null) {
+            bounds = new Bounds().copyFrom(defData.b);
         } 
-        let isAggressive = data.aggro;
-        let tiledID = data.tID;
-        let attackNPCs = data.atkNPC != null;
-        let properties = data.data;
+        let isAggressive = defData.aggro;
+        let tiledID = defData.tID;
+        let properties = defData.properties;
+        let propertiesFound = false;
 
-        let ignoreKeys = ['boundsX1', 'boundsX2', 'boundsY1', 'boundsY2', 'isAggresive'];
+        let ignoreKeys = ['boundsX1', 'boundsX2', 'boundsY1', 'boundsY2', 'isAggressive'];
 
-        let npcDef = new NPCDef(id, x, y, bounds, isAggressive);
+        let npcDef = new NPCDef(id, x, y, bounds, isAggressive, tiledID);
         if (properties && npcDef.def) {
             let defCopy = JSON.parse(JSON.stringify(npcDef.def));
             let keys = Object.keys(properties);
-            let propertiesFound = false;
             for(let i = 0; i < keys.length; ++i) {
                 if (!ignoreKeys.includes(keys[i])) {
                     let innerKeys = keys[i].split('.');
@@ -96,18 +85,20 @@ function entityDataToMapEntities(worldObjectData, npcData, mapID) {
             }
             
             if (propertiesFound) {
-                overrideData[tiledID] = defCopy;
+                overrideDef = defCopy;
                 
-                if(attackNPCs) {
-                    let npcToAttack = data.atkNPC;
-                    overrideData[tiledID].isAggresiveTo = [npcToAttack];
-                }
             }
         }
-        npcDef.initialize(mapID);
+
+        if (defData.atkNPC != null) {
+            npcDef.isAggressive = [defData.atkNPC];
+        }
+
+        let baseDefCopy = JSON.parse(JSON.stringify(npcDef.def));
+        npcDef.def = Object.assign({}, baseDefCopy, overrideDef);
+
         entitiesArray.push(npcDef);
     }
-    objectMapData[mapID] = overrideData;
 
     return entitiesArray;
 }

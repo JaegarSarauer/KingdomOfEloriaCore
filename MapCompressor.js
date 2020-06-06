@@ -36,28 +36,21 @@ class TileData {
 };
 
 class EntityData {
-    constructor(x, y, characterID, bounds, isAggresive, tiledID) {
+    constructor(x, y, characterID, bounds, isAggressive, tiledID) {
         this.x = x;
         this.y = y;
         this.id = characterID;
         this.b = bounds;
-        this.aggro = isAggresive;
+        this.aggro = isAggressive;
         this.tID = tiledID;
     }
-
-    setData(data) {
-        this.data = data;
-    }
 };
+
 class WorldObjectData {
     constructor(x, y, id) {
         this.x = x;
         this.y = y;
         this.id = id;
-    }
-
-    setData(data) {
-        this.data = data;
     }
 };
 
@@ -217,30 +210,19 @@ function loadMapCharacters(JSONMap) {
         if (obj.properties && obj.properties.boundsX1) {
             bounds = new Bounds(obj.properties.boundsX1, obj.properties.boundsY1, obj.properties.boundsX2, obj.properties.boundsY2);
         }
-        let isAgressive = obj.properties && obj.properties.isAgressive || false;
+        let isAggressive = obj.properties && obj.properties.isAggressive || false;
         let attackNPCs = obj.properties && obj.properties.attackNPC || false;
         
-        let npcDef = new EntityData(x, y, id, bounds, isAgressive, tiledID)
+        let npcDef = new EntityData(x, y, id, bounds, isAggressive, tiledID);
         if (attackNPCs) {
             npcDef.atkNPC = obj.properties.attackNPC;
         }
-        if ( obj.properties != null) {
-            npcDef.data = obj.properties;
-        }
+        npcDef.properties = obj.properties;
         
         entitiesArray.push(npcDef);
     }
-    return entitiesArray
+    return entitiesArray;
 }
-
-
-module.exports.GetEntityDataFromMap = function(tiledID, mapID) {
-    if (objectMapData[mapID] && objectMapData[mapID][tiledID]) {
-        return objectMapData[mapID][tiledID];
-    }
-    return null;
-}
-
 
 function loadItemSpawns(JSONMap) {
     let gidStart = JSONMap.tilesets[5].firstgid + 1;
