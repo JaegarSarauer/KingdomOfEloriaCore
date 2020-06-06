@@ -71,12 +71,11 @@ function entityDataToMapEntities(worldObjectData, npcData, mapID) {
 
         let ignoreKeys = ['boundsX1', 'boundsX2', 'boundsY1', 'boundsY2', 'isAggresive'];
 
-        let npcDef = new NPCDef(id, x, y, bounds, isAggressive, tiledID);
-
+        let npcDef = new NPCDef(id, x, y, bounds, isAggressive);
         if (properties && npcDef.def) {
             let defCopy = JSON.parse(JSON.stringify(npcDef.def));
             let keys = Object.keys(properties);
-            let hit = false;
+            let propertiesFound = false;
             for(let i = 0; i < keys.length; ++i) {
                 if (!ignoreKeys.includes(keys[i])) {
                     let innerKeys = keys[i].split('.');
@@ -90,40 +89,22 @@ function entityDataToMapEntities(worldObjectData, npcData, mapID) {
     
                         if (innerObj) {
                             innerObj[innerKeys[innerKeys.length - 1]] = overrideValue;
-                            hit = true;
+                            propertiesFound = true;
                         }
                     }
                 }
             }
             
-            if (hit) {
+            if (propertiesFound) {
                 overrideData[tiledID] = defCopy;
                 
                 if(attackNPCs) {
                     let npcToAttack = data.atkNPC;
-                    overrideData[tiledID].behaviorLoop = (entity) => {
-                        entity.timers.setTimer(17, 30, () => {
-                            let chance = Math.random() * 3;
-                            if (chance <= 1) {
-                                let action = new Action(entity, 0, 6, {
-                                    id: 0,
-                                    name: 'Attack',
-                                    actionInterval: -1,
-                                    steps: [
-                                        [buildStep(StepType.MAKE_CLOSEST_NPC_ATTACK_CLOSEST_NPC, { params: [entity.id, npcToAttack] })]
-                                    ],
-                                });
-                                action.performAction(entity);
-                            }
-                            return 30;
-                        })
-                    } 
-
-                    delete overrideData[tiledID].attackNPCs;                    
+                    overrideData[tiledID].isAggresiveTo = [npcToAttack];
                 }
             }
         }
-
+        npcDef.initialize(mapID);
         entitiesArray.push(npcDef);
     }
     objectMapData[mapID] = overrideData;
