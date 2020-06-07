@@ -107,6 +107,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
 
     return {entities, customEntityData};
 }
+
 function guildDataToGuilds(guildData) {
     let guildsArray = [];
     for (let i = 0; i < guildData.length; i++) {
@@ -117,6 +118,7 @@ function guildDataToGuilds(guildData) {
     }
     return guildsArray;
 }
+
 function shopDataToShops(shopStorageData) {
     let shopDatas = [];
     for(let i = 0; i < shopStorageData.length; ++i) {
