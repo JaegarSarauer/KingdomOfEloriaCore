@@ -397,6 +397,7 @@ module.exports.compressMapData = (mapID, name) => {
     let mapData = new MapData(mapID, name, width, height );
     let tiledMap  = null;
 
+<<<<<<< HEAD
     try {
         switch(mapID) {
             case 0:
@@ -459,6 +460,66 @@ module.exports.compressMapData = (mapID, name) => {
     }
     catch (e) {
 
+=======
+    switch(mapID) {
+        case 0:
+            tiledMap = require('../../../GuildsOfGodsAssets/MapDesign/TiledMap.json');
+            mapData.spawnPoint = [21, 36];
+            mapData.shopsData = [
+                new ShopStorageData(0, 'General Store', [[123, 5], [46, 2000], [1, 5], [9, 5], [117, 5], [63, 5], [118, 5], [51, 10], [513, 10], [524, 10], [744, 100], [761, 10]], 60),
+                new ShopStorageData(1, 'Woodcutting Store', [[123, 10], [1, 10], [2, 5], [3, 1], [5, 20], [6, 6]], 120),
+                new ShopStorageData(2, 'Fishing Store', [[117, 10], [47, 20], [48, 5], [49, 1]], 120),
+                new ShopStorageData(3, 'Metalsmith Store', [[63, 10], [59, 10], [60, 2]], 120),
+                new ShopStorageData(4, 'Mining Store', [[9, 10], [10, 5], [11, 1], [55, 10], [56, 5], [57, 1]], 120),
+                new ShopStorageData(5, 'Crafting Store', [[91, 100], [92, 5000], [87, 10], [88, 1], [524, 25]], 120),
+                new ShopStorageData(6, 'Alchemy Store', [[76, 100], [77, 100], [78, 500], [79, 350], [80, 200], [81, 100], [493, 40], [495, 50], [494, 20], [513, 10], [500, 1000], [501, 750], [502, 500], [503, 250], [505, 100], [504, 5], [507, 100], [506, 50], [508, 10]], 120),
+                new ShopStorageData(7, 'Melee Store', [[13, 10], [14, 5], [15, 1], [17, 5], [18, 2], [21, 10], [22, 5], [23, 1], [25, 5], [26, 2], [42, 10], [43, 5], [29, 10], [30, 5]], 120),
+                new ShopStorageData(8, 'Archery Store', [[37, 10], [38, 5], [39, 1], [68, 500], [69, 100], [70, 50], [71, 10], [105, 10], [106, 5], [109, 10], [110, 5], [113, 10], [114, 5]], 120),
+                new ShopStorageData(9, 'Magic Store', [[83, 500], [84, 100], [85, 50], [86, 10], [93, 10], [94, 5], [97, 10], [98, 5], [101, 10], [102, 5]], 120),
+                new ShopStorageData(10, 'Clothing Store', [[331, 5] ,[333, 5] ,[335, 5] ,[337, 5] ,[339, 5] ,[341, 5] ,[343, 5] ,[345, 5] ,[347, 5] ,[475, 5] ,[349, 5] ,[351, 5] ,[353, 5] ,[355, 5] ,[357, 5] ,[359, 5] ,[361, 5] ,[363, 5] ,[365, 5] ,[477, 5] ,[367, 5] ,[369, 5] ,[371, 5] ,[373, 5] ,[375, 5] ,[377, 5] ,[379, 5] ,[381, 5] ,[383, 5] ,[479, 5] ,[385, 5] ,[387, 5] ,[389, 5] ,[391, 5] ,[393, 5] ,[395, 5] ,[397, 5] ,[399, 5] ,[401, 5] ,[481, 5] ,[403, 5] ,[405, 5] ,[407, 5] ,[409, 5] ,[411, 5] ,[413, 5] ,[415, 5] ,[417, 5] ,[419, 5] ,[483, 5] ,[421, 5] ,[423, 5] ,[425, 5] ,[427, 5] ,[429, 5] ,[431, 5] ,[433, 5] ,[435, 5] ,[437, 5] ,[485, 5] ,[439, 5] ,[441, 5] ,[443, 5] ,[445, 5] ,[447, 5] ,[449, 5] ,[451, 5] ,[453, 5] ,[455, 5] ,[487, 5] ,[457, 5] ,[459, 5] ,[461, 5] ,[463, 5] ,[465, 5] ,[467, 5] ,[469, 5] ,[471, 5] ,[473, 5],[489, 5]], 120), 
+                new ShopStorageData(11, 'Farming Store', [[744, 1000]], 120),
+                new ShopStorageData(12, 'Fletching Store', [[123, 5], [5, 5], [6, 5], [7, 5], [74, 20]], 120),
+            ];
+            mapData.SafeAreas = [
+                new Bounds(19, 33, 23, 38), //castle left
+                new Bounds(24, 29, 39, 42), //castle center
+                new Bounds(40, 33, 44, 38), //castle right
+            ];
+            mapData.bountyAreaData =  [
+                new Bounds(3, 87, 16, 97), //island
+            ];
+            mapData.multicombatAreas = [
+                new Bounds(71, 105, 101, 132), //island
+                new Bounds(168, 0, 199, 63), //righr corner
+                new Bounds(200, 200, 240, 240), //war zone
+                new Bounds(222, 256, 256, 279), //goblin settlement
+                new Bounds(203, 247, 301, 339), //goblin cave
+            ];
+            break;
+        case 1:
+            tiledMap = require('../../../GuildsOfGodsAssets/MapDesign/TiledMapUnderground.json');
+
+            mapData.spawnPoint = new Point(21, 36);
+            mapData.shopsData = [];
+            mapData.SafeAreas = [];
+            mapData.bountyAreaData = [];
+            mapData.multicombatAreas = loadMultiAreas(tiledMap);
+            break;
+        case 2:
+            tiledMap = require('../../../GuildsOfGodsAssets/MapDesign/TiledMapSpecial.json');
+
+            mapData.spawnPoint = new Point(16, 70);
+            mapData.shopsData = [
+                        new ShopStorageData(0, 'General Store', [[127, 1], [123, 5], [46, 2000], [1, 5], [9, 5], [117, 5], [63, 5], [118, 5], [51, 10], [513, 10], [524, 10]], 60),
+                        new ShopStorageData(10, 'Clothing Store', [[331, 5] ,[333, 5] ,[335, 5] ,[337, 5] ,[339, 5] ,[341, 5] ,[343, 5] ,[345, 5] ,[347, 5] ,[475, 5] ,[349, 5] ,[351, 5] ,[353, 5] ,[355, 5] ,[357, 5] ,[359, 5] ,[361, 5] ,[363, 5] ,[365, 5] ,[477, 5] ,[367, 5] ,[369, 5] ,[371, 5] ,[373, 5] ,[375, 5] ,[377, 5] ,[379, 5] ,[381, 5] ,[383, 5] ,[479, 5] ,[385, 5] ,[387, 5] ,[389, 5] ,[391, 5] ,[393, 5] ,[395, 5] ,[397, 5] ,[399, 5] ,[401, 5] ,[481, 5] ,[403, 5] ,[405, 5] ,[407, 5] ,[409, 5] ,[411, 5] ,[413, 5] ,[415, 5] ,[417, 5] ,[419, 5] ,[483, 5] ,[421, 5] ,[423, 5] ,[425, 5] ,[427, 5] ,[429, 5] ,[431, 5] ,[433, 5] ,[435, 5] ,[437, 5] ,[485, 5] ,[439, 5] ,[441, 5] ,[443, 5] ,[445, 5] ,[447, 5] ,[449, 5] ,[451, 5] ,[453, 5] ,[455, 5] ,[487, 5] ,[457, 5] ,[459, 5] ,[461, 5] ,[463, 5] ,[465, 5] ,[467, 5] ,[469, 5] ,[471, 5] ,[473, 5],[489, 5]], 120), 
+            ];
+            mapData.SafeAreas = [];
+            mapData.bountyAreaData = [];
+            mapData.multicombatAreas = [];
+            break;
+        default:
+            break;
+>>>>>>> GuildState includes Tiled data
     }
 
     mapData.tileData = {
