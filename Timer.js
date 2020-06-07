@@ -65,6 +65,10 @@ export const Timer = [
     },
     {
         id: 16,
-        name: 'Random Event Rest',
+        name: 'Random Event Rest or NPC Walk Rest',
+    },
+    {
+        id: 17,
+        name: 'Behavior Loop',
     }
 ];
