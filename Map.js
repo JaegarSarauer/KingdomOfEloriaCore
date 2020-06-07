@@ -36,7 +36,9 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
     let entitiesArray = [];
     let overrideDef = null;
 
-    for(let i = 0; i < worldObjectData.length; ++i) {
+    let index = 0;
+
+    for(let i = 0; i < worldObjectData.length; ++i, ++index) {
         let defData = worldObjectData[i];
         let x = defData[0];
         let y = defData[1];
@@ -44,7 +46,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
         entitiesArray.push(new WorldObjectDef(id, x, y));
     }
 
-    for(let i = 0; i < charData.length; ++i) {
+    for(let i = 0; i < charData.length; ++i, ++index) {
         let defData = charData[i];
 
         let x = defData.x;
@@ -55,7 +57,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
             bounds = new Bounds().copyFrom(defData.b);
         } 
         let isAggressive = defData.aggro;
-        let tiledID = defData.tID;
+        let tiledID = index;
         let properties = defData.properties;
         let propertiesFound = false;
 
