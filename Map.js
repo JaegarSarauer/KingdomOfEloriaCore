@@ -11,7 +11,7 @@ if (WorldObjectDef == null) {
 }
 const GroundItemDef = require('../def/GroundItemDef');
 const Bounds = require('../def/Bounds');
-const GuildState = require('../internal/GuildState').GuildState;
+const GuildState = require('../internal/GuildState');
 const Item = require('../typedef/Item');
 
 const MapCompressor = require('./MapCompressor');
@@ -88,6 +88,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
             
             if (propertiesFound) {
                 overrideDef = defCopy;
+                console.info(tiledID, overrideDef);
                 customEntityData[tiledID] = overrideDef;
             }
         }
@@ -109,11 +110,10 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
 function guildDataToGuilds(guildData) {
     let guildsArray = [];
     for (let i = 0; i < guildData.length; i++) {
-        let obj = guildData[i];
-
-        let guild = guildsArray[obj.id] = new GuildState(obj.id, obj.name);
-        guild.cityArea = obj.cityArea;
-        guild.mayorArea = obj.mayorArea;
+        if (GuildState.Guilds[i]) {
+            let obj = guildData[i];
+            guildsArray[obj.id] = new GuildState.GuildState(obj.id, obj.cityArea, obj.mayorArea, GuildState.Guilds[i]);
+        }
     }
     return guildsArray;
 }
