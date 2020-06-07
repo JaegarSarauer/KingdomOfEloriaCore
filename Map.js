@@ -11,7 +11,7 @@ if (WorldObjectDef == null) {
 }
 const GroundItemDef = require('../def/GroundItemDef');
 const Bounds = require('../def/Bounds');
-const GuildState = require('../internal/GuildState');
+const GuildState = require('../internal/GuildState').GuildState;
 const Item = require('../typedef/Item');
 
 const MapCompressor = require('./MapCompressor');
@@ -28,25 +28,25 @@ let mapData = [
 function tileDataToMapBaseTiles(tileData) {
     return tileData;
 }
+
 function wallDataToMapWalls(wallData) {
     return wallData;
 }
 
 function entityDataToMapEntities(worldObjectData, charData, mapID) {
-    let entitiesArray = [];
+    let entities = [];
+    let customEntityData = {};
     let overrideDef = null;
 
-    let index = 0;
-
-    for(let i = 0; i < worldObjectData.length; ++i, ++index) {
+    for(let i = 0; i < worldObjectData.length; ++i) {
         let defData = worldObjectData[i];
         let x = defData[0];
         let y = defData[1];
         let id = defData[2];
-        entitiesArray.push(new WorldObjectDef(id, x, y));
+        entities.push(new WorldObjectDef(id, x, y));
     }
 
-    for(let i = 0; i < charData.length; ++i, ++index) {
+    for(let i = 0; i < charData.length; ++i) {
         let defData = charData[i];
 
         let x = defData.x;
@@ -57,7 +57,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
             bounds = new Bounds().copyFrom(defData.b);
         } 
         let isAggressive = defData.aggro;
-        let tiledID = index;
+        let tiledID = defData.tID;
         let properties = defData.properties;
         let propertiesFound = false;
 
@@ -88,7 +88,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
             
             if (propertiesFound) {
                 overrideDef = defCopy;
-                
+                customEntityData[tiledID] = overrideDef;
             }
         }
 
@@ -96,21 +96,24 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
             npcDef.isAggressiveTo = [defData.atkNPC];
         }
 
-        let baseDefCopy = JSON.parse(JSON.stringify(npcDef.def));
-        npcDef.def = Object.assign({}, baseDefCopy, overrideDef);
+        if (propertiesFound) {
+            let baseDefCopy = JSON.parse(JSON.stringify(npcDef.def));
+            npcDef.def = Object.assign({}, baseDefCopy, overrideDef);
+        }
 
-        entitiesArray.push(npcDef);
+        entities.push(npcDef);
     }
 
-    return entitiesArray;
+    return {entities, customEntityData};
 }
 function guildDataToGuilds(guildData) {
     let guildsArray = [];
     for (let i = 0; i < guildData.length; i++) {
-        if (GuildState.Guilds[i]) {
-            let obj = guildData[i];
-            let guild = guildsArray[obj.id] = new GuildState.GuildState(obj.id, obj.cityArea, obj.mayorArea, GuildState.Guilds[i]);
-        }
+        let obj = guildData[i];
+
+        let guild = guildsArray[obj.id] = new GuildState(obj.id, obj.name);
+        guild.cityArea = obj.cityArea;
+        guild.mayorArea = obj.mayorArea;
     }
     return guildsArray;
 }
@@ -133,6 +136,7 @@ function copyBoundsArray(boundsArray) {
 }
 
 function mapDataToMap(mapData) {
+    let mapEntityData = entityDataToMapEntities(mapData.worldObjectData, mapData.npcData, mapData.id);
     return {
         id: mapData.id,
         name : mapData.name,
@@ -141,7 +145,7 @@ function mapDataToMap(mapData) {
         spawnPoint: new Point(mapData.spawnPoint[0], mapData.spawnPoint[1]),
         mapBaseTiles: tileDataToMapBaseTiles(mapData.tileData),
         mapWalls: wallDataToMapWalls(mapData.wallData),
-        mapEntities: entityDataToMapEntities(mapData.worldObjectData, mapData.npcData, mapData.id),
+        mapEntities: mapEntityData.entities,
         mapGuilds: guildDataToGuilds(mapData.guildsData),
         musicAreas: mapData.musicData,
         shops: shopDataToShops(mapData.shopsData),
@@ -149,6 +153,7 @@ function mapDataToMap(mapData) {
         bountyAreas: copyBoundsArray(mapData.bountyAreaData ),
         multicombatAreas: copyBoundsArray(mapData.multicombatAreas),
         itemSpawns: mapData.worldItemData,
+        customEntityData: mapEntityData.customEntityData,
     };
 }
 
