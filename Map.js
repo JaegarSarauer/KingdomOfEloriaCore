@@ -87,8 +87,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
             }
             
             if (propertiesFound) {
-                overrideDef = defCopy;
-                customEntityData[tiledID] = overrideDef;
+                customEntityData[tiledID] = defCopy;
             }
         }
 
@@ -98,7 +97,7 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
 
         if (propertiesFound) {
             let baseDefCopy = JSON.parse(JSON.stringify(npcDef.def));
-            npcDef.def = Object.assign({}, baseDefCopy, overrideDef);
+            npcDef.def = Object.assign({}, baseDefCopy, customEntityData[tiledID]);
         }
 
         entities.push(npcDef);
