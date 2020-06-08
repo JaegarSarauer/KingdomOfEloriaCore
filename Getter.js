@@ -3069,6 +3069,30 @@ const Action = {
     }
 
 const WorldObject = {
+    GuildChest: (id, guildName, guildID) => {
+        return {
+            id,
+            name: guildName + ' Community Chest',
+            description: 'The donation chest for the guild of ' + guildName + '.',
+            modelName: 'ROCK',
+            modelParams: {
+                BASE: {
+                    asset: 'worldObjects_Chests',
+                    sprite: 'chestClosed',
+                    spriteID: 1,
+                }
+            },
+            actions: [{
+                interfaceID: 0,
+                id: 48,
+                name: 'Open',
+                actionInterval: -1,
+                steps: [
+                    [buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { params: [guildID] })],
+                ],
+            }],
+        };
+    },
     Well: function(id, name, spriteIndex) {
         return {
             id,

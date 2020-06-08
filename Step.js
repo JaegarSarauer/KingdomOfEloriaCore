@@ -168,6 +168,34 @@ module.exports.StepType = StepType = {
         paramTypes: [],
         params: [],
     },
+    ADD_GUILD_CHEST_ITEM: {
+        id: 'ADD_GUILD_CHEST_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'object|null'], //itemID, maxItemAmount, itemStateDef
+        params: [],
+    },
+    REMOVE_GUILD_CHEST_ITEM: {
+        id: 'REMOVE_GUILD_CHEST_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'object|null'], //itemID, maxItemAmount, itemStateDef
+        params: [],
+    },
+    OPEN_GUILD_CHEST_INTERFACE: {
+        id: 'OPEN_GUILD_CHEST_INTERFACE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], // guildID
+        params: [],
+    },
+    DEPOSIT_GUILD_CHEST_ITEMS: {
+        id: 'DEPOSIT_GUILD_CHEST_ITEMS',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     SET_CHARACTER_STATE: {
         id: 'SET_CHARACTER_STATE',
         stepResultFail: 'END_ACTION',
@@ -263,7 +291,7 @@ module.exports.StepType = StepType = {
         id: 'GET_MAX_ITEM_AMOUNT',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'nnumber', 'object|null'], //itemID, maxItemAmount, itemStateDef
+        paramTypes: ['number', 'number', 'object|null'], //itemID, maxItemAmount, itemStateDef
         params: [],
     },
     INVENTORY_HAS_ROOM: {
@@ -1538,6 +1566,10 @@ try {
     const StepRemoveEnchantmentItem = require('../internal/Steps/StepRemoveEnchantmentItem');
     const StepChangeAppearance = require('../internal/Steps/StepChangeAppearance');
     const StepIsPatreonSupporter = require('../internal/Steps/StepIsPatreonSupporter');
+    const StepAddGuildChestItem = require('../internal/Steps/StepAddGuildChestItem');
+    const StepRemoveGuildChestItem = require('../internal/Steps/StepRemoveGuildChestItem');
+    const StepOpenGuildChestInterface = require('../internal/Steps/StepOpenGuildChestInterface');
+    const StepDepositGuildChestItems = require('../internal/Steps/StepDepositGuildChestItems');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
@@ -1725,9 +1757,29 @@ try {
                 return new StepHasInventoryItem.StepHasInventoryItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
-        IS_PATREON_SUPPORTER : {
+        IS_PATREON_SUPPORTER: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepIsPatreonSupporter.StepIsPatreonSupporter(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        ADD_GUILD_CHEST_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepAddGuildChestItem.StepAddGuildChestItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        REMOVE_GUILD_CHEST_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepRemoveGuildChestItem.StepRemoveGuildChestItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        OPEN_GUILD_CHEST_INTERFACE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepOpenGuildChestInterface.StepOpenGuildChestInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        DEPOSIT_GUILD_CHEST_ITEMS: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepDepositGuildChestItems.StepDepositGuildChestItems(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SET_CHARACTER_STATE: {

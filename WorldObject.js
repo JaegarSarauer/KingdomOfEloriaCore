@@ -1152,4 +1152,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.CatQuestViosSign(94),
     Get.WorldObject.Door(95, 'Door', 1, 1, 1, null, 1, { x : 174, y : 70}, { x: 174, y: 69 }, 'Through the cracks you see a scary wolf. The Alpha Wolf.' ),
     Get.WorldObject.Door(96, 'Door', 10, 35, 1, null, 0, { x : 65, y : 338}, { x: 65, y: 337 }, 'Through the door is a exclusive mining area.' ),
+    Get.WorldObject.GuildChest(97, 'Tergaron', 0),
+    Get.WorldObject.GuildChest(98, 'Salmo', 1),
+    Get.WorldObject.GuildChest(99, 'Acernis', 2),
 ];

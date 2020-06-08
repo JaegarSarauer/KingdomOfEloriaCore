@@ -2130,4 +2130,38 @@ module.exports.Interface = [
             ],
         },
     ],
-}];
+}, {
+    id: 28,
+    name: 'Inventory Guild Chest Interface',
+    actions: [
+        {
+            id: 1,
+            name: 'Add',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.ADD_GUILD_CHEST_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+            ],
+        }
+    ],
+}, {
+    id: 29,
+    name: 'Guild Chest Interface',
+    actions: [
+        {
+            id: 0,
+            name: 'Deposit',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.DEPOSIT_GUILD_CHEST_ITEMS)]
+            ],
+        },
+        {
+            id: 1,
+            name: 'Remove',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.REMOVE_GUILD_CHEST_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+            ],
+        }
+    ],
+},];
