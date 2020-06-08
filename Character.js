@@ -385,6 +385,7 @@ Get.Character.EmperorMeleeGuard(94, 'Emperor\'s Elite Guard', 6),
 Get.Character.King(95, 'King of Tergaron', 0), // Mining
 Get.Character.King(96, 'King of Salmo', 1), // Fishing
 Get.Character.King(97, 'King of Acernis', 2), // Woodcutting
+Get.Character.Emperor(98, 'Emperor of Eloria', 2), // Dark Magic
 ];
 
 

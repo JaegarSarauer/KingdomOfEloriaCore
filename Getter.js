@@ -4821,22 +4821,69 @@ const Character = {
                 guard.equipmentModel = [287, 301, 299, 291, 289];
                 break;
         }
+        guard.isAggressiveTo = [91, 92, 93, 94, 98];
         return guard;
     },
     EmperorMeleeGuard: function(id, name, tier) {
         let guard = this.MeleeGuard(id, name, tier, 666);
         guard.isEmperorGuard = true;
+        guard.isAggressiveTo = [87, 88, 89, 90, 95, 96, 97];
         return guard;
     },
     King: function(id, name, guildID) {
+        let human = this.Human(id, name, 13, [24, 20, null, 45, 32]);
+
+        human.isAggressiveTo = [91, 92, 93, 94, 98];
+        human.actions = [
+            {
+                interfaceID: 0,
+                id: 6, //36
+                name: 'Attack',
+            }
+        ];
+        human.doNotRespawn = true;
+
+        human.stats = [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]];
+        human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
+        return human;
+    },
+    Emperor: function(id, name) {
         let human = this.Human(id, name, 13, [23, 19, null, 44, 31]);
         human.actions = [{
             interfaceID: 0,
             id: 6,
             name: 'Attack'
         }];
-        human.stats = [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]];
+        human.doNotRespawn = true;
+
+        human.equipmentModel = [null, 301, null, 291, 289];
+        human.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
         human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
+        human.isAggressiveTo = [87, 88, 89, 90, 95, 96, 97];
+        human.modelParams = {
+            CHEST: { spriteID: 11},
+            HEAD: { spriteID: 1},
+            HEAD_WORN: {
+                id: 'HEAD_WORN',
+                asset: 'headParts',
+                sprite: 'fullHelm',
+                parent: 'HEAD',
+                spriteID: 'Emperor',
+                anchor: { x: 9/24, y: 0.8 },
+                position: {x: 0, y: -0.1},
+                rotation: 0,
+                UIModel: null,
+            },
+            RIGHT_SHOULDER: { spriteID: 1},
+            LEFT_SHOULDER: { spriteID: 1},
+            RIGHT_FOREARM: { spriteID: 1},
+            LEFT_FOREARM: { spriteID: 1},
+            RIGHT_THIGH: { spriteID: 1},
+            LEFT_THIGH: { spriteID: 1},
+            RIGHT_SHIN: { spriteID: 1},
+            LEFT_SHIN: { spriteID: 1},
+            EYES: { tint: HairColors.CherryRed }
+        };
         return human;
     },
     HumanAppearanceShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, appearanceShopMenuID) {

@@ -88,7 +88,6 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
             
             if (propertiesFound) {
                 overrideDef = defCopy;
-                console.info(tiledID, overrideDef);
                 customEntityData[tiledID] = overrideDef;
             }
         }
