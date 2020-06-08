@@ -111,7 +111,7 @@ function guildDataToGuilds(guildData) {
     for (let i = 0; i < guildData.length; i++) {
         if (GuildState.Guilds[i]) {
             let obj = guildData[i];
-            guildsArray[obj.id] = new GuildState.GuildState(obj.id, obj.cityArea, obj.mayorArea, GuildState.Guilds[i]);
+            guildsArray[obj.id] = new GuildState.GuildState(obj.id, null, obj.mayorArea, GuildState.Guilds[i]);
         }
     }
     return guildsArray;
