@@ -748,6 +748,7 @@ const AnimationHelper = class AnimationHelper {
             }
         }
 
+
         switch(transforms.length) {
             case 1:
             new AnimationDef(source, transforms[0], millisecondsDuration[0]).start();
@@ -869,7 +870,143 @@ const AnimationHelper = class AnimationHelper {
                 )
             ).start();
             break;
+            case 11:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6]).chain(
+                                        new AnimationDef(source, transforms[7], millisecondsDuration[7]).chain(
+                                            new AnimationDef(source, transforms[8], millisecondsDuration[8]).chain(
+                                                new AnimationDef(source, transforms[9], millisecondsDuration[9]).chain(
+                                                    new AnimationDef(source, transforms[10], millisecondsDuration[10])
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
+            case 12:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6]).chain(
+                                        new AnimationDef(source, transforms[7], millisecondsDuration[7]).chain(
+                                            new AnimationDef(source, transforms[8], millisecondsDuration[8]).chain(
+                                                new AnimationDef(source, transforms[9], millisecondsDuration[9]).chain(
+                                                    new AnimationDef(source, transforms[10], millisecondsDuration[10]).chain(
+                                                        new AnimationDef(source, transforms[11], millisecondsDuration[11])
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
+            case 13:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6]).chain(
+                                        new AnimationDef(source, transforms[7], millisecondsDuration[7]).chain(
+                                            new AnimationDef(source, transforms[8], millisecondsDuration[8]).chain(
+                                                new AnimationDef(source, transforms[9], millisecondsDuration[9]).chain(
+                                                    new AnimationDef(source, transforms[10], millisecondsDuration[10]).chain(
+                                                        new AnimationDef(source, transforms[11], millisecondsDuration[11]).chain(
+                                                            new AnimationDef(source, transforms[12], millisecondsDuration[12])
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
+            case 14:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6]).chain(
+                                        new AnimationDef(source, transforms[7], millisecondsDuration[7]).chain(
+                                            new AnimationDef(source, transforms[8], millisecondsDuration[8]).chain(
+                                                new AnimationDef(source, transforms[9], millisecondsDuration[9]).chain(
+                                                    new AnimationDef(source, transforms[10], millisecondsDuration[10]).chain(
+                                                        new AnimationDef(source, transforms[11], millisecondsDuration[11]).chain(
+                                                            new AnimationDef(source, transforms[12], millisecondsDuration[12]).chain(
+                                                                new AnimationDef(source, transforms[13], millisecondsDuration[13])
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
+            case 15:
+            new AnimationDef(source, transforms[0], millisecondsDuration[0]).chain(
+                new AnimationDef(source, transforms[1], millisecondsDuration[1]).chain(
+                    new AnimationDef(source, transforms[2], millisecondsDuration[2]).chain(
+                        new AnimationDef(source, transforms[3], millisecondsDuration[3]).chain(
+                            new AnimationDef(source, transforms[4], millisecondsDuration[4]).chain(
+                                new AnimationDef(source, transforms[5], millisecondsDuration[5]).chain(
+                                    new AnimationDef(source, transforms[6], millisecondsDuration[6]).chain(
+                                        new AnimationDef(source, transforms[7], millisecondsDuration[7]).chain(
+                                            new AnimationDef(source, transforms[8], millisecondsDuration[8]).chain(
+                                                new AnimationDef(source, transforms[9], millisecondsDuration[9]).chain(
+                                                    new AnimationDef(source, transforms[10], millisecondsDuration[10]).chain(
+                                                        new AnimationDef(source, transforms[11], millisecondsDuration[11]).chain(
+                                                            new AnimationDef(source, transforms[12], millisecondsDuration[12]).chain(
+                                                                new AnimationDef(source, transforms[13], millisecondsDuration[13]).chain(
+                                                                    new AnimationDef(source, transforms[14], millisecondsDuration[14])
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ).start();
+            break;
         }
+        console.info(transforms.length);
     }
 
     createPropertyAnimationChain(source, property, values, millisionLerp) {
@@ -1531,6 +1668,115 @@ function CreateAnimationChain(source, transforms, waitDelay = 0) {
                 )
             )
         )
+        
+        case 12:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration, waitDelay).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration, waitDelay).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration, waitDelay).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration, waitDelay).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration, waitDelay).chain(
+                                new AnimationDef(source, transforms[6], transforms[6].duration, waitDelay).chain(
+                                    new AnimationDef(source, transforms[7], transforms[7].duration, waitDelay).chain(
+                                        new AnimationDef(source, transforms[8], transforms[8].duration, waitDelay).chain(
+                                            new AnimationDef(source, transforms[9], transforms[9].duration, waitDelay).chain(
+                                                new AnimationDef(source, transforms[10], transforms[10].duration, waitDelay).chain(
+                                                    new AnimationDef(source, transforms[11], transforms[11].duration, waitDelay)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        case 13:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration, waitDelay).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration, waitDelay).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration, waitDelay).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration, waitDelay).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration, waitDelay).chain(
+                                new AnimationDef(source, transforms[6], transforms[6].duration, waitDelay).chain(
+                                    new AnimationDef(source, transforms[7], transforms[7].duration, waitDelay).chain(
+                                        new AnimationDef(source, transforms[8], transforms[8].duration, waitDelay).chain(
+                                            new AnimationDef(source, transforms[9], transforms[9].duration, waitDelay).chain(
+                                                new AnimationDef(source, transforms[10], transforms[10].duration, waitDelay).chain(
+                                                    new AnimationDef(source, transforms[11], transforms[11].duration, waitDelay).chain(
+                                                        new AnimationDef(source, transforms[12], transforms[12].duration, waitDelay)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        case 14:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration, waitDelay).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration, waitDelay).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration, waitDelay).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration, waitDelay).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration, waitDelay).chain(
+                                new AnimationDef(source, transforms[6], transforms[6].duration, waitDelay).chain(
+                                    new AnimationDef(source, transforms[7], transforms[7].duration, waitDelay).chain(
+                                        new AnimationDef(source, transforms[8], transforms[8].duration, waitDelay).chain(
+                                            new AnimationDef(source, transforms[9], transforms[9].duration, waitDelay).chain(
+                                                new AnimationDef(source, transforms[10], transforms[10].duration, waitDelay).chain(
+                                                    new AnimationDef(source, transforms[11], transforms[11].duration, waitDelay).chain(
+                                                        new AnimationDef(source, transforms[12], transforms[12].duration, waitDelay).chain(
+                                                            new AnimationDef(source, transforms[13], transforms[13].duration, waitDelay)
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        case 15:
+        return new AnimationDef(source, transforms[0], transforms[0].duration, waitDelay).chain(
+            new AnimationDef(source, transforms[1], transforms[1].duration, waitDelay).chain(
+                new AnimationDef(source, transforms[2], transforms[2].duration, waitDelay).chain(
+                    new AnimationDef(source, transforms[3], transforms[3].duration, waitDelay).chain(
+                        new AnimationDef(source, transforms[4], transforms[4].duration, waitDelay).chain(
+                            new AnimationDef(source, transforms[5], transforms[5].duration, waitDelay).chain(
+                                new AnimationDef(source, transforms[6], transforms[6].duration, waitDelay).chain(
+                                    new AnimationDef(source, transforms[7], transforms[7].duration, waitDelay).chain(
+                                        new AnimationDef(source, transforms[8], transforms[8].duration, waitDelay).chain(
+                                            new AnimationDef(source, transforms[9], transforms[9].duration, waitDelay).chain(
+                                                new AnimationDef(source, transforms[10], transforms[10].duration, waitDelay).chain(
+                                                    new AnimationDef(source, transforms[11], transforms[11].duration, waitDelay).chain(
+                                                        new AnimationDef(source, transforms[12], transforms[12].duration, waitDelay).chain(
+                                                            new AnimationDef(source, transforms[13], transforms[13].duration, waitDelay).chain(
+                                                                new AnimationDef(source, transforms[14], transforms[14])
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
     }
 }
 

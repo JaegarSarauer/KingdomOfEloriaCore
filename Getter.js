@@ -3069,6 +3069,30 @@ const Action = {
     }
 
 const WorldObject = {
+    GuildChest: (id, guildName, guildID) => {
+        return {
+            id,
+            name: guildName + ' Community Chest',
+            description: 'The donation chest for the guild of ' + guildName + '.',
+            modelName: 'ROCK',
+            modelParams: {
+                BASE: {
+                    asset: 'worldObjects_Chests',
+                    sprite: 'chestClosed',
+                    spriteID: 1,
+                }
+            },
+            actions: [{
+                interfaceID: 0,
+                id: 48,
+                name: 'Open',
+                actionInterval: -1,
+                steps: [
+                    [buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { params: [guildID] })],
+                ],
+            }],
+        };
+    },
     Well: function(id, name, spriteIndex) {
         return {
             id,
@@ -4853,6 +4877,7 @@ const Character = {
     },
     EmperorMeleeGuard: function(id, name, tier) {
         let guard = this.MeleeGuard(id, name, tier, 666);
+        guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
