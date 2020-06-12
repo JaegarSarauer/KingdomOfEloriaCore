@@ -4850,6 +4850,7 @@ const Character = {
     },
     EmperorMeleeGuard: function(id, name, tier) {
         let guard = this.MeleeGuard(id, name, tier, 666);
+        guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
         guard.isAggressiveTo = [87, 88, 89, 90, 95, 96, 97];
         return guard;
@@ -4878,6 +4879,7 @@ const Character = {
             id: 6,
             name: 'Attack'
         }];
+        human.modelOverrideName = 'EMPEROR_GUARDS';
         human.doNotRespawn = true;
 
         human.equipmentModel = [null, 301, null, 291, 289];
