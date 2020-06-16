@@ -4848,10 +4848,39 @@ const Character = {
         guard.isAggressiveTo = [91, 92, 93, 94, 98];
         return guard;
     },
+    ArcheryGuard: function(id, name, tier, spriteID = null) {
+        let guard = this.Guard(id, name, spriteID);
+        tier = Math.min(6, Math.max(1, tier));
+        guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
+        switch(tier) {
+            case 1:
+                guard.equipmentModel = [21, 17, null, 42, 29];
+                break;
+            case 2:
+                guard.equipmentModel = [22, 18, null, 43, 30];
+                break;
+            case 3:
+                guard.equipmentModel = [23, 19, null, 44, 31];
+                break;
+            case 4:
+                guard.equipmentModel = [24, 20, null, 45, 32];
+                break;
+            case 5:
+                guard.equipmentModel = [259, 273, 271, 263, 261];
+                break;
+            case 6:
+                guard.equipmentModel = [287, 301, 299, 291, 289];
+                break;
+        }
+        guard.isAggressiveTo = [91, 92, 93, 94, 98];
+        return guard;
+    },
     EmperorMeleeGuard: function(id, name, tier) {
         let guard = this.MeleeGuard(id, name, tier, 666);
+        guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
-        guard.isAggressiveTo = [87, 88, 89, 90, 95, 96, 97];
+        guard.modelOverrideName = 'EMPEROR_GUARDS';
+        guard.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
         return guard;
     },
     King: function(id, name, guildID) {
@@ -4878,12 +4907,13 @@ const Character = {
             id: 6,
             name: 'Attack'
         }];
+        human.modelOverrideName = 'EMPEROR_GUARDS';
         human.doNotRespawn = true;
 
         human.equipmentModel = [null, 301, null, 291, 289];
         human.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
         human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
-        human.isAggressiveTo = [87, 88, 89, 90, 95, 96, 97];
+        human.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
         human.modelParams = {
             CHEST: { spriteID: 11},
             HEAD: { spriteID: 1},
