@@ -2135,7 +2135,7 @@ module.exports.Interface = [
     name: 'Inventory Guild Chest Interface',
     actions: [
         {
-            id: 1,
+            id: 0,
             name: 'Add',
             actionInterval: -1,
             steps: [
