@@ -4883,10 +4883,15 @@ const Character = {
         guard.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
         return guard;
     },
+    EmperorGeneral: function(id, name) {
+        let guard = this.EmperorMeleeGuard(id, name, 8, 666);
+        guard.equipmentModel = [259, 273, 299, 263, 261];
+        return guard;
+    },
     King: function(id, name, guildID) {
         let human = this.Human(id, name, 13, [24, 20, null, 45, 32]);
 
-        human.isAggressiveTo = [91, 92, 93, 94, 98];
+        human.isAggressiveTo = [91, 92, 93, 94, 98, 99];
         human.actions = [
             {
                 interfaceID: 0,
