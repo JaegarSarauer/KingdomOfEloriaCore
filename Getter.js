@@ -4842,10 +4842,13 @@ const Character = {
                 guard.equipmentModel = [259, 273, 271, 263, 261];
                 break;
             case 6:
+            case 7:
+            case 8:
+            case 9:
                 guard.equipmentModel = [287, 301, 299, 291, 289];
                 break;
         }
-        guard.isAggressiveTo = [91, 92, 93, 94, 98];
+        guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
         return guard;
     },
     ArcheryGuard: function(id, name, tier, spriteID = null) {
@@ -4872,7 +4875,7 @@ const Character = {
                 guard.equipmentModel = [287, 301, 299, 291, 289];
                 break;
         }
-        guard.isAggressiveTo = [91, 92, 93, 94, 98];
+        guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
         return guard;
     },
     EmperorMeleeGuard: function(id, name, tier) {
@@ -4883,10 +4886,16 @@ const Character = {
         guard.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
         return guard;
     },
+    EmperorGeneral: function(id, name) {
+        let guard = this.EmperorMeleeGuard(id, name, 8, 666);
+        guard.equipmentModel = [259, 273, 299, 263, 261];
+        guard.doNotRespawn = true;
+        return guard;
+    },
     King: function(id, name, guildID) {
         let human = this.Human(id, name, 13, [24, 20, null, 45, 32]);
 
-        human.isAggressiveTo = [91, 92, 93, 94, 98];
+        human.isAggressiveTo = [91, 92, 93, 94, 98, 99];
         human.actions = [
             {
                 interfaceID: 0,

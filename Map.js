@@ -109,11 +109,9 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
 function guildDataToGuilds(guildData) {
     let guildsArray = [];
     for (let i = 0; i < guildData.length; i++) {
-        if (GuildState.Guilds[i]) {
-            let obj = guildData[i];
-            if (obj != null) {
-                guildsArray[obj.id] = new GuildState.GuildState(obj.id, obj.cityArea, obj.mayorArea, GuildState.Guilds[i]);
-            }
+        let obj = guildData[i];
+        if (obj != null && GuildState.Guilds[obj.id]) {
+            guildsArray[obj.id] = GuildState.createGuildState(obj.id, obj.cityArea, obj.mayorArea);
         }
     }
     return guildsArray;
