@@ -2039,6 +2039,10 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
             }, 500).start(); // 500ms = 1 server tick
         }
 
+        if (params.isSimpleAnimation) {
+            return;
+        }
+
         if (params.xDirection > 0) {
             let keys = Object.keys(transformsByPart);
             let faceCameraDirectly = false; // Faces a direction instead of the camera
@@ -2455,11 +2459,6 @@ class AnimationDef extends TWEEN.Tween {
         }
 
         this.to(this.end, duration);
-
-        this.onComplete((modelPart) => {
-            modelPart = null;
-            this._object = null;
-        });
     }
 }
 
