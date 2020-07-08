@@ -4757,7 +4757,7 @@ const Character = {
             let genderID = Math.floor(Math.random() * 3) + 1;
             spriteID = genderID * 10 + skinTone;
         }
-        let human = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, faceId, eyeColor );
+        let human = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [], faceId, eyeColor );
         human.requirements = ItemDetail.build([
             ItemDetail.levelSkillDetail(1, 1, 'BOUNTY'),
             ItemDetail.levelSkillDetail(30, 20, 'STEAL'),
@@ -4821,8 +4821,8 @@ const Character = {
         }];
         return human;
     },
-    MeleeGuard: function(id, name, tier, spriteID = null) {
-        let guard = this.Guard(id, name, spriteID);
+    MeleeGuard: function(id, name, tier, spriteID = null, hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822) {
+        let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor );
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         switch(tier) {
@@ -4851,7 +4851,36 @@ const Character = {
         guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
         return guard;
     },
-    ArcheryGuard: function(id, name, tier, spriteID = null) {
+    ArcheryGuard: function(id, name, tier, spriteID = null, hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822) {
+        let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor );
+        tier = Math.min(6, Math.max(1, tier));
+        guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
+        guard.combatStyle = Combat.CombatStyle.RANGE;
+        guard.attackRange = 6;
+        switch(tier) {
+            case 1:
+                guard.equipmentModel = [105, 37, null, 113, 109];
+                break;
+            case 2:
+                guard.equipmentModel = [106, 38, null, 114, 110];
+                break;
+            case 3:
+                guard.equipmentModel = [107, 39, null, 115, 111];
+                break;
+            case 4:
+                guard.equipmentModel = [108, 40, null, 116, 112];
+                break;
+            case 5:
+                guard.equipmentModel = [265, 319, null, 269, 267];
+                break;
+            case 6:
+                guard.equipmentModel = [293, 321, null, 297, 295];
+                break;
+        }
+        guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
+        return guard;
+    },
+    MagicGuard: function(id, name, tier, spriteID = null) {
         let guard = this.Guard(id, name, spriteID);
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
@@ -4878,6 +4907,59 @@ const Character = {
         guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
         return guard;
     },
+    TeragonMeleeGuard: function(id, name, tier) {
+      let guard = this.MeleeGuard(id, name, tier);
+      // guard.equipmentModel = [];
+      // guard.modelParams = {};
+      return guard;
+    },
+    TeragonThakod: function(id) {
+        let guard = this.MeleeGuard(id, 'Thakod', 4, 12, 7, 0xe27634, 7, 0xee6631 );
+        guard.equipmentModel = [0, 11, 0, 453, 477];
+        return guard;
+    },
+    TeragonSwordsman: function(id, name, tier) {
+        let guard = this.TeragonMeleeGuard(id, name, tier);
+        // guard.equipmentModel = [];
+        // guard.modelParams = {};
+        return guard;
+    },
+    SalmoMeleeGuard: function(id, name, tier) {
+        let guard = this.MeleeGuard(id, name, tier);
+        // guard.equipmentModel = [];
+        // guard.modelParams = {};
+        return guard;
+    },
+    SalmoTune: function(id) {
+        let guard = this.SalmoMeleeGuard(id, 'Tune', 6);
+        // guard.equipmentModel = [];
+        // guard.modelParams = {};
+        return guard;
+    },
+    SalmoRangeGuard: function(id, name, tier) {
+        let guard = this.ArcheryGuard(id, name, tier);
+        // guard.equipmentModel = [];
+        // guard.modelParams = {};
+        return guard;
+    },
+    AcernisTisha: function(id) {
+        let guard = this.ArcheryGuard(id, 'Tisha', 6);
+        // guard.equipmentModel = [];
+        // guard.modelParams = {};
+        return guard;
+    },
+    AcernisMeleeGuard: function(id, name, tier) {
+        let guard = this.MeleeGuard(id, name, tier);
+        // guard.equipmentModel = [];
+        // guard.modelParams = {};
+        return guard;
+    },
+    AcernisRangeGuard: function(id, name, tier) {
+        let guard = this.ArcheryGuard(id, name, tier);
+        // guard.equipmentModel = [];
+        // guard.modelParams = {};
+        return guard;
+    },
     EmperorMeleeGuard: function(id, name, tier) {
         let guard = this.MeleeGuard(id, name, tier, 666);
         guard.modelOverrideName = 'EMPEROR_GUARDS';
@@ -4886,13 +4968,19 @@ const Character = {
         guard.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
         return guard;
     },
+    EmperorMagicGuard: function(id, name, tier) {
+        let guard = this.MagicGuard(id, name, tier);
+        // guard.equipmentModel = [];
+        // guard.modelParams = {};
+        return guard;
+    },
     EmperorGeneral: function(id, name) {
         let guard = this.EmperorMeleeGuard(id, name, 8, 666);
         guard.equipmentModel = [259, 273, 299, 263, 261];
         guard.doNotRespawn = true;
         return guard;
     },
-    King: function(id, name, guildID) {
+    GuildMaster: function(id, name, guildID) {
         let human = this.Human(id, name, 13, [24, 20, null, 45, 32]);
 
         human.isAggressiveTo = [91, 92, 93, 94, 98, 99];

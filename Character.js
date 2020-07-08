@@ -157,7 +157,7 @@ Get.Character.Rat(24, 'Large Rat', 1, [[11, 12], [0, 12], [1, 4], [2, 3]], ////3
     [[[1, 100], [0, 45, 80, 100]]]),
 Get.Character.MeleeGuard(25, 'Guard', 3),
 Get.Character.EmperorMeleeGuard(26, 'Emperor\'s Guard', 3),
-Get.Character.King(27, 'King', 0),
+Get.Character.GuildMaster(27, 'King', 0),
 {
     id: 28,
     name: 'Player Guard',
@@ -374,19 +374,38 @@ Get.Character.HumanAppearanceShopOwner(83, 'Wizard Surgeon', 13, [539, null, nul
 Get.Character.PatreonPim(84),
 Get.Character.PatreonTat(85),
 Get.Character.Patreoner(86, 'Aeronic', 22, [null, null, null, 407, 479], 8, HairColors.Brown, EyeColors.Brown, FacialStyles.Beard_Short, 40 + 6, 70),
-Get.Character.MeleeGuard(87, 'Guard', 3),
-Get.Character.MeleeGuard(88, 'Guard', 4),
-Get.Character.MeleeGuard(89, 'Elite Guard', 5),
-Get.Character.MeleeGuard(90, 'Elite Guard', 6),
+Get.Character.TeragonMeleeGuard(87, 'Guard', 3), // Mining Steel Guard
+Get.Character.TeragonMeleeGuard(88, 'Guard', 4), // Mining Nelenite Guard
+Get.Character.TeragonMeleeGuard(89, 'Elite Guard', 5),  // Mining Gothite Guard
+Get.Character.TeragonMeleeGuard(90, 'Elite Guard', 6), // Mining Osmium Guard
 Get.Character.EmperorMeleeGuard(91, 'Emperor\'s Guard', 3),
 Get.Character.EmperorMeleeGuard(92, 'Emperor\'s Guard', 4),
 Get.Character.EmperorMeleeGuard(93, 'Emperor\'s Elite Guard', 5),
 Get.Character.EmperorMeleeGuard(94, 'Emperor\'s Elite Guard', 6),
-Get.Character.King(95, 'King of Tergaron', 0), // Mining
-Get.Character.King(96, 'King of Salmo', 1), // Fishing
-Get.Character.King(97, 'King of Acernis', 2), // Woodcutting
+Get.Character.GuildMaster(95, 'King of Tergaron', 0), // Mining
+Get.Character.GuildMaster(96, 'King of Salmo', 1), // Fishing
+Get.Character.GuildMaster(97, 'King of Acernis', 2), // Woodcutting
 Get.Character.Emperor(98, 'Emperor of Eloria'), // Dark Magic
 Get.Character.EmperorGeneral(99, 'Emperor\'s General'),
+Get.Character.EmperorMagicGuard(100, 'Grand Sorceror', 3),
+Get.Character.EmperorMagicGuard(101, 'Elite Sorceror', 3),
+Get.Character.EmperorMagicGuard(102, 'Sorceror\'s Apprentice', 2),
+Get.Character.TeragonThakod(103), // Mining Dwaft Thakod, #2 rank
+Get.Character.TeragonSwordsman(104, 'Swordsman\'s Apprentice', 2), // Mining Swordsman's apprentice
+Get.Character.TeragonSwordsman(105, 'Swordsman', 5), // Mining swordsman
+Get.Character.SalmoTune(106), // Fishing Tune, #2 rank
+Get.Character.SalmoMeleeGuard(107, 'Guard', 3),  // Fishing Steel Guard
+Get.Character.SalmoMeleeGuard(108, 'Guard', 4), // Fishing Nelenite Guard
+Get.Character.SalmoMeleeGuard(109, 'Elite Guard', 5),  // Fishing Gothite Guard
+Get.Character.SalmoMeleeGuard(110, 'Elite Guard', 6), // Fishing Osmium Guard
+Get.Character.SalmoRangeGuard(111, 'Archer', 2), // Fishing Archer
+Get.Character.AcernisTisha(112), // Woodcutting Elf Tisha, rank #2
+Get.Character.AcernisMeleeGuard(113, 'Guard', 3),  // Woodcutting Steel Guard
+Get.Character.AcernisMeleeGuard(114, 'Guard', 4), // Woodcutting Nelenite Guard
+Get.Character.AcernisMeleeGuard(115, 'Elite Guard', 5), // Woodcutting Gothite Guard
+Get.Character.AcernisMeleeGuard(116, 'Elite Guard', 6), // Woodcutting Osmium Guard
+Get.Character.AcernisRangeGuard(117, 'Archer', 2), // Woodcutting Archer
+Get.Character.AcernisRangeGuard(118, 'Elite Archer', 6), // Woodcutting Elite Archer
 ];
 
 
