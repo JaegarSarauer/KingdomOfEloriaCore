@@ -378,13 +378,13 @@ Get.Character.TeragonMeleeGuard(87, 'Guard', 3), // Mining Steel Guard
 Get.Character.TeragonMeleeGuard(88, 'Guard', 4), // Mining Nelenite Guard
 Get.Character.TeragonMeleeGuard(89, 'Elite Guard', 5),  // Mining Gothite Guard
 Get.Character.TeragonMeleeGuard(90, 'Elite Guard', 6), // Mining Osmium Guard
-Get.Character.EmperorMeleeGuard(91, 'Emperor\'s Guard', 3),
-Get.Character.EmperorMeleeGuard(92, 'Emperor\'s Guard', 4),
-Get.Character.EmperorMeleeGuard(93, 'Emperor\'s Elite Guard', 5),
-Get.Character.EmperorMeleeGuard(94, 'Emperor\'s Elite Guard', 6),
-Get.Character.GuildMaster(95, 'King of Tergaron', 0), // Mining
-Get.Character.GuildMaster(96, 'King of Salmo', 1), // Fishing
-Get.Character.GuildMaster(97, 'King of Acernis', 2), // Woodcutting
+Get.Character.EmperorMeleeGuard(91, 'Emperor\'s Guard', 3), // Emperor Steel Guards
+Get.Character.EmperorMeleeGuard(92, 'Emperor\'s Guard', 4), // Emperor Nelenite Guard
+Get.Character.EmperorMeleeGuard(93, 'Emperor\'s Elite Guard', 5), // Emperor Gothite Guard
+Get.Character.EmperorMeleeGuard(94, 'Emperor\'s Elite Guard', 6), // Emperor Osmium Guard
+Get.Character.GuildMaster(95, 'Tergaron Guild Master', 0), // Mining
+Get.Character.GuildMaster(96, 'Salmo Guild Master', 1), // Fishing
+Get.Character.GuildMaster(97, 'Acernis Guild Master', 2), // Woodcutting
 Get.Character.Emperor(98, 'Emperor of Eloria'), // Dark Magic
 Get.Character.EmperorGeneral(99, 'Emperor\'s General'),
 Get.Character.EmperorMagicGuard(100, 'Grand Sorceror', 3),

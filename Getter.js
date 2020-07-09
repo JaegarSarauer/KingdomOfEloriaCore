@@ -4884,24 +4884,54 @@ const Character = {
         let guard = this.Guard(id, name, spriteID);
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
+        guard.combatStyle = Combat.CombatStyle.RANGE;
+        guard.attackRange = 6;
         switch(tier) {
             case 1:
-                guard.equipmentModel = [21, 17, null, 42, 29];
+                guard.equipmentModel = [105, 37, null, 113, 109];
                 break;
             case 2:
-                guard.equipmentModel = [22, 18, null, 43, 30];
+                guard.equipmentModel = [106, 38, null, 114, 110];
                 break;
             case 3:
-                guard.equipmentModel = [23, 19, null, 44, 31];
+                guard.equipmentModel = [107, 39, null, 115, 111];
                 break;
             case 4:
-                guard.equipmentModel = [24, 20, null, 45, 32];
+                guard.equipmentModel = [108, 40, null, 116, 112];
                 break;
             case 5:
-                guard.equipmentModel = [259, 273, 271, 263, 261];
+                guard.equipmentModel = [265, 319, null, 269, 267];
                 break;
             case 6:
-                guard.equipmentModel = [287, 301, 299, 291, 289];
+                guard.equipmentModel = [293, 321, null, 297, 295];
+                break;
+        }
+        guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
+        return guard;
+    },
+    MagicGuard: function(id, name, tier, spriteID = null) {
+        let guard = this.Guard(id, name, spriteID);
+        tier = Math.min(6, Math.max(1, tier));
+        guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
+        guard.combatStyle = Combat.CombatStyle.MAGIC;
+        guard.attackRange = 8;
+        switch(tier) {
+            case 1:
+                guard.equipmentModel = [93, 84, null, 97, 101];
+                break;
+            case 2:
+                guard.equipmentModel = [94, 84, null, 98, 102];
+                break;
+            case 3:
+                guard.equipmentModel = [95, 84, null, 99, 103];
+                break;
+            case 4:
+                guard.equipmentModel = [96, 84, null, 100, 104];
+                break;
+            case 5:
+                guard.equipmentModel = [539, 84, null, 541, 543];
+                break;
+            default:
                 break;
         }
         guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
@@ -4914,14 +4944,13 @@ const Character = {
       return guard;
     },
     TeragonThakod: function(id) {
-        let guard = this.MeleeGuard(id, 'Thakod', 4, 12, 7, 0xe27634, 7, 0xee6631 );
+        let guard = this.MeleeGuard(id, 'Thakod', 4, 13, 7, 0xe27634, 7, 0xe27634 );
         guard.equipmentModel = [0, 11, 0, 453, 477];
         return guard;
     },
     TeragonSwordsman: function(id, name, tier) {
-        let guard = this.TeragonMeleeGuard(id, name, tier);
-        // guard.equipmentModel = [];
-        // guard.modelParams = {};
+        let guard = this.MeleeGuard(id, name, tier, 13, 3, (tier == 5) ? 0x202020 : 0x3b3b3b , 8 );
+        guard.equipmentModel = [(tier == 5) ? 257 : 22, (tier == 5) ? 273 : 18, 530,(tier == 5) ? 401 : 399, (tier == 5) ? 491 : 489];
         return guard;
     },
     SalmoMeleeGuard: function(id, name, tier) {
@@ -4937,15 +4966,15 @@ const Character = {
         return guard;
     },
     SalmoRangeGuard: function(id, name, tier) {
-        let guard = this.ArcheryGuard(id, name, tier);
+        let guard = this.ArcheryGuard(id, name, tier, 21, 5, 0xe2dc6d, null, 0x34789c);
         // guard.equipmentModel = [];
         // guard.modelParams = {};
         return guard;
     },
     AcernisTisha: function(id) {
-        let guard = this.ArcheryGuard(id, 'Tisha', 6);
-        // guard.equipmentModel = [];
-        // guard.modelParams = {};
+        let guard = this.ArcheryGuard(id, 'Tisha', 4, 31, 5, 0xe2dc6d, null, 0x34789c );
+        guard.equipmentModel = [0, 39, 0, 425, 481];
+        // Dagger to left hand
         return guard;
     },
     AcernisMeleeGuard: function(id, name, tier) {
