@@ -900,7 +900,7 @@ const Item = Object.freeze([
     },
     {
         id: 87,
-        name: 'Blue Cloth',
+        name: 'Blue Silk',
         noted: false,
         notedID: 195,
         value: 12,
@@ -926,7 +926,7 @@ const Item = Object.freeze([
     },
     {
         id: 88,
-        name: 'Green Cloth',
+        name: 'Green Silk',
         noted: false,
         notedID: 196,
         value: 30,
@@ -952,7 +952,7 @@ const Item = Object.freeze([
     },
     {
         id: 89,
-        name: 'Purple Cloth',
+        name: 'Purple Silk',
         noted: false,
         notedID: 197,
         value: 84,
@@ -978,7 +978,7 @@ const Item = Object.freeze([
     },
     {
         id: 90,
-        name: 'Burgundy Cloth',
+        name: 'Burgundy Silk',
         noted: false,
         notedID: 198,
         value: 142,
@@ -1011,7 +1011,7 @@ const Item = Object.freeze([
         requirements: ItemDetail.build([
             ItemDetail.levelSkillDetail(6, 17, 'INCINERATE'),
         ]),
-        description: 'Use this to put thread through cloth.',
+        description: 'Use this to put thread through silk and cloth.',
         essenceValue: EssenceValue(6, 1, [ShardCatalog.SHARP(2), ShardCatalog.METAL(1)]),
         spriteIndex: 92,
     },
@@ -1021,7 +1021,7 @@ const Item = Object.freeze([
         noted: false,
         value: 1,
         stackable: true,
-        description: 'Useful for binding cloth.',
+        description: 'Useful for binding silk and cloth.',
         requirements: ItemDetail.build([
             ItemDetail.levelSkillDetail(3, 17, 'INCINERATE'),
         ]),
@@ -1629,10 +1629,10 @@ const Item = Object.freeze([
     Get.Item.Note(192, 63, 'Hammer', 4, 64),
     Get.Item.Note(193, 75, 'Clay', 2, 76),
     Get.Item.Note(194, 77, 'Clay Pot', 5, 78),
-    Get.Item.Note(195, 87, 'Blue Cloth', 12, 88),
-    Get.Item.Note(196, 88, 'Green Cloth', 30, 89),
-    Get.Item.Note(197, 89, 'Purple Cloth', 84, 90),
-    Get.Item.Note(198, 90, 'Burgundy Cloth', 142, 91),
+    Get.Item.Note(195, 87, 'Blue Silk', 12, 88),
+    Get.Item.Note(196, 88, 'Green Silk', 30, 89),
+    Get.Item.Note(197, 89, 'Purple Silk', 84, 90),
+    Get.Item.Note(198, 90, 'Burgundy Silk', 142, 91),
     Get.Item.Note(199, 93, 'Blue Wizard Hat', 44, 94),
     Get.Item.Note(200, 94, 'Green Wizard Hat', 100, 95),
     Get.Item.Note(201, 95, 'Purple Wizard Hat', 296, 96),
@@ -2945,7 +2945,7 @@ const Item = Object.freeze([
                     buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [848, 1] }),
                 ]
             ],
-        }],
+        },],
     },
     Get.Item.Note(535, 534, 'Inferno Knife', 2154, 309),
     {
@@ -2963,7 +2963,7 @@ const Item = Object.freeze([
     },
     {
         id: 537,
-        name: 'Red Cloth',
+        name: 'Red Silk',
         noted: false,
         notedID: 538,
         value: 224,
@@ -2987,7 +2987,7 @@ const Item = Object.freeze([
             ],
         }],
     },
-    Get.Item.Note(538, 537, 'Red Cloth', 224, 311),
+    Get.Item.Note(538, 537, 'Red Silk', 224, 311),
     {
         id: 539,
         name: 'Red Wizard Hat',
@@ -3525,10 +3525,10 @@ const Item = Object.freeze([
     Get.Item.Note(673, 672, 'Gold Bar', 50, 431),
     Get.Item.GoldAmulet(674, 675, 'Gold Amulet', 20, 20, 57, 432 ),
     Get.Item.Note(675, 674, 'Gold Amulet', 57, 432),
-    Get.Item.NullItem(676),
-    Get.Item.NullItem(677),
-    Get.Item.CrabPot(678, 'Crab Pot', 560),
-    Get.Item.NullItem(679),
+    Get.Item.Item(676, null, 'Silk', 2, 100, 'A strand of silk.', [ShardCatalog.EARTH(2), ShardCatalog.BIND(1)], true),
+    Get.Item.Item(677, 678, 'Silk', 8, 600, 'A piece of unenchanted silk.', [ShardCatalog.AIR(30), ShardCatalog.EARTH(20), ShardCatalog.NATURE(3), ShardCatalog.BIND(20)]),
+    Get.Item.Note(678, 677, 'Silk', 8, 600),
+    Get.Item.CrabPot(679, 'Crab Pot', 560),
     Get.Item.NullItem(680),
     Get.Item.NullItem(681),
     Get.Item.NullItem(682),
@@ -3740,26 +3740,17 @@ const Item = Object.freeze([
     Get.Item.SpellUnlockScroll(843, 'Wizard Tower Teleport', 37, 187, 478, 46, [ShardCatalog.NATURE(120), ShardCatalog.FIRE(360), ShardCatalog.VOID(270)]),
     Get.Item.RawCoockableFood(844, 845, 'Raw Octopus', 120, 561, 'A raw octopus, perfect for cooking.', 70, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(845, 844, 'Raw Octopus', 120, 561),
-    Get.Item.Food(846, 847, 'Cooked Octopus', 180, 8, 562, 'A cooked octopus, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Food(846, 847, 'Cooked Octopus', 180, 10, 562, 'A cooked octopus, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(847, 846, 'Cooked Octopus', 180, 562),
     Get.Item.Item(848, 849, 'Burnt Octopus', 0, 563, 'A burnt octopus. Yuck.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1)]), false), // Jaegar look at last 3 params
     Get.Item.Note(849, 548, 'Burnt Octopus', 0, 563),
     Get.Item.RawCoockableFood(850, 851, 'Raw Octopus Tentacle', 30, 564, 'A raw octopus tentacle, perfect for cooking.', 15, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(851, 850, 'Raw Octopus Tentacle', 30, 564),
-    Get.Item.Food(852, 853, 'Cooked Octopus Tentacle', 50, 1, 565, 'A cooked octopus tentacle, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Food(852, 853, 'Cooked Octopus Tentacle', 50, 2, 565, 'A cooked octopus tentacle, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(853, 852, 'Cooked Octopus Tentacle', 50, 565),
     Get.Item.Item(854, 855, 'Burnt Octopus Tentacle', 0, 566, 'A burnt octopus tentacle. Yuck.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1)]), false), // Jaegar look at last 3 params
     Get.Item.Note(855, 854, 'Burnt Octopus Tentacle', 0, 566),
-    Get.Item.Dye(856, 857, 'Blue Dye', 15, 567),
-    Get.Item.Note(857, 856, 'Blue Dye', 15, 567),
-    Get.Item.Dye(856, 857, 'Green Dye', 15, 568),
-    Get.Item.Note(857, 856, 'Green Dye', 15, 568),
-    Get.Item.Dye(856, 857, 'Purple Dye', 15, 569),
-    Get.Item.Note(857, 856, 'Purple Dye', 15, 569),
-    Get.Item.Dye(856, 857, 'Burgunty Dye', 15, 570),
-    Get.Item.Note(857, 856, 'Burgunty Dye', 15, 570),
-    Get.Item.Dye(856, 857, 'Red Dye', 15, 571),
-    Get.Item.Note(857, 856, 'Red Dye', 15, 571),
+
 
     // Get.Item.Scissors(611, 612, 'Scissors', 15, 298),
     // Get.Item.Note(612, 611, 'Scissors', 15, 298),

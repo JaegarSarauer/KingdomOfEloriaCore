@@ -170,7 +170,7 @@ module.exports.WorldObject = WorldObject = [
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
                 [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
-                buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[266, 270, 60, 154]] })]
+                buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[266, 270, 60, 154, 281]] })]
             ],
         }],
         useActions: [],
@@ -431,6 +431,8 @@ module.exports.WorldObject = WorldObject = [
             Get.Action.Cook(55, 763, 765, 767, 10, 'meat pie', 10, 25, 70, 4, 761),
             Get.Action.Cook(56, 769, 771, 773, 8, 'chicken pot pie', 10, 23, 60, 4, 761),
             Get.Action.Cook(57, 775, 777, 779, 14, 'cake', 10, 38, 90, 4, 761),
+            Get.Action.Cook(50, 844, 846, 848, 70, 'octopus', 10, 100, 230),
+            Get.Action.Cook(51, 850, 852, 854, 25, 'octopus tentacle', 10, 50, 45),
         ],//cook
         modelName: 'ROCK',	
         modelParams: {	
@@ -478,6 +480,8 @@ module.exports.WorldObject = WorldObject = [
             Get.Action.Cook(55, 763, 765, 767, 1, 'meat pie', 1, 15, 35, 3),
             Get.Action.Cook(56, 769, 771, 773, 1, 'chicken pot pie', 1, 15, 35, 3),
             Get.Action.Cook(57, 775, 777, 779, 1, 'cake', 1, 15, 35, 3),
+            Get.Action.Cook(50, 844, 846, 848, 70, 'octopus', 10, 100, 230, 3),
+            Get.Action.Cook(51, 850, 852, 854, 25, 'octopus tentacle', 10, 50, 45, 3),
         ],//cook
         modelName: 'ROCK',	
         modelParams: {	

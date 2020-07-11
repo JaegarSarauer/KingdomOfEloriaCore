@@ -3546,7 +3546,7 @@ const WorldObject = {
                         buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                         buildStep(StepType.PLAY_SOUND, { params: [35] }),
                         buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                            params: [5, 105, 12, 0.15, true, 0.1],
+                            params: [-70, 80, 12, 1, false, 0.0],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
                         })],
                         [buildStep(StepType.ROLL_DESPAWN, {
@@ -3557,21 +3557,34 @@ const WorldObject = {
                             params: [240],
                             stepResultFail: 'NEXT_STEP',
                         }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-70, 100, 12, 0.25, true, 1], }),
+                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
+                            params: [-70, 100, 12, 1, false, 0],
+                            stepResultFail: 'NEXT_STEP_LIST',
+                            stepResultPass: 'NEXT_STEP',
+                         }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
                         buildStep(StepType.GIVE_XP, { params: [12, 30] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You fish some shrimp.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-75, 105, 12, 0.25, true, 1], }),
+                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
+                            params: [-70, 105, 12, 1, false, 0],
+                            stepResultFail: 'NEXT_STEP_LIST',
+                            stepResultPass: 'NEXT_STEP',
+                         }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [48, 1] }),
                         buildStep(StepType.GIVE_XP, { params: [12, 55] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You fish a sardine.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
-                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [844, 1] }),
+                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
+                            params: [-70, 110, 12, 1, false, 0],
+                            stepResultFail: 'END_AND_GOTO_LIST_3',
+                            stepResultPass: 'NEXT_STEP',
+                         }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [844, 1] }),
                         buildStep(StepType.GIVE_XP, { params: [12, 200] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You fish a octopus.'],
@@ -3858,6 +3871,25 @@ const WorldObject = {
                     ItemDetail.levelSkillDetail(requiredLevel, 9, 'CHOP'),
                     ItemDetail.itemNameDetail('Axe', 'TOOL_NAME'),
                 ]),
+                behaviorLoop: (entity) => {
+                    entity.timers.setTimer(17, 120, () => {
+                        if (entity.isDroppingSilk) {
+                            entity.assignEntityData({
+                                isDroppingSilk: false,
+                            });
+                            return 20;
+                        } else {
+                            let chance = Math.random() * 100;
+                            if (chance <= 1) {
+                                entity.assignEntityData({
+                                    isDroppingSilk: true,
+                                });
+                                return 100 + Math.floor(Math.random() * 260);
+                            }
+                            return 40 + Math.floor(Math.random() * 20);
+                        }
+                    });
+                },
                 modelName: 'TREE',
                 modelParams: {
                     BASE: {
@@ -3894,6 +3926,7 @@ const WorldObject = {
                             stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
                         }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [logId, 1] }),
+                        buildStep(StepType.ROLL_GIVE_SILK, { params: [requiredLevel, requiredLevel + 9] }),
                         buildStep(StepType.GIVE_XP, { params: [9, xp] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You get some ' + logName + '.'] }),
                         buildStep(StepType.ROLL_DESPAWN, {
