@@ -203,6 +203,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number'], //stateID, stateValue
         params: [],
     },
+    ROLL_GIVE_SILK: {
+        id: 'ROLL_GIVE_SILK',
+        stepResultFail: 'NEXT_STEP',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number'], //minSilkDrop, maxSilkDrop
+        params: [],
+    },
     BUY_STORAGE_SPACE: {
         id: 'BUY_STORAGE_SPACE',
         stepResultFail: 'END_ACTION',
@@ -1431,6 +1438,7 @@ try {
     const StepHasInventoryItemGroup = require('../internal/Steps/StepHasInventoryItemGroup');
     const StepGetMaxItemAmount = require('../internal/Steps/StepGetMaxItemAmount');
     const StepSetCharacterState = require('../internal/Steps/StepSetCharacterState');
+    const StepRollGiveSilk = require('../internal/Steps/StepRollGiveSilk');
     const StepBuyStorageSpace = require('../internal/Steps/StepBuyStorageSpace');
     const StepChangeUsername = require('../internal/Steps/StepChangeUsername');
     const StepCheckCharacterState = require('../internal/Steps/StepCheckCharacterState');
@@ -1785,6 +1793,11 @@ try {
         SET_CHARACTER_STATE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSetCharacterState.StepSetCharacterState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        ROLL_GIVE_SILK: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepRollGiveSilk.StepRollGiveSilk(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         BUY_STORAGE_SPACE: {

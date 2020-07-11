@@ -3674,6 +3674,25 @@ const WorldObject = {
                     ItemDetail.levelSkillDetail(requiredLevel, 9, 'CHOP'),
                     ItemDetail.itemNameDetail('Axe', 'TOOL_NAME'),
                 ]),
+                behaviorLoop: (entity) => {
+                    entity.timers.setTimer(17, 120, () => {
+                        if (entity.isDroppingSilk) {
+                            entity.assignEntityData({
+                                isDroppingSilk: false,
+                            });
+                            return 20;
+                        } else {
+                            let chance = Math.random() * 100;
+                            if (chance <= 1) {
+                                entity.assignEntityData({
+                                    isDroppingSilk: true,
+                                });
+                                return 100 + Math.floor(Math.random() * 260);
+                            }
+                            return 40 + Math.floor(Math.random() * 20);
+                        }
+                    });
+                },
                 modelName: 'TREE',
                 modelParams: {
                     BASE: {
@@ -3710,6 +3729,7 @@ const WorldObject = {
                             stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
                         }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [logId, 1] }),
+                        buildStep(StepType.ROLL_GIVE_SILK, { params: [requiredLevel, requiredLevel + 9] }),
                         buildStep(StepType.GIVE_XP, { params: [9, xp] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You get some ' + logName + '.'] }),
                         buildStep(StepType.ROLL_DESPAWN, {
