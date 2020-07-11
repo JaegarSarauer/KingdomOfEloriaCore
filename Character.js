@@ -27,6 +27,19 @@ try {
     }	
 }
 
+
+module.exports.EmperorTeamIds = EmperorTeamIds = [
+    91, 92, 93, 94, 98, 99, 100, 101, 102
+];
+
+module.exports.WoodcuttingGuildNPCIds = WoodcuttingGuildNPCIds = [
+
+];
+
+module.exports.FishingGuildNPCIds = FishingGuildNPCIds = [
+
+];
+
 module.exports.Character = Character = [{
     id: 0,
     name: 'Chicken',
@@ -385,7 +398,7 @@ Get.Character.EmperorMeleeGuard(94, 'Emperor\'s Elite Guard', 6), // Emperor Osm
 Get.Character.GuildMaster(95, 'Tergaron Guild Master', 0), // Mining
 Get.Character.GuildMaster(96, 'Salmo Guild Master', 1), // Fishing
 Get.Character.GuildMaster(97, 'Acernis Guild Master', 2), // Woodcutting
-Get.Character.Emperor(98, 'Emperor of Eloria'), // Dark Magic
+Get.Character.Emperor(98, 'Emperor of Eloria'), // Dark Magic 
 Get.Character.EmperorGeneral(99, 'Emperor\'s General'),
 Get.Character.EmperorMagicGuard(100, 'Grand Sorceror', 3),
 Get.Character.EmperorMagicGuard(101, 'Elite Sorceror', 3),
@@ -407,5 +420,3 @@ Get.Character.AcernisMeleeGuard(116, 'Elite Guard', 6), // Woodcutting Osmium Gu
 Get.Character.AcernisRangeGuard(117, 'Archer', 2), // Woodcutting Archer
 Get.Character.AcernisRangeGuard(118, 'Elite Archer', 6), // Woodcutting Elite Archer
 ];
-
-

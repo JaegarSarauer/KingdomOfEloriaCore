@@ -2411,6 +2411,20 @@ const ItemGetter = {
             essenceValue
         };
     },
+    CrabPot : function(id, fullName, spriteIndex) {
+        return {
+            id,
+            name: fullName,
+            noted: false,
+            value: 0,
+            stackable: false,
+            description: 'A crab pot used for fishing in a Crab Fishing Pool.',
+            requirements: ItemDetail.build([
+                ItemDetail.levelSkillDetail(35, 12, 'GATHER'),
+            ]),
+            spriteIndex,
+        };
+    },
     Fish: function(id, notedID, name, value, spriteIndex, amountHealed, cookingLevel, incinerationLevel, essenceValue) {
         return  {
             id,
@@ -3429,6 +3443,158 @@ const WorldObject = {
                 spriteIndex: 10,
             };
         },
+        CrabPotFishingPool: function (id) {
+            return {
+                id: id,
+                name: 'Crab Pot Fishing Pool',
+                description: 'A likely spot for crustations.',
+                requirements: ItemDetail.build([
+                    ItemDetail.levelSkillDetail('1-30', 12, 'FISH'),
+                    ItemDetail.itemNameDetail('Crab Pot', 'TOOL_NAME'),
+                ]),
+                modelName: 'FISHING_POOL',
+                modelParams: {
+                    BASE: {
+                        spriteID: 1,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 9,
+                    name: 'Cast Net',
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You cast your fishing net.'] }),
+                        buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
+                        [buildStep(StepType.IS_ADJACENT),
+                        buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 1] }),
+                        buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
+                        buildStep(StepType.INVENTORY_HAS_ROOM),
+                        buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
+                        buildStep(StepType.PLAY_SOUND, { params: [35] }),
+                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
+                            params: [5, 105, 12, 0.15, true, 0.1],
+                            stepResultFail: 'END_AND_GOTO_LIST_3',
+                        })],
+                        [buildStep(StepType.ROLL_DESPAWN, {
+                            params: [250],
+                            stepResultFail: 'NEXT_STEP',
+                        }),
+                        buildStep(StepType.SET_RESPAWN_TIMER, {
+                            params: [240],
+                            stepResultFail: 'NEXT_STEP',
+                        }),
+                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-2.25, 5, 12, 0.25, true, 0.25], }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 25] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish some shrimp.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-4.75, 10, 12, 0.25, true, 0.25], }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [48, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 50] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish a sardine.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-7.25, 15, 12, 0.25, true, 0.25], }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [49, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 75] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish a herring.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [50, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 100] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish a mullet.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                    ]
+                }],
+                spriteIndex: 10,
+            };
+        },
+        HandFishingPool: function (id) {
+            let skillLevel = 70;
+            return {
+                id: id,
+                name: 'Hand Fishing Pool',
+                description: 'So shallow, you could almost reach in and grab one.',
+                requirements: ItemDetail.build([
+                    ItemDetail.levelSkillDetail(skillLevel + '+', 12, 'FISH'),
+                ]),
+                modelName: 'FISHING_POOL',
+                modelParams: {
+                    BASE: {
+                        spriteID: 1,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 9,
+                    name: 'Cast Net',
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You hunt for sea critter.'] }),
+                        buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
+                        [buildStep(StepType.IS_ADJACENT),
+                        buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, skillLevel] }),
+                        buildStep(StepType.INVENTORY_HAS_ROOM),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
+                        buildStep(StepType.PLAY_SOUND, { params: [35] }),
+                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
+                            params: [-70, 80, 12, 1, false, 0.0],
+                            stepResultFail: 'END_AND_GOTO_LIST_3',
+                        })],
+                        [buildStep(StepType.ROLL_DESPAWN, {
+                            params: [250],
+                            stepResultFail: 'NEXT_STEP',
+                        }),
+                        buildStep(StepType.SET_RESPAWN_TIMER, {
+                            params: [240],
+                            stepResultFail: 'NEXT_STEP',
+                        }),
+                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
+                            params: [-70, 100, 12, 1, false, 0],
+                            stepResultFail: 'NEXT_STEP_LIST',
+                            stepResultPass: 'NEXT_STEP',
+                         }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 30] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish some shrimp.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
+                            params: [-70, 105, 12, 1, false, 0],
+                            stepResultFail: 'NEXT_STEP_LIST',
+                            stepResultPass: 'NEXT_STEP',
+                         }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [48, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 55] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish a sardine.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
+                            params: [-70, 110, 12, 1, false, 0],
+                            stepResultFail: 'END_AND_GOTO_LIST_3',
+                            stepResultPass: 'NEXT_STEP',
+                         }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [844, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 200] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish a octopus.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                    ]
+                }],
+                spriteIndex: 10,
+            };
+        },
         TutorialShallowFishingPool: function(id) {
             let pool = this.ShallowFishingPool(id);
             pool.actions = [{
@@ -3661,6 +3827,37 @@ const WorldObject = {
                     steps: actionsSteps
                 }],
                 spriteIndex: spriteIndex,
+            }
+        },
+        GemRock: function (id, name, gemNumber, clothID, coloredClothID) {
+            return {
+                id: id,
+                name: name,
+                description : 'A powerful gem!',
+                requirements: ItemDetail.build([
+                ]),
+                modelName: 'ROCK',
+                modelParams: {
+                    BASE: {
+                        sprite: 'gemRock',
+                        spriteID: gemNumber,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 3,
+                    name: 'Echant Cloth',
+                    steps: [
+                        [
+                            buildStep(StepType.HAS_INVENTORY_ITEM, { params: [clothID, 1] }),
+                            buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [clothID, 1] }),
+                            buildStep(StepType.GIVE_INVENTORY_ITEM, { 
+                                params: [coloredClothID, 1],
+                                stepResultPass: 'END_AND_REPEAT_STEP_LIST'
+                             },),
+                        ]
+                    ],
+                }],
             }
         },
         Tree: function (id, logId, woodName, requiredLevel, spriteIndex, successRollBase, successRoleBestChance, xp, despawnRoll, spawnTimer, description) {
@@ -4022,7 +4219,7 @@ const WorldObject = {
                 spriteIndex: spriteIndex,
             }
         },
-        Door: function(id, name, skillID, skillLevelRequirement, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
+        DoorSkillLocked: function(id, name, skillID, skillLevelRequirement, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
             return {
                 id: id,
                 name: name,
@@ -4060,6 +4257,61 @@ const WorldObject = {
                             }),
                             buildStep(StepType.HAS_SKILL_LEVEL, {
                                 params: [skillID, skillLevelRequirement],
+                                stepResultFail: StepResult.END_ACTION,
+                            }),
+                            buildStep(StepType.TELEPORT, {
+                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, 0,
+                                [
+                                    [buildStep(StepType.TELEPORT, {
+                                        params: [mapID, entryPoint.x, entryPoint.y, entryPoint.x, entryPoint.y, 0],
+                                        stepResultPass: StepResult.END_ACTION,
+                                    })]
+                                ]],
+                                stepResultPass: StepResult.END_ACTION,
+                            })
+                        ]
+                    ],
+                }],
+            }
+        },
+        DoorGuildLocked: function(id, name, guildID, tierOperator, guildTier, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
+            return {
+                id: id,
+                name: name,
+                description: description,
+                modelName: 'DOOR',
+                modelParams: {
+                    BASE: {
+                        spriteID: spriteID,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 23,
+                    name: 'Go Through Door',
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [
+                            buildStep(StepType.IS_IN_AREA, {
+                                stepResultFail: StepResult.NEXT_STEP_LIST,
+                                params: [true, entryPoint.x, entryPoint.y, entryPoint.x, entryPoint.y]
+                            }),
+                            buildStep(StepType.ASSERT_GUILD_TIER, {
+                                params: [guildID, tierOperator, guildTier],
+                                stepResultFail: StepResult.END_ACTION,
+                            }),
+                            buildStep(StepType.TELEPORT, {
+                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, 0],
+                                stepResultPass: StepResult.END_ACTION,
+                            })
+                        ], 
+                        [
+                            buildStep(StepType.IS_IN_AREA, {
+                                stepResultFail: StepResult.END_ACTION,
+                                params: [true, exitPoint.x - 1, exitPoint.y - 1, exitPoint.x + 1, exitPoint.y]
+                            }),
+                            buildStep(StepType.ASSERT_GUILD_TIER, {
+                                params: [guildID, tierOperator, guildTier],
                                 stepResultFail: StepResult.END_ACTION,
                             }),
                             buildStep(StepType.TELEPORT, {
@@ -4961,6 +5213,7 @@ const Character = {
     },
     SalmoTune: function(id) {
         let guard = this.SalmoMeleeGuard(id, 'Tune', 6);
+        guard.equipmentModel = [];
         // guard.equipmentModel = [];
         // guard.modelParams = {};
         return guard;
