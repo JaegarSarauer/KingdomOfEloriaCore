@@ -170,7 +170,7 @@ module.exports.WorldObject = WorldObject = [
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
                 [buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
-                buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[266, 270, 60, 154]] })]
+                buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[266, 270, 60, 154, 281]] })]
             ],
         }],
         useActions: [],

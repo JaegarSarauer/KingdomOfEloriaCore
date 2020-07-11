@@ -1811,6 +1811,21 @@ module.exports.Interface = [
                 steps: [
                     [buildStep(StepType.BIND_ENCHANTMENT_ITEM, {params: ['ITEM_ID_OTHER']})],
                 ],
+            },            
+            {
+                id: 281,
+                name: 'Spin Silkstring into Silk',
+                flags: ['REPEAT_ACTION'],
+                actionInterval: 4,
+                steps: [
+                    [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [676, 10]}),
+                    buildStep(StepType.HAS_SKILL_LEVEL, {params: [15, 1]}),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [676, 10]}),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [677, 1]}),
+                    buildStep(StepType.GIVE_XP, {params: [15, 25]}),
+                    buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You spin a piece of silk.']}),
+                    buildStep(StepType.PLAY_SOUND, {params: [29]})]
+                ],
             },
         ],
     },
