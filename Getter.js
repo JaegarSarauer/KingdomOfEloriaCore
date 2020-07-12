@@ -980,7 +980,7 @@ const ItemGetter = {
                 ItemDetail.levelSkillDetail(equipLevel, 5, 'EQUIP'),
                 ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE')
             ]),
-            essenceValue: EssenceValue(incinerateLevel, 12 * tier, [ShardCatalog.EARTH(15 * tier), ShardCatalog.METAL(10 * tier), ShardCatalog.FIRE(4 * tier), ShardCatalog.BIND(10 * tier)]),
+            essenceValue: EssenceValue(incinerateLevel, 12 * tier, [ShardCatalog.EARTH(15 * tier), ShardCatalog.METAL(10 * tier), ShardCatalog.FIRE(4 * tier), ShardCatalog.BIND(40 * tier)]),
             spriteIndex: spriteIndex,
             equipmentStats: stats,
             model: {
@@ -1023,7 +1023,7 @@ const ItemGetter = {
                 ItemDetail.levelSkillDetail(equipLevel, 5, 'EQUIP'),
                 ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE')
             ]),
-            essenceValue: EssenceValue(incinerateLevel, 20 * tier, [ShardCatalog.EARTH(24 * tier), ShardCatalog.METAL(15 * tier), ShardCatalog.FIRE(6 * tier), ShardCatalog.BIND(20 * tier)]),
+            essenceValue: EssenceValue(incinerateLevel, 20 * tier, [ShardCatalog.EARTH(24 * tier), ShardCatalog.METAL(15 * tier), ShardCatalog.FIRE(6 * tier), ShardCatalog.BIND(80 * tier)]),
             spriteIndex: spriteIndex,
             equipmentStats: stats,
             model: {
@@ -1102,7 +1102,7 @@ const ItemGetter = {
                 ItemDetail.levelSkillDetail(equipLevel, 5, 'EQUIP'),
                 ItemDetail.levelSkillDetail(incinerateLevel, 17, 'INCINERATE')
             ]),
-            essenceValue: EssenceValue(incinerateLevel, 28 * tier, [ShardCatalog.EARTH(44 * tier), ShardCatalog.METAL(22 * tier), ShardCatalog.FIRE(9 * tier), ShardCatalog.BIND(30 * tier)]),
+            essenceValue: EssenceValue(incinerateLevel, 28 * tier, [ShardCatalog.EARTH(44 * tier), ShardCatalog.METAL(22 * tier), ShardCatalog.FIRE(9 * tier), ShardCatalog.BIND(120 * tier)]),
             spriteIndex: spriteIndex,
             equipmentStats: stats,
             model: {
@@ -3100,8 +3100,12 @@ const WorldObject = {
                 interfaceID: 0,
                 id: 48,
                 name: 'Open',
-                actionInterval: -1,
+                actionInterval: 0,
                 steps: [
+                    buildStepList(StepType.WALK_ADJACENT, {
+                        stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
+                        stepResultFail: 'END_AND_REPEAT_STEP_LIST'
+                    }),
                     [buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { params: [guildID] })],
                 ],
             }],
@@ -3829,7 +3833,7 @@ const WorldObject = {
                 spriteIndex: spriteIndex,
             }
         },
-        GemRock: function (id, name, gemNumber, clothID, coloredClothID) {
+        GemObelisk: function (id, name, gemNumber, environmentMagicLevel, xp, coloredClothID, bindEssenceCost) {
             return {
                 id: id,
                 name: name,
@@ -3839,23 +3843,27 @@ const WorldObject = {
                 modelName: 'ROCK',
                 modelParams: {
                     BASE: {
-                        sprite: 'gemRock',
+                        asset: 'worldObjects_Rocks',
+                        sprite: 'gemObelisk',
                         spriteID: gemNumber,
                     }
                 },
                 actions: [{
                     interfaceID: 0,
-                    id: 3,
-                    name: 'Echant Cloth',
+                    id: 11,
+                    name: 'Enchant Cloth',
+                    flags: ['REPEAT_ACTION'],
+                    actionInterval: 4,
                     steps: [
-                        [
-                            buildStep(StepType.HAS_INVENTORY_ITEM, { params: [clothID, 1] }),
-                            buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [clothID, 1] }),
-                            buildStep(StepType.GIVE_INVENTORY_ITEM, { 
-                                params: [coloredClothID, 1],
-                                stepResultPass: 'END_AND_REPEAT_STEP_LIST'
-                             },),
-                        ]
+                        [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [677, 1]}),
+                        buildStep(StepType.HAS_INVENTORY_ITEM, {params: [497, bindEssenceCost]}),
+                        buildStep(StepType.HAS_SKILL_LEVEL, {params: [22, environmentMagicLevel]}),
+                        buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [677, 1]}),
+                        buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [497, bindEssenceCost]}),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [coloredClothID, 1]}),
+                        buildStep(StepType.GIVE_XP, {params: [22, xp]}),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You enchant the silk against the gem.']}),
+                        buildStep(StepType.PLAY_SOUND, {params: [29]})]
                     ],
                 }],
             }
