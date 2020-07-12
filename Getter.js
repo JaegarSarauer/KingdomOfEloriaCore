@@ -2479,19 +2479,9 @@ const ItemGetter = {
             essenceValue
         };
     },
-    CrabPot : function(id, fullName, spriteIndex) {
-        return {
-            id,
-            name: fullName,
-            noted: false,
-            value: 0,
-            stackable: false,
-            description: 'A crab pot used for fishing in a Crab Fishing Pool.',
-            requirements: ItemDetail.build([
-                ItemDetail.levelSkillDetail(35, 12, 'GATHER'),
-            ]),
-            spriteIndex,
-        };
+    CrabPot : function(id, notedID, fullName, value, spriteIndex) {
+        let item = this.Item(id, notedID, fullName, value, spriteIndex, 'A pot for catching crabs.', [ShardCatalog.EARTH(80), ShardCatalog.METAL(30)], false);
+        return item;
     },
     Fish: function(id, notedID, name, value, spriteIndex, amountHealed, cookingLevel, incinerationLevel, essenceValue) {
         return  {
@@ -3521,7 +3511,7 @@ const WorldObject = {
                 name: 'Crab Pot Fishing Pool',
                 description: 'A likely spot for crustations.',
                 requirements: ItemDetail.build([
-                    ItemDetail.levelSkillDetail('1-30', 12, 'FISH'),
+                    ItemDetail.levelSkillDetail('30', 12, 'FISH'),
                     ItemDetail.itemNameDetail('Crab Pot', 'TOOL_NAME'),
                 ]),
                 modelName: 'FISHING_POOL',
@@ -3532,58 +3522,69 @@ const WorldObject = {
                 },
                 actions: [{
                     interfaceID: 0,
-                    id: 9,
-                    name: 'Cast Net',
+                    id: 11,
+                    name: 'Cast Cage',
+                    actionInterval: 0,
                     steps: [
                         buildStepList(StepList.WALK_ADJACENT),
-                        [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You cast your fishing net.'] }),
-                        buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
-                        [buildStep(StepType.IS_ADJACENT),
-                        buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 1] }),
-                        buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
-                        buildStep(StepType.INVENTORY_HAS_ROOM),
-                        buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
+                        [buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 30] }),
+                        buildStep(StepType.HAS_INVENTORY_ITEM, { params: [679, 1] }),
+                        buildStep(StepType.CREATE_CONSTRUCTION_OBJECT, {
+                            params: [109],
+                            stepResultFail: StepResult.END_ACTION,
+                        }),
+                        buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [679, 1] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You cast out a fishing pot.'] }),
                         buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
-                        buildStep(StepType.PLAY_SOUND, { params: [35] }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                            params: [5, 105, 12, 0.15, true, 0.1],
-                            stepResultFail: 'END_AND_GOTO_LIST_3',
-                        })],
-                        [buildStep(StepType.ROLL_DESPAWN, {
-                            params: [250],
-                            stepResultFail: 'NEXT_STEP',
-                        }),
-                        buildStep(StepType.SET_RESPAWN_TIMER, {
-                            params: [240],
-                            stepResultFail: 'NEXT_STEP',
-                        }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-2.25, 5, 12, 0.25, true, 0.25], }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 25] }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish some shrimp.'],
-                            stepResultPass: 'END_AND_GOTO_LIST_3',
-                        }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-4.75, 10, 12, 0.25, true, 0.25], }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [48, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 50] }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a sardine.'],
-                            stepResultPass: 'END_AND_GOTO_LIST_3',
-                        }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-7.25, 15, 12, 0.25, true, 0.25], }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [49, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 75] }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a herring.'],
-                            stepResultPass: 'END_AND_GOTO_LIST_3',
-                        }),],
-                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [50, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 100] }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a mullet.'],
-                            stepResultPass: 'END_AND_GOTO_LIST_3',
-                        }),],
+                        buildStep(StepType.PLAY_SOUND, { params: [35] })],
+                    ]
+                }],
+                spriteIndex: 10,
+            };
+        },
+        CrabPot: (id, name) => {
+            return {
+                id,
+                name,
+                description: 'A cage used for catching crabs.',
+                requirements: ItemDetail.build([
+                    ItemDetail.levelSkillDetail('30', 12, 'FISH'),
+                    ItemDetail.itemNameDetail('Crab Pot', 'TOOL_NAME'),
+                ]),
+                modelName: 'FISHING_POOL',
+                modelParams: {
+                    BASE: {
+                        asset: 'worldObjects_Camps',
+                        sprite: 'crabPot',
+                        spriteID: 0,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 11,
+                    name: 'Open',
+                    actionInterval: 0,
+                    flags: ['VISIBLE_ONLY_TO_OWNER'],
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 30] }),
+                        buildStep(StepType.PEEK_CRAB_POT, {params: [false]}),
+                        buildStep(StepType.DESPAWN_OWNER),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [900, 'ITEM_AMOUNT']}),
+                        buildStep(StepType.GIVE_XP, {params: [12, 'XP']}),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
+                        buildStep(StepType.PLAY_SOUND, { params: [35] })],
+                    ]
+                }, {
+                    interfaceID: 0,
+                    id: 12,
+                    name: 'Check',
+                    actionInterval: 0,
+                    flags: ['VISIBLE_ONLY_TO_OWNER'],
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [buildStep(StepType.PEEK_CRAB_POT, {params: [true]}),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] })],
                     ]
                 }],
                 spriteIndex: 10,
@@ -3901,6 +3902,83 @@ const WorldObject = {
                 spriteIndex: spriteIndex,
             }
         },
+        GemRock: function (id, name, skillLevelToMine, rollSuccessParams, xp, spriteIndex, spawnTimer, despawnRoll, description) {
+            let oreName = name.split(' ').length > 0 ? name.split(' ')[0].toLowerCase() : '';
+            let actionsSteps = [
+                buildStepList(StepList.WALK_ADJACENT),
+
+                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [10, skillLevelToMine] }),
+                buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [2] }),
+                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to mine a gem.'] }),
+                buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
+
+                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [10, skillLevelToMine] }),
+                buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [2] }),
+                buildStep(StepType.INVENTORY_HAS_ROOM),
+                buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [10, 2] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['MINE', { repeat: 2 }] }),
+                buildStep(StepType.PLAY_SOUND, { params: [22] }),
+                buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                    params: rollSuccessParams,
+                    stepResultFail: 'END_AND_REPEAT_STEP_LIST'
+                })],
+                [buildStep(StepType.ROLL_SKILL_DROP_TABLE, { 
+                    params: [1, 10, [[UncutGemIDs.UNCUT_OPAL, 1, 1, 2000, 10]
+                    , [UncutGemIDs.UNCUT_TOPAZ, 1, 1, 1600, 10]
+                    , [UncutGemIDs.UNCUT_QUARTZ, 1, 1, 1200, 10]
+                    , [UncutGemIDs.UNCUT_JADE, 1, 1, 800, 10]
+                    , [UncutGemIDs.UNCUT_AMBER, 1, 1, 400, 10]
+                    , [UncutGemIDs.UNCUT_SAPPHIRE, 1, 1, 0, 10]
+                    , [UncutGemIDs.UNCUT_AMETHYST, 1, 1, -300, 10]
+                    , [UncutGemIDs.UNCUT_EMERALD, 1, 1, -500, 10]
+                    , [UncutGemIDs.UNCUT_RUBY, 1, 1, -650, 10]
+                    , [UncutGemIDs.UNCUT_ONYX, 1, 1, -840, 10]
+                    , [UncutGemIDs.UNCUT_DIAMOND, 1, 1, -960, 10]
+                    ]],
+                })],
+            ];
+
+            actionsSteps.push([
+                buildStep(StepType.GIVE_XP, { params: [10, xp] }),
+                buildStep(StepType.ROLL_RANDOM_EVENT, { params: [250, [spriteIndex]] }),
+                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You mine some ' + oreName + ' ore.'] })
+            ]);
+
+            actionsSteps.push([
+                buildStep(StepType.ROLL_DESPAWN, {
+                    params: [despawnRoll],
+                    stepResultFail: StepResult.END_AND_GOTO_LIST_3,
+                }),
+                buildStep(StepType.SET_RESPAWN_TIMER, { params: [spawnTimer] }),
+                buildStep(StepType.PLAY_SOUND, {
+                    params: [40],
+                    stepResultPass: 'END_ACTION'
+                })
+            ]);
+
+            return {
+                id: id,
+                name: 'name',
+                description,
+                requirements: ItemDetail.build([
+                    ItemDetail.levelSkillDetail(skillLevelToMine, 10, 'MINE'),
+                    ItemDetail.itemNameDetail('Pickaxe', 'TOOL_NAME'),
+                ]),
+                modelName: 'ROCK',
+                modelParams: {
+                    BASE: {
+                        spriteID: spriteIndex,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 3,
+                    name: 'Mine',
+                    steps: actionsSteps
+                }],
+                spriteIndex: spriteIndex,
+            }
+        },
         GemObelisk: function (id, name, gemNumber, environmentMagicLevel, xp, coloredClothID, bindEssenceCost) {
             return {
                 id: id,
@@ -3923,6 +4001,7 @@ const WorldObject = {
                     flags: ['REPEAT_ACTION'],
                     actionInterval: 4,
                     steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
                         [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [677, 1]}),
                         buildStep(StepType.HAS_INVENTORY_ITEM, {params: [497, bindEssenceCost]}),
                         buildStep(StepType.HAS_SKILL_LEVEL, {params: [22, environmentMagicLevel]}),

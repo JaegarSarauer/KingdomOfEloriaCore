@@ -1827,6 +1827,23 @@ module.exports.Interface = [
                     buildStep(StepType.PLAY_SOUND, {params: [29]})]
                 ],
             },
+            {
+                id: 282,
+                name: 'Build Crab Pot (30 Construction) (3 Ash Logs, 2 Steel Bars)',
+                flags: ['REPEAT_ACTION'],
+                actionInterval: 6,
+                steps: [
+                    [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [7, 3] }), // logs
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [61, 2] }), // bars
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }), //saw
+                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, 20] })],
+                    [buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [7, 3] }),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [61, 2] }),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [679, 1] }), //crab pot
+                    buildStep(StepType.GIVE_XP, { params: [18, 50] }),
+                    buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You craft a crab trap.'] })]
+                ],
+            },
         ],
     },
     {
