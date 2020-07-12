@@ -5250,6 +5250,7 @@ const Character = {
     },
     MeleeGuard: function(id, name, tier, spriteID = null, hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822) {
         let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor );
+        guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         switch(tier) {
@@ -5281,6 +5282,7 @@ const Character = {
     },
     ArcheryGuard: function(id, name, tier, spriteID = null, hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822) {
         let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor );
+        guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         guard.combatStyle = Combat.CombatStyle.RANGE;
@@ -5310,6 +5312,7 @@ const Character = {
     },
     MagicGuard: function(id, name, tier, spriteID = null) {
         let guard = this.Guard(id, name, spriteID);
+        guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         guard.combatStyle = Combat.CombatStyle.RANGE;
@@ -5339,6 +5342,7 @@ const Character = {
     },
     MagicGuard: function(id, name, tier, spriteID = null) {
         let guard = this.Guard(id, name, spriteID);
+        guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         guard.combatStyle = Combat.CombatStyle.MAGIC;
@@ -5420,7 +5424,7 @@ const Character = {
         let guard = this.MeleeGuard(id, name, tier, 666);
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
-        guard.modelOverrideName = 'EMPEROR_GUARDS';
+        guard.isGuard = false;
         if (tier >= 5) {
             guard.equipmentModel[0] = 868;
             guard.equipmentModel[3] = 870; 
@@ -5438,6 +5442,10 @@ const Character = {
     EmperorMagicGuard: function(id, name, tier) {
         let guard = this.MagicGuard(id, name, tier, 666);
 
+        guard.modelOverrideName = 'EMPEROR_GUARDS';
+        guard.isEmperorGuard = true;
+        guard.isGuard = false;
+        
         guard.equipmentModel[0] = tier == 3 ? 880 : 862;
         guard.equipmentModel[3] = 864; 
         guard.equipmentModel[4] = 866;
@@ -5467,6 +5475,7 @@ const Character = {
 
         let human = this.Human(id, name, 13, equipmentModel);
 
+        human.isMultiTarget = true;
         human.isAggressiveTo = EmperorTeamNPCIds;
         human.actions = [
             {
@@ -5489,6 +5498,9 @@ const Character = {
             id: 6,
             name: 'Attack'
         }];
+        human.isMultiTarget = true;
+        human.isGuard = false;
+        human.isEmperorGuard = true;
         human.modelOverrideName = 'EMPEROR_GUARDS';
         human.doNotRespawn = true;
 
