@@ -845,6 +845,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], //hpDamage
         params: [],
     },
+    PEEK_CRAB_POT: {
+        id: 'PEEK_CRAB_POT',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['boolean'], //isJustLooking
+        params: [],
+    },
     TELEPORT: {
         id: 'TELEPORT',
         stepResultFail: 'END_ACTION',
@@ -1302,6 +1309,10 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
         id: 'ITEM_AMOUNT',
         type: 'number',
     },
+    XP: {
+        id: 'XP',
+        type: 'number',
+    },
     ITEM_STATE: {
         id: 'ITEM_STATE',
         type: 'object|null',
@@ -1528,6 +1539,7 @@ try {
     const StepFollowOwner = require('../internal/Steps/StepFollowOwner');
     const StepEatFood = require('../internal/Steps/StepEatFood');
     const StepDamage = require('../internal/Steps/StepDamage');
+    const StepPeekCrabPot = require('../internal/Steps/StepPeekCrabPot');
     const StepTeleport = require('../internal/Steps/StepTeleport');
     const StepSetBounty = require('../internal/Steps/StepSetBounty');
     const StepHireAdventurer = require('../internal/Steps/StepHireAdventurer');
@@ -2271,6 +2283,11 @@ try {
         DAMAGE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepDamage.StepDamage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        PEEK_CRAB_POT: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepPeekCrabPot.StepPeekCrabPot(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         TELEPORT: {

@@ -1161,7 +1161,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.GuildChest(97, 'Tergaron', 0),
     Get.WorldObject.GuildChest(98, 'Salmo', 1),
     Get.WorldObject.GuildChest(99, 'Acernis', 2),
-    Get.WorldObject.Rock(100, 'Gem Rock', 1, [10, 15, 4, true, 0.5, 0.5], [[55, 1, 1, 100]], 25, 1, 8, 4, 'There appears to be copper in this rock.', 12, 572, 575),  
+    Get.WorldObject.GemRock(100, 'Gem Rock', 60, [10, 70, 20, true, 0.5, 0.5], 100, 1, 70, 6, 'This rock is encrusted with gems.', 1),  
     Get.WorldObject.Rock(101, 'Rocks blocking 2x1 pathway', 1, [10, 15, 4, true, 0.5, 0.5], [[55, 1, 1, 100]], 25, 1, 8, 4, 'There appears to be copper in this rock.', 12, 572, 575),
     Get.WorldObject.CrabPotFishingPool(102),
     Get.WorldObject.HandFishingPool(103),
@@ -1170,4 +1170,5 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.GemObelisk(106, 'Purple Gem Obelisk', 3, 20, 75, 89, 3),
     Get.WorldObject.GemObelisk(107, 'Burgunty Gem Obelisk', 4, 30, 100, 90, 4),
     Get.WorldObject.GemObelisk(108, 'Red Gem Obelisk', 5, 40, 125, 537, 5),
+    Get.WorldObject.CrabPot(109, 'Crab Pot'),
 ];
