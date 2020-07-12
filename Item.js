@@ -3555,12 +3555,6 @@ const Item = Object.freeze([
     Get.Item.Note(853, 852, 'Octopus Tentacle', 50, 565),
     Get.Item.Item(854, 855, 'Burnt Octopus Tentacle', 0, 566, 'A burnt octopus tentacle. Yuck.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(20)]), false), // Jaegar look at last 3 params
     Get.Item.Note(855, 854, 'Burnt Octopus Tentacle', 0, 566),
-    Get.Item.RawCoockableFood(900, 901, 'Raw Crab', 22, 564, 'A raw crab, tastes better cooked.', 30, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
-    Get.Item.Note(901, 900, 'Raw Crab', 22, 564),
-    Get.Item.Food(902, 903, 'Crab', 50, 6, 565, 'A well cooked crab.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
-    Get.Item.Note(903, 902, 'Crab', 50, 565),
-    Get.Item.Item(904, 905, 'Burnt Crab', 0, 566, 'A burnt crab.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(8)]), false), // Jaegar look at last 3 params
-    Get.Item.Note(905, 904, 'Burnt Crab', 0, 566),
 
     // Emperor's General
     Get.Item.FullHelm(856, 557, 'Generals\'s Helmet', 110, 200, 567, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
@@ -3620,7 +3614,14 @@ const Item = Object.freeze([
     Get.Item.Platebody(896, 897, 'Woodcutting Guild Master Platebody', 101, 200, 574,  null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
     Get.Item.Note(897, 898, 'Woodcutting Guild Master Platebody', 200, 574),
     Get.Item.Platelegs(898, 899, 'Woodcutting Guild MasterPlatelegs', 101, 200, 575,  null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
-    Get.Item.Note(899, 898, 'Woodcutting Guild Master Platelegs', 200, 575),
+    Get.Item.Note(899, 898, 'Woodcutting Guild Master Platelegs', 200, 575),    
+    
+    Get.Item.RawCoockableFood(900, 901, 'Raw Crab', 22, 569, 'A raw crab, tastes better cooked.', 30, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(901, 900, 'Raw Crab', 22, 569),
+    Get.Item.Food(902, 903, 'Crab', 50, 6, 570, 'A well cooked crab.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(903, 902, 'Crab', 50, 570),
+    Get.Item.Item(904, 905, 'Burnt Crab', 0, 571, 'A burnt crab.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(8)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(905, 904, 'Burnt Crab', 0, 571),
      
 
     

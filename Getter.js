@@ -3543,22 +3543,37 @@ const WorldObject = {
                 modelName: 'FISHING_POOL',
                 modelParams: {
                     BASE: {
-                        spriteID: 1,
+                        asset: 'worldObjects_Camps',
+                        sprite: 'crabPot',
+                        spriteID: 0,
                     }
                 },
                 actions: [{
                     interfaceID: 0,
                     id: 11,
-                    name: 'Check',
+                    name: 'Open',
                     actionInterval: 0,
+                    flags: ['VISIBLE_ONLY_TO_OWNER'],
                     steps: [
                         buildStepList(StepList.WALK_ADJACENT),
                         [buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 30] }),
-                        buildStep(StepType.LOOT_CRAB_TRAP),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [900, 'ITEM_AMOUNT']}),
+                        buildStep(StepType.PEEK_CRAB_POT, {params: [false]}),
                         buildStep(StepType.DESPAWN_OWNER),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [900, 'ITEM_AMOUNT']}),
+                        buildStep(StepType.GIVE_XP, {params: [12, 'XP']}),
                         buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                         buildStep(StepType.PLAY_SOUND, { params: [35] })],
+                    ]
+                }, {
+                    interfaceID: 0,
+                    id: 12,
+                    name: 'Check',
+                    actionInterval: 0,
+                    flags: ['VISIBLE_ONLY_TO_OWNER'],
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [buildStep(StepType.PEEK_CRAB_POT, {params: [true]}),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] })],
                     ]
                 }],
                 spriteIndex: 10,
