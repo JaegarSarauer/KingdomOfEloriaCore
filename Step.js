@@ -845,6 +845,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], //hpDamage
         params: [],
     },
+    LOOT_CRAB_TRAP: {
+        id: 'LOOT_CRAB_TRAP',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     TELEPORT: {
         id: 'TELEPORT',
         stepResultFail: 'END_ACTION',
@@ -1528,6 +1535,7 @@ try {
     const StepFollowOwner = require('../internal/Steps/StepFollowOwner');
     const StepEatFood = require('../internal/Steps/StepEatFood');
     const StepDamage = require('../internal/Steps/StepDamage');
+    const StepLootCrabTrap = require('../internal/Steps/StepLootCrabTrap');
     const StepTeleport = require('../internal/Steps/StepTeleport');
     const StepSetBounty = require('../internal/Steps/StepSetBounty');
     const StepHireAdventurer = require('../internal/Steps/StepHireAdventurer');
@@ -2271,6 +2279,11 @@ try {
         DAMAGE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepDamage.StepDamage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        LOOT_CRAB_TRAP: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepLootCrabTrap.StepLootCrabTrap(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         TELEPORT: {
