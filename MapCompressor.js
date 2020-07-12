@@ -17,7 +17,7 @@ const Item = require('./Item');
 const MAP_WIDTH = 400;
 const SOLID_SQUARE_ID = 60;
 const EMPTY_IDS = [0, 1024];
-const COMPRESS = false;
+const COMPRESS = true;
 
 class TileData {
     constructor(x, y) {
@@ -329,6 +329,9 @@ function loadGuilds(JSONMap) {
     let entityObjects = getLayer(JSONMap, "GuildAreas").objects
     let guildsArray = [];
     if (entityObjects != null) {
+        
+        entityObjects.sort(function(a,b) { return a.properties.guildID-b.properties.guildID })
+
         for (let i = 0; i < entityObjects.length; i++) {
             let obj = entityObjects[i];
             if (!obj.properties) {

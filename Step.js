@@ -98,6 +98,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number', 'string', 'string', 'number|string'], //slotID, itemID, itemStateDefID, assertString, value2
         params: [],
     },
+    ASSERT_GUILD_TIER: {
+        id: 'ASSERT_GUILD_TIER',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'string', 'number|string'], //guildID, assertString, value2
+        params: [],
+    },
     ASSERT_GOAL_STATES: {
         id: 'ASSERT_GOAL_STATES',
         stepResultFail: 'END_ACTION',
@@ -1423,6 +1430,7 @@ try {
     const StepIsEnacterOwnerOfOwner = require('../internal/Steps/StepIsEnacterOwnerOfOwner');
     const StepOfferEnergy = require('../internal/Steps/StepOfferEnergy');
     const StepAssertItemState = require('../internal/Steps/StepAssertItemState');
+    const StepAssertGuildTier = require('../internal/Steps/StepAssertGuildTier');
     const StepAssertGoalStates = require('../internal/Steps/StepAssertGoalStates');
     const StepHealOther = require('../internal/Steps/StepHealOther');
     const StepCreateBarricade = require('../internal/Steps/StepCreateBarricade');
@@ -1753,6 +1761,11 @@ try {
         ASSERT_ITEM_STATE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepAssertItemState.StepAssertItemState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        ASSERT_GUILD_TIER: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepAssertGuildTier.StepAssertGuildTier(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         ASSERT_GOAL_STATES: {

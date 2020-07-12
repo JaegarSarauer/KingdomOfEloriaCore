@@ -1386,6 +1386,21 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[144, 145]] })]
             ],
+        },
+        {
+            interfaceID: 5,
+            id: 48,
+            name: '',
+            entityType: Entity.EntityType.INVENTORY_ITEM,
+            entityID: 844,
+            actionInterval: 2,
+            steps: [
+                [
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [844, 1] }),
+                    buildStep(StepType.ROLL_SKILL_DROP_TABLE, { params: [1, 13, [[850, 3, 8, 1, 1]]] }),
+                    buildStep(StepType.GIVE_XP, { params: [13, 15] }),
+                ]
+            ],
         },],
     },
     {
@@ -2916,6 +2931,20 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[175, 176]] })]
             ],
+        },
+        {
+            interfaceID: 5,
+            id: 48,
+            name: '',
+            entityType: Entity.EntityType.INVENTORY_ITEM,
+            entityID: 844,
+            actionInterval: 4,
+            steps: [
+                [
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [844, 1] }),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [848, 1] }),
+                ]
+            ],
         },],
     },
     Get.Item.Note(535, 534, 'Inferno Knife', 2154, 309),
@@ -3499,7 +3528,7 @@ const Item = Object.freeze([
     Get.Item.Item(676, null, 'Silk', 2, 100, 'A strand of silk.', [ShardCatalog.EARTH(2), ShardCatalog.BIND(1)], true),
     Get.Item.Item(677, 678, 'Silk', 8, 600, 'A piece of unenchanted silk.', [ShardCatalog.AIR(30), ShardCatalog.EARTH(20), ShardCatalog.NATURE(3), ShardCatalog.BIND(20)]),
     Get.Item.Note(678, 677, 'Silk', 8, 600),
-    Get.Item.NullItem(679),
+    Get.Item.CrabPot(679, 'Crab Pot', 560),
     Get.Item.NullItem(680),
     Get.Item.NullItem(681),
     Get.Item.NullItem(682),
@@ -3709,6 +3738,18 @@ const Item = Object.freeze([
     Get.Item.SpellUnlockScroll(841, 'Syphon Nature Essence', 51, 398, 559, 58, [ShardCatalog.NATURE(290), ShardCatalog.SOUL(90), ShardCatalog.NATURE(300)]),
     Get.Item.SpellUnlockScroll(842, 'Enchant Volcano Teleport', 36, 114, 474, 41, [ShardCatalog.NATURE(120), ShardCatalog.EARTH(600), ShardCatalog.VOID(270)]),
     Get.Item.SpellUnlockScroll(843, 'Wizard Tower Teleport', 37, 187, 478, 46, [ShardCatalog.NATURE(120), ShardCatalog.FIRE(360), ShardCatalog.VOID(270)]),
+    Get.Item.RawCoockableFood(844, 845, 'Raw Octopus', 120, 561, 'A raw octopus, perfect for cooking.', 70, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(845, 844, 'Raw Octopus', 120, 561),
+    Get.Item.Food(846, 847, 'Cooked Octopus', 180, 10, 562, 'A cooked octopus, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(847, 846, 'Cooked Octopus', 180, 562),
+    Get.Item.Item(848, 849, 'Burnt Octopus', 0, 563, 'A burnt octopus. Yuck.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(849, 548, 'Burnt Octopus', 0, 563),
+    Get.Item.RawCoockableFood(850, 851, 'Raw Octopus Tentacle', 30, 564, 'A raw octopus tentacle, perfect for cooking.', 15, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(851, 850, 'Raw Octopus Tentacle', 30, 564),
+    Get.Item.Food(852, 853, 'Cooked Octopus Tentacle', 50, 2, 565, 'A cooked octopus tentacle, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(853, 852, 'Cooked Octopus Tentacle', 50, 565),
+    Get.Item.Item(854, 855, 'Burnt Octopus Tentacle', 0, 566, 'A burnt octopus tentacle. Yuck.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(855, 854, 'Burnt Octopus Tentacle', 0, 566),
 
 
     // Get.Item.Scissors(611, 612, 'Scissors', 15, 298),
