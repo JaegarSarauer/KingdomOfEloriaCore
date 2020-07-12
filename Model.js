@@ -1887,6 +1887,8 @@ const AnimationsClaim = {
     HUMANOID : {
         WALK_HORIZONTAL : ['LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_THIGH', 'RIGHT_SHIN'],
         WALK_VERTICAL : ['LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_THIGH', 'RIGHT_SHIN'],
+        RUN_HORIZONTAL : ['LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_THIGH', 'RIGHT_SHIN'],
+        RUN_VERTICAL : ['LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_THIGH', 'RIGHT_SHIN'],
         ATTACK_MELEE : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
         ATTACK_MELEE_WEAPON : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
         ATTACK_MELEE_RANGE : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
@@ -1900,6 +1902,11 @@ const AnimationsClaim = {
         FLETCH : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
         WOODCUT : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
         DEATH : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM', 'CHEST', 'RIGHT_THIGH', 'LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_SHIN'],
+        PET : ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
+        EQUIP_LEGS: ['RIGHT_THIGH', 'LEFT_THIGH', 'LEFT_SHIN', 'RIGHT_SHIN'],
+        STEAL_CHEST: ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM', 'CHEST'],
+        LIGHT_FIRE: ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM', 'CHEST'],
+        TALK_TO: ['LEFT_SHOULDER', 'LEFT_FOREARM', 'RIGHT_SHOULDER', 'RIGHT_FOREARM'],
     },
     FOUR_LEGGED_MAMMAL : {
         WALK_HORIZONTAL : ['THIGH_VISIBLE_FRONT', 'THIGH_VISIBLE_BACK', 'THIGH_HIDDEN_FRONT', 'THIGH_HIDDEN_BACK', 'SHIN_HIDDEN_FRONT', 'SHIN_HIDDEN_BACK', 'SHIN_VISIBLE_FRONT', 'SHIN_VISIBLE_BACK'],
@@ -2117,8 +2124,10 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
             let swappedKey = swapParts[initialKey];
             let part = (swappedKey) ? modelParts[swappedKey] : modelParts[initialKey];
             let realKey = swappedKey ? swappedKey : initialKey;
+
             
             if (part) {
+                part.reset();
                 let claimedDuration = 0;
                 if (activeAnimations[realKey] != null) {
                     let animationsActive = activeAnimations[realKey];

@@ -798,7 +798,7 @@ const ItemGetter = {
         let incinerateLevel = 26 + (tier * 6);
         let spriteId = tier;
         if (tier > 10) {
-            tier = 6;
+            tier = 10;
         }
 
         return {
@@ -822,7 +822,7 @@ const ItemGetter = {
                     asset: 'headParts',
                     sprite: 'fullHelm',
                     parent: 'HEAD',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: 9/24, y: 0.8 },
                     position: {x: -0.01, y: -0.11},
                     rotation: 0,
@@ -5345,7 +5345,7 @@ const Character = {
         return guard;
     },
     EmperorMagicGuard: function(id, name, tier) {
-        let guard = this.MagicGuard(id, name, tier);
+        let guard = this.MagicGuard(id, name, tier, 666);
 
         guard.equipmentModel[0] = tier == 3 ? 880 : 862;
         guard.equipmentModel[3] = 864; 
