@@ -709,6 +709,10 @@ const ItemGetter = {
     },
     Helmet: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 16 + (tier * 6);
+        let spriteId = tier;
+        if (tier > 10) {
+            tier = 10;
+        }
         return {
             id: id,
             name: fullName,
@@ -730,7 +734,7 @@ const ItemGetter = {
                     asset: 'headParts',
                     sprite: 'medHelm',
                     parent: 'HEAD',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: 0.5, y: 0.8 },
                     position: {x: 0, y: -0.15},
                     rotation: 0,
@@ -800,7 +804,6 @@ const ItemGetter = {
         if (tier > 10) {
             tier = 10;
         }
-
         return {
             id: id,
             name: fullName,
@@ -1022,6 +1025,21 @@ const ItemGetter = {
                 ]
             }],
         };
+    },
+    EmperorGuardPlatebody: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
+        let platebody = this.Platebody(id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats);
+        platebody.model.CHEST_WORN.position.y -= 0.06;
+        platebody.model.RIGHT_SHOULDER_WORN.position.x -= 0.025;
+        platebody.model.LEFT_SHOULDER_WORN.position.x += 0.025;
+        platebody.model.RIGHT_SHOULDER_WORN.position.y += 0.06;
+        platebody.model.LEFT_SHOULDER_WORN.position.y += 0.06;
+        return platebody;
+    },
+    GeneralsPlatebody: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
+        let platebody = this.EmperorGuardPlatebody(id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats);
+        platebody.model.LEFT_SHOULDER_WORN.anchor = { x: 8/21, y: 7/21 };
+        platebody.model.LEFT_SHOULDER_WORN.position.x += 0.2;
+        return platebody;
     },
     ChainHelm: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 14 + (tier * 4);
@@ -1602,6 +1620,42 @@ const ItemGetter = {
                     spriteID: 0,
                     anchor: { x: 0.5, y: 0.9 },
                     position: { x: 0, y: 0.05 },
+                    rotation: 0,
+                    UIModel: null,
+                },
+            },
+            actions: [{
+                interfaceID: 5,
+                id: 3,
+                name: 'Equip',
+                steps: [
+                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
+                    buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
+                ]
+            }],
+        };
+    },
+    Hat: function (id, notedId, fullName, value, spriteIndex, assetPartName, spriteID, stats, description) {
+        return {
+            id: id,
+            name: fullName,
+            noted: false,
+            notedID: notedId,
+            value: value,
+            stackable: false,
+            description: description,
+            spriteIndex: spriteIndex,
+            equipmentStats: stats,
+            model: {
+                HEAD_WORN: {
+                    id: 'HEAD_WORN',
+                    asset: 'headParts',
+                    sprite: spriteID,
+                    parent: 'HEAD',
+                    sprite: assetPartName,
+                    anchor: { x: 0.5, y: 0.85 },
+                    position: { x: 0, y: -0.5 },
                     rotation: 0,
                     UIModel: null,
                 },
@@ -5424,7 +5478,7 @@ const Character = {
         return guard;
     },
     EmperorMagicGuard: function(id, name, tier) {
-        let guard = this.MagicGuard(id, name, tier, 666);
+        let guard = this.MagicGuard(id, name, tier);
 
         guard.equipmentModel[0] = tier == 3 ? 880 : 862;
         guard.equipmentModel[3] = 864; 

@@ -401,7 +401,7 @@ Get.Character.GuildMaster(97, 'Acernis Guild Master', 2), // Woodcutting
 Get.Character.Emperor(98, 'Emperor of Eloria'), // Dark Magic 
 Get.Character.EmperorGeneral(99, 'Emperor\'s General'),
 Get.Character.EmperorMagicGuard(100, 'Grand Sorcerer', 3),
-Get.Character.EmperorMagicGuard(101, 'Elite Sorcerer', 3),
+Get.Character.EmperorMagicGuard(101, 'Elite Sorcerer', 2),
 Get.Character.EmperorMagicGuard(102, 'Sorcerer\'s Apprentice', 2),
 Get.Character.TeragonThakod(103), // Mining Dwaft Thakod, #2 rank
 Get.Character.TeragonSwordsman(104, 'Swordsman\'s Apprentice', 2), // Mining Swordsman's apprentice
