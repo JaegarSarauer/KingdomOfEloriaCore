@@ -1028,166 +1028,10 @@ const Item = Object.freeze([
         spriteIndex: 93,
         essenceValue: EssenceValue(3, 1, [ShardCatalog.EARTH(2), ShardCatalog.AIR(2)]),
     },
-    {
-        id: 93,
-        name: 'Blue Wizard Hat',
-        noted: false,
-        notedID: 199,
-        value: 44,
-        stackable: false,
-        description: '',
-        requirements: ItemDetail.build([
-            ItemDetail.levelSkillDetail('1', 15, 'CRAFT'),
-            ItemDetail.levelSkillDetail('1', 8, 'EQUIP'),
-            ItemDetail.levelSkillDetail(25, 17, 'INCINERATE'),
-        ]),
-        spriteIndex: 94,
-        equipmentStats: [0, 0, 0, 0, 0, 0, 2, 2, 6],
-        essenceValue: EssenceValue(25, 12, [ShardCatalog.AIR(160), ShardCatalog.EARTH(40), ShardCatalog.NATURE(10), ShardCatalog.BIND(100)]),
-        model: {
-            HEAD_WORN: {
-                id: 'HEAD_WORN',
-                asset: 'headParts',
-                sprite: 'robeHat',
-                parent: 'HEAD',
-                spriteID: 1,
-                anchor: { x: 0.5, y: 0.9 },
-                position: { x: 0.05, y: -0.5 },
-                rotation: 0,
-                UIModel: null,
-            },
-        },
-        actions: [{
-            interfaceID: 5,
-            id: 3,
-            name: 'Equip',
-            steps: [
-                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 1] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
-                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
-            ]
-        }],
-    },
-    {
-        id: 94,
-        name: 'Green Wizard Hat',
-        noted: false,
-        notedID: 200,
-        value: 100,
-        stackable: false,
-        description: '',
-        requirements: ItemDetail.build([
-            ItemDetail.levelSkillDetail('10', 15, 'CRAFT'),
-            ItemDetail.levelSkillDetail('10', 8, 'EQUIP'),
-            ItemDetail.levelSkillDetail(30, 17, 'INCINERATE'),
-        ]),
-        spriteIndex: 95,
-        equipmentStats: [0, 0, 0, 0, 0, 0, 4, 4, 12],
-        essenceValue: EssenceValue(18, 6, [ShardCatalog.AIR(320), ShardCatalog.EARTH(60), ShardCatalog.NATURE(17), ShardCatalog.BIND(200)]),
-        model: {
-            HEAD_WORN: {
-                id: 'HEAD_WORN',
-                asset: 'headParts',
-                sprite: 'robeHat',
-                parent: 'HEAD',
-                spriteID: 2,
-                anchor: { x: 0.5, y: 0.9 },
-                position: { x: 0.05, y: -0.5 },
-                rotation: 0,
-                UIModel: null,
-            },
-        },
-        actions: [{
-            interfaceID: 5,
-            id: 3,
-            name: 'Equip',
-            steps: [
-                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 10] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
-                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
-            ]
-        }],
-    },
-    {
-        id: 95,
-        name: 'Purple Wizard Hat',
-        noted: false,
-        notedID: 201,
-        value: 296,
-        stackable: false,
-        description: '',
-        requirements: ItemDetail.build([
-            ItemDetail.levelSkillDetail('20', 15, 'CRAFT'),
-            ItemDetail.levelSkillDetail('20', 8, 'EQUIP'),
-            ItemDetail.levelSkillDetail(35, 17, 'INCINERATE'),
-        ]),
-        spriteIndex: 96,
-        essenceValue: EssenceValue(35, 24, [ShardCatalog.AIR(480), ShardCatalog.EARTH(80), ShardCatalog.NATURE(25), ShardCatalog.BIND(300)]),
-        equipmentStats: [0, 0, 0, 0, 0, 0, 6, 6, 18],
-        model: {
-            HEAD_WORN: {
-                id: 'HEAD_WORN',
-                asset: 'headParts',
-                sprite: 'robeHat',
-                parent: 'HEAD',
-                spriteID: 4,
-                anchor: { x: 0.5, y: 0.9 },
-                position: { x: 0.05, y: -0.5 },
-                rotation: 0,
-                UIModel: null,
-            },
-        },
-        actions: [{
-            interfaceID: 5,
-            id: 3,
-            name: 'Equip',
-            steps: [
-                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 20] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
-                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
-            ]
-        }],
-    },
-    {
-        id: 96,
-        name: 'Burgundy Wizard Hat',
-        noted: false,
-        notedID: 202,
-        value: 512,
-        stackable: false,
-        description: '',
-        requirements: ItemDetail.build([
-            ItemDetail.levelSkillDetail('30', 15, 'CRAFT'),
-            ItemDetail.levelSkillDetail('30', 8, 'EQUIP'),
-            ItemDetail.levelSkillDetail(40, 17, 'INCINERATE'),
-        ]),
-        spriteIndex: 97,
-        essenceValue: EssenceValue(40, 30, [ShardCatalog.AIR(660), ShardCatalog.EARTH(100), ShardCatalog.NATURE(32), ShardCatalog.BIND(400)]),
-        equipmentStats: [0, 0, 0, 0, 0, 0, 8, 8, 24],
-        model: {
-            HEAD_WORN: {
-                id: 'HEAD_WORN',
-                asset: 'headParts',
-                sprite: 'robeHat',
-                parent: 'HEAD',
-                spriteID: 3,
-                anchor: { x: 0.5, y: 0.9 },
-                position: { x: 0.05, y: -0.5 },
-                rotation: 0,
-                UIModel: null,
-            },
-        },
-        actions: [{
-            interfaceID: 5,
-            id: 3,
-            name: 'Equip',
-            steps: [
-                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 30] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
-                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
-            ]
-        }],
-    },
+    Get.Item.WizardHat(93, 199, 'Blue Wizard Hat', 1, 1, 94, 44, 1),
+    Get.Item.WizardHat(94, 200, 'Green Wizard Hat', 2, 2, 95, 100, 10),
+    Get.Item.WizardHat(95, 201, 'Purple Wizard Hat', 3, 3, 96, 296, 20),
+    Get.Item.WizardHat(96, 202, 'Burgundy Wizard Hat', 4, 4, 97, 512, 30),
     Get.Item.RobeChest(97, 203, 'Blue Wizard Top', 98, 1, 84, [0, 0, 0, 0, 0, -2, 4, 4, 10], 1),
     Get.Item.RobeChest(98, 204, 'Green Wizard Top', 99, 2, 170, [0, 0, 0, 0, 0, -4, 8, 8, 20], 10),
     Get.Item.RobeChest(99, 205, 'Purple Wizard Top', 100, 4, 478, [0, 0, 0, 0, 0, -6, 12, 12, 30], 20),
@@ -2985,49 +2829,10 @@ const Item = Object.freeze([
             steps: [
                 [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[177, 178, 179]] })]
             ],
-        }],
+    }],
     },
     Get.Item.Note(538, 537, 'Red Silk', 224, 311),
-    {
-        id: 539,
-        name: 'Red Wizard Hat',
-        noted: false,
-        notedID: 540,
-        value: 760,
-        stackable: false,
-        description: '',
-        requirements: ItemDetail.build([
-            ItemDetail.levelSkillDetail('40', 15, 'CRAFT'),
-            ItemDetail.levelSkillDetail('40', 8, 'EQUIP'),
-            ItemDetail.levelSkillDetail(45, 17, 'INCINERATE'),
-        ]),
-        spriteIndex: 312,
-        equipmentStats: [0, 0, 0, 0, 0, 0, 10, 10, 30],
-        essenceValue: EssenceValue(45, 355, [ShardCatalog.AIR(740), ShardCatalog.EARTH(120), ShardCatalog.NATURE(38), ShardCatalog.BIND(500)]),
-        model: {
-            HEAD_WORN: {
-                id: 'HEAD_WORN',
-                asset: 'headParts',
-                sprite: 'robeHat',
-                parent: 'HEAD',
-                spriteID: 5,
-                anchor: { x: 0.5, y: 0.9 },
-                position: { x: 0.05, y: -0.5 },
-                rotation: 0,
-                UIModel: null,
-            },
-        },
-        actions: [{
-            interfaceID: 5,
-            id: 3,
-            name: 'Equip',
-            steps: [
-                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, 40] }),
-                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
-                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
-            ]
-        }],
-    },
+    Get.Item.WizardHat(539, 540, 'Red Wizard Hat', 5, 5, 312, 760, 40),
     Get.Item.Note(540, 539, 'Red Wizard Hat', 760, 312),
     Get.Item.RobeChest(541, 542, 'Red Wizard Top', 313, 5, 1420, [0, 0, 0, 0, 0, -10, 20, 20, 50], 40),
     Get.Item.Note(542, 541, 'Red Wizard Top', 1420, 313),
@@ -3757,7 +3562,68 @@ const Item = Object.freeze([
     Get.Item.Item(904, 905, 'Burnt Crab', 0, 566, 'A burnt crab.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(8)]), false), // Jaegar look at last 3 params
     Get.Item.Note(905, 904, 'Burnt Crab', 0, 566),
 
+    // Emperor's General
+    Get.Item.FullHelm(856, 557, 'Generals\'s Helmet', 110, 200, 567, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
+    Get.Item.Note(857, 856, 'Generals\'s Helmet', 200, 567),
+    Get.Item.Platebody(858, 859, 'General\'s Platebody', 110, 200, 568, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
+    Get.Item.Note(859, 858, 'Generals\'s Platebody', 200, 568),
+    Get.Item.Platelegs(860, 861, 'General\'s Platelegs', 110, 200, 569, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
+    Get.Item.Note(861, 860, 'Generals\'s Platebody', 200, 569),
 
+    // Emperor's Sorcerer
+    Get.Item.WizardHat(862, 863, 'Sorcerors\'s Hat', 5, 100, 570, 760, 50),
+    Get.Item.Note(863, 862, 'Sorcerors\'s Hat', 93, 570),
+    Get.Item.RobeChest(864, 865, 'Sorcerors\'s Top', 571, 100, 1420, [0, 0, 0, 0, 0, -10, 20, 20, 50], 40),
+    Get.Item.Note(865, 864, 'Sorcerors\'s Top', 1420, 571),
+    Get.Item.RobeLegs(866, 867, 'Sorcerors\'s Bottom', 572, 100, 1175, [0, 0, 0, 0, 0, -5, 15, 15, 40], 40),
+    Get.Item.Note(867, 866, 'Sorcerors\'s Bottom', 1175, 572),
+
+    // Elite Emperor's Guard
+    Get.Item.FullHelm(868, 869, 'EmpOps\'s Helmet', 101, 200, 573, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
+    Get.Item.Note(869, 868, 'EmpOps\'s Helmet', 200, 573),
+    Get.Item.Platebody(870, 871, 'EmpOps\'s Platebody', 101, 200, 574, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
+    Get.Item.Note(871, 870, 'EmpOps\'s Platebody', 200, 574),
+    Get.Item.Platelegs(872, 873, 'EmpOps\'s Platelegs', 101, 200, 575, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
+    Get.Item.Note(873, 872, 'EmpOps\'s Platelegs', 200, 575),
+
+    // Tier 1 Emperor's guard
+    Get.Item.FullHelm(874, 875, 'Emperor\'s Guard\'s Helmet', 100, 200, 576, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
+    Get.Item.Note(875, 874, 'Emperor\'s Guard\'s Helmet', 200, 576),
+    Get.Item.Platebody(876, 877, 'Emperor\'s Guard\'s Platebody', 100, 200, 577, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
+    Get.Item.Note(877, 876, 'Emperor\'s Guard\'s Platebody', 200, 577),
+    Get.Item.Platelegs(878, 879, 'Emperor\'s Guard\'s Platelegs', 100, 200, 578, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
+    Get.Item.Note(879, 878, 'Emperor\'s Guard\'s Platebody', 200, 578),
+
+    // Grand Sorceror
+    Get.Item.WizardHat(880, 881, 'Grand Sorcerors\'s Hat', 101, 100, 579, 760, 50),
+    Get.Item.Note(881, 880, 'Grand Sorcerors\'s Hat', 200, 579),
+
+    // TODO: Mining Guild Master Outfit
+     Get.Item.FullHelm(882, 883, 'Mining Guild Master Helmet', 101, 200, 573, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
+     Get.Item.Note(883, 882, 'Mining Guild Master Helmet', 200, 573),
+     Get.Item.Platebody(884, 885, 'Mining Guild Master Platebody', 101, 200, 574, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
+     Get.Item.Note(885, 884, 'Mining Guild Master Platebody', 200, 574),
+     Get.Item.Platelegs(886, 887, 'Mining Guild Master Platelegs', 101, 200, 575, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
+     Get.Item.Note(887, 886, 'Mining Guild Master Platelegs', 200, 575),
+
+     // TODO: Fishing Guild Master Outfit
+    Get.Item.FullHelm(888, 889, 'Fishing Guild Master Helmet', 101, 200, 573, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
+    Get.Item.Note(889, 888, 'Fishing Guild Master Helmet', 200, 573),
+    Get.Item.Platebody(890, 891, 'Fishing Guild Master Platebody', 101, 200, 574, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
+    Get.Item.Note(891, 890, 'Fishing Guild Master Platebody', 200, 574),
+    Get.Item.Platelegs(892, 893, 'Fishing Guild Master Platelegs', 101, 200, 575, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
+    Get.Item.Note(893, 892, 'Fishing Guild Master Platelegs', 200, 575),
+
+    // TODO: Woodcutting Guild Master Outfit
+    Get.Item.FullHelm(894, 895, 'Woodcutting Guild Master Helmet', 101, 200, 573, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
+    Get.Item.Note(895, 894, 'Woodcutting Guild Master Helmet', 200, 573),
+    Get.Item.Platebody(896, 897, 'Woodcutting Guild Master Platebody', 101, 200, 574,  null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
+    Get.Item.Note(897, 898, 'Woodcutting Guild Master Platebody', 200, 574),
+    Get.Item.Platelegs(898, 899, 'Woodcutting Guild MasterPlatelegs', 101, 200, 575,  null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
+    Get.Item.Note(899, 898, 'Woodcutting Guild Master Platelegs', 200, 575),
+     
+
+    
     // Get.Item.Scissors(611, 612, 'Scissors', 15, 298),
     // Get.Item.Note(612, 611, 'Scissors', 15, 298),
     // Get.Item.Dye(613, 614, "Red Dye", 8, 299, SpriteColor.Red),

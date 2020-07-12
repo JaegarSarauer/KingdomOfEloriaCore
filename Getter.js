@@ -750,8 +750,57 @@ const ItemGetter = {
             }],
         };
     },
+    WizardHat: function (id, notedId, fullName, tier, spriteID, itemSpriteIndex, value, equipLevel) {
+        let incinerateLevel = 26 + (tier * 6);
+        return {
+            id: id,
+            name: fullName,
+            noted: false,
+            notedID: notedId,
+            value: value,
+            stackable: false,
+            description: 'Worn for extra defense against magic damage.',
+            requirements: ItemDetail.build([
+                ItemDetail.levelSkillDetail(equipLevel, 15, 'CRAFT'),
+                ItemDetail.levelSkillDetail(equipLevel, 8, 'EQUIP'),
+                ItemDetail.levelSkillDetail(20 + 5 * tier, 17, 'INCINERATE'),
+            ]),
+            essenceValue: EssenceValue(40, 30, [ShardCatalog.AIR(100 + 100 * tier), ShardCatalog.EARTH(25 + 25 * tier), ShardCatalog.NATURE(5 + 5 * tier), ShardCatalog.BIND(50 + 50 * tier)]),
+            spriteIndex: itemSpriteIndex,
+            equipmentStats: [0, 0, 0, 0, 0, 0, 2 * tier, 2 * tier, 6 * tier],
+            model: {
+                HEAD_WORN: {
+                    id: 'HEAD_WORN',
+                    asset: 'headParts',
+                    sprite: 'robeHat',
+                    parent: 'HEAD',
+                    spriteID: spriteID,
+                    anchor: { x: 0.5, y: 0.9 },
+                    position: { x: 0.05, y: -0.5 },
+                    rotation: 0,
+                    UIModel: null,
+                    hideParts : ['HAIR'],
+                },
+            },
+            actions: [{
+                interfaceID: 5,
+                id: 3,
+                name: 'Equip',
+                steps: [
+                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
+                    buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
+                ]
+            }],
+        };
+    },
     FullHelm: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 26 + (tier * 6);
+        let spriteId = tier;
+        if (tier > 10) {
+            tier = 6;
+        }
+
         return {
             id: id,
             name: fullName,
@@ -795,6 +844,10 @@ const ItemGetter = {
     },
     Platelegs: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 26 + (tier * 4);
+        let spriteId = tier;
+        if (tier > 10) {
+            tier = 10;
+        }
         return {
             id: id,
             name: fullName,
@@ -816,7 +869,7 @@ const ItemGetter = {
                     asset: 'legParts',
                     sprite: 'platelegLeftThigh',
                     parent: 'LEFT_THIGH',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: (6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
@@ -828,7 +881,7 @@ const ItemGetter = {
                     asset: 'legParts',
                     sprite: 'platelegRightThigh',
                     parent: 'RIGHT_THIGH',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: 1-(6/9), y: 0.2 },
                     position: {x: 0, y: 0},
                     rotation: 0,
@@ -840,7 +893,7 @@ const ItemGetter = {
                     asset: 'legParts',
                     sprite: 'platelegLeftShin',
                     parent: 'LEFT_SHIN',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0.09},
                     rotation: 0,
@@ -853,7 +906,7 @@ const ItemGetter = {
                     asset: 'legParts',
                     sprite: 'platelegRightShin',
                     parent: 'RIGHT_SHIN',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: 0.5, y: 0.1 },
                     position: {x: 0, y: 0.09},
                     rotation: 0,
@@ -876,6 +929,10 @@ const ItemGetter = {
     },
     Platebody: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 36 + (tier * 4);
+        let spriteId = tier;
+        if (tier > 10) {
+            tier = 10;
+        }
         return {
             id: id,
             name: fullName,
@@ -897,7 +954,7 @@ const ItemGetter = {
                     asset: 'chestParts',
                     sprite: 'platebodyChest',
                     parent: 'CHEST',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: 0.5, y: 0.65 },
                     position: { x: 0, y: 0.15 },
                     rotation: 0,
@@ -910,7 +967,7 @@ const ItemGetter = {
                     asset: 'armParts',
                     sprite: 'platebodyRightShoulder',
                     parent: 'RIGHT_SHOULDER',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: 9/11, y: 0.18 },
                     position: {x: 0.38, y: -0.05},
                     rotation: 0,
@@ -922,7 +979,7 @@ const ItemGetter = {
                     asset: 'armParts',
                     sprite: 'platebodyLeftShoulder',
                     parent: 'LEFT_SHOULDER',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: { x: 1-9/11, y: 0.18 },
                     position: {x: -0.38, y: -0.05},
                     rotation: 0,
@@ -934,7 +991,7 @@ const ItemGetter = {
                     asset: 'armParts',
                     sprite: 'platebodyRightForearm',
                     parent: 'RIGHT_FOREARM',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: {x: 1-4/7, y: 0.05},
                     position: {x: 0.06, y: 0},
                     rotation: 0,
@@ -946,7 +1003,7 @@ const ItemGetter = {
                     asset: 'armParts',
                     sprite: 'platebodyLeftForearm',
                     parent: 'LEFT_FOREARM',
-                    spriteID: tier,
+                    spriteID: spriteId,
                     anchor: {x: 4/7, y: 0.05},
                     position: {x: -0.06, y: 0},
                     rotation: 0,
@@ -5305,9 +5362,7 @@ const Character = {
     },
     SalmoTune: function(id) {
         let guard = this.SalmoMeleeGuard(id, 'Tune', 6);
-        guard.equipmentModel = [];
-        // guard.equipmentModel = [];
-        // guard.modelParams = {};
+        guard.equipmentModel =  [0, 0, 0, 455, 475];
         return guard;
     },
     SalmoRangeGuard: function(id, name, tier) {
@@ -5339,23 +5394,49 @@ const Character = {
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
         guard.modelOverrideName = 'EMPEROR_GUARDS';
+        if (tier >= 5) {
+            guard.equipmentModel[0] = 868;
+            guard.equipmentModel[3] = 870; 
+            guard.equipmentModel[4] = 872;
+        }
+        else {
+            guard.equipmentModel[0] = 874;
+            guard.equipmentModel[3] = 876; 
+            guard.equipmentModel[4] = 878;
+        }
+
         guard.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
         return guard;
     },
     EmperorMagicGuard: function(id, name, tier) {
         let guard = this.MagicGuard(id, name, tier);
-        // guard.equipmentModel = [];
-        // guard.modelParams = {};
+
+        guard.equipmentModel[0] = tier == 3 ? 880 : 862;
+        guard.equipmentModel[3] = 864; 
+        guard.equipmentModel[4] = 866;
         return guard;
     },
     EmperorGeneral: function(id, name) {
         let guard = this.EmperorMeleeGuard(id, name, 8, 666);
-        guard.equipmentModel = [259, 273, 299, 263, 261];
+        guard.equipmentModel = [856, 273, 299, 858, 860];
         guard.doNotRespawn = true;
         return guard;
     },
     GuildMaster: function(id, name, guildID) {
-        let human = this.Human(id, name, 13, [24, 20, null, 45, 32]);
+        let equipmentModel = [24, 20, null, 45, 32];
+        switch(guildID) {
+            case 0:
+                equipmentModel = [882, 20, null, 884, 886];
+                break;
+            case 1:
+                equipmentModel = [888, 20, null, 890, 892];
+                break;
+            case 2:
+                equipmentModel = [894, 20, null, 896, 898];
+                break;
+        }
+
+        let human = this.Human(id, name, 13, equipmentModel);
 
         human.isAggressiveTo = [91, 92, 93, 94, 98, 99];
         human.actions = [
@@ -5366,6 +5447,7 @@ const Character = {
             }
         ];
         human.doNotRespawn = true;
+
 
         human.stats = [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]];
         human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
