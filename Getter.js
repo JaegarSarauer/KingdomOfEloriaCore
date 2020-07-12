@@ -24,6 +24,17 @@ const LEVEL_INDEX = {
     COOKING: 13
 }
 
+const EmperorTeamNPCIds = [
+    91, 92, 93, 94, 98, 99, 100, 101, 102,
+];
+
+const GuildNPCIds = [
+    87, 88, 89, 90, 95, 103, 104, 105, 
+    96, 106, 107, 108, 109, 110, 111,
+    97, 112, 113, 114, 115, 116, 117, 118
+];
+
+
 const CalculateGemCapacity = (tier, grade) => {
     let base = Item[659 + tier].baseEnchantCharge;
     let multiplier = 1 + (grade * 0.5);
@@ -5293,6 +5304,7 @@ const Character = {
     },
     MeleeGuard: function(id, name, tier, spriteID = null, hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822) {
         let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor );
+        guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         switch(tier) {
@@ -5318,11 +5330,13 @@ const Character = {
                 guard.equipmentModel = [287, 301, 299, 291, 289];
                 break;
         }
-        guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
+        
+        guard.isAggressiveTo = EmperorTeamNPCIds;
         return guard;
     },
     ArcheryGuard: function(id, name, tier, spriteID = null, hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822) {
         let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor );
+        guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         guard.combatStyle = Combat.CombatStyle.RANGE;
@@ -5347,11 +5361,12 @@ const Character = {
                 guard.equipmentModel = [293, 321, null, 297, 295];
                 break;
         }
-        guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
+        guard.isAggressiveTo = EmperorTeamNPCIds;
         return guard;
     },
     MagicGuard: function(id, name, tier, spriteID = null) {
         let guard = this.Guard(id, name, spriteID);
+        guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         guard.combatStyle = Combat.CombatStyle.RANGE;
@@ -5376,11 +5391,12 @@ const Character = {
                 guard.equipmentModel = [293, 321, null, 297, 295];
                 break;
         }
-        guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
+        guard.isAggressiveTo = EmperorTeamNPCIds;
         return guard;
     },
     MagicGuard: function(id, name, tier, spriteID = null) {
         let guard = this.Guard(id, name, spriteID);
+        guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
         guard.combatStyle = Combat.CombatStyle.MAGIC;
@@ -5404,7 +5420,7 @@ const Character = {
             default:
                 break;
         }
-        guard.isAggressiveTo = [91, 92, 93, 94, 98, 99];
+        guard.isAggressiveTo = EmperorTeamNPCIds;
         return guard;
     },
     TeragonMeleeGuard: function(id, name, tier) {
@@ -5462,7 +5478,7 @@ const Character = {
         let guard = this.MeleeGuard(id, name, tier, 666);
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
-        guard.modelOverrideName = 'EMPEROR_GUARDS';
+        guard.isGuard = false;
         if (tier >= 5) {
             guard.equipmentModel[0] = 868;
             guard.equipmentModel[3] = 870; 
@@ -5474,15 +5490,21 @@ const Character = {
             guard.equipmentModel[4] = 878;
         }
 
-        guard.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
+        guard.isAggressiveTo = GuildNPCIds;
         return guard;
     },
     EmperorMagicGuard: function(id, name, tier) {
         let guard = this.MagicGuard(id, name, tier);
 
+        guard.modelOverrideName = 'EMPEROR_GUARDS';
+        guard.isEmperorGuard = true;
+        guard.isGuard = false;
+        
         guard.equipmentModel[0] = tier == 3 ? 880 : 862;
         guard.equipmentModel[3] = 864; 
         guard.equipmentModel[4] = 866;
+
+        guard.isAggressiveTo = GuildNPCIds;
         return guard;
     },
     EmperorGeneral: function(id, name) {
@@ -5507,7 +5529,8 @@ const Character = {
 
         let human = this.Human(id, name, 13, equipmentModel);
 
-        human.isAggressiveTo = [91, 92, 93, 94, 98, 99];
+        human.isMultiTarget = true;
+        human.isAggressiveTo = EmperorTeamNPCIds;
         human.actions = [
             {
                 interfaceID: 0,
@@ -5529,13 +5552,16 @@ const Character = {
             id: 6,
             name: 'Attack'
         }];
+        human.isMultiTarget = true;
+        human.isGuard = false;
+        human.isEmperorGuard = true;
         human.modelOverrideName = 'EMPEROR_GUARDS';
         human.doNotRespawn = true;
 
         human.equipmentModel = [null, 301, null, 291, 289];
         human.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
         human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
-        human.isAggressiveTo = [25, 87, 88, 89, 90, 95, 96, 97];
+        human.isAggressiveTo = GuildNPCIds;
         human.modelParams = {
             CHEST: { spriteID: 11},
             HEAD: { spriteID: 1},

@@ -27,19 +27,6 @@ try {
     }	
 }
 
-
-module.exports.EmperorTeamIds = EmperorTeamIds = [
-    91, 92, 93, 94, 98, 99, 100, 101, 102
-];
-
-module.exports.WoodcuttingGuildNPCIds = WoodcuttingGuildNPCIds = [
-
-];
-
-module.exports.FishingGuildNPCIds = FishingGuildNPCIds = [
-
-];
-
 module.exports.Character = Character = [{
     id: 0,
     name: 'Chicken',
