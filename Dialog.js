@@ -736,6 +736,11 @@ const Dialogs = Object.freeze([{
     id: 70, // Aeronic
     title: '<b>Aeronic</b>',
     message: 'I hope you like my musical additions and suggestions for GoG! Remember to stand for the Elorian Anthem!',
+},
+{
+    id: 71, // Guildmaster generic (for now)
+    title: '<b>Guildmaster</b>',
+    message: 'Hello adventurer.\n\nPlease help our guild flourish by donating some items to our community chest.\nWith your help we can stay strong against the emperor.',
 }]);
 
 module.exports.Dialogs = Dialogs;

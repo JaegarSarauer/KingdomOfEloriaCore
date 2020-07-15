@@ -5407,6 +5407,7 @@ const Character = {
     EmperorMeleeGuard: function(id, name, tier) {
         let guard = this.MeleeGuard(id, name, tier, 666);
         guard.modelOverrideName = 'EMPEROR_GUARDS';
+        guard.isGuard = false;
         guard.isEmperorGuard = true;
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         if (tier >= 5) {
@@ -5457,7 +5458,21 @@ const Character = {
         human.actions = [
             {
                 interfaceID: 0,
-                id: 6, //36
+                id: 4,
+                name: 'Talk To',
+                steps: [
+                    buildStepList(StepList.WALK_ADJACENT), 
+                    [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, {
+                        params: [71],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })],
+                ],
+            },
+            {
+                interfaceID: 0,
+                id: 36,
                 name: 'Attack',
             }
         ];
