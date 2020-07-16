@@ -19,6 +19,10 @@ const TestType = {
         id: 'MINE_COPPER_ORE',
         executeString: 'mine_copper'
     },
+    MINE_GEM_ROCK: {
+        id: 'MINE_GEM_ROCK',
+        executeString: 'mine_gem'
+    },
     MINE_TO_MAX: {
         id: 'MINE_TO_MAX',
         executeString: 'mine_max'
@@ -40,6 +44,7 @@ const TestMineCopperOre = require('../internal/Tests/TestMineCopperOre');
 const TestMineToMax = require('../internal/Tests/TestMineToMax');
 const TestCutBankedGems = require('../internal/Tests/TestCutBankedGems');
 const TestWalkRandom = require('../internal/Tests/TestWalkRandom');
+const TestMineGemRock = require('../internal/Tests/TestMineGemRock');
 
 module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     INCINERATE_ALL_ITEMS: {
@@ -55,6 +60,11 @@ module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     MINE_COPPER_ORE: {
         build: (parameters) => {
             return new TestMineCopperOre.TestMineCopperOre(...parameters);
+        },
+    },
+    MINE_GEM_ROCK: {
+        build: (parameters) => {
+            return new TestMineGemRock.TestMineGemRock(...parameters);
         },
     },
     MINE_TO_MAX: {
