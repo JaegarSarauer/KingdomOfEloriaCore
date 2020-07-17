@@ -1329,6 +1329,14 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
         id: 'OWNER_UID',
         type: 'string',
     },
+    SHOP_ID: {
+        id: 'SHOP_ID',
+        type: 'number',
+    },
+    TALK_TO: {
+        id: 'TALK_TO',
+        type: 'number',
+    },
     MAX_AMOUNT: {
         id: 'MAX_AMOUNT',
         type: 'number',

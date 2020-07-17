@@ -5222,16 +5222,19 @@ const Character = {
         return golem;
     },
     HumanShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, shopsMenuInterfaceID) {
-        return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
+        let def = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
                 interfaceID: 0,
                 id: 5,
                 name: 'Trade',
                 steps: [
-                    [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
-                    buildStep(StepType.OPEN_SHOP_INTERFACE, { params: [shopsMenuInterfaceID] })]
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['TALK_TO'] }),
+                    buildStep(StepType.OPEN_SHOP_INTERFACE, { params: ['SHOP_ID'] })]
                 ],
             }], faceId, eyeColor);
-        },
+
+        def.shopID = shopsMenuInterfaceID;
+        return def;
+    },
     Guard: function(id, name, spriteID = null, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822,) {
         if (spriteID == null) {
             let skinTone = Math.floor(Math.random() * 6) + 1;
@@ -5609,7 +5612,7 @@ const Character = {
                 id: 5,
                 name: 'Trade',
                 steps: [
-                    [buildStep(StepType.PLAY_ANIMATION, { params: ['TALk_TO'] }),
+                    [buildStep(StepType.PLAY_ANIMATION, { params: ['TALK_TO'] }),
                     buildStep(StepType.OPEN_CHANGE_APPEARANCE, { params: [appearanceShopMenuID] })]
                 ],
             }], faceId, eyeColor);
