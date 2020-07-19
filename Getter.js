@@ -952,16 +952,16 @@ const ItemGetter = {
             description: description,
             requirements: ItemDetail.build([
                 ItemDetail.levelSkillDetail(1, 2, 'EQUIP'),
-                ItemDetail.levelSkillDetail(35, 17, 'INCINERATE'),
+                ItemDetail.levelSkillDetail(99, 17, 'INCINERATE'),
             ]),
-            essenceValue: EssenceValue(35, 45, [ShardCatalog.AIR(25), ShardCatalog.EARTH(50), ShardCatalog.METAL(40), ShardCatalog.FIRE(60), ShardCatalog.FORCE(88)]),
+            essenceValue: EssenceValue(99, 45, [ShardCatalog.AIR(25), ShardCatalog.EARTH(50), ShardCatalog.METAL(40), ShardCatalog.FIRE(60), ShardCatalog.FORCE(88)]),
             spriteIndex: spriteIndex,
-            equipmentStats: [],
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             model: {
                 LEFT_THIGH_WORN: {
                     id: 'LEFT_THIGH_WORN',
                     asset: 'legParts',
-                    sprite: 'guildLeftThigh',
+                    sprite: 'guildPantLeftThigh',
                     parent: 'LEFT_THIGH',
                     spriteID: guildID,
                     anchor: { x: (6/9), y: 0.2 },
@@ -973,7 +973,7 @@ const ItemGetter = {
                 RIGHT_THIGH_WORN: {
                     id: 'RIGHT_THIGH_WORN',
                     asset: 'legParts',
-                    sprite: 'guildRightThigh',
+                    sprite: 'guildPantRightThigh',
                     parent: 'RIGHT_THIGH',
                     spriteID: guildID,
                     anchor: { x: 1-(6/9), y: 0.2 },
@@ -985,7 +985,7 @@ const ItemGetter = {
                 LEFT_SHIN_WORN: {
                     id: 'LEFT_SHIN_WORN',
                     asset: 'legParts',
-                    sprite: 'guildLeftShin',
+                    sprite: 'guildPantLeftShin',
                     parent: 'LEFT_SHIN',
                     spriteID: guildID,
                     anchor: { x: 0.5, y: 0.1 },
@@ -998,7 +998,7 @@ const ItemGetter = {
                 RIGHT_SHIN_WORN: {
                     id: 'RIGHT_SHIN_WORN',
                     asset: 'legParts',
-                    sprite: 'guildRightShin',
+                    sprite: 'guildPantRightShin',
                     parent: 'RIGHT_SHIN',
                     spriteID: guildID,
                     anchor: { x: 0.5, y: 0.1 },
@@ -1128,11 +1128,11 @@ const ItemGetter = {
             description: description,
             requirements: ItemDetail.build([
                 ItemDetail.levelSkillDetail(1, 2, 'EQUIP'),
-                ItemDetail.levelSkillDetail(36, 17, 'INCINERATE'),
+                ItemDetail.levelSkillDetail(99, 17, 'INCINERATE'),
             ]),
             essenceValue: EssenceValue(99, 55, [ShardCatalog.AIR(25), ShardCatalog.EARTH(85), ShardCatalog.METAL(52), ShardCatalog.FIRE(60), ShardCatalog.FORCE(110)]),
             spriteIndex: spriteIndex,
-            equipmentStats: [],
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             model: {
                 CHEST_WORN: {
                     id: 'CHEST_WORN',
