@@ -1770,7 +1770,7 @@ const ItemGetter = {
             }],
         };
     },
-    Hat: function (id, notedId, fullName, value, spriteIndex, assetPartName, spriteID, stats, description) {
+    GuildHat: function (id, notedId, fullName, value, spriteIndex, assetPartName, guildID, description) {
         return {
             id: id,
             name: fullName,
@@ -1780,12 +1780,12 @@ const ItemGetter = {
             stackable: false,
             description: description,
             spriteIndex: spriteIndex,
-            equipmentStats: stats,
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             model: {
                 HEAD_WORN: {
                     id: 'HEAD_WORN',
                     asset: 'headParts',
-                    sprite: spriteID,
+                    sprite: guildID,
                     parent: 'HEAD',
                     sprite: assetPartName,
                     anchor: { x: 0.5, y: 0.85 },

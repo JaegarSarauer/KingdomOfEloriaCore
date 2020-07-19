@@ -3593,7 +3593,7 @@ const Item = Object.freeze([
     Get.Item.Note(881, 880, 'Grand Sorcerors\'s Hat', 200, 581),
 
     // Mining Guild Master Outfit
-    Get.Item.Hat(882, 883, 'Teregon Guild Master\'s Hat', 100, 582, 'guildHat', 0, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Teregon Guild Master\'s Hat'),
+    Get.Item.GuildHat(882, 883, 'Teregon Guild Master\'s Hat', 100, 582, 'guildHat', 0, 'Teregon Guild Master\'s Hat'),
     Get.Item.Note(883, 882, 'Teregon Guild Master\'s Hat', 200, 582),
     Get.Item.GuildShirt(884, 885, 'Teregon Guild Master\'s Shirt', 0, 100, 583, 'Teregon Guild Master\'s lucky shirt!'),
     Get.Item.Note(885, 884, 'Teregon Guild Master\'s Shirt', 200, 583),
@@ -3601,7 +3601,7 @@ const Item = Object.freeze([
     Get.Item.Note(887, 886, 'Teregon Guild Master Platelegs', 200, 584),
 
     // Fishing Guild Master Outfit
-    Get.Item.Hat(888, 889, 'Salmo Guild Master\'s Hat', 100, 585, 'guildHat', 1, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Salmo Guild Master\'s Hat'),
+    Get.Item.GuildHat(888, 889, 'Salmo Guild Master\'s Hat', 100, 585, 'guildHat', 1, 'Salmo Guild Master\'s Hat'),
     Get.Item.Note(889, 888, 'Salmo Guild Master\'s Hat', 200, 585),
     Get.Item.GuildShirt(890, 891, 'Salmo Guild Master\'s Shirt', 1, 100, 586, 'Salmo Guild Master\'s lucky shirt!'),
     Get.Item.Note(891, 890, 'Salmo Guild Master\'s Shirt', 200, 586),
@@ -3609,7 +3609,7 @@ const Item = Object.freeze([
     Get.Item.Note(893, 892, 'Salmo Guild Master\'s Pants', 200, 587),
 
     // Woodcutting Guild Master Outfit
-    Get.Item.Hat(894, 895, 'Acernis Guild Master\'s Hat', 100, 588, 'guildHat', 2, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Acernis Guild Master\'s Hat'),
+    Get.Item.GuildHat(894, 895, 'Acernis Guild Master\'s Hat', 100, 588, 'guildHat', 2, 'Acernis Guild Master\'s Hat'),
     Get.Item.Note(895, 894, 'Acernis Guild Master\'s Hat', 200, 588),
     Get.Item.GuildShirt(896, 897, 'Acernis Guild Master\'s Shirt', 2, 100, 589, 'Acernis Guild Master\'s lucky shirt!'),
     Get.Item.Note(897, 898, 'Acernis Guild Master\'s Shirt', 200, 589),
