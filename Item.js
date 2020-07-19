@@ -3569,59 +3569,59 @@ const Item = Object.freeze([
     Get.Item.Note(863, 862, 'Sorcerors\'s Hat', 93, 572),
     Get.Item.RobeChest(864, 865, 'Sorcerors\'s Top', 573, 100, 1420, [0, 0, 0, 0, 0, -10, 20, 20, 50], 40),
     Get.Item.Note(865, 864, 'Sorcerors\'s Top', 1420, 573),
-    Get.Item.RobeLegs(866, 867, 'Sorcerors\'s Bottom', 573, 100, 1175, [0, 0, 0, 0, 0, -5, 15, 15, 40], 40),
-    Get.Item.Note(867, 866, 'Sorcerors\'s Bottom', 1175, 573),
+    Get.Item.RobeLegs(866, 867, 'Sorcerors\'s Bottom', 574, 100, 1175, [0, 0, 0, 0, 0, -5, 15, 15, 40], 40),
+    Get.Item.Note(867, 866, 'Sorcerors\'s Bottom', 1175, 574),
 
     // Elite Emperor's Guard
-    Get.Item.Helmet(868, 869, 'EmpOps\'s Helmet', 101, 200, 573, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
-    Get.Item.Note(869, 868, 'EmpOps\'s Helmet', 200, 573),
-    Get.Item.EmperorGuardPlatebody(870, 871, 'EmpOps\'s Platebody', 101, 200, 574, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
-    Get.Item.Note(871, 870, 'EmpOps\'s Platebody', 200, 574),
-    Get.Item.Platelegs(872, 873, 'EmpOps\'s Platelegs', 101, 200, 575, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
-    Get.Item.Note(873, 872, 'EmpOps\'s Platelegs', 200, 575),
+    Get.Item.Helmet(868, 869, 'EmpOps\'s Helmet', 101, 200, 575, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
+    Get.Item.Note(869, 868, 'EmpOps\'s Helmet', 200, 575),
+    Get.Item.EmperorGuardPlatebody(870, 871, 'EmpOps\'s Platebody', 101, 200, 576, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
+    Get.Item.Note(871, 870, 'EmpOps\'s Platebody', 200, 576),
+    Get.Item.Platelegs(872, 873, 'EmpOps\'s Platelegs', 101, 200, 577, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
+    Get.Item.Note(873, 872, 'EmpOps\'s Platelegs', 200, 577),
 
     // Tier 1 Emperor's guard
-    Get.Item.Helmet(874, 875, 'Emperor\'s Guard\'s Helmet', 100, 200, 576, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
-    Get.Item.Note(875, 874, 'Emperor\'s Guard\'s Helmet', 200, 576),
-    Get.Item.EmperorGuardPlatebody(876, 877, 'Emperor\'s Guard\'s Platebody', 100, 200, 577, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
-    Get.Item.Note(877, 876, 'Emperor\'s Guard\'s Platebody', 200, 577),
-    Get.Item.Platelegs(878, 879, 'Emperor\'s Guard\'s Platelegs', 100, 200, 578, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
-    Get.Item.Note(879, 878, 'Emperor\'s Guard\'s Platebody', 200, 578),
+    Get.Item.Helmet(874, 875, 'Emperor\'s Guard\'s Helmet', 100, 200, 578, null, 70, [0, 0, 6, 0, 0, 2, -2, -2, -3] ), // Emperor's General Helmet -  Tier 1
+    Get.Item.Note(875, 874, 'Emperor\'s Guard\'s Helmet', 200, 578),
+    Get.Item.EmperorGuardPlatebody(876, 877, 'Emperor\'s Guard\'s Platebody', 100, 200, 579, null, 70, [0, 2, 28, 0, 0, 14, -14, -14, -20]),
+    Get.Item.Note(877, 876, 'Emperor\'s Guard\'s Platebody', 200, 579),
+    Get.Item.Platelegs(878, 879, 'Emperor\'s Guard\'s Platelegs', 100, 200, 580, null, 70, [0, 2, 20, 0, 0, 10, -10, -10, -16]),
+    Get.Item.Note(879, 878, 'Emperor\'s Guard\'s Platebody', 200, 580),
 
     // Grand Sorceror
-    Get.Item.WizardHat(880, 881, 'Grand Sorcerors\'s Hat', 101, 101, 579, 760, 50),
-    Get.Item.Note(881, 880, 'Grand Sorcerors\'s Hat', 200, 579),
+    Get.Item.WizardHat(880, 881, 'Grand Sorcerors\'s Hat', 101, 101, 581, 760, 50),
+    Get.Item.Note(881, 880, 'Grand Sorcerors\'s Hat', 200, 581),
 
     // Mining Guild Master Outfit
-    Get.Item.Hat(888, 889, 'Teregon Guild Master\'s Hat', 100, 583, 'hatGuild', 0, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Teregon Guild Master\'s Hat'),
-     Get.Item.Note(883, 882, 'Teregon Guild Master\'s Hat', 200, 580),
-     Get.Item.Shirt(884, 885, 'Teregon Guild Master\'s Shirt', 580, 'guild', 0, 100, 'Teregon Guild Master\'s lucky shirt!'),
-     Get.Item.Note(885, 884, 'Teregon Guild Master\'s Shirt', 200, 581),
-     Get.Item.Pants(886, 887, 'Teregon Guild Master\'s Pants', 'guild', 0, 581, 100),
-     Get.Item.Note(887, 886, 'Mining Guild Master Platelegs', 200, 582),
+    Get.Item.Hat(882, 883, 'Teregon Guild Master\'s Hat', 100, 582, 'guildHat', 0, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Teregon Guild Master\'s Hat'),
+    Get.Item.Note(883, 882, 'Teregon Guild Master\'s Hat', 200, 582),
+    Get.Item.GuildShirt(884, 885, 'Teregon Guild Master\'s Shirt', 0, 100, 583, 'Teregon Guild Master\'s lucky shirt!'),
+    Get.Item.Note(885, 884, 'Teregon Guild Master\'s Shirt', 200, 583),
+    Get.Item.GuildPants(886, 887, 'Teregon Guild Master\'s Pants', 0, 100, 584, 'These seem to be Teregon Guild Master\'s pants!'),
+    Get.Item.Note(887, 886, 'Teregon Guild Master Platelegs', 200, 584),
 
     // Fishing Guild Master Outfit
-    Get.Item.Hat(888, 889, 'Salmo Guild Master\'s Hat', 100, 583, 'hatGuild', 1, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Salmo Guild Master\'s Hat'),
-    Get.Item.Note(889, 888, 'Salmo Guild Master\'s Hat', 200, 583),
-    Get.Item.Shirt(890, 891, 'Salmo Guild Master\'s Shirt', 580, 'guild', 1, 100, 'Salmo Guild Master\'s lucky shirt!'),
-    Get.Item.Note(891, 890, 'Salmo Guild Master\'s Shirt', 200, 574),
-    Get.Item.Pants(892, 893, 'Salmo Guild Master\'s Pants', 'guild', 1, 582, 100),
-    Get.Item.Note(893, 892, 'Salmo Guild Master\'s Pants', 200, 575),
+    Get.Item.Hat(888, 889, 'Salmo Guild Master\'s Hat', 100, 585, 'guildHat', 1, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Salmo Guild Master\'s Hat'),
+    Get.Item.Note(889, 888, 'Salmo Guild Master\'s Hat', 200, 585),
+    Get.Item.GuildShirt(890, 891, 'Salmo Guild Master\'s Shirt', 1, 100, 586, 'Salmo Guild Master\'s lucky shirt!'),
+    Get.Item.Note(891, 890, 'Salmo Guild Master\'s Shirt', 200, 586),
+    Get.Item.GuildPants(892, 893, 'Salmo Guild Master\'s Pants', 1, 100, 587, 'These seem to be Salmo Guild Master\'s pants!'),
+    Get.Item.Note(893, 892, 'Salmo Guild Master\'s Pants', 200, 587),
 
     // Woodcutting Guild Master Outfit
-    Get.Item.Hat(894, 895, 'Acernis Guild Master\'s Hat', 100, 586, 'hatGuild', 2, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Acernis Guild Master\'s Hat'),
-    Get.Item.Note(895, 894, 'Acernis Guild Master\'s Hat', 200, 573),
-    Get.Item.Shirt(896, 897, 'Acernis Guild Master\'s Shirt', 580, 'guild', 2, 100, 'Acernis Guild Master\'s lucky shirt!'),
-    Get.Item.Note(897, 898, 'Acernis Guild Master\'s Shirt', 200, 580),
-    Get.Item.Pants(898, 899, 'Acernis Guild Master\'s Pants', 'guild', 2, 583, 100),
-    Get.Item.Note(899, 898, 'Acernis Guild Master\'s Pants', 200, 575),    
+    Get.Item.Hat(894, 895, 'Acernis Guild Master\'s Hat', 100, 588, 'guildHat', 2, [0, 0, 6, 0, 0, 2, -2, -2, -3] , 'Acernis Guild Master\'s Hat'),
+    Get.Item.Note(895, 894, 'Acernis Guild Master\'s Hat', 200, 588),
+    Get.Item.GuildShirt(896, 897, 'Acernis Guild Master\'s Shirt', 2, 100, 589, 'Acernis Guild Master\'s lucky shirt!'),
+    Get.Item.Note(897, 898, 'Acernis Guild Master\'s Shirt', 200, 589),
+    Get.Item.GuildPants(898, 899, 'Acernis Guild Master\'s Pants', 2, 100, 587, 'These seem to be Acernis Guild Master\'s pants!'),
+    Get.Item.Note(899, 898, 'Acernis Guild Master\'s Pants', 200, 590),    
     
-    Get.Item.RawCoockableFood(900, 901, 'Raw Crab', 22, 569, 'A raw crab, tastes better cooked.', 30, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
-    Get.Item.Note(901, 900, 'Raw Crab', 22, 569),
-    Get.Item.Food(902, 903, 'Crab', 50, 6, 570, 'A well cooked crab.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
-    Get.Item.Note(903, 902, 'Crab', 50, 570),
-    Get.Item.Item(904, 905, 'Burnt Crab', 0, 571, 'A burnt crab.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(8)]), false), // Jaegar look at last 3 params
-    Get.Item.Note(905, 904, 'Burnt Crab', 0, 571),
+    Get.Item.RawCoockableFood(900, 901, 'Raw Crab', 22, 591, 'A raw crab, tastes better cooked.', 30, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(901, 900, 'Raw Crab', 22, 591),
+    Get.Item.Food(902, 903, 'Crab', 50, 6, 592, 'A well cooked crab.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(903, 902, 'Crab', 50, 592),
+    Get.Item.Item(904, 905, 'Burnt Crab', 0, 593, 'A burnt crab.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(8)]), false), // Jaegar look at last 3 params
+    Get.Item.Note(905, 904, 'Burnt Crab', 0, 593),
      
 
     

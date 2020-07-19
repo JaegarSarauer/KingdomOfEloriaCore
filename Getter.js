@@ -941,6 +941,86 @@ const ItemGetter = {
             }],
         };
     },
+    GuildPants: function (id, notedId, fullName, guildID, value, spriteIndex, description) {
+        return {
+            id: id,
+            name: fullName,
+            noted: false,
+            notedID: notedId,
+            value: value,
+            stackable: false,
+            description: description,
+            requirements: ItemDetail.build([
+                ItemDetail.levelSkillDetail(1, 2, 'EQUIP'),
+                ItemDetail.levelSkillDetail(35, 17, 'INCINERATE'),
+            ]),
+            essenceValue: EssenceValue(35, 45, [ShardCatalog.AIR(25), ShardCatalog.EARTH(50), ShardCatalog.METAL(40), ShardCatalog.FIRE(60), ShardCatalog.FORCE(88)]),
+            spriteIndex: spriteIndex,
+            equipmentStats: [],
+            model: {
+                LEFT_THIGH_WORN: {
+                    id: 'LEFT_THIGH_WORN',
+                    asset: 'legParts',
+                    sprite: 'guildLeftThigh',
+                    parent: 'LEFT_THIGH',
+                    spriteID: guildID,
+                    anchor: { x: (6/9), y: 0.2 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    hideParts: ['LEFT_THIGH_WORN_PANTS'],
+                    UIModel: null,
+                },
+                RIGHT_THIGH_WORN: {
+                    id: 'RIGHT_THIGH_WORN',
+                    asset: 'legParts',
+                    sprite: 'guildRightThigh',
+                    parent: 'RIGHT_THIGH',
+                    spriteID: guildID,
+                    anchor: { x: 1-(6/9), y: 0.2 },
+                    position: {x: 0, y: 0},
+                    rotation: 0,
+                    hideParts: ['RIGHT_THIGH_WORN_PANTS'],
+                    UIModel: null,
+                },
+                LEFT_SHIN_WORN: {
+                    id: 'LEFT_SHIN_WORN',
+                    asset: 'legParts',
+                    sprite: 'guildLeftShin',
+                    parent: 'LEFT_SHIN',
+                    spriteID: guildID,
+                    anchor: { x: 0.5, y: 0.1 },
+                    position: {x: 0, y: 0.09},
+                    rotation: 0,
+                    hideParts: ['LEFT_SHIN_WORN_PANTS'],
+                    UIModel: null,
+                    z: 5,
+                },
+                RIGHT_SHIN_WORN: {
+                    id: 'RIGHT_SHIN_WORN',
+                    asset: 'legParts',
+                    sprite: 'guildRightShin',
+                    parent: 'RIGHT_SHIN',
+                    spriteID: guildID,
+                    anchor: { x: 0.5, y: 0.1 },
+                    position: {x: 0, y: 0.09},
+                    rotation: 0,
+                    hideParts: ['RIGHT_SHIN_WORN_PANTS'],
+                    UIModel: null,
+                    z: 5,
+                },
+            },
+            actions: [{
+                interfaceID: 5,
+                id: 7,
+                name: 'Equip',
+                steps: [
+                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
+                    buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
+                ]
+            }],
+        };
+    },
     Platebody: function (id, notedId, fullName, tier, value, spriteIndex, cmlSpriteSheetRow, equipLevel, stats) {
         let incinerateLevel = 36 + (tier * 4);
         let spriteId = tier;
@@ -1031,6 +1111,49 @@ const ItemGetter = {
                 name: 'Equip',
                 steps: [
                     [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
+                    buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
+                ]
+            }],
+        };
+    },
+    GuildShirt: function (id, notedId, fullName, guildID, value, spriteIndex, description) {
+        return {
+            id: id,
+            name: fullName,
+            noted: false,
+            notedID: notedId,
+            value: value,
+            stackable: false,
+            description: description,
+            requirements: ItemDetail.build([
+                ItemDetail.levelSkillDetail(1, 2, 'EQUIP'),
+                ItemDetail.levelSkillDetail(36, 17, 'INCINERATE'),
+            ]),
+            essenceValue: EssenceValue(99, 55, [ShardCatalog.AIR(25), ShardCatalog.EARTH(85), ShardCatalog.METAL(52), ShardCatalog.FIRE(60), ShardCatalog.FORCE(110)]),
+            spriteIndex: spriteIndex,
+            equipmentStats: [],
+            model: {
+                CHEST_WORN: {
+                    id: 'CHEST_WORN',
+                    asset: 'chestParts',
+                    sprite: 'guildChest',
+                    parent: 'CHEST',
+                    spriteID: guildID,
+                    anchor: { x: 0.5, y: 0.65 },
+                    position: { x: 0, y: 0.15 },
+                    rotation: 0,
+                    UIModel: null,
+                    hideParts: ['CHEST_WORN_SHIRT'],
+                    z: -1,
+                },
+            },
+            actions: [{
+                interfaceID: 5,
+                id: 6,
+                name: 'Equip',
+                steps: [
+                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
                     buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
