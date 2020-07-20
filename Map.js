@@ -12,6 +12,7 @@ if (WorldObjectDef == null) {
 const GroundItemDef = require('../def/GroundItemDef');
 const Bounds = require('../def/Bounds');
 const GuildState = require('../internal/GuildState');
+const Guilds = require('../typedef/Guild').Guilds;
 const Item = require('../typedef/Item');
 
 const MapCompressor = require('./MapCompressor');
@@ -110,7 +111,7 @@ function guildDataToGuilds(guildData) {
     let guildsArray = [];
     for (let i = 0; i < guildData.length; i++) {
         let obj = guildData[i];
-        if (obj != null && GuildState.Guilds[obj.id]) {
+        if (obj != null && Guilds[obj.id]) {
             guildsArray[obj.id] = GuildState.createGuildState(obj.id, obj.cityArea, obj.mayorArea);
         }
     }

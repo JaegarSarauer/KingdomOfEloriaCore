@@ -4212,7 +4212,7 @@ const WorldObject = {
                             });
                             return 20;
                         } else {
-                            let chance = Math.random() * treeSilkSpawnBaseChance;
+                            let chance = Math.random() * entity.treeSilkSpawnBaseChance;
                             if (chance <= 1) {
                                 entity.assignEntityData({
                                     isDroppingSilk: true,
