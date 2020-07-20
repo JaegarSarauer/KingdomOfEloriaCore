@@ -4081,6 +4081,7 @@ const WorldObject = {
                     ItemDetail.itemNameDetail('Axe', 'TOOL_NAME'),
                 ]),
                 behaviorLoop: (entity) => {
+                    entity.treeSilkSpawnBaseChance = 100;
                     entity.timers.setTimer(17, 120, () => {
                         if (entity.isDroppingSilk) {
                             entity.assignEntityData({
@@ -4088,7 +4089,7 @@ const WorldObject = {
                             });
                             return 20;
                         } else {
-                            let chance = Math.random() * 100;
+                            let chance = Math.random() * treeSilkSpawnBaseChance;
                             if (chance <= 1) {
                                 entity.assignEntityData({
                                     isDroppingSilk: true,
