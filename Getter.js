@@ -3362,19 +3362,6 @@ const WorldObject = {
                     spriteID: spriteIndex,
                 }
             },
-            // actions: [
-            //     {
-            //         interfaceID: 0,
-            //         id: 24,
-            //         name: 'Operate',
-            //         steps: [
-            //             [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, fishingPoolId]], 9] }),
-            //             buildStep(StepType.SEND_CLIENT_MESSAGE, {
-            //                 params: ['Looking for ' + fishingPoolName + 's...'],
-            //                 stepResultPass: 'END_AND_REPEAT_ACTION',
-            //             })],
-            //         ],
-            //     },],
             actions: [],
             useActions: [Action.FillBucketsWithWater(0, 53)],
             spriteIndex: spriteIndex,
@@ -3435,6 +3422,9 @@ const WorldObject = {
                         name: 'Operate',
                         steps: [
                             [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, fishingPoolId]], 9] }),
+                            buildStep(StepType.SET_ACTION_INTERVAL, { 
+                                params: [2],
+                            }),
                             buildStep(StepType.SEND_CLIENT_MESSAGE, {
                                 params: ['Looking for ' + fishingPoolName + 's...'],
                                 stepResultPass: 'END_AND_REPEAT_ACTION',
@@ -4357,6 +4347,9 @@ const WorldObject = {
                         name: 'Operate',
                         steps: [
                             [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, woTreeId]], 2] }),
+                            buildStep(StepType.SET_ACTION_INTERVAL, { 
+                                params: [2],
+                            }),
                             buildStep(StepType.SEND_CLIENT_MESSAGE, {
                                 params: ['Looking for ' + treeName + '...'],
                                 stepResultPass: 'END_AND_REPEAT_ACTION',
@@ -4479,6 +4472,9 @@ const WorldObject = {
                         name: 'Operate',
                         steps: [
                             [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [woRockIds, 3] }),
+                            buildStep(StepType.SET_ACTION_INTERVAL, { 
+                                params: [2],
+                            }),
                             buildStep(StepType.SEND_CLIENT_MESSAGE, {
                                 params: ['Looking for ' + oreName.toLowerCase() + ' rocks...'],
                                 stepResultPass: 'END_AND_REPEAT_ACTION',

@@ -904,7 +904,7 @@ module.exports.StepType = StepType = {
     DISASSEMBLE_CONSTRUCTION_OBJECT: {
         id: 'DISASSEMBLE_CONSTRUCTION_OBJECT',
         stepResultFail: 'END_ACTION',
-        stepResultPass: 'NEXT_STEP',
+        stepResultPass: 'END_ACTION',
         paramTypes: [],
         params: [],
     },
