@@ -866,6 +866,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number', 'number', 'number'],
         params: [],
     },
+    CHANGE_NPC_POSITION: {
+        id: 'CHANGE_NPC_POSITION',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'number', 'number'], // mapID, x, y, teleportDelay
+        params: [],
+    },
     SET_BOUNTY: {
         id: 'SET_BOUNTY',
         stepResultFail: 'END_ACTION',
@@ -1557,6 +1564,7 @@ try {
     const StepPeekCrabPot = require('../internal/Steps/StepPeekCrabPot');
     const StepTeleport = require('../internal/Steps/StepTeleport');
     const StepChangeNPCWalkBounds = require('../internal/Steps/StepChangeNPCWalkBounds');
+    const StepChangeNPCPosition = require('../internal/Steps/StepChangeNPCPosition');
     const StepSetBounty = require('../internal/Steps/StepSetBounty');
     const StepHireAdventurer = require('../internal/Steps/StepHireAdventurer');
     const StepSwitchNoteSettings = require('../internal/Steps/StepSwitchNoteSettings');
@@ -2314,6 +2322,11 @@ try {
         CHANGE_NPC_WALK_BOUNDS: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepChangeNPCWalkBounds.StepChangeNPCWalkBounds(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CHANGE_NPC_POSITION: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepChangeNPCPosition.StepChangeNPCPosition(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SET_BOUNTY: {
