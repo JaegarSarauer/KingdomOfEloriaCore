@@ -965,7 +965,7 @@ const ItemGetter = {
                     parent: 'LEFT_THIGH',
                     spriteID: guildID,
                     anchor: { x: (6/9), y: 0.2 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0, y: 0.15},
                     rotation: 0,
                     hideParts: ['LEFT_THIGH_WORN_PANTS'],
                     UIModel: null,
@@ -977,7 +977,7 @@ const ItemGetter = {
                     parent: 'RIGHT_THIGH',
                     spriteID: guildID,
                     anchor: { x: 1-(6/9), y: 0.2 },
-                    position: {x: 0, y: 0},
+                    position: {x: 0, y: 0.15},
                     rotation: 0,
                     hideParts: ['RIGHT_THIGH_WORN_PANTS'],
                     UIModel: null,
@@ -989,7 +989,7 @@ const ItemGetter = {
                     parent: 'LEFT_SHIN',
                     spriteID: guildID,
                     anchor: { x: 0.5, y: 0.1 },
-                    position: {x: 0, y: 0.09},
+                    position: {x: 0, y: 0.15},
                     rotation: 0,
                     hideParts: ['LEFT_SHIN_WORN_PANTS'],
                     UIModel: null,
@@ -1002,7 +1002,7 @@ const ItemGetter = {
                     parent: 'RIGHT_SHIN',
                     spriteID: guildID,
                     anchor: { x: 0.5, y: 0.1 },
-                    position: {x: 0, y: 0.09},
+                    position: {x: 0, y: 0.15},
                     rotation: 0,
                     hideParts: ['RIGHT_SHIN_WORN_PANTS'],
                     UIModel: null,
@@ -1785,7 +1785,7 @@ const ItemGetter = {
                 HEAD_WORN: {
                     id: 'HEAD_WORN',
                     asset: 'headParts',
-                    sprite: guildID,
+                    spriteID: guildID,
                     parent: 'HEAD',
                     sprite: assetPartName,
                     anchor: { x: 0.5, y: 0.85 },
@@ -5562,15 +5562,15 @@ const Character = {
         guard.equipmentModel = [(tier == 5) ? 257 : 22, (tier == 5) ? 273 : 18, 530,(tier == 5) ? 401 : 399, (tier == 5) ? 491 : 489];
         return guard;
     },
-    SalmoMeleeGuard: function(id, name, tier) {
-        let guard = this.MeleeGuard(id, name, tier);
+    SalmoMeleeGuard: function(id, name, tier, skinGender = null) {
+        let guard = this.MeleeGuard(id, name, tier, skinGender);
         // guard.equipmentModel = [];
         // guard.modelParams = {};
         return guard;
     },
     SalmoTune: function(id) {
-        let guard = this.SalmoMeleeGuard(id, 'Tune', 6);
-        guard.equipmentModel =  [0, 0, 0, 455, 475];
+        let guard = this.SalmoMeleeGuard(id, 'Tune', 6, 11);
+        guard.equipmentModel =  [257, 0, 0, 455, 475];
         return guard;
     },
     SalmoRangeGuard: function(id, name, tier) {
