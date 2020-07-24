@@ -421,7 +421,7 @@ module.exports.compressMapData = (mapID, name) => {
                     new ShopStorageData(12, 'Tergaron General Store', [], 120),
                     new ShopStorageData(13, 'Tergaron Metalsmith Store', [], 120),
                     new ShopStorageData(14, 'Tergaron Mining Store', [], 120),
-                    new ShopStorageData(15, 'Salmo General Store', [], 120),
+                    new ShopStorageData(15, 'NULL STORE', [], 120),
                     new ShopStorageData(16, 'Salmo Fishing Store', [], 120),
                     new ShopStorageData(17, 'Salmo Archery Store', [], 120),
                     new ShopStorageData(18, 'Salmo Alchemy Store', [], 120),
