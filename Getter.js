@@ -5614,7 +5614,7 @@ const Character = {
             guard.equipmentModel[4] = 878;
         }
 
-        guard.stats = [[0, 1000], [1, 1000], [2, 1000], [3, 1000], [4, 1000], [5, 1000], [6, 1000], [7, 1000], [8, 1000], [11, 3000],];
+        guard.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
         guard.isAggressiveTo = GuildNPCIds;
         return guard;
     },
@@ -5624,7 +5624,7 @@ const Character = {
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
         guard.isGuard = false;
-        guard.stats = [[0, 1000], [1, 1000], [2, 1000], [3, 1000], [4, 1000], [5, 1000], [6, 1000], [7, 1000], [8, 1000], [11, 3000],];
+        guard.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
         
         guard.equipmentModel[0] = tier == 3 ? 880 : 862;
         guard.equipmentModel[3] = 864; 
