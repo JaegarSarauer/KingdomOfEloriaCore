@@ -5661,13 +5661,13 @@ const Character = {
         let equipmentModel = [24, 20, null, 45, 32];
         switch(guildID) {
             case 0:
-                equipmentModel = [882, 20, null, 884, 886];
+                equipmentModel = [882, 307, null, 884, 886];
                 break;
             case 1:
-                equipmentModel = [888, 20, null, 890, 892];
+                equipmentModel = [888, 299, null, 890, 892];
                 break;
             case 2:
-                equipmentModel = [894, 20, null, 896, 898];
+                equipmentModel = [894, 305, null, 896, 898];
                 break;
         }
 
