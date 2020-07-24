@@ -3421,7 +3421,7 @@ const WorldObject = {
                         id: 24,
                         name: 'Operate',
                         steps: [
-                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, fishingPoolId]], 9] }),
+                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, fishingPoolId]], 9, 1] }),
                             buildStep(StepType.SET_ACTION_INTERVAL, { 
                                 params: [2],
                             }),
@@ -4346,7 +4346,7 @@ const WorldObject = {
                         id: 24,
                         name: 'Operate',
                         steps: [
-                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, woTreeId]], 2] }),
+                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, woTreeId]], 2, 2] }),
                             buildStep(StepType.SET_ACTION_INTERVAL, { 
                                 params: [2],
                             }),
@@ -4471,7 +4471,7 @@ const WorldObject = {
                         id: 24,
                         name: 'Operate',
                         steps: [
-                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [woRockIds, 3] }),
+                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [woRockIds, 3, 0] }),
                             buildStep(StepType.SET_ACTION_INTERVAL, { 
                                 params: [2],
                             }),
