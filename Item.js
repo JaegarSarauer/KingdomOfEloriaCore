@@ -3622,6 +3622,20 @@ const Item = Object.freeze([
     Get.Item.Note(903, 902, 'Crab', 50, 592),
     Get.Item.Item(904, 905, 'Burnt Crab', 0, 593, 'A burnt crab.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(8)]), false), // Jaegar look at last 3 params
     Get.Item.Note(905, 904, 'Burnt Crab', 0, 593),
+    {
+        id: 906,
+        name: 'Soul Coins',
+        noted: false,
+        value: 12,
+        stackable: true,
+        description: 'Coins gifted to you from death himself.',
+        requirements: ItemDetail.build([
+            ItemDetail.levelSkillDetail(1, 17, 'INCINERATE'),
+        ]),
+        spriteIndex: 594,
+        itemGroup: 0,
+        essenceValue: EssenceValue(1, 0, [ShardCatalog.METAL(1), ShardCatalog.SOUL(2)]),
+    },
      
 
     

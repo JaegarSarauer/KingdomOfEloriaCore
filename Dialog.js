@@ -64,17 +64,15 @@ const Dialogs = Object.freeze([{
     id: 5,
     title: '<b>Death</b>',
     message: 'Why hello there, peculiar human.\n\n' +
-    'Nice to see you finally bit the bullet.' +    
-    'I\'ve been watching you closely. It was just yesterday you were nothing but a young lad.\n\n' +
-    'Honestly, I\'ve grown quite fond of you. For the time being, I have chosen to spare you.' +
-    'Next time your adventurer reaches 0 hitpoints, you will die and then simply wake up back in your home town.' +
-    'I\'ll show you mercy, but your fellow humans may not be so kind. They will steal your possesions.' +
-    'Remember to eat food when you are injured, and don\'t fight things you can\'t handle!\n\n' +   
+    'Nice to see you finally bit the bullet. ' +    
+    'I\'ll show you mercy, but it\'ll cost you to get your items back.\n' +
+    'Remember to eat food when you are injured, and don\'t fight things you can\'t handle.\n\n' +   
     'Right click a character before you attack it to see its combat level. If it is much higher than yours, stay away!\n\n' + 
-    'Next time you die, you will drop all the items in your inventory except for your most valuable one.\n' +
+    'Next time you die, your items will be mine.\n' +
     'Until we meet again, my child.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SET_FIRST_DEATH),
         buildStep(StepType.TELEPORT, {params: [0, 20, 32, 22, 39, 0] }),
     ]]
 }, {
@@ -741,6 +739,15 @@ const Dialogs = Object.freeze([{
     id: 71, // Guildmaster generic (for now)
     title: '<b>Guildmaster</b>',
     message: 'Hello adventurer.\n\nPlease help our guild flourish by donating some items to our community chest.\nWith your help we can stay strong against the emperor.',
+},
+{
+    id: 72,
+    title: '<b>Death</b>',
+    message: 'I see you have fallen!\n' +
+    'If you have your possessions, I can send you home.',
+    continueSteps: [[
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[283, 88]] }),
+    ]]
 }]);
 
 module.exports.Dialogs = Dialogs;

@@ -490,6 +490,20 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number', 'object|null'], //itemID, itemAmount, itemStateDef
         params: [],
     },
+    BUY_LOST_ITEM: {
+        id: 'BUY_LOST_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'object|null'], //itemID, itemAmount, itemStateDef
+        params: [],
+    },
+    CLEAR_LOST_ITEMS: {
+        id: 'CLEAR_LOST_ITEMS',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [], 
+        params: [],
+    },
     SELL_ITEM_TO_SHOP: {
         id: 'SELL_ITEM_TO_SHOP',
         stepResultFail: 'END_ACTION',
@@ -502,6 +516,20 @@ module.exports.StepType = StepType = {
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
         paramTypes: ['number', 'number', 'object|null', 'number'], //itemID, maxBuyAmount, itemStateDef, price
+        params: [],
+    },
+    HAD_FIRST_DEATH: {
+        id: 'HAD_FIRST_DEATH',
+        stepResultFail: 'NEXT_STEP_LIST',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
+    SET_FIRST_DEATH: {
+        id: 'SET_FIRST_DEATH',
+        stepResultFail: 'NEXT_STEP_LIST',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
         params: [],
     },
     REMOVE_MARKET_OFFER: {
@@ -597,7 +625,7 @@ module.exports.StepType = StepType = {
         id: 'OPERATE_CONSTRUCTION_OBJECT',
         stepResultFail: 'NEXT_STEP',
         stepResultPass: 'NEXT_STEP_LIST',
-        paramTypes: ['Array', 'number'], //entityTypeAndIDArray, actionID
+        paramTypes: ['Array', 'number', 'number'], //entityTypeAndIDArray, actionID, guildID
         params: [],
     },
     OWNER_IN_ATTACK_RANGE: {
@@ -707,6 +735,13 @@ module.exports.StepType = StepType = {
     },
     OPEN_STORAGE_INTERFACE: {
         id: 'OPEN_STORAGE_INTERFACE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
+    OPEN_LOST_ITEMS_INTERFACE: {
+        id: 'OPEN_LOST_ITEMS_INTERFACE',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
         paramTypes: [],
@@ -1503,8 +1538,12 @@ try {
     const StepDepositItem = require('../internal/Steps/StepDepositItem');
     const StepDepositDropPartyItem = require('../internal/Steps/StepDepositDropPartyItem');
     const StepWithdrawItem = require('../internal/Steps/StepWithdrawItem');
+    const StepBuyLostItem = require('../internal/Steps/StepBuyLostItem');
+    const StepClearLostItems = require('../internal/Steps/StepClearLostItems');
     const StepSellItemToShop = require('../internal/Steps/StepSellItemToShop');
     const StepBuyItemFromShop = require('../internal/Steps/StepBuyItemFromShop');
+    const StepHadFirstDeath = require('../internal/Steps/StepHadFirstDeath');
+    const StepSetFirstDeath = require('../internal/Steps/StepSetFirstDeath');
     const StepRemoveMarketOffer = require('../internal/Steps/StepRemoveMarketOffer');
     const StepRollSkillSuccess = require('../internal/Steps/StepRollSkillSuccess');
     const StepSetParameterBestToolPower = require('../internal/Steps/StepSetParameterBestToolPower');
@@ -1530,6 +1569,7 @@ try {
     const StepRollSkillDropTable = require('../internal/Steps/StepRollSkillDropTable');        
     const StepCreateGroundItem = require('../internal/Steps/StepCreateGroundItem');
     const StepOpenStorageInterface = require('../internal/Steps/StepOpenStorageInterface');
+    const StepOpenLostItemsInterface = require('../internal/Steps/StepOpenLostItemsInterface');
     const StepOpenDialogInterface = require('../internal/Steps/StepOpenDialogInterface');
     const StepShowDialog = require('../internal/Steps/StepShowDialog');
     const StepProcessDialog = require('../internal/Steps/StepProcessDialog');
@@ -2041,6 +2081,16 @@ try {
                 return new StepWithdrawItem.StepWithdrawItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
+        BUY_LOST_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepBuyLostItem.StepBuyLostItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CLEAR_LOST_ITEMS: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepClearLostItems.StepClearLostItems(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
         SELL_ITEM_TO_SHOP: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSellItemToShop.StepSellItemToShop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
@@ -2049,6 +2099,16 @@ try {
         BUY_ITEM_FROM_SHOP: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepBuyItemFromShop.StepBuyItemFromShop(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        HAD_FIRST_DEATH: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepHadFirstDeath.StepHadFirstDeath(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        SET_FIRST_DEATH: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSetFirstDeath.StepSetFirstDeath(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         REMOVE_MARKET_OFFER: {
@@ -2189,6 +2249,11 @@ try {
         OPEN_STORAGE_INTERFACE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepOpenStorageInterface.StepOpenStorageInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        OPEN_LOST_ITEMS_INTERFACE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepOpenLostItemsInterface.StepOpenLostItemsInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         OPEN_DIALOG_INTERFACE: {

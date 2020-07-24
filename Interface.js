@@ -1844,6 +1844,23 @@ module.exports.Interface = [
                     buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You craft a crab trap.'] })]
                 ],
             },
+            {
+                id: 283,
+                name: 'Go Home',
+                actionInterval: 1,
+                steps: [
+                    [buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+                    buildStep(StepType.TELEPORT, {params: [0, 20, 32, 22, 39, 0] })]
+                ],
+            },
+            {
+                id: 284,
+                name: 'Destroy All Lost Items',
+                actionInterval: 1,
+                steps: [
+                    [buildStep(StepType.CLEAR_LOST_ITEMS)],
+                ],
+            },
         ],
     },
     {
@@ -2195,5 +2212,26 @@ module.exports.Interface = [
                 [buildStep(StepType.REMOVE_GUILD_CHEST_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
             ],
         }
+    ],
+}, {
+    id: 30,
+    name: 'Lost Items',
+    actions: [
+        {
+            id: 0,
+            name: 'Buy',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.BUY_LOST_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+            ],
+        },
+        {
+            id: 1,
+            name: 'Clear',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[284, 88]] })]
+            ],
+        },
     ],
 },];

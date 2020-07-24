@@ -1171,4 +1171,23 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.GemObelisk(107, 'Burgunty Gem Obelisk', 4, 30, 100, 90, 4),
     Get.WorldObject.GemObelisk(108, 'Red Gem Obelisk', 5, 40, 125, 537, 5),
     Get.WorldObject.CrabPot(109, 'Crab Pot'),
+    {
+        id: 110,
+        name: 'Storage Chest',
+        description: 'A strangely large chest from inside...',
+        modelName: 'ROCK',
+        modelParams: {
+            BASE: {
+                asset: 'worldObjects_Chests',
+                sprite: 'chestOpen',
+                spriteID: 1,
+            }
+        },
+        actions: [{
+            interfaceID: 0,
+            id: 7,
+            name: 'Bank',
+        }],
+        spriteIndex: 46,
+    },
 ];

@@ -5278,7 +5278,25 @@ const Character = {
                 steps: [
                     buildStepList(StepList.WALK_ADJACENT),
                     [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                    buildStep(StepType.SHOW_DIALOG, {params: [5]})]
+                    buildStep(StepType.HAD_FIRST_DEATH),
+                    buildStep(StepType.SET_FIRST_DEATH),
+                    buildStep(StepType.SHOW_DIALOG, {
+                        params: [72],
+                        stepResultPass: StepResult.END_ACTION,
+                        stepResultFail: StepResult.END_ACTION,
+                    })],
+                    [buildStep(StepType.SHOW_DIALOG, {params: [5]})]
+                ],
+            },
+            {
+                interfaceID: 0,
+                id: 11,
+                name: 'Buy Items',
+                actionInterval: 0,
+                steps: [
+                    buildStepList(StepList.WALK_ADJACENT),
+                    [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.OPEN_LOST_ITEMS_INTERFACE)]
                 ],
             }
         ]);
