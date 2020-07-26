@@ -172,6 +172,7 @@ module.exports.AppearanceShops = AppearanceShops = [
         name : 'Customize Your Adventurer',
         id: 1,
         usesReset: false,
+        usesClose: false,
         shopData : [
             [
                 {
