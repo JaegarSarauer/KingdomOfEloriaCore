@@ -5717,7 +5717,7 @@ const Character = {
         human.doNotRespawn = true;
 
         human.equipmentModel = [null, 301, null, 291, 289];
-        human.stats = [[0, 1000], [1, 1000], [2, 1000], [3, 1000], [4, 1000], [5, 1000], [6, 1000], [7, 1000], [8, 1000], [11, 3000],];
+        human.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
         human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
         human.isAggressiveTo = GuildNPCIds;
         human.modelParams = {
