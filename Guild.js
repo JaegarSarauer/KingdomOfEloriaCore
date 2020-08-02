@@ -44,6 +44,14 @@ const GuardType = {
     EMPIRE_OSMIUM_MELEE_GUARD: 94,
 };
 
+const ObeliskType = {
+    BLUE : 104,
+    GREEN : 105,
+    PURPLE : 106,
+    BURGUNTY : 107,
+    RED : 108
+};
+
 const indexToTier = (index) => {
     return index - 5;
 }
@@ -153,6 +161,12 @@ const Guilds = [{
     ],
     kingID: GuardType.TERAGON_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
+    obelisk: {
+        id : ObeliskType.PURPLE,
+        x : 110,
+        y : 350,
+        mapID : 1
+    },
     cityBounds: new Bounds(43, 341, 86, 370),
     guildBounds: new Bounds(65, 366, 86, 370),
     guildShops: [
@@ -274,6 +288,12 @@ const Guilds = [{
     ],
     kingID: GuardType.SALMO_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
+    obelisk: {
+        id : ObeliskType.BURGUNTY,
+        x : 236,
+        y : 47,
+        mapID : 0
+    },
     cityBounds: new Bounds(141, 10, 170, 20),
     guildBounds: new Bounds(145, 12, 151, 17),
     guildShops: [
@@ -365,6 +385,12 @@ const Guilds = [{
     ],
     kingID: GuardType.ACERNIS_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
+    obelisk: {
+        id : ObeliskType.RED,
+        x : 332,
+        y : 23,
+        mapID : 0
+    },
     tierDetails: [{
         tierID: -5,
         items: [[0, 1000000]],
