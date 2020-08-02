@@ -4153,13 +4153,19 @@ const WorldObject = {
                 description : 'A powerful gem!',
                 requirements: ItemDetail.build([
                 ]),
-                modelName: 'ROCK',
+                modelName: 'OBELISK',
                 modelParams: {
+                    CORE: {
+                        asset: 'worldObjects_Rocks',
+                        sprite: 'gemObelisk',
+                        spriteID: '-1',
+                    },
                     BASE: {
                         asset: 'worldObjects_Rocks',
                         sprite: 'gemObelisk',
                         spriteID: gemNumber,
-                    }
+                        parent : 'CORE',
+                    },
                 },
                 actions: [{
                     interfaceID: 0,
