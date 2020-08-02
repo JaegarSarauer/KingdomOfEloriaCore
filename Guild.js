@@ -162,7 +162,7 @@ const Guilds = [{
     kingID: GuardType.TERAGON_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
     obelisk: {
-        id : ObeliskType.PURPLE,
+        id : ObeliskType.BURGUNTY,
         x : 110,
         y : 350,
         mapID : 1
@@ -289,10 +289,10 @@ const Guilds = [{
     kingID: GuardType.SALMO_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
     obelisk: {
-        id : ObeliskType.BURGUNTY,
-        x : 236,
-        y : 47,
-        mapID : 0
+        id : ObeliskType.PURPLE,
+        x : 119,
+        y : 8,
+        mapID : 1
     },
     cityBounds: new Bounds(141, 10, 170, 20),
     guildBounds: new Bounds(145, 12, 151, 17),
