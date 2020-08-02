@@ -83,7 +83,7 @@ Get.Character.Wizard(13, 'Wizard', 13,
     animations: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8]],
     actions: [],
 },
-Get.Character.Human(15, 'Duchess', 32, [null, 299, 612, 44, 31, null, 674], 5, HairColors.Gray, [{
+Get.Character.Human(15, 'Baroness', 32, [null, 299, 612, 44, 31, null, 674], 5, HairColors.Gray, [{
     interfaceID: 0,
     id: 4,
     name: 'Talk To',
