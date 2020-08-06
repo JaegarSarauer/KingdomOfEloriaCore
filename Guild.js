@@ -142,7 +142,7 @@ const Guilds = [{
     }, {
         tierID: 5,
         items: [],
-        description: ' - 11 Osmium Guards, 2 Range Guards\n - Shop stocks increased\n - Shop taxes reduced by 25%\n - Additional defensive barricades\n - Access to fast coal rocks\n - Access to gem rocks',
+        description: ' - 11 Osmium Guards, 2 Range Guards\n - Shop stocks increased\n - Shop taxes reduced by 25%\n - Additional defensive barricades\n - Access to fast coal rocks\n - Access to gem rocks\n - Adventurers will automatically use the next mining camp',
         taxMultiplier: 0.75,
         guards: [[GuardType.TERAGON_OSMIUM_MELEE_GUARD, 13], [GuardType.TERAGON_THAKOD, 1], [GuardType.TERAGON_SWORDSMAN, 1], [GuardType.TERAGON_SWORDSMAN_APPRENTICE, 5]],
     }],
@@ -263,7 +263,7 @@ const Guilds = [{
     }, {
         tierID: 5,
         items: [],
-        description: ' - 11 Osmium Guards, 2 Range Guards\n - Shop stocks increased\n - Shop taxes reduced by 25%\n - Additional defensive barricades\n - Access to octopus pools\n - Access to crab pools',
+        description: ' - 11 Osmium Guards, 2 Range Guards\n - Shop stocks increased\n - Shop taxes reduced by 25%\n - Additional defensive barricades\n - Access to octopus pools\n - Access to crab pools\n - Adventurers will automatically use the next fishing camp',
         taxMultiplier: 0.75,
         guards: [[GuardType.SALMO_OSMIUM_MELEE_GUARD, 13], [GuardType.SALMO_TUNE, 1], [GuardType.SALMO_ARCHER, 5]],
     }],
@@ -427,7 +427,7 @@ const Guilds = [{
     }, {
         tierID: 5,
         items: [],
-        description: ' - 11 Osmium Guards, 2 Range Guards\n - Shop stocks increased\n - Shop taxes reduced by 25%\n - Additional defensive barricades\n - Trees in the guild forest produce extra silk',
+        description: ' - 11 Osmium Guards, 2 Range Guards\n - Shop stocks increased\n - Shop taxes reduced by 25%\n - Additional defensive barricades\n - Trees in the guild forest produce extra silk\n - Adventurers will automatically use the next woodcutting camp',
         taxMultiplier: 0.75,
         guards: [[GuardType.ACERNIS_OSMIUM_MELEE_GUARD, 13], [GuardType.ACERNIS_TISHA, 1], [GuardType.ACERNIS_ELITE_ARCHER, 1], [GuardType.ACERNIS_ARCHER, 5]],
     }],
