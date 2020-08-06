@@ -658,6 +658,31 @@ const Model = {
             UIModel: null,
         }
     },
+    OBELISK: {
+        id: 'OBELISK',
+        CORE: {
+            id: 'CORE',
+            asset: 'worldObjects_Rocks',
+            sprite: 'gemObelisk',
+            parent: null,
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
+        BASE: {
+            id: 'BASE',
+            asset: 'worldObjects_Rocks',
+            sprite: 'gemObelisk',
+            parent: null,
+            spriteID: 1,
+            anchor: {x: 0.5, y: 1},
+            position: {x: 0, y: 32},
+            rotation: 0,
+            UIModel: null,
+        },
+    },
     DUMMY: {
         id: 'DUMMY',
         BASE: {
