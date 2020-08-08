@@ -83,50 +83,16 @@ Get.Character.Wizard(13, 'Wizard', 13,
     animations: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8]],
     actions: [],
 },
-{
-    id: 15,
-    name: 'Emperor',
-    modelName: 'HUMANOID',
-    spriteIndex: 7,
-    stats: [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],],
-    animations: [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]],
-    equipmentModel: [null, 301, null, 291, 289], //head, right, left, chest, legs
-    modelParams: {
-        CHEST: { spriteID: 11},
-        HEAD: { spriteID: 1},
-        HEAD_WORN: {
-            id: 'HEAD_WORN',
-            asset: 'headParts',
-            sprite: 'fullHelm',
-            parent: 'HEAD',
-            spriteID: 'Emperor',
-            anchor: { x: 9/24, y: 0.8 },
-            position: {x: 0, y: -0.1},
-            rotation: 0,
-            UIModel: null,
-        },
-        RIGHT_SHOULDER: { spriteID: 1},
-        LEFT_SHOULDER: { spriteID: 1},
-        RIGHT_FOREARM: { spriteID: 1},
-        LEFT_FOREARM: { spriteID: 1},
-        RIGHT_THIGH: { spriteID: 1},
-        LEFT_THIGH: { spriteID: 1},
-        RIGHT_SHIN: { spriteID: 1},
-        LEFT_SHIN: { spriteID: 1},
-        EYES: { tint: HairColors.CherryRed }
-    },
-    entityGuildType: 'EMPEROR',
-    actions: [{
-        interfaceID: 0,
-        id: 4,
-        name: 'Talk To',
-        steps: [
-            buildStepList(StepList.WALK_ADJACENT),
-            [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-            buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[83, 84, 85, 86, 90]]})]
-        ],
-    }]
-},
+Get.Character.Human(15, 'Baroness', 32, [null, 299, 612, 44, 31, null, 674], 5, HairColors.Gray, [{
+    interfaceID: 0,
+    id: 4,
+    name: 'Talk To',
+    steps: [
+        buildStepList(StepList.WALK_ADJACENT),
+        [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[83, 84, 85, 86, 90]]})]
+    ],
+}], 11, EyeColors.Purple ),
 Get.Character.GoblinOrcRanged(16, 'Goblin', 1,  
     [[11, 22], [0, 15], [1, 15], [2, 12], [5, 8], [8, 8]], //22hp, 15atk, 15pow, 12meleedef, 8rangedef, 8magicdefence
     [[[1, 100], [0, 5, 15, 75], [37, 1, 1, 15], [127, 1, 1, 5], [168, 1, 1, 5]], [[1, 100], [68, 1, 5, 90], [69, 1, 2, 10]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
