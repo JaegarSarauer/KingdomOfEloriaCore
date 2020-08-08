@@ -1,13 +1,11 @@
-const Dialogs = Object.freeze([{
+const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     id: 0,
     title: '<b>Welcome to Guilds of Gods!</b>',
-    message: '<b>\tGetting Started</b>\n' + 
-    'Use your left and right mouse buttons to move and interact with the world and your items.\n\n' + 
-    ' - The menu on the right has controls and stats for your adventurer. Here you will find your inventory, stats, equipment, and combat settings.\n' + 
-    ' - The menu on the left has controls and settings for your account. Game and chat messages appear here.\n\n' + 
+    message: '<note>Eloria</note> has been overruled by a corrupt emperor who has pitted the human race against goblins and orcs! \n\n' + 
+
+    'Explore each guild and choose a community to join in your fight against the evil tyrant. Whether you fancy fishing, mining, or woodcutting, all guilds play a role in the fight against the emperor.\n\n' + 
     
-    '<b>\tObjective</b>\n' +
-    'Follow the arrow to find <note>Osaik</note> and help him get back to the city of <note>Fiewon</note>!\n', 
+    'Complete quests and build up your skills so when the time comes to face him, you are ready. With your help, the residents of <note>Eloria</note> may live in peace once again.',
     continueSteps: [[
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -16,30 +14,16 @@ const Dialogs = Object.freeze([{
     ]],
 }, {
     id: 1,
-    title: '<b>Osaik</b>',
-    message: 'Hello! You found me.  I am here to get you prepared for the dungeons.\nWe are currently digging towards the ruins as we speak. Now is the time to get prepared before we hit the entrance!\n' +
-    'Here is some equipment, we could use the help once you get stronger, but for now you should just try to stay alive. You can talk to the bankers in the town you walked by ' +
-    'to deposit your extra items.\n\n' +
-    
-    '<note>[Osaik gives you a set of copper armor and a lot of coins.]</note>\n\n' +
-    
-    'If combat isn’t your thing, we could always use more resources to support our guards. You can use camps to automate your resource collection once you get some experience in your chosen trades. You’ll need this saw to build one.\n\n' +
-    
-    '<note>[Osaik also gives you a saw.]</note>\n\n' +
-    
-    'Once you get 10,000 coins, you can buy your 2nd adventurer. The larger the party, the stronger.\nTalk to me if you need any more help!',
-    continueSteps: [[
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
-        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [-1]}),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 0]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [13, 1]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [21, 1]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [42, 1]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [29, 1]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [0, 100]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [118, 1]}),
-    ]],
+    title: '',
+    message: '<b>\tHow to Play</b>\n' + 
+    ' - Left click your mouse to move around and interact with your surrounding world and items. Right click to view more options.\n\n' + 
+
+    ' - View the left menu for account controls such as: game notifications, chat room, friends list, settings and quests list.\n\n' +
+
+    ' - View the right menu for adventurer controls such as: inventory, skill levels, equipment, combat settings, and spellbook.\n\n' +
+
+    '<b>\tGetting Started</b>\n' + 
+    'Move around and click to interact with anything on <note>Tutorial Island</note>. Find a man named <note>Osaik</note> to start your journey.',
 },{
     id: 2,
     title: '<b>Osaik</b>',
@@ -123,6 +107,8 @@ const Dialogs = Object.freeze([{
 {
     id: 13,
     title: '<b>Osaik</b>',
+    // message: 'Welcome new adventurer, I have been waiting for you.\n\n' +
+    // 'Hurry now, we don\'t have much time. You must be on your way to <note>Eloria</note>\n' +
     message: '<b>OW!</b> It bit me! That damn mouserat bit me!\n\n' +
     '<note>[...]</note>\n\n' +
     'Oh hi! Where did you come from? Nevermind that, the damn mouserat bit me. Can you get me some food so I can heal up?\n\n' +
@@ -621,15 +607,15 @@ const Dialogs = Object.freeze([{
 {
     id: 60, 
     title: '<b>Babyshark</b>',
-    message: 'Baking cakes is easy!\n\n' +
+    message: 'Hello, new friend!\n\n' +
             
-            'Just take a<note>Pan</note>, <note>Raw Dough</note>, ann <note>Egg</note> and a <note>Bucket of Milk</note>. \n\n' +
+            'They say that cupcakes bring happiness to all who are lucky enough to receive them. I made this one just for you. I hope you like it!\n\n\n' +
 
-            'Put all the ingredients into the pan, then cook your new <note>Uncooked Cake</note> on a <note>Range</note>! \n\n' + 
             
-            'You\'re going to love it!',
+            '<note>*Babyshark gives you a cupcake*</note>',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params : [907, 1] })
     ]],
 },
 {
@@ -748,6 +734,17 @@ const Dialogs = Object.freeze([{
     continueSteps: [[
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[283, 88]] }),
     ]]
-}]);
+},
+{
+    id: 83, 
+    title: '<b>Baker</b>',
+    message: 'Baking cakes is easy!\n\n' +
+            
+            'Just take a<note>Pan</note>, <note>Raw Dough</note>, ann <note>Egg</note> and a <note>Bucket of Milk</note>. \n\n' +
+
+            'Put all the ingredients into the pan, then cook your new <note>Uncooked Cake</note> on a <note>Range</note>! \n\n' + 
+            
+            'You\'re going to love it!',
+},]);
 
 module.exports.Dialogs = Dialogs;
