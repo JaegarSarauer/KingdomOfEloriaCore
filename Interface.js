@@ -2178,6 +2178,21 @@ module.exports.Interface = [
                 ]
             ],
         },
+        {
+            id: 1,
+            name: 'Continue tutorial',
+            actionInterval: -1,
+            steps: [
+                [
+                    buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+                    buildStep(StepType.SHOW_DIALOG, {
+                        params: [1],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ]
+            ],
+        },
     ],
 }, {
     id: 28,
