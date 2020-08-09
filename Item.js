@@ -3639,8 +3639,6 @@ const Item = Object.freeze([
     Get.Item.Food(907, 908, 'Cupcake', 1, 1, 595, 'A cute little cupcake!', EssenceValue(2, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(4), ShardCatalog.FIRE(5)]), false),
     Get.Item.Note(908, 907, 'Cupcake', 22, 595),
     
-
-    
     // Get.Item.Scissors(611, 612, 'Scissors', 15, 298),
     // Get.Item.Note(612, 611, 'Scissors', 15, 298),
     // Get.Item.Dye(613, 614, "Red Dye", 8, 299, SpriteColor.Red),
