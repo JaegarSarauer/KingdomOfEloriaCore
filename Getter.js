@@ -3174,7 +3174,8 @@ const Action = {
                 })],
                 [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [rawItemId, 1] }),
                 buildStep(StepType.HAS_SKILL_LEVEL, { params: [LEVEL_INDEX.COOKING, cookingLevelRequired] }),
-                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You begin to cook the ' + itemName + '.'] })],
+                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You begin to cook the ' + itemName + '.'] }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['LIGHT_FIRE']})],
             ];
 
             let stepFailList = [buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [rawItemId, 1] }),
