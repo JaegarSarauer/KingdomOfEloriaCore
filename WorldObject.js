@@ -50,6 +50,7 @@ module.exports.WorldObject = WorldObject = [
             Get.Action.Cook(48, 738, 740, 742, 1, 'raw chicken', 1, 8, 25),
             Get.Action.Cook(50, 844, 846, 848, 70, 'octopus', 10, 100, 230),
             Get.Action.Cook(51, 850, 852, 854, 25, 'octopus tentacle', 10, 50, 45),
+            Get.Action.Cook(52, 900, 902, 904, 35, 'crab', 10, 70, 175),
         ],//cook
         spriteIndex: 9,
     }, 
@@ -433,6 +434,7 @@ module.exports.WorldObject = WorldObject = [
             Get.Action.Cook(57, 775, 777, 779, 14, 'cake', 10, 38, 90, 4, 761),
             Get.Action.Cook(50, 844, 846, 848, 70, 'octopus', 10, 100, 230),
             Get.Action.Cook(51, 850, 852, 854, 25, 'octopus tentacle', 10, 50, 45),
+            Get.Action.Cook(52, 900, 902, 904, 35, 'crab', 10, 70, 175),
         ],//cook
         modelName: 'ROCK',	
         modelParams: {	
@@ -482,6 +484,7 @@ module.exports.WorldObject = WorldObject = [
             Get.Action.Cook(57, 775, 777, 779, 1, 'cake', 1, 15, 35, 3),
             Get.Action.Cook(50, 844, 846, 848, 70, 'octopus', 10, 100, 230, 3),
             Get.Action.Cook(51, 850, 852, 854, 25, 'octopus tentacle', 10, 50, 45, 3),
+            Get.Action.Cook(52, 900, 902, 904, 35, 'crab', 10, 70, 175, 3),
         ],//cook
         modelName: 'ROCK',	
         modelParams: {	
