@@ -608,6 +608,7 @@ const Item = Object.freeze([
                 buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [76, 1] }),
                 buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [82, 1] }),
                 buildStep(StepType.GIVE_XP, { params: [19, 10] }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['ACTION_BOTHHANDS']}),
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You line the inside of the pot with ashes.'] })],
             ],
         }],
