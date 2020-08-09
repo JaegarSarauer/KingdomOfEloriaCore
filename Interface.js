@@ -77,7 +77,7 @@ module.exports.Interface = [
                     [buildStep(StepType.CAN_PICKUP_GROUNDITEM),
                     buildStep(StepType.HAS_INVENTORY_SPACE, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']}),
                     buildStep(StepType.DESPAWN_OWNER),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['PET'] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['PICKUP'] }),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']}),
                     buildStep(StepType.PLAY_SOUND, {params: [18]})],
                 ],
@@ -1173,6 +1173,7 @@ module.exports.Interface = [
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [75, 1]}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [125, 2]}),
                     buildStep(StepType.GIVE_XP, {params: [15, 50]}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You throw a pot.']}),
                     buildStep(StepType.PLAY_SOUND, {params: [30]})]
                 ],
@@ -1189,6 +1190,7 @@ module.exports.Interface = [
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [125, 1]}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [77, 1]}),
                     buildStep(StepType.GIVE_XP, {params: [15, 50]}),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_BOTHHANDS'] }),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You heat the pot until it is solid.']}),
                     buildStep(StepType.PLAY_SOUND, {params: [31]})]
                 ],
