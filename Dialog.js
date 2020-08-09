@@ -9,7 +9,6 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     continueSteps: [[
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
         buildStep(StepType.OPEN_CHANGE_APPEARANCE, {params: [1]}),
     ]],
 }, {
@@ -24,6 +23,11 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 
     '<b>\tGetting Started</b>\n' + 
     'Move around and click to interact with anything on <note>Tutorial Island</note>. Find a man named <note>Osaik</note> to start your journey.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+    ]],
 },{
     id: 2,
     title: '<b>Osaik</b>',
