@@ -794,6 +794,7 @@ const ItemGetter = {
                     position: { x: 0.05, y: -0.5 },
                     rotation: 0,
                     UIModel: null,
+                    hideParts : ['HAIR'],
                 },
             },
             actions: [{
