@@ -122,9 +122,18 @@ function shopDataToShops(shopStorageData) {
     let shopDatas = [];
     for(let i = 0; i < shopStorageData.length; ++i) {
         let data = shopStorageData[i];
-        shopDatas.push(new ShopStorage(data.shopRefID, data.shopName, data.shopDefaultStockArray, data.restockTicks));
+        let shopDefaultStockArray = data.shopDefaultStockArray;
+
+        if (data.guildID != null && data.guildID >= 0) {
+            for (let i = 0; i < Guilds[data.guildID].guildShops.length; ++i) {
+                if (Guilds[data.guildID].guildShops[i].shopRefID == data.shopRefID) {
+                    shopDefaultStockArray = Guilds[data.guildID].guildShops[i].getStock(0);
+                }
+            }
+        }
+        shopDatas.push(new ShopStorage(data.shopRefID, data.shopName, shopDefaultStockArray, data.restockTicks));
     }
-    return shopDatas
+    return shopDatas;
 }
 
 function copyBoundsArray(boundsArray) {
