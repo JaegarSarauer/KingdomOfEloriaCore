@@ -35,6 +35,10 @@ const TestType = {
         id: 'WALK_RANDOM',
         executeString: 'walk'
     },
+    SET_GUILD_TIERS: {
+        id: 'SET_GUILD_TIERS',
+        executeString: 'set_guild_tiers'
+    },
 };
 module.exports.TestType = TestType;
 
@@ -45,6 +49,7 @@ const TestMineToMax = require('../internal/Tests/TestMineToMax');
 const TestCutBankedGems = require('../internal/Tests/TestCutBankedGems');
 const TestWalkRandom = require('../internal/Tests/TestWalkRandom');
 const TestMineGemRock = require('../internal/Tests/TestMineGemRock');
+const TestSetGuildTiers = require('../internal/Tests/TestSetGuildTiers');
 
 module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     INCINERATE_ALL_ITEMS: {
@@ -65,6 +70,11 @@ module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     MINE_GEM_ROCK: {
         build: (parameters) => {
             return new TestMineGemRock.TestMineGemRock(...parameters);
+        },
+    },
+    SET_GUILD_TIERS: {
+        build: (parameters) => {
+            return new TestSetGuildTiers.TestSetGuildTiers(...parameters);
         },
     },
     MINE_TO_MAX: {
