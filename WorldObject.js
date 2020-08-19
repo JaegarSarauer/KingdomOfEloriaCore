@@ -880,6 +880,7 @@ module.exports.WorldObject = WorldObject = [
                 [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [523, 1]}),
                 buildStep(StepType.HEAL_OTHER, {params: [10, 1000]}),
                 buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [523, 1]}),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['ACTION_BOTHHANDS']}),
                 buildStep(StepType.GIVE_OBELISK_ANCIENT_ENERGY, {params: [4]}),
                 ],
             ],
