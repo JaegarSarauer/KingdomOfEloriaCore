@@ -13,6 +13,8 @@ const GroundItemDef = require('../def/GroundItemDef');
 const Bounds = require('../def/Bounds');
 const GuildState = require('../internal/GuildState').GuildState;
 const Item = require('./Item');
+const Guilds = require('../typedef/Guild').Guilds;
+const guildTierToIndex = require('../typedef/Guild').tierToIndex;
 
 const MAP_WIDTH = 400;
 const SOLID_SQUARE_ID = 60;
@@ -366,11 +368,12 @@ function loadGuilds(JSONMap) {
 }
 
 class ShopStorageData {
-    constructor(shopRefID, shopName, shopDefaultStockArray, restockTicks) {
+    constructor(shopRefID, shopName, shopDefaultStockArray, restockTicks, guildID = -1) {
         this.shopRefID = shopRefID,
         this.shopName = shopName;
         this.shopDefaultStockArray = shopDefaultStockArray;
         this.restockTicks = restockTicks;
+        this.guildID = guildID;
     }
 }
 
@@ -418,18 +421,18 @@ module.exports.compressMapData = (mapID, name) => {
                     new ShopStorageData(9, 'Magic Store', [[83, 500], [84, 100], [85, 50], [86, 10], [93, 10], [94, 5], [97, 10], [98, 5], [101, 10], [102, 5]], 120),
                     new ShopStorageData(10, 'Clothing Store', [[331, 5] ,[333, 5] ,[335, 5] ,[337, 5] ,[339, 5] ,[341, 5] ,[343, 5] ,[345, 5] ,[347, 5] ,[475, 5] ,[349, 5] ,[351, 5] ,[353, 5] ,[355, 5] ,[357, 5] ,[359, 5] ,[361, 5] ,[363, 5] ,[365, 5] ,[477, 5] ,[367, 5] ,[369, 5] ,[371, 5] ,[373, 5] ,[375, 5] ,[377, 5] ,[379, 5] ,[381, 5] ,[383, 5] ,[479, 5] ,[385, 5] ,[387, 5] ,[389, 5] ,[391, 5] ,[393, 5] ,[395, 5] ,[397, 5] ,[399, 5] ,[401, 5] ,[481, 5] ,[403, 5] ,[405, 5] ,[407, 5] ,[409, 5] ,[411, 5] ,[413, 5] ,[415, 5] ,[417, 5] ,[419, 5] ,[483, 5] ,[421, 5] ,[423, 5] ,[425, 5] ,[427, 5] ,[429, 5] ,[431, 5] ,[433, 5] ,[435, 5] ,[437, 5] ,[485, 5] ,[439, 5] ,[441, 5] ,[443, 5] ,[445, 5] ,[447, 5] ,[449, 5] ,[451, 5] ,[453, 5] ,[455, 5] ,[487, 5] ,[457, 5] ,[459, 5] ,[461, 5] ,[463, 5] ,[465, 5] ,[467, 5] ,[469, 5] ,[471, 5] ,[473, 5],[489, 5]], 120), 
                     new ShopStorageData(11, 'Farming Store', [[744, 1000]], 120),
-                    new ShopStorageData(12, 'Tergaron General Store', [], 120),
-                    new ShopStorageData(13, 'Tergaron Metalsmith Store', [], 120),
-                    new ShopStorageData(14, 'Tergaron Mining Store', [], 120),
+                    new ShopStorageData(12, 'Tergaron General Store', [], 120, 0),
+                    new ShopStorageData(13, 'Tergaron Metalsmith Store', [], 120, 0),
+                    new ShopStorageData(14, 'Tergaron Mining Store', [], 120, 0),
                     new ShopStorageData(15, 'NULL STORE', [], 120),
-                    new ShopStorageData(16, 'Salmo Fishing Store', [], 120),
-                    new ShopStorageData(17, 'Salmo Archery Store', [], 120),
-                    new ShopStorageData(18, 'Salmo Alchemy Store', [], 120),
-                    new ShopStorageData(19, 'Salmo Magic Store', [], 120),
-                    new ShopStorageData(20, 'Acernis General Store', [], 120),
-                    new ShopStorageData(21, 'Acernis Woodcutting Store', [], 120),
-                    new ShopStorageData(22, 'Acernis Archery Store', [], 120),
-                    new ShopStorageData(23, 'Acernis Fletching Store', [], 120),
+                    new ShopStorageData(16, 'Salmo Fishing Store', [], 120, 1),
+                    new ShopStorageData(17, 'Salmo Archery Store', [], 120, 1),
+                    new ShopStorageData(18, 'Salmo Alchemy Store', [], 120, 1),
+                    new ShopStorageData(19, 'Salmo Magic Store', [], 120, 1),
+                    new ShopStorageData(20, 'Acernis General Store', [], 120, 2),
+                    new ShopStorageData(21, 'Acernis Woodcutting Store', [], 120, 2),
+                    new ShopStorageData(22, 'Acernis Archery Store', [], 120, 2),
+                    new ShopStorageData(23, 'Acernis Fletching Store', [], 120, 2),
                 ];
                 mapData.SafeAreas = [
                     new Bounds(19, 33, 23, 38), //castle left
