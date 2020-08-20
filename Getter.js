@@ -3856,7 +3856,7 @@ const WorldObject = {
                     buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                     buildStep(StepType.PLAY_SOUND, { params: [35] }),
                     buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                        params: [5, 105, 12, 0.15, true, 0.1],
+                        params: [10, 50, 12, 0.25, true, 0.1],
                         stepResultFail: 'END_AND_GOTO_LIST_3',
                     })],
 
