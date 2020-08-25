@@ -78,6 +78,24 @@ const DropTables = {
     ItemPickupPages: (tableRarity) => {
         return DropTables.Table(tableRarity, [[727, 1, 1, 90], [728, 1, 1, 10]]);
     },
+    AutoEnchantmentScrolls: (tableRarity) => {
+        return DropTables.Table(tableRarity, [[828, 1, 1, 40], [829, 1, 1, 80]]);
+    },
+    FortifyCombatEnchantmentScrolls: (tableRarity) => {
+        return DropTables.Table(tableRarity, [[819, 1, 1, 18], [820, 1, 1, 15], [821, 1, 1, 20], [822, 1, 1, 20], [823, 1, 1, 18], [824, 1, 1, 25], [825, 1, 1, 16], [826, 1, 1, 14], [827, 1, 1, 19]]);
+    },
+    TeleportEnchantmentScrolls: (tableRarity) => {
+        return DropTables.Table(tableRarity, [[816, 1, 1, 40], [817, 1, 1, 35], [818, 1, 1, 30], [842, 1, 1, 25], [843, 1, 1, 20]]);
+    },
+    LowTierSyphonScrolls: (tableRarity) => {
+        return DropTables.Table(tableRarity, [[830, 1, 1, 50], [831, 1, 1, 50], [832, 1, 1, 45], [833, 1, 1, 45], [835, 1, 1, 35]]);
+    },
+    MidTierSyphonScrolls: (tableRarity) => {
+        return DropTables.Table(tableRarity, [[836, 1, 1, 50], [837, 1, 1, 40], [841, 1, 1, 30], [838, 1, 1, 20]]);
+    },
+    HighTierSyphonScrolls: (tableRarity) => {
+        return DropTables.Table(tableRarity, [[839, 1, 1, 70], [834, 1, 1, 40], [840, 1, 1, 20]]);
+    },
     TeleportScrolls: (tableRarity, IDs = [722, 721, 720, 719, 718, 717, 716, 715]) => {
         let dropArray = [];
         for (let i = 0; i <IDs.length; ++i) {
@@ -3856,7 +3874,7 @@ const WorldObject = {
                     buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                     buildStep(StepType.PLAY_SOUND, { params: [35] }),
                     buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                        params: [5, 105, 12, 0.15, true, 0.1],
+                        params: [10, 50, 12, 0.25, true, 0.1],
                         stepResultFail: 'END_AND_GOTO_LIST_3',
                     })],
 
@@ -5573,6 +5591,7 @@ const Character = {
     },
     TeragonMeleeGuard: function(id, name, tier) {
       let guard = this.MeleeGuard(id, name, tier);
+      //guard.drops = [DropTables.LowTierSyphonScrolls(128), DropTables.MidTierSyphonScrolls(256)]; 
       // guard.equipmentModel = [];
       // guard.modelParams = {};
       return guard;

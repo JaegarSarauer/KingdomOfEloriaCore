@@ -322,7 +322,7 @@ Get.Character.Patreoner(66, 'Redd', 22, [313, 299, 632, null, null], 8, HairColo
 Get.Character.Patreoner(67, 'Aiden', 22, [null, 4, null, 385, 483], 1, HairColors.Black, EyeColors.Brown, FacialStyles.Freckles, 280 + 0, 10),
 Get.Character.Patreoner(68, 'WeSkillNow', 22, [null, null, null, 429, 477], 1, HairColors.CherryRed, EyeColors.Green, null, 55 + 8, 11),
 Get.Character.Patreoner(69, 'Thomas', 22, [93, 3, null, 393, 481], 1, HairColors.Brown, EyeColors.Brown, FacialStyles.Freckles, 65 + 18, 12),
-Get.Character.Rat(70, 'Mouserat', 1, [[11, 3], [0, 0], [1, 0.25], [2, 1]], //3hp, 0atk, .5pow, 2def
+Get.Character.Rat(70, 'Mouserat', 1, [[11, 3], [0, 0], [1, 0.25], [2, -1]], //3hp, 0atk, .5pow, 2def
     [[[1, 100], [730, 1, 1, 100]]]),
 Get.Character.Kiaso(71),
 Get.Character.Duck(72, 'Male Duck', 1),
