@@ -3327,7 +3327,7 @@ const WorldObject = {
             modelName: 'ROCK',
             modelParams: {
                 BASE: {
-                    asset: 'worldObjects_Chests',
+                    asset: 'worldObjects',
                     sprite: 'chestClosed',
                     spriteID: 1,
                 }
@@ -3358,7 +3358,7 @@ const WorldObject = {
             modelName: 'ROCK',
             modelParams: {
                 BASE: {
-                    asset: 'worldObjects_Wells',
+                    asset: 'worldObjects',
                     sprite: 'well',
                     spriteID: spriteIndex,
                 }
@@ -3379,7 +3379,7 @@ const WorldObject = {
             modelName: 'ROCK',
             modelParams: {
                 BASE: {
-                    asset: 'worldObjects_Mills',
+                    asset: 'worldObjects',
                     sprite: 'mill',
                     spriteID: spriteIndex,
                 }
@@ -3722,7 +3722,7 @@ const WorldObject = {
                 modelName: 'FISHING_POOL',
                 modelParams: {
                     BASE: {
-                        asset: 'worldObjects_Camps',
+                        asset: 'worldObjects',
                         sprite: 'crabPot',
                         spriteID: 0,
                     }
@@ -4157,12 +4157,12 @@ const WorldObject = {
                 modelName: 'OBELISK',
                 modelParams: {
                     CORE: {
-                        asset: 'worldObjects_Rocks',
+                        asset: 'worldObjects',
                         sprite: 'gemObelisk',
                         spriteID: '-1',
                     },
                     BASE: {
-                        asset: 'worldObjects_Rocks',
+                        asset: 'worldObjects',
                         sprite: 'gemObelisk',
                         spriteID: gemNumber,
                         parent : 'CORE',
@@ -4429,7 +4429,7 @@ const WorldObject = {
                 ]),
                 modelParams: {
                     BASE: {
-                        asset: 'worldObjects_MarketStall',
+                        asset: 'worldObjects',
                         sprite: 'marketStall',
                         spriteID: spriteIndex,
                     }
@@ -4696,7 +4696,7 @@ const WorldObject = {
                 modelName: 'ROCK',
                 modelParams: {
                     BASE: {
-                        asset: 'worldObjects_Plants',
+                        asset: 'worldObjects',
                         sprite: spriteName,
                         spriteID: spriteID,
                     }
@@ -4826,13 +4826,13 @@ const WorldObject = {
             return readable;
         },
         CatQuestBillyRecipe: function(id) {
-            return this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects_QuestMisc', 'recipe', 1, 50, 0)
+            return this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 1, 50, 0)
         },
         CatQuestVixenRecipe: function(id) {
-            return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects_QuestMisc', 'recipe', 2, 51, 1)
+            return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects', 2, 51, 1)
         },
         CatQuestViosSign: function(id) {
-            return this.CatQuestReadObject(id, 'Vio\'s Sign', 'A sign placed here by the home owner', 'worldObjects_QuestMisc', 'plaque', 1, 52)
+            return this.CatQuestReadObject(id, 'Vio\'s Sign', 'A sign placed here by the home owner', 'worldObjects', 1, 52)
         },
         CatQuestHerbs: function(id) {
             let herbId = 791;
