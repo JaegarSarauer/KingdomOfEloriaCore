@@ -30,7 +30,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Fire',
+                asset: 'worldObjects',
                 sprite: 'fire',
                 spriteID: 0,
             }
@@ -65,7 +65,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Smithing',
+                asset: 'worldObjects',
                 sprite: 'furnace',
                 spriteID: 0,
             }
@@ -122,7 +122,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Smithing',
+                asset: 'worldObjects',
                 sprite: 'anvil',
                 spriteID: 0,
             }
@@ -159,7 +159,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Crafting',
+                asset: 'worldObjects',
                 sprite: 'wheel',
                 spriteID: 0,
             }
@@ -256,7 +256,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Crafting',
+                asset: 'worldObjects',
                 sprite: 'potteryWheel',
                 spriteID: 0,
             }
@@ -306,7 +306,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Smithing',
+                asset: 'worldObjects',
                 sprite: 'furnace',
                 spriteID: 1,
             }
@@ -361,7 +361,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Crafting',
+                asset: 'worldObjects',
                 sprite: 'potteryWheel',
                 spriteID: 1,
             }
@@ -439,7 +439,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',	
         modelParams: {	
             BASE: {	
-                asset: 'worldObjects_Range',	
+                asset: 'worldObjects',	
                 sprite: 'range',	
                 spriteID: 0,	
             }	
@@ -489,7 +489,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',	
         modelParams: {	
             BASE: {	
-                asset: 'worldObjects_Range',	
+                asset: 'worldObjects',	
                 sprite: 'range',	
                 spriteID: 1,	
             }	
@@ -525,7 +525,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Chests',
+                asset: 'worldObjects',
                 sprite: 'chestClosed',
                 spriteID: 1,
             }
@@ -573,7 +573,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Chests',
+                asset: 'worldObjects',
                 sprite: 'chestOpen',
                 spriteID: 1,
             }
@@ -600,7 +600,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Smithing',
+                asset: 'worldObjects',
                 sprite: 'incinerator',
                 spriteID: 0,
             }
@@ -626,7 +626,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Smithing',
+                asset: 'worldObjects',
                 sprite: 'incinerator',
                 spriteID: 1,
             }
@@ -655,7 +655,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Chests',
+                asset: 'worldObjects',
                 sprite: 'chestClosed',
                 spriteID: 1,
             }
@@ -707,7 +707,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Ladders',
+                asset: 'worldObjects',
                 sprite: 'ladder',
                 spriteID: 0,
             }
@@ -724,7 +724,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Ladders',
+                asset: 'worldObjects',
                 sprite: 'ladder',
                 spriteID: 0,
             }
@@ -780,7 +780,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Chests',
+                asset: 'worldObjects',
                 sprite: 'chestClosed',
                 spriteID: 1,
             }
@@ -856,7 +856,7 @@ module.exports.WorldObject = WorldObject = [
         stats: [[11, 100]],
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Barricade',
+                asset: 'worldObjects',
                 sprite: 'barricade',
                 spriteID: 1,
             }
@@ -890,7 +890,7 @@ module.exports.WorldObject = WorldObject = [
         name: 'Crumbled Barricade',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Barricade',
+                asset: 'worldObjects',
                 sprite: 'barricade',
                 spriteID: 0,
             }
@@ -962,7 +962,7 @@ module.exports.WorldObject = WorldObject = [
         stats: [[11, 250, 1000]],
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Minigame',
+                asset: 'worldObjects',
                 sprite: 'obelisk',
                 spriteID: 0,
             }
@@ -1003,7 +1003,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Chests',
+                asset: 'worldObjects',
                 sprite: 'chestOpen',
                 spriteID: 1,
             }
@@ -1057,7 +1057,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Chests',
+                asset: 'worldObjects',
                 sprite: 'chestClosed',
                 spriteID: 1,
             }
@@ -1101,7 +1101,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Chests',
+                asset: 'worldObjects',
                 sprite: 'chestClosed',
                 spriteID: 1,
             }
@@ -1182,7 +1182,7 @@ module.exports.WorldObject = WorldObject = [
         modelName: 'ROCK',
         modelParams: {
             BASE: {
-                asset: 'worldObjects_Chests',
+                asset: 'worldObjects',
                 sprite: 'chestOpen',
                 spriteID: 1,
             }

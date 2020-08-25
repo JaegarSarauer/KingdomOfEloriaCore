@@ -601,7 +601,7 @@ const Model = {
         id: 'TREE',
         BASE: {
             id: 'BASE',
-            asset: 'worldObjects_Trees',
+            asset: 'worldObjects',
             sprite: 'treeBottom',
             parent: null,
             spriteID: 0,
@@ -612,7 +612,7 @@ const Model = {
         },
         BOTTOM: {
             id: 'BOTTOM',
-            asset: 'worldObjects_Trees',
+            asset: 'worldObjects',
             sprite: 'treeBottomMid',
             parent: 'BASE',
             spriteID: 0,
@@ -623,7 +623,7 @@ const Model = {
         },
         MIDDLE: {
             id: 'MIDDLE',
-            asset: 'worldObjects_Trees',
+            asset: 'worldObjects',
             sprite: 'treeTopMid',
             parent: 'BOTTOM',
             spriteID: 0,
@@ -634,7 +634,7 @@ const Model = {
         },
         TOP: {
             id: 'TOP',
-            asset: 'worldObjects_Trees',
+            asset: 'worldObjects',
             sprite: 'treeTop',
             parent: 'MIDDLE',
             spriteID: 0,
@@ -648,7 +648,7 @@ const Model = {
         id: 'ROCK',
         BASE: {
             id: 'BASE',
-            asset: 'worldObjects_Rocks',
+            asset: 'worldObjects',
             sprite: 'rock',
             parent: null,
             spriteID: 0,
@@ -662,7 +662,7 @@ const Model = {
         id: 'OBELISK',
         CORE: {
             id: 'CORE',
-            asset: 'worldObjects_Rocks',
+            asset: 'worldObjects',
             sprite: 'gemObelisk',
             parent: null,
             spriteID: 0,
@@ -673,7 +673,7 @@ const Model = {
         },
         BASE: {
             id: 'BASE',
-            asset: 'worldObjects_Rocks',
+            asset: 'worldObjects',
             sprite: 'gemObelisk',
             parent: null,
             spriteID: 1,
@@ -687,7 +687,7 @@ const Model = {
         id: 'DUMMY',
         BASE: {
             id: 'BASE',
-            asset: 'worldObjects_Dummy',
+            asset: 'worldObjects',
             sprite: 'dummy',
             parent: null,
             spriteID: 0,
@@ -701,7 +701,7 @@ const Model = {
         id: 'CAMP',
         BASE: {
             id: 'BASE',
-            asset: 'worldObjects_Camps',
+            asset: 'worldObjects',
             sprite: 'treeCamp',
             parent: null,
             spriteID: 0,
@@ -715,7 +715,7 @@ const Model = {
         id: 'FISHING_POOL',
         BASE: {
             id: 'BASE',
-            asset: 'worldObjects_Pools',
+            asset: 'worldObjects',
             sprite: 'pool',
             parent: null,
             spriteID: 0,
@@ -743,7 +743,7 @@ const Model = {
         id: 'DOOR',
         BASE: {
             id: 'BASE',
-            asset: 'worldObjects_Doors',
+            asset: 'worldObjects',
             sprite: 'door',
             parent: null,
             spriteID: 0,
