@@ -70,5 +70,9 @@ export const Timer = [
     {
         id: 17,
         name: 'Behavior Loop',
+    },
+    {
+        id: 18,
+        name: 'Test Timer',
     }
 ];
