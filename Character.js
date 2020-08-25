@@ -144,9 +144,9 @@ Get.Character.GuildMaster(27, 'King', 0),
     }],
 },
 Get.Character.Ghost(29, 'Ghost', 0, [[11, 10], [6, 5], [7, 5], [2, 10], [8, 1], [5, 10]], 78, 1, 5),// Air - [10hp, 5mfocus, 5mpower, 10def, 1 mdef, 10 range defence]
-Get.Character.Ghost(30, 'Ghost ', 1, [[11, 18], [6, 10], [7, 15], [2, 25], [8, 1], [5, 25]], 79, 1, 20),// Water - [18hp, 10mfocus, 15mpower, 25def, 1 mdef, 25 range defence]
-Get.Character.Ghost(31, 'Ghost ', 2, [[11, 40], [6, 18], [7, 28], [2, 50], [8, 1], [5, 50]], 80, 1, 80),// Earth - [40hp, 18mfocus, 28mpower, 50def, 1 mdef, 50 range defence]
-Get.Character.Ghost(32, 'Ghost ', 3, [[11, 70], [6, 28], [7, 50], [2, 75], [8, 1], [5, 75]], 81, 1, 240),// Fire - [70hp, 28mfocus, 50mpower, 75def, 1 mdef, 75 range defence]
+Get.Character.Ghost(30, 'Ghost', 1, [[11, 18], [6, 10], [7, 15], [2, 25], [8, 1], [5, 25]], 79, 1, 20),// Water - [18hp, 10mfocus, 15mpower, 25def, 1 mdef, 25 range defence]
+Get.Character.Ghost(31, 'Ghost', 2, [[11, 40], [6, 18], [7, 28], [2, 50], [8, 1], [5, 50]], 80, 1, 80),// Earth - [40hp, 18mfocus, 28mpower, 50def, 1 mdef, 50 range defence]
+Get.Character.Ghost(32, 'Ghost', 3, [[11, 70], [6, 28], [7, 50], [2, 75], [8, 1], [5, 75]], 81, 1, 240),// Fire - [70hp, 28mfocus, 50mpower, 75def, 1 mdef, 75 range defence]
 Get.Character.ElementalGhost(33, 'Elemental Ghost ', 4, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81], 1, 960),// Elemental - [150hp, 40mfocus, 99mpower, 99def, 1 mdef, 99 range defence]
 Get.Character.Crab(34, 'Cave Crawler', 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], null),
 Get.Character.HumanAppearanceShopOwner(35, 'Clothing Store Owner', 36, [null, null, null, 395, 491], HairStyle.Scruffy, HairColors.Black, 1, EyeColors.Purple, 2),
@@ -322,7 +322,7 @@ Get.Character.Patreoner(66, 'Redd', 22, [313, 299, 632, null, null], 8, HairColo
 Get.Character.Patreoner(67, 'Aiden', 22, [null, 4, null, 385, 483], 1, HairColors.Black, EyeColors.Brown, FacialStyles.Freckles, 280 + 0, 10),
 Get.Character.Patreoner(68, 'WeSkillNow', 22, [null, null, null, 429, 477], 1, HairColors.CherryRed, EyeColors.Green, null, 55 + 8, 11),
 Get.Character.Patreoner(69, 'Thomas', 22, [93, 3, null, 393, 481], 1, HairColors.Brown, EyeColors.Brown, FacialStyles.Freckles, 65 + 18, 12),
-Get.Character.Rat(70, 'Mouserat', 1, [[11, 3], [0, 0], [1, 0.25], [2, 1]], //3hp, 0atk, .5pow, 2def
+Get.Character.Rat(70, 'Mouserat', 1, [[11, 3], [0, 0], [1, 0.25], [2, -1]], //3hp, 0atk, .5pow, 2def
     [[[1, 100], [730, 1, 1, 100]]]),
 Get.Character.Kiaso(71),
 Get.Character.Duck(72, 'Male Duck', 1),
@@ -373,3 +373,16 @@ Get.Character.AcernisMeleeGuard(116, 'Elite Guard', 6), // Woodcutting Osmium Gu
 Get.Character.AcernisRangeGuard(117, 'Archer', 2), // Woodcutting Archer
 Get.Character.AcernisRangeGuard(118, 'Elite Archer', 6), // Woodcutting Elite Archer
 ];
+
+// let npcs = [];
+// for(let i = 0; i < Character.length; ++i) {
+//     let npc = Character[i];
+//     npcs.push({
+//         id: npc.id,
+//         name: npc.name,
+//         stats: npc.stats,
+//         drops: npc.drops
+//     });
+// }
+
+// console.info(JSON.stringify(npcs));

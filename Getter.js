@@ -6512,7 +6512,7 @@ const Character = {
         return sheep;
     },
     Cat: function(id, spriteIndex, name = 'Cat', stats = [], meowDialog = 47) {
-        let cat = this.FourLeggedMammalWithTail(id, name, 'Cat', spriteIndex,  stats);
+        let cat = this.FourLeggedMammalWithTail(id, name, 'cat', spriteIndex,  stats);
         cat.modelParams.HEAD.position = {x: -0.35, y: -0.1};
         cat.modelParams.THIGH_HIDDEN_BACK.anchor = {x: 0.8, y: 0.15};
         cat.modelParams.THIGH_VISIBLE_BACK.anchor = {x: 0.8, y: 0.15};

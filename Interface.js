@@ -1200,7 +1200,7 @@ module.exports.Interface = [
             Get.Interface.MixSpellPot(77, 'Lesser Earth Wound', ' (4 Alchemy) (3 Air, 1 Earth, 1 Force)', 19, 4, 15, 2, 85),
             Get.Interface.MixSpellPot(78, 'Lesser Fire Wound', ' (6 Alchemy) (3 Air, 1 Fire, 1 Force)', 19, 6, 20, 3, 86),
             Get.Interface.MixSpellPot(79, 'Fiewon Teleport', ' (1 Alchemy) (3 Air, 1 Void)', 19, 1, 25, 15, 127), //level 10, not 1
-            Get.Interface.MixSpellPot(80, 'Cadgwith Teleport', ' (14 Alchemy) (2 Air, 1 Water, 1 Void)', 19, 14, 35, 16, 128),
+            Get.Interface.MixSpellPot(80, 'Salmo Teleport', ' (14 Alchemy) (2 Air, 1 Water, 1 Void)', 19, 14, 35, 16, 128),
             Get.Interface.MixSpellPot(81, 'Volcano Teleport', ' (18 Alchemy) (2 Air, 1 Earth, 1 Void)', 19, 18, 45, 17, 129),
             Get.Interface.MixSpellPot(82, 'Island Teleport', ' (22 Alchemy) (2 Air, 1 Fire, 1 Void)', 19, 22, 55, 18, 130),
             {

@@ -1331,11 +1331,11 @@ const Item = Object.freeze([
     },
     {
         id: 128,
-        name: 'Cadgwith Teleport',
+        name: 'Salmo Teleport',
         noted: false,
         value: 48,
         stackable: true,
-        description: 'A teleport spell to Cadgwith.',
+        description: 'A teleport spell to Salmo.',
         requirements: ItemDetail.build([
             ItemDetail.levelSkillDetail('14', 22, 'USE'),
             ItemDetail.levelSkillDetail(59, 17, 'INCINERATE'),
@@ -3371,7 +3371,7 @@ const Item = Object.freeze([
     Get.Item.TeleportPot(713, 'Woodcutting Guild Teleport', 140, 'A teleport spell to the Woodcutting Guild.', 34, 74, 40, 120, 21, 470),
     Get.Item.TeleportPot(714, 'Mining Guild Teleport', 144, 'A teleport spell to the Mining Guild.', 38, 77, 70, 130, 22, 471),
     Get.Item.SpellUnlockScroll(715, 'Fiewon Teleport', 15, 512, 472, 32, EssenceValue(70, 1,[ShardCatalog.NATURE(20), ShardCatalog.EARTH(180)])),
-    Get.Item.SpellUnlockScroll(716, 'Cadgwith Teleport', 16, 672, 473, 36, EssenceValue(70, 1,[ShardCatalog.NATURE(20), ShardCatalog.EARTH(180)])),
+    Get.Item.SpellUnlockScroll(716, 'Salmo Teleport', 16, 672, 473, 36, EssenceValue(70, 1,[ShardCatalog.NATURE(20), ShardCatalog.EARTH(180)])),
     Get.Item.SpellUnlockScroll(717, 'Volcano Teleport', 17, 755, 474, 40, EssenceValue(70, 1,[ShardCatalog.NATURE(20), ShardCatalog.EARTH(180)])),
     Get.Item.SpellUnlockScroll(718, 'Island Teleport', 18, 525, 475, 44, EssenceValue(70, 1,[ShardCatalog.NATURE(20), ShardCatalog.EARTH(180)])),
     Get.Item.SpellUnlockScroll(719, 'Hyrill Teleport', 19, 742, 476, 48, EssenceValue(70, 1,[ShardCatalog.NATURE(20), ShardCatalog.EARTH(180)])),

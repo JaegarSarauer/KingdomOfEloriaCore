@@ -182,7 +182,7 @@ module.exports.Spells = [
     SpellBuilder.COMBAT(14, 'Greater Metal Wound', [[6, 28]], [EssenceCatalog.AIR(4), EssenceCatalog.METAL(4), EssenceCatalog.FORCE(3)], 10, [0,0,0,0,0,0,17,30,0], 8, 14),
 
     SpellBuilder.TELEPORT(15, 25, 'Fiewon Teleport', [[22, 10]], [EssenceCatalog.AIR(3), EssenceCatalog.VOID(1)], [0, 30, 34, 33, 37, 3], 15),
-    SpellBuilder.TELEPORT(16, 35, 'Cadgwith Teleport', [[22, 14]], [EssenceCatalog.AIR(2), EssenceCatalog.WATER(1), EssenceCatalog.VOID(1)], [0, 154, 3, 159, 5, 3], 16),
+    SpellBuilder.TELEPORT(16, 35, 'Salmo Teleport', [[22, 14]], [EssenceCatalog.AIR(2), EssenceCatalog.WATER(1), EssenceCatalog.VOID(1)], [0, 154, 3, 159, 5, 3], 16),
     SpellBuilder.TELEPORT(17, 45, 'Volcano Teleport', [[22, 18]], [EssenceCatalog.AIR(2), EssenceCatalog.EARTH(1), EssenceCatalog.VOID(1)], [0, 166, 71, 170, 74, 3], 17),
     SpellBuilder.TELEPORT(18, 55, 'Island Teleport', [[22, 22]], [EssenceCatalog.AIR(2), EssenceCatalog.FIRE(1), EssenceCatalog.VOID(1)], [0, 11, 92, 13, 94, 3], 18),
     SpellBuilder.TELEPORT(19, 65, 'Hyrill Teleport', [[22, 26]], [EssenceCatalog.AIR(2), EssenceCatalog.FIRE(1), EssenceCatalog.EARTH(1), EssenceCatalog.VOID(1)], [0, 28, 167, 35, 174, 3], 19),
