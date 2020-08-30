@@ -4143,8 +4143,8 @@ const WorldObject = {
             ]);
 
             return {
-                id: id,
-                name: 'name',
+                id,
+                name,
                 description,
                 requirements: ItemDetail.build([
                     ItemDetail.levelSkillDetail(skillLevelToMine, 10, 'MINE'),
@@ -4163,6 +4163,23 @@ const WorldObject = {
                     steps: actionsSteps
                 }],
                 spriteIndex: spriteIndex,
+            }
+        },
+        RockPile: function(id, ) {
+            return {
+                id: id,
+                name: 'Rocks',
+                description: 'A pile of rocks',
+                requirements: ItemDetail.build([
+                ]),
+                modelName: 'ROCK',
+                modelParams: {
+                    BASE: {
+                        spriteID: 'Pile',
+                    }
+                },
+                actions: [],
+                spriteIndex: 'Pile',
             }
         },
         GemObelisk: function (id, name, gemNumber, environmentMagicLevel, xp, coloredClothID, bindEssenceCost) {
