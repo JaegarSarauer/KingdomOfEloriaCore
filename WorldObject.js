@@ -3,7 +3,6 @@ const ParameterMappingKeys = require('./Step').ParameterMappingKeys;
 const StepList = require('./Step').StepList;
 const StepResult = require('./Step').StepResult;
 const StepType = require('./Step').StepType;
-const StepTypeClassDictionary = require('./Step').StepTypeClassDictionary;
 const buildStep = require('./Step').buildStep;
 const buildStepList = require('./Step').buildStepList;
 const Entity = require('../typedef/Entity');
@@ -1165,7 +1164,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.GuildChest(97, 'Tergaron', 0),
     Get.WorldObject.GuildChest(98, 'Salmo', 1),
     Get.WorldObject.GuildChest(99, 'Acernis', 2),
-    Get.WorldObject.GemRock(100, 'Gem Rock', 60, [10, 70, 20, true, 0.5, 0.5], 100, 1, 70, 6, 'This rock is encrusted with gems.', 1),  
+    Get.WorldObject.GemRock(100, 'Gem Rock', 60, [10, 70, 20, true, 0.5, 0.5], 100, 'Gem1', 70, 6, 'This rock is encrusted with gems.', 1),  
     Get.WorldObject.RockPile(101),
     Get.WorldObject.CrabPotFishingPool(102),
     Get.WorldObject.HandFishingPool(103),
