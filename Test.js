@@ -9,39 +9,48 @@ module.exports.TestResult = TestResult = {
 const TestType = {
     INCINERATE_ALL_ITEMS: {
         id: 'INCINERATE_ALL_ITEMS',
-        executeString: 'incinerate'
+        executeString: 'incinerate',
+        suiteString: 'release',
     },
     KILL_ALPHA_WOLF: {
         id: 'KILL_ALPHA_WOLF',
-        executeString: 'kill_alpha_wolf'
+        executeString: 'kill_alpha_wolf',
+        suiteString: '',
     },
     MINE_COPPER_ORE: {
         id: 'MINE_COPPER_ORE',
-        executeString: 'mine_copper'
+        executeString: 'mine_copper',
+        suiteString: 'balance',
     },
     MINE_GEM_ROCK: {
         id: 'MINE_GEM_ROCK',
-        executeString: 'mine_gem'
+        executeString: 'mine_gem',
+        suiteString: 'balance',
     },
     MINE_TO_MAX: {
         id: 'MINE_TO_MAX',
-        executeString: 'mine_max'
+        executeString: 'mine_max',
+        suiteString: 'balance',
     },
     CUT_BANKED_GEMS: {
         id: 'CUT_BANKED_GEMS',
-        executeString: 'cut_gems'
+        executeString: 'cut_gems',
+        suiteString: 'balance',
     },
     WALK_RANDOM: {
         id: 'WALK_RANDOM',
-        executeString: 'walk'
+        executeString: 'walk',
+        suiteString: '',
     },
     SET_GUILD_TIERS: {
         id: 'SET_GUILD_TIERS',
-        executeString: 'set_guild_tiers'
+        executeString: 'set_guild_tiers',
+        suiteString: 'release',
     },
     GUILD_MANAGER_CYCLE: {
         id: 'GUILD_MANAGER_CYCLE',
-        executeString: 'guild_manager_cycle'
+        executeString: 'guild_manager_cycle',
+        suiteString: 'release',
     },
 };
 module.exports.TestType = TestType;
@@ -115,6 +124,34 @@ const BuildTestFromExecutionString = (executeString, userDef, advDef) => {
     console.warn('Unable to run test ' + executeString);
 }
 
+const RunTestSuite = (testSuiteString, userDef, advDef, callback) => {
+    let testsToRun = [];
+    for (let i = 0, le = TestTypeKeys.length; i < le; ++i) {
+        if (TestType[TestTypeKeys[i]].suiteString == testSuiteString) {
+            testsToRun.push(this.TestTypeClassDictionary[TestTypeKeys[i]].build([userDef, advDef]));
+        }
+    }
+    if (testsToRun.length <= 0) {
+        return;
+    }
+    let testIndex = 0;
+    const performCallback = (result, message) => {
+        switch(result) {
+            case 0:
+                break;
+            case 1:
+            case 2:
+                return callback(!hasFailed);
+        }
+        if (testsToRun.length > testIndex) {
+            testsToRun[testIndex++].perform(performCallback);
+        } else {
+            return callback(true);
+        }
+    };
+    testsToRun[testIndex++].perform(performCallback);
+}
+
 const writeTestResults = (fileName, dataObj, callback = () => {}) => {
     fs.writeFile('./TestResults/' + fileName, dataObj, (res) => {
         callback(res);
@@ -122,3 +159,4 @@ const writeTestResults = (fileName, dataObj, callback = () => {}) => {
 }
 module.exports.writeTestResults = writeTestResults;
 module.exports.BuildTestFromExecutionString = BuildTestFromExecutionString;
+module.exports.RunTestSuite = RunTestSuite;

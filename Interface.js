@@ -3,7 +3,6 @@ const ParameterMappingKeys = require('./Step').ParameterMappingKeys;
 const StepList = require('./Step').StepList;
 const StepResult = require('./Step').StepResult;
 const StepType = require('./Step').StepType;
-const StepTypeClassDictionary = require('./Step').StepTypeClassDictionary;
 const buildStep = require('./Step').buildStep;
 const buildStepList = require('./Step').buildStepList;
 const Get = require('./Getter').Get;
