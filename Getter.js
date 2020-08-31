@@ -4603,9 +4603,9 @@ const WorldObject = {
                 stats: [[11, hp], [2, defenceLevel], [5, defenceLevel], [8, defenceLevel]], //50hp, 5 defence
                 modelName: 'DUMMY',
                 modelParams: {
-                    BASE: {
+                    CHEST: {
                         spriteID: spriteIndex,
-                    }
+                    },
                 },
                 actions: [
                     {
