@@ -109,6 +109,20 @@ const DropTables = {
         }
         return DropTables.Table(tableRarity, dropArray);
     },
+    UncutGems: (tableRarity) => {
+        return DropTables.Table(tableRarity, [[UncutGemIDs.UNCUT_OPAL, 1, 1, 2000]
+            , [UncutGemIDs.UNCUT_TOPAZ, 1, 1, 1600]
+            , [UncutGemIDs.UNCUT_QUARTZ, 1, 1, 1200]
+            , [UncutGemIDs.UNCUT_JADE, 1, 1, 800]
+            , [UncutGemIDs.UNCUT_AMBER, 1, 1, 400]
+            , [UncutGemIDs.UNCUT_SAPPHIRE, 1, 1, 200]
+            , [UncutGemIDs.UNCUT_AMETHYST, 1, 1, 100]
+            , [UncutGemIDs.UNCUT_EMERALD, 1, 1, 50]
+            , [UncutGemIDs.UNCUT_RUBY, 1, 1, 25]
+            , [UncutGemIDs.UNCUT_ONYX, 1, 1, 12]
+            , [UncutGemIDs.UNCUT_DIAMOND, 1, 1, 6]
+            ]);
+    }
 }
 
 const UncutGemIDs = {
@@ -5409,7 +5423,7 @@ const Character = {
             ItemDetail.levelSkillDetail(30, 20, 'STEAL'),
         ]);
         human.stats = [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]];
-        human.drops =  [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[128, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)]; //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+        human.drops =  [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[128, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)];
         human.isGuard = true;
         human.actions = [{
             interfaceID: 0,
@@ -5450,11 +5464,15 @@ const Character = {
                     stepResultFail: StepResult.END_AND_REPEAT_ACTION,
                 })],
                 [buildStep(StepType.ROLL_DROP_TABLE, { 
-                    params: [1, [[0, 4, 16, 50], [0, 15, 28, 25], [0, 25, 48, 20], [0, 60, 80, 5]]],
+                    params: [1, [[0, 4, 16, 50], [0, 9, 22, 25], [0, 15, 30, 20], [0, 20, 40, 5]]],
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.ROLL_DROP_TABLE, { 
                     params: [1, [[13, 1, 1, 25], [14, 1, 1, 20], [15, 1, 1, 15], [73, 2, 4, 10], [22, 1, 1, 5]]],
+                    stepResultFail: StepResult.NEXT_STEP
+                }),
+                buildStep(StepType.ROLL_DROP_TABLE, { 
+                    params: [50, Get.DropTables.UncutGems(50).slice(1)],
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.GIVE_XP, { params: [20, 50] }),
@@ -5534,7 +5552,7 @@ const Character = {
         guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
-        guard.combatStyle = Combat.CombatStyle.RANGE;
+        guard.combatStyle = Combat.CombatStyle.MAGIC;
         guard.attackRange = 6;
         switch(tier) {
             case 1:
@@ -5556,88 +5574,132 @@ const Character = {
                 guard.equipmentModel = [293, 321, null, 297, 295];
                 break;
         }
-        guard.isAggressiveTo = EmperorTeamNPCIds;
-        return guard;
-    },
-    MagicGuard: function(id, name, tier, spriteID = null) {
-        let guard = this.Guard(id, name, spriteID);
-        guard.isMultiTarget = true;
-        tier = Math.min(6, Math.max(1, tier));
-        guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
-        guard.combatStyle = Combat.CombatStyle.MAGIC;
-        guard.attackRange = 8;
-        switch(tier) {
-            case 1:
-                guard.equipmentModel = [93, 84, null, 97, 101];
-                break;
-            case 2:
-                guard.equipmentModel = [94, 84, null, 98, 102];
-                break;
-            case 3:
-                guard.equipmentModel = [95, 84, null, 99, 103];
-                break;
-            case 4:
-                guard.equipmentModel = [96, 84, null, 100, 104];
-                break;
-            case 5:
-                guard.equipmentModel = [539, 84, null, 541, 543];
-                break;
-            default:
-                break;
-        }
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [83, 3, 4, 15], [84, 2, 3, 10], [85, 1, 2, 10], [86, 1, 1, 10]]),
+            DropTables.ItemPickupPages(108 - (tier * 4)),
+            DropTables.TeleportScrolls(250 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(250 - (tier * 6)),
+            DropTables.MidTierSyphonScrolls(450 - (tier * 6)),
+        ];
+
         guard.isAggressiveTo = EmperorTeamNPCIds;
         return guard;
     },
     TeragonMeleeGuard: function(id, name, tier) {
       let guard = this.MeleeGuard(id, name, tier);
-      //guard.drops = [DropTables.LowTierSyphonScrolls(128), DropTables.MidTierSyphonScrolls(256)]; 
-      // guard.equipmentModel = [];
-      // guard.modelParams = {};
+
+      guard.drops = [
+          DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [14, 1, 1, 15], [15, 1, 1, 5], [16, 1, 1, 1], [18, 1, 1, 5]]),
+          DropTables.ItemPickupPages(128 - (tier * 4)),
+          DropTables.TeleportScrolls(350 - (tier * 6)),
+          DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+      ];
+
       return guard;
     },
     TeragonThakod: function(id) {
-        let guard = this.MeleeGuard(id, 'Thakod', 4, 13, 7, 0xe27634, 7, 0xe27634 );
+        let tier = 4;
+        let guard = this.MeleeGuard(id, 'Thakod', tier, 13, 7, 0xe27634, 7, 0xe27634 );
         guard.equipmentModel = [0, 11, 0, 453, 477];
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [14, 1, 1, 15], [15, 1, 1, 5], [16, 1, 1, 1], [18, 1, 1, 5]]),
+            DropTables.ItemPickupPages(128 - (tier * 4)),
+            DropTables.TeleportScrolls(350 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+        ];
+        
         return guard;
     },
     TeragonSwordsman: function(id, name, tier) {
         let guard = this.MeleeGuard(id, name, tier, 13, 3, (tier == 5) ? 0x202020 : 0x3b3b3b , 8 );
         guard.equipmentModel = [(tier == 5) ? 257 : 22, (tier == 5) ? 273 : 18, 530,(tier == 5) ? 401 : 399, (tier == 5) ? 491 : 489];
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [14, 1, 1, 15], [15, 1, 1, 5], [16, 1, 1, 1], [18, 1, 1, 5]]),
+            DropTables.ItemPickupPages(128 - (tier * 4)),
+            DropTables.TeleportScrolls(350 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+        ];
+    
         return guard;
     },
     SalmoMeleeGuard: function(id, name, tier, skinGender = null) {
         let guard = this.MeleeGuard(id, name, tier, skinGender);
-        // guard.equipmentModel = [];
-        // guard.modelParams = {};
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [14, 1, 1, 15], [15, 1, 1, 5], [16, 1, 1, 1], [18, 1, 1, 5]]),
+            DropTables.ItemPickupPages(128 - (tier * 4)),
+            DropTables.TeleportScrolls(350 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+        ];
+
         return guard;
     },
     SalmoTune: function(id) {
-        let guard = this.SalmoMeleeGuard(id, 'Tune', 6, 11);
+        let tier = 6;
+        let guard = this.SalmoMeleeGuard(id, 'Tune', tier, 11);
         guard.equipmentModel =  [257, 0, 0, 455, 475];
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [14, 1, 1, 15], [15, 1, 1, 5], [16, 1, 1, 1], [18, 1, 1, 5]]),
+            DropTables.ItemPickupPages(128 - (tier * 4)),
+            DropTables.TeleportScrolls(350 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+        ];
+
         return guard;
     },
     SalmoRangeGuard: function(id, name, tier) {
         let guard = this.ArcheryGuard(id, name, tier, 21, 5, 0xe2dc6d, null, 0x34789c);
-        // guard.equipmentModel = [];
-        // guard.modelParams = {};
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [37, 1, 1, 15], [38, 1, 1, 5], [39, 1, 1, 1], [68, 8, 25, 5]]),
+            DropTables.ItemPickupPages(128 - (tier * 4)),
+            DropTables.TeleportScrolls(350 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+        ];
+
         return guard;
     },
     AcernisTisha: function(id) {
-        let guard = this.ArcheryGuard(id, 'Tisha', 4, 31, 5, 0xe2dc6d, null, 0x34789c );
+        let tier = 4;
+        let guard = this.ArcheryGuard(id, 'Tisha', tier, 31, 5, 0xe2dc6d, null, 0x34789c );
         guard.equipmentModel = [0, 39, 0, 425, 481];
         // Dagger to left hand
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [37, 1, 1, 15], [38, 1, 1, 5], [39, 1, 1, 1], [68, 8, 25, 5]]),
+            DropTables.ItemPickupPages(128 - (tier * 4)),
+            DropTables.TeleportScrolls(350 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+        ];
+
         return guard;
     },
     AcernisMeleeGuard: function(id, name, tier) {
         let guard = this.MeleeGuard(id, name, tier);
-        // guard.equipmentModel = [];
-        // guard.modelParams = {};
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [14, 1, 1, 15], [15, 1, 1, 5], [16, 1, 1, 1], [18, 1, 1, 5]]),
+            DropTables.ItemPickupPages(128 - (tier * 4)),
+            DropTables.TeleportScrolls(350 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+        ];
+
         return guard;
     },
     AcernisRangeGuard: function(id, name, tier) {
         let guard = this.ArcheryGuard(id, name, tier);
-        // guard.equipmentModel = [];
-        // guard.modelParams = {};
+
+        guard.drops = [
+            DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [37, 1, 1, 15], [38, 1, 1, 5], [39, 1, 1, 1], [68, 8, 25, 5]]),
+            DropTables.ItemPickupPages(128 - (tier * 4)),
+            DropTables.TeleportScrolls(350 - (tier * 6)),
+            DropTables.LowTierSyphonScrolls(350 - (tier * 6)),
+        ];
+
         return guard;
     },
     EmperorMeleeGuard: function(id, name, tier) {
@@ -5645,7 +5707,14 @@ const Character = {
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isGuard = false;
         guard.isEmperorGuard = true;
-        guard.isGuard = false;
+        guard.drops = [
+            DropTables.Table(1, [[0, 5, 25, 20], [0, 10, 50, 20], [16, 1, 1, 5], [11, 1, 1, 5], [27, 1, 1, 10], [503, 10, 30, 10], [502, 8, 22, 10], [24, 1, 1, 10]]),
+            DropTables.UncutGems(32 - (tier * 2)), 
+            DropTables.LowTierSyphonScrolls(64 - (tier * 2)), 
+            DropTables.MidTierSyphonScrolls(256 - (tier * 4)), 
+            DropTables.ItemPickupPages(64 - (tier * 4)), 
+            DropTables.FortifyCombatEnchantmentScrolls(512 - (tier * 16)),
+        ];
         if (tier >= 5) {
             guard.equipmentModel[0] = 868;
             guard.equipmentModel[3] = 870; 
@@ -5667,6 +5736,22 @@ const Character = {
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
         guard.isGuard = false;
+        guard.drops = [
+            DropTables.Table(1, [[0, 5, 25, 20], [0, 10, 50, 20], [89, 1, 2, 25], [90, 1, 2, 15], [537, 1, 2, 2], [537, 1, 1, 5], [78, 1, 10, 30], [79, 1, 3, 10], [126, 2, 5, 10]]),
+            DropTables.UncutGems(24 - (tier * 2)), 
+            DropTables.LowTierSyphonScrolls(32 - (tier * 2)), 
+            DropTables.MidTierSyphonScrolls(128 - (tier * 4)), 
+            DropTables.HighTierSyphonScrolls(300 - (tier * 12)), 
+            DropTables.ItemPickupPages(48 - (tier * 4)), 
+            DropTables.AutoEnchantmentScrolls(100 - (tier * 4)), 
+            DropTables.FortifyCombatEnchantmentScrolls(300 - (tier * 16)),
+            DropTables.TeleportScrolls(112 - (tier * 8)),
+            DropTables.TeleportEnchantmentScrolls(256 - (tier * 16)),
+            DropTables.WoundSpellPages(256 - (tier * 6)),
+            DropTables.GreaterWoundSpellPages(512 - (tier * 16)),
+            DropTables.EssenceShards(1, 10, 100, [500, 500, 450, 450, 25, 400, 300, 250, 200, 300, 20, 100]),
+            DropTables.EssenceShards(32, 45, 350, [500, 500, 450, 450, 25, 400, 300, 250, 200, 300, 20, 100]),
+        ];
         guard.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
         
         guard.equipmentModel[0] = tier == 3 ? 880 : 862;
@@ -5740,6 +5825,23 @@ const Character = {
         human.isEmperorGuard = true;
         human.modelOverrideName = 'EMPEROR_GUARDS';
         human.doNotRespawn = true;
+
+        human.drops = [
+            DropTables.Table(1, [[0, 5, 25, 20], [0, 10, 50, 20], [89, 1, 2, 25], [90, 1, 2, 15], [537, 1, 2, 2], [537, 1, 1, 5], [78, 1, 10, 30], [79, 1, 3, 10], [126, 2, 5, 10]]),
+            DropTables.UncutGems(7), 
+            DropTables.LowTierSyphonScrolls(8), 
+            DropTables.MidTierSyphonScrolls(24), 
+            DropTables.HighTierSyphonScrolls(64), 
+            DropTables.ItemPickupPages(4), 
+            DropTables.AutoEnchantmentScrolls(64), 
+            DropTables.FortifyCombatEnchantmentScrolls(55),
+            DropTables.TeleportScrolls(30),
+            DropTables.TeleportEnchantmentScrolls(64),
+            DropTables.WoundSpellPages(55),
+            DropTables.GreaterWoundSpellPages(80),
+            DropTables.EssenceShards(1, 30, 600, [500, 500, 450, 450, 25, 400, 300, 250, 200, 300, 20, 100]),
+            DropTables.EssenceShards(8, 450, 3500, [500, 500, 450, 450, 25, 400, 300, 250, 200, 300, 20, 100]),
+        ];
 
         human.equipmentModel = [null, 301, null, 291, 289];
         human.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
