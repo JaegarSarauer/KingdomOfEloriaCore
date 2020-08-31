@@ -2549,6 +2549,7 @@ const ItemGetter = {
                     buildStep(StepType.IS_TIMER_EXPIRED, { params: [11] }),
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1] }),
                     buildStep(StepType.GIVE_XP, { params: [22, xp] }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TELEPORT']}),
                     buildStep(StepType.TELEPORT, { params: spellDef.teleportParams })]
                 ],
             }],
@@ -4156,8 +4157,8 @@ const WorldObject = {
             ]);
 
             return {
-                id: id,
-                name: 'name',
+                id,
+                name,
                 description,
                 requirements: ItemDetail.build([
                     ItemDetail.levelSkillDetail(skillLevelToMine, 10, 'MINE'),
@@ -4176,6 +4177,23 @@ const WorldObject = {
                     steps: actionsSteps
                 }],
                 spriteIndex: spriteIndex,
+            }
+        },
+        RockPile: function(id, ) {
+            return {
+                id: id,
+                name: 'Rocks',
+                description: 'A pile of rocks',
+                requirements: ItemDetail.build([
+                ]),
+                modelName: 'ROCK',
+                modelParams: {
+                    BASE: {
+                        spriteID: 'Pile',
+                    }
+                },
+                actions: [],
+                spriteIndex: 'Pile',
             }
         },
         GemObelisk: function (id, name, gemNumber, environmentMagicLevel, xp, coloredClothID, bindEssenceCost) {
@@ -6815,4 +6833,7 @@ module.exports.ColoredClothes = {
         }
     },
 };
+module.exports.EmperorTeamNPCIds = EmperorTeamNPCIds;
+module.exports.GuildNPCIds = GuildNPCIds;
+
 

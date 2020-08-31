@@ -113,7 +113,7 @@ const Guilds = [{
         guards: [[GuardType.EMPIRE_STEEL_MELEE_GUARD, 7]],
     }, {
         tierID: -1,
-        items: [],
+        items: [[0, 1000]],
         description: ' - Shop taxes increased by 10%',
         taxMultiplier: 1.1,
         guards: [[GuardType.EMPIRE_STEEL_MELEE_GUARD, 5]],
@@ -241,7 +241,7 @@ const Guilds = [{
         guards: [[GuardType.EMPIRE_STEEL_MELEE_GUARD, 7]],
     }, {
         tierID: -1,
-        items: [],
+        items: [[0, 1000]],
         description: ' - Shop taxes increased by 10%',
         taxMultiplier: 1.1,
         guards: [[GuardType.EMPIRE_STEEL_MELEE_GUARD, 5]],
@@ -417,7 +417,7 @@ const Guilds = [{
         guards: [[GuardType.EMPIRE_STEEL_MELEE_GUARD, 7]],
     }, {
         tierID: -1,
-        items: [],
+        items: [[0, 1000]],
         description: ' - Shop taxes increased by 10%\n - The emperor has control of the red gem obelisk',
         taxMultiplier: 1.1,
         guards: [[GuardType.EMPIRE_STEEL_MELEE_GUARD, 5]],
