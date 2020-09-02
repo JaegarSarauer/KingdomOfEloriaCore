@@ -89,6 +89,7 @@ let getSkinModel = function(id, skinToneID) {
 
                     // columnWeight: 1
 
+                    //17 * 7 * 7 * 12 * 8 * 2
 const allFaceIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
 const allSkinToneIds = [1, 2, 3, 4, 5, 6, 7]
 
