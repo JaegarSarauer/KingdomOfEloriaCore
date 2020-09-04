@@ -1084,7 +1084,7 @@ module.exports.WorldObject = WorldObject = [
     },
     Get.WorldObject.TutorialTree(78, 5, undefined, 1, 0, 15, 4, 25, 5, 16, 'Use your axe on the tree to get logs.'),
     Get.WorldObject.TutorialShallowFishingPool(79),
-    Get.WorldObject.DoorSkillLocked(80, 'Gold Rock', 25, [10, 32, 7, true, 0.5, 0.5], [[670, 1, 1, 100]], 85, 8, 120, 10, 'There appears to be gold in this rock.', 9.5),
+    Get.WorldObject.Rock(80, 'Gold Rock', 25, [10, 32, 7, true, 0.5, 0.5], [[670, 1, 1, 100]], 85, 8, 120, 10, 'There appears to be gold in this rock.', 9.5),
     Get.WorldObject.DoorSkillLocked(81, 'Door', 9, 70, 1, null, 0, { x : 341, y : 47}, { x: 341, y: 46 }, 'Through the door cracks you see an exclusive woodcutting area.' ),
     Get.WorldObject.DoorGuildLocked(82, 'Door', 0, 'GREATER_EQUALS', 2, 1, null, 1, { x : 47, y : 363}, { x: 47, y: 362 }, 'Through the door cracks you see an exclusive mining area.' ),
     Get.WorldObject.Rock(83, 'Pure Coal Rock', 40, [10, 30, 3, true, 0.33, 0.33], [[57, 1, 1, 90], [57, 1, 2, 10]], 75, 3, 50, 20, 'There appears to be extra coal in this rock.', 8, 584, 587), 

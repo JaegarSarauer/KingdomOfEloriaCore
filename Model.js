@@ -695,7 +695,19 @@ const Model = {
             position: {x: 0, y: 16},
             rotation: 0,
             UIModel: null,
-        }
+        },
+        CHEST: {
+            id: 'CHEST',
+            asset: 'chestParts',
+            sprite: 'platebodyChest',
+            parent: 'BASE',
+            spriteID: 0,
+            anchor: { x: 0.5, y: 0.65 },
+            position: { x: 0, y: 0.15 },
+            rotation: 0,
+            UIModel: null,
+            z: -1,
+        },
     },
     CAMP: {
         id: 'CAMP',
