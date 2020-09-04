@@ -3307,6 +3307,7 @@ const Item = Object.freeze([
         name: 'Gem Shards',
         noted: false,
         stackable: true,
+        value: 0,
         essenceValue: EssenceValue(70, 1, [ShardCatalog.SHARP(2), ShardCatalog.FIRE(2)]),
         requirements: ItemDetail.build([
             ItemDetail.levelSkillDetail(70, 17, 'INCINERATE'),
