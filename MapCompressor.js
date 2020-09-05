@@ -13,7 +13,6 @@ const GroundItemDef = require('../def/GroundItemDef');
 const Bounds = require('../def/Bounds');
 const GuildState = require('../internal/GuildState').GuildState;
 const Item = require('./Item');
-const Guilds = require('../typedef/Guild').Guilds;
 const guildTierToIndex = require('../typedef/Guild').tierToIndex;
 
 const MAP_WIDTH = 400;
