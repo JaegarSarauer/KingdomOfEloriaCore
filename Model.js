@@ -2071,7 +2071,6 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
             x : 0,
             y : 0
         }
-
         if (animationName.includes('WALK') || animationName.includes('RUN')) {
             let xChange = offsets.x = (params.xTileChange || 0) * 64;
             let yChange = offsets.y = (params.yTileChange || 0) * 64;
@@ -2083,6 +2082,7 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
                 y: modelParts.CORE.y + yChange,
             }, 500).start(); // 500ms = 1 server tick
         }
+
 
         if (params.isSimpleAnimation) {
             return;
@@ -2302,197 +2302,200 @@ let CreatePartDef = function(id, filePath, parent, anchor, position, rotation ) 
         UIModel : null
     };
 }
+ /**
+  * Unfinihed code for creating default Models from Spriter animation starting positions
+  */
+
+// let CreatePIXIJSModelFromSpriterAnimation = function(modelId, animation, folders) {
+//     let model = null; 
+//     let startingKey = animation.mainline.key[0];
+//     if (startingKey) {
+//        let partHierarchy = GetHierarchyFromAnimation(animation);
+//        let objRefParentIdToObjTimelineId = partHierarchy.objRefParentIdToObjTimelineId;
+//        let boneRefIdToBoneRefParentId = partHierarchy.boneRefIdToBoneRefParentId;
+//        let timelinePartIdToPartKey = partHierarchy.objKeyByTimelineId;
+//        //// let boneIdToBoneName = partHierarchy.boneIdToBoneName;
+//        //// let objIdToBoneId = partHierarchy.objIdToBoneId;
+//        //// let objRefIdToParentId = partHierarchy.objRefIdToParentId;
+//     ////    let partKeyToBoneId = {};
+//        let partKeyToParentKey = {};
+//        //// let nameToReadonlyKeyframe = {};
+
+//        let boneIds = Object.keys(objRefParentIdToObjTimelineId);
+//        for(let i = 0; i < boneIds.length; ++i) {
+//            let partKey = timelinePartIdToPartKey[objRefParentIdToObjTimelineId[boneIds[i]]];
+//         //    partKeyToBoneId[partKey] = boneIds[i];
+//            let parentBoneId = boneRefIdToBoneRefParentId[boneIds[i]];
+//            if (parentBoneId != null && parentBoneId != undefined) {
+//                partKeyToParentKey[partKey] = timelinePartIdToPartKey[objRefParentIdToObjTimelineId[parentBoneId]];
+//            }
+//            else {
+//                partKeyToParentKey[partKey] = null;
+//            }
+//        }
+
+//        //// for(let i = 0; i < animation.timeline.length; ++i) {
+//        ////     if (animation.timeline[i].object_type == 'bone') {
+//        ////         nameToReadonlyKeyframe[animation.timeline[i].name] = animation.timeline[i].key[0].bone
+//        ////     }
+//        ////     else {
+//        ////         nameToReadonlyKeyframe[animation.timeline[i].name] = animation.timeline[i].key[0].object
+//        ////     };
+//        //// }
+
+//         let modelRelationships = GetModelRelationships(animation);
+//         let boneRefById = modelRelationships.boneRefById;
+//         let objectRefByTimelineId = modelRelationships.objectRefByTimelineId;
+//         let timelineDataById = modelRelationships.timelineDataById;
+//         let timelineIdByKey = modelRelationships.timelineIdByKey;
+//         let partKeys = modelRelationships.partKeys;
+
+//         console.info(modelRelationships);
+
+//         model = {
+//             id : modelId,
+//             CORE: {
+//                 id : 'CORE',
+//                 asset : 'chestParts',
+//                 spriteID : 1,
+//                 anchor : {x: 0.5, y: 0.5},
+//                 parent : null,
+//                 position : {x: 0, y: 0},
+//                 rotation : 0,
+//                 UIModel : null
+//             }
+//         };
+
+//         //// let partIds = Object.keys(timelinePartIdToPartKey);
+//         //// let partKeyToTimelinePartId = {};
+
+//         //// for(let i = 0; i < partIds.length; ++i) {
+//         ////     partKeyToTimelinePartId[timelinePartIdToPartKey[partIds[i]]] = partIds[i];
+//         //// }
+//         //// console.info(partKeyToTimelinePartId);
+
+//         // /**
+//         //  * Part keys are offset by their parent bone key positions
+//         //  * Bone keys are offset by their parent positions
+//         //  * Bone keys without a starting position are the original one
+//         //  * 
+//         //  * Algo:
+//         //  * 
+//         //  * headPosition.X = headKey.x - headBone.x - chestBone.x
+//         //  * 
+//         //  * Seriously this should be it.... I definitely implemented wrong.
+//         //  * Maybe rewrite the logic :( Has old pre-epiphany funny business
+//         //  * 
+//         //  */
 
 
-let CreatePIXIJSModelFromSpriterAnimation = function(modelId, animation, folders) {
-    let model = null; 
-    let startingKey = animation.mainline.key[0];
-    if (startingKey) {
-       let partHierarchy = GetHierarchyFromAnimation(animation);
-       let objRefParentIdToObjTimelineId = partHierarchy.objRefParentIdToObjTimelineId;
-       let boneRefIdToBoneRefParentId = partHierarchy.boneRefIdToBoneRefParentId;
-       let timelinePartIdToPartKey = partHierarchy.objKeyByTimelineId;
-       //// let boneIdToBoneName = partHierarchy.boneIdToBoneName;
-       //// let objIdToBoneId = partHierarchy.objIdToBoneId;
-       //// let objRefIdToParentId = partHierarchy.objRefIdToParentId;
-    ////    let partKeyToBoneId = {};
-       let partKeyToParentKey = {};
-       //// let nameToReadonlyKeyframe = {};
+//         // let defData = {};
 
-       let boneIds = Object.keys(objRefParentIdToObjTimelineId);
-       for(let i = 0; i < boneIds.length; ++i) {
-           let partKey = timelinePartIdToPartKey[objRefParentIdToObjTimelineId[boneIds[i]]];
-        //    partKeyToBoneId[partKey] = boneIds[i];
-           let parentBoneId = boneRefIdToBoneRefParentId[boneIds[i]];
-           if (parentBoneId != null && parentBoneId != undefined) {
-               partKeyToParentKey[partKey] = timelinePartIdToPartKey[objRefParentIdToObjTimelineId[parentBoneId]];
-           }
-           else {
-               partKeyToParentKey[partKey] = null;
-           }
-       }
+//         let coreAngle = 0;
 
-       //// for(let i = 0; i < animation.timeline.length; ++i) {
-       ////     if (animation.timeline[i].object_type == 'bone') {
-       ////         nameToReadonlyKeyframe[animation.timeline[i].name] = animation.timeline[i].key[0].bone
-       ////     }
-       ////     else {
-       ////         nameToReadonlyKeyframe[animation.timeline[i].name] = animation.timeline[i].key[0].object
-       ////     };
-       //// }
-
-        let modelRelationships = GetModelRelationships(animation);
-        let boneRefById = modelRelationships.boneRefById;
-        let objectRefByTimelineId = modelRelationships.objectRefByTimelineId;
-        let timelineDataById = modelRelationships.timelineDataById;
-        let timelineIdByKey = modelRelationships.timelineIdByKey;
-        let partKeys = modelRelationships.partKeys;
-
-        console.info(modelRelationships);
-
-        model = {
-            id : modelId,
-            CORE: {
-                id : 'CORE',
-                asset : 'chestParts',
-                spriteID : 1,
-                anchor : {x: 0.5, y: 0.5},
-                parent : null,
-                position : {x: 0, y: 0},
-                rotation : 0,
-                UIModel : null
-            }
-        };
-
-        //// let partIds = Object.keys(timelinePartIdToPartKey);
-        //// let partKeyToTimelinePartId = {};
-
-        //// for(let i = 0; i < partIds.length; ++i) {
-        ////     partKeyToTimelinePartId[timelinePartIdToPartKey[partIds[i]]] = partIds[i];
-        //// }
-        //// console.info(partKeyToTimelinePartId);
-
-        // /**
-        //  * Part keys are offset by their parent bone key positions
-        //  * Bone keys are offset by their parent positions
-        //  * Bone keys without a starting position are the original one
-        //  * 
-        //  * Algo:
-        //  * 
-        //  * headPosition.X = headKey.x - headBone.x - chestBone.x
-        //  * 
-        //  * Seriously this should be it.... I definitely implemented wrong.
-        //  * Maybe rewrite the logic :( Has old pre-epiphany funny business
-        //  * 
-        //  */
+//         partKeys.forEach(initialKey => {
+//             let __safeguard = 0;
 
 
-        // let defData = {};
-
-        let coreAngle = 0;
-
-        partKeys.forEach(initialKey => {
-            let __safeguard = 0;
-
-
-            // First case is object, rest recusively do bones. Always will have first case.
-            let timelineId = timelineIdByKey[initialKey];
-            let partTimelineData = timelineDataById[timelineId];
-            let datas = [
-                {
-                    x : partTimelineData.x,
-                    y : partTimelineData.y,
-                    angle : partTimelineData.angle// - 270
-                }
-            ];
-            let objectRef = objectRefByTimelineId[timelineId];
+//             // First case is object, rest recusively do bones. Always will have first case.
+//             let timelineId = timelineIdByKey[initialKey];
+//             let partTimelineData = timelineDataById[timelineId];
+//             let datas = [
+//                 {
+//                     x : partTimelineData.x,
+//                     y : partTimelineData.y,
+//                     angle : partTimelineData.angle// - 270
+//                 }
+//             ];
+//             let objectRef = objectRefByTimelineId[timelineId];
 
 
-            let boneRef = boneRefById[objectRef.parentBoneRefId];
-            while(boneRef != null && __safeguard++ < 20) {
-                datas.push(timelineDataById[boneRef.timelineId]);
-                boneRef = boneRefById[boneRef.parentBoneRefId];
-            }
+//             let boneRef = boneRefById[objectRef.parentBoneRefId];
+//             while(boneRef != null && __safeguard++ < 20) {
+//                 datas.push(timelineDataById[boneRef.timelineId]);
+//                 boneRef = boneRefById[boneRef.parentBoneRefId];
+//             }
 
-            let log = initialKey + ' : ';
-            let position = {x : 0, y : 0};
-            let angleToAdd = coreAngle;
+//             let log = initialKey + ' : ';
+//             let position = {x : 0, y : 0};
+//             let angleToAdd = coreAngle;
 
-            datas.reverse();
+//             datas.reverse();
 
-            let doLog = (initialKey == 'LEFT_SHOULDER' || initialKey == 'RIGHT_SHOULDER');
+//             let doLog = (initialKey == 'LEFT_SHOULDER' || initialKey == 'RIGHT_SHOULDER');
 
-            let lastAngle = 0;
-            datas.forEach(data => {
-                let xFactor = 1;
-                let yFactor = 1;
-                let x = 0;
-                let y = 0;
+//             let lastAngle = 0;
+//             datas.forEach(data => {
+//                 let xFactor = 1;
+//                 let yFactor = 1;
+//                 let x = 0;
+//                 let y = 0;
 
-                let angle = ((data.angle != null) ? data.angle : 0);
+//                 let angle = ((data.angle != null) ? data.angle : 0);
 
-                xFactor = Math.sin(toRadians(angle - lastAngle));
-                yFactor = Math.cos(toRadians(angle - lastAngle));
+//                 xFactor = Math.sin(toRadians(angle - lastAngle));
+//                 yFactor = Math.cos(toRadians(angle - lastAngle));
 
 
-                if (data.x != null) { 
-                    x += Math.round(data.x * xFactor);
-                    y += Math.round(data.x * yFactor);
-                }
-                if (data.y != null) {
-                    x += Math.round(data.y * xFactor);
-                    y += Math.round(data.y * yFactor);
-                }
+//                 if (data.x != null) { 
+//                     x += Math.round(data.x * xFactor);
+//                     y += Math.round(data.x * yFactor);
+//                 }
+//                 if (data.y != null) {
+//                     x += Math.round(data.y * xFactor);
+//                     y += Math.round(data.y * yFactor);
+//                 }
 
-                if (doLog) {
-                    console.info(angle, data.x, data.y)
-                }
-                log += ((angle - lastAngle) % 360) + 'deg, x:' + x + ', y:' + y + ' | '
+//                 if (doLog) {
+//                     console.info(angle, data.x, data.y)
+//                 }
+//                 log += ((angle - lastAngle) % 360) + 'deg, x:' + x + ', y:' + y + ' | '
 
-                position.x += x;
-                position.y += y;
-                lastAngle = angle;
-                // angleToAdd += angle;
-            });
+//                 position.x += x;
+//                 position.y += y;
+//                 lastAngle = angle;
+//                 // angleToAdd += angle;
+//             });
 
-            if (doLog) {
-                console.info(log, position);
-            }
+//             if (doLog) {
+//                 console.info(log, position);
+//             }
 
-            let file = folders[partTimelineData.folder].file[partTimelineData.file];
-            let assetWithId = file.name;
+//             let file = folders[partTimelineData.folder].file[partTimelineData.file];
+//             let assetWithId = file.name;
 
-            let anchor = {
-                x : partTimelineData.pivot_x != null ? partTimelineData.pivot_x : file.pivot_x,
-                y : partTimelineData.pivot_y != null ? partTimelineData.pivot_y : file.pivot_y,
-            }
-            let parentKey = partKeyToParentKey[initialKey];
-            model[initialKey] = CreatePartDef(initialKey, assetWithId, parentKey, anchor, { x : position.x / 10, y : position.y / 10 } );
+//             let anchor = {
+//                 x : partTimelineData.pivot_x != null ? partTimelineData.pivot_x : file.pivot_x,
+//                 y : partTimelineData.pivot_y != null ? partTimelineData.pivot_y : file.pivot_y,
+//             }
+//             let parentKey = partKeyToParentKey[initialKey];
+//             model[initialKey] = CreatePartDef(initialKey, assetWithId, parentKey, anchor, { x : position.x / 10, y : position.y / 10 } );
             
-            // console.info(initialKey, position, datas, initialAngle);
-        });
+//             // console.info(initialKey, position, datas, initialAngle);
+//         });
 
-        console.info(model);
-    }
+//         console.info(model);
+//     }
 
-    return model;
-}
-let SpriterOverrideModels = function() {
-    let entities = animationsRaw.entity;
-    for(let i = 0; i < entities.length; ++i) {
-        let entity = entities[i];
-        if (entity && entity.name && Model[entity.name] && entity.animation) { // We have a Entity that has the same name as a model
-            for(let j = 0; j < entity.animation.length; ++j) {
-                if (entity.animation[j].name == 'DEFAULT') {
-                    let newModel = CreatePIXIJSModelFromSpriterAnimation(entity.name, entity.animation[j], animationsRaw.folder, entity.obj_info);
-                    if (newModel) {
-                        Model[entity.name] = newModel;
-                    }
-                }
-            }
-        }
-    }
-}
+//     return model;
+// }
+// let SpriterOverrideModels = function() {
+//     console.info('not autistic')
+//     let entities = animationsRaw.entity;
+//     for(let i = 0; i < entities.length; ++i) {
+//         let entity = entities[i];
+//         if (entity && entity.name && Model[entity.name] && entity.animation) { // We have a Entity that has the same name as a model
+//             for(let j = 0; j < entity.animation.length; ++j) {
+//                 if (entity.animation[j].name == 'DEFAULT') {
+//                     let newModel = CreatePIXIJSModelFromSpriterAnimation(entity.name, entity.animation[j], animationsRaw.folder, entity.obj_info);
+//                     if (newModel) {
+//                         Model[entity.name] = newModel;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 // SpriterOverrideModels();
 
 class AnimationDef extends TWEEN.Tween {
