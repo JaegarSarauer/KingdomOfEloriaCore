@@ -4603,9 +4603,9 @@ const WorldObject = {
                 stats: [[11, hp], [2, defenceLevel], [5, defenceLevel], [8, defenceLevel]], //50hp, 5 defence
                 modelName: 'DUMMY',
                 modelParams: {
-                    BASE: {
+                    CHEST: {
                         spriteID: spriteIndex,
-                    }
+                    },
                 },
                 actions: [
                     {
@@ -5574,22 +5574,22 @@ const Character = {
         guard.attackRange = 6;
         switch(tier) {
             case 1:
-                guard.equipmentModel = [105, 37, null, 113, 109];
+                guard.equipmentModel = [105, 702, null, 113, 109];
                 break;
             case 2:
-                guard.equipmentModel = [106, 38, null, 114, 110];
+                guard.equipmentModel = [106, 703, null, 114, 110];
                 break;
             case 3:
-                guard.equipmentModel = [107, 39, null, 115, 111];
+                guard.equipmentModel = [107, 704, null, 115, 111];
                 break;
             case 4:
-                guard.equipmentModel = [108, 40, null, 116, 112];
+                guard.equipmentModel = [108, 705, null, 116, 112];
                 break;
             case 5:
-                guard.equipmentModel = [265, 319, null, 269, 267];
+                guard.equipmentModel = [265, 706, null, 269, 267];
                 break;
             case 6:
-                guard.equipmentModel = [293, 321, null, 297, 295];
+                guard.equipmentModel = [293, 707, null, 297, 295];
                 break;
         }
 
@@ -5744,7 +5744,12 @@ const Character = {
             guard.equipmentModel[4] = 878;
         }
 
-        guard.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
+        let meleeLevels = 60 + 20 * tier;
+        let rangeTier = 35 + 5 * tier;
+        let magicLevels = 75 + 15 * tier;
+        let health = 100 + 50 * tier;
+
+        guard.stats = [[0, meleeLevels], [1, meleeLevels], [2, meleeLevels], [3, rangeTier], [4, rangeTier], [5, rangeTier], [6, magicLevels], [7, magicLevels], [8, magicLevels], [11, health],];
         guard.isAggressiveTo = GuildNPCIds;
         return guard;
     },
@@ -5770,7 +5775,14 @@ const Character = {
             DropTables.EssenceShards(1, 10, 100, [500, 500, 450, 450, 25, 400, 300, 250, 200, 300, 20, 100]),
             DropTables.EssenceShards(32, 45, 350, [500, 500, 450, 450, 25, 400, 300, 250, 200, 300, 20, 100]),
         ];
-        guard.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
+
+        
+        let meleeLevels = 50 + 20 * tier;
+        let rangeTier = 50 + 10 * tier;
+        let magicLevels = 80 + 22 * tier;
+        let health = 100 + 50 * tier;
+
+        guard.stats = [[0, meleeLevels], [1, meleeLevels], [2, meleeLevels], [3, rangeTier], [4, rangeTier], [5, rangeTier], [6, magicLevels], [7, magicLevels], [8, magicLevels], [11, health],];
         
         guard.equipmentModel[0] = tier == 3 ? 880 : 862;
         guard.equipmentModel[3] = 864; 
@@ -5783,6 +5795,8 @@ const Character = {
         let guard = this.EmperorMeleeGuard(id, name, 8, 666);
         guard.equipmentModel = [856, 273, 299, 858, 860];
         guard.doNotRespawn = true;
+        guard.isEmperorGuard = true;
+        guard.isGuard = false;
         return guard;
     },
     GuildMaster: function(id, name, guildID) {
@@ -5827,7 +5841,7 @@ const Character = {
         human.doNotRespawn = true;
 
 
-        human.stats = [[0, 70], [1, 90], [2, 70], [3, 70], [4, 90], [5, 70], [6, 70], [7, 90], [8, 70], [11, 140]];
+        human.stats = [[0, 150], [1, 90], [2, 120], [3, 70], [4, 90], [5, 120], [6, 70], [7, 90], [8, 120], [11, 180]];
         human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
         return human;
     },
@@ -5862,7 +5876,7 @@ const Character = {
         ];
 
         human.equipmentModel = [null, 301, null, 291, 289];
-        human.stats = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100], [5, 100], [6, 100], [7, 100], [8, 100], [11, 300],];
+        human.stats = [[0, 200], [1, 200], [2, 200], [3, 100], [4, 100], [5, 100], [6, 250], [7, 250], [8, 250], [11, 500],];
         human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
         human.isAggressiveTo = GuildNPCIds;
         human.modelParams = {
