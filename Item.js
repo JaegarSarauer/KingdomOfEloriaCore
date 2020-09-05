@@ -1233,7 +1233,7 @@ const Item = Object.freeze([
         },
         {
             interfaceID: 5,
-            id: 48,
+            id: 25,
             name: '',
             entityType: Entity.EntityType.INVENTORY_ITEM,
             entityID: 844,
