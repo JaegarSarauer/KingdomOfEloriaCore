@@ -5744,7 +5744,7 @@ const Character = {
             guard.equipmentModel[4] = 878;
         }
 
-        let meleeLevels = 50 + 15 * tier;
+        let meleeLevels = 60 + 20 * tier;
         let rangeTier = 35 + 5 * tier;
         let magicLevels = 75 + 15 * tier;
         let health = 100 + 50 * tier;
@@ -5777,9 +5777,9 @@ const Character = {
         ];
 
         
-        let meleeLevels = 50 + 10 * tier;
+        let meleeLevels = 50 + 20 * tier;
         let rangeTier = 50 + 10 * tier;
-        let magicLevels = 80 + 20 * tier;
+        let magicLevels = 80 + 22 * tier;
         let health = 100 + 50 * tier;
 
         guard.stats = [[0, meleeLevels], [1, meleeLevels], [2, meleeLevels], [3, rangeTier], [4, rangeTier], [5, rangeTier], [6, magicLevels], [7, magicLevels], [8, magicLevels], [11, health],];
