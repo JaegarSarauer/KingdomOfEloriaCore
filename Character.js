@@ -371,18 +371,8 @@ Get.Character.AcernisMeleeGuard(115, 'Elite Guard', 5), // Woodcutting Gothite G
 Get.Character.AcernisMeleeGuard(116, 'Elite Guard', 6), // Woodcutting Osmium Guard
 Get.Character.AcernisRangeGuard(117, 'Archer', 2), // Woodcutting Archer
 Get.Character.AcernisRangeGuard(118, 'Elite Archer', 6), // Woodcutting Elite Archer
-Get.Character.Guide(119), // Downstairs Tutorial Guide
+Get.Character.DownstairsGuide(119), // Downstairs Tutorial Guide
+Get.Character.AboveGroundGuide(120, 0), // Upstairs Mining Guild Guide
+Get.Character.AboveGroundGuide(121, 1), // Upstairs Fishing Guilde Guide
+Get.Character.AboveGroundGuide(122, 2), // Upstairs Woodcutting Guilde Guide
 ];
-
-// let npcs = [];
-// for(let i = 0; i < Character.length; ++i) {
-//     let npc = Character[i];
-//     npcs.push({
-//         id: npc.id,
-//         name: npc.name,
-//         stats: npc.stats,
-//         drops: npc.drops
-//     });
-// }
-
-// console.info(JSON.stringify(npcs));

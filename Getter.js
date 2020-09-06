@@ -6439,21 +6439,22 @@ const Character = {
             name: 'Talk To',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-
-                // If we have previously completed the tutorial, go straight to questions dialog
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 0],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [2],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
-
-                // if we are at step 1 => Give you the fishing net => step 2
+                [buildStep(StepType.SHOW_DIALOG, {params: [18]})],
+            ],
+        }];
+        let guide = this.Human(id, 'Guide', 12, [null, 16, null, 413, 477], HairStyle.Scruffy, HairColors.DarkBrown, actions, 6, EyeColors.DarkBrown );
+        guide.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
+        return guide;
+    },
+    DownstairsGuide : function(id) {
+        let actions = [{
+            interfaceID: 0,
+            id: 4,
+            name: 'Talk To',
+            steps: [
+                buildStepList(StepList.WALK_ADJACENT),
+    
+                // If we have started the tutorial & not talked to the NPC
                 [buildStep(StepType.CHECK_CHARACTER_STATE, {
                     params: [4, 2],
                     stepResultPass: 'NEXT_STEP',
@@ -6465,15 +6466,10 @@ const Character = {
                     stepResultPass: 'END_ACTION',
                     stepResultFail: 'END_ACTION',
                 })],
-    
-                // If we are at step 2 AND have a raw shrimp => step 3
+
+                // If we have started the tutorial & spoke to the NPC
                 [buildStep(StepType.CHECK_CHARACTER_STATE, {
                     params: [4, 3],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.HAS_INVENTORY_ITEM, { 
-                    params: [47, 1], 
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6483,80 +6479,39 @@ const Character = {
                     stepResultPass: 'END_ACTION',
                     stepResultFail: 'END_ACTION',
                 })],
-    
-                // If we are at step 3 AND have a cooked shrimp => step 4
+
+                // If we fixed the ladder
                 [buildStep(StepType.CHECK_CHARACTER_STATE, {
                     params: [4, 4],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.HAS_INVENTORY_ITEM, { 
-                    params: [51, 1], 
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [51, 1] }),
                 buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [15],
                     stepResultPass: 'END_ACTION',
                     stepResultFail: 'END_ACTION',
                 })],
-
-                
-                // If we are at step 3 still AND have a burnt shrimp => step 4
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 4],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.HAS_INVENTORY_ITEM, { 
-                    params: [119, 1], 
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [39],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
     
-                // If we are at step 4 AND have Osaiks key => step 5
+    
+                [buildStep(StepType.SHOW_DIALOG, {params: [14]})],
+            ],
+        }];
+        let guide = this.Guide(id);
+        guide.actions = actions;
+        return guide;
+    },
+    AboveGroundGuide : function(id, guildID) {
+        let actions = [{
+            interfaceID: 0,
+            id: 4,
+            name: 'Talk To',
+            steps: [
+                buildStepList(StepList.WALK_ADJACENT),
+
+                // Scene 2: Give a tour
                 [buildStep(StepType.CHECK_CHARACTER_STATE, {
                     params: [4, 5],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.HAS_INVENTORY_ITEM, { 
-                    params: [730, 1], 
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [730, 1] }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [16],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
-    
-                // If we are at step 2 still, we need a raw shrimp => ask for shrimp
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 3],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [17],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
-                
-                // If we are at step 3 still, we need a cooked shrimp => ask for shrimp
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 4],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6567,20 +6522,7 @@ const Character = {
                     stepResultFail: 'END_ACTION',
                 })],
     
-                // If we are at step 4 still, we need a key => ask for shrimp
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 5],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [19],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
-    
-                // If we are at step 5, we havent teleported, 
+                // Scene 3: Start the task
                 [buildStep(StepType.CHECK_CHARACTER_STATE, {
                     params: [4, 6],
                     stepResultPass: 'NEXT_STEP',
@@ -6588,30 +6530,17 @@ const Character = {
                 }),
                 buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
-                    params: [20],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
-
-                
-                // If we are at step 6, we have teleported but not yet spoke to Osaik by Fiewon, 
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 7],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [22],
+                    params: [13],
                     stepResultPass: 'END_ACTION',
                     stepResultFail: 'END_ACTION',
                 })],
     
-                [buildStep(StepType.SHOW_DIALOG, {params: [2]})],
+    
+                [buildStep(StepType.SHOW_DIALOG, {params: [18]})],
             ],
         }];
-        let guide = this.Human(id, 'Guide', 12, [null, 16, null, 413, 477], HairStyle.Scruffy, HairColors.DarkBrown, actions, 6, EyeColors.DarkBrown );
-        guide.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
+        let guide = this.Guide(id);
+        guide.actions = actions;
         return guide;
     },
     Kiaso : function(id) {

@@ -110,16 +110,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 13,
-    title: '<b>Osaik</b>',
-    // message: 'Welcome new adventurer, I have been waiting for you.\n\n' +
-    // 'Hurry now, we don\'t have much time. You must be on your way to <note>Eloria</note>\n' +
-    message: '<b>OW!</b> It bit me! That damn mouserat bit me!\n\n' +
-    '<note>[...]</note>\n\n' +
-    'Oh hi! Where did you come from? Nevermind that, the damn mouserat bit me. Can you get me some food so I can heal up?\n\n' +
-
-    '<note>[Osaik gives you a fishing net.]</note>\n\n' +
-
-    'Find a shallow fishing pool along the beach and catch some shrimp for me, will ya?',
+    title: '<b>Guide</b>',
+    message: '[Oh no, the lader broke. What will we do]',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
@@ -130,12 +122,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 14,
-    title: '<b>Osaik</b>',
-    message: 'I can’t eat raw shrimp, you need to cook it first..\n\n' +
-
-    '<note>[Osaik gives you a copper axe and a matchbox.]</note>\n\n' +
-
-    'Find a tree and chop it down for logs of wood. Afterwards, use the matchbox on the wood to light a fire. Use the raw shrimp on the fire to try and cook them.',
+    title: '<b>Guild</b>',
+    message: '[We cant get out. Help me]',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 3]}),
@@ -147,17 +135,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 15,
-    title: '<b>Osaik</b>',
+    title: '<b>Guide</b>',
     message: 
-    'Thank you for the shrimp, this will do the trick!\n\n' +
-    
-    '<note>[Osaik eats the shrimp. He is healed.]</note>\n\n' +
-
-    'I don’t know about you, but I’m sick of this island. I have teleports that can get us to <note>Fiewon</note>, but they are locked in my safe. The stupid mouserat ate my key earlier. Can you get it back for me?\n\n' +
-    
-    '<note>[Osaik gives you a copper dagger.]</note>\n\n' +
-    
-    'Kill the mouserat and get my key back for me.',
+    '[Ah thank you. Where were we... Oh yes. This is why nobody goes in the guild cellar. Let me show you the rest of the guild.]',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 4]}),
@@ -168,12 +148,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 16,
-    title: '<b>Osaik</b>',
-    message: 'Thank you. Now that I can get into my safe, let me get you your teleport.\n\n' +
-    
-    '<note>[Osaik gives you a Fiewon Teleport.]</note>\n\n' +
-    
-    'Use it to get to the land of Eloria. I’ll meet you on the other side.',
+    title: '<b>Guide</b>',
+    message: '[Oh yeah, I need to fill my weekly quota. Come along, I\'ll show you how to setup a camp]',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 5]}),
@@ -183,15 +159,12 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 17,
-    title: '<b>Osaik</b>',
-    message: 'Where is my shrimp?\n\n' +
-    'Get it by fishing in a fishing pool, they are all along the beach.',
+    title: '<b>Guide</b>',
+    message: '[Thanks you for items for task]',
 }, {
     id: 18,
-    title: '<b>Osaik</b>',
-    message: 'I told you to cook a shrimp first.\n\n' +
-    'Find a tree and chop it down for logs of wood. Afterwards, use the matchbox on the wood to light a fire. Use the raw shrimp on the fire to try and cook them.\n\n' +
-    'Try not to burn it or you will have to try again.',
+    title: '<b>Guide</b>',
+    message: '[Post-tutorial message]',
 }, {
     id: 19,
     title: '<b>Osaik</b>',
