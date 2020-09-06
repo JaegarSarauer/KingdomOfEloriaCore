@@ -1112,7 +1112,7 @@ module.exports.WorldObject = WorldObject = [
                 }),
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You\'re Wanted! Your bounty will wear off in 2 minutes.'] }),
                 buildStep(StepType.ROLL_DROP_TABLE, { 
-                    params: [1, [[687, 1, 1, 1], [688, 1, 1, 1], [689, 1, 1, 1], [690, 1, 1, 1], [691, 1, 1, 1], [727, 1, 1, 5], [728, 1, 1, 4], [563, 1, 1, 1] [0, 10, 50, 85]]],
+                    params: [1, [[687, 1, 1, 1], [688, 1, 1, 1], [689, 1, 1, 1], [690, 1, 1, 1], [691, 1, 1, 1], [727, 1, 1, 5], [728, 1, 1, 4], [563, 1, 1, 1], [0, 10, 50, 85]]],
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.ROLL_DROP_TABLE, { 
