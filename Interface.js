@@ -1726,7 +1726,7 @@ module.exports.Interface = [
             Get.Interface.AskNPCQuestion(252, 'What are camps and how do they work?', 35),
             Get.Interface.AskNPCQuestion(253, 'What are PvP bounties and how do they work?', 36),
             Get.Interface.AskNPCQuestion(254, 'What are bags and how do they work?', 37),
-            Get.Interface.AskNPCQuestion(255, 'What are Tomes of Collection and how do they work?', 38),
+            Get.Interface.AskNPCQuestion(255, 'What are gems and how do they work?', 38),
 
             Get.Interface.SmeltBar(256, 'Smelt Gold Bar (25 Smithing) (3 Gold Ore)', 'gold bar', 25, 670, 672, 85, 0, 3),
             Get.Interface.PurchaseBankSlots(257, 5),
