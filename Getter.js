@@ -275,6 +275,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.75 },
                     rotation: 0,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1448,9 +1449,10 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.75 },
+                    position: { x: 0.75, y: 0.75 },
                     rotation: 0,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1488,6 +1490,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.95 },
                     rotation: (30 * Math.PI / 180),
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1568,9 +1571,10 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.75 },
+                    position: { x: 1, y: 0.75 },
                     rotation: 5 * Math.PI / 180,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1689,6 +1693,7 @@ const ItemGetter = {
                     position: { x: 0.5, y: 0.9 },
                     rotation: 8 * Math.PI / 180,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1739,6 +1744,7 @@ const ItemGetter = {
                     position: { x: 0.5, y: 0.75 },
                     rotation: 3 * Math.PI / 180,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1931,6 +1937,7 @@ const ItemGetter = {
                     position: { x: 0.35, y: 0.5 },
                     rotation:  -60 * Math.PI / 180,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -4271,15 +4278,6 @@ const WorldObject = {
                 modelName: 'TREE',
                 modelParams: {
                     BASE: {
-                        spriteID: spriteIndex,
-                    },
-                    BOTTOM: {
-                        spriteID: spriteIndex,
-                    },
-                    MIDDLE: {
-                        spriteID: spriteIndex,
-                    },
-                    TOP: {
                         spriteID: spriteIndex,
                     },
                 },
