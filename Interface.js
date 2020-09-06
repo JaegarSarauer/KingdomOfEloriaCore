@@ -1820,6 +1820,7 @@ module.exports.Interface = [
                 actionInterval: 4,
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, {params: [676, 10]}),
+                    buildStep(StepType.HAS_INVENTORY_SPACE, {params: [677, 1]}),
                     buildStep(StepType.HAS_SKILL_LEVEL, {params: [15, 1]}),
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [676, 10]}),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [677, 1]}),

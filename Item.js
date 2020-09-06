@@ -3331,7 +3331,7 @@ const Item = Object.freeze([
     Get.Item.Note(673, 672, 'Gold Bar', 50, 431),
     Get.Item.GoldAmulet(674, 675, 'Gold Amulet', 20, 20, 57, 432 ),
     Get.Item.Note(675, 674, 'Gold Amulet', 57, 432),
-    Get.Item.Item(676, null, 'Silk', 2, 567, 'A strand of silk.', EssenceValue(70, 1, [ShardCatalog.EARTH(2), ShardCatalog.BIND(1)]), true),
+    Get.Item.Item(676, null, 'Silk Thread', 2, 567, 'A strand of silk.', EssenceValue(70, 1, [ShardCatalog.EARTH(2), ShardCatalog.BIND(1)]), true),
     Get.Item.Item(677, 678, 'Silk', 8, 568, 'A piece of unenchanted silk.',  EssenceValue(70, 1,  [ShardCatalog.AIR(30), ShardCatalog.EARTH(20), ShardCatalog.NATURE(3), ShardCatalog.BIND(20)])),
     Get.Item.Note(678, 677, 'Silk', 8, 568),
     Get.Item.CrabPot(679, 680, 'Crab Pot', 44, 560),

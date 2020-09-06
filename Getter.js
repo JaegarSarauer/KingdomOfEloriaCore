@@ -3396,7 +3396,7 @@ const WorldObject = {
                 }
             },
             actions: [],
-            useActions: [Action.FillBucketsWithWater(0, 53)],
+            useActions: [Action.FillBucketsWithWater(0, 60)],
             spriteIndex: spriteIndex,
         };
     },
