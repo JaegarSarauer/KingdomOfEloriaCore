@@ -275,6 +275,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.75 },
                     rotation: 0,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1448,9 +1449,10 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.75 },
+                    position: { x: 0.75, y: 0.75 },
                     rotation: 0,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1488,6 +1490,7 @@ const ItemGetter = {
                     position: { x: 0, y: 0.95 },
                     rotation: (30 * Math.PI / 180),
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1568,9 +1571,10 @@ const ItemGetter = {
                     parent: 'RIGHT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.95, y: 0.5 },
-                    position: { x: 0, y: 0.75 },
+                    position: { x: 1, y: 0.75 },
                     rotation: 5 * Math.PI / 180,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1689,6 +1693,7 @@ const ItemGetter = {
                     position: { x: 0.5, y: 0.9 },
                     rotation: 8 * Math.PI / 180,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1739,6 +1744,7 @@ const ItemGetter = {
                     position: { x: 0.5, y: 0.75 },
                     rotation: 3 * Math.PI / 180,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -1931,6 +1937,7 @@ const ItemGetter = {
                     position: { x: 0.35, y: 0.5 },
                     rotation:  -60 * Math.PI / 180,
                     UIModel: null,
+                    z: -10,
                 },
             },
             actions: [{
@@ -4103,7 +4110,6 @@ const WorldObject = {
             }
         },
         GemRock: function (id, name, skillLevelToMine, rollSuccessParams, xp, spriteIndex, spawnTimer, despawnRoll, description) {
-            let oreName = name.split(' ').length > 0 ? name.split(' ')[0].toLowerCase() : '';
             let actionsSteps = [
                 buildStepList(StepList.WALK_ADJACENT),
 
@@ -4141,7 +4147,7 @@ const WorldObject = {
             actionsSteps.push([
                 buildStep(StepType.GIVE_XP, { params: [10, xp] }),
                 buildStep(StepType.ROLL_RANDOM_EVENT, { params: [250, [spriteIndex]] }),
-                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You mine some ' + oreName + ' ore.'] })
+                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You mined a gem!'] })
             ]);
 
             actionsSteps.push([
@@ -4274,15 +4280,6 @@ const WorldObject = {
                     BASE: {
                         spriteID: spriteIndex,
                     },
-                    BOTTOM: {
-                        spriteID: spriteIndex,
-                    },
-                    MIDDLE: {
-                        spriteID: spriteIndex,
-                    },
-                    TOP: {
-                        spriteID: spriteIndex,
-                    },
                 },
                 actions: [{
                     interfaceID: 0,
@@ -4322,60 +4319,21 @@ const WorldObject = {
                 spriteIndex: spriteIndex,
             };
         },
-        TutorialTree: function(id, logId, woodName, requiredLevel, spriteIndex, successRollBase, successRoleBestChance, xp, despawnRoll, spawnTimer, description) {
-            let tree = this.Tree(id, 5, null, 1, 0, 15, 4, 25, 5, 16, 'Use your axe on the tree to get logs.');
-            let name = "Tree";
-            let logName = "logs";
-            tree.actions = [{
-                interfaceID: 0,
-                id: 2,
-                name: 'Chop',
-                steps: [
-                    buildStepList(StepList.WALK_ADJACENT),
-                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [9, requiredLevel] }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [1] }),
-                    buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You begin cutting the ' + name.toLowerCase() + '.'] }),
-                    buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
-                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [9, requiredLevel] }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [1] }),
-                    buildStep(StepType.INVENTORY_HAS_ROOM),
-                    buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [9, 1] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['WOODCUT'] }),
-                    buildStep(StepType.PLAY_SOUND, { params: [23] }),
-                    buildStep(StepType.ROLL_SKILL_SUCCESS, {
-                        params: [9, successRollBase, successRoleBestChance, true, 0.5, 0.5],
-                        stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
-                    }),
-                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [logId, 1] }),
-                    buildStep(StepType.GIVE_XP, { params: [9, xp] }),
-                    buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You get some ' + logName + '.'] }),
-                    buildStep(StepType.CHECK_CHARACTER_STATE, {
-                        params: [4, 4],
-                        stepResultPass: 'NEXT_STEP',
-                        stepResultFail: 'NEXT_STEP_LIST',
-                    }),
-                    buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}), // Tree
-                    buildStep(StepType.ROLL_DESPAWN, {
-                        params: [despawnRoll],
-                        stepResultFail: 'END_AND_REPEAT_STEP_LIST'
-                    }),
-                    buildStep(StepType.SET_RESPAWN_TIMER, { params: [spawnTimer] }),
-                    buildStep(StepType.PLAY_SOUND, {
-                        params: [41],
-                        stepResultPass: 'END_ACTION'
-                    })],
-                    [buildStep(StepType.ROLL_DESPAWN, {
-                        params: [despawnRoll],
-                        stepResultFail: 'END_AND_GOTO_LIST_3'
-                    }),
-                    buildStep(StepType.SET_RESPAWN_TIMER, { params: [spawnTimer] }),
-                        buildStep(StepType.PLAY_SOUND, {
-                        params: [41],
-                        stepResultPass: 'END_ACTION'
-                    })]
-                ],
-            }];
-            return tree;
+        Ladder: function(id, name, description, spriteID, actions = []) {
+            return  {
+                id: id,
+                name: name,
+                description: description,
+                modelName: 'ROCK',
+                modelParams: {
+                    BASE: {
+                        asset: 'worldObjects',
+                        sprite: 'ladder',
+                        spriteID: spriteID,
+                    }
+                },
+                actions: actions,
+            }
         },
         LumberCamp: function (id, woodName, woodId, woTreeId, spriteIndex, xpMultiplier, campLevel, skillLevel) {
             let name = woodName == null ? 'Lumber Camp' : woodName + ' Lumber Camp';
@@ -6471,6 +6429,188 @@ const Character = {
         let osaik = this.Human(id, 'Osaik', 11, [null, 16, null, 413, 477], HairStyle.Scruffy, HairColors.Blond, actions, 6, EyeColors.Blue );
         osaik.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
         return osaik;
+    },
+    Guide : function(id) {
+        let actions = [{
+            interfaceID: 0,
+            id: 4,
+            name: 'Talk To',
+            steps: [
+                buildStepList(StepList.WALK_ADJACENT),
+
+                // If we have previously completed the tutorial, go straight to questions dialog
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 0],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [2],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+
+                // if we are at step 1 => Give you the fishing net => step 2
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 2],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [13],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+    
+                // If we are at step 2 AND have a raw shrimp => step 3
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 3],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.HAS_INVENTORY_ITEM, { 
+                    params: [47, 1], 
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [14],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+    
+                // If we are at step 3 AND have a cooked shrimp => step 4
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 4],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.HAS_INVENTORY_ITEM, { 
+                    params: [51, 1], 
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [51, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [15],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+
+                
+                // If we are at step 3 still AND have a burnt shrimp => step 4
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 4],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.HAS_INVENTORY_ITEM, { 
+                    params: [119, 1], 
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [39],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+    
+                // If we are at step 4 AND have Osaiks key => step 5
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 5],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.HAS_INVENTORY_ITEM, { 
+                    params: [730, 1], 
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [730, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [16],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+    
+                // If we are at step 2 still, we need a raw shrimp => ask for shrimp
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 3],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [17],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+                
+                // If we are at step 3 still, we need a cooked shrimp => ask for shrimp
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 4],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [18],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+    
+                // If we are at step 4 still, we need a key => ask for shrimp
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 5],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [19],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+    
+                // If we are at step 5, we havent teleported, 
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 6],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [20],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+
+                
+                // If we are at step 6, we have teleported but not yet spoke to Osaik by Fiewon, 
+                [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                    params: [4, 7],
+                    stepResultPass: 'NEXT_STEP',
+                    stepResultFail: 'NEXT_STEP_LIST',
+                }),
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, {
+                    params: [22],
+                    stepResultPass: 'END_ACTION',
+                    stepResultFail: 'END_ACTION',
+                })],
+    
+                [buildStep(StepType.SHOW_DIALOG, {params: [2]})],
+            ],
+        }];
+        let guide = this.Human(id, 'Guide', 12, [null, 16, null, 413, 477], HairStyle.Scruffy, HairColors.DarkBrown, actions, 6, EyeColors.DarkBrown );
+        guide.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
+        return guide;
     },
     Kiaso : function(id) {
         let kiaso = this.Human(id, 'Kiaso', 12, [null, 301, null, 405, 485], HairStyle.Scruffy, HairColors.CherryRed, [{

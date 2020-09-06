@@ -699,41 +699,18 @@ module.exports.WorldObject = WorldObject = [
             ],
         }],
         spriteIndex: 46,
-    }, {
-        id: 62,
-        name: 'Ladder',
-        description: 'I can climb down this.',
-        modelName: 'ROCK',
-        modelParams: {
-            BASE: {
-                asset: 'worldObjects',
-                sprite: 'ladder',
-                spriteID: 0,
-            }
-        },
-        actions: [{
-            interfaceID: 0,
-            id: 37,
-            name: 'Climb Down',
-        }],
-    }, {
-        id: 63,
-        name: 'Ladder',
-        description: 'I can climb up this.',
-        modelName: 'ROCK',
-        modelParams: {
-            BASE: {
-                asset: 'worldObjects',
-                sprite: 'ladder',
-                spriteID: 0,
-            }
-        },
-        actions: [{
-            interfaceID: 0,
-            id: 38,
-            name: 'Climb Up',
-        }],
-    }, {
+    },
+    Get.WorldObject.Ladder(62, 'Ladder', 'I can climb down this.', 0, [{
+        interfaceID: 0,
+        id: 37,
+        name: 'Climb Down',
+    }]),
+    Get.WorldObject.Ladder(63, 'Ladder', 'I can climb up this.', 3, [{
+        interfaceID: 0,
+        id: 38,
+        name: 'Climb Up',
+    }]),
+    {
         id: 64,
         name: 'Rocks',
         description: 'These look tough to get past. Passing these will let me join Obelisk Defense.',
@@ -1082,7 +1059,11 @@ module.exports.WorldObject = WorldObject = [
         }],
         spriteIndex: 46,
     },
-    Get.WorldObject.TutorialTree(78, 5, undefined, 1, 0, 15, 4, 25, 5, 16, 'Use your axe on the tree to get logs.'),
+    Get.WorldObject.Ladder(78, 'Ladder', 'I can go up this', 3, [{
+        interfaceID: 0,
+        id: 38,
+        name: 'Climb Up',
+    }]),
     Get.WorldObject.TutorialShallowFishingPool(79),
     Get.WorldObject.Rock(80, 'Gold Rock', 25, [10, 32, 7, true, 0.5, 0.5], [[670, 1, 1, 100]], 85, 8, 120, 10, 'There appears to be gold in this rock.', 9.5),
     Get.WorldObject.DoorSkillLocked(81, 'Door', 9, 70, 1, null, 0, { x : 341, y : 47}, { x: 341, y: 46 }, 'Through the door cracks you see an exclusive woodcutting area.' ),
