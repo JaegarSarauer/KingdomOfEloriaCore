@@ -3930,7 +3930,7 @@ const WorldObject = {
                 name: 'Deep Fishing Pool',
                 description: 'A swirling pool of fish are under the surface. They look big.',
                 requirements: ItemDetail.build([
-                    ItemDetail.levelSkillDetail('30-60', 12, 'FISH'),
+                    ItemDetail.levelSkillDetail('40-60', 12, 'FISH'),
                     ItemDetail.itemNameDetail('Fishing Net', 'TOOL_NAME'),
                 ]),
                 modelName: 'FISHING_POOL',
