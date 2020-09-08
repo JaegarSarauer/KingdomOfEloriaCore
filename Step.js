@@ -21,6 +21,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['string'], //message
         params: [],
     },
+    SEND_CLIENT_STATUS: {
+        id: 'SEND_CLIENT_STATUS',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['string'], //message
+        params: [],
+    },
     SEND_GLOBAL_MESSAGE: {
         id: 'SEND_GLOBAL_MESSAGE',
         stepResultFail: 'END_ACTION',
@@ -1490,6 +1497,7 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
 
 try {
     const StepSendClientMessage = require('../internal/Steps/StepSendClientMessage');
+    const StepSendClientStatus = require('../internal/Steps/StepSendClientStatus');
     const StepSendGlobalMessage = require('../internal/Steps/StepSendGlobalMessage');
     const StepIsAdjacent = require('../internal/Steps/StepIsAdjacent');
     const StepWalkAdjacent = require('../internal/Steps/StepWalkAdjacent');
@@ -1665,6 +1673,11 @@ try {
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSendClientMessage.StepSendClientMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        SEND_CLIENT_STATUS: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSendClientMessage.StepSendClientMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
