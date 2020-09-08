@@ -302,9 +302,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Bags can be crafted through sewing multiple cloth together with thread and a drawstring. To create a tier 1 bag, you need three blue cloth, three threads, a needle and a drawstring. Additional cloth can be sewn onto the bag to provide additional storage capacity.',
 }, {
     id: 38,
-    title: '<b>Kiaso</b>', // <What are Tomes of Collection?>
-    message: 'A <note>Tome of Collection</note> is a item that will automatically collect other items dropped by enemies you slay. This allows you to pick up many unstackable items while in combat, even if you are not present to pick them up yourself.\n\n' +
-    'Each Tome of Collection collects a single type of item, randomly chosen upon creation. Rumor has it, <note>The Mysterious Man</note> in Hyrill has the ability to redirect the energy of the tome, letting it collect a different item.',
+    title: '<b>Kiaso</b>', // <What are Gems>
+    message: 'A <note>Gem</note> is a enchantable item that can be found through mining. Once enchanted, they can be crafted into jewelry.\n\n' +
+    'Enchanted gems can provide various effects, such as increasing your power, collecting dropped items, or even teleporting.',
 },
 {
     id: 39,
