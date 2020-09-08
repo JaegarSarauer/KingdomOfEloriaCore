@@ -1,13 +1,10 @@
 const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     id: 0,
     title: '<b>Welcome to Guilds of Gods!</b>',
-    message: '<note>Eloria</note> has been overruled by a corrupt emperor who has pitted the human race against goblins and orcs! \n\n' + 
-
-    'Explore each guild and choose a community to join in your fight against the evil tyrant. Whether you fancy fishing, mining, or woodcutting, all guilds play a role in the fight against the emperor.\n\n' + 
+    message: 'Welcome to the beautiful lands of Eloria.\n\n' +
     
-    'Complete quests and build up your skills so when the time comes to face him, you are ready. With your help, the residents of <note>Eloria</note> may live in peace once again.',
+    'Start your journey by customizing your adventurer.',
     continueSteps: [[
-        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_CHANGE_APPEARANCE, {params: [1]}),
     ]],
@@ -22,11 +19,11 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ' - View the right menu for adventurer controls such as: inventory, skill levels, equipment, combat settings, and spellbook.\n\n' +
 
     '<b>\tGetting Started</b>\n' + 
-    'Move around and click to interact with anything on <note>Tutorial Island</note>. Find a man named <note>Osaik</note> to start your journey.',
+    'Your journey begins in the <note>Guild Hall Training Grounds</note>, where you complete your entrance exam.\n\n' +
+
+    'Move around and click to interact with anything in the training grounds.',
     continueSteps: [[
-        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
     ]],
 },{
     id: 2,
@@ -110,61 +107,61 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 13,
-    title: '<b>Guide</b>',
-    message: '[Oh no, the lader broke. What will we do]',
+    title: '<b>Welcome to Guilds of Gods</b>',
+    message: '<note>Eloria</note> has been overruled by a corrupt emperor who has pitted the human race against goblins and orcs! \n\n' + 
+
+    'Explore each guild and choose a community to join in your fight against the evil tyrant. Whether you fancy fishing, mining, or woodcutting, all guilds play a role in the fight against the emperor.\n\n' +
+
+    'Select your guild',
+    //'Complete quests and build up your skills so when the time comes to face him, you are ready. With your help, the residents of <note>Eloria</note> may live in peace once again.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
-        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [152, 86]}), // Fishing pool
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [117, 1]}), // Fishing net
+        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 1]}),
+        // TODO: Go to Guild Selection, which THEN calls SET_CHARACTER_STATE from (4,1) to (4,2)
+        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+        // Guild Selection on continue decides where we teleport and which quest we started. Below is "Start Woodcutting"
+        buildStep(StepType.SET_USER_GOAL_STATE, { params: [4, [1]] }),
+        buildStep(StepType.SHOW_DIALOG, {params: [1] }),
     ]],
 },
 {
     id: 14,
-    title: '<b>Guild</b>',
-    message: '[We cant get out. Help me]',
+    title: '<b>Guide</b>',
+    message: 'First, grab all the materials needed to create a camp',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 3]}),
-        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [125, 78]}), // Tree
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 4]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [1, 1]}), // Copper axe
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [46, 1]}), // Matchboxes
     ]],
 },
 {
     id: 15,
     title: '<b>Guide</b>',
-    message: 
-    '[Ah thank you. Where were we... Oh yes. This is why nobody goes in the guild cellar. Let me show you the rest of the guild.]',
+    message: 'Use the <note>Saw</note on the <note>Logs</note> to create a </note>Camp</note>',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 4]}),
-        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [-1]}),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 5]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [13, 1]}), // Copper dagger
     ]],
 },
 {
     id: 16,
     title: '<b>Guide</b>',
-    message: '[Oh yeah, I need to fill my weekly quota. Come along, I\'ll show you how to setup a camp]',
+    message: 'Operate your camp and create 20 <note>Noted Logs</note> to pass the exam.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 5]}),
-        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [-1]}), // Tree
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 6]}),
-        buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [729, 1]}), // Fiewon teleport
     ]],
 }, {
     id: 17,
     title: '<b>Guide</b>',
-    message: '[Thanks you for items for task]',
+    message: 'Congratulations, you have passed your exam!',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DIALOG, {params: [18]}),
+    ]],
 }, {
     id: 18,
     title: '<b>Guide</b>',
-    message: '[Post-tutorial message]',
+    message: 'Allow me to give you a tour of our <note>Guild</note>',
+    continueSteps: [[
+        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, 5]}),
+    ]],
 }, {
     id: 19,
     title: '<b>Osaik</b>',

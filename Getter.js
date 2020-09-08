@@ -6432,22 +6432,14 @@ const Character = {
         osaik.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
         return osaik;
     },
-    Guide : function(id) {
-        let actions = [{
-            interfaceID: 0,
-            id: 4,
-            name: 'Talk To',
-            steps: [
-                buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.SHOW_DIALOG, {params: [18]})],
-            ],
-        }];
-        let guide = this.Human(id, 'Guide', 12, [null, 16, null, 413, 477], HairStyle.Scruffy, HairColors.DarkBrown, actions, 6, EyeColors.DarkBrown );
+    BaseGuide : function(id, guildID) {
+        let guide = this.Human(id, 'Guide', 11, [null, 16, null, 413, 477], HairStyle.Scruffy, HairColors.DarkBrown, [], 6, EyeColors.DarkBrown );
         guide.stats = [[0, 30], [1, 30], [2, 30], [3, 30], [4, 30], [5, 30], [6, 30], [7, 30], [8, 30], [11, 30],];
         return guide;
     },
-    DownstairsGuide : function(id) {
-        let actions = [{
+    TrainingGuide : function(id, guildID) {
+        let guide = this.BaseGuide(id, guildID);
+        guide.actions = [{
             interfaceID: 0,
             id: 4,
             name: 'Talk To',
@@ -6462,7 +6454,7 @@ const Character = {
                 }),
                 buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
-                    params: [13],
+                    params: [14],
                     stepResultPass: 'END_ACTION',
                     stepResultFail: 'END_ACTION',
                 })],
@@ -6497,12 +6489,11 @@ const Character = {
                 [buildStep(StepType.SHOW_DIALOG, {params: [14]})],
             ],
         }];
-        let guide = this.Guide(id);
-        guide.actions = actions;
         return guide;
     },
-    AboveGroundGuide : function(id, guildID) {
-        let actions = [{
+    TourGuide : function(id, guildID) {
+        let guide = this.BaseGuide(id, guildID);
+        guide.actions = [{
             interfaceID: 0,
             id: 4,
             name: 'Talk To',
@@ -6539,8 +6530,6 @@ const Character = {
                 [buildStep(StepType.SHOW_DIALOG, {params: [18]})],
             ],
         }];
-        let guide = this.Guide(id);
-        guide.actions = actions;
         return guide;
     },
     Kiaso : function(id) {
