@@ -1,4 +1,5 @@
 const ItemState = require('../def/interface/ItemStateDef');
+const MapManager = require('../manager/MapManager');
 
 // NOTE: upgrade for a ID means upgrading to that ID
 const AccountVersion = [{
@@ -68,6 +69,21 @@ const AccountVersion = [{
             if (tutorialState != 1) {
                 adv.appearanceState.setEntityAtSlot(1);
                 adv.interfaces.enableInterfaces(obInterfaces);
+            }
+        })
+    },
+}, {
+    id: 2,
+    upgradeData: (userDef)  => userDef,
+    onUpgradeComplete: (userDef) => {
+        userDef.forAllAdventurers((adv) => {
+            if (adv.id == 0) {
+                MapManager.i.changeMap(adv, 2);
+                adv.setPosition(26, 118);
+                adv.appearanceState.setEntityAtSlot(1);
+                adv.state.updateState(4, 1);
+                adv.dialog.showDialog(0); // Emperor vs Guilds => Choose Guild
+                adv.interfaces.enableInterfaces([13, 17]);
             }
         })
     },
