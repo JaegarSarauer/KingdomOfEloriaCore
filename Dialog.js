@@ -24,6 +24,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Move around and click to interact with anything in the training grounds.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SEND_CLIENT_STATUS, {params: ['Click on the guide to get instructions.']})
     ]],
 },{
     id: 2,
