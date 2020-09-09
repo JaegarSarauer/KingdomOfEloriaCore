@@ -74,5 +74,9 @@ export const Timer = [
     {
         id: 18,
         name: 'Test Timer',
+    },
+    {
+        id: 19,
+        name: 'Active Task Timer',
     }
 ];

@@ -28,6 +28,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['string'], //message
         params: [],
     },
+    START_TUTORIAL_TIMER: {
+        id: 'START_TUTORIAL_TIMER',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [''],
+        params: [],
+    },
     SEND_GLOBAL_MESSAGE: {
         id: 'SEND_GLOBAL_MESSAGE',
         stepResultFail: 'END_ACTION',
@@ -460,6 +467,13 @@ module.exports.StepType = StepType = {
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
         paramTypes: ['number', 'number'], //timerID, ticks
+        params: [],
+    },
+    ADD_TIMER: {
+        id: 'ADD_TIMER',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'function'], // timerID, ticks, callback
         params: [],
     },
     CHANGE_LEVEL: {
@@ -1548,6 +1562,7 @@ try {
     const StepRemoveEquipmentItem = require('../internal/Steps/StepRemoveEquipmentItem');
     const StepRemoveOwnerEquipmentItem = require('../internal/Steps/StepRemoveOwnerEquipmentItem');
     const StepUpdateTimer = require('../internal/Steps/StepUpdateTimer');
+    const StepAddTimer = require('../internal/Steps/StepAddTimer');
     const StepChangeLevel = require('../internal/Steps/StepChangeLevel');
     const StepDespawnOwner = require('../internal/Steps/StepDespawnOwner');
     const StepDepositItem = require('../internal/Steps/StepDepositItem');
@@ -1670,6 +1685,7 @@ try {
     const StepRemoveGuildChestItem = require('../internal/Steps/StepRemoveGuildChestItem');
     const StepOpenGuildChestInterface = require('../internal/Steps/StepOpenGuildChestInterface');
     const StepDepositGuildChestItems = require('../internal/Steps/StepDepositGuildChestItems');
+    const StepStartTutorialTimer = require('../internal/Steps/StepStartTutorialTimer');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
@@ -1679,7 +1695,12 @@ try {
         },
         SEND_CLIENT_STATUS: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSendClientMessage.StepSendClientMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+                return new StepSendClientStatus.StepSendClientStatus(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        START_TUTORIAL_TIMER: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepStartTutorialTimer.StepStartTutorialTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SAY_MESSAGE: {
@@ -2075,6 +2096,11 @@ try {
         UPDATE_TIMER: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepUpdateTimer.StepUpdateTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        ADD_TIMER: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepAddTimer.StepAddTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         CHANGE_LEVEL: {
