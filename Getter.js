@@ -2689,7 +2689,7 @@ const ItemGetter = {
         };
     },
     CrabPot : function(id, notedID, fullName, value, spriteIndex) {
-        let item = this.Item(id, notedID, fullName, value, spriteIndex, 'A pot for catching crabs.', [ShardCatalog.EARTH(80), ShardCatalog.METAL(30)], false);
+        let item = this.Item(id, notedID, fullName, value, spriteIndex, 'A pot for catching crabs.', EssenceValue(70, 28, [ShardCatalog.EARTH(80), ShardCatalog.METAL(30)]), false);
         return item;
     },
     Fish: function(id, notedID, name, value, spriteIndex, amountHealed, cookingLevel, incinerationLevel, essenceValue) {
@@ -3660,44 +3660,65 @@ const WorldObject = {
                         buildStep(StepType.INVENTORY_HAS_ROOM),
                         buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
                         buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
-                        buildStep(StepType.PLAY_SOUND, { params: [35] }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                            params: [5, 105, 12, 0.15, true, 0.1],
+                        buildStep(StepType.PLAY_SOUND, { params: [35] }),],
+                        [buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 20, 8, true, 0.15, 0.1],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
-                        })],
-                        [buildStep(StepType.ROLL_DESPAWN, {
+                        }),
+                        buildStep(StepType.ROLL_DESPAWN, {
                             params: [250],
                             stepResultFail: 'NEXT_STEP',
                         }),
                         buildStep(StepType.SET_RESPAWN_TIMER, {
                             params: [240],
                             stepResultFail: 'NEXT_STEP',
+                        })],
+                        [buildStep(StepType.HAS_SKILL_LEVEL, {
+                            params: [12, 30, false],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
                         }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-2.25, 5, 12, 0.25, true, 0.25], }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 25] }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 15, 4, true, 0.15, 0.1],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [50, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 100] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish some shrimp.'],
+                            params: ['You fish a mullet.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-4.75, 10, 12, 0.25, true, 0.25], }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [48, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 50] }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a sardine.'],
-                            stepResultPass: 'END_AND_GOTO_LIST_3',
-                        }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-7.25, 15, 12, 0.25, true, 0.25], }),
+                        [buildStep(StepType.HAS_SKILL_LEVEL, {
+                            params: [12, 20, false],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 12, 3, true, 0.15, 0.1],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [49, 1] }),
                         buildStep(StepType.GIVE_XP, { params: [12, 75] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You fish a herring.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
-                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [50, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 100] }),
+                        [buildStep(StepType.HAS_SKILL_LEVEL, {
+                            params: [12, 10, false],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 10, 2, true, 0.15, 0.1],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [48, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 50] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a mullet.'],
+                            params: ['You fish a sardine.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 25] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish some shrimp.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
                     ]
@@ -3817,50 +3838,51 @@ const WorldObject = {
                         buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, skillLevel] }),
                         buildStep(StepType.INVENTORY_HAS_ROOM),
                         buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
-                        buildStep(StepType.PLAY_SOUND, { params: [35] }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                            params: [-70, 80, 12, 1, false, 0.0],
+                        buildStep(StepType.PLAY_SOUND, { params: [35] })],
+                        [buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 36, 22, false, 0.15, 0.1],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
-                        })],
-                        [buildStep(StepType.ROLL_DESPAWN, {
-                            params: [250],
+                        }),
+                        buildStep(StepType.ROLL_DESPAWN, {
+                            params: [280],
                             stepResultFail: 'NEXT_STEP',
                         }),
                         buildStep(StepType.SET_RESPAWN_TIMER, {
-                            params: [240],
+                            params: [340],
                             stepResultFail: 'NEXT_STEP',
+                        })],
+                        [buildStep(StepType.HAS_SKILL_LEVEL, {
+                            params: [12, 70, false],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
                         }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
-                            params: [-70, 100, 12, 1, false, 0],
-                            stepResultFail: 'NEXT_STEP_LIST',
-                            stepResultPass: 'NEXT_STEP',
-                         }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 30] }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 16, 5, false, 0.15, 0.1],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [844, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 200] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish some shrimp.'],
+                            params: ['You fish an octopus.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
-                            params: [-70, 105, 12, 1, false, 0],
-                            stepResultFail: 'NEXT_STEP_LIST',
-                            stepResultPass: 'NEXT_STEP',
-                         }),
+                        [buildStep(StepType.HAS_SKILL_LEVEL, {
+                            params: [12, 10, false],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 11, 2, true, 0.15, 0.1],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [48, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 55] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 50] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You fish a sardine.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { 
-                            params: [-70, 110, 12, 1, false, 0],
-                            stepResultFail: 'END_AND_GOTO_LIST_3',
-                            stepResultPass: 'NEXT_STEP',
-                         }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [844, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 200] }),
+                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 25] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a octopus.'],
+                            params: ['You fish some shrimp.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
                     ]
@@ -3941,49 +3963,70 @@ const WorldObject = {
                         [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You cast your fishing net.'] }),
                         buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
                         [buildStep(StepType.IS_ADJACENT),
-                        buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 40] }),
+                        buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 30] }),
                         buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
                         buildStep(StepType.INVENTORY_HAS_ROOM),
                         buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
                         buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
-                        buildStep(StepType.PLAY_SOUND, { params: [35] }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                            params: [5, 105, 12, 0.15, true, 0.1],
+                        buildStep(StepType.PLAY_SOUND, { params: [35] }),],
+                        [buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 26, 12, true, 0.15, 0.1],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
-                        })],
-                        [buildStep(StepType.ROLL_DESPAWN, {
+                        }),
+                        buildStep(StepType.ROLL_DESPAWN, {
                             params: [250],
                             stepResultFail: 'NEXT_STEP',
                         }),
                         buildStep(StepType.SET_RESPAWN_TIMER, {
                             params: [300], // Extra minute respawn timer
                             stepResultFail: 'NEXT_STEP',
+                        })],
+                        [buildStep(StepType.HAS_SKILL_LEVEL, {
+                            params: [12, 60, false],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
                         }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-9.75, 20, 12, 0.25, true, 0.25], }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [50, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 100] }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 16, 4.5, false, 0.15, 0.1],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [247, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 175] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a mullet.'],
+                            params: ['You fish a starslug.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-11.75, 25, 12, 0.25, true, 0.25], }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [232, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 125] }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a boxfish.'],
-                            stepResultPass: 'END_AND_GOTO_LIST_3',
-                        }),],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-13.75, 30, 12, 0.25, true, 0.25], }),
+                        [buildStep(StepType.HAS_SKILL_LEVEL, {
+                            params: [12, 50, false],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 13, 3, true, 0.15, 0.1],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
                         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [241, 1] }),
                         buildStep(StepType.GIVE_XP, { params: [12, 150] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You fish a rockfish.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
-                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [247, 1] }),
-                        buildStep(StepType.GIVE_XP, { params: [12, 175] }),
+                        [buildStep(StepType.HAS_SKILL_LEVEL, {
+                            params: [12, 40, false],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 10, 2, true, 0.15, 0.1],
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [232, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 125] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                            params: ['You fish a starslug.'],
+                            params: ['You fish a boxfish.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [50, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 100] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish a mullet.'],
                             stepResultPass: 'END_AND_GOTO_LIST_3',
                         }),],
                     ]

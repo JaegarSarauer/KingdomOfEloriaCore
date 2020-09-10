@@ -256,7 +256,7 @@ module.exports.StepType = StepType = {
         id: 'HAS_SKILL_LEVEL',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number'], //skillID, reqLevel
+        paramTypes: ['number', 'number', 'boolean'], //skillID, reqLevel, sendFailMessage = true
         params: [],
     },
     HAS_COMBAT_LEVEL: {
