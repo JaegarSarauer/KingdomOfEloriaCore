@@ -371,6 +371,7 @@ Get.Character.AcernisMeleeGuard(115, 'Elite Guard', 5), // Woodcutting Gothite G
 Get.Character.AcernisMeleeGuard(116, 'Elite Guard', 6), // Woodcutting Osmium Guard
 Get.Character.AcernisRangeGuard(117, 'Archer', 2), // Woodcutting Archer
 Get.Character.AcernisRangeGuard(118, 'Elite Archer', 6), // Woodcutting Elite Archer
+Get.Character.Guide(119), // Downstairs Tutorial Guide
 ];
 
 // let npcs = [];
