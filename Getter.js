@@ -4378,6 +4378,61 @@ const WorldObject = {
                 actions: actions,
             }
         },
+        TutorialTree: function(id, logId, woodName, requiredLevel, spriteIndex, successRollBase, successRoleBestChance, xp, despawnRoll, spawnTimer, description) {
+            let tree = this.Tree(id, 5, null, 1, 0, 15, 4, 25, 5, 16, 'Use your axe on the tree to get logs.');
+            let name = "Tree";
+            let logName = "logs";
+            tree.actions = [{
+                interfaceID: 0,
+                id: 2,
+                name: 'Chop',
+                steps: [
+                    buildStepList(StepList.WALK_ADJACENT),
+                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [9, requiredLevel] }),
+                    buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [1] }),
+                    buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You begin cutting the ' + name.toLowerCase() + '.'] }),
+                    buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
+                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [9, requiredLevel] }),
+                    buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [1] }),
+                    buildStep(StepType.INVENTORY_HAS_ROOM),
+                    buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [9, 1] }),
+                    buildStep(StepType.PLAY_ANIMATION, { params: ['WOODCUT'] }),
+                    buildStep(StepType.PLAY_SOUND, { params: [23] }),
+                    buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                        params: [9, successRollBase, successRoleBestChance, true, 0.5, 0.5],
+                        stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
+                    }),
+                    buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [logId, 1] }),
+                    buildStep(StepType.GIVE_XP, { params: [9, xp] }),
+                    buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You get some ' + logName + '.'] }),
+                    buildStep(StepType.CHECK_CHARACTER_STATE, {
+                        params: [4, 4],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}), // Tree
+                    buildStep(StepType.ROLL_DESPAWN, {
+                        params: [despawnRoll],
+                        stepResultFail: 'END_AND_REPEAT_STEP_LIST'
+                    }),
+                    buildStep(StepType.SET_RESPAWN_TIMER, { params: [spawnTimer] }),
+                    buildStep(StepType.PLAY_SOUND, {
+                        params: [41],
+                        stepResultPass: 'END_ACTION'
+                    })],
+                    [buildStep(StepType.ROLL_DESPAWN, {
+                        params: [despawnRoll],
+                        stepResultFail: 'END_AND_GOTO_LIST_3'
+                    }),
+                    buildStep(StepType.SET_RESPAWN_TIMER, { params: [spawnTimer] }),
+                        buildStep(StepType.PLAY_SOUND, {
+                        params: [41],
+                        stepResultPass: 'END_ACTION'
+                    })]
+                ],
+            }];
+            return tree;
+        },
         LumberCamp: function (id, woodName, woodId, woTreeId, spriteIndex, xpMultiplier, campLevel, skillLevel) {
             let name = woodName == null ? 'Lumber Camp' : woodName + ' Lumber Camp';
             let treeName = woodName == null ? 'trees' : woodName.toLowerCase() + ' trees';
