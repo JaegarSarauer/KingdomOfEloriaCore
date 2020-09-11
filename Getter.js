@@ -5430,7 +5430,7 @@ const Character = {
         def.shopID = shopsMenuInterfaceID;
         return def;
     },
-    Guard: function(id, name, spriteID = null, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822,) {
+    Guard: function(id, name, spriteID = null, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, bountyTypeEnterSafeAreas = false) {
         if (spriteID == null) {
             let skinTone = Math.floor(Math.random() * 6) + 1;
             let genderID = Math.floor(Math.random() * 3) + 1;
@@ -5450,7 +5450,7 @@ const Character = {
             name: 'Attack',
             steps: [
                 [buildStep(StepType.SET_BOUNTY, {
-                    params: [false, 120],
+                    params: [bountyTypeEnterSafeAreas, 120],
                 })]
             ],
         }, {
@@ -5474,7 +5474,7 @@ const Character = {
                     stepResultFail: StepResult.NEXT_STEP_LIST,
                 }),
                 buildStep(StepType.SET_BOUNTY, {
-                    params: [false, 300],
+                    params: [bountyTypeEnterSafeAreas, 300],
                 }),
                 buildStep(StepType.DAMAGE, {params: [2]}),
                 buildStep(StepType.SEND_CLIENT_MESSAGE, {
@@ -5505,7 +5505,7 @@ const Character = {
         return human;
     },
     MeleeGuard: function(id, name, tier, spriteID = null, hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822) {
-        let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor );
+        let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor, false);
         guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
@@ -5537,7 +5537,7 @@ const Character = {
         return guard;
     },
     ArcheryGuard: function(id, name, tier, spriteID = null, hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822) {
-        let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor );
+        let guard = this.Guard(id, name, spriteID, null, hairStyleId, hairColor, faceId, eyeColor, false);
         guard.isMultiTarget = true;
         tier = Math.min(6, Math.max(1, tier));
         guard.stats = [[0, tier * 10], [1, 40 + tier * 10], [2, 20 + tier * 10], [3, 5 + tier * 3], [4, 5 + tier * 3], [5, tier * 15], [6, tier], [7, tier], [8, 10 + tier * 3], [11, 30 + tier * 10]];
@@ -5726,6 +5726,10 @@ const Character = {
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isGuard = false;
         guard.isEmperorGuard = true;
+
+        //make white skull bounty
+        guard.actions[0].steps[0][0].params[0] = true;
+
         guard.drops = [
             DropTables.Table(1, [[0, 5, 25, 20], [0, 10, 50, 20], [16, 1, 1, 5], [11, 1, 1, 5], [27, 1, 1, 10], [503, 10, 30, 10], [502, 8, 22, 10], [24, 1, 1, 10]]),
             DropTables.UncutGems(32 - (tier * 2)), 
@@ -5757,6 +5761,9 @@ const Character = {
     EmperorMagicGuard: function(id, name, tier) {
         let guard = this.MagicGuard(id, name, tier);
 
+        //make white skull bounty
+        guard.actions[0].steps[0][0].params[0] = true;
+        
         guard.modelOverrideName = 'EMPEROR_GUARDS';
         guard.isEmperorGuard = true;
         guard.isGuard = false;
@@ -5798,6 +5805,8 @@ const Character = {
         guard.doNotRespawn = true;
         guard.isEmperorGuard = true;
         guard.isGuard = false;
+        //make white skull bounty
+        guard.actions[0].steps[0][0].params[0] = true;
         return guard;
     },
     GuildMaster: function(id, name, guildID) {

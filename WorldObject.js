@@ -1116,7 +1116,7 @@ module.exports.WorldObject = WorldObject = [
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.ROLL_DROP_TABLE, { 
-                    params: [1, [[89, 2, 3, 25], [90, 1, 2, 20], [537, 1, 1, 10], [168, 8, 16, 20], [169, 6, 15, 10], [46, 4, 8, 10], [170, 4, 8, 5]]],
+                    params: [1, [[89, 1, 2, 10], [89, 1, 1, 15], [90, 1, 1, 20], [537, 1, 1, 4], [672, 1, 2, 6], [168, 8, 16, 20], [169, 6, 15, 10], [46, 4, 8, 10], [170, 4, 8, 5]]],
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.ROLL_DROP_TABLE, { 
@@ -1125,8 +1125,6 @@ module.exports.WorldObject = WorldObject = [
                 }),
                 buildStep(StepType.GIVE_XP, { params: [20, 250] }),
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You open the chest and find some loot.'] }),
-                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['The goblins send out a war call in your name.'] }),
-                buildStep(StepType.SEND_GLOBAL_MESSAGE, { params: [4, 'A player has just stolen from the goblin chests and they want them dead!'] }),
                 buildStep(StepType.ROLL_DESPAWN, {
                     params: [1],
                     stepResultFail: 'END_ACTION'
