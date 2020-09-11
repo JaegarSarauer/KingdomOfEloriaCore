@@ -18,6 +18,7 @@ const FacialStyles = require("./Model").FacialStyles;
 const EyeColors = require("./Model").EyeColors;
 const ShardIDs = require("./Essence").ShardIDs;
 const EssenceIDs = require("./Essence").EssenceIDs;
+const Guilds = require("./Guild").Guilds;
 
 const LEVEL_INDEX = {
     COOKING: 13
@@ -6437,6 +6438,7 @@ const Character = {
     },
     TrainingGuide : function(id, guildID) {
         let guide = this.BaseGuide(id, guildID);
+        let questID = Guilds[guildID].questID;
         guide.actions = [{
             interfaceID: 0,
             id: 4,
@@ -6444,47 +6446,147 @@ const Character = {
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
     
+/**
+ * case 0: // Unstarted
+                                break;
+                            case 1: // Began exam
+                                adv.state.setEntityAtSlot(7, ['Talk to the guide to learn your task.']);
+                                break
+                            case 2: // Grab a saw
+                                adv.state.setEntityAtSlot(7, ['Pick up the saw, 5 logs and 2 tools.']);
+                                break;
+                            case 3: // Create a mining camp
+                                adv.state.setEntityAtSlot(7, ['Use the saw on the logs and build a camp.']);
+                                break;
+                            case 4: // Operate the camp and get 10 noted items
+                                adv.state.setEntityAtSlot(7, ['Right click on the camp and \'Operate\' it.']);
+                                break;
+                            case 5: // Speak to guide and pass exam
+                                adv.state.setEntityAtSlot(7, ['Speak to your guide to complete your exam.']);
+                                break;
+ * 
+ * 
+ */
+
+
                 // If we have started the tutorial & not talked to the NPC
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 2],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [14],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
+                
+                [
+                    buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
+                        params: [questID, [7], ['EQUALS']],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
+                        params: [17],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
+                [
+                    buildStep(StepType.ASSERT_GOAL_STATES, { // Unstarted
+                        params: [questID, [0], ['EQUALS']],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, { // Default message
+                        params: [16],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
+                [
+                    buildStep(StepType.ASSERT_GOAL_STATES, { // Began exam
+                        params: [questID, [1], ['EQUALS']],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, { // Talk to the guide to learn your task.
+                        params: [14],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
+                [
+                    buildStep(StepType.ASSERT_GOAL_STATES, { // Speak to guide and pass exam
+                        params: [questID, [5], ['EQUALS']],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
+                        params: [17],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
+                [
+                    buildStep(StepType.ASSERT_GOAL_STATES, { // Speak to guide and pass exam
+                        params: [questID, [6], ['EQUALS']],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
+                        params: [17],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
+                // Combine 2/3/4 into 'in process of exam' => 'Re-explains the task'
+                [
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, { // Ex-explain task
+                        params: [36],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
+                
+
+
+                // [buildStep(StepType.ASSERT_GOAL_STATES, {
+                //     params: [4, 2],
+                //     stepResultPass: 'NEXT_STEP',
+                //     stepResultFail: 'NEXT_STEP_LIST',
+                // }),
+                // buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                // buildStep(StepType.SHOW_DIALOG, {
+                //     params: [14],
+                //     stepResultPass: 'END_ACTION',
+                //     stepResultFail: 'END_ACTION',
+                // })],
 
                 // If we have started the tutorial & spoke to the NPC
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 3],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [14],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
+                // [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                //     params: [4, 3],
+                //     stepResultPass: 'NEXT_STEP',
+                //     stepResultFail: 'NEXT_STEP_LIST',
+                // }),
+                // buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                // buildStep(StepType.SHOW_DIALOG, {
+                //     params: [14],
+                //     stepResultPass: 'END_ACTION',
+                //     stepResultFail: 'END_ACTION',
+                // })],
 
-                // If we fixed the ladder
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 4],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [15],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
+                // // If we fixed the ladder
+                // [buildStep(StepType.CHECK_CHARACTER_STATE, {
+                //     params: [4, 4],
+                //     stepResultPass: 'NEXT_STEP',
+                //     stepResultFail: 'NEXT_STEP_LIST',
+                // }),
+                // buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                // buildStep(StepType.SHOW_DIALOG, {
+                //     params: [15],
+                //     stepResultPass: 'END_ACTION',
+                //     stepResultFail: 'END_ACTION',
+                // })],
     
     
-                [buildStep(StepType.SHOW_DIALOG, {params: [14]})],
             ],
         }];
         return guide;

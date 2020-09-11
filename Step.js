@@ -1,4 +1,3 @@
-
 module.exports.StepResult = StepResult = {
     NEXT_STEP: 'NEXT_STEP', //continue to next step
     NEXT_STEP_LIST: 'NEXT_STEP_LIST', //end the step, go to next step list
@@ -33,6 +32,13 @@ module.exports.StepType = StepType = {
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
         paramTypes: [''],
+        params: [],
+    },
+    START_GUILD_ENTRANCE_QUEST_TIMER: {
+        id: 'START_GUILD_ENTRANCE_QUEST_TIMER',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], // guildID
         params: [],
     },
     SEND_GLOBAL_MESSAGE: {
@@ -1686,6 +1692,7 @@ try {
     const StepOpenGuildChestInterface = require('../internal/Steps/StepOpenGuildChestInterface');
     const StepDepositGuildChestItems = require('../internal/Steps/StepDepositGuildChestItems');
     const StepStartTutorialTimer = require('../internal/Steps/StepStartTutorialTimer');
+    const StepStartGuildEntranceQuestTimer = require('../internal/Steps/StepStartGuildEntranceQuestTimer');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         SEND_CLIENT_MESSAGE: {
@@ -1701,6 +1708,11 @@ try {
         START_TUTORIAL_TIMER: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepStartTutorialTimer.StepStartTutorialTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        START_GUILD_ENTRANCE_QUEST_TIMER : {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepStartGuildEntranceQuestTimer.StepStartGuildEntranceQuestTimer(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SAY_MESSAGE: {

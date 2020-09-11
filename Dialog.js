@@ -15,7 +15,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ' - Left click your mouse to move around and interact with your surrounding world and items. Right click to view more options.\n\n' + 
 
     ' - View the left menu for account controls such as: game notifications, chat room, friends list, settings and quests list.\n\n' +
-
+                                
     ' - View the right menu for adventurer controls such as: inventory, skill levels, equipment, combat settings, and spellbook.\n\n' +
 
     '<b>\tGetting Started</b>\n' + 
@@ -24,6 +24,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Move around and click to interact with anything in the training grounds.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.START_TUTORIAL_TIMER),
+        buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
     ]],
 },{
     id: 2,
@@ -127,15 +129,22 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 14,
     title: '<b>Guide</b>',
-    message: 'First, grab all the materials needed to create a camp',
+    message: 'First, grab all the materials needed to create a camp.\n\n' +
+
+    'Then, create your camp by using a saw on the logs.\n\n' +
+    
+    'Once constructed, right click the\'operate\' option to start.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [2]]}),
     ]],
 },
 {
     id: 15,
     title: '<b>Guide</b>',
-    message: 'Use the <note>Saw</note on the <note>Logs</note> to create a </note>Camp</note>',
+    message: 'Grab all the materials needed to create a camp.\n\n' +
+
+    'Create and operate your camp. You will need to produce 20 noted pieces to complete your exam.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
@@ -143,7 +152,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 16,
     title: '<b>Guide</b>',
-    message: 'Operate your camp and create 20 <note>Noted Logs</note> to pass the exam.',
+    message: 'Nice to see you again.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
@@ -159,8 +168,10 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Guide</b>',
     message: 'Allow me to give you a tour of our <note>Guild</note>',
     continueSteps: [[
+        buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, -1]}),
         buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, 5]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 }, {
     id: 19,
@@ -720,5 +731,12 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
             
             'You\'re going to love it!',
 },]);
+
+const DialogStrings = {
+    0 : 'Copper Axe',
+    1 : 'Copper Pickaxe',
+    2 : 'Fishing Net',
+};
+
 
 module.exports.Dialogs = Dialogs;
