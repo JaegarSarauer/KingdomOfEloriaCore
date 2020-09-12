@@ -63,7 +63,8 @@ module.exports.Interface = [
                 actionInterval: 0,
                 steps: [
                     buildStepList(StepList.WALK_ADJACENT),
-                    [buildStep(StepType.OPEN_STORAGE_INTERFACE)]
+                    [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.OPEN_STORAGE_INTERFACE)]
                 ],
             },
             {
