@@ -2651,6 +2651,8 @@ const Item = Object.freeze([
     Get.Item.Note(529, 528, 'Skeleton Bow', 680, 306),
     (() => {
         let shield = Get.Item.Shield(530, 531, 'Ghostly Shield', 1200, 307, [0, 0, 2, 0, 0, 0, 0, 0, 16], 3.5, 35, 8);
+        shield.model.LEFT_TOOL.rotation = 90 / 180 * Math.PI;
+        shield.model.LEFT_TOOL.position.y -= 0.25;
         shield.model.LEFT_TOOL.sprite = 'ghostShield';
         shield.model.LEFT_TOOL.spriteID = 0;
         return shield;
