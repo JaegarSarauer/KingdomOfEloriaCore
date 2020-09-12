@@ -2347,7 +2347,7 @@ const ItemGetter = {
                     id: 'LEFT_TOOL',
                     asset: 'heldParts',
                     sprite: 'shield',
-                    parent: 'LEFT_SHOULDER',
+                    parent: 'LEFT_FOREARM',
                     spriteID: tier,
                     anchor: { x: 0.5, y: 0.5 },
                     position: { x: 0, y: 1.0 },
