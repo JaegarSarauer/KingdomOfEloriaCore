@@ -161,6 +161,7 @@ const Guilds = [{
     ],
     kingID: GuardType.TERAGON_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
+    questID : 2,
     obelisk: {
         id : ObeliskType.BURGUNTY,
         x : 110,
@@ -301,6 +302,7 @@ const Guilds = [{
     ],
     kingID: GuardType.SALMO_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
+    questID : 3,
     obelisk: {
         id : ObeliskType.PURPLE,
         x : 119,
@@ -411,6 +413,7 @@ const Guilds = [{
     ],
     kingID: GuardType.ACERNIS_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
+    questID : 4,
     obelisk: {
         id : ObeliskType.RED,
         x : 332,

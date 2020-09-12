@@ -78,5 +78,9 @@ export const Timer = [
     {
         id: 19,
         name: 'Active Task Timer',
+    },
+    {
+        id: 20,
+        name: 'Quest Timer',
     }
 ];
