@@ -377,4 +377,16 @@ Get.Character.TrainingGuide(121, 2), // Training Woodcutting Guilde Guide
 Get.Character.TourGuide(122, 0), // Upstairs Mining Guild Guide
 Get.Character.TourGuide(123, 1), // Upstairs Fishing Guilde Guide
 Get.Character.TourGuide(124, 2), // Upstairs Woodcutting Guilde Guide
+Get.Character.Human(125, 'Doctor', 23, [null, null, null, 363, 489], 4, HairColors.Gray, [{
+    interfaceID: 0,
+    id: 4,
+    name: 'Talk To',
+    steps: [
+        buildStepList(StepList.WALK_ADJACENT),
+        [
+            buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+            buildStep(StepType.SHOW_DIALOG, { params: [20] } )
+        ]
+    ],
+}], 7, EyeColors.Blue ),
 ];

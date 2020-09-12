@@ -25,7 +25,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.START_TUTORIAL_TIMER),
-        buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
+        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [360, 76]}),
     ]],
 },{
     id: 2,
@@ -172,16 +172,27 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
         buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        // Goes into tour of guilde
+        buildStep(StepType.SHOW_DIALOG, {params: [19]})
     ]],
 }, {
     id: 19,
-    title: '<b>Osaik</b>',
-    message: ' Did you find my key yet?\n\n' + 
-    'The mouserat ate it. He was scurrying around here somewhere...',
+    title: '<b>Guide</b>',
+    message: 'Donate your items to the guild guild to complete your quest.',
 }, {
     id: 20,
-    title: '<b>Osaik</b>',
-    message: 'I\'m ready to go to Eloria whenever you are. Just use the Fiewon Teleport I gave you.',
+    title: '<b>Doctor</b>',
+    message: 'Thank goodness, you\'re finally awake!\n\n' +
+    
+    'The emperor\'s enforcers really did a number on you. The trip here was hard, huh.\n\n' +
+    
+    'We\'re in the infirmary, a neutral zone shared by the guilds, underneath <note>Eloria</note>.\n\n' +
+    
+    'From here we can access the training grounds for every guild. Where would you like to start your journey?',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SHOW_DIALOG, {params: [33]}) // TODO: Guild selection here
+    ]],
 }, {
     id: 21,
     title: '<b>The Land of Eloria</b>',
