@@ -6439,99 +6439,85 @@ const Character = {
     TrainingGuide : function(id, guildID) {
         let guide = this.BaseGuide(id, guildID);
         let questID = Guilds[guildID].questID;
+        let dialogs = Guilds[guildID].questDialogs;
+
+        let states = {
+            UNSTARTED : 0,
+            EXAM_STARTED : 1,
+            GO_COMPLETE : 5,
+            GO_DONATE : 6,
+            COMPLETE : 7
+        };
+
         guide.actions = [{
             interfaceID: 0,
             id: 4,
             name: 'Talk To',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-    
-/**
- * case 0: // Unstarted
-                                break;
-                            case 1: // Began exam
-                                adv.state.setEntityAtSlot(7, ['Talk to the guide to learn your task.']);
-                                break
-                            case 2: // Grab a saw
-                                adv.state.setEntityAtSlot(7, ['Pick up the saw, 5 logs and 2 tools.']);
-                                break;
-                            case 3: // Create a mining camp
-                                adv.state.setEntityAtSlot(7, ['Use the saw on the logs and build a camp.']);
-                                break;
-                            case 4: // Operate the camp and get 10 noted items
-                                adv.state.setEntityAtSlot(7, ['Right click on the camp and \'Operate\' it.']);
-                                break;
-                            case 5: // Speak to guide and pass exam
-                                adv.state.setEntityAtSlot(7, ['Speak to your guide to complete your exam.']);
-                                break;
- * 
- * 
- */
-
-
                 // If we have started the tutorial & not talked to the NPC
                 
                 [
                     buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
-                        params: [questID, [7], ['EQUALS']],
+                        params: [questID, [states.COMPLETE], ['EQUALS']],
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
-                        params: [17],
+                        params: [dialogs.PASSED_EXAM],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
                 ],
                 [
                     buildStep(StepType.ASSERT_GOAL_STATES, { // Unstarted
-                        params: [questID, [0], ['EQUALS']],
+                        params: [questID, [states.UNSTARTED], ['EQUALS']],
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Default message
-                        params: [16],
+                        params: [dialogs.EXAM_COMPLETE],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
                 ],
                 [
                     buildStep(StepType.ASSERT_GOAL_STATES, { // Began exam
-                        params: [questID, [1], ['EQUALS']],
+                        params: [questID, [states.EXAM_STARTED], ['EQUALS']],
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Talk to the guide to learn your task.
-                        params: [14],
+                        params: [dialogs.EXAM_EXPLAINED],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
                 ],
                 [
                     buildStep(StepType.ASSERT_GOAL_STATES, { // Speak to guide and pass exam
-                        params: [questID, [5], ['EQUALS']],
+                        params: [questID, [states.GO_COMPLETE], ['EQUALS']],
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
-                        params: [17],
+                        params: [dialogs.PASSED_EXAM],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
                 ],
                 [
                     buildStep(StepType.ASSERT_GOAL_STATES, { // Speak to guide and pass exam
-                        params: [questID, [6], ['EQUALS']],
+                        params: [questID, [states.GO_DONATE], ['EQUALS']],
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
-                        params: [17],
+                        params: [dialogs.TOUR],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
@@ -6540,59 +6526,28 @@ const Character = {
                 [
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Ex-explain task
-                        params: [36],
+                        params: [dialogs.EXAM_REEXPLAINED],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
                 ],
-                
-
-
-                // [buildStep(StepType.ASSERT_GOAL_STATES, {
-                //     params: [4, 2],
-                //     stepResultPass: 'NEXT_STEP',
-                //     stepResultFail: 'NEXT_STEP_LIST',
-                // }),
-                // buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                // buildStep(StepType.SHOW_DIALOG, {
-                //     params: [14],
-                //     stepResultPass: 'END_ACTION',
-                //     stepResultFail: 'END_ACTION',
-                // })],
-
-                // If we have started the tutorial & spoke to the NPC
-                // [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                //     params: [4, 3],
-                //     stepResultPass: 'NEXT_STEP',
-                //     stepResultFail: 'NEXT_STEP_LIST',
-                // }),
-                // buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                // buildStep(StepType.SHOW_DIALOG, {
-                //     params: [14],
-                //     stepResultPass: 'END_ACTION',
-                //     stepResultFail: 'END_ACTION',
-                // })],
-
-                // // If we fixed the ladder
-                // [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                //     params: [4, 4],
-                //     stepResultPass: 'NEXT_STEP',
-                //     stepResultFail: 'NEXT_STEP_LIST',
-                // }),
-                // buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                // buildStep(StepType.SHOW_DIALOG, {
-                //     params: [15],
-                //     stepResultPass: 'END_ACTION',
-                //     stepResultFail: 'END_ACTION',
-                // })],
-    
-    
             ],
         }];
         return guide;
     },
     TourGuide : function(id, guildID) {
         let guide = this.BaseGuide(id, guildID);
+        
+        let questID = Guilds[guildID].questID;
+        let dialogs = Guilds[guildID].questDialogs;
+
+        let states = {
+            UNSTARTED : 0,
+            EXAM_STARTED : 1,
+            GO_COMPLETE : 5,
+            GO_DONATE : 6,
+            COMPLETE : 7
+        };
         guide.actions = [{
             interfaceID: 0,
             id: 4,
@@ -6600,28 +6555,29 @@ const Character = {
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
 
-                // Scene 2: Give a tour
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 5],
-                    stepResultPass: 'NEXT_STEP',
-                    stepResultFail: 'NEXT_STEP_LIST',
-                }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {
-                    params: [18],
-                    stepResultPass: 'END_ACTION',
-                    stepResultFail: 'END_ACTION',
-                })],
+                [
+                    buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
+                        params: [questID, [states.COMPLETE], ['EQUALS']],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
+                        params: [dialogs.PASSED_EXAM],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
     
                 // Scene 3: Start the task
                 [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 6],
+                    params: [questID, states.GO_DONATE],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
                 buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
-                    params: [13],
+                    params: [dialogs.DONATE_TO_COMPLETE],
                     stepResultPass: 'END_ACTION',
                     stepResultFail: 'END_ACTION',
                 })],

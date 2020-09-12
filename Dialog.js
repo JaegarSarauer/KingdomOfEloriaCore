@@ -128,7 +128,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 14,
-    title: '<b>Guide</b>',
+    title: '<b>Mining Guide</b>',
     message: 'First, grab all the materials needed to create a camp.\n\n' +
 
     'Then, create your camp by using a saw on the logs.\n\n' +
@@ -141,7 +141,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 15,
-    title: '<b>Guide</b>',
+    title: '<b>Mining Guide</b>',
     message: 'Grab all the materials needed to create a camp.\n\n' +
 
     'Create and operate your camp. You will need to produce 20 noted pieces to complete your exam.',
@@ -151,21 +151,21 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 16,
-    title: '<b>Guide</b>',
+    title: '<b>Mining Guide</b>',
     message: 'Nice to see you again.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 }, {
     id: 17,
-    title: '<b>Guide</b>',
+    title: '<b>Mining Guide</b>',
     message: 'Congratulations, you have passed your exam!',
     continueSteps: [[
         buildStep(StepType.SHOW_DIALOG, {params: [18]}),
     ]],
 }, {
     id: 18,
-    title: '<b>Guide</b>',
+    title: '<b>Mining Guide</b>',
     message: 'Allow me to give you a tour of our <note>Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, -1]}),
@@ -177,7 +177,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 19,
-    title: '<b>Guide</b>',
+    title: '<b>Mining Guide</b>',
     message: 'Donate your items to the guild guild to complete your quest.',
 }, {
     id: 20,
@@ -191,7 +191,12 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'From here we can access the training grounds for every guild. Where would you like to start your journey?',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.SHOW_DIALOG, {params: [33]}) // TODO: Guild selection here
+         // TODO: Guild selection here
+        // Woodcutting Guild set actions
+        buildStep(StepType.TELEPORT, {params: [2, 25, 114, 27, 119, -1]}),
+        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [1]]}),
+        buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}), // TODO This is done by Guild Selection UI confirm & the NPC's start-quest
     ]],
 }, {
     id: 21,
@@ -731,17 +736,137 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[283, 88]] }),
     ]]
 },
-{
-    id: 83, 
-    title: '<b>Baker</b>',
-    message: 'Baking cakes is easy!\n\n' +
+// {
+//     id: 83, 
+//     title: '<b>Baker</b>',
+//     message: 'Baking cakes is easy!\n\n' +
             
-            'Just take a<note>Pan</note>, <note>Raw Dough</note>, ann <note>Egg</note> and a <note>Bucket of Milk</note>. \n\n' +
+//             'Just take a<note>Pan</note>, <note>Raw Dough</note>, ann <note>Egg</note> and a <note>Bucket of Milk</note>. \n\n' +
 
-            'Put all the ingredients into the pan, then cook your new <note>Uncooked Cake</note> on a <note>Range</note>! \n\n' + 
+//             'Put all the ingredients into the pan, then cook your new <note>Uncooked Cake</note> on a <note>Range</note>! \n\n' + 
             
-            'You\'re going to love it!',
-},]);
+//             'You\'re going to love it!',
+// },
+{
+    id: 73,
+    title: '<b>Fishing Guide</b>',
+    message: 'First, grab all the materials needed to create a camp.\n\n' +
+
+    'Then, create your camp by using a saw on the logs.\n\n' +
+    
+    'Once constructed, right click the\'operate\' option to start.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [2]]}),
+    ]],
+},
+{
+    id: 74,
+    title: '<b>Fishing Guide</b>',
+    message: 'Grab all the materials needed to create a camp.\n\n' +
+
+    'Create and operate your camp. You will need to produce 20 noted pieces to complete your exam.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 75,
+    title: '<b>Fishing Guide</b>',
+    message: 'Nice to see you again.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+}, {
+    id: 76,
+    title: '<b>Fishing Guide</b>',
+    message: 'Congratulations, you have passed your exam!',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DIALOG, {params: [18]}),
+    ]],
+}, {
+    id: 77,
+    title: '<b>Fishing Guide</b>',
+    message: 'Allow me to give you a tour of our <note>Guild</note>',
+    continueSteps: [[
+        buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, -1]}),
+        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        // Goes into tour of guilde
+        buildStep(StepType.SHOW_DIALOG, {params: [19]})
+    ]],
+}, {
+    id: 78,
+    title: '<b>Fishing Guide</b>',
+    message: 'Donate your items to the guild guild to complete your quest.',
+},
+{
+    id: 79,
+    title: '<b>Woodcutting Guide</b>',
+    message: 'First, grab all the materials needed to create a camp.\n\n' +
+
+    'Then, create your camp by using a saw on the logs.\n\n' +
+    
+    'Once constructed, right click the\'operate\' option to start.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [2]]}),
+    ]],
+},
+{
+    id: 80,
+    title: '<b>Woodcutting Guide</b>',
+    message: 'Grab all the materials needed to create a camp.\n\n' +
+
+    'Create and operate your camp. You will need to produce 20 noted pieces to complete your exam.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},
+{
+    id: 81,
+    title: '<b>Woodcutting Guide</b>',
+    message: 'Nice to see you again.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+}, {
+    id: 82,
+    title: '<b>Woodcutting Guide</b>',
+    message: 'Congratulations, you have passed your exam!',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DIALOG, {params: [18]}),
+    ]],
+}, {
+    id: 83,
+    title: '<b>Wooductting Guide</b>',
+    message: 'Allow me to give you a tour of our <note>Guild</note>',
+    continueSteps: [[
+        buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, -1]}),
+        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        // Goes into tour of guilde
+        buildStep(StepType.SHOW_DIALOG, {params: [19]})
+    ]],
+}, {
+    id: 84,
+    title: '<b>Woodcutting Guide</b>',
+    message: 'Donate your items to the guild guild to complete your quest.',
+}, {
+    id: 85,
+    title: '<b>Mining Guide</b>',
+    message: 'Wanna join the guild?',
+}, {
+    id: 86,
+    title: '<b>Fishing Guide</b>',
+    message: 'Wanna join the guild?',
+}, {
+    id: 87,
+    title: '<b>Woodcutting Guide</b>',
+    message: 'Wanna join the guild?',
+}]);
 
 const DialogStrings = {
     0 : 'Copper Axe',

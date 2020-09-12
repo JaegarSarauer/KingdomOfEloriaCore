@@ -226,6 +226,19 @@ const Guilds = [{
     ],
     tier2Barricades: [[71, 362], [74, 362], [75, 361], [76, 361], [77, 362], [80, 362]],
     tier4Barricades: [[75, 333], [76, 333], [137, 349], [137, 350], [137, 351], [137, 352], [26, 329], [27, 329]],
+    questDialogs : {
+        EXAM_EXPLAINED : 14,
+        EXAM_REEXPLAINED : 15, 
+        EXAM_COMPLETE : 16,
+        PASSED_EXAM : 17, 
+        TOUR : 18, 
+        DONATE_TO_COMPLETE : 19,
+        INVITE_TO_START_QUEST : 85,
+    },
+    questItems : {
+        tool : 9,
+        notedResourceID : 184,
+    },
 }, {
     id: 1,
     name: "Salmo - Fishing Guild",
@@ -403,6 +416,19 @@ const Guilds = [{
     ],
     tier2Barricades: [[148, 13], [149, 13]],
     tier4Barricades: [[142, 18], [177, 16], [177, 17], [177, 18], [167, 18]],
+    questDialogs : {
+        EXAM_EXPLAINED : 73,
+        EXAM_REEXPLAINED : 74, 
+        EXAM_COMPLETE : 75,
+        PASSED_EXAM : 76, 
+        TOUR : 77, 
+        DONATE_TO_COMPLETE : 78,
+        INVITE_TO_START_QUEST : 86,
+    },
+    questItems : {
+        tool : 117,
+        notedResourceID : 176,
+    },
 }, {
     id: 2,
     name: "Acernis - Woodcutting Guild",
@@ -568,6 +594,19 @@ const Guilds = [{
     ],
     tier2Barricades: [[329, 49], [329, 50], [340, 56], [341, 56], [342, 56], [353, 49], [353, 50]],
     tier4Barricades: [[340, 86], [341, 86], [342, 86]],
+    questDialogs : {
+        EXAM_EXPLAINED : 79,
+        EXAM_REEXPLAINED : 80, 
+        EXAM_COMPLETE : 81,
+        PASSED_EXAM : 82, 
+        TOUR : 83, 
+        DONATE_TO_COMPLETE : 84,
+        INVITE_TO_START_QUEST : 87,
+    },
+    questItems : {
+        tool : 1,
+        notedResourceID : 135,
+    },
 },];
 
 
