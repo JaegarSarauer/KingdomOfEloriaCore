@@ -2842,8 +2842,8 @@ const Item = Object.freeze([
     Get.Item.Note(544, 543, 'Red Wizard Bottom', 1175, 314),
     (() => {
         let helm = Get.Item.FullHelm(545, 546, 'Shell Helmet', 1, 340, 315, -1, 5, [0, 0, 12, 0, 0, 4, -4, -4, 0]);
-        helm.model.HEAD_WORN.position.x -= 0.15;
-        helm.model.HEAD_WORN.position.y -= 0.05;
+        helm.model.HEAD_WORN.position.x -= 0.1;
+        helm.model.HEAD_WORN.position.y -= 0.45;
         helm.model.HEAD_WORN.sprite = 'shellHelm';
         helm.model.HEAD_WORN.spriteID = 0;
         return helm;
