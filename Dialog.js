@@ -118,11 +118,11 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     //'Complete quests and build up your skills so when the time comes to face him, you are ready. With your help, the residents of <note>Eloria</note> may live in peace once again.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 1]}),
-        // TODO: Go to Guild Selection, which THEN calls SET_CHARACTER_STATE from (4,1) to (4,2)
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
-        // Guild Selection on continue decides where we teleport and which quest we started. Below is "Start Woodcutting"
-        buildStep(StepType.SET_USER_GOAL_STATE, { params: [4, [1]] }),
+        // buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 1]}),
+        // // TODO: Go to Guild Selection, which THEN calls SET_CHARACTER_STATE from (4,1) to (4,2)
+        // buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+        // // Guild Selection on continue decides where we teleport and which quest we started. Below is "Start Woodcutting"
+        // buildStep(StepType.SET_USER_GOAL_STATE, { params: [4, [1]] }),
         buildStep(StepType.SHOW_DIALOG, {params: [1] }),
     ]],
 },
@@ -136,7 +136,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Once constructed, right click the\'operate\' option to start.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [2]]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [2]]}),
     ]],
 },
 {
@@ -168,17 +168,20 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Mining Guide</b>',
     message: 'Allow me to give you a tour of our <note>Guild</note>',
     continueSteps: [[
-        buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, -1]}),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        // Goes into tour of guilde
-        buildStep(StepType.SHOW_DIALOG, {params: [19]})
+        buildStep(StepType.TELEPORT, {params: [0, 34, 334, 50, 335, 2, [[
+            buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+            buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [6]]}),
+            // Goes into tour of guilde
+            buildStep(StepType.SHOW_DIALOG, {params: [19]})
+        ]]]}),
     ]],
 }, {
     id: 19,
     title: '<b>Mining Guide</b>',
     message: 'Donate your items to the guild guild to complete your quest.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
 }, {
     id: 20,
     title: '<b>Doctor</b>',
@@ -193,10 +196,10 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
          // TODO: Guild selection here
         // Woodcutting Guild set actions
-        buildStep(StepType.TELEPORT, {params: [2, 25, 114, 27, 119, -1]}),
+        buildStep(StepType.TELEPORT, {params: [2, 26, 166, 28, 170, 2]}),
         buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [1]]}),
-        buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}), // TODO This is done by Guild Selection UI confirm & the NPC's start-quest
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
+        buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}), // TODO This is done by Guild Selection UI confirm & the NPC's start-quest
     ]],
 }, {
     id: 21,
@@ -757,7 +760,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Once constructed, right click the\'operate\' option to start.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [2]]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [2]]}),
     ]],
 },
 {
@@ -782,19 +785,20 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Fishing Guide</b>',
     message: 'Congratulations, you have passed your exam!',
     continueSteps: [[
-        buildStep(StepType.SHOW_DIALOG, {params: [18]}),
+        buildStep(StepType.SHOW_DIALOG, {params: [77]}),
     ]],
 }, {
     id: 77,
     title: '<b>Fishing Guide</b>',
     message: 'Allow me to give you a tour of our <note>Guild</note>',
     continueSteps: [[
-        buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, -1]}),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        // Goes into tour of guilde
-        buildStep(StepType.SHOW_DIALOG, {params: [19]})
+        buildStep(StepType.TELEPORT, {params: [0, 146, 5, 148, 7, 2, [[
+            buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+            buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [6]]}),
+            buildStep(StepType.START_TUTORIAL_TIMER),
+            // Goes into tour of guilde
+            buildStep(StepType.SHOW_DIALOG, {params: [78]})
+        ]]]}),
     ]],
 }, {
     id: 78,
@@ -836,36 +840,63 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Woodcutting Guide</b>',
     message: 'Congratulations, you have passed your exam!',
     continueSteps: [[
-        buildStep(StepType.SHOW_DIALOG, {params: [18]}),
+        buildStep(StepType.SHOW_DIALOG, {params: [83]}),
     ]],
 }, {
     id: 83,
-    title: '<b>Wooductting Guide</b>',
+    title: '<b>Woodcutting Guide</b>',
     message: 'Allow me to give you a tour of our <note>Guild</note>',
     continueSteps: [[
-        buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, -1]}),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        // Goes into tour of guilde
-        buildStep(StepType.SHOW_DIALOG, {params: [19]})
+        buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, 2, [[
+            buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+            buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
+            // Goes into tour of guilde
+            buildStep(StepType.SHOW_DIALOG, {params: [84]}),
+        ]]]}),
     ]],
 }, {
     id: 84,
     title: '<b>Woodcutting Guide</b>',
     message: 'Donate your items to the guild guild to complete your quest.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
 }, {
     id: 85,
     title: '<b>Mining Guide</b>',
-    message: 'Wanna join the guild?',
+    message: 'Wanna try to join the guild? Too late!',
+    continueSteps: [[
+        buildStep(StepType.ASSERT_GOAL_STATES, {params: [2, [0], ['EQUALS']]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
+        buildStep(StepType.TELEPORT, {params: [2, 25, 19, 27, 24, 0, [[
+            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
+        ]]]}),
+    ]],
 }, {
     id: 86,
     title: '<b>Fishing Guide</b>',
-    message: 'Wanna join the guild?',
+    message: 'Wanna try to join the guild? Too late!',
+    continueSteps: [[
+        buildStep(StepType.ASSERT_GOAL_STATES, {params: [3, [0], ['EQUALS']]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [1]]}),
+        buildStep(StepType.TELEPORT, {params: [2, 25, 19, 27, 24, 0, [[
+            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [1]}),
+        ]]]}),
+    ]],
 }, {
     id: 87,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Wanna join the guild?',
+    message: 'Wanna try to join the guild? Too late!',
+    continueSteps: [[
+        buildStep(StepType.ASSERT_GOAL_STATES, {params: [4, [0], ['EQUALS']]}),
+        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [1]]}),
+        buildStep(StepType.TELEPORT, {params: [2, 26, 166, 28, 171, 0, [[
+            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
+        ]]]}),
+    ]],
 }]);
 
 const DialogStrings = {
