@@ -1300,7 +1300,7 @@ module.exports.Interface = [
             Get.Interface.BuildMiningCamp(98, 'Build Iron Mining Camp (10 Cons., 20 Mining) (5 Oak Logs, 1 Iron Pickaxe)', 6, 10, 20, 10, 23, 200, 'iron mining camp'),
             Get.Interface.BuildMiningCamp(99, 'Build Coal Mining Camp (20 Cons., 30 Mining) (5 Ash Logs, 1 Steel Pickaxe)', 7, 11, 30, 20, 24, 300, 'coal mining camp'),
             Get.Interface.BuildMiningCamp(100, 'Build Nelenite Mining Camp (30 Cons., 40 Mining) (5 Fur Logs, 1 Nelenite Pickaxe)', 8, 12, 40, 30, 25, 400, 'nelenite mining camp'),
-            Get.Interface.BuildFishingPool(101, 'Build Shallow Pool Fishery (10 Cons., 20 Fishing) (5 Oak Logs, 1 Fising Net)', 6, 20, 10, 20, 100, 'shallow pool fishery'),
+            Get.Interface.BuildFishingPool(101, 'Build Shallow Pool Fishery (10 Cons., 10 Fishing) (5 Logs, 1 Fishing Net)', 5, 10, 1, 20, 100, 'shallow pool fishery'),
             {
                 id: 102,
                 name: 'Steel Furnace (25 Construction, 35 Smithing) (5 Steel Bars)',
