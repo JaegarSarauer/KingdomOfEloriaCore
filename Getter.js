@@ -3452,9 +3452,13 @@ const WorldObject = {
                 modelName: 'CAMP',
                 modelParams: {
                     BASE: {
-                        sprite: 'fishCamp',
                         spriteID: spriteIndex,
-                    }
+                    },
+                    ITEM: {
+                        sprite: 'fishingNet',
+                        spriteID: 1,
+                        rotation : 0,
+                    },
                 },
                 actions: [
                     {
@@ -4339,6 +4343,7 @@ const WorldObject = {
         LumberCamp: function (id, woodName, woodId, woTreeId, spriteIndex, xpMultiplier, campLevel, skillLevel) {
             let name = woodName == null ? 'Lumber Camp' : woodName + ' Lumber Camp';
             let treeName = woodName == null ? 'trees' : woodName.toLowerCase() + ' trees';
+            let axeId = Math.round( Math.round(skillLevel) / 10 );
             return {
                 id: id,
                 name: name,
@@ -4353,6 +4358,10 @@ const WorldObject = {
                 modelParams: {
                     BASE: {
                         spriteID: spriteIndex,
+                    },
+                    ITEM : {
+                        sprite: 'axe',
+                        spriteID: axeId
                     }
                 },
                 actions: [
@@ -4463,6 +4472,7 @@ const WorldObject = {
             };
         },
         MiningCamp: function (id, oreName, oreId, woRockIds, spriteIndex, xpMultiplier, campLevel, skillLevel) {
+            let axeId = Math.round( Math.round(skillLevel) / 10 );
             return {
                 id: id,
                 name: oreName + ' Mining Camp',
@@ -4476,9 +4486,12 @@ const WorldObject = {
                 modelName: 'CAMP',
                 modelParams: {
                     BASE: {
-                        sprite: 'mineCamp',
                         spriteID: spriteIndex,
-                    }
+                    },
+                    ITEM: {
+                        sprite: 'pickaxe',
+                        spriteID: axeId,
+                    },
                 },
                 actions: [
                     {
