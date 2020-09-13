@@ -13,6 +13,13 @@ module.exports.StepResult = StepResult = {
 };
 
 module.exports.StepType = StepType = {
+    OPEN_GUILD_SELECTION_INTERFACE : {
+        id : 'OPEN_GUILD_SELECTION_INTERFACE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     SEND_CLIENT_MESSAGE: {
         id: 'SEND_CLIENT_MESSAGE',
         stepResultFail: 'END_ACTION',
@@ -1693,8 +1700,14 @@ try {
     const StepDepositGuildChestItems = require('../internal/Steps/StepDepositGuildChestItems');
     const StepStartTutorialTimer = require('../internal/Steps/StepStartTutorialTimer');
     const StepStartGuildEntranceQuestTimer = require('../internal/Steps/StepStartGuildEntranceQuestTimer');
+    const StepOpenGuildSelectionInterface = require('../internal/Steps/StepOpenGuildSelectionInterface');
 
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
+        OPEN_GUILD_SELECTION_INTERFACE : {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepOpenGuildSelectionInterface.StepOpenGuildSelectionInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
         SEND_CLIENT_MESSAGE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSendClientMessage.StepSendClientMessage(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);

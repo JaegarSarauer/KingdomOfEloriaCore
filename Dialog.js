@@ -194,12 +194,13 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'From here we can access the training grounds for every guild. Where would you like to start your journey?',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-         // TODO: Guild selection here
+        buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
+
         // Woodcutting Guild set actions
-        buildStep(StepType.TELEPORT, {params: [2, 26, 166, 28, 170, 2]}),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
-        buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}), // TODO This is done by Guild Selection UI confirm & the NPC's start-quest
+        // buildStep(StepType.TELEPORT, {params: [2, 26, 166, 28, 170, 2]}),
+        // buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+        // buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
+        // buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}), // TODO This is done by Guild Selection UI confirm & the NPC's start-quest
     ]],
 }, {
     id: 21,
