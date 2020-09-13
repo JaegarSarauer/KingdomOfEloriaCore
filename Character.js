@@ -44,7 +44,9 @@ module.exports.Character = Character = [{
             let chance = Math.random() * 10;
             if (chance <= 1) {
                 let eggGroundItem = new GroundItemDef(732, entity.x, entity.y, 1, null);
+                // Mobile release fix (.default.)
                 KingdomOfEloria.i.getMap(entity.mapID).spawnEntity(eggGroundItem);
+                // Mobile release fix
             }
             return 30;
         })

@@ -26,7 +26,7 @@ const startGolemEvent = (currentMap, targetEntity, golemCharID) => {
     }
     golem.stats.fromSkillArray(skillArray);
 
-    let tryDespawn = () => {
+    let tryDespawn = () => {// Mobile release fix (.default.)
         if (golem.ownerUID != targetEntity.uid || golem.timers.getTimerTick(6) < KingdomOfEloria.i.currentTick) {
             currentMap.despawnEntity(golem);
         } else {
