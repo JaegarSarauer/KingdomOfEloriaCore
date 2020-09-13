@@ -2842,6 +2842,8 @@ const Item = Object.freeze([
     Get.Item.Note(544, 543, 'Red Wizard Bottom', 1175, 314),
     (() => {
         let helm = Get.Item.FullHelm(545, 546, 'Shell Helmet', 1, 340, 315, -1, 5, [0, 0, 12, 0, 0, 4, -4, -4, 0]);
+        helm.model.HEAD_WORN.position.x -= 0.15;
+        helm.model.HEAD_WORN.position.y -= 0.05;
         helm.model.HEAD_WORN.sprite = 'shellHelm';
         helm.model.HEAD_WORN.spriteID = 0;
         return helm;
@@ -3548,13 +3550,13 @@ const Item = Object.freeze([
     Get.Item.SpellUnlockScroll(843, 'Wizard Tower Teleport', 37, 187, 478, 46, [ShardCatalog.NATURE(120), ShardCatalog.FIRE(360), ShardCatalog.VOID(270)]),
     Get.Item.RawCoockableFood(844, 845, 'Raw Octopus', 120, 561, 'A raw octopus, perfect for cooking.', 70, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(845, 844, 'Raw Octopus', 120, 561),
-    Get.Item.Food(846, 847, 'Octopus', 180, 10, 562, 'A cooked octopus, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Food(846, 847, 'Octopus', 10, 180, 562, 'A cooked octopus, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(847, 846, 'Octopus', 180, 562),
     Get.Item.Item(848, 849, 'Burnt Octopus', 0, 563, 'A burnt octopus. Yuck.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(100)]), false), // Jaegar look at last 3 params
     Get.Item.Note(849, 548, 'Burnt Octopus', 0, 563),
     Get.Item.RawCoockableFood(850, 851, 'Raw Octopus Tentacle', 30, 564, 'A raw octopus tentacle, perfect for cooking.', 15, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(851, 850, 'Raw Octopus Tentacle', 30, 564),
-    Get.Item.Food(852, 853, 'Octopus Tentacle', 50, 2, 565, 'A cooked octopus tentacle, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
+    Get.Item.Food(852, 853, 'Octopus Tentacle', 2, 50, 565, 'A cooked octopus tentacle, perfect for eating.', EssenceValue(6, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(853, 852, 'Octopus Tentacle', 50, 565),
     Get.Item.Item(854, 855, 'Burnt Octopus Tentacle', 0, 566, 'A burnt octopus tentacle. Yuck.', EssenceValue(8, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(1), ShardCatalog.POISON(20)]), false), // Jaegar look at last 3 params
     Get.Item.Note(855, 854, 'Burnt Octopus Tentacle', 0, 566),
@@ -3641,6 +3643,15 @@ const Item = Object.freeze([
     },
     Get.Item.Food(907, 908, 'Cupcake', 1, 1, 595, 'A cute little cupcake!', EssenceValue(2, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(4), ShardCatalog.FIRE(5)]), false),
     Get.Item.Note(908, 907, 'Cupcake', 22, 595),
+    (() => {
+        let helm = Get.Item.FullHelm(909, 910, 'Shell Helmet', 1, 340, 315, -1, 5, [0, 0, 12, 0, 0, 4, -4, -4, 0]);
+        helm.model.HEAD_WORN.position.x -= 0.15;
+        helm.model.HEAD_WORN.position.y -= 0.45;
+        helm.model.HEAD_WORN.sprite = 'shellHelm';
+        helm.model.HEAD_WORN.spriteID = 1;
+        return helm;
+    })(),
+    Get.Item.Note(910, 909, 'Shell Helmet', 340, 315),
     
     // Get.Item.Scissors(611, 612, 'Scissors', 15, 298),
     // Get.Item.Note(612, 611, 'Scissors', 15, 298),
