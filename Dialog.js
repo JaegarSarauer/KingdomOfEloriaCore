@@ -836,7 +836,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Woodcutting Guide</b>',
     message: 'Congratulations, you have passed your exam!',
     continueSteps: [[
-        buildStep(StepType.SHOW_DIALOG, {params: [18]}),
+        buildStep(StepType.SHOW_DIALOG, {params: [83]}),
     ]],
 }, {
     id: 83,
