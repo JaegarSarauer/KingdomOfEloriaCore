@@ -2251,4 +2251,19 @@ module.exports.Interface = [
             ],
         },
     ],
+},{
+    id: 31,
+    name: 'Guild Selection UI',
+    actions: [
+        {
+            id: 0,
+            name: 'Pick Guild',
+            actionInterval: -1,
+            steps: [
+                [
+                    buildStep(StepType.SEND_CLIENT_STATUS, {params: ['Wassup']})
+                ]
+            ],
+        },
+    ],
 },];
