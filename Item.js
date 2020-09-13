@@ -1085,8 +1085,8 @@ const Item = Object.freeze([
         spriteIndex: 119,
         essenceValue: EssenceValue(5, 3, [ShardCatalog.SHARP(1), ShardCatalog.EARTH(1), ShardCatalog.METAL(2)]),
         useActions: [
-            Get.Action.BuildWithSaw(9, 5, [92, 96, 97, 112, 187]), // Logs -> [lumber(1), mine(1), clay, training(1), market stall]
-            Get.Action.BuildWithSaw(10, 6, [93, 98, 101, 113, 188, 282]), // Oak -> [lumber(2), mine(2), fish, training(2), crabpot]
+            Get.Action.BuildWithSaw(9, 5, [92, 96, 97, 101, 112, 187]), // Logs -> [lumber(1), mine(1), clay, fish, training(1), market stall]
+            Get.Action.BuildWithSaw(10, 6, [93, 98, 113, 188, 282]), // Oak -> [lumber(2), mine(2), training(2), crabpot]
             Get.Action.BuildWithSaw(11, 7, [94, 99, 261, 114, 189]), // Ash -> [lumber(3), mine(3), mine(gold), training(3)]
             Get.Action.BuildWithSaw(12, 8, [95, 100, 115, 190]), // Fur -> [lumber(4), mine(4), training(4)]
             Get.Action.BuildWithSaw(13, 240, [92, 96, 97, 112]), // Construction Frame -> [lumber(1), mine(1), clay, training(1)]
