@@ -3360,6 +3360,11 @@ const Action = {
 
 const WorldObject = {
     GuildChest: (id, guildName, guildID) => {
+        let guildDef = Guilds[guildID];
+        
+        let questID = guildDef.questID;
+        let notedResourceID = guildDef.questItems.notedResourceID;
+
         return {
             id,
             name: guildName + ' Community Chest',
@@ -3383,6 +3388,17 @@ const WorldObject = {
                         stepResultFail: 'END_AND_REPEAT_STEP_LIST'
                     }),
                     [buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { params: [guildID] })],
+                    [
+                        buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
+                            params: [questID, [6], ['EQUALS']],
+                            stepResultPass: 'NEXT_STEP',
+                            stepResultFail: 'NEXT_STEP_LIST',
+                        }),
+                        buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, 10]},),
+                        buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [notedResourceID, 10]},),
+                        buildStep(StepType.SET_USER_GOAL_STATE, { params: [questID, [7]] }),
+                        buildStep(StepType.SEND_CLIENT_STATUS, { params: [''] }),
+                    ]
                 ],
             }],
         };
@@ -6441,6 +6457,8 @@ const Character = {
         let questID = Guilds[guildID].questID;
         let dialogs = Guilds[guildID].questDialogs;
 
+        const questTimerID = 20;
+
         let states = {
             UNSTARTED : 0,
             EXAM_STARTED : 1,
@@ -6456,7 +6474,14 @@ const Character = {
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
                 // If we have started the tutorial & not talked to the NPC
-                
+                [
+                    buildStep(StepType.IS_TIMER_EXPIRED, {
+                        params: [questTimerID],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [guildID]}),
+                ],
                 [
                     buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
                         params: [questID, [states.COMPLETE], ['EQUALS']],
@@ -6541,12 +6566,13 @@ const Character = {
         let questID = Guilds[guildID].questID;
         let dialogs = Guilds[guildID].questDialogs;
 
+
         let states = {
             UNSTARTED : 0,
             EXAM_STARTED : 1,
             GO_COMPLETE : 5,
             GO_DONATE : 6,
-            COMPLETE : 7
+            COMPLETE :  7
         };
         guide.actions = [{
             interfaceID: 0,
@@ -6554,7 +6580,19 @@ const Character = {
             name: 'Talk To',
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
-
+                [
+                    buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
+                        params: [questID, [states.UNSTARTED], ['EQUALS']],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP_LIST',
+                    }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
+                        params: [dialogs.INVITE_TO_START_QUEST],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
                 [
                     buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
                         params: [questID, [states.COMPLETE], ['EQUALS']],
@@ -6563,15 +6601,13 @@ const Character = {
                     }),
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
-                        params: [dialogs.PASSED_EXAM],
+                        params: [dialogs.EXAM_COMPLETE],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
                 ],
-    
-                // Scene 3: Start the task
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [questID, states.GO_DONATE],
+                [buildStep(StepType.ASSERT_GOAL_STATES, {
+                    params: [questID, [states.GO_DONATE], ['EQUALS']],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6583,7 +6619,7 @@ const Character = {
                 })],
     
     
-                [buildStep(StepType.SHOW_DIALOG, {params: [18]})],
+                [buildStep(StepType.SHOW_DIALOG, {params: [dialogs.EXAM_COMPLETE]})],
             ],
         }];
         return guide;
