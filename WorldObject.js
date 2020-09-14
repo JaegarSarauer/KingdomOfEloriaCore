@@ -1178,4 +1178,5 @@ module.exports.WorldObject = WorldObject = [
         }],
         spriteIndex: 46,
     },
+    Get.WorldObject.ShrimpFishingPool(111),
 ];

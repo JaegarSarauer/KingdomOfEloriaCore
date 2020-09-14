@@ -3733,6 +3733,52 @@ const WorldObject = {
                 spriteIndex: 10,
             };
         },
+        ShrimpFishingPool: function (id) {
+            return {
+                id: id,
+                name: 'Shallow Fishing Pool',
+                description: 'A swirling pool of fish are just under the surface.',
+                requirements: ItemDetail.build([
+                    ItemDetail.levelSkillDetail('1+', 12, 'FISH'),
+                    ItemDetail.itemNameDetail('Fishing Net', 'TOOL_NAME'),
+                ]),
+                modelName: 'FISHING_POOL',
+                modelParams: {
+                    BASE: {
+                        spriteID: 1,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 9,
+                    name: 'Cast Net',
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You cast your fishing net.'] }),
+                        buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
+                        [buildStep(StepType.IS_ADJACENT),
+                        buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 1] }),
+                        buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
+                        buildStep(StepType.INVENTORY_HAS_ROOM),
+                        buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
+                        buildStep(StepType.PLAY_SOUND, { params: [35] }),
+                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
+                            params: [5, 105, 12, 0.15, true, 0.1],
+                            stepResultFail: 'END_AND_GOTO_LIST_3',
+                        })],
+                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-2.25, 5, 12, 0.25, true, 0.25], }),
+                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
+                        buildStep(StepType.GIVE_XP, { params: [12, 25] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You fish some shrimp.'],
+                            stepResultPass: 'END_AND_GOTO_LIST_3',
+                        }),],
+                    ]
+                }],
+                spriteIndex: 10,
+            };
+        },
         CrabPotFishingPool: function (id) {
             return {
                 id: id,
@@ -6578,7 +6624,7 @@ const Character = {
         
         let questID = Guilds[guildID].questID;
         let dialogs = Guilds[guildID].questDialogs;
-
+        let skillID = Guilds[guildID].skillID;
 
         let states = {
             UNSTARTED : 0,
@@ -6599,6 +6645,7 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
+                    buildStep(StepType.HAS_SKILL_LEVEL, {params: [skillID, 10]}),
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
                         params: [dialogs.INVITE_TO_START_QUEST],
