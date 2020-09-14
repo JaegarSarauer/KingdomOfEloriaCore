@@ -3783,13 +3783,20 @@ const WorldObject = {
                         buildStep(StepType.INVENTORY_HAS_ROOM),
                         buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
                         buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
-                        buildStep(StepType.PLAY_SOUND, { params: [35] }),
-                        buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                            params: [5, 105, 12, 0.15, true, 0.1],
+                        buildStep(StepType.PLAY_SOUND, { params: [35] }),],
+                        [buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [12, 2, 2, true, 0.15, 0.1],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
+                        }),
+                        buildStep(StepType.ROLL_DESPAWN, {
+                            params: [250],
+                            stepResultFail: 'NEXT_STEP',
+                        }),
+                        buildStep(StepType.SET_RESPAWN_TIMER, {
+                            params: [240],
+                            stepResultFail: 'NEXT_STEP',
                         })],
-                        [buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, { params: [-2.25, 5, 12, 0.25, true, 0.25], }),
-                        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
+                        [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
                         buildStep(StepType.GIVE_XP, { params: [12, 25] }),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, {
                             params: ['You fish some shrimp.'],

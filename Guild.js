@@ -237,6 +237,7 @@ const Guilds = [{
     },
     questItems : {
         tool : 9,
+        resourceID : 55,
         notedResourceID : 184,
     },
     skillID: 10,
@@ -433,6 +434,7 @@ const Guilds = [{
     },
     questItems : {
         tool : 117,
+        resourceID : 47,
         notedResourceID : 176,
     },
     skillID: 12,
@@ -617,6 +619,7 @@ const Guilds = [{
     },
     questItems : {
         tool : 1,
+        resourceID : 5,
         notedResourceID : 135,
     },
     questLocation : {
