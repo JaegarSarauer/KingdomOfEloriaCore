@@ -20,6 +20,13 @@ module.exports.StepType = StepType = {
         paramTypes: [],
         params: [],
     },
+    SELECT_GUILD : {
+        id : 'SELECT_GUILD',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], // guildID
+        params: [],
+    },
     SEND_CLIENT_MESSAGE: {
         id: 'SEND_CLIENT_MESSAGE',
         stepResultFail: 'END_ACTION',
@@ -1519,6 +1526,10 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
     PANTS: {
         id: 'PANTS',
         type: 'number'
+    },
+    GUILD_ID : {
+        id : 'GUILD_ID',
+        type: 'number'
     }
 };
 
@@ -1701,11 +1712,17 @@ try {
     const StepStartTutorialTimer = require('../internal/Steps/StepStartTutorialTimer');
     const StepStartGuildEntranceQuestTimer = require('../internal/Steps/StepStartGuildEntranceQuestTimer');
     const StepOpenGuildSelectionInterface = require('../internal/Steps/StepOpenGuildSelectionInterface');
-
+    const StepSelectGuild = require('../internal/Steps/StepSelectGuild');
+    
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         OPEN_GUILD_SELECTION_INTERFACE : {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepOpenGuildSelectionInterface.StepOpenGuildSelectionInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        SELECT_GUILD : {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSelectGuild.StepSelectGuild(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SEND_CLIENT_MESSAGE: {

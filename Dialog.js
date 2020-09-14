@@ -172,7 +172,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
             buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [6]]}),
             // Goes into tour of guilde
-            buildStep(StepType.SHOW_DIALOG, {params: [19]})
+            buildStep(StepType.SHOW_DIALOG, {params: [19]}),
+            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
         ]]]}),
     ]],
 }, {
@@ -197,9 +198,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
 
         // Woodcutting Guild set actions
+                    // buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
         // buildStep(StepType.TELEPORT, {params: [2, 26, 166, 28, 170, 2]}),
         // buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
-        // buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
         // buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}), // TODO This is done by Guild Selection UI confirm & the NPC's start-quest
     ]],
 }, {
@@ -796,9 +797,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.TELEPORT, {params: [0, 146, 5, 148, 7, 2, [[
             buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [6]]}),
-            buildStep(StepType.START_TUTORIAL_TIMER),
             // Goes into tour of guilde
-            buildStep(StepType.SHOW_DIALOG, {params: [78]})
+            buildStep(StepType.SHOW_DIALOG, {params: [78]}),
+            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [1]}),
         ]]]}),
     ]],
 }, {
@@ -853,6 +854,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
             // Goes into tour of guilde
             buildStep(StepType.SHOW_DIALOG, {params: [84]}),
+            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
         ]]]}),
     ]],
 }, {
@@ -869,7 +871,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     continueSteps: [[
         buildStep(StepType.ASSERT_GOAL_STATES, {params: [2, [0], ['EQUALS']]}),
         buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
-        buildStep(StepType.TELEPORT, {params: [2, 25, 19, 27, 24, 0, [[
+        buildStep(StepType.TELEPORT, {params: [2, 25, 169, 27, 171, 0, [[
             buildStep(StepType.SHOW_DEFAULT_INTERFACES),
             buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
         ]]]}),

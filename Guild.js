@@ -239,6 +239,12 @@ const Guilds = [{
         tool : 9,
         notedResourceID : 184,
     },
+    skillID: 10,
+    questLocation : {
+        x : 26,
+        y: 169,
+        mapID : 2,
+    },
 }, {
     id: 1,
     name: "Salmo - Fishing Guild",
@@ -429,6 +435,12 @@ const Guilds = [{
         tool : 117,
         notedResourceID : 176,
     },
+    skillID: 12,
+    questLocation : {
+        x : 26,
+        y: 22,
+        mapID : 2,
+    },
 }, {
     id: 2,
     name: "Acernis - Woodcutting Guild",
@@ -607,6 +619,13 @@ const Guilds = [{
         tool : 1,
         notedResourceID : 135,
     },
+    questLocation : {
+        x : 26,
+        y: 115,
+        mapID : 2,
+    },
+    skillID: 9,
+
 },];
 
 

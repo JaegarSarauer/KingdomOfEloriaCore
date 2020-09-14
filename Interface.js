@@ -2261,7 +2261,11 @@ module.exports.Interface = [
             actionInterval: -1,
             steps: [
                 [
-                    buildStep(StepType.SEND_CLIENT_STATUS, {params: ['Wassup']})
+                    buildStep(StepType.SELECT_GUILD, {params: ['GUILD_ID']}),
+                    buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+                    buildStep(StepType.START_TUTORIAL_TIMER),
+                    buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: ['GUILD_ID']}),
+                    buildStep(StepType.SHOW_DEFAULT_INTERFACES),
                 ]
             ],
         },
