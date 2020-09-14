@@ -286,7 +286,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.LumberCamp(17, 'Oak', 6, 1, 2, 10, 10, 20),
     Get.WorldObject.LumberCamp(18, 'Ash', 7, 2, 3, 15, 20, 30),
     Get.WorldObject.LumberCamp(19, 'Fur', 8, 3, 4, 20, 30, 40), 
-    Get.WorldObject.FisheryCamp(20, 'Shallow Pool Fishery', 9, 1, 'shallow fishing pool', 10, 20),
+    Get.WorldObject.FisheryCamp(20, 'Shallow Pool Fishery', [9, 111], 1, 'shallow fishing pool', 10, 20),
     Get.WorldObject.MiningCamp(21, 'Copper', 55, [[1, 4]], 1, 5, 1, 10),
     Get.WorldObject.MiningCamp(22, 'Clay', 75, [[1, 14]], 1, 5, 1, 10),
     Get.WorldObject.MiningCamp(23, 'Iron', 56, [[1, 5]], 2, 10, 10, 20),
@@ -591,7 +591,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.TrainingDummy(55, 'Gothite Training Dummy', 250, 25, 5, 40, 50),
     Get.WorldObject.TrainingDummy(56, 'Osmium Training Dummy', 300, 30, 6, 50, 60),
     Get.WorldObject.DeepFishingPool(57),
-    Get.WorldObject.FisheryCamp(58, 'Deep Pool Fishery', 57, 4, 'deep fishing pool', 40, 50),
+    Get.WorldObject.FisheryCamp(58, 'Deep Pool Fishery', [57], 4, 'deep fishing pool', 40, 50),
     {
         id: 59,
         name: 'Incinerator',

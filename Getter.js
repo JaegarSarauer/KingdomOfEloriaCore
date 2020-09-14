@@ -3475,7 +3475,12 @@ const WorldObject = {
             spriteIndex: spriteIndex,
         };
     },
-        FisheryCamp: function (id, name, fishingPoolId, spriteIndex, fishingPoolName, campLevel, skillLevel) {
+        FisheryCamp: function (id, name, fishingPoolIds, spriteIndex, fishingPoolName, campLevel, skillLevel) {
+            let worldObjectParams = [];
+            for(let i = 0; i < fishingPoolIds.length; ++i) {
+                worldObjectParams.push([1, fishingPoolIds[i]])
+            }
+
             return {
                 id: id,
                 name: name,
@@ -3503,7 +3508,7 @@ const WorldObject = {
                         id: 24,
                         name: 'Operate',
                         steps: [
-                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, fishingPoolId]], 9, 1] }),
+                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [worldObjectParams, 9, 1] }),
                             buildStep(StepType.SET_ACTION_INTERVAL, { 
                                 params: [2],
                             }),
