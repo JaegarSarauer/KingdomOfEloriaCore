@@ -1864,6 +1864,17 @@ module.exports.Interface = [
                     [buildStep(StepType.CLEAR_LOST_ITEMS)],
                 ],
             },
+            {
+                id: 285,
+                name: 'Maybe another time',
+                actionInterval: -1,
+                steps: [
+                    [buildStep(StepType.SHOW_DEFAULT_INTERFACES)]
+                ],
+            },
+            Get.Interface.AttemptGuildExam(286, 0),
+            Get.Interface.AttemptGuildExam(287, 1),
+            Get.Interface.AttemptGuildExam(288, 2),
         ],
     },
     {

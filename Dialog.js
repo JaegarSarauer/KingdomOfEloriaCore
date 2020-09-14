@@ -11,17 +11,31 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 1,
     title: '',
-    message: '<b>\tHow to Play</b>\n' + 
-    ' - Left click your mouse to move around and interact with your surrounding world and items. Right click to view more options.\n\n' + 
-
-    ' - View the left menu for account controls such as: game notifications, chat room, friends list, settings and quests list.\n\n' +
-                                
-    ' - View the right menu for adventurer controls such as: inventory, skill levels, equipment, combat settings, and spellbook.\n\n' +
-
+    message: 
     '<b>\tGetting Started</b>\n' + 
-    'Your journey begins in the <note>Guild Hall Training Grounds</note>, where you complete your entrance exam.\n\n' +
+    'You were traveling on a ship to the beautiful lands of <note>Eloria</note>, when the ship crashes onto the shores.\n' +
+    'It was <note>The Emperor</note>, and his forces. They caused the crash.\n' +
 
-    'Move around and click to interact with anything in the training grounds.',
+    'The ship is filled with soldiers from various guilds. They evacuate the wreckage, and holding off the emperor\'s forces.' +
+
+
+    'One archer shoots a glowing arrow into the sky, which erupts into a beacon of light. It\'s a flair. They are calling for reinforcements!\n\n' +
+
+    'You, a unarmed adventurer, are told to escape this battle.\n\n' +
+
+    '\'<i>There is a ladder, find it and get out of here!</i>\' shouts a friendly voice.\n\n' + 
+
+    '<b>\tHow to Play</b>\n' + 
+    ' - Left click your mouse to move around. \n' + 
+    ' - Follow the arrow.\n' + 
+    ' - Escape.\n',
+
+    // '<b>\tHow to Play</b>\n' + 
+    // ' - Left click your mouse to move around and interact with your surrounding world and items. Right click to view more options.\n\n' + 
+
+    // ' - View the left menu for account controls such as: game notifications, chat room, friends list, settings and quests list.\n\n' +
+                                
+    // ' - View the right menu for adventurer controls such as: inventory, skill levels, equipment, combat settings, and spellbook.\n\n' +
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.START_TUTORIAL_TIMER),
@@ -129,11 +143,13 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 14,
     title: '<b>Mining Guide</b>',
-    message: 'First, grab all the materials needed to create a camp.\n\n' +
+    message: 'First, pick up all the items you need to create a <note>Copper Mining Camp</note>\n\n' +
 
-    'Then, create your camp by using a saw on the logs.\n\n' +
+    'To do this, you will need <note>Two Copper Pickaxes</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
+
+    'Use the <note>saw</note> on the <note>logs</note> to create the <note>Copper Mining Camp</note>\n\n' +
     
-    'Once constructed, right click the\'operate\' option to start.',
+    'Once constructed, \'Operate\' the camp.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [2]]}),
@@ -142,9 +158,11 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 15,
     title: '<b>Mining Guide</b>',
-    message: 'Grab all the materials needed to create a camp.\n\n' +
+    message: 'Pick up <note>Two Copper Pickaxes</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
 
-    'Create and operate your camp. You will need to produce 20 noted pieces to complete your exam.',
+    'Use the <note>saw</note> on the <note>logs</note> to create the <note>Copper Mining Camp</note>.\n\n' +
+
+    'To operate the camp, right click it and select \'Operate\'.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
@@ -152,21 +170,23 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 16,
     title: '<b>Mining Guide</b>',
-    message: 'Nice to see you again.',
+    message: 'Welcome back. I hope your adventurers have taught you much.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 }, {
     id: 17,
     title: '<b>Mining Guide</b>',
-    message: 'Congratulations, you have passed your exam!',
+    message: 'It took you long enough...\n\n' +
+
+    'Congratulations on passing your exam. You have what it takes to join the <note>Teragon Mining Guild</note>.',
     continueSteps: [[
         buildStep(StepType.SHOW_DIALOG, {params: [18]}),
     ]],
 }, {
     id: 18,
     title: '<b>Mining Guide</b>',
-    message: 'Allow me to give you a tour of our <note>Guild</note>',
+    message: 'Allow me to give you a tour of the <note>Teragon Mining Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 34, 334, 50, 335, 2, [[
             buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
@@ -179,7 +199,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 19,
     title: '<b>Mining Guide</b>',
-    message: 'Donate your items to the guild guild to complete your quest.',
+    message: 'Donate your ten <note>Copper Ore</note> to the guild chest.\n\n' +
+    
+    'Then, you will officially be a member of our guild.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
@@ -188,20 +210,22 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Doctor</b>',
     message: 'Thank goodness, you\'re finally awake!\n\n' +
     
-    'The emperor\'s enforcers really did a number on you. The trip here was hard, huh.\n\n' +
+    'I was worried we got to you too late.\n\n' +
     
-    'We\'re in the infirmary, a neutral zone shared by the guilds, underneath <note>Eloria</note>.\n\n' +
+    '<note>...</note>\n\n' +
+
+    'Where are we? We\'re in the infirmary, a neutral zone shared by all the guilds. You\'re safe here.\n\n' +
     
-    'From here we can access the training grounds for every guild. Where would you like to start your journey?',
+    'Through these tunnels we can access the training grounds for every guild.\n\n' + 
+    
+    'Once you\'re fully healed, we\'ll escort you to your destination.\n\n' +
+
+    '<note>...</note>\n\n' +
+    
+    'What\'s that? You\'re feeling better? Excellent. <b>Which guild would you like to join?</b>',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
-
-        // Woodcutting Guild set actions
-                    // buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
-        // buildStep(StepType.TELEPORT, {params: [2, 26, 166, 28, 170, 2]}),
-        // buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
-        // buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}), // TODO This is done by Guild Selection UI confirm & the NPC's start-quest
     ]],
 }, {
     id: 21,
@@ -755,11 +779,13 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 73,
     title: '<b>Fishing Guide</b>',
-    message: 'First, grab all the materials needed to create a camp.\n\n' +
+    message: 'First, pick up all the items you need to create a <note>Shallow Pool Fishery Camp</note>\n\n' +
 
-    'Then, create your camp by using a saw on the logs.\n\n' +
+    'To do this, you will need <note>Two Fishing Nets</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
+
+    'Use the <note>saw</note> on the <note>logs</note> to create the <note>Shallow Pool Fishery Camp</note>\n\n' +
     
-    'Once constructed, right click the\'operate\' option to start.',
+    'Once constructed, \'Operate\' the camp.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [2]]}),
@@ -768,9 +794,11 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 74,
     title: '<b>Fishing Guide</b>',
-    message: 'Grab all the materials needed to create a camp.\n\n' +
+    message: 'Pick up <note>Two Fishing Nets</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
 
-    'Create and operate your camp. You will need to produce 20 noted pieces to complete your exam.',
+    'Use the <note>saw</note> on the <note>logs</note> to create the <note>Shallow Pool Fishery Camp</note>.\n\n' +
+
+    'To operate the camp, right click it and select \'Operate\'.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
@@ -785,14 +813,15 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 76,
     title: '<b>Fishing Guide</b>',
-    message: 'Congratulations, you have passed your exam!',
+    message: 'Well well well, it looks like you had what it took all along!\n\n' +
+    'Congratulations, you have passed your exam!',
     continueSteps: [[
         buildStep(StepType.SHOW_DIALOG, {params: [77]}),
     ]],
 }, {
     id: 77,
     title: '<b>Fishing Guide</b>',
-    message: 'Allow me to give you a tour of our <note>Guild</note>',
+    message: 'Allow me to give you a tour of the <note>Salmo Fishing Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 146, 5, 148, 7, 2, [[
             buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
@@ -805,16 +834,18 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 78,
     title: '<b>Fishing Guide</b>',
-    message: 'Donate your items to the guild guild to complete your quest.',
+    message: 'For your final task, go to our guild chest and donate your ten noted <note>Raw Shrimp</note>',
 },
 {
     id: 79,
     title: '<b>Woodcutting Guide</b>',
-    message: 'First, grab all the materials needed to create a camp.\n\n' +
+    message: 'First, pick up all the items you need to create a <note>Lumber Camp</note>\n\n' +
 
-    'Then, create your camp by using a saw on the logs.\n\n' +
+    'To do this, you will need <note>Two Copper Axes</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
+
+    'Use the <note>saw</note> on the <note>logs</note> to create the <note>Lumber Camp</note>\n\n' +
     
-    'Once constructed, right click the\'operate\' option to start.',
+    'Once constructed, \'Operate\' the camp.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [2]]}),
@@ -823,9 +854,11 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 80,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Grab all the materials needed to create a camp.\n\n' +
+    message: 'Pick up <note>Two Copper Axes</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
 
-    'Create and operate your camp. You will need to produce 20 noted pieces to complete your exam.',
+    'Use the <note>saw</note> on the <note>logs</note> to create the <note>Lumber Camp</note>.\n\n' +
+
+    'To operate the camp, right click it and select \'Operate\'.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
@@ -833,21 +866,23 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 81,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Nice to see you again.',
+    message: 'Welcome back traveler. Always a pleasure to run into you.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 }, {
     id: 82,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Congratulations, you have passed your exam!',
+    message: 'Congratulations, you have completed your exam.\n\n' + 
+    
+    'I am very proud to call you a member of our family!',
     continueSteps: [[
         buildStep(StepType.SHOW_DIALOG, {params: [83]}),
     ]],
 }, {
     id: 83,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Allow me to give you a tour of our <note>Guild</note>',
+    message: 'Allow me to give you a tour of the <note>Acernis Woodcutting Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, 2, [[
             buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
@@ -860,53 +895,43 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 84,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Donate your items to the guild guild to complete your quest.',
+    message: 'Your final task is to donate your ten noted <note>Logs</note> to the guild chest.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 }, {
     id: 85,
     title: '<b>Mining Guide</b>',
-    message: 'Wanna try to join the guild? Too late!',
+    message: 'Welcome adventurer.\n\n' + 
+    
+    'The proud <note>Teragon Mining Guild<note> is looking for new members.\n\n' +
+    
+    'Are you interested in joining?',
     continueSteps: [[
-        buildStep(StepType.ASSERT_GOAL_STATES, {params: [2, [0], ['EQUALS']]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
-        buildStep(StepType.TELEPORT, {params: [2, 25, 169, 27, 171, 0, [[
-            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
-        ]]]}),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[286, 285]] }),
     ]],
 }, {
     id: 86,
     title: '<b>Fishing Guide</b>',
-    message: 'Wanna try to join the guild? Too late!',
+    message: 'Welcome fellow fisher.\n\n' + 
+    
+    'The <note>Salmo Fishing Guild<note> could use more members like yourself.\n\n' +
+    
+    'Would you like to tryout?',
     continueSteps: [[
-        buildStep(StepType.ASSERT_GOAL_STATES, {params: [3, [0], ['EQUALS']]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [1]]}),
-        buildStep(StepType.TELEPORT, {params: [2, 25, 19, 27, 24, 0, [[
-            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [1]}),
-        ]]]}),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[287, 285]] }),
     ]],
 }, {
     id: 87,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Wanna try to join the guild? Too late!',
+    message: 'Hello wandering adventurer.\n\n' + 
+    
+    'The <note>Acernis Woodcutting Guild<note> is always eagerly accepting new members.\n\n' +
+    
+    'Care to take the entrance exam?',
     continueSteps: [[
-        buildStep(StepType.ASSERT_GOAL_STATES, {params: [4, [0], ['EQUALS']]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [1]]}),
-        buildStep(StepType.TELEPORT, {params: [2, 26, 166, 28, 171, 0, [[
-            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
-        ]]]}),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[288, 285]] }),
     ]],
 }]);
-
-const DialogStrings = {
-    0 : 'Copper Axe',
-    1 : 'Copper Pickaxe',
-    2 : 'Fishing Net',
-};
-
 
 module.exports.Dialogs = Dialogs;
