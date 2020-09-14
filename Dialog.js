@@ -26,7 +26,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     '\'<i>There is a ladder, find it and get out of here!</i>\' shouts a friendly voice.\n\n' + 
 
     '<b>\tHow to Play</b>\n' + 
-    ' - Left click your mouse to move around. Follow the arrow. Escape!\n\n',
+    ' - Left click your mouse to move around. \n' + 
+    ' - Follow the arrow.\n' + 
+    ' - Escape.\n',
 
     // '<b>\tHow to Play</b>\n' + 
     // ' - Left click your mouse to move around and interact with your surrounding world and items. Right click to view more options.\n\n' + 
