@@ -44,7 +44,9 @@ module.exports.Character = Character = [{
             let chance = Math.random() * 10;
             if (chance <= 1) {
                 let eggGroundItem = new GroundItemDef(732, entity.x, entity.y, 1, null);
+                // Mobile release fix (.default.)
                 KingdomOfEloria.i.getMap(entity.mapID).spawnEntity(eggGroundItem);
+                // Mobile release fix
             }
             return 30;
         })
@@ -54,6 +56,16 @@ Get.Character.Human(1, 'Banker', 24, [null, null, null, 100, 104], HairStyle.Lef
     interfaceID: 0,
     id: 7,
     name: 'Bank',
+}, {
+    interfaceID: 0,
+    id: 11,
+    name: 'Lost Items',
+    actionInterval: 0,
+    steps: [
+        buildStepList(StepList.WALK_ADJACENT),
+        [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+        buildStep(StepType.OPEN_LOST_ITEMS_INTERFACE)]
+    ],
 }]),
 Get.Character.HumanShopOwner(2, 'General Store Owner', 11, [21, null, null, 42, 29], HairStyle.Bald, HairColors.Black, null, EyeColors.DarkBrown, 0),
 Get.Character.HumanShopOwner(3, 'Woodcutting Store Owner', 11, [null, 4, null, 417, 477], HairStyle.RightSideSwipe, HairColors.DarkBrown, 6, EyeColors.DarkBrown, 1),

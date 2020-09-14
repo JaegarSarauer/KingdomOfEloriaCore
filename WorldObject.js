@@ -1059,11 +1059,7 @@ module.exports.WorldObject = WorldObject = [
         }],
         spriteIndex: 46,
     },
-    Get.WorldObject.Ladder(78, 'Ladder', 'I can go up this', 3, [{
-        interfaceID: 0,
-        id: 38,
-        name: 'Climb Up',
-    }]),
+    Get.WorldObject.TutorialTree(78, 5, undefined, 1, 0, 15, 4, 25, 5, 16, 'Use your axe on the tree to get logs.'),
     Get.WorldObject.TutorialShallowFishingPool(79),
     Get.WorldObject.Rock(80, 'Gold Rock', 25, [10, 32, 7, true, 0.5, 0.5], [[670, 1, 1, 100]], 85, 8, 120, 10, 'There appears to be gold in this rock.', 9.5),
     Get.WorldObject.DoorSkillLocked(81, 'Door', 9, 70, 1, null, 0, { x : 341, y : 47}, { x: 341, y: 46 }, 'Through the door cracks you see an exclusive woodcutting area.' ),
@@ -1116,7 +1112,7 @@ module.exports.WorldObject = WorldObject = [
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.ROLL_DROP_TABLE, { 
-                    params: [1, [[89, 2, 3, 25], [90, 1, 2, 20], [537, 1, 1, 10], [168, 8, 16, 20], [169, 6, 15, 10], [46, 4, 8, 10], [170, 4, 8, 5]]],
+                    params: [1, [[89, 1, 2, 10], [89, 1, 1, 15], [90, 1, 1, 20], [537, 1, 1, 4], [672, 1, 2, 6], [168, 8, 16, 20], [169, 6, 15, 10], [46, 4, 8, 10], [170, 4, 8, 5]]],
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.ROLL_DROP_TABLE, { 
@@ -1125,8 +1121,6 @@ module.exports.WorldObject = WorldObject = [
                 }),
                 buildStep(StepType.GIVE_XP, { params: [20, 250] }),
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You open the chest and find some loot.'] }),
-                buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['The goblins send out a war call in your name.'] }),
-                buildStep(StepType.SEND_GLOBAL_MESSAGE, { params: [4, 'A player has just stolen from the goblin chests and they want them dead!'] }),
                 buildStep(StepType.ROLL_DESPAWN, {
                     params: [1],
                     stepResultFail: 'END_ACTION'
