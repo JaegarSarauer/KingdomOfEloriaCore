@@ -906,12 +906,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     
     'Are you interested in joining?',
     continueSteps: [[
-        buildStep(StepType.ASSERT_GOAL_STATES, {params: [2, [0], ['EQUALS']]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [1]]}),
-        buildStep(StepType.TELEPORT, {params: [2, 25, 169, 27, 171, 0, [[
-            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
-        ]]]}),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[286, 285]] }),
     ]],
 }, {
     id: 86,
@@ -922,12 +917,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     
     'Would you like to tryout?',
     continueSteps: [[
-        buildStep(StepType.ASSERT_GOAL_STATES, {params: [3, [0], ['EQUALS']]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [1]]}),
-        buildStep(StepType.TELEPORT, {params: [2, 25, 19, 27, 24, 0, [[
-            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [1]}),
-        ]]]}),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[287, 285]] }),
     ]],
 }, {
     id: 87,
@@ -938,12 +928,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     
     'Care to take the entrance exam?',
     continueSteps: [[
-        buildStep(StepType.ASSERT_GOAL_STATES, {params: [4, [0], ['EQUALS']]}),
-        buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [1]]}),
-        buildStep(StepType.TELEPORT, {params: [2, 26, 166, 28, 171, 0, [[
-            buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
-        ]]]}),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[288, 285]] }),
     ]],
 }]);
 

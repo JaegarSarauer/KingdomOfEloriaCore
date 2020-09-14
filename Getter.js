@@ -2747,6 +2747,27 @@ const Interface = {
             steps: steps,
         };
     },
+    AttemptGuildExam: (id, guildID) => {
+        let guild = Guilds[guildID];
+        let goalID = guild.questID;
+        let x = guild.questLocation.x;
+        let y = guild.questLocation.y;
+        let mapID = guild.questLocation.mapID;
+        return {
+            id,
+            name: 'I want to join ' + guild.name,
+            actionInterval: -1,
+            steps: [[
+                    buildStep(StepType.ASSERT_GOAL_STATES, {params: [goalID, [0], ['EQUALS']]}),
+                    buildStep(StepType.SET_USER_GOAL_STATE, {params: [goalID, [1]]}),
+                    buildStep(StepType.TELEPORT, {params: [mapID, x - 1, y - 1, x + 1, y + 1, 0, [[
+                        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+                        buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [guildID]}),
+                    ]]]})
+                ],
+            ],
+        };
+    },
     MixSpellPot: (id, name, nameDetail, skillID, skillLevel, xp, spellID, mixPotID) => {
         let spellDef = Spells.Spells[spellID];
         let steps = [[], []];
