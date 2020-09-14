@@ -1971,7 +1971,7 @@ module.exports.Interface = [
 },
 {   
     id: 18,
-    name: 'Building Permit Purchase Interface',
+    name: 'Purchases Interface',
     actions: [
         {
             id: 0,
