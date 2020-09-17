@@ -1853,7 +1853,7 @@ module.exports.Interface = [
                 actionInterval: 1,
                 steps: [
                     [buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-                    buildStep(StepType.TELEPORT, {params: [0, 20, 32, 22, 39, 0] })]
+                    buildStep(StepType.TELEPORT_TO_SPAWN),]
                 ],
             },
             {
@@ -2273,8 +2273,10 @@ module.exports.Interface = [
             actionInterval: -1,
             steps: [
                 [
+                    buildStep(StepType.CHECK_CHARACTER_STATE, { params: [4, 1] }),
                     buildStep(StepType.SELECT_GUILD, {params: ['GUILD_ID']}),
                     buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+                    buildStep(StepType.SET_CHARACTER_STATE, {params: [8, 'GUILD_ID']}),
                     buildStep(StepType.START_TUTORIAL_TIMER),
                     buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: ['GUILD_ID']}),
                     buildStep(StepType.SHOW_DEFAULT_INTERFACES),

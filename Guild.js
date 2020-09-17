@@ -45,11 +45,11 @@ const GuardType = {
 };
 
 const ObeliskType = {
-    BLUE : 104,
-    GREEN : 105,
-    PURPLE : 106,
-    BURGUNTY : 107,
-    RED : 108
+    BLUE: 104,
+    GREEN: 105,
+    PURPLE: 106,
+    BURGUNTY: 107,
+    RED: 108
 };
 
 const indexToTier = (index) => {
@@ -161,23 +161,22 @@ const Guilds = [{
     ],
     kingID: GuardType.TERAGON_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
-    questID : 2,
     obelisk: {
-        id : ObeliskType.BURGUNTY,
-        x : 110,
-        y : 350,
-        mapID : 1
+        id: ObeliskType.BURGUNTY,
+        x: 110,
+        y: 350,
+        mapID: 1
     },
     tour: [{
         bounds: new Bounds(64, 359, 87, 372),
         text: 'The Teragon Guild Hall',
-    },{
+    }, {
         bounds: new Bounds(63, 357, 70, 362),
         text: 'The Teragon Community Chest',
-    },{
+    }, {
         bounds: new Bounds(60, 337, 70, 348),
         text: 'A bank',
-    },{
+    }, {
         bounds: new Bounds(32, 334, 51, 363),
         text: 'These are the shops in our guild',
     },],
@@ -226,25 +225,32 @@ const Guilds = [{
     ],
     tier2Barricades: [[71, 362], [74, 362], [75, 361], [76, 361], [77, 362], [80, 362]],
     tier4Barricades: [[75, 333], [76, 333], [137, 349], [137, 350], [137, 351], [137, 352], [26, 329], [27, 329]],
-    questDialogs : {
-        EXAM_EXPLAINED : 14,
-        EXAM_REEXPLAINED : 15, 
-        EXAM_COMPLETE : 16,
-        PASSED_EXAM : 17, 
-        TOUR : 18, 
-        DONATE_TO_COMPLETE : 19,
-        INVITE_TO_START_QUEST : 85,
-    },
-    questItems : {
-        tool : 9,
-        resourceID : 55,
-        notedResourceID : 184,
-    },
     skillID: 10,
-    questLocation : {
-        x : 26,
-        y: 169,
-        mapID : 2,
+    quest: {
+        entrance_exam: {
+            id: 2,
+            itemAmount: 8,
+            camp : 21,
+            dialogs: {
+                EXAM_EXPLAINED: 14,
+                EXAM_REEXPLAINED: 15,
+                EXAM_COMPLETE: 16,
+                PASSED_EXAM: 17,
+                TOUR: 18,
+                DONATE_TO_COMPLETE: 19,
+                INVITE_TO_START_QUEST: 85,
+            },
+            items: {
+                tool: 9,
+                resourceID: 55,
+                notedResourceID: 184,
+            },
+            location: {
+                x: 26,
+                y: 169,
+                mapID: 2,
+            },
+        },
     },
 }, {
     id: 1,
@@ -322,23 +328,22 @@ const Guilds = [{
     ],
     kingID: GuardType.SALMO_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
-    questID : 3,
     obelisk: {
-        id : ObeliskType.PURPLE,
-        x : 119,
-        y : 8,
-        mapID : 1
+        id: ObeliskType.PURPLE,
+        x: 119,
+        y: 8,
+        mapID: 1
     },
     tour: [{
         bounds: new Bounds(144, 11, 152, 18),
         text: 'The Salmo Guild Hall',
-    },{
+    }, {
         bounds: new Bounds(144, 10, 148, 14),
         text: 'The Teragon Community Chest',
-    },{
+    }, {
         bounds: new Bounds(136, 4, 144, 10),
         text: 'A bank',
-    },{
+    }, {
         bounds: new Bounds(151, 6, 173, 18),
         text: 'These are the shops in our guild',
     },],
@@ -423,25 +428,32 @@ const Guilds = [{
     ],
     tier2Barricades: [[148, 13], [149, 13]],
     tier4Barricades: [[142, 18], [177, 16], [177, 17], [177, 18], [167, 18]],
-    questDialogs : {
-        EXAM_EXPLAINED : 73,
-        EXAM_REEXPLAINED : 74, 
-        EXAM_COMPLETE : 75,
-        PASSED_EXAM : 76, 
-        TOUR : 77, 
-        DONATE_TO_COMPLETE : 78,
-        INVITE_TO_START_QUEST : 86,
-    },
-    questItems : {
-        tool : 117,
-        resourceID : 47,
-        notedResourceID : 176,
-    },
     skillID: 12,
-    questLocation : {
-        x : 26,
-        y: 22,
-        mapID : 2,
+    quest: {
+        entrance_exam: {
+            id: 3,
+            itemAmount: 8,
+            camp : 20,
+            dialogs: {
+                EXAM_EXPLAINED: 73,
+                EXAM_REEXPLAINED: 74,
+                EXAM_COMPLETE: 75,
+                PASSED_EXAM: 76,
+                TOUR: 77,
+                DONATE_TO_COMPLETE: 78,
+                INVITE_TO_START_QUEST: 86,
+            },
+            items: {
+                tool: 117,
+                resourceID: 47,
+                notedResourceID: 176,
+            },
+            location: {
+                x: 26,
+                y: 22,
+                mapID: 2,
+            },
+        },
     },
 }, {
     id: 2,
@@ -453,23 +465,22 @@ const Guilds = [{
     ],
     kingID: GuardType.ACERNIS_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
-    questID : 4,
     obelisk: {
-        id : ObeliskType.RED,
-        x : 332,
-        y : 23,
-        mapID : 0
+        id: ObeliskType.RED,
+        x: 332,
+        y: 23,
+        mapID: 0
     },
     tour: [{
         bounds: new Bounds(330, 37, 352, 55),
         text: 'The Teragon Guild Hall',
-    },{
+    }, {
         bounds: new Bounds(332, 44, 337, 49),
         text: 'The Teragon Community Chest',
-    },{
+    }, {
         bounds: new Bounds(347, 55, 358, 62),
         text: 'A bank',
-    },{
+    }, {
         bounds: new Bounds(327, 68, 356, 80),
         text: 'These are the shops in our guild',
     },],
@@ -608,26 +619,33 @@ const Guilds = [{
     ],
     tier2Barricades: [[329, 49], [329, 50], [340, 56], [341, 56], [342, 56], [353, 49], [353, 50]],
     tier4Barricades: [[340, 86], [341, 86], [342, 86]],
-    questDialogs : {
-        EXAM_EXPLAINED : 79,
-        EXAM_REEXPLAINED : 80, 
-        EXAM_COMPLETE : 81,
-        PASSED_EXAM : 82, 
-        TOUR : 83, 
-        DONATE_TO_COMPLETE : 84,
-        INVITE_TO_START_QUEST : 87,
-    },
-    questItems : {
-        tool : 1,
-        resourceID : 5,
-        notedResourceID : 135,
-    },
-    questLocation : {
-        x : 26,
-        y: 115,
-        mapID : 2,
-    },
     skillID: 9,
+    quest: {
+        entrance_exam: {
+            id: 4,
+            itemAmount: 8,
+            camp : 16,
+            dialogs: {
+                EXAM_EXPLAINED: 79,
+                EXAM_REEXPLAINED: 80,
+                EXAM_COMPLETE: 81,
+                PASSED_EXAM: 82,
+                TOUR: 83,
+                DONATE_TO_COMPLETE: 84,
+                INVITE_TO_START_QUEST: 87,
+            },
+            items: {
+                tool: 1,
+                resourceID: 5,
+                notedResourceID: 135,
+            },
+            location: {
+                x: 26,
+                y: 115,
+                mapID: 2,
+            },
+        },
+    },
 
 },];
 

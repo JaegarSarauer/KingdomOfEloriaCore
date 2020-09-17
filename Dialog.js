@@ -70,7 +70,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SET_FIRST_DEATH),
-        buildStep(StepType.TELEPORT, {params: [0, 20, 32, 22, 39, 0] }),
+        buildStep(StepType.TELEPORT_TO_SPAWN),
     ]]
 }, {
     id: 6,
@@ -200,6 +200,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Then, you will officially be a member of our guild.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [67, 360]}),
     ]],
 }, {
     id: 20,
@@ -829,6 +830,10 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     id: 78,
     title: '<b>Fishing Guide</b>',
     message: 'For your final task, go to our guild chest and donate your eight noted <note>Raw Shrimp</note>',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [146, 12]}),
+    ]],
 },
 {
     id: 79,
@@ -892,6 +897,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     message: 'Your final task is to donate your eight noted <note>Logs</note> to the guild chest.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [335, 47]}),
     ]],
 }, {
     id: 85,
