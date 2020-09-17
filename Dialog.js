@@ -10,25 +10,21 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 1,
-    title: '',
-    message: 
-    '<b>\tGetting Started</b>\n' + 
-    'You were traveling on a ship to the beautiful lands of <note>Eloria</note>, when the ship crashes onto the shores.\n' +
-    'It was <note>The Emperor</note>, and his forces. They caused the crash.\n' +
+    title: '<b>\tBrand New World</b>' ,
+    message: 'You were traveling by ship to start your new life in <note>Eloria</note>. Eloria is known for its beautiful scenery, natural resources and the struggle between powers to control it all.\n\n' +
 
-    'The ship is filled with soldiers from various guilds. They evacuate the wreckage, and holding off the emperor\'s forces.' +
+    'The ship crashes along the shore. As you peer overboard, you see the empire attacking your ship.\n\n' +
 
+    'Friendly soldiers evacuate the wreckage, and began fighting the emperor\'s forces.\n\n' +
 
-    'One archer shoots a glowing arrow into the sky, which erupts into a beacon of light. It\'s a flair. They are calling for reinforcements!\n\n' +
-
-    'You, a unarmed adventurer, are told to escape this battle.\n\n' +
+    'You, an unarmed adventurer, are told to escape this battle.\n\n' +
 
     '\'<i>There is a ladder, find it and get out of here!</i>\' shouts a friendly voice.\n\n' + 
 
     '<b>\tHow to Play</b>\n' + 
-    ' - Left click your mouse to move around. \n' + 
-    ' - Follow the arrow.\n' + 
-    ' - Escape.\n',
+    ' - Left click your mouse to move around.\n' + 
+    ' - Follow the arrow.\n' +
+    ' - Escape.',
 
     // '<b>\tHow to Play</b>\n' + 
     // ' - Left click your mouse to move around and interact with your surrounding world and items. Right click to view more options.\n\n' + 
@@ -199,7 +195,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 19,
     title: '<b>Mining Guide</b>',
-    message: 'Donate your ten <note>Copper Ore</note> to the guild chest.\n\n' +
+    message: 'Donate your eight <note>Copper Ore</note> to the guild chest.\n\n' +
     
     'Then, you will officially be a member of our guild.',
     continueSteps: [[
@@ -210,19 +206,17 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Doctor</b>',
     message: 'Thank goodness, you\'re finally awake!\n\n' +
     
-    'I was worried we got to you too late.\n\n' +
-    
-    '<note>...</note>\n\n' +
+    '<note><i>Where am I?</i></note>\n\n' +
 
-    'Where are we? We\'re in the infirmary, a neutral zone shared by all the guilds. You\'re safe here.\n\n' +
+    'We\'re in the infirmary, a neutral zone shared by all the guilds. You\'re safe here.\n\n' +
     
     'Through these tunnels we can access the training grounds for every guild.\n\n' + 
     
     'Once you\'re fully healed, we\'ll escort you to your destination.\n\n' +
 
-    '<note>...</note>\n\n' +
+    '<note><i>I\'m feeling better.</i></note>\n\n' +
     
-    'What\'s that? You\'re feeling better? Excellent. <b>Which guild would you like to join?</b>',
+    'Excellent. Which guild would you like to join?',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
@@ -834,7 +828,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 78,
     title: '<b>Fishing Guide</b>',
-    message: 'For your final task, go to our guild chest and donate your ten noted <note>Raw Shrimp</note>',
+    message: 'For your final task, go to our guild chest and donate your eight noted <note>Raw Shrimp</note>',
 },
 {
     id: 79,
@@ -895,7 +889,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 84,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Your final task is to donate your ten noted <note>Logs</note> to the guild chest.',
+    message: 'Your final task is to donate your eight noted <note>Logs</note> to the guild chest.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
@@ -931,6 +925,13 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Care to take the entrance exam?',
     continueSteps: [[
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[288, 285]] }),
+    ]],
+}, {
+    id: 88,
+    title: '',
+    message: 'Talk to your guide to resume your entrance exam.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
 }]);
 
