@@ -2749,10 +2749,10 @@ const Interface = {
     },
     AttemptGuildExam: (id, guildID) => {
         let guild = Guilds[guildID];
-        let goalID = guild.questID;
-        let x = guild.questLocation.x;
-        let y = guild.questLocation.y;
-        let mapID = guild.questLocation.mapID;
+        let goalID = guild.quest.entrance_exam.id;
+        let x = guild.quest.entrance_exam.location.x;
+        let y = guild.quest.entrance_exam.location.y;
+        let mapID = guild.quest.entrance_exam.location.mapID;
         return {
             id,
             name: 'I want to join ' + guild.name,
@@ -3383,8 +3383,9 @@ const WorldObject = {
     GuildChest: (id, guildName, guildID) => {
         let guildDef = Guilds[guildID];
         
-        let questID = guildDef.questID;
-        let notedResourceID = guildDef.questItems.notedResourceID;
+        let questID = guildDef.quest.entrance_exam.id;
+        let notedResourceID = guildDef.quest.entrance_exam.items.notedResourceID;
+        let resourceAmount = guildDef.quest.entrance_exam.itemAmount;
 
         return {
             id,
@@ -3409,16 +3410,19 @@ const WorldObject = {
                         stepResultFail: 'END_AND_REPEAT_STEP_LIST'
                     }),
                     [buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { params: [guildID] })],
+
                     [
                         buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
                             params: [questID, [6], ['EQUALS']],
                             stepResultPass: 'NEXT_STEP',
                             stepResultFail: 'NEXT_STEP_LIST',
                         }),
-                        buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, 10]},),
-                        buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [notedResourceID, 10]},),
+                        buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount]},),
+                        buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount]},),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You have completed your quest!'] }),
                         buildStep(StepType.SET_USER_GOAL_STATE, { params: [questID, [7]] }),
                         buildStep(StepType.SEND_CLIENT_STATUS, { params: [''] }),
+                        buildStep(StepType.SHOW_DIRECTION_ARROW),
                     ]
                 ],
             }],
@@ -6653,8 +6657,8 @@ const Character = {
     },
     TrainingGuide : function(id, guildID) {
         let guide = this.BaseGuide(id, guildID);
-        let questID = Guilds[guildID].questID;
-        let dialogs = Guilds[guildID].questDialogs;
+        let questID = Guilds[guildID].quest.entrance_exam.id;
+        let dialogs = Guilds[guildID].quest.entrance_exam.dialogs;
 
         const questTimerID = 20;
 
@@ -6702,7 +6706,7 @@ const Character = {
                     }),
                     buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Default message
-                        params: [dialogs.EXAM_COMPLETE],
+                        params: [dialogs.INVITE_TO_START_QUEST],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
@@ -6762,8 +6766,8 @@ const Character = {
     TourGuide : function(id, guildID) {
         let guide = this.BaseGuide(id, guildID);
         
-        let questID = Guilds[guildID].questID;
-        let dialogs = Guilds[guildID].questDialogs;
+        let questID = Guilds[guildID].quest.entrance_exam.id;
+        let dialogs = Guilds[guildID].quest.entrance_exam.dialogs;
         let skillID = Guilds[guildID].skillID;
 
         let states = {
