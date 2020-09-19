@@ -31,7 +31,7 @@ module.exports.StepType = StepType = {
         id: 'START_TOUR',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number'], // tourID
+        paramTypes: ['number', 'Array|null'], // tourID, postStepList
         params: [],
     },
     SEND_CLIENT_MESSAGE: {
@@ -52,7 +52,7 @@ module.exports.StepType = StepType = {
         id: 'START_TUTORIAL_TIMER',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: [''],
+        paramTypes: [],
         params: [],
     },
     START_GUILD_ENTRANCE_QUEST_TIMER: {
