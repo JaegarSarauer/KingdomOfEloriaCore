@@ -167,19 +167,7 @@ const Guilds = [{
         y: 350,
         mapID: 1
     },
-    tour: [{
-        bounds: new Bounds(64, 359, 87, 372),
-        text: 'The Teragon Guild Hall',
-    }, {
-        bounds: new Bounds(63, 357, 70, 362),
-        text: 'The Teragon Community Chest',
-    }, {
-        bounds: new Bounds(60, 337, 70, 348),
-        text: 'A bank',
-    }, {
-        bounds: new Bounds(32, 334, 51, 363),
-        text: 'These are the shops in our guild',
-    },],
+    tourID: 0,
     cityBounds: new Bounds(43, 341, 86, 370),
     guildBounds: new Bounds(65, 366, 86, 370),
     guildShops: [
@@ -334,19 +322,7 @@ const Guilds = [{
         y: 8,
         mapID: 1
     },
-    tour: [{
-        bounds: new Bounds(144, 11, 152, 18),
-        text: 'The Salmo Guild Hall',
-    }, {
-        bounds: new Bounds(144, 10, 148, 14),
-        text: 'The Teragon Community Chest',
-    }, {
-        bounds: new Bounds(136, 4, 144, 10),
-        text: 'A bank',
-    }, {
-        bounds: new Bounds(151, 6, 173, 18),
-        text: 'These are the shops in our guild',
-    },],
+    tourID: 1,
     cityBounds: new Bounds(141, 10, 170, 20),
     guildBounds: new Bounds(145, 12, 151, 17),
     guildShops: [
@@ -471,19 +447,7 @@ const Guilds = [{
         y: 23,
         mapID: 0
     },
-    tour: [{
-        bounds: new Bounds(330, 37, 352, 55),
-        text: 'The Teragon Guild Hall',
-    }, {
-        bounds: new Bounds(332, 44, 337, 49),
-        text: 'The Teragon Community Chest',
-    }, {
-        bounds: new Bounds(347, 55, 358, 62),
-        text: 'A bank',
-    }, {
-        bounds: new Bounds(327, 68, 356, 80),
-        text: 'These are the shops in our guild',
-    },],
+    tourID: 2,
     tierDetails: [{
         tierID: -5,
         items: [[0, 1000000]],
