@@ -27,6 +27,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], // guildID
         params: [],
     },
+    START_TOUR: {
+        id: 'START_TOUR',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], // tourID
+        params: [],
+    },
     SEND_CLIENT_MESSAGE: {
         id: 'SEND_CLIENT_MESSAGE',
         stepResultFail: 'END_ACTION',
@@ -1721,6 +1728,7 @@ try {
     const StepStartGuildEntranceQuestTimer = require('../internal/Steps/StepStartGuildEntranceQuestTimer');
     const StepOpenGuildSelectionInterface = require('../internal/Steps/StepOpenGuildSelectionInterface');
     const StepSelectGuild = require('../internal/Steps/StepSelectGuild');
+    const StepStartTour = require('../internal/Steps/StepStartTour');
     
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         OPEN_GUILD_SELECTION_INTERFACE : {
@@ -1731,6 +1739,11 @@ try {
         SELECT_GUILD : {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSelectGuild.StepSelectGuild(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        START_TOUR : {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepStartTour.StepStartTour(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         SEND_CLIENT_MESSAGE: {
