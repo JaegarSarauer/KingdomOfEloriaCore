@@ -6784,15 +6784,26 @@ const Character = {
             steps: [
                 buildStepList(StepList.WALK_ADJACENT),
                 [
-                    buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
+                    buildStep(StepType.ASSERT_GOAL_STATES, { // If you have not startedm try and start it
                         params: [questID, [states.UNSTARTED], ['EQUALS']],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'END_AND_GOTO_LIST_4',
+                    }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    buildStep(StepType.HAS_SKILL_LEVEL, { // Check level
+                        params: [skillID, 10],
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.HAS_SKILL_LEVEL, {params: [skillID, 10]}),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                    buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
+                    buildStep(StepType.SHOW_DIALOG, { // If you pass
                         params: [dialogs.INVITE_TO_START_QUEST],
+                        stepResultPass: 'END_ACTION',
+                        stepResultFail: 'END_ACTION',
+                    })
+                ],
+                [
+                    buildStep(StepType.SHOW_DIALOG, { 
+                        params: [dialogs.LEVEL_REQUIREMENT_NOT_MET],
                         stepResultPass: 'END_ACTION',
                         stepResultFail: 'END_ACTION',
                     })
