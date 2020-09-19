@@ -235,8 +235,8 @@ const Guilds = [{
                 notedResourceID: 184,
             },
             location: {
-                x: 26,
-                y: 169,
+                x: 27,
+                y: 170,
                 mapID: 2,
             },
         },
@@ -608,7 +608,7 @@ const Guilds = [{
             },
             location: {
                 x: 26,
-                y: 115,
+                y: 118,
                 mapID: 2,
             },
         },

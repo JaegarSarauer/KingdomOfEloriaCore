@@ -3815,7 +3815,7 @@ const WorldObject = {
                         buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
                         buildStep(StepType.PLAY_SOUND, { params: [35] }),],
                         [buildStep(StepType.ROLL_SKILL_SUCCESS, {
-                            params: [12, 2, 2, true, 0.15, 0.1],
+                            params: [12, 3, 2, true, 0.15, 0.1],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
                         }),
                         buildStep(StepType.ROLL_DESPAWN, {
@@ -4000,55 +4000,6 @@ const WorldObject = {
                 }],
                 spriteIndex: 10,
             };
-        },
-        TutorialShallowFishingPool: function(id) {
-            let pool = this.ShallowFishingPool(id);
-            pool.actions = [{
-                interfaceID: 0,
-                id: 9,
-                name: 'Cast Net',
-                steps: [
-                    buildStepList(StepList.WALK_ADJACENT),
-                    
-                    [buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You cast your fishing net.'] }),
-                    buildStep(StepType.SET_ACTION_INTERVAL, { params: [2] })],
-
-                    [buildStep(StepType.IS_ADJACENT),
-                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 1] }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [3] }),
-                    buildStep(StepType.INVENTORY_HAS_ROOM),
-                    buildStep(StepType.SET_PARAMETER_BEST_TOOL_POWER, { params: [12, 3] }),
-                    buildStep(StepType.PLAY_ANIMATION, { params: ['CAST_NET'] }),
-                    buildStep(StepType.PLAY_SOUND, { params: [35] }),
-                    buildStep(StepType.ROLL_MIN_MAX_SKILL_SUCCESS, {
-                        params: [10, 50, 12, 0.25, true, 0.1],
-                        stepResultFail: 'END_AND_GOTO_LIST_3',
-                    })],
-
-                    [buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [47, 1] }),
-                    buildStep(StepType.GIVE_XP, { params: [12, 25] }),
-                    buildStep(StepType.SEND_CLIENT_MESSAGE, {
-                        params: ['You fish some shrimp.'],
-                    }),
-                    buildStep(StepType.CHECK_CHARACTER_STATE, {
-                        params: [4, 3],
-                        stepResultFail: 'END_AND_GOTO_LIST_5',
-                    }),
-                    buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [134, 71]}), // Osaik's cabin
-                    ],
-
-                    [buildStep(StepType.ROLL_DESPAWN, {
-                        params: [250],
-                        stepResultFail: 'END_AND_GOTO_LIST_3',
-                    }),
-                    buildStep(StepType.SET_RESPAWN_TIMER, {
-                        params: [240],
-                        stepResultFail: 'END_AND_GOTO_LIST_3',
-                        stepResultPass: 'END_AND_GOTO_LIST_3'
-                    }),]
-                ]
-            }];
-            return pool;
         },
         DeepFishingPool: function (id) {
             return {
