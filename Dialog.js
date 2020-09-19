@@ -185,11 +185,13 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     message: 'Allow me to give you a tour of the <note>Teragon Mining Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 81, 362, 86, 363, 2, [[
-            buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
-            buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [6]]}),
-            // Goes into tour of guild
-            buildStep(StepType.SHOW_DIALOG, {params: [19]}),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
+            buildStep(StepType.START_TOUR, {params: [0, [[
+                buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [6]]}),
+                buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
+                buildStep(StepType.SHOW_DIALOG, {params: [19]}),
+                buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
+                buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+            ]]]})
         ]]]}),
     ]],
 }, {
@@ -819,11 +821,13 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     message: 'Allow me to give you a tour of the <note>Salmo Fishing Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 151, 15, 155, 16, 2, [[
-            buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
-            buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [6]]}),
-            // Goes into tour of guilde
-            buildStep(StepType.SHOW_DIALOG, {params: [78]}),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [1]}),
+            buildStep(StepType.START_TOUR, {params: [1, [[
+                buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [6]]}),
+                buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [1]}),
+                buildStep(StepType.SHOW_DIALOG, {params: [78]}),
+                buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
+                buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+            ]]]})
         ]]]}),
     ]],
 }, {
@@ -884,11 +888,13 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     message: 'Allow me to give you a tour of the <note>Acernis Woodcutting Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 331, 51, 333, 53, 2, [[
-            buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
-            buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
-            // Goes into tour of guilde
-            buildStep(StepType.SHOW_DIALOG, {params: [84]}),
-            buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
+            buildStep(StepType.START_TOUR, {params: [1, [[
+                buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
+                buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
+                buildStep(StepType.SHOW_DIALOG, {params: [84]}),
+                buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
+                buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+            ]]]})
         ]]]}),
     ]],
 }, {
@@ -936,6 +942,39 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     id: 88,
     title: '',
     message: 'Talk to your guide to resume your entrance exam.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+},{
+    id: 89,
+    title: '<b>Mining Guide</b>',
+    message: 'Welcome adventurer.\n\n' + 
+    
+    'The proud <note>Teragon Mining Guild</note> is looking for new members.\n\n' +
+    
+    'Once you have a <note>Mining Level</note> of <note>10</note>, you may tryout.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+}, {
+    id: 90,
+    title: '<b>Fishing Guide</b>',
+    message: 'Welcome fellow fisher.\n\n' + 
+    
+    'The <note>Salmo Fishing Guild<note> could use more members like yourself.\n\n' +
+    
+    'Once you have a <note>Fishing Level</note> of <note>10</note>, you may tryout.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
+}, {
+    id: 91,
+    title: '<b>Woodcutting Guide</b>',
+    message: 'Hello wandering adventurer.\n\n' + 
+    
+    'The <note>Acernis Woodcutting Guild<note> is always eagerly accepting new members.\n\n' +
+    
+    'Once you have a <note>Woodcutting Level</note> of <note>10</note>, you may tryout.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],

@@ -227,6 +227,7 @@ const Guilds = [{
                 TOUR: 18,
                 DONATE_TO_COMPLETE: 19,
                 INVITE_TO_START_QUEST: 85,
+                LEVEL_REQUIREMENT_NOT_MET : 89,
             },
             items: {
                 tool: 9,
@@ -418,6 +419,7 @@ const Guilds = [{
                 TOUR: 77,
                 DONATE_TO_COMPLETE: 78,
                 INVITE_TO_START_QUEST: 86,
+                LEVEL_REQUIREMENT_NOT_MET : 90,
             },
             items: {
                 tool: 117,
@@ -597,6 +599,7 @@ const Guilds = [{
                 TOUR: 83,
                 DONATE_TO_COMPLETE: 84,
                 INVITE_TO_START_QUEST: 87,
+                LEVEL_REQUIREMENT_NOT_MET : 91,
             },
             items: {
                 tool: 1,
