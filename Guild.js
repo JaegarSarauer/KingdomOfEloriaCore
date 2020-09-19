@@ -310,9 +310,9 @@ const Guilds = [{
         guards: [[GuardType.SALMO_OSMIUM_MELEE_GUARD, 13], [GuardType.SALMO_TUNE, 1], [GuardType.SALMO_ARCHER, 5]],
     }],
     emperorSpawnBounds: [
-        [new Bounds(141, 21, 143, 25), new Bounds(141, 10, 154, 11), new Bounds(145, 12, 151, 17)],
-        [new Bounds(167, 21, 169, 25), new Bounds(161, 5, 171, 11), new Bounds(141, 10, 154, 11), new Bounds(145, 12, 151, 17)],
-        [new Bounds(192, 9, 195, 12), new Bounds(161, 5, 175, 18), new Bounds(145, 12, 151, 17)],
+        [new Bounds(141, 21, 143, 25), new Bounds(141, 10, 154, 11), new Bounds(145, 12, 152, 17)],
+        [new Bounds(167, 21, 169, 25), new Bounds(161, 5, 171, 11), new Bounds(141, 10, 154, 11), new Bounds(145, 12, 152, 17)],
+        [new Bounds(192, 9, 195, 12), new Bounds(161, 5, 175, 18), new Bounds(145, 12, 152, 17)],
     ],
     kingID: GuardType.SALMO_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
