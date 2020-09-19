@@ -184,10 +184,10 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Mining Guide</b>',
     message: 'Allow me to give you a tour of the <note>Teragon Mining Guild</note>',
     continueSteps: [[
-        buildStep(StepType.TELEPORT, {params: [0, 34, 334, 50, 335, 2, [[
+        buildStep(StepType.TELEPORT, {params: [0, 81, 362, 86, 363, 2, [[
             buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [6]]}),
-            // Goes into tour of guilde
+            // Goes into tour of guild
             buildStep(StepType.SHOW_DIALOG, {params: [19]}),
             buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
         ]]]}),
@@ -818,7 +818,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Fishing Guide</b>',
     message: 'Allow me to give you a tour of the <note>Salmo Fishing Guild</note>',
     continueSteps: [[
-        buildStep(StepType.TELEPORT, {params: [0, 146, 5, 148, 7, 2, [[
+        buildStep(StepType.TELEPORT, {params: [0, 151, 15, 155, 16, 2, [[
             buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [6]]}),
             // Goes into tour of guilde
@@ -883,7 +883,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Woodcutting Guide</b>',
     message: 'Allow me to give you a tour of the <note>Acernis Woodcutting Guild</note>',
     continueSteps: [[
-        buildStep(StepType.TELEPORT, {params: [0, 325, 57, 331, 60, 2, [[
+        buildStep(StepType.TELEPORT, {params: [0, 331, 51, 333, 53, 2, [[
             buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
             // Goes into tour of guilde
@@ -904,7 +904,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Mining Guide</b>',
     message: 'Welcome adventurer.\n\n' + 
     
-    'The proud <note>Teragon Mining Guild<note> is looking for new members.\n\n' +
+    'The proud <note>Teragon Mining Guild</note> is looking for new members.\n\n' +
     
     'Are you interested in joining?',
     continueSteps: [[
