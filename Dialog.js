@@ -888,7 +888,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     message: 'Allow me to give you a tour of the <note>Acernis Woodcutting Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 331, 51, 333, 53, 2, [[
-            buildStep(StepType.START_TOUR, {params: [1, [[
+            buildStep(StepType.START_TOUR, {params: [2, [[
                 buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
                 buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
                 buildStep(StepType.SHOW_DIALOG, {params: [84]}),

@@ -1059,8 +1059,8 @@ module.exports.WorldObject = WorldObject = [
         }],
         spriteIndex: 46,
     },
-    Get.WorldObject.TutorialTree(78, 5, undefined, 1, 0, 15, 4, 25, 5, 16, 'Use your axe on the tree to get logs.'),
-    Get.WorldObject.TutorialShallowFishingPool(79),
+    Get.WorldObject.Tree(78, 5, undefined, 1, 0, 3, 2, 25, 5, 16, 'Use your axe on the tree to get logs.'),
+    Get.WorldObject.Rock(79, 'Copper Rock', 1, [10, 3, 2, true, 0.5, 0.5], [[55, 1, 1, 100]], 25, 1, 8, 4, 'There appears to be copper in this rock.', 12, 572, 575), 
     Get.WorldObject.Rock(80, 'Gold Rock', 25, [10, 32, 7, true, 0.5, 0.5], [[670, 1, 1, 100]], 85, 8, 120, 10, 'There appears to be gold in this rock.', 9.5),
     Get.WorldObject.DoorSkillLocked(81, 'Door', 9, 70, 1, null, 0, { x : 341, y : 47}, { x: 341, y: 46 }, 'Through the door cracks you see an exclusive woodcutting area.' ),
     Get.WorldObject.DoorGuildLocked(82, 'Door', 0, 'GREATER_EQUALS', 2, 1, null, 1, { x : 47, y : 363}, { x: 47, y: 362 }, 'Through the door cracks you see an exclusive mining area.' ),
@@ -1173,4 +1173,18 @@ module.exports.WorldObject = WorldObject = [
         spriteIndex: 46,
     },
     Get.WorldObject.ShrimpFishingPool(111),
+    Get.WorldObject.Ladder(112, 'Ladder', 'I can see some people wearing guild emblems down there.', 0, [{
+        interfaceID: 0,
+        id: 37,
+        name: 'Climb Down',
+        steps: [
+            buildStepList(StepList.WALK_ABOVE),
+            [buildStep(StepType.TELEPORT, {
+                params: [2, 72, 165, 74, 167, 0, [[
+                    buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+                    buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
+                ]]]
+            })]
+        ],
+    }]),
 ];
