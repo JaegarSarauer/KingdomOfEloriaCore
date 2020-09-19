@@ -2059,7 +2059,7 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
             new AnimationDef(modelParts.CORE, {
                 x: modelParts.CORE.x + xChange,
                 y: modelParts.CORE.y + yChange,
-            }, 500).start(); // 500ms = 1 server tick
+            }, 500).easing(TWEEN.Easing.Linear.None).start(); // 500ms = 1 server tick
         }
 
 
@@ -2488,6 +2488,7 @@ class AnimationDef extends TWEEN.Tween {
         }
 
         this.to(this.end, duration);
+        this.easing(TWEEN.Easing.Quadratic.In);
     }
 }
 
