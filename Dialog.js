@@ -921,7 +921,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Fishing Guide</b>',
     message: 'Welcome fellow fisher.\n\n' + 
     
-    'The <note>Salmo Fishing Guild<note> could use more members like yourself.\n\n' +
+    'The <note>Salmo Fishing Guild</note> could use more members like yourself.\n\n' +
     
     'Would you like to tryout?',
     continueSteps: [[
@@ -932,7 +932,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Woodcutting Guide</b>',
     message: 'Hello wandering adventurer.\n\n' + 
     
-    'The <note>Acernis Woodcutting Guild<note> is always eagerly accepting new members.\n\n' +
+    'The <note>Acernis Woodcutting Guild</note> is always eagerly accepting new members.\n\n' +
     
     'Care to take the entrance exam?',
     continueSteps: [[
@@ -961,7 +961,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Fishing Guide</b>',
     message: 'Welcome fellow fisher.\n\n' + 
     
-    'The <note>Salmo Fishing Guild<note> could use more members like yourself.\n\n' +
+    'The <note>Salmo Fishing Guild</note> could use more members like yourself.\n\n' +
     
     'Once you have a <note>Fishing Level</note> of <note>10</note>, you may tryout.',
     continueSteps: [[
@@ -972,7 +972,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Woodcutting Guide</b>',
     message: 'Hello wandering adventurer.\n\n' + 
     
-    'The <note>Acernis Woodcutting Guild<note> is always eagerly accepting new members.\n\n' +
+    'The <note>Acernis Woodcutting Guild</note> is always eagerly accepting new members.\n\n' +
     
     'Once you have a <note>Woodcutting Level</note> of <note>10</note>, you may tryout.',
     continueSteps: [[
