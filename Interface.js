@@ -1975,7 +1975,7 @@ module.exports.Interface = [
     actions: [
         {
             id: 0,
-            name: 'Buy ',
+            name: 'Buy',
             actionInterval: -1,
             steps: [
                 [buildStep(StepType.PURCHASE_ITEM, {params: ['PURCHASE_KEY', 'ITEM_AMOUNT']})]
@@ -1983,10 +1983,10 @@ module.exports.Interface = [
         },
         {
             id: 1,
-            name: 'Withdraw ',
+            name: 'Reroll Cosmetics',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.WITHDRAW_PURCHASE, {params: ['PURCHASE_KEY', 'ITEM_AMOUNT']})]
+                [buildStep(StepType.REROLL_COSMETICS)]
             ],
         },
     ],

@@ -1055,6 +1055,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number'], //cutGemID, itemAmount
         params: [],
     },
+    REROLL_COSMETICS: {
+        id: 'REROLL_COSMETICS',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     IS_SPELL_UNLOCKED: {
         id: 'IS_SPELL_UNLOCKED',
         stepResultFail: 'END_ACTION',
@@ -1587,6 +1594,7 @@ try {
     const StepSetAutocastSpell = require('../internal/Steps/StepSetAutocastSpell');
     const StepCastSpell = require('../internal/Steps/StepCastSpell');
     const StepGiveCutGem = require('../internal/Steps/StepGiveCutGem');
+    const StepRerollCosmetics = require('../internal/Steps/StepRerollCosmetics');
     const StepCanCastSpell = require('../internal/Steps/StepCanCastSpell');
     const StepIsSpellUnlocked = require('../internal/Steps/StepIsSpellUnlocked');
     const StepUnlockSpell = require('../internal/Steps/StepUnlockSpell');
@@ -2312,6 +2320,11 @@ try {
         GIVE_CUT_GEM: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepGiveCutGem.StepGiveCutGem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        REROLL_COSMETICS: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepRerollCosmetics.StepRerollCosmetics(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         CAN_CAST_SPELL: {
