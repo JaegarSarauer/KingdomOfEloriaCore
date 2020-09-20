@@ -106,7 +106,7 @@ Get.Character.Human(15, 'Baroness', 32, [null, 299, 612, 44, 31, null, 674], 5, 
 }], 11, EyeColors.Purple ),
 Get.Character.GoblinOrcRanged(16, 'Goblin', 1,  
     [[11, 22], [0, 15], [1, 15], [2, 12], [5, 8], [8, 8]], //22hp, 15atk, 15pow, 12meleedef, 8rangedef, 8magicdefence
-    [[[1, 100], [0, 5, 15, 75], [37, 1, 1, 15], [127, 1, 1, 5], [168, 1, 1, 5]], [[1, 100], [68, 1, 5, 90], [69, 1, 2, 10]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    [[[1, 100], [0, 5, 15, 75], [37, 1, 1, 15], [127, 1, 1, 5], [38, 1, 1, 5]], [[1, 100], [68, 1, 5, 90], [69, 1, 2, 10]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     37, 8, 2), // attack range
 Get.Character.GoblinOrOrc(17, 'Orc', 1,  
     [[11, 4], [2, 2], [3, 6], [4, 6]], //4hp, 2 melee def, 6 range focus, 6 range power
@@ -114,7 +114,7 @@ Get.Character.GoblinOrOrc(17, 'Orc', 1,
     18, 2), //head, right, left, chest, legs
 Get.Character.GoblinOrcRanged(18, 'Orc', 1,  
     [[11, 18], [2, 8], [3, 16], [4, 16], [5, 10], [8, 12]], //18hp, 8 melee def, 16 range focus, 16 range power, 10rangedef, 12magicdefence
-    [[[1, 100], [0, 20, 45, 70], [38, 1, 1, 19], [39, 1, 1, 1], [127, 1, 1, 5], [168, 1, 1, 5]], [[1, 100], [68, 3, 12, 50], [69, 2, 7, 40], [70, 1, 4, 10]], [[512, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
+    [[[1, 100], [0, 20, 45, 70], [38, 1, 1, 19], [39, 1, 1, 1], [127, 1, 1, 5], [38, 1, 1, 5]], [[1, 100], [68, 3, 12, 50], [69, 2, 7, 40], [70, 1, 4, 10]], [[512, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128)], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
     39, 8, 2), // Attack range
 Get.Character.GoblinOrOrc(19, 'King Orc', 3,  
     [[11, 100], [0, 100], [1, 60], [2, 50], [5, 60], [8, 40]], //99hp, 45atk, 45pow, 35meleedef, 45rangedef, 30magicdefence
