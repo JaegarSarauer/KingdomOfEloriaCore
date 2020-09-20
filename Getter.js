@@ -4492,6 +4492,15 @@ const WorldObject = {
             let name = woodName == null ? 'Lumber Camp' : woodName + ' Lumber Camp';
             let treeName = woodName == null ? 'trees' : woodName.toLowerCase() + ' trees';
             let axeId = Math.round( Math.round(skillLevel) / 10 );
+
+
+            let trees = [[1, woTreeId]];
+
+            // If its regular logs, also add tutorial tree
+            if (woodId == 5) {
+                trees.push([1, 78]);
+            }
+
             return {
                 id: id,
                 name: name,
@@ -4518,7 +4527,7 @@ const WorldObject = {
                         id: 24,
                         name: 'Operate',
                         steps: [
-                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [[[1, woTreeId]], 2, 2] }),
+                            [buildStep(StepType.OPERATE_CONSTRUCTION_OBJECT, { params: [trees, 2, 2] }),
                             buildStep(StepType.SET_ACTION_INTERVAL, { 
                                 params: [2],
                             }),

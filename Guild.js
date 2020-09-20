@@ -155,9 +155,9 @@ const Guilds = [{
         guards: [[GuardType.TERAGON_OSMIUM_MELEE_GUARD, 13], [GuardType.TERAGON_THAKOD, 1], [GuardType.TERAGON_SWORDSMAN, 1], [GuardType.TERAGON_SWORDSMAN_APPRENTICE, 5]],
     }],
     emperorSpawnBounds: [
-        [new Bounds(78, 322, 81, 326), new Bounds(65, 360, 86, 370),],
-        [new Bounds(145, 351, 160, 355), new Bounds(71, 351, 80, 356), new Bounds(65, 360, 86, 370),],
-        [new Bounds(22, 324, 26, 327), new Bounds(33, 338, 60, 346), new Bounds(65, 360, 86, 370),]
+        [new Bounds.Bounds(78, 322, 81, 326), new Bounds.Bounds(65, 360, 86, 370),],
+        [new Bounds.Bounds(145, 351, 160, 355), new Bounds.Bounds(71, 351, 80, 356), new Bounds.Bounds(65, 360, 86, 370),],
+        [new Bounds.Bounds(22, 324, 26, 327), new Bounds.Bounds(33, 338, 60, 346), new Bounds.Bounds(65, 360, 86, 370),]
     ],
     kingID: GuardType.TERAGON_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
@@ -168,8 +168,8 @@ const Guilds = [{
         mapID: 1
     },
     tourID: 0,
-    cityBounds: new Bounds(43, 341, 86, 370),
-    guildBounds: new Bounds(65, 366, 86, 370),
+    cityBounds: new Bounds.Bounds(43, 341, 86, 370),
+    guildBounds: new Bounds.Bounds(65, 366, 86, 370),
     guildShops: [
         new ShopUpgrade(12, 'Tergaron General Store', [
             [123, [1, 2, 3, 5, 8, 10, 15, 20, 25, 30, 50]],
@@ -311,9 +311,9 @@ const Guilds = [{
         guards: [[GuardType.SALMO_OSMIUM_MELEE_GUARD, 13], [GuardType.SALMO_TUNE, 1], [GuardType.SALMO_ARCHER, 5]],
     }],
     emperorSpawnBounds: [
-        [new Bounds(141, 21, 143, 25), new Bounds(141, 10, 154, 11), new Bounds(145, 12, 152, 17)],
-        [new Bounds(167, 21, 169, 25), new Bounds(161, 5, 171, 11), new Bounds(141, 10, 154, 11), new Bounds(145, 12, 152, 17)],
-        [new Bounds(192, 9, 195, 12), new Bounds(161, 5, 175, 18), new Bounds(145, 12, 152, 17)],
+        [new Bounds.Bounds(141, 21, 143, 25), new Bounds.Bounds(141, 10, 154, 11), new Bounds.Bounds(145, 12, 152, 17)],
+        [new Bounds.Bounds(167, 21, 169, 25), new Bounds.Bounds(161, 5, 171, 11), new Bounds.Bounds(141, 10, 154, 11), new Bounds.Bounds(145, 12, 152, 17)],
+        [new Bounds.Bounds(192, 9, 195, 12), new Bounds.Bounds(161, 5, 175, 18), new Bounds.Bounds(145, 12, 152, 17)],
     ],
     kingID: GuardType.SALMO_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
@@ -324,8 +324,8 @@ const Guilds = [{
         mapID: 1
     },
     tourID: 1,
-    cityBounds: new Bounds(141, 10, 170, 20),
-    guildBounds: new Bounds(145, 12, 151, 17),
+    cityBounds: new Bounds.Bounds(141, 10, 170, 20),
+    guildBounds: new Bounds.Bounds(145, 12, 151, 17),
     guildShops: [
         new ShopUpgrade(16, 'Salmo Fishing Store', [
             [117, [1, 2, 3, 5, 8, 10, 20, 30, 45, 70, 100]],
@@ -437,9 +437,9 @@ const Guilds = [{
     id: 2,
     name: "Acernis - Woodcutting Guild",
     emperorSpawnBounds: [
-        [new Bounds(332, 100, 338, 105), new Bounds(338, 84, 342, 99), new Bounds(331, 47, 351, 55),],
-        [new Bounds(369, 82, 377, 86), new Bounds(338, 84, 342, 99), new Bounds(331, 47, 351, 55),],
-        //[new Bounds(305, 50, 310, 58), new Bounds(315, 78, 324, 82), new Bounds(338, 84, 342, 99), new Bounds(331, 47, 351, 55), ],
+        [new Bounds.Bounds(332, 100, 338, 105), new Bounds.Bounds(338, 84, 342, 99), new Bounds.Bounds(331, 47, 351, 55),],
+        [new Bounds.Bounds(369, 82, 377, 86), new Bounds.Bounds(338, 84, 342, 99), new Bounds.Bounds(331, 47, 351, 55),],
+        //[new Bounds.Bounds(305, 50, 310, 58), new Bounds.Bounds(315, 78, 324, 82), new Bounds.Bounds(338, 84, 342, 99), new Bounds.Bounds(331, 47, 351, 55), ],
     ],
     kingID: GuardType.ACERNIS_GUILDMASTER,
     generalID: GuardType.EMPIRE_GENERAL,
@@ -516,8 +516,8 @@ const Guilds = [{
         taxMultiplier: 0.75,
         guards: [[GuardType.ACERNIS_OSMIUM_MELEE_GUARD, 13], [GuardType.ACERNIS_TISHA, 1], [GuardType.ACERNIS_ELITE_ARCHER, 1], [GuardType.ACERNIS_ARCHER, 5]],
     }],
-    cityBounds: new Bounds(331, 47, 351, 55),
-    guildBounds: new Bounds(331, 47, 351, 55),
+    cityBounds: new Bounds.Bounds(331, 47, 351, 55),
+    guildBounds: new Bounds.Bounds(331, 47, 351, 55),
     guildShops: [
         new ShopUpgrade(20, 'Acernis General Store', [
             [123, [1, 2, 3, 5, 8, 10, 15, 20, 25, 30, 50]],
