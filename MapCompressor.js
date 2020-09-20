@@ -10,7 +10,7 @@ if (WorldObjectDef == null) {
     Action = require('../internal/Action').default;
 }
 const GroundItemDef = require('../def/GroundItemDef');
-const Bounds = require('../def/Bounds');
+const Bounds = require('../def/Bounds').Bounds;
 const GuildState = require('../internal/GuildState').GuildState;
 const Item = require('./Item');
 const guildTierToIndex = require('../typedef/Guild').tierToIndex;

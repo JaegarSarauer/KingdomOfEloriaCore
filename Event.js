@@ -1,6 +1,6 @@
 const Character = require('../typedef/Character');
 const NPCDef = require('../def/NPCDef');
-const Bounds = require('../def/Bounds');
+const Bounds = require('../def/Bounds').Bounds;
 const KingdomOfEloria = require('../KingdomOfEloria');
 
 const startGolemEvent = (currentMap, targetEntity, golemCharID) => {
