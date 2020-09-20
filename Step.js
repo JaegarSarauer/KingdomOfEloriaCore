@@ -1062,6 +1062,13 @@ module.exports.StepType = StepType = {
         paramTypes: [],
         params: [],
     },
+    BUY_COSMETIC: {
+        id: 'BUY_COSMETIC',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], // cosmeticID
+        params: [],
+    },
     IS_SPELL_UNLOCKED: {
         id: 'IS_SPELL_UNLOCKED',
         stepResultFail: 'END_ACTION',
@@ -1492,6 +1499,10 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
     PANTS: {
         id: 'PANTS',
         type: 'number'
+    },
+    COSMETIC_ID: {
+        id: 'COSMETIC_ID',
+        type: 'number'
     }
 };
 
@@ -1595,6 +1606,7 @@ try {
     const StepCastSpell = require('../internal/Steps/StepCastSpell');
     const StepGiveCutGem = require('../internal/Steps/StepGiveCutGem');
     const StepRerollCosmetics = require('../internal/Steps/StepRerollCosmetics');
+    const StepBuyCosmetic = require('../internal/Steps/StepBuyCosmetic');
     const StepCanCastSpell = require('../internal/Steps/StepCanCastSpell');
     const StepIsSpellUnlocked = require('../internal/Steps/StepIsSpellUnlocked');
     const StepUnlockSpell = require('../internal/Steps/StepUnlockSpell');
@@ -2325,6 +2337,11 @@ try {
         REROLL_COSMETICS: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepRerollCosmetics.StepRerollCosmetics(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        BUY_COSMETIC: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepBuyCosmetic.StepBuyCosmetic(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         CAN_CAST_SPELL: {
