@@ -2000,6 +2000,14 @@ module.exports.Interface = [
                 [buildStep(StepType.REROLL_COSMETICS)]
             ],
         },
+        {
+            id: 2,
+            name: 'Buy Cosmetic',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.BUY_COSMETIC, {params: ['COSMETIC_ID']})]
+            ],
+        },
     ],
 }, {
     id: 19,
