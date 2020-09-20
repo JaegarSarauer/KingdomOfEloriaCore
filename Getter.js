@@ -259,7 +259,7 @@ const ItemGetter = {
         };
     },
     BaseCosmeticHeadPiece: (id, cosmeticID, name, description, spriteIndex ) => {
-        let result = this.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
+        let result = Get.Item.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
         
         result.model = {
             HEAD_WORN: {
@@ -289,7 +289,7 @@ const ItemGetter = {
         return result;
     },
     BaseCosmeticChestPiece: (id, cosmeticID, name, description, spriteIndex, longSleeve = true ) => {
-        let result = this.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
+        let result = Get.Item.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
         
         result.model = {
             RIGHT_SHOULDER_WORN_SHIRT: {
@@ -365,7 +365,7 @@ const ItemGetter = {
         return result;
     },
     BaseCosmeticLegPiece: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = this.BaseCosmetic(id, cosmeticID, name, description, spriteIndex);
+        let result = Get.Item.BaseCosmetic(id, cosmeticID, name, description, spriteIndex);
 
         result.model = {
             LEFT_THIGH_WORN_PANTS: {
@@ -384,7 +384,7 @@ const ItemGetter = {
                 asset: 'legParts',
                 sprite: 'guildPantRightThigh',
                 parent: 'RIGHT_THIGH',
-                spriteID: guildID,
+                spriteID: cosmeticID,
                 anchor: { x: 1-(6/9), y: 0.2 },
                 position: {x: 0, y: 0.15},
                 rotation: 0,
@@ -430,22 +430,22 @@ const ItemGetter = {
     },
     // Creatable
     CosmeticHat: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = this.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = Get.Item.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
 
         return result;
     },
     CosmeticSunglasses: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = this.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = Get.Item.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
 
         return result;
     },
     CosmeticShirt: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = this.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
 
         return result;
     },
     CosmeticPants: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = this.BaseCosmeticLegPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = Get.Item.BaseCosmeticLegPiece(id, cosmeticID, name, description, spriteIndex);
 
         return result;
     },
