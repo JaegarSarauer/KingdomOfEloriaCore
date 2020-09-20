@@ -86,7 +86,9 @@ class ShopUpgrade {
 
 const Guilds = [{
     id: 0,
-    name: "Tergaron - Mining Guild",
+    name: "Teragon - Mining Guild",
+    loreDescription: 'Deep in the southern mountain range lies a guild as old as Eloria itself.\nFounded by dwarves, the guild has a rich history of mining.\nThe location was picked due to the abundance of rare and uniqure ores in the nearby caves.',
+    perksDescription: '+10 Mining Levels\nComplete Guild Entrance Quest\nRespawn in Teragon',
     tierDetails: [{
         tierID: -5,
         items: [[0, 1000000]],
@@ -244,6 +246,8 @@ const Guilds = [{
 }, {
     id: 1,
     name: "Salmo - Fishing Guild",
+    loreDescription: 'On the north side of the continent resides Salmo, a fishing guild. Salmo is one a more recent guild born out of the exploding trade of fish.\nWar is a constant in Eloria, creating demand for the unique and rare species found in the local waters.',
+    perksDescription: '+10 Fishing Levels\nComplete Guild Entrance Quest\nRespawn in Salmo',
     tierDetails: [{
         tierID: -5,
         items: [[0, 1000000]],
@@ -436,6 +440,8 @@ const Guilds = [{
 }, {
     id: 2,
     name: "Acernis - Woodcutting Guild",
+    loreDescription: 'Deep in the eastern forest is Acernis, the Woodcutting Guild. \nThe origin of Acernis is a highly contested topic. \nThe present Guild Master insists the guild was born out of a Elvish history, however there is no evidence to back up these claims.',
+    perksDescription: '+10 Woodcutting Levels\nComplete Guild Entrance Quest\nRespawn in Acernis',
     emperorSpawnBounds: [
         [new Bounds.Bounds(332, 100, 338, 105), new Bounds.Bounds(338, 84, 342, 99), new Bounds.Bounds(331, 47, 351, 55),],
         [new Bounds.Bounds(369, 82, 377, 86), new Bounds.Bounds(338, 84, 342, 99), new Bounds.Bounds(331, 47, 351, 55),],
