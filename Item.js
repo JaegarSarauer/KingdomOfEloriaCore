@@ -2591,7 +2591,7 @@ const Item = Object.freeze([
     Get.Item.Note(529, 528, 'Skeleton Bow', 680, 306),
     (() => {
         let shield = Get.Item.Shield(530, 531, 'Ghostly Shield', 1200, 307, [0, 0, 2, 0, 0, 0, 0, 0, 16], 3.5, 35, 8);
-        shield.model.LEFT_TOOL.rotation = 90 / 180 * Math.PI;
+        shield.model.LEFT_TOOL.rotation = -90 / 180 * Math.PI;
         shield.model.LEFT_TOOL.position.y -= 0.25;
         shield.model.LEFT_TOOL.sprite = 'ghostShield';
         shield.model.LEFT_TOOL.spriteID = 0;
@@ -3601,11 +3601,11 @@ const Item = Object.freeze([
         return helm;
     })(),
     Get.Item.Note(911, 910, 'Shell Helmet', 340, 315),
-    Get.Item.CosmeticHat(912, 0, 'Hat 1', 'Special hat 1', 596 ),
-    Get.Item.CosmeticHat(913, 1, 'Hat 2', 'Special hat 2', 597 ),
-    Get.Item.CosmeticHat(914, 2, 'Hat 3', 'Special hat 3', 598 ),
-    Get.Item.CosmeticHat(915, 3, 'Hat 4', 'Special hat 4', 599 ),
-    Get.Item.CosmeticHat(916, 4, 'Hat 5', 'Special hat 5', 600 ),
+    Get.Item.CosmeticHatBeanie(912, 0, 'Hat 1', 'Special hat 1', 596 ),
+    Get.Item.CosmeticHatBeanie(913, 1, 'Hat 2', 'Special hat 2', 597 ),
+    Get.Item.CosmeticHatBeanie(914, 2, 'Hat 3', 'Special hat 3', 598 ),
+    Get.Item.CosmeticHatBeanie(915, 3, 'Hat 4', 'Special hat 4', 599 ),
+    Get.Item.CosmeticHatBeanie(916, 4, 'Hat 5', 'Special hat 5', 600 ),
     Get.Item.CosmeticShirt(917, 5, 'Shirt 1', 'Special Shirt 1', 601 ),
     Get.Item.CosmeticShirt(918, 6, 'Shirt 2', 'Special Shirt 2', 602 ),
     Get.Item.CosmeticShirt(919, 7, 'Shirt 3', 'Special Shirt 3', 603 ),
@@ -3616,11 +3616,11 @@ const Item = Object.freeze([
     Get.Item.CosmeticPants(924, 12, 'Pants 3', 'Special Pants 3', 608 ),
     Get.Item.CosmeticPants(925, 13, 'Pants 4', 'Special Pants 4', 609 ),
     Get.Item.CosmeticPants(926, 14, 'Pants 5', 'Special Pants 5', 610 ),
-    Get.Item.CosmeticHat(927, 15, 'Hat 6', 'Special hat 1', 611 ),
-    Get.Item.CosmeticHat(928, 16, 'Hat 7', 'Special hat 2', 612 ),
-    Get.Item.CosmeticHat(929, 17, 'Hat 8', 'Special hat 3', 613 ),
-    Get.Item.CosmeticHat(930, 18, 'Hat 9', 'Special hat 4', 614 ),
-    Get.Item.CosmeticHat(931, 19, 'Hat 10', 'Special hat 5', 615 ),
+    Get.Item.CosmeticHatAnimalWithTail(927, 15, 'Hat 6', 'Special hat 1', 611 ),
+    Get.Item.CosmeticHatAnimalWithTail(928, 16, 'Hat 7', 'Special hat 2', 612 ),
+    Get.Item.CosmeticHatAnimalWithTail(929, 17, 'Hat 8', 'Special hat 3', 613 ),
+    Get.Item.CosmeticHatAnimalWithTail(930, 18, 'Hat 9', 'Special hat 4', 614 ),
+    Get.Item.CosmeticHatAnimalWithTail(931, 19, 'Hat 10', 'Special hat 5', 615 ),
     Get.Item.CosmeticShirt(932, 20, 'Shirt 6', 'Special Shirt 6', 616 ),
     Get.Item.CosmeticShirt(933, 21, 'Shirt 7', 'Special Shirt 7', 617 ),
     Get.Item.CosmeticShirt(934, 22, 'Shirt 8', 'Special Shirt 8', 618 ),

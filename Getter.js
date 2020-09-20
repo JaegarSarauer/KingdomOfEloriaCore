@@ -271,6 +271,7 @@ const ItemGetter = {
                 anchor: { x: 0.5, y: 0.85 },
                 position: { x: 0, y: -0.5 },
                 rotation: 0,
+                hideParts: ['HAIR'],
                 UIModel: null,
             },
         };
@@ -299,7 +300,7 @@ const ItemGetter = {
                 parent: 'RIGHT_SHOULDER',
                 spriteID: cosmeticID,
                 anchor: { x: 0.75, y: 0.18 },
-                position: {x: 0.05, y: 0},
+                position: {x: 0, y: -0.05},
                 rotation: 0,
                 UIModel: null,
             },
@@ -310,7 +311,7 @@ const ItemGetter = {
                 parent: 'LEFT_SHOULDER',
                 spriteID: cosmeticID,
                 anchor: { x: 0.25, y: 0.18 },
-                position: {x: -0.05, y: 0},
+                position: {x: 0, y: -0.05},
                 rotation: 0,
                 UIModel: null,
             },
@@ -335,7 +336,7 @@ const ItemGetter = {
                 parent: 'RIGHT_FOREARM',
                 spriteID: cosmeticID,
                 anchor: {x: (3/8), y: 0.05},
-                position: {x: 0.10, y: -0.15},
+                position: {x: 0.10, y: -0.2},
                 rotation: -2.5 / 180 * Math.PI,
                 UIModel: null,
             };
@@ -346,7 +347,7 @@ const ItemGetter = {
                 parent: 'LEFT_FOREARM',
                 spriteID: cosmeticID,
                 anchor: {x: 1-(3/8), y: 0.05},
-                position: {x: -0.1, y: -0.15},
+                position: {x: -0.1, y: -0.2},
                 rotation: 2.5 / 180 * Math.PI,
                 UIModel: null,
             };
@@ -358,7 +359,7 @@ const ItemGetter = {
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
                 buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
-                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [9, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }];
 
@@ -375,18 +376,18 @@ const ItemGetter = {
                 parent: 'LEFT_THIGH',
                 spriteID: cosmeticID,
                 anchor: { x: (6/9), y: 0.2 },
-                position: {x: 0, y: 0.15},
+                position: {x: 0.025, y: 0.15},
                 rotation: 0,
                 UIModel: null,
             },
             RIGHT_THIGH_WORN_PANTS: {
                 id: 'RIGHT_THIGH_WORN_PANTS',
                 asset: 'legParts',
-                sprite: 'guildPantRightThigh',
+                sprite: 'cosmeticRightThigh',
                 parent: 'RIGHT_THIGH',
                 spriteID: cosmeticID,
                 anchor: { x: 1-(6/9), y: 0.2 },
-                position: {x: 0, y: 0.15},
+                position: {x: -0.025, y: 0.15},
                 rotation: 0,
                 UIModel: null,
             },
@@ -397,7 +398,7 @@ const ItemGetter = {
                 parent: 'LEFT_SHIN',
                 spriteID: cosmeticID,
                 anchor: { x: 0.5, y: 0.1 },
-                position: {x: 0, y: 0.15},
+                position: {x: 0, y: 0.05},
                 rotation: 0,
                 UIModel: null,
                 z: 5,
@@ -409,20 +410,20 @@ const ItemGetter = {
                 parent: 'RIGHT_SHIN',
                 spriteID: cosmeticID,
                 anchor: { x: 0.5, y: 0.1 },
-                position: {x: 0, y: 0.15},
+                position: {x: 0, y: 0.05},
                 rotation: 0,
                 UIModel: null,
                 z: 5,
             },
         };
-        result.model.actions = [{
+        result.actions = [{
             interfaceID: 5,
             id: 7,
             name: 'Equip',
             steps: [
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
                 buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
-                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [10, 'ITEM_ID', 'ITEM_STATE'] })]
             ]
         }];
 
@@ -432,6 +433,18 @@ const ItemGetter = {
     CosmeticHat: (id, cosmeticID, name, description, spriteIndex) => {
         let result = Get.Item.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
 
+        return result;
+    },
+    CosmeticHatBeanie: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let head = result.model.HEAD_WORN;
+        head.anchor = { x : 0.525, y : 0.85 };
+        return result;
+    },
+    CosmeticHatAnimalWithTail: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let head = result.model.HEAD_WORN;
+        head.anchor = { x : 0.35, y : 0.85 };
         return result;
     },
     CosmeticSunglasses: (id, cosmeticID, name, description, spriteIndex) => {
