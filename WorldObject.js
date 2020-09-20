@@ -287,7 +287,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.LumberCamp(18, 'Ash', 7, 2, 3, 15, 20, 30),
     Get.WorldObject.LumberCamp(19, 'Fur', 8, 3, 4, 20, 30, 40), 
     Get.WorldObject.FisheryCamp(20, 'Shallow Pool Fishery', [9, 111], 1, 'shallow fishing pool', 10, 20),
-    Get.WorldObject.MiningCamp(21, 'Copper', 55, [[1, 4]], 1, 5, 1, 10),
+    Get.WorldObject.MiningCamp(21, 'Copper', 55, [[1, 4], [1, 79]], 1, 5, 1, 10),
     Get.WorldObject.MiningCamp(22, 'Clay', 75, [[1, 14]], 1, 5, 1, 10),
     Get.WorldObject.MiningCamp(23, 'Iron', 56, [[1, 5]], 2, 10, 10, 20),
     Get.WorldObject.MiningCamp(24, 'Coal', 57, [[1, 6], [1, 83]], 3, 15, 20, 30),
