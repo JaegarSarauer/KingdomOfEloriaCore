@@ -123,21 +123,25 @@ for (let i = 0; i < count; ++i) {
         id: i,
         name: 'Leg ' + i,
         rarity: i % 5,
-        itemID: i % 5,
+        itemID: 912 + i,
         crownCost: (i + 1) * 1000,
     });
 }
 return items;
 }
 
-const Cosmetics = [//{
+let defaultCrownCost = 1000;
+
+const Cosmetics = [ 
+    // {
 //     id: 0,
 //     name: 'Hat 1',
-//     rarity: 0,
-//     itemID: 0,
-// }, 
-...CosmeticTestBuilder(500),
-];
+//     rarity: 0, // 0 - 5
+//     itemID: , 
+//     crownCost: defaultCrownCost,
+// },
+...CosmeticTestBuilder(139),
+ ];
 
 const CosmeticRarityItems = (() =>{
     let rarities = [];

@@ -243,6 +243,212 @@ const CreateStepListFromRecipe = function(recipe) {
 }
 
 const ItemGetter = {
+    // Base Cosmetics
+    BaseCosmetic: (id, cosmeticID, name, description, spriteIndex ) => {
+        return {
+            id,
+            cosmeticID,
+            name,
+            description,
+            spriteIndex,
+            noted: false,
+            value: 1,
+            stackable: false,
+            actions : [],
+            equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        };
+    },
+    BaseCosmeticHeadPiece: (id, cosmeticID, name, description, spriteIndex ) => {
+        let result = this.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
+        
+        result.model = {
+            HEAD_WORN: {
+                id: 'HEAD_WORN',
+                asset: 'headParts',
+                spriteID: cosmeticID,
+                parent: 'HEAD',
+                sprite: 'cosmeticHead',
+                anchor: { x: 0.5, y: 0.85 },
+                position: { x: 0, y: -0.5 },
+                rotation: 0,
+                UIModel: null,
+            },
+        };
+        
+        result.actions = [{
+            interfaceID: 5,
+            id: 3,
+            name: 'Equip',
+            steps: [
+                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
+            ]
+        }];
+
+        return result;
+    },
+    BaseCosmeticChestPiece: (id, cosmeticID, name, description, spriteIndex, longSleeve = true ) => {
+        let result = this.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
+        
+        result.model = {
+            RIGHT_SHOULDER_WORN_SHIRT: {
+                id: 'RIGHT_SHOULDER_WORN_SHIRT',
+                asset: 'armParts',
+                sprite: 'cosmeticRightShoulder',
+                parent: 'RIGHT_SHOULDER',
+                spriteID: cosmeticID,
+                anchor: { x: 0.75, y: 0.18 },
+                position: {x: 0.05, y: 0},
+                rotation: 0,
+                UIModel: null,
+            },
+            LEFT_SHOULDER_WORN_SHIRT: {
+                id: 'LEFT_SHOULDER_WORN_SHIRT',
+                asset: 'armParts',
+                sprite: 'cosmeticLeftShoulder',
+                parent: 'LEFT_SHOULDER',
+                spriteID: cosmeticID,
+                anchor: { x: 0.25, y: 0.18 },
+                position: {x: -0.05, y: 0},
+                rotation: 0,
+                UIModel: null,
+            },
+            CHEST_WORN_SHIRT: {
+                id: 'CHEST_WORN_SHIRT',
+                asset: 'chestParts',
+                sprite: 'cosmeticChest',
+                parent: 'CHEST',
+                spriteID: cosmeticID,
+                anchor: { x: 0.5, y: 0.65 },
+                position: { x: 0, y: -0.05 },
+                rotation: 0,
+                UIModel: null,
+                z: -1,
+            },
+        };
+        if (longSleeve) {
+            result.model.RIGHT_FOREARM_WORN_SHIRT = {
+                id: 'RIGHT_FOREARM_WORN_SHIRT',
+                asset: 'armParts',
+                sprite:  'cosmeticRightForearm',
+                parent: 'RIGHT_FOREARM',
+                spriteID: cosmeticID,
+                anchor: {x: (3/8), y: 0.05},
+                position: {x: 0.10, y: -0.15},
+                rotation: -2.5 / 180 * Math.PI,
+                UIModel: null,
+            };
+            result.model.LEFT_FOREARM_WORN_SHIRT = {
+                id: 'LEFT_FOREARM_WORN_SHIRT',
+                asset: 'armParts',
+                sprite: 'cosmeticLeftForearm',
+                parent: 'LEFT_FOREARM',
+                spriteID: cosmeticID,
+                anchor: {x: 1-(3/8), y: 0.05},
+                position: {x: -0.1, y: -0.15},
+                rotation: 2.5 / 180 * Math.PI,
+                UIModel: null,
+            };
+        }
+        result.actions = [{
+            interfaceID: 5,
+            id: 6,
+            name: 'Equip',
+            steps: [
+                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_CHEST'] }),
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [3, 'ITEM_ID', 'ITEM_STATE'] })]
+            ]
+        }];
+
+        return result;
+    },
+    BaseCosmeticLegPiece: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = this.BaseCosmetic(id, cosmeticID, name, description, spriteIndex);
+
+        result.model = {
+            LEFT_THIGH_WORN_PANTS: {
+                id: 'LEFT_THIGH_WORN_PANTS',
+                asset: 'legParts',
+                sprite: 'cosmeticLeftThigh',
+                parent: 'LEFT_THIGH',
+                spriteID: cosmeticID,
+                anchor: { x: (6/9), y: 0.2 },
+                position: {x: 0, y: 0.15},
+                rotation: 0,
+                UIModel: null,
+            },
+            RIGHT_THIGH_WORN_PANTS: {
+                id: 'RIGHT_THIGH_WORN_PANTS',
+                asset: 'legParts',
+                sprite: 'guildPantRightThigh',
+                parent: 'RIGHT_THIGH',
+                spriteID: guildID,
+                anchor: { x: 1-(6/9), y: 0.2 },
+                position: {x: 0, y: 0.15},
+                rotation: 0,
+                UIModel: null,
+            },
+            LEFT_SHIN_WORN_PANTS: {
+                id: 'LEFT_SHIN_WORN_PANTS',
+                asset: 'legParts',
+                sprite: 'cosmeticLeftShin',
+                parent: 'LEFT_SHIN',
+                spriteID: cosmeticID,
+                anchor: { x: 0.5, y: 0.1 },
+                position: {x: 0, y: 0.15},
+                rotation: 0,
+                UIModel: null,
+                z: 5,
+            },
+            RIGHT_SHIN_WORN_PANTS: {
+                id: 'RIGHT_SHIN_WORN_PANTS',
+                asset: 'legParts',
+                sprite: 'cosmeticRightShin',
+                parent: 'RIGHT_SHIN',
+                spriteID: cosmeticID,
+                anchor: { x: 0.5, y: 0.1 },
+                position: {x: 0, y: 0.15},
+                rotation: 0,
+                UIModel: null,
+                z: 5,
+            },
+        };
+        result.model.actions = [{
+            interfaceID: 5,
+            id: 7,
+            name: 'Equip',
+            steps: [
+                [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, 1] }),
+                buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_LEGS'] }),
+                buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [4, 'ITEM_ID', 'ITEM_STATE'] })]
+            ]
+        }];
+
+        return result;
+    },
+    // Creatable
+    CosmeticHat: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = this.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
+
+        return result;
+    },
+    CosmeticSunglasses: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = this.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
+
+        return result;
+    },
+    CosmeticShirt: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = this.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+
+        return result;
+    },
+    CosmeticPants: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = this.BaseCosmeticLegPiece(id, cosmeticID, name, description, spriteIndex);
+
+        return result;
+    },
     SpellPot: (id, name, spellID, value, magicFocusLevel, craftLevel, incinerateLevel, essenceCatalog, spriteIndex, spriteModelID) => {
         let spellDef = Spells.Spells[spellID];
         return {
@@ -333,7 +539,7 @@ const ItemGetter = {
             noted: false,
             notedID,
             value,
-            cannotRedirectTome: true,
+            itemCannotBeRolled: true,
             stackable: false,
             description: 'A rough gemstone.',
             requirements: ItemDetail.build([
@@ -379,7 +585,7 @@ const ItemGetter = {
             noted: false,
             tier,
             value,
-            cannotRedirectTome: true,
+            itemCannotBeRolled: true,
             stackable: false,
             description: 'A cut gemstone.',
             state,
@@ -613,7 +819,7 @@ const ItemGetter = {
         return {
             id,
             name: 'null item',
-            cannotRedirectTome: true,
+            itemCannotBeRolled: true,
         }
     },
     MixableCookingItem: function(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable, recipe) {
@@ -1512,7 +1718,7 @@ const ItemGetter = {
             name,
             noted: false,
             value: 100000,
-            cannotRedirectTome: true,
+            itemCannotBeRolled: true,
             stackable: false,
             spriteIndex,
             description,
@@ -1962,7 +2168,7 @@ const ItemGetter = {
             noted: false,
             notedID: notedId,
             value: value,
-            cannotRedirectTome: true,
+            itemCannotBeRolled: true,
             stackable: false,
             description: description,
             requirements: itemDetail || ItemDetail.build([
@@ -2149,7 +2355,7 @@ const ItemGetter = {
             noted: false,
             notedID: notedId,
             value: value,
-            cannotRedirectTome: true,
+            itemCannotBeRolled: true,
             stackable: false,
             description: 'A pair of pants. Some general protection.',
             spriteIndex: spriteIndex,
@@ -2571,7 +2777,7 @@ const ItemGetter = {
             noted: false,
             notedID: notedId,
             value: value,
-            cannotRedirectTome: true,
+            itemCannotBeRolled: true,
             stackable: false,
             description: 'Appears to dye things.',
             requirements: ItemDetail.build([
@@ -2624,7 +2830,7 @@ const ItemGetter = {
             noted: false,
             value: 45,
             stackable: true,
-            cannotRedirectTome: true,
+            itemCannotBeRolled: true,
             description: 'A teleport spell to the starter town, Fiewon.',
             requirements: ItemDetail.build([
                 ItemDetail.levelSkillDetail('1', 22, 'USE'), //level 10, not 1
