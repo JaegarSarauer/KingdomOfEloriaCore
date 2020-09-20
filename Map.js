@@ -108,14 +108,23 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
 }
 
 function guildDataToGuilds(guildData) {
-    let guildsArray = [];
+    let result = {
+        guildsArray : [],
+        cityArray : [],
+    };
     for (let i = 0; i < guildData.length; i++) {
         let obj = guildData[i];
-        if (obj != null && Guilds[obj.id]) {
-            guildsArray[obj.id] = GuildState.createGuildState(obj.id, obj.cityArea, obj.mayorArea);
+        if (obj != null ) {
+            // If it has a guild ID, it's a guild
+            if (obj.id != null && Guilds[obj.id]) {
+                result.guildsArray[obj.id] = GuildState.createGuildState(obj.id, obj.cityArea, obj.mayorArea);
+            }
+            else if (obj.cityArea) {
+                result.cityArray.push(GuildState.createCityDef(obj.cityArea));  
+            }
         }
     }
-    return guildsArray;
+    return result;
 }
 
 function shopDataToShops(shopStorageData) {
