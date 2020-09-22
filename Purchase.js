@@ -145,7 +145,7 @@ const Cosmetics = [
     },
     {
         id: 4,
-        rarity: 0,
+        rarity: 1,
         itemID: 916,
         crownCost: defaultCrownCost
     },
@@ -175,7 +175,7 @@ const Cosmetics = [
     },
     {
         id: 9,
-        rarity: 0,
+        rarity: 1,
         itemID: 921,
         crownCost: defaultCrownCost
     },
@@ -205,7 +205,7 @@ const Cosmetics = [
     },
     {
         id: 14,
-        rarity: 0,
+        rarity: 1,
         itemID: 926,
         crownCost: defaultCrownCost
     },
@@ -223,7 +223,7 @@ const Cosmetics = [
     },
     {
         id: 17,
-        rarity: 0,
+        rarity: 2,
         itemID: 929,
         crownCost: defaultCrownCost
     },
@@ -235,7 +235,7 @@ const Cosmetics = [
     },
     {
         id: 19,
-        rarity: 0,
+        rarity: 1,
         itemID: 931,
         crownCost: defaultCrownCost
     },
@@ -253,7 +253,7 @@ const Cosmetics = [
     },
     {
         id: 22,
-        rarity: 0,
+        rarity: 2,
         itemID: 934,
         crownCost: defaultCrownCost
     },
@@ -265,7 +265,7 @@ const Cosmetics = [
     },
     {
         id: 24,
-        rarity: 0,
+        rarity: 1,
         itemID: 936,
         crownCost: defaultCrownCost
     },
@@ -283,7 +283,7 @@ const Cosmetics = [
     },
     {
         id: 27,
-        rarity: 0,
+        rarity: 2,
         itemID: 939,
         crownCost: defaultCrownCost
     },
@@ -295,61 +295,61 @@ const Cosmetics = [
     },
     {
         id: 29,
-        rarity: 0,
+        rarity: 1,
         itemID: 941,
         crownCost: defaultCrownCost
     },
     {
         id: 30,
-        rarity: 0,
+        rarity: 1,
         itemID: 942,
         crownCost: defaultCrownCost
     },
     {
         id: 31,
-        rarity: 0,
+        rarity: 2,
         itemID: 943,
         crownCost: defaultCrownCost
     },
     {
         id: 32,
-        rarity: 0,
+        rarity: 3,
         itemID: 944,
         crownCost: defaultCrownCost
     },
     {
         id: 33,
-        rarity: 0,
+        rarity: 1,
         itemID: 945,
         crownCost: defaultCrownCost
     },
     {
         id: 34,
-        rarity: 0,
+        rarity: 2,
         itemID: 946,
         crownCost: defaultCrownCost
     },
     {
         id: 35,
-        rarity: 0,
+        rarity: 3,
         itemID: 947,
         crownCost: defaultCrownCost
     },
     {
         id: 36,
-        rarity: 0,
+        rarity: 1,
         itemID: 948,
         crownCost: defaultCrownCost
     },
     {
         id: 37,
-        rarity: 0,
+        rarity: 2,
         itemID: 949,
         crownCost: defaultCrownCost
     },
     {
         id: 38,
-        rarity: 0,
+        rarity: 3,
         itemID: 950,
         crownCost: defaultCrownCost
     },
@@ -361,19 +361,19 @@ const Cosmetics = [
     },
     {
         id: 40,
-        rarity: 0,
+        rarity: 1,
         itemID: 952,
         crownCost: defaultCrownCost
     },
     {
         id: 41,
-        rarity: 0,
+        rarity: 2,
         itemID: 953,
         crownCost: defaultCrownCost
     },
     {
         id: 42,
-        rarity: 0,
+        rarity: 3,
         itemID: 954,
         crownCost: defaultCrownCost
     },
@@ -385,19 +385,19 @@ const Cosmetics = [
     },
     {
         id: 44,
-        rarity: 0,
+        rarity: 1,
         itemID: 956,
         crownCost: defaultCrownCost
     },
     {
         id: 45,
-        rarity: 0,
+        rarity: 2,
         itemID: 957,
         crownCost: defaultCrownCost
     },
     {
         id: 46,
-        rarity: 0,
+        rarity: 3,
         itemID: 958,
         crownCost: defaultCrownCost
     },
@@ -409,19 +409,19 @@ const Cosmetics = [
     },
     {
         id: 48,
-        rarity: 0,
+        rarity: 1,
         itemID: 960,
         crownCost: defaultCrownCost
     },
     {
         id: 49,
-        rarity: 0,
+        rarity: 2,
         itemID: 961,
         crownCost: defaultCrownCost
     },
     {
         id: 50,
-        rarity: 0,
+        rarity: 3,
         itemID: 962,
         crownCost: defaultCrownCost
     },
@@ -445,127 +445,127 @@ const Cosmetics = [
     },
     {
         id: 54,
-        rarity: 0,
+        rarity: 4,
         itemID: 966,
         crownCost: defaultCrownCost
     },
     {
         id: 55,
-        rarity: 0,
+        rarity: 1,
         itemID: 967,
         crownCost: defaultCrownCost
     },
     {
         id: 56,
-        rarity: 0,
+        rarity: 1,
         itemID: 968,
         crownCost: defaultCrownCost
     },
     {
         id: 57,
-        rarity: 0,
+        rarity: 2,
         itemID: 969,
         crownCost: defaultCrownCost
     },
     {
         id: 58,
-        rarity: 0,
+        rarity: 4,
         itemID: 970,
         crownCost: defaultCrownCost
     },
     {
         id: 59,
-        rarity: 0,
+        rarity: 1,
         itemID: 971,
         crownCost: defaultCrownCost
     },
     {
         id: 60,
-        rarity: 0,
+        rarity: 1,
         itemID: 972,
         crownCost: defaultCrownCost
     },
     {
         id: 61,
-        rarity: 0,
+        rarity: 2,
         itemID: 973,
         crownCost: defaultCrownCost
     },
     {
         id: 62,
-        rarity: 0,
+        rarity: 4,
         itemID: 974,
         crownCost: defaultCrownCost
     },
     {
         id: 63,
-        rarity: 0,
+        rarity: 2,
         itemID: 975,
         crownCost: defaultCrownCost
     },
     {
         id: 64,
-        rarity: 0,
+        rarity: 3,
         itemID: 976,
         crownCost: defaultCrownCost
     },
     {
         id: 65,
-        rarity: 0,
+        rarity: 4,
         itemID: 977,
         crownCost: defaultCrownCost
     },
     {
         id: 66,
-        rarity: 0,
+        rarity: 5,
         itemID: 978,
         crownCost: defaultCrownCost
     },
     {
         id: 67,
-        rarity: 0,
+        rarity: 2,
         itemID: 979,
         crownCost: defaultCrownCost
     },
     {
         id: 68,
-        rarity: 0,
+        rarity: 3,
         itemID: 980,
         crownCost: defaultCrownCost
     },
     {
         id: 69,
-        rarity: 0,
+        rarity: 4,
         itemID: 981,
         crownCost: defaultCrownCost
     },
     {
         id: 70,
-        rarity: 0,
+        rarity: 5,
         itemID: 982,
         crownCost: defaultCrownCost
     },
     {
         id: 71,
-        rarity: 0,
+        rarity: 2,
         itemID: 983,
         crownCost: defaultCrownCost
     },
     {
         id: 72,
-        rarity: 0,
+        rarity: 3,
         itemID: 984,
         crownCost: defaultCrownCost
     },
     {
         id: 73,
-        rarity: 0,
+        rarity: 4,
         itemID: 985,
         crownCost: defaultCrownCost
     },
     {
         id: 74,
-        rarity: 0,
+        rarity: 5,
         itemID: 986,
         crownCost: defaultCrownCost
     },
@@ -595,13 +595,13 @@ const Cosmetics = [
     },
     {
         id: 79,
-        rarity: 0,
+        rarity: 1,
         itemID: 991,
         crownCost: defaultCrownCost
     },
     {
         id: 80,
-        rarity: 0,
+        rarity: 1,
         itemID: 992,
         crownCost: defaultCrownCost
     },
@@ -625,7 +625,7 @@ const Cosmetics = [
     },
     {
         id: 84,
-        rarity: 0,
+        rarity: 1,
         itemID: 996,
         crownCost: defaultCrownCost
     },
@@ -643,19 +643,19 @@ const Cosmetics = [
     },
     {
         id: 87,
-        rarity: 0,
+        rarity: 1,
         itemID: 999,
         crownCost: defaultCrownCost
     },
     {
         id: 88,
-        rarity: 0,
+        rarity: 1,
         itemID: 1000,
         crownCost: defaultCrownCost
     },
     {
         id: 89,
-        rarity: 0,
+        rarity: 1,
         itemID: 1001,
         crownCost: defaultCrownCost
     },
@@ -679,13 +679,13 @@ const Cosmetics = [
     },
     {
         id: 93,
-        rarity: 0,
+        rarity: 1,
         itemID: 1005,
         crownCost: defaultCrownCost
     },
     {
         id: 94,
-        rarity: 0,
+        rarity: 2,
         itemID: 1006,
         crownCost: defaultCrownCost
     },
@@ -709,19 +709,19 @@ const Cosmetics = [
     },
     {
         id: 98,
-        rarity: 0,
+        rarity: 1,
         itemID: 1010,
         crownCost: defaultCrownCost
     },
     {
         id: 99,
-        rarity: 0,
+        rarity: 1,
         itemID: 1011,
         crownCost: defaultCrownCost
     },
     {
         id: 100,
-        rarity: 0,
+        rarity: 2,
         itemID: 1012,
         crownCost: defaultCrownCost
     },
@@ -751,13 +751,13 @@ const Cosmetics = [
     },
     {
         id: 105,
-        rarity: 0,
+        rarity: 1,
         itemID: 1017,
         crownCost: defaultCrownCost
     },
     {
         id: 106,
-        rarity: 0,
+        rarity: 3,
         itemID: 1018,
         crownCost: defaultCrownCost
     },
@@ -775,13 +775,13 @@ const Cosmetics = [
     },
     {
         id: 109,
-        rarity: 0,
+        rarity: 2,
         itemID: 1021,
         crownCost: defaultCrownCost
     },
     {
         id: 110,
-        rarity: 0,
+        rarity: 2,
         itemID: 1022,
         crownCost: defaultCrownCost
     },
@@ -799,7 +799,7 @@ const Cosmetics = [
     },
     {
         id: 113,
-        rarity: 0,
+        rarity: 1,
         itemID: 1025,
         crownCost: defaultCrownCost
     },
@@ -811,7 +811,7 @@ const Cosmetics = [
     },
     {
         id: 115,
-        rarity: 0,
+        rarity: 1,
         itemID: 1027,
         crownCost: defaultCrownCost
     },
@@ -829,7 +829,7 @@ const Cosmetics = [
     },
     {
         id: 118,
-        rarity: 0,
+        rarity: 3,
         itemID: 1030,
         crownCost: defaultCrownCost
     },
@@ -847,7 +847,7 @@ const Cosmetics = [
     },
     {
         id: 121,
-        rarity: 0,
+        rarity: 5,
         itemID: 1033,
         crownCost: defaultCrownCost
     },
@@ -865,13 +865,13 @@ const Cosmetics = [
     },
     {
         id: 124,
-        rarity: 0,
+        rarity: 1,
         itemID: 1036,
         crownCost: defaultCrownCost
     },
     {
         id: 125,
-        rarity: 0,
+        rarity: 2,
         itemID: 1037,
         crownCost: defaultCrownCost
     },
@@ -907,7 +907,7 @@ const Cosmetics = [
     },
     {
         id: 131,
-        rarity: 0,
+        rarity: 1,
         itemID: 1043,
         crownCost: defaultCrownCost
     },
@@ -925,31 +925,31 @@ const Cosmetics = [
     },
     {
         id: 134,
-        rarity: 0,
+        rarity: 1,
         itemID: 1046,
         crownCost: defaultCrownCost
     },
     {
         id: 135,
-        rarity: 0,
+        rarity: 2,
         itemID: 1047,
         crownCost: defaultCrownCost
     },
     {
         id: 136,
-        rarity: 0,
+        rarity: 3,
         itemID: 1048,
         crownCost: defaultCrownCost
     },
     {
         id: 137,
-        rarity: 0,
+        rarity: 4,
         itemID: 1049,
         crownCost: defaultCrownCost
     },
     {
         id: 138,
-        rarity: 0,
+        rarity: 5,
         itemID: 1050,
         crownCost: defaultCrownCost
     }
