@@ -87,32 +87,32 @@ module.exports.CROWNS_PURCHASES = [
 const Rarity = [{
     id: 0,
     name: 'Common',
-    color: 0x1d1e78,
+    color: 0x007bff,
     rollChance: 4,
 }, {
     id: 1,
     name: 'Uncommon',
-    color: 0x0c5e0d,
+    color: 0x00e303,
     rollChance: 20,
 }, {
     id: 2,
     name: 'Rare',
-    color: 0xe8c90b,
+    color: 0xffee00,
     rollChance: 330,
 }, {
     id: 3,
     name: 'Mythical',
-    color: 0x3d034c,
+    color: 0x8c0cad,
     rollChance: 2600,
 }, {
     id: 4,
     name: 'Royal',
-    color: 0xb30404,
+    color: 0xfc0000,
     rollChance: 16800,
 }, {
     id: 5,
     name: 'Godly',
-    color: 0xce42f5,
+    color: 0xece6ed,
     rollChance: 350000,
 }];
 
@@ -122,8 +122,8 @@ for (let i = 0; i < count; ++i) {
     items.push({
         id: i,
         name: 'Leg ' + i,
-        rarity: i % 5,
-        itemID: i % 5,
+        rarity: i % 6,
+        itemID: i % 6,
         crownCost: (i + 1) * 1000,
     });
 }
@@ -136,7 +136,7 @@ const Cosmetics = [//{
 //     rarity: 0,
 //     itemID: 0,
 // }, 
-...CosmeticTestBuilder(500),
+...CosmeticTestBuilder(600),
 ];
 
 const CosmeticRarityItems = (() =>{
