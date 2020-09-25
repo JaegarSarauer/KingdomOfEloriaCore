@@ -2292,4 +2292,16 @@ module.exports.Interface = [
             ],
         },
     ],
+}, {
+    id: 32,
+    name: 'All Cosmetic Items',
+    actions: [
+        {
+            id: 0,
+            name: 'Select',
+            actionInterval: -1,
+            flags: ['IS_LOCAL'],
+            steps: [],
+        },
+    ],
 },];

@@ -87,42 +87,42 @@ module.exports.CROWNS_PURCHASES = [
 const Rarity = [{
     id: 0,
     name: 'Common',
-    color: 0x1d1e78,
+    color: 0x007bff,
     rollChance: 4,
     minCrownCost: 1200,
     maxCrownCost: 1900,
 }, {
     id: 1,
     name: 'Uncommon',
-    color: 0x0c5e0d,
+    color: 0x00e303,
     rollChance: 20,
     minCrownCost: 1900,
     maxCrownCost: 4000,
 }, {
     id: 2,
     name: 'Rare',
-    color: 0xe8c90b,
+    color: 0xffee00,
     rollChance: 330,
     minCrownCost: 5000,
     maxCrownCost: 9500,
 }, {
     id: 3,
     name: 'Mythical',
-    color: 0x3d034c,
+    color: 0x8c0cad,
     rollChance: 2600,
     minCrownCost: 10000,
     maxCrownCost: 25000,
 }, {
     id: 4,
     name: 'Royal',
-    color: 0xb30404,
+    color: 0xfc0000,
     rollChance: 16800,
     minCrownCost: 25000,
     maxCrownCost: 50000,
 }, {
     id: 5,
     name: 'Godly',
-    color: 0xce42f5,
+    color: 0xece6ed,
     rollChance: 350000,
     minCrownCost: 10000,
     maxCrownCost: 500000,
@@ -136,7 +136,6 @@ let getCrownPrice = (rarity, factor) => {
     let preRound = r.minCrownCost + dif * factor;
     return preRound % 100 * 100;
 }
-
 
 const Cosmetics = [
     {
