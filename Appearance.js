@@ -103,7 +103,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Face',
                     preview: {
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_FACE',
                         scale : 2,
                     },
                     price: 15,
@@ -111,7 +111,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'faceID',
                         ids: allFaceIds,
                         controlType: 'ScrollSelect',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_FACE',
                         itemWidth: 48,
                         scale : 1.5,
                         extra : { y : 10 }
@@ -126,7 +126,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Hair',
                     preview: {
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_HAIR',
                         scale : 2,
                     },
                     price: 20,
@@ -134,7 +134,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'hairStyleID',
                         ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                         controlType: 'ScrollSelect',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_HAIR',
                         itemWidth: 48,
                         scale : 1.5,
                         extra : { y : -26 }
@@ -142,7 +142,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'hairColor',
                         ids: Object.values(HairColors),
                         controlType: 'ScrollSelect',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_HAIR',
                         itemWidth: 48,
                         extra : { y : 18 },
                         scale : 1.5,
@@ -185,14 +185,14 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Skin Tone',
                     preview: {
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_SKIN',
                         scale : 1.25,
                     },
                     editorParams : [{
                         override: 'skinToneID',
                         ids: allSkinToneIds,
                         controlType: 'Button',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_SKIN',
                         scale : 1.5,
                         itemWidth: 48,
                     }],
@@ -205,14 +205,14 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Hair',
                     preview: {
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_HAIR',
                         scale : 1.25,
                     },
                     editorParams: [{
                         override: 'hairStyleID',
                         ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                         controlType: 'ScrollSelect',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_HAIR',
                         itemWidth: 48,
                         scale : 1.5,
                         extra : { y : -16 }
@@ -220,7 +220,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'hairColor',
                         ids: Object.values(HairColors),
                         controlType: 'ScrollSelect',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_HAIR',
                         itemWidth: 48,
                         scale : 1.5,
                         extra : { y : 24 },
@@ -240,7 +240,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'eyeColor',
                         ids:  Object.values(EyeColors),
                         controlType: 'ScrollSelect',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_EYES',
                         itemWidth: 48,
                         scale : 1.5,
                         extra : { y : -16 }
@@ -248,7 +248,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'faceID',
                         ids: allFaceIds,
                         controlType: 'ScrollSelect',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_FACE',
                         itemWidth: 48,
                         scale : 1.5,
                         extra : { y : 24 }
@@ -422,7 +422,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Skin Tone',
                     preview: {
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_SKIN',
                         scale : 1.25,
                     },
                     price: 50,
@@ -430,7 +430,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'skinToneID',
                         ids: allSkinToneIds,
                         controlType: 'Button',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_SKIN',
                         itemWidth: 48,
                         scale : 1.5,
                     }],
@@ -464,7 +464,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Eye Color',
                     preview: {
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_EYES',
                         scale : 1.25,
                     },
                     price: 50,
@@ -472,7 +472,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'eyeColor',
                         ids:  Object.values(EyeColors),
                         controlType: 'ScrollSelect',
-                        modelID : 'HUMANOID_VIEW_HEAD',
+                        modelID : 'HUMANOID_VIEW_EYES',
                         itemWidth: 48,
                         scale: 1.5,
                         extra : { y : -14 }

@@ -7425,7 +7425,11 @@ module.exports.ColoredClothes = {
         if (shirtStyleID >= 0 && coloredShirtsByStyle[shirtStyleID] != null) {
             return coloredShirtsByStyle[shirtStyleID];
         }
-        return [];
+        let keys = Object.keys(coloredShirtsByStyle);
+        if (keys.length > 0) {
+            return coloredShirtsByStyle[keys[0]];
+        }
+        return 
     },
     GetShirtsWithSameColor: (shirtID) => {
         let styleAndColor = module.exports.ColoredClothes.GetShirtStyleAndColorFromId(shirtID);
@@ -7433,7 +7437,11 @@ module.exports.ColoredClothes = {
         if (shirtColorID >= 0 && coloredShirtsByColor[shirtColorID] != null) {
             return coloredShirtsByColor[shirtColorID];
         }
-        return [];
+        let keys = Object.keys(coloredShirtsByColor);
+        if (keys.length > 0) {
+            return coloredShirtsByColor[keys[0]];
+        }
+        return 
     }
 };
 module.exports.EmperorTeamNPCIds = EmperorTeamNPCIds;
