@@ -55,6 +55,8 @@ module.exports.CalculateGemCapacity = CalculateGemCapacity;
 const coloredShirtIdsByStyleAndColor = {};
 const coloredShirtStyleAndColorById = {};
 const coloredPantsIdsByColor = {};
+const coloredShirtsByStyle = {};
+const coloredShirtsByColor = {};
 
 const DropTables = {
     // Table rarity refers to denominator of the roll. (Math.random() < 1 / tableRarity)
@@ -300,7 +302,7 @@ const ItemGetter = {
                 parent: 'RIGHT_SHOULDER',
                 spriteID: cosmeticID,
                 anchor: { x: 0.75, y: 0.18 },
-                position: {x: 0, y: -0.05},
+                position: {x: -0.025, y: -0.1},
                 rotation: 0,
                 UIModel: null,
             },
@@ -311,7 +313,7 @@ const ItemGetter = {
                 parent: 'LEFT_SHOULDER',
                 spriteID: cosmeticID,
                 anchor: { x: 0.25, y: 0.18 },
-                position: {x: 0, y: -0.05},
+                position: {x: 0.025, y: -0.1},
                 rotation: 0,
                 UIModel: null,
             },
@@ -322,7 +324,7 @@ const ItemGetter = {
                 parent: 'CHEST',
                 spriteID: cosmeticID,
                 anchor: { x: 0.5, y: 0.65 },
-                position: { x: 0, y: -0.05 },
+                position: { x: 0, y: -0.1 },
                 rotation: 0,
                 UIModel: null,
                 z: -1,
@@ -335,9 +337,9 @@ const ItemGetter = {
                 sprite:  'cosmeticRightForearm',
                 parent: 'RIGHT_FOREARM',
                 spriteID: cosmeticID,
-                anchor: {x: (3/8), y: 0.05},
-                position: {x: 0.10, y: -0.2},
-                rotation: -2.5 / 180 * Math.PI,
+                anchor: {x: 0.5, y: 0.5},
+                position: {x: 0.0, y: 0.0},
+                rotation: 0,
                 UIModel: null,
             };
             result.model.LEFT_FOREARM_WORN_SHIRT = {
@@ -346,9 +348,9 @@ const ItemGetter = {
                 sprite: 'cosmeticLeftForearm',
                 parent: 'LEFT_FOREARM',
                 spriteID: cosmeticID,
-                anchor: {x: 1-(3/8), y: 0.05},
-                position: {x: -0.1, y: -0.2},
-                rotation: 2.5 / 180 * Math.PI,
+                anchor: {x: 0.5, y: 0.0},
+                position: {x: -0.15, y: 0.2},
+                rotation: 0,
                 UIModel: null,
             };
         }
@@ -430,9 +432,14 @@ const ItemGetter = {
         return result;
     },
     // Creatable
-    CosmeticHat: (id, cosmeticID, name, description, spriteIndex) => {
+    CosmeticHat: (id, cosmeticID, name, description, spriteIndex, yAnchor = null, xAnchor = null) => {
         let result = Get.Item.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
-
+        if (yAnchor != null) {
+            result.model.HEAD_WORN.anchor.y = yAnchor;
+        }
+        if (xAnchor != null) {
+            result.model.HEAD_WORN.anchor.x = xAnchor;
+        }
         return result;
     },
     CosmeticHatBeanie: (id, cosmeticID, name, description, spriteIndex) => {
@@ -441,15 +448,30 @@ const ItemGetter = {
         head.anchor = { x : 0.525, y : 0.85 };
         return result;
     },
+    CosmeticHatFriendlyFire: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let head = result.model.HEAD_WORN;
+        head.anchor = { x : 0.15, y : 0.85 };
+        head.position = { x : 0.15, y : -0.7 };
+        return result;
+    },
+    CosmeticHatJester: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let head = result.model.HEAD_WORN;
+        head.anchor = { x : 0.525, y : 0.8 };
+        return result;
+    },
     CosmeticHatAnimalWithTail: (id, cosmeticID, name, description, spriteIndex) => {
         let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
         let head = result.model.HEAD_WORN;
         head.anchor = { x : 0.35, y : 0.85 };
         return result;
     },
-    CosmeticSunglasses: (id, cosmeticID, name, description, spriteIndex) => {
+    CosmeticSunglasses: (id, cosmeticID, name, description, spriteIndex, yAnchor = 0.5 ) => {
         let result = Get.Item.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
-
+        result.model.HEAD_WORN.anchor = { x: 0.5, y: yAnchor };
+        result.model.HEAD_WORN.position.y = -0.375;
+        result.model.HEAD_WORN.hideParts = null;
         return result;
     },
     CosmeticShirt: (id, cosmeticID, name, description, spriteIndex) => {
@@ -2337,6 +2359,15 @@ const ItemGetter = {
     ColoredShirt: function (id, notedId, name, itemSpriteIndex, shirtStyleNumber, colorSpriteId, value) {
         coloredShirtStyleAndColorById[id] = shirtStyleNumber * 1000 + colorSpriteId;
         coloredShirtIdsByStyleAndColor[shirtStyleNumber * 1000 + colorSpriteId] = id;
+        if (coloredShirtsByStyle[shirtStyleNumber] == null) {
+            coloredShirtsByStyle[shirtStyleNumber] = [];
+        }
+        coloredShirtsByStyle[shirtStyleNumber].push(id);
+        
+        if (coloredShirtsByColor[colorSpriteId] == null) {
+            coloredShirtsByColor[colorSpriteId] = [];
+        }
+        coloredShirtsByColor[colorSpriteId].push(id);
         return this.Shirt(id, notedId, name, itemSpriteIndex, 'shirt' + shirtStyleNumber, colorSpriteId, value, 'Everyday clothing', 'shirt' );
     },
     RobeChest: function (id, notedId, name, itemspriteIndex, spriteId, value, equipmentStats, minEquipLevelId) {
@@ -5596,6 +5627,10 @@ const Character = {
         ]);
         human.drops = [[[1, 100], [0, 2, 5, 10], [0, 5, 9, 40], [13, 1, 1, 20], [14, 1, 1, 10], [21, 1, 1, 10], [29, 1, 1, 10]], [[64, 100], [727, 1, 1, 5], [728, 1, 1, 1], [0, 10, 20, 14], [78, 1, 2, 80]], DropTables.EssenceShards(20, 15, 80, [100, 100, 100, 100, 40, 50, 10, 10, 10, 10, 0, 0])];
         human.stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
+        
+        human.behaviorLoop = (entity) => {
+
+        };
         return human;
     },
     Patreoner : function(id, name, spriteID, equipmentModel, hairStyleId, hairColor, eyeColor, facial, amountDonated, talkToDialog) {
@@ -5615,11 +5650,12 @@ const Character = {
         if (!Number.isInteger(tier) || tier <= 0) {
             tier = 1;
         }
+        patreoner.behaviorLoop = null;
         patreoner.stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
         return patreoner;
     },
     KaityPatreon: function(id, amountDonated, talkToDialog) {
-        let result = this.Patreoner(id, 'Babyshark', 33, [null, null, null, 379, 483], 5, 0x523000, 0x523000, 0, amountDonated, talkToDialog);
+        let result = this.Patreoner(id, 'Babyshark', 33, [null, null, 1022, 379, 483], 5, 0x523000, 0x523000, 0, amountDonated, talkToDialog);
         result.modelParams.FACE.spriteID = 'Kaity';
         result.modelParams.HEAD.spriteID = 'Kaity';
         result.modelParams.HAIR.sprite = 'hairStyle';
@@ -7383,15 +7419,22 @@ module.exports.ColoredClothes = {
         }
         return result;
     },
-    GetPantsIdFromColor : (pantColorId) => coloredPantsIdsByColor[pantColorId],
-    GetPantsColorFromId : (id) => {
-        let colors = Object.keys(coloredPantsIdsByColor);
-        for(let i = 0; i < colors.length; ++i) {
-            if (coloredPantsIdsByColor[colors[i]] == id) {
-                return Number( colors[i] );
-            }
+    GetShirtsWithSameStyle: (shirtID) => {
+        let styleAndColor = module.exports.ColoredClothes.GetShirtStyleAndColorFromId(shirtID);
+        let shirtStyleID = styleAndColor.shirtStyleID;
+        if (shirtStyleID >= 0 && coloredShirtsByStyle[shirtStyleID] != null) {
+            return coloredShirtsByStyle[shirtStyleID];
         }
+        return [];
     },
+    GetShirtsWithSameColor: (shirtID) => {
+        let styleAndColor = module.exports.ColoredClothes.GetShirtStyleAndColorFromId(shirtID);
+        let shirtColorID = styleAndColor.shirtColorID;
+        if (shirtColorID >= 0 && coloredShirtsByColor[shirtColorID] != null) {
+            return coloredShirtsByColor[shirtColorID];
+        }
+        return [];
+    }
 };
 module.exports.EmperorTeamNPCIds = EmperorTeamNPCIds;
 module.exports.GuildNPCIds = GuildNPCIds;

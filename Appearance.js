@@ -2,6 +2,7 @@ const SpriteColor = require('./Model').SpriteColor;
 const HairColors = require('./Model').HairColors;
 const EyeColors = require('./Model').EyeColors;
 const HairStyle = require('./Model').HairStyle;
+const Getter = require('./Getter');
 const SpriteClothesColors = require('./Model').SpriteClothesColors;
 
 module.exports.AppearanceType = {
@@ -102,15 +103,17 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Face',
                     preview: {
-                        parts: ['HEAD', 'EYES', 'FACE']
+                        modelID : 'HUMANOID_VIEW_HEAD',
+                        scale : 2,
                     },
                     price: 15,
                     editorParams: [{
                         override: 'faceID',
                         ids: allFaceIds,
                         controlType: 'ScrollSelect',
-                        parts: ['HEAD', 'EYES', 'FACE'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
+                        scale : 1.5,
                         extra : { y : 10 }
                     }],
                     rowSpan: 3
@@ -123,23 +126,26 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Hair',
                     preview: {
-                      parts: ['HEAD', 'EYES', 'HAIR'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
+                        scale : 2,
                     },
                     price: 20,
                     editorParams: [{
                         override: 'hairStyleID',
                         ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                         controlType: 'ScrollSelect',
-                        parts: ['HEAD', 'EYES', 'HAIR'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
+                        scale : 1.5,
                         extra : { y : -26 }
                     }, {
                         override: 'hairColor',
                         ids: Object.values(HairColors),
                         controlType: 'ScrollSelect',
-                        parts: ['HEAD', 'EYES', 'HAIR'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
                         extra : { y : 18 },
+                        scale : 1.5,
                         disableIf : { 'hairStyleID' : 0 }
                     }],
                     rowSpan: 3
@@ -179,13 +185,15 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Skin Tone',
                     preview: {
-                        parts : ['HEAD', 'EYES'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
+                        scale : 1.25,
                     },
                     editorParams : [{
                         override: 'skinToneID',
                         ids: allSkinToneIds,
                         controlType: 'Button',
-                        parts: ['HEAD', 'EYES'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
+                        scale : 1.5,
                         itemWidth: 48,
                     }],
                 }, 
@@ -197,22 +205,25 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Hair',
                     preview: {
-                      parts: ['HEAD', 'EYES', 'HAIR'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
+                        scale : 1.25,
                     },
                     editorParams: [{
                         override: 'hairStyleID',
                         ids: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                         controlType: 'ScrollSelect',
-                        parts: ['HEAD', 'EYES', 'HAIR'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
-                        extra : { y : -26 }
+                        scale : 1.5,
+                        extra : { y : -16 }
                     }, {
                         override: 'hairColor',
                         ids: Object.values(HairColors),
                         controlType: 'ScrollSelect',
-                        parts: ['HEAD', 'EYES', 'HAIR'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
-                        extra : { y : 18 },
+                        scale : 1.5,
+                        extra : { y : 24 },
                         disableIf : { 'hairStyleID' : 0 }
                     }],
 
@@ -222,22 +233,25 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Face',
                     preview: {
-                        parts: ['HEAD', 'EYES', 'FACE']
+                        modelID : 'HUMANOID_VIEW_HEAD',
+                        scale : 1.25,
                     },
                     editorParams: [{
                         override: 'eyeColor',
                         ids:  Object.values(EyeColors),
                         controlType: 'ScrollSelect',
-                        parts: ['HEAD', 'EYES'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
-                        extra : { y : -14 }
+                        scale : 1.5,
+                        extra : { y : -16 }
                     }, {
                         override: 'faceID',
                         ids: allFaceIds,
                         controlType: 'ScrollSelect',
-                        parts: ['HEAD', 'EYES', 'FACE'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
-                        extra : { y : 10 }
+                        scale : 1.5,
+                        extra : { y : 24 }
                     }]
                 },
                 {
@@ -247,22 +261,26 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Shirt',
                     preview: {
-                        parts: ['SHIRT']
+                        modelID : 'HUMANOID_VIEW_SHIRT',
                     },
                     editorParams: [{ 
-                        override: 'shirtStyleID',
-                        ids: [0, 2, 3, 4, 5, 6, 7, 8],
+                        override: 'shirtID',
+                        ids: (options) => {
+                            return Getter.ColoredClothes.GetShirtsWithSameStyle(options.shirtID);
+                        },
                         controlType: 'ScrollSelect',
-                        parts: ['SHIRT'],
+                        modelID : 'HUMANOID_VIEW_SHIRT',
                         itemWidth: 32,
-                        extra : { x: -24, spacing : 16, y : -14 }
+                        extra : { x: -24, spacing : 16, y : 0 }
                     }, {
-                        override: 'shirtColorID',
-                        ids: Object.values(SpriteClothesColors),
+                        override: 'shirtID',
+                        ids: (options) => {
+                            return Getter.ColoredClothes.GetShirtsWithSameColor(options.shirtID);
+                        },
                         controlType: 'ScrollSelect',
-                        parts: ['SHIRT'],
+                        modelID : 'HUMANOID_VIEW_SHIRT',
                         itemWidth: 32,
-                        extra : { x : -24, spacing : 16, y : 10 },
+                        extra : { x : -24, spacing : 16, y : 20 },
                     }],
                 }, 
             ],
@@ -270,16 +288,17 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Body',
                     preview: {
-                        parts: ['BODY'],
-                        options: { hairStyleID : HairStyle.Bald, faceID : 0 },
+                        modelID : 'HUMANOID_VIEW_BODY',
+                        scale : 0.7,
                     },
                     editorParams: [{
                         override: 'genderID',
                         ids: [1, 2, 3],
                         controlType: 'Button',
-                        parts: ['BODY'],
+                        modelID : 'HUMANOID_VIEW',
                         itemWidth: 96,
-                        extra : { spacing : 16 }
+                        scale : 0.7,
+                        extra : { spacing : 16, y : 16 }
                     }],
                 },
                 {
@@ -289,14 +308,15 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Pants',
                     preview: {
-                        parts: ['PANTS'],
+                        modelID : 'HUMANOID_VIEW_PANTS',
                     },
                     editorParams: [ {
                         override: 'pantsID',
-                        ids: Object.values(SpriteClothesColors),
+                        ids: [475, 477, 479, 481, 483, 485, 487, 489, 491],
                         controlType: 'ScrollSelect',
-                        parts: ['PANTS'],
+                        modelID : 'HUMANOID_VIEW_PANTS',
                         itemWidth: 32,
+                        scale: 1.5,
                         extra : { x : -16, spacing : 16 }
                     }],
                 }, 
@@ -326,22 +346,26 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Shirt',
                     preview: {
-                        parts: ['SHIRT'],
+                        modelID : 'HUMANOID_VIEW_SHIRT',
                         itemWidth: 64,
                     },
                     price: 25,
                     editorParams: [{ 
-                        override: 'shirtStyleID',
-                        ids: [0, 2, 3, 4, 5, 6, 7, 8],
+                        override: 'shirtID',
+                        ids: (options) => {
+                            return Getter.ColoredClothes.GetShirtsWithSameStyle(options.shirtID);
+                        },
                         controlType: 'ScrollSelect',
-                        parts: ['SHIRT'],
+                        modelID : 'HUMANOID_VIEW_SHIRT',
                         itemWidth: 32,
                         extra : { x: -24, spacing : 16, y : -14 }
                     }, {
-                        override: 'shirtColorID',
-                        ids: Object.values(SpriteClothesColors),
+                        override: 'shirtID',
+                        ids: (options) => {
+                            return Getter.ColoredClothes.GetShirtsWithSameColor(options.shirtID);
+                        },
                         controlType: 'ScrollSelect',
-                        parts: ['SHIRT'],
+                        modelID : 'HUMANOID_VIEW_SHIRT',
                         itemWidth: 32,
                         extra : { x : -24, spacing : 16, y : 10 },
                     }],
@@ -350,16 +374,17 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Pants',
                     preview: {
-                        parts: ['PANTS'],
+                        modelID : 'HUMANOID_VIEW_PANTS',
                         itemWidth: 64,
                     },
                     price: 20,
                     editorParams: [ {
                         override: 'pantsID',
-                        ids: Object.values(SpriteClothesColors),
+                        ids: [475, 477, 479, 481, 483, 485, 487, 489, 491],
                         controlType: 'ScrollSelect',
-                        parts: ['PANTS'],
+                        modelID : 'HUMANOID_VIEW_PANTS',
                         itemWidth: 32,
+                        scale: 1.5,
                         extra : { x : -16, spacing : 16 }
                     }],
                     rowSpan : 3,
@@ -397,15 +422,17 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Skin Tone',
                     preview: {
-                        parts : ['HEAD', 'EYES'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
+                        scale : 1.25,
                     },
                     price: 50,
                     editorParams : [{
                         override: 'skinToneID',
                         ids: allSkinToneIds,
                         controlType: 'Button',
-                        parts: ['HEAD', 'EYES'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
+                        scale : 1.5,
                     }],
                     rowSpan : 1,
                 }, 
@@ -417,7 +444,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Body',
                     preview: {
-                        parts: ['BODY'],
+                        modelID : 'HUMANOID_VIEW',
                         options: { hairStyleID : HairStyle.Bald, faceID : 0 },
                     },
                     price: 50,
@@ -425,8 +452,9 @@ module.exports.AppearanceShops = AppearanceShops = [
                         override: 'genderID',
                         ids: [1, 2, 3],
                         controlType: 'Button',
-                        parts: ['BODY'],
+                        modelID : 'HUMANOID_VIEW',
                         itemWidth: 96,
+                        scale : 0.7,
                         extra : { spacing : 16 }
                     }],
                     rowSpan : 2,
@@ -436,15 +464,17 @@ module.exports.AppearanceShops = AppearanceShops = [
                 {
                     title: 'Eye Color',
                     preview: {
-                        parts: ['HEAD', 'EYES']
+                        modelID : 'HUMANOID_VIEW_HEAD',
+                        scale : 1.25,
                     },
                     price: 50,
                     editorParams: [{
                         override: 'eyeColor',
                         ids:  Object.values(EyeColors),
                         controlType: 'ScrollSelect',
-                        parts: ['HEAD', 'EYES'],
+                        modelID : 'HUMANOID_VIEW_HEAD',
                         itemWidth: 48,
+                        scale: 1.5,
                         extra : { y : -14 }
                     }]
                 },
