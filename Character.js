@@ -101,7 +101,7 @@ Get.Character.Human(15, 'Baroness', 32, [null, 299, 612, 44, 31, null, 674], 5, 
     steps: [
         buildStepList(StepList.WALK_ADJACENT),
         [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[83, 84, 85, 86, 90]]})]
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[83, 84, 85, 86]]})]
     ],
 }], 11, EyeColors.Purple ),
 Get.Character.GoblinOrcRanged(16, 'Goblin', 1,  
