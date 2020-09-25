@@ -318,7 +318,7 @@ Get.Character.Golem(57, 'Gothite Golem', 4, 2.5, 254, 279, 595, 598), // Fragmen
 Get.Character.Golem(58, 'Osmium Golem', 5, 3.0, 282, 307, 601, 604), // Fragment, Chunk
 Get.Character.Death(59, "Death", 666, [null, 610, null, 347, 491]),
 Get.Character.PickPocketableHuman(60, 'Man', 22, [null, null, null, 455, 487], HairStyle.RightSideSwipe, HairColors.Black, 1),
-Get.Character.PickPocketableHuman(61, 'Man', 22, [null, null, null, 345, 491], HairStyle.Scruffy, HairColors.Gray, 2),
+Get.Character.PickPocketableHuman(61, 'Woman', 32, [null, null, null, 345, 491], 7, HairColors.Brown, 2),
 Get.Character.PickPocketableHuman(62, 'Man', 12, [null, null, null, 429, 477], HairStyle.Mohawk, HairColors.CherryRed, 5),
 Get.Character.Human(63, "Indie Dev", 22, [null, null, null, 437, 483], HairStyle.Messy,  HairColors.Purple, [
     {
