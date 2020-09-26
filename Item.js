@@ -1837,7 +1837,7 @@ const Item = Object.freeze([
                 id: 'LEFT_TOOL',
                 asset: 'heldParts',
                 sprite: 'moneyBag',
-                parent: 'LEFT_SHOULDER',
+                parent: 'LEFT_FOREARM',
                 spriteID: 0,
                 anchor: { x: 0.5, y: 0.3 },
                 position: { x: 0.5, y: 1.2 },
