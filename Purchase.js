@@ -122,7 +122,7 @@ const Rarity = [{
 }, {
     id: 5,
     name: 'Godly',
-    color: 0xece6ed,
+    color: 0xff63ed,
     rollChance: 350000,
     minCrownCost: 10000,
     maxCrownCost: 500000,
