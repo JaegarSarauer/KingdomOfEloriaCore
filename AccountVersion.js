@@ -1,5 +1,8 @@
 const ItemState = require('../def/interface/ItemStateDef');
 const MapManager = require('../manager/MapManager');
+const StepStartTutorialTimer = require('../internal/Steps/StepStartTutorialTimer');
+const StepTypeClassDictionary = require('./Step');
+const StateType = require('../internal/State').StateType;
 
 // NOTE: upgrade for a ID means upgrading to that ID
 const AccountVersion = [{
@@ -77,13 +80,20 @@ const AccountVersion = [{
     upgradeData: (userDef)  => userDef,
     onUpgradeComplete: (userDef) => {
         userDef.forAllAdventurers((adv) => {
-            if (adv.id == 0) {
+            let tutorialState = adv.state.getState(4);
+            if (tutorialState > 0) {
                 MapManager.i.changeMap(adv, 2);
-                adv.setPosition(26, 118);
-                adv.appearanceState.setEntityAtSlot(1);
-                adv.state.updateState(4, 1);
-                adv.dialog.showDialog(0); // Emperor vs Guilds => Choose Guild
-                adv.interfaces.enableInterfaces([13, 17]);
+                adv.setPosition(272, 72);
+                adv.state.setEntityAtSlot(4, [1]);
+
+                let step = new StepStartTutorialTimer.StepStartTutorialTimer(null, StepTypeClassDictionary.StepType.OPEN_SHOP_INTERFACE, adv, adv, {});
+                step._perform([]);
+                
+                let tutorialStateDef = StateType[4].state[1];
+                if (tutorialStateDef.dialogID != null) {
+                    adv.dialog.showDialog(tutorialStateDef.dialogID);
+                    adv.interfaces.enableInterfaces([13, 17]);
+                } 
             }
         })
     },
