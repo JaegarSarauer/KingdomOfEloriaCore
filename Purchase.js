@@ -1003,18 +1003,3 @@ const CosmeticRarityItems = (() => {
 module.exports.CosmeticRarityItems = CosmeticRarityItems;
 module.exports.Rarity = Rarity;
 module.exports.Cosmetics = Cosmetics;
-
-let rarityCount = {
-    0: 0,
-    1: 0, 
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-};
-
-for(let i = 0; i < Cosmetics.length; ++i) {
-    rarityCount[Cosmetics[i].rarity] += 1;
-}
-
-console.info(CosmeticRarityItems);

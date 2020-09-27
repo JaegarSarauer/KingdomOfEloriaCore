@@ -213,8 +213,11 @@ function loadMapCharacters(JSONMap) {
         }
         let isAggressive = obj.properties && obj.properties.isAggressive || false;
         let attackNPCs = obj.properties && obj.properties.attackNPC || false;
-        
+
         let npcDef = new EntityData(x, y, id, bounds, isAggressive, tiledID);
+        if (obj.properties && obj.properties.dialogMessage) {
+            npcDef.dialogMessage = obj.properties.dialogMessage;
+        }
         if (attackNPCs) {
             npcDef.atkNPC = obj.properties.attackNPC;
         }
