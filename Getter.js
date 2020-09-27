@@ -256,6 +256,8 @@ const ItemGetter = {
             noted: false,
             value: 1,
             stackable: false,
+            untradeable: true,
+            isCosmeticItem: true,
             actions : [],
             equipmentStats: [0, 0, 0, 0, 0, 0, 0, 0, 0],
         };

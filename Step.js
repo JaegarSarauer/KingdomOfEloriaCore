@@ -524,6 +524,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['number', 'number', 'object|null'], //itemID, itemAmount, itemStateDef
         params: [],
     },
+    DEPOSIT_WARDROBE_ITEM: {
+        id: 'DEPOSIT_WARDROBE_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'object|null'], //itemID, itemAmount, itemStateDef
+        params: [],
+    },
     DEPOSIT_DROP_PARTY_ITEM: {
         id: 'DEPOSIT_DROP_PARTY_ITEM',
         stepResultFail: 'END_ACTION',
@@ -533,6 +540,13 @@ module.exports.StepType = StepType = {
     },
     WITHDRAW_ITEM: {
         id: 'WITHDRAW_ITEM',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number', 'number', 'object|null'], //itemID, itemAmount, itemStateDef
+        params: [],
+    },
+    WITHDRAW_WARDROBE_ITEM: {
+        id: 'WITHDRAW_WARDROBE_ITEM',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
         paramTypes: ['number', 'number', 'object|null'], //itemID, itemAmount, itemStateDef
@@ -1121,7 +1135,14 @@ module.exports.StepType = StepType = {
         id: 'BUY_COSMETIC',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number'], // cosmeticID
+        paramTypes: ['number', 'boolean'], // cosmeticID, isBuyingFeatured
+        params: [],
+    },
+    CONVERT_CROWNS_TO_FAVOR: {
+        id: 'CONVERT_CROWNS_TO_FAVOR',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], // crownsAmount
         params: [],
     },
     IS_SPELL_UNLOCKED: {
@@ -1563,6 +1584,10 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
         id: 'COSMETIC_ID',
         type: 'number'
     },
+    IS_FEATURE: {
+        id: 'IS_FEATURE',
+        type: 'boolean'
+    },
 };
 
 try {
@@ -1622,8 +1647,10 @@ try {
     const StepChangeLevel = require('../internal/Steps/StepChangeLevel');
     const StepDespawnOwner = require('../internal/Steps/StepDespawnOwner');
     const StepDepositItem = require('../internal/Steps/StepDepositItem');
+    const StepDepositWardrobeItem = require('../internal/Steps/StepDepositWardrobeItem');
     const StepDepositDropPartyItem = require('../internal/Steps/StepDepositDropPartyItem');
     const StepWithdrawItem = require('../internal/Steps/StepWithdrawItem');
+    const StepWithdrawWardrobeItem = require('../internal/Steps/StepWithdrawWardrobeItem');
     const StepBuyLostItem = require('../internal/Steps/StepBuyLostItem');
     const StepClearLostItems = require('../internal/Steps/StepClearLostItems');
     const StepSellItemToShop = require('../internal/Steps/StepSellItemToShop');
@@ -1668,6 +1695,7 @@ try {
     const StepGiveCutGem = require('../internal/Steps/StepGiveCutGem');
     const StepRerollCosmetics = require('../internal/Steps/StepRerollCosmetics');
     const StepBuyCosmetic = require('../internal/Steps/StepBuyCosmetic');
+    const StepConvertCrownsToFavor = require('../internal/Steps/StepConvertCrownsToFavor');
     const StepCanCastSpell = require('../internal/Steps/StepCanCastSpell');
     const StepIsSpellUnlocked = require('../internal/Steps/StepIsSpellUnlocked');
     const StepUnlockSpell = require('../internal/Steps/StepUnlockSpell');
@@ -2201,6 +2229,11 @@ try {
                 return new StepDepositItem.StepDepositItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
+        DEPOSIT_WARDROBE_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepDepositWardrobeItem.StepDepositWardrobeItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
         DEPOSIT_DROP_PARTY_ITEM: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepDepositDropPartyItem.StepDepositDropPartyItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
@@ -2209,6 +2242,11 @@ try {
         WITHDRAW_ITEM: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepWithdrawItem.StepWithdrawItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        WITHDRAW_WARDROBE_ITEM: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepWithdrawWardrobeItem.StepWithdrawWardrobeItem(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         BUY_LOST_ITEM: {
@@ -2444,6 +2482,11 @@ try {
         BUY_COSMETIC: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepBuyCosmetic.StepBuyCosmetic(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CONVERT_CROWNS_TO_FAVOR: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepConvertCrownsToFavor.StepConvertCrownsToFavor(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         CAN_CAST_SPELL: {

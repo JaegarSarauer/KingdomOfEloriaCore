@@ -82,5 +82,9 @@ export const Timer = [
     {
         id: 20,
         name: 'Quest Timer',
+    },
+    {
+        id: 21,
+        name: 'Reroll Featured Cosmetics'
     }
 ];

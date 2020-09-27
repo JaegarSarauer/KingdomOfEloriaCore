@@ -1997,6 +1997,7 @@ module.exports.Interface = [
             name: 'Reroll Cosmetics',
             actionInterval: -1,
             steps: [
+                [buildStep(StepType.IS_TIMER_EXPIRED, {params: [21]})],
                 [buildStep(StepType.REROLL_COSMETICS)]
             ],
         },
@@ -2005,7 +2006,15 @@ module.exports.Interface = [
             name: 'Buy Cosmetic',
             actionInterval: -1,
             steps: [
-                [buildStep(StepType.BUY_COSMETIC, {params: ['COSMETIC_ID']})]
+                [buildStep(StepType.BUY_COSMETIC, {params: ['COSMETIC_ID', 'IS_FEATURE']})]
+            ],
+        },
+        {
+            id: 3,
+            name: 'Convert Crowns',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.CONVERT_CROWNS_TO_FAVOR, {params: ['ITEM_AMOUNT']})]
             ],
         },
     ],
@@ -2304,4 +2313,33 @@ module.exports.Interface = [
             steps: [],
         },
     ],
+}, {
+    id: 33,
+    name: 'Wardrobe',
+    actions: [
+        {
+            id: 0,
+            name: 'Withdraw',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.WITHDRAW_WARDROBE_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+            ],
+        },
+    ],
+}, {
+    id: 34,
+    name: 'Adventurer Inventory Wardrobe',
+    actions: [
+        {
+            id: 0,
+            name: 'Deposit',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.DEPOSIT_WARDROBE_ITEM, {params: ['ITEM_ID', 'ITEM_AMOUNT', 'ITEM_STATE']})]
+            ],
+        },
+    ],
 },];
+
+
+
