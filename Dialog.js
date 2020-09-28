@@ -166,9 +166,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 16,
     title: '<b>Mining Guide</b>',
-    message: 'Welcome back. I hope your adventurers have taught you much.',
+    message: 'Welcome back. I hope your adventurers have taught you much.\n\nWhat can I help you with?',
     continueSteps: [[
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[289, 241, 242, 243, 244, 245, 246, 247, 248, 249]] }),
     ]],
 }, {
     id: 17,
@@ -248,27 +248,27 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 23,
-    title: '<b>Osaik</b>', // <How do I make tools and armor?>
+    title: '<b>Guide</b>', // <How do I make tools and armor?>
     message: 'Armor, axes and pickaxes are all smithed from ores found in the land of Eloria. Making such tools uses a combination of two skills, Mining and Smithing.\n\n' +
     'To mine, you will want to wield a pickaxe and find a rock. When you are new to mining, you will want to acquire a copper pickaxe and then click on a copper rock to mine it.\n\n'+
     'Once you have enough ore, you will smith them into bars. Bring the ores to a furnace and click on the furnace. Furnaces are often found in Metalsmith Stores within the cities.\n\n'+
     'Then you use a hammer on an anvil to smith it into whatever you desire. You can buy a hammer at a General Store.\n\n',
 },{
     id: 24,
-    title: '<b>Osaik</b>', // <How do I make bows and arrows?>
+    title: '<b>Guide</b>', // <How do I make bows and arrows?>
     message: 'Bows and arrows are fletched from trees found in grassy areas. Creating bows and arrows is a multi-step process. Creating unstrung bows and arrow shafts, however, only required Woodcutting and Fletching.\n\n' +
     'To woodcut, you will want to wield an axe and find a tree. When you are new to woodcutting, you will want to acquire a copper axe and then click on a regular tree to mine it. Once you have logs, you will fletch them into bows or arrow shafts. Use a knife on the log to fletch it. Knives can be purchased from a General Store.\n\n'+
     'To turn an unstrung bow into a bow, you must string it with a bowstring, which are created by spinning flax. Flax can be around around the lands.\n\n'+
     'To turn arrow shafts into arrows, you must first put feathers on the arrow shafts, which can be acquired by slaying chickens. You must then put arrow heads onto the shafts. Ask me about making tools and armor to learn how to make arrowheads.',
 },{
     id: 25,
-    title: '<b>Osaik</b>', // <How do I learn magic?>
+    title: '<b>Guide</b>', // <How do I learn magic?>
     message: 'Magic can is learnt by acquiring spell scrolls and studying them. Once you read a spell scroll, it crumbles into dust, but the spell is permanently added to your Spell Book.\n\n' +
     'Once a spell is learned, you can find it in your Spell Book, a tab found in the menu on the right. To use a spell, carry the appropriate essence in your inventory and then click on the spell in your spell book. If it is a combat spell, it will be equipped activated and used once you get into a fight.\n\n' +
     'Both spell scrolls and essence can be dropped by enemies upon being slain, or acquired through thieving chests. You can also be create essence with essence shards.',
 },{
     id: 26,
-    title: '<b>Osaik</b>', // <Where do I store my items?>
+    title: '<b>Guide</b>', // <Where do I store my items?>
     message: 'You can store your items safely at a bank. Banks are found in nearly every town in Eloria.\n\n' +
 
     'To deposit your items into a bank, talk to a Banker. Bankers will let you deposit  or withdraw all your items.\n' +
@@ -277,14 +277,14 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Items can be deposited or withdrawn normally or as notes. To toggle between noted, check the Note/Item toggle in the upper right  of the bank menu.',
 },{
     id: 27,
-    title: '<b>Osaik</b>', // <How can I make money?>
+    title: '<b>Guide</b>', // <How can I make money?>
     message: 'Money can be made by selling items to stores and market stalls or trading directly with players.\n' + 
     'Items can be acquired by gathering resources such as mining or woodcutting, creating items from resources such as through smithing, fletching or crafting. They can also be dropped by slain enemies in combat, or stolen through thieving NPCs and chests.\n\n' +
     
     'Many players suggest stealing items through thieving as it is a highly profitable way to make money, but it comes with high risk.',
 },{
     id: 28,
-    title: '<b>Osaik</b>', // <What is thieving?>
+    title: '<b>Guide</b>', // <What is thieving?>
     message: 'Thieving is one of the best sources of Coins and Cloth in the game currently. It consists of 2 activities: Pickpocketting certain NPCs, and opening Chests.\n\n' +
 
     'Opening a chest, or uncommonly failing a pickpocket will earn the player a bounty skull. This means that thieving is a somewhat risky activity. Not only will this allow another player within your level range to attack you, it means that guards in town will attack you on sight.\n\n' +
@@ -292,7 +292,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Thieving is a high risk, high reward activity. Proceed with caution, it\'s not exactly encouraged around here... but Eloria is the new wild west. People don\'t exactly trust The Emperor\'s guards anyway...',
 }, {
     id: 29,
-    title: '<b>Osaik</b>', // <What are notes and where can I redeem them?>
+    title: '<b>Guide</b>', // <What are notes and where can I redeem them?>
     message: 'Notes are an IOU that the bank accept at a 1:1 rate with the described item.\n\n' +
 
     'Items can often take up a lot of space in your inventory. Notes are a way of carrying many of the same item, while having each item only take up spot in your inventory.\n\n' +
@@ -300,7 +300,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'If you wish to use an item that is noted, you must deposit it into your bank and withdraw the item normally. To toggle between withdrawing and depositing noted items, check the Note/Item toggle in the upper right  of the bank menu.',
 }, {
     id: 30,
-    title: '<b>Osaik</b>', // <How does crafting work?>
+    title: '<b>Guide</b>', // <How does crafting work?>
     message: 'Crafting provides a number of benefits to other skills in Guilds of Gods - it is required for creating magic combat armors, spinning flax for bowstrings for fletching and drawstrings for making bags as well as the creation of Pots for alchemy. These uses, plus its relative ease to train means it is a great skill to work on early for a new player.\n\n' +
     
     'Crafting relies on tools such as Needles and Threads, which can be purchased from Crafting Stores. It often requires using a spinning wheel or pottery wheel, which can be found in most Crafting Stores.\n\n' +
@@ -308,7 +308,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Cloth can be crafted into wizard robes, clay crafted into claypots, and flax into bowstrings. Each of these tools is very useful for other skills.',
 }, {
     id: 31,
-    title: '<b>Osaik</b>', // <How can I connect with other adventurers?>
+    title: '<b>Guide</b>', // <How can I connect with other adventurers?>
     message: 'In the menu on the left, there is a \'Chat\' tab which allows you to talk to all players who are currently online.\n\n' +
     
     'Below that is the \'Friends List\' tab, which lets you add other adventurers as friends.\n' +
@@ -803,9 +803,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 75,
     title: '<b>Fishing Guide</b>',
-    message: 'Nice to see you again.',
+    message: 'Nice to see you again. What can I help you with?',
     continueSteps: [[
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[290, 241, 242, 243, 244, 245, 246, 247, 248, 249]] }),
     ]],
 }, {
     id: 76,
@@ -869,9 +869,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 {
     id: 81,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Welcome back traveler. Always a pleasure to run into you.',
+    message: 'Welcome back traveler. What can I help you with?',
     continueSteps: [[
-        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[291, 241, 242, 243, 244, 245, 246, 247, 248, 249]] }),
     ]],
 }, {
     id: 82,

@@ -1875,6 +1875,9 @@ module.exports.Interface = [
             Get.Interface.AttemptGuildExam(286, 0),
             Get.Interface.AttemptGuildExam(287, 1),
             Get.Interface.AttemptGuildExam(288, 2),
+            Get.Interface.SetSpawnPoint(289, 0),
+            Get.Interface.SetSpawnPoint(290, 1),
+            Get.Interface.SetSpawnPoint(291, 2),
         ],
     },
     {

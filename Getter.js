@@ -3020,6 +3020,20 @@ const Interface = {
             ],
         };
     },
+    SetSpawnPoint: (id, guildID) => {
+        let guild = Guilds[guildID];
+        let spawnStateID = 8;
+        return {
+            id,
+            name: 'I want to spawn in ' + guild.name,
+            actionInterval: -1,
+            steps: [
+                [
+                    buildStep(StepType.SET_USER_GOAL_STATE, {params: [spawnStateID, [guildID]]}),
+                ],
+            ],
+        };
+    },
     MixSpellPot: (id, name, nameDetail, skillID, skillLevel, xp, spellID, mixPotID) => {
         let spellDef = Spells.Spells[spellID];
         let steps = [[], []];
@@ -6890,7 +6904,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Default message
                         params: [dialogs.INVITE_TO_START_QUEST],
                         stepResultPass: 'END_ACTION',
@@ -6903,7 +6916,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Talk to the guide to learn your task.
                         params: [dialogs.EXAM_EXPLAINED],
                         stepResultPass: 'END_ACTION',
@@ -6916,7 +6928,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
                         params: [dialogs.PASSED_EXAM],
                         stepResultPass: 'END_ACTION',
@@ -6929,7 +6940,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
                         params: [dialogs.TOUR],
                         stepResultPass: 'END_ACTION',
@@ -6938,7 +6948,6 @@ const Character = {
                 ],
                 // Combine 2/3/4 into 'in process of exam' => 'Re-explains the task'
                 [
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Ex-explain task
                         params: [dialogs.EXAM_REEXPLAINED],
                         stepResultPass: 'END_ACTION',
@@ -6972,7 +6981,7 @@ const Character = {
                     buildStep(StepType.ASSERT_GOAL_STATES, { // If you have not startedm try and start it
                         params: [questID, [states.UNSTARTED], ['EQUALS']],
                         stepResultPass: 'NEXT_STEP',
-                        stepResultFail: 'END_AND_GOTO_LIST_3',
+                        stepResultFail: 'END_AND_GOTO_LIST_5',
                     }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { // Check level
                         params: [skillID, 10],
