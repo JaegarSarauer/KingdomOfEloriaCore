@@ -3025,11 +3025,12 @@ const Interface = {
         let spawnStateID = 8;
         return {
             id,
-            name: 'I want to spawn in ' + guild.name,
+            name: 'I want to set my spawn to the ' + guild.name + '.',
             actionInterval: -1,
             steps: [
                 [
-                    buildStep(StepType.SET_USER_GOAL_STATE, {params: [spawnStateID, [guildID]]}),
+                    buildStep(StepType.SET_CHARACTER_STATE, {params: [spawnStateID, [guildID]]}),
+                    buildStep(StepType.SHOW_DIALOG, {params: [92]}),
                 ],
             ],
         };

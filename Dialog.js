@@ -978,6 +978,15 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
+}, {
+    id: 92,
+    title: '<b>Guide</b>',
+    message: 'All set!\n\n' + 
+    
+    'The next time you die, you will respawn here, in the guild.',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+    ]],
 }]);
 
 module.exports.Dialogs = Dialogs;
