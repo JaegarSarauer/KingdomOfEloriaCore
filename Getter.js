@@ -303,8 +303,8 @@ const ItemGetter = {
                 sprite: 'cosmeticRightShoulder',
                 parent: 'RIGHT_SHOULDER',
                 spriteID: cosmeticID,
-                anchor: { x: 0.75, y: 0.18 },
-                position: {x: -0.025, y: -0.1},
+                anchor: { x: 0.6, y: 0.18 },
+                position: {x: -0.15, y: 0.0},
                 rotation: 0,
                 UIModel: null,
             },
@@ -314,8 +314,8 @@ const ItemGetter = {
                 sprite: 'cosmeticLeftShoulder',
                 parent: 'LEFT_SHOULDER',
                 spriteID: cosmeticID,
-                anchor: { x: 0.25, y: 0.18 },
-                position: {x: 0.025, y: -0.1},
+                anchor: { x: 0.4, y: 0.18 },
+                position: {x: 0.15, y: 0.0},
                 rotation: 0,
                 UIModel: null,
             },
@@ -326,7 +326,7 @@ const ItemGetter = {
                 parent: 'CHEST',
                 spriteID: cosmeticID,
                 anchor: { x: 0.5, y: 0.65 },
-                position: { x: 0, y: -0.1 },
+                position: { x: 0, y: 0.0 },
                 rotation: 0,
                 UIModel: null,
                 z: -1,
@@ -339,8 +339,8 @@ const ItemGetter = {
                 sprite:  'cosmeticRightForearm',
                 parent: 'RIGHT_FOREARM',
                 spriteID: cosmeticID,
-                anchor: {x: 0.5, y: 0.5},
-                position: {x: 0.0, y: 0.0},
+                anchor: {x: 0.5, y: 0.1},
+                position: {x: 0.2, y: -0.1},
                 rotation: 0,
                 UIModel: null,
             };
@@ -350,8 +350,8 @@ const ItemGetter = {
                 sprite: 'cosmeticLeftForearm',
                 parent: 'LEFT_FOREARM',
                 spriteID: cosmeticID,
-                anchor: {x: 0.5, y: 0.0},
-                position: {x: -0.15, y: 0.2},
+                anchor: {x: 0.5, y: 0.1},
+                position: {x: -0.2, y: -0.1},
                 rotation: 0,
                 UIModel: null,
             };
@@ -479,6 +479,14 @@ const ItemGetter = {
     CosmeticShirt: (id, cosmeticID, name, description, spriteIndex) => {
         let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
 
+        return result;
+    },
+    CosmeticShirtJesterFancyShoulder: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.anchor = { x: 0.6, y: 0.18 };
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position = {x: -0.3, y: 0.0};
+        result.model.LEFT_SHOULDER_WORN_SHIRT.anchor = { x: 0.4, y: 0.18 };
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position = {x: 0.3, y: 0.0};
         return result;
     },
     CosmeticPants: (id, cosmeticID, name, description, spriteIndex) => {
