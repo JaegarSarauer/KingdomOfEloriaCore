@@ -193,7 +193,7 @@ module.exports.AppearanceShops = AppearanceShops = [
                         ids: allSkinToneIds,
                         controlType: 'Button',
                         modelID : 'HUMANOID_VIEW_SKIN',
-                        scale : 1.5,
+                        scale : 1.75,
                         itemWidth: 48,
                     }],
                 }, 
@@ -266,7 +266,12 @@ module.exports.AppearanceShops = AppearanceShops = [
                     editorParams: [{ 
                         override: 'shirtID',
                         ids: (options) => {
-                            return Getter.ColoredClothes.GetShirtsWithSameStyle(options.shirtID);
+                            if (options != null) {
+                                return Getter.ColoredClothes.GetShirtsWithSameStyle(options.shirtID);
+                            }
+                            else {
+                                return Getter.ColoredClothes.GetAllShirts();
+                            }
                         },
                         controlType: 'ScrollSelect',
                         modelID : 'HUMANOID_VIEW_SHIRT',
@@ -275,7 +280,12 @@ module.exports.AppearanceShops = AppearanceShops = [
                     }, {
                         override: 'shirtID',
                         ids: (options) => {
-                            return Getter.ColoredClothes.GetShirtsWithSameColor(options.shirtID);
+                            if (options != null) {
+                                return Getter.ColoredClothes.GetShirtsWithSameColor(options.shirtID);
+                            }
+                            else {
+                                return Getter.ColoredClothes.GetAllShirts();
+                            }
                         },
                         controlType: 'ScrollSelect',
                         modelID : 'HUMANOID_VIEW_SHIRT',
@@ -353,7 +363,12 @@ module.exports.AppearanceShops = AppearanceShops = [
                     editorParams: [{ 
                         override: 'shirtID',
                         ids: (options) => {
-                            return Getter.ColoredClothes.GetShirtsWithSameStyle(options.shirtID);
+                            if (options != null) {
+                                return Getter.ColoredClothes.GetShirtsWithSameStyle(options.shirtID);
+                            }
+                            else {
+                                return Getter.ColoredClothes.GetAllShirts();
+                            }
                         },
                         controlType: 'ScrollSelect',
                         modelID : 'HUMANOID_VIEW_SHIRT',
@@ -362,7 +377,12 @@ module.exports.AppearanceShops = AppearanceShops = [
                     }, {
                         override: 'shirtID',
                         ids: (options) => {
-                            return Getter.ColoredClothes.GetShirtsWithSameColor(options.shirtID);
+                            if (options != null) {
+                                return Getter.ColoredClothes.GetShirtsWithSameColor(options.shirtID);
+                            }
+                            else {
+                                return Getter.ColoredClothes.GetAllShirts();
+                            }
                         },
                         controlType: 'ScrollSelect',
                         modelID : 'HUMANOID_VIEW_SHIRT',

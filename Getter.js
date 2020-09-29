@@ -7485,7 +7485,20 @@ module.exports.ColoredClothes = {
             return coloredShirtsByColor[keys[0]];
         }
         return 
-    }
+    },
+    GetAllShirts: () => {
+        let result = [];
+        let keys = Object.keys(coloredShirtsByStyle);
+        for(let i = 0; i < keys.length; ++i) {
+            let shirtIds = coloredShirtsByStyle[keys[i]];
+            if (shirtIds != null) {
+                for(let j = 0; j < shirtIds.length; ++j) {
+                    result.push(shirtIds[j]);
+                }
+            }
+        }
+        return result;
+    },
 };
 module.exports.EmperorTeamNPCIds = EmperorTeamNPCIds;
 module.exports.GuildNPCIds = GuildNPCIds;
