@@ -2020,6 +2020,14 @@ module.exports.Interface = [
                 [buildStep(StepType.CONVERT_CROWNS_TO_FAVOR, {params: ['ITEM_AMOUNT']})]
             ],
         },
+        {
+            id: 4,
+            name: 'Toggle Wardrobe',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.TOGGLE_WARDROBE_INTERFACE, {params: ['IS_FEATURE']})]
+            ],
+        },
     ],
 }, {
     id: 19,
