@@ -3020,6 +3020,21 @@ const Interface = {
             ],
         };
     },
+    SetSpawnPoint: (id, guildID) => {
+        let guild = Guilds[guildID];
+        let spawnStateID = 8;
+        return {
+            id,
+            name: 'I want to set my spawn to the ' + guild.name + '.',
+            actionInterval: -1,
+            steps: [
+                [
+                    buildStep(StepType.SET_CHARACTER_STATE, {params: [spawnStateID, [guildID]]}),
+                    buildStep(StepType.SHOW_DIALOG, {params: [92]}),
+                ],
+            ],
+        };
+    },
     MixSpellPot: (id, name, nameDetail, skillID, skillLevel, xp, spellID, mixPotID) => {
         let spellDef = Spells.Spells[spellID];
         let steps = [[], []];
@@ -3334,7 +3349,6 @@ const Interface = {
                 name: 'Talk To',
                 actionInterval: -1,
                 steps: [
-                    [buildStepList(StepList.WALK_ADJACENT)],
                     [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.OPEN_DIALOG_INTERFACE),
                     buildStep(StepType.SHOW_DIALOG, { params: [dialogID] })]
@@ -5574,9 +5588,7 @@ const Character = {
             id: 4,
             name: 'Talk To',
             steps: [
-                buildStepList(StepList.WALK_ADJACENT),
-                [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {params: [talkToDialog]})],
+                [buildStep(StepType.SHOW_DIALOG, {params: [talkToDialog]})],
             ],
         }, {
             interfaceID: 0,
@@ -5672,9 +5684,7 @@ const Character = {
                 id: 4,
                 name: 'Talk To',
                 steps: [
-                    buildStepList(StepList.WALK_ADJACENT),
                     [
-                        buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                         buildStep(StepType.IS_PATREON_SUPPORTER, {
                             stepResultPass: StepResult.NEXT_STEP,
                             stepResultFail: StepResult.NEXT_STEP_LIST,
@@ -5701,9 +5711,7 @@ const Character = {
                 id: 4,
                 name: 'Talk To',
                 steps: [
-                    buildStepList(StepList.WALK_ADJACENT),
                     [
-                        buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                         buildStep(StepType.SHOW_DIALOG, { params: [67], })
                     ]
                 ],
@@ -5718,8 +5726,7 @@ const Character = {
                 id: 4,
                 name: 'Talk To',
                 steps: [
-                    buildStepList(StepList.WALK_ADJACENT),
-                    [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    [
                     buildStep(StepType.HAD_FIRST_DEATH),
                     buildStep(StepType.SET_FIRST_DEATH),
                     buildStep(StepType.SHOW_DIALOG, {
@@ -6218,8 +6225,7 @@ const Character = {
                 id: 4,
                 name: 'Talk To',
                 steps: [
-                    buildStepList(StepList.WALK_ADJACENT), 
-                    [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                    [
                     buildStep(StepType.SHOW_DIALOG, {
                         params: [71],
                         stepResultPass: 'END_ACTION',
@@ -6600,15 +6606,12 @@ const Character = {
             id: 4,
             name: 'Talk To',
             steps: [
-                buildStepList(StepList.WALK_ADJACENT),
-
                 // If we have previously completed the tutorial, go straight to post-tutorial dialog
                 [buildStep(StepType.ASSERT_GOAL_STATES, {
                     params: [questStateId, [states.COMPLETE], ['EQUALS'] ],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [44],
                     stepResultPass: 'END_ACTION',
@@ -6633,7 +6636,6 @@ const Character = {
                 }),
                 buildStep(StepType.GIVE_OWNER_EQUIPMENT_ITEM, {params: [1, 13, null]}),
                 buildStep(StepType.GIVE_OWNER_EQUIPMENT_ITEM, {params: [0, 21, null]}),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [42],
                     stepResultPass: 'END_ACTION',
@@ -6648,7 +6650,6 @@ const Character = {
                 }),
                 buildStep(StepType.REMOVE_OWNER_EQUIPMENT_ITEM, {params: [1]}),
                 buildStep(StepType.REMOVE_OWNER_EQUIPMENT_ITEM, {params: [0]}),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [43],
                     stepResultPass: 'END_ACTION',
@@ -6661,7 +6662,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [45],
                     stepResultPass: 'END_ACTION',
@@ -6674,7 +6674,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [41],
                     stepResultPass: 'END_ACTION',
@@ -6691,15 +6690,12 @@ const Character = {
             id: 4,
             name: 'Talk To',
             steps: [
-                buildStepList(StepList.WALK_ADJACENT),
-
                 // If we have previously completed the tutorial, go straight to questions dialog
                 [buildStep(StepType.CHECK_CHARACTER_STATE, {
                     params: [4, 0],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [2],
                     stepResultPass: 'END_ACTION',
@@ -6712,7 +6708,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [13],
                     stepResultPass: 'END_ACTION',
@@ -6730,7 +6725,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [14],
                     stepResultPass: 'END_ACTION',
@@ -6749,7 +6743,6 @@ const Character = {
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
                 buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [51, 1] }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [15],
                     stepResultPass: 'END_ACTION',
@@ -6768,7 +6761,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [39],
                     stepResultPass: 'END_ACTION',
@@ -6787,7 +6779,6 @@ const Character = {
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
                 buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [730, 1] }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [16],
                     stepResultPass: 'END_ACTION',
@@ -6800,7 +6791,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [17],
                     stepResultPass: 'END_ACTION',
@@ -6813,7 +6803,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [18],
                     stepResultPass: 'END_ACTION',
@@ -6826,7 +6815,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [19],
                     stepResultPass: 'END_ACTION',
@@ -6839,7 +6827,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [20],
                     stepResultPass: 'END_ACTION',
@@ -6853,7 +6840,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [22],
                     stepResultPass: 'END_ACTION',
@@ -6892,7 +6878,6 @@ const Character = {
             id: 4,
             name: 'Talk To',
             steps: [
-                buildStepList(StepList.WALK_ADJACENT),
                 // If we have started the tutorial & not talked to the NPC
                 [
                     buildStep(StepType.IS_TIMER_EXPIRED, {
@@ -6908,7 +6893,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
                         params: [dialogs.PASSED_EXAM],
                         stepResultPass: 'END_ACTION',
@@ -6921,7 +6905,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Default message
                         params: [dialogs.INVITE_TO_START_QUEST],
                         stepResultPass: 'END_ACTION',
@@ -6934,7 +6917,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Talk to the guide to learn your task.
                         params: [dialogs.EXAM_EXPLAINED],
                         stepResultPass: 'END_ACTION',
@@ -6947,7 +6929,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
                         params: [dialogs.PASSED_EXAM],
                         stepResultPass: 'END_ACTION',
@@ -6960,7 +6941,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
                         params: [dialogs.TOUR],
                         stepResultPass: 'END_ACTION',
@@ -6969,7 +6949,6 @@ const Character = {
                 ],
                 // Combine 2/3/4 into 'in process of exam' => 'Re-explains the task'
                 [
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Ex-explain task
                         params: [dialogs.EXAM_REEXPLAINED],
                         stepResultPass: 'END_ACTION',
@@ -6999,14 +6978,12 @@ const Character = {
             id: 4,
             name: 'Talk To',
             steps: [
-                buildStepList(StepList.WALK_ADJACENT),
                 [
                     buildStep(StepType.ASSERT_GOAL_STATES, { // If you have not startedm try and start it
                         params: [questID, [states.UNSTARTED], ['EQUALS']],
                         stepResultPass: 'NEXT_STEP',
-                        stepResultFail: 'END_AND_GOTO_LIST_4',
+                        stepResultFail: 'END_AND_GOTO_LIST_5',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.HAS_SKILL_LEVEL, { // Check level
                         params: [skillID, 10],
                         stepResultPass: 'NEXT_STEP',
@@ -7031,7 +7008,6 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
-                    buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                     buildStep(StepType.SHOW_DIALOG, { // Nice to see you again
                         params: [dialogs.EXAM_COMPLETE],
                         stepResultPass: 'END_ACTION',
@@ -7043,7 +7019,6 @@ const Character = {
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
-                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [dialogs.DONATE_TO_COMPLETE],
                     stepResultPass: 'END_ACTION',
@@ -7062,8 +7037,9 @@ const Character = {
             id: 4,
             name: 'Talk To',
             steps: [
-                [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-                buildStep(StepType.SHOW_DIALOG, {params: [33]})],
+                [
+                    buildStep(StepType.SHOW_DIALOG, {params: [33]})
+                ],
             ],
         }], 7, EyeColors.Purple);
         kiaso.stats = [[0, 40], [1, 40], [2, 40], [3, 40], [4, 40], [5, 40], [6, 40], [7, 40], [8, 40], [11, 40],];
