@@ -3657,10 +3657,10 @@ const Item = Object.freeze([
     Get.Item.CosmeticHat(964, 52, 'Hustler Hat', 'A flashy hustler hat', 648),
     Get.Item.CosmeticHat(965, 53, 'Hustler Hat', 'Attract unwanted attention in this hat', 649, 0.725 ),
     Get.Item.CosmeticHat(966, 54, 'Hustler Hat', 'A hat made for the Boss.', 650, 0.7 ),
-    Get.Item.CosmeticShirt(967, 55, 'Hustler Jacket', 'A hard hustler jacket', 651 ),
-    Get.Item.CosmeticShirt(968, 56, 'Hustler Jacket', 'The return of the mack', 652 ),
-    Get.Item.CosmeticShirt(969, 57, 'Hustler Jacket', 'A sinister jacket for the sinister individual', 653 ),
-    Get.Item.CosmeticShirt(970, 58, 'Hustler Jacket', 'For the Boss only', 654 ),
+    Get.Item.CosmeticShirtHustler(967, 55, 'Hustler Jacket', 'A hard hustler jacket', 651 ),
+    Get.Item.CosmeticShirtHustler(968, 56, 'Hustler Jacket', 'The return of the mack', 652 ),
+    Get.Item.CosmeticShirtHustler(969, 57, 'Hustler Jacket', 'A sinister jacket for the sinister individual', 653 ),
+    Get.Item.CosmeticShirtHustler(970, 58, 'Hustler Jacket', 'For the Boss only', 654 ),
     Get.Item.CosmeticPants(971, 59, 'Hustler Pants', 'A pair of pants for the hustler', 655 ),
     Get.Item.CosmeticPants(972, 60, 'Hustler Pants', 'A slick pair of pants', 656 ),
     Get.Item.CosmeticPants(973, 61, 'Hustler Pants', 'Pants made for the mysterious hustler', 657 ),
@@ -3669,14 +3669,84 @@ const Item = Object.freeze([
     Get.Item.CosmeticSunglasses(976, 64, 'Blindfold', 'A shredded piece of silk cloth', 660),
     Get.Item.CosmeticSunglasses(977, 65, 'Blindfold', 'Pure as bloodied snow', 661 ),
     Get.Item.CosmeticSunglasses(978, 66, 'Eyepatch', 'Your skill in combat saved one eye at least', 662, 0.68 ),
-    Get.Item.CosmeticShirt(979, 67, 'Adventurer Shirt', 'A shirt for the skilled archer', 663 ),
-    Get.Item.CosmeticShirt(980, 68, 'Adventurer Shirt', 'A shirt for the skilled sword wielder', 664 ),
-    Get.Item.CosmeticShirt(981, 69, 'Adventurer Shirt', 'The shirt trusted by rich adventurers everywhere', 665 ),
-    Get.Item.CosmeticShirt(982, 70, 'Adventurer Shirt', 'The legendary adventurers legendary shirt of legend', 666 ),
-    Get.Item.CosmeticPants(983, 71, 'Adventurer Pants', 'A pair of pants with a quiver', 667 ),
-    Get.Item.CosmeticPants(984, 72, 'Adventurer Pants', 'A quality pair of pants with a sword sheath', 668 ),
-    Get.Item.CosmeticPants(985, 73, 'Adventurer Pants', 'Comes with a pouch for all your gold', 669 ),
-    Get.Item.CosmeticPants(986, 74, 'Adventurer Pants', 'Not just pants, the best pants', 670 ),
+    (()=> {
+        let result = Get.Item.CosmeticShirt(979, 67, 'Adventurer Shirt', 'A shirt for the skilled archer', 663 );
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.1;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x -= 0.1;
+        return result;
+    })(),
+    (()=> {
+        let result = Get.Item.CosmeticShirt(980, 68, 'Adventurer Shirt', 'A shirt for the skilled sword wielder', 664 );
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.1;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x -= 0.1;
+        return result;
+    })(),
+    (()=> {
+        let result = Get.Item.CosmeticShirt(981, 69, 'Adventurer Shirt', 'The shirt trusted by rich adventurers everywhere', 665 );
+        result.model.CHEST_WORN_SHIRT.position.x -= 0.3;
+        result.model.CHEST_WORN_SHIRT.position.y -= 0.1;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.05;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x += 0.05;
+        return result;
+    })(),
+    (()=> {
+        let result = Get.Item.CosmeticShirt(982, 70, 'Adventurer Shirt', 'The legendary adventurers legendary shirt of legend', 666 );
+        result.model.CHEST_WORN_SHIRT.position.x -= 0.3;
+        result.model.CHEST_WORN_SHIRT.position.y -= 0.1;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.1;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.y -= 0.08;
+
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x -= 0.1;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.y -= 0.08;
+
+
+        result.model.TOP_UNDER =  {
+            id: 'TOP_UNDER',
+            asset: 'chestParts',
+            sprite: 'cosmeticChest',
+            parent: 'CORE',
+            spriteID: '70b',
+            anchor: { x: 0.6, y: 0.3 },
+            position: { x: 0.05, y: -0.55 },
+            z : -10,
+        };
+
+        return result;
+    })(),
+    (()=> {
+        let result = Get.Item.CosmeticPants(983, 71, 'Adventurer Pants', 'A pair of pants with a quiver', 667 );
+        result.model.LEFT_THIGH_WORN_PANTS.position.x -= 0.1;
+        result.model.RIGHT_THIGH_WORN_PANTS.position.x += 0.1;
+        result.model.LEFT_THIGH_WORN_PANTS.anchor = { x : 0.45, y : 0.4};
+        return result;
+    })(),
+    (()=> {
+        let result = Get.Item.CosmeticPants(984, 72, 'Adventurer Pants', 'A quality pair of pants with a sword sheath', 668 );
+        result.model.LEFT_THIGH_WORN_PANTS.position.x -= 0.1;
+        result.model.RIGHT_THIGH_WORN_PANTS.position.x += 0.1;
+        result.model.LEFT_THIGH_WORN_PANTS.anchor = { x : 0.45, y : 0.58};
+        return result;
+    })(),
+    (()=> {
+        let result = Get.Item.CosmeticPants(985, 73, 'Adventurer Pants', 'Comes with a pouch for all your gold', 669 );
+        result.model.LEFT_THIGH_WORN_PANTS.position.x -= 0.1;
+        result.model.RIGHT_THIGH_WORN_PANTS.position.x += 0.1;
+        result.model.LEFT_THIGH_WORN_PANTS.anchor = { x : 0.45, y : 0.3 };
+        return result;
+    })(),
+    (()=> {
+        let result = Get.Item.CosmeticPants(986, 74, 'Adventurer Pants', 'Not just pants, the best pants', 670 );
+        result.model.LEFT_THIGH_WORN_PANTS.position.x -= 0.1;
+        result.model.RIGHT_THIGH_WORN_PANTS.position.x += 0.1;
+        result.model.LEFT_THIGH_WORN_PANTS.anchor = { x : 0.45, y : 0.3 };
+        return result;
+    })(),
     Get.Item.CosmeticHatFriendlyFire(987, 75, 'Friendly Fire', 'A novice mistake', 671 ),
     Get.Item.CosmeticHatFriendlyFire(988, 76, 'Friendly Fire', 'A training accident', 672 ),
     Get.Item.CosmeticHatFriendlyFire(989, 77, 'Friendly Fire', 'A battlefield mishap', 673 ),

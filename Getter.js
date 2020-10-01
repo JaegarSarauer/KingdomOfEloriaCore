@@ -481,6 +481,12 @@ const ItemGetter = {
 
         return result;
     },
+    CosmeticShirtHustler: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x -= 0.05;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x += 0.05;
+        return result;
+    },
     CosmeticShirtJesterFancyShoulder: (id, cosmeticID, name, description, spriteIndex) => {
         let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
         result.model.RIGHT_SHOULDER_WORN_SHIRT.anchor = { x: 0.6, y: 0.18 };
