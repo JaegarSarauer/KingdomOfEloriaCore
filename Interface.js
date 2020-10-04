@@ -10,7 +10,9 @@ const EssenceCatalog = require('./Essence').EssenceCatalog;
 const HairStyle = require('./Model').HairStyle;
 const SpriteColor = require('./Model').SpriteColor;
 
-module.exports.Interface = [
+let priorityInterfaces = [];
+
+const Interface = [
     {
         id: 0,
         name: 'Map',
@@ -442,6 +444,7 @@ module.exports.Interface = [
     {
         id: 1,
         name: 'Bank Screen',
+        isPriority: true,
         actions: [
             {
                 id: 0,
@@ -456,6 +459,7 @@ module.exports.Interface = [
     {  
         id: 2,
         name: 'Shop Screen',
+        isPriority: true,
         actions: [
             {
                 id: 0,
@@ -864,6 +868,7 @@ module.exports.Interface = [
     {   
         id: 13,
         name: 'NPC Dialog',
+        isPriority: true,
         actions: [
             {
                 id: 0,
@@ -1986,6 +1991,7 @@ module.exports.Interface = [
 {   
     id: 18,
     name: 'Purchases Interface',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2045,6 +2051,7 @@ module.exports.Interface = [
 }, {
     id: 20,
     name: 'Drop Party Minigame Chest Interface',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2106,6 +2113,7 @@ module.exports.Interface = [
 }, {
     id: 23,
     name: 'Jewelry Craft Interface',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2151,6 +2159,7 @@ module.exports.Interface = [
 }, {
     id: 25,
     name: 'Enchantment Interface',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2208,6 +2217,7 @@ module.exports.Interface = [
 {   
     id: 27,
     name: 'Appearance',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2252,6 +2262,7 @@ module.exports.Interface = [
 }, {
     id: 29,
     name: 'Guild Chest Interface',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2273,6 +2284,7 @@ module.exports.Interface = [
 }, {
     id: 30,
     name: 'Lost Items',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2294,6 +2306,7 @@ module.exports.Interface = [
 },{
     id: 31,
     name: 'Guild Selection UI',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2327,6 +2340,7 @@ module.exports.Interface = [
 }, {
     id: 33,
     name: 'Wardrobe',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2340,6 +2354,7 @@ module.exports.Interface = [
 }, {
     id: 34,
     name: 'Adventurer Inventory Wardrobe',
+    isPriority: true,
     actions: [
         {
             id: 0,
@@ -2351,6 +2366,26 @@ module.exports.Interface = [
         },
     ],
 },];
+
+let keys = Object.keys(Interface);
+for(let i = 0; i < keys.length; ++i) {
+    let index = keys[i];
+    let interface = Interface[index];
+    if (interface.isPriority) {
+        priorityInterfaces.push(interface.id);
+    }
+}
+
+module.exports.Interface = Interface;
+module.exports.PriorityInterfaces = priorityInterfaces;
+module.exports.IsAnyPriorityInterfaceActive = (enabledInterfaces) => {
+    for(let i = 0; i < priorityInterfaces.length; ++i) {
+        if (enabledInterfaces.includes(priorityInterfaces[i])) {
+            return true;
+        }
+    }
+    return false;
+};
 
 
 
