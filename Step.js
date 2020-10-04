@@ -967,7 +967,7 @@ module.exports.StepType = StepType = {
         id: 'TELEPORT_TO_SPAWN',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: [],
+        paramTypes: ['number'], //teleportDelay
         params: [],
     },
     CHANGE_NPC_WALK_BOUNDS: {

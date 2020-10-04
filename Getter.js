@@ -3043,7 +3043,7 @@ const Interface = {
             actionInterval: -1,
             steps: [
                 [
-                    buildStep(StepType.SET_CHARACTER_STATE, {params: [spawnStateID, [guildID]]}),
+                    buildStep(StepType.SET_CHARACTER_STATE, {params: [spawnStateID, [guild.spawnID]]}),
                     buildStep(StepType.SHOW_DIALOG, {params: [92]}),
                 ],
             ],

@@ -170,6 +170,7 @@ const Guilds = [{
         mapID: 1
     },
     tourID: 0,
+    spawnID: 0,
     cityBounds: new Bounds.Bounds(43, 341, 86, 370),
     guildBounds: new Bounds.Bounds(65, 366, 86, 370),
     guildShops: [
@@ -242,7 +243,7 @@ const Guilds = [{
                 mapID: 2,
             },
         },
-    },
+    }
 }, {
     id: 1,
     name: "Salmo - Fishing Guild",
@@ -328,6 +329,7 @@ const Guilds = [{
         mapID: 1
     },
     tourID: 1,
+    spawnID: 1,
     cityBounds: new Bounds.Bounds(141, 10, 170, 20),
     guildBounds: new Bounds.Bounds(145, 12, 151, 17),
     guildShops: [
@@ -436,7 +438,7 @@ const Guilds = [{
                 mapID: 2,
             },
         },
-    },
+    }
 }, {
     id: 2,
     name: "Acernis - Woodcutting Guild",
@@ -456,6 +458,7 @@ const Guilds = [{
         mapID: 0
     },
     tourID: 2,
+    spawnID: 2,
     tierDetails: [{
         tierID: -5,
         items: [[0, 1000000]],
@@ -619,7 +622,6 @@ const Guilds = [{
             },
         },
     },
-
 },];
 
 
