@@ -87,7 +87,7 @@ class ShopUpgrade {
 const Guilds = [{
     id: 0,
     name: "Teragon - Mining Guild",
-    loreDescription: 'Deep in the southern mountain range lies a guild as old as Eloria itself.\nFounded by dwarves, the guild has a rich history of mining.\nThe location was picked due to the abundance of rare and uniqure ores in the nearby caves.',
+    loreDescription: 'Deep in the southern mountain range lies a guild as old as Eloria itself.\nFounded by dwarves, the guild has a rich history of mining.\nThe location was picked due to the abundance of rare and unique ores in the nearby caves.',
     perksDescription: '+10 Mining Levels\nComplete Guild Entrance Quest\nRespawn in Teragon',
     tierDetails: [{
         tierID: -5,
@@ -247,7 +247,7 @@ const Guilds = [{
 }, {
     id: 1,
     name: "Salmo - Fishing Guild",
-    loreDescription: 'On the north side of the continent resides Salmo, a fishing guild. Salmo is one a more recent guild born out of the exploding trade of fish.\nWar is a constant in Eloria, creating demand for the unique and rare species found in the local waters.',
+    loreDescription: 'On the north side of the continent resides Salmo, a fishing guild. Salmo is one a more recent guilds born out of the exploding trade of fish.\nWar is a constant in Eloria, creating demand for the unique and rare species found in the local waters.',
     perksDescription: '+10 Fishing Levels\nComplete Guild Entrance Quest\nRespawn in Salmo',
     tierDetails: [{
         tierID: -5,
