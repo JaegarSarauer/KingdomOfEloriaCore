@@ -154,6 +154,29 @@ const SpellBuilder = {
             }],
         };
     },
+    TELEPORT_TO_SPAWN: (id, name, spellIconIndex) => {
+        return {
+            id,
+            name,
+            type: SpellType.TELEPORT,
+            spellIconIndex,
+            magicLevelReq: [[22, 1]],
+            carbonRequirement: 0,
+            actions: [{
+                name: 'Cast',
+                interfaceID: 21,
+                id: 0,
+                actionInterval: -1,
+                steps: [
+                    [
+                        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 0]}),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['TELEPORT'] }),
+                        buildStep(StepType.TELEPORT_TO_SPAWN, { params: [3] }),
+                    ]
+                ],
+            }],
+        };
+    },
 };
 
 const SpellType = {
@@ -226,6 +249,7 @@ module.exports.Spells = [
     SpellBuilder.SYPHON_ESSENCE(51, "Syphon Nature Essence", 6, 200, 50, ShardCatalog.NATURE(1)[0], 51),
     SpellBuilder.ENCHANT(52, 170, 'Enchant Item Collection', [[22, 65]], [EssenceCatalog.NATURE(5), EssenceCatalog.EARTH(16), EssenceCatalog.SOUL(6)], 12, 38),
     SpellBuilder.ENCHANT(53, 200, 'Enchant Auto Consume', [[22, 80]], [EssenceCatalog.NATURE(5), EssenceCatalog.WATER(20), EssenceCatalog.VOID(9)], 15, 39),
+    SpellBuilder.TELEPORT_TO_SPAWN(54, 'Guild Teleport', 52 ),
 ];
 
 module.exports.SpellType = SpellType;

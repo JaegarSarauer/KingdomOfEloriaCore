@@ -80,6 +80,7 @@ const AccountVersion = [{
     upgradeData: (userDef)  => userDef,
     onUpgradeComplete: (userDef) => {
         userDef.forAllAdventurers((adv) => {
+            // If you had not completed the tutorial, reset to the new tutorial
             let tutorialState = adv.state.getState(4);
             if (tutorialState > 0) {
                 MapManager.i.changeMap(adv, 2);

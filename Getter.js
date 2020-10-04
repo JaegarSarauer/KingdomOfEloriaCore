@@ -3703,7 +3703,9 @@ const WorldObject = {
                         buildStep(StepType.SET_USER_GOAL_STATE, { params: [questID, [7]] }),
                         buildStep(StepType.SEND_CLIENT_STATUS, { params: [''] }),
                         buildStep(StepType.SHOW_DIRECTION_ARROW),
-                    ]
+                        buildStep(StepType.CHECK_CHARACTER_STATE, { params : [4, 3] }),
+                        buildStep(StepType.SET_CHARACTER_STATE, { params : [4, 0] }),
+                    ],
                 ],
             }],
         };
