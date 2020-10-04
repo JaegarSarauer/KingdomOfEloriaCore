@@ -345,7 +345,18 @@ module.exports.WorldObject = WorldObject = [
                 [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[89, 88]] })]
             ],
         }],
-        useActions: [],
+        useActions: [{
+            interfaceID: 0,
+            id: 11,
+            name: 'Craft',
+            entityType: Entity.EntityType.INVENTORY_ITEM,
+            entityID: 672,
+            actionInterval: 0,
+            steps: [
+                buildStepList(StepList.WALK_ADJACENT),
+                [buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[271, 272]] })]
+            ],
+        }],
         spriteIndex: 29,
     }, {
         id: 27,
