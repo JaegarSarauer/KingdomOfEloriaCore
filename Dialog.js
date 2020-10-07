@@ -13,18 +13,18 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>\tBrand New World</b>' ,
     message: 'You were traveling by ship to start your new life in <note>Eloria</note>. Eloria is known for its beautiful scenery, natural resources and the struggle between powers to control it all.\n\n' +
 
+    'On this ship carries soldiers from various Elorian guilds, and new adventurers, such as yourself, looking to the future.\n\n' +
+
     'The ship crashes along the shore. As you peer overboard, you see the empire attacking your ship.\n\n' +
 
-    'Friendly soldiers evacuate the wreckage, and began fighting the emperor\'s forces.\n\n' +
+    'Soldiers evacuate the wreckage, and began fighting the attacking forces.\n\n' +
 
-    'You, an unarmed adventurer, are told to escape this battle.\n\n' +
-
-    '\'<i>There is a ladder, find it and get out of here!</i>\' shouts a friendly voice.\n\n' + 
+    'You hear a friendly voice shout <note>\'<i>There is a ladder, find it and get out of here!</i>\'</note>\n\n' +
 
     '<b>\tHow to Play</b>\n' + 
     ' - Left click your mouse to move around.\n' + 
     ' - Follow the arrow.\n' +
-    ' - Escape.',
+    ' - Try to escape.',
 
     // '<b>\tHow to Play</b>\n' + 
     // ' - Left click your mouse to move around and interact with your surrounding world and items. Right click to view more options.\n\n' + 
@@ -207,19 +207,19 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 20,
     title: '<b>Doctor</b>',
-    message: 'Thank goodness, you\'re finally awake!\n\n' +
-    
-    '<note><i>Where am I?</i></note>\n\n' +
+    message: 'Thank goodness, you\'re finally awake! We\'re in the infirmary. You\'re safe here.\n\n' +
 
-    'We\'re in the infirmary, a neutral zone shared by all the guilds. You\'re safe here.\n\n' +
-    
-    'Through these tunnels we can access the training grounds for every guild.\n\n' + 
-    
-    'Once you\'re fully healed, we\'ll escort you to your destination.\n\n' +
+    '<note><i>What happened?</i></note>\n\n' +
 
-    '<note><i>I\'m feeling better.</i></note>\n\n' +
+    'As the ship docked, you were ambushed. Reinforcements quickly arrived and saved all the survivors they could.\n\n' +
+
+    'Once you\'re fully healed, we\'ll escort you to the guild of your choice.\n\n' +
     
-    'Excellent. Which guild would you like to join?',
+    '<note><i>Thank you... I\'m feeling better.</i></note>\n\n' +
+
+    'Excellent. Through these tunnels we can access the training grounds for every guild.\n\n' + 
+    
+    'Which guild would you like to join?',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
