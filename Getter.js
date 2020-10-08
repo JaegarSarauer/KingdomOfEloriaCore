@@ -450,6 +450,13 @@ const ItemGetter = {
         head.anchor = { x : 0.525, y : 0.85 };
         return result;
     },
+    CosmeticHatBear: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let head = result.model.HEAD_WORN;
+        head.anchor = { x : 0.6, y : 0.9 };
+        head.position.y += 0.6;
+        return result;
+    },
     CosmeticHatFriendlyFire: (id, cosmeticID, name, description, spriteIndex) => {
         let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
         let head = result.model.HEAD_WORN;

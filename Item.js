@@ -3675,14 +3675,22 @@ const Item = Object.freeze([
         result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.1;
         result.model.LEFT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
         result.model.LEFT_SHOULDER_WORN_SHIRT.position.x -= 0.1;
+        result.model.LEFT_FOREARM_WORN_SHIRT.position.y += 0.375;
+        result.model.RIGHT_FOREARM_WORN_SHIRT.position.y += 0.375
+        result.model.RIGHT_FOREARM_WORN_SHIRT.position.x -= 0.05;
+        result.model.LEFT_FOREARM_WORN_SHIRT.position.x += 0.05;
         return result;
     })(),
     (()=> {
         let result = Get.Item.CosmeticShirt(980, 68, 'Adventurer Shirt', 'A shirt for the skilled sword wielder', 664 );
         result.model.RIGHT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
-        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.1;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.075;
         result.model.LEFT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
-        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x -= 0.1;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x -= 0.09;
+        result.model.LEFT_FOREARM_WORN_SHIRT.position.y += 0.375;
+        result.model.RIGHT_FOREARM_WORN_SHIRT.position.y += 0.375
+        result.model.RIGHT_FOREARM_WORN_SHIRT.position.x -= 0.05;
+        result.model.LEFT_FOREARM_WORN_SHIRT.position.x += 0.05;
         return result;
     })(),
     (()=> {
@@ -3690,9 +3698,13 @@ const Item = Object.freeze([
         result.model.CHEST_WORN_SHIRT.position.x -= 0.3;
         result.model.CHEST_WORN_SHIRT.position.y -= 0.1;
         result.model.RIGHT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
-        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.05;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x += 0.1;
         result.model.LEFT_SHOULDER_WORN_SHIRT.position.y -= 0.05;
-        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x += 0.05;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.x += 0.04;
+        result.model.LEFT_FOREARM_WORN_SHIRT.position.y += 0.375;
+        result.model.RIGHT_FOREARM_WORN_SHIRT.position.y += 0.375
+        result.model.RIGHT_FOREARM_WORN_SHIRT.position.x -= 0.05;
+        result.model.LEFT_FOREARM_WORN_SHIRT.position.x += 0.05;
         return result;
     })(),
     (()=> {
@@ -3716,6 +3728,11 @@ const Item = Object.freeze([
             position: { x: 0.05, y: -0.55 },
             z : -10,
         };
+
+        result.model.LEFT_FOREARM_WORN_SHIRT.position.y += 0.375;
+        result.model.RIGHT_FOREARM_WORN_SHIRT.position.y += 0.375
+        result.model.RIGHT_FOREARM_WORN_SHIRT.position.x -= 0.05;
+        result.model.LEFT_FOREARM_WORN_SHIRT.position.x += 0.05;
 
         return result;
     })(),
@@ -3822,10 +3839,9 @@ const Item = Object.freeze([
     Get.Item.CosmeticHat(1045, 133, 'Octopus Hat', 'A slimy blue octopus', 729 ),
     Get.Item.CosmeticHat(1046, 134, 'Octopus Hat', 'An octopus, the purple kind', 730 ),
     Get.Item.CosmeticHat(1047, 135, 'Octopus Hat', 'An angry red octopus', 731 ),
-    Get.Item.CosmeticHat(1048, 136, 'Bear Hat', '', 732 ),
-    Get.Item.CosmeticHat(1049, 137, 'Bear Hat', '', 733 ),
-    Get.Item.CosmeticHat(1050, 138, 'Bear Hat', '', 734 ),
-    
+    Get.Item.CosmeticHatBear(1048, 136, 'Bear Hat', '', 732 ),
+    Get.Item.CosmeticHatBear(1049, 137, 'Bear Hat', '', 733 ),
+    Get.Item.CosmeticHatBear(1050, 138, 'Bear Hat', '', 734 ),
     Get.Item.CosmeticShirt(1051, 139, 'Shirt', 'A shirt', 735 ),
     Get.Item.CosmeticShirt(1052, 140, 'Shirt', 'A shirt', 736 ),
     Get.Item.CosmeticShirt(1053, 141, 'Shirt', 'A shirt', 737 ),
@@ -3850,18 +3866,18 @@ const Item = Object.freeze([
     Get.Item.CosmeticShirt(1072, 160, 'Shirt', 'A shirt', 756 ),
     Get.Item.CosmeticShirt(1073, 161, 'Shirt', 'A shirt', 757 ),
     Get.Item.CosmeticShirt(1074, 162, 'Shirt', 'A shirt', 758 ),
-    Get.Item.CosmeticHat(1075, 163, 'Beanie', 'A cool beanie', 759 ),
-    Get.Item.CosmeticHat(1076, 164, 'Beanie', 'A fresh beanie', 760 ),
-    Get.Item.CosmeticHat(1077, 165, 'Beanie', 'A chill beanie', 761 ),
-    Get.Item.CosmeticHat(1078, 166, 'Beanie', 'A lit beanie', 762 ),
-    Get.Item.CosmeticHat(1079, 167, 'Beanie', 'A lit beanie', 763 ),
-    Get.Item.CosmeticHat(1080, 168, 'Beanie', 'A gothic beanie', 764 ),
-    Get.Item.CosmeticHat(1081, 169, 'Toque', 'What commoners may call a beanie', 765 ),
-    Get.Item.CosmeticHat(1082, 170, 'Toque', 'What commoners may call a beanie', 766 ),
-    Get.Item.CosmeticHat(1083, 171, 'Toque', 'What commoners may call a beanie', 767 ),
-    Get.Item.CosmeticHat(1084, 172, 'Toque', 'What commoners may call a beanie', 768 ),
-    Get.Item.CosmeticHat(1085, 173, 'Toque', 'What commoners may call a beanie', 769 ),
-    Get.Item.CosmeticHat(1086, 174, 'Toque', 'What commoners may call a beanie', 770 ),
+    Get.Item.CosmeticHat(1075, 163, 'Beanie', 'A cool beanie', 759, 0.95 ),
+    Get.Item.CosmeticHat(1076, 164, 'Beanie', 'A fresh beanie', 760, 0.95 ),
+    Get.Item.CosmeticHat(1077, 165, 'Beanie', 'A chill beanie', 761, 0.95 ),
+    Get.Item.CosmeticHat(1078, 166, 'Beanie', 'A lit beanie', 762, 0.95 ),
+    Get.Item.CosmeticHat(1079, 167, 'Beanie', 'A lit beanie', 763, 0.95 ),
+    Get.Item.CosmeticHat(1080, 168, 'Beanie', 'A gothic beanie', 764, 0.95 ),
+    Get.Item.CosmeticHat(1081, 169, 'Toque', 'What commoners may call a beanie', 765, 0.9, 0.575 ),
+    Get.Item.CosmeticHat(1082, 170, 'Toque', 'What commoners may call a beanie', 766, 0.9, 0.575 ),
+    Get.Item.CosmeticHat(1083, 171, 'Toque', 'What commoners may call a beanie', 767, 0.9, 0.575 ),
+    Get.Item.CosmeticHat(1084, 172, 'Toque', 'What commoners may call a beanie', 768, 0.9, 0.575 ),
+    Get.Item.CosmeticHat(1085, 173, 'Toque', 'What commoners may call a beanie', 769, 0.9, 0.575 ),
+    Get.Item.CosmeticHat(1086, 174, 'Toque', 'What commoners may call a beanie', 770, 0.9, 0.575 ),
 ]);
 
 var ItemName = [];
