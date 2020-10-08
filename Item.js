@@ -3814,7 +3814,7 @@ const Item = Object.freeze([
     Get.Item.CosmeticSunglasses(1030, 118, 'Teller Brim', 'All I see is green', 714, 0.85 ),
     Get.Item.CosmeticSunglasses(1031, 119, 'Goggles', 'Some nice sunny day goggles', 715 ),
     Get.Item.CosmeticSunglasses(1032, 120, 'Goggles', 'Some sick frames', 716 ),
-    Get.Item.CosmeticSunglasses(1033, 121, 'Dollar Signs', 'Big purchases incoming', 717 ),
+    Get.Item.CosmeticSunglasses(1033, 121, 'Money Trees', 'Perfect place for shade', 717 ),
     Get.Item.CosmeticSunglasses(1034, 122, 'Aviators', 'Dragon pilot standard issue', 718 ),
     Get.Item.CosmeticSunglasses(1035, 123, 'Glasses', 'Some standard frame glasses', 719 ),
     (()=> {
