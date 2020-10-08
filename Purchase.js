@@ -85,7 +85,7 @@ const Cosmetics = [
         id: 5,
         rarity: 0,
         itemID: 917,
-        crownCost: getCrownPrice(0, 0.25),
+        crownCost: getCrownPrice(0, 0.6),
     },
     {
         id: 6,
@@ -109,37 +109,37 @@ const Cosmetics = [
         id: 9,
         rarity: 2,
         itemID: 921,
-        crownCost: getCrownPrice(0, 0.6),
+        crownCost: getCrownPrice(2, 0.6),
     },
     {
         id: 10,
         rarity: 0,
         itemID: 922,
-        crownCost: getCrownPrice(0, 0.6),
+        crownCost: getCrownPrice(0, 0.5),
     },
     {
         id: 11,
         rarity: 0,
         itemID: 923,
-        crownCost: getCrownPrice(0, 0.6),
+        crownCost: getCrownPrice(0, 0.5),
     },
     {
         id: 12,
         rarity: 0,
         itemID: 924,
-        crownCost: getCrownPrice(0, 0.6),
+        crownCost: getCrownPrice(0, 0.5),
     },
     {
         id: 13,
         rarity: 0,
         itemID: 925,
-        crownCost: getCrownPrice(0, 0.6),
+        crownCost: getCrownPrice(0, 0.5),
     },
     {
         id: 14,
         rarity: 2,
         itemID: 926,
-        crownCost: getCrownPrice(2, 0.6),
+        crownCost: getCrownPrice(2, 0.5),
     },
     {
         id: 15,
@@ -205,31 +205,31 @@ const Cosmetics = [
         id: 25,
         rarity: 0,
         itemID: 937,
-        crownCost: getCrownPrice(0, 0.4),
+        crownCost: getCrownPrice(0, 0.5),
     },
     {
         id: 26,
         rarity: 0,
         itemID: 938,
-        crownCost: getCrownPrice(0, 0.4),
+        crownCost: getCrownPrice(0, 0.5),
     },
     {
         id: 27,
         rarity: 2,
         itemID: 939,
-        crownCost: getCrownPrice(2, 0.4),
+        crownCost: getCrownPrice(2, 0.5),
     },
     {
         id: 28,
         rarity: 0,
         itemID: 940,
-        crownCost: getCrownPrice(0, 0.4),
+        crownCost: getCrownPrice(0, 0.5),
     },
     {
         id: 29,
         rarity: 2,
         itemID: 941,
-        crownCost: getCrownPrice(2, 0.4),
+        crownCost: getCrownPrice(2, 0.5),
     },
     {
         id: 30,
@@ -371,9 +371,9 @@ const Cosmetics = [
     },
     {
         id: 53,
-        rarity: 0,
+        rarity: 2,
         itemID: 965,
-        crownCost: getCrownPrice(0, 1),
+        crownCost: getCrownPrice(2, 1),
     },
     {
         id: 54,
@@ -583,13 +583,13 @@ const Cosmetics = [
         id: 88,
         rarity: 1,
         itemID: 1000,
-        crownCost: getCrownPrice(1, 0.85),
+        crownCost: getCrownPrice(1, 0.9),
     },
     {
         id: 89,
         rarity: 1,
         itemID: 1001,
-        crownCost: getCrownPrice(1, 0.85),
+        crownCost: getCrownPrice(1, 1),
     },
     {
         id: 90,
@@ -661,7 +661,7 @@ const Cosmetics = [
         id: 101,
         rarity: 0,
         itemID: 1013,
-        crownCost: getCrownPrice(0, 0.5),
+        crownCost: getCrownPrice(0, 0.9),
     },
     {
         id: 102,
@@ -673,13 +673,13 @@ const Cosmetics = [
         id: 103,
         rarity: 0,
         itemID: 1015,
-        crownCost: getCrownPrice(0, 0.6),
+        crownCost: getCrownPrice(0, 1),
     },
     {
         id: 104,
         rarity: 0,
         itemID: 1016,
-        crownCost: getCrownPrice(0, 0.6),
+        crownCost: getCrownPrice(0, 1),
     },
     {
         id: 105,
@@ -995,7 +995,17 @@ const CosmeticRarityItems = (() => {
     }
     for (let i = 0; i < Cosmetics.length; ++i) {
         let cosmetic = Cosmetics[i];
-        rarities[cosmetic.rarity].push(cosmetic.id);
+        let entered = false;
+        for (let r = 0; r < rarities[cosmetic.rarity].length; ++r) {
+            if (cosmetic.crownCost < Cosmetics[rarities[cosmetic.rarity][r]].crownCost) {
+                rarities[cosmetic.rarity].splice(r, 0, cosmetic.id);
+                entered = true;
+                break;
+            }
+        }
+        if (!entered) {
+            rarities[cosmetic.rarity].push(cosmetic.id);
+        }
     }
     return rarities;
 })();
