@@ -83,7 +83,9 @@ const AccountVersion = [{
             // If you had not completed the tutorial, reset to the new tutorial
             let tutorialState = adv.state.getState(4);
             if (tutorialState > 0) {
-                MapManager.i.changeMap(adv, 2);
+                if (adv.mapID != 2) {
+                    MapManager.i.changeMap(adv, 2);
+                }
                 adv.setPosition(272, 72);
                 adv.state.setEntityAtSlot(4, [1]);
 
