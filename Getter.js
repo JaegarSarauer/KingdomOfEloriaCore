@@ -488,6 +488,15 @@ const ItemGetter = {
 
         return result;
     },
+    CosmeticShortSleeveShirt: (id, cosmeticID, name, description, spriteIndex) => {
+        let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+        delete result.model.RIGHT_FOREARM_WORN_SHIRT;
+        delete result.model.LEFT_FOREARM_WORN_SHIRT;
+        result.model.CHEST_WORN_SHIRT.anchor.y = 0.7;
+        result.model.RIGHT_SHOULDER_WORN_SHIRT.position.y -= 0.075;
+        result.model.LEFT_SHOULDER_WORN_SHIRT.position.y -= 0.075;
+        return result;
+    },
     CosmeticShirtHustler: (id, cosmeticID, name, description, spriteIndex) => {
         let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
         result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x -= 0.05;
