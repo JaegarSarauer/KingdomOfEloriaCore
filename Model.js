@@ -268,6 +268,18 @@ const Model = {
             UIModel: null,
             z: 0,
         },
+        CHEST_OVERLAY : {
+            id: 'CHEST_OVERLAY',
+            asset: 'chestParts',
+            sprite: 'humanChestOverlay',
+            parent: 'CHEST',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.65 },
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+            z: 500
+        },
         RIGHT_THIGH: {
             id: 'RIGHT_THIGH',
             asset: 'legParts',
@@ -526,6 +538,18 @@ const Model = {
             rotation: 0,
             UIModel: null,
             z: 0,
+        },
+        CHEST_OVERLAY : {
+            id: 'CHEST_OVERLAY',
+            asset: 'chestParts',
+            sprite: 'humanChestOverlay',
+            parent: 'CHEST',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.65 },
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+            z: 500
         },
         LEFT_SHOULDER: {
             id: 'LEFT_SHOULDER',
@@ -1007,6 +1031,18 @@ const Model = {
             rotation: 0,
             UIModel: null,
             z: 0,
+        },
+        CHEST_OVERLAY : {
+            id: 'CHEST_OVERLAY',
+            asset: 'chestParts',
+            sprite: 'humanChestOverlay',
+            parent: 'CHEST',
+            spriteID: 0,
+            anchor: {x: 0.5, y: 0.65 },
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+            z: 500
         },
         RIGHT_THIGH: {
             id: 'RIGHT_THIGH',
