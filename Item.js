@@ -3591,7 +3591,7 @@ const Item = Object.freeze([
         value: 0,
         tradeable: false,
         description: 'Currency used to buy items from the shop.',
-        spriteIndex: 771,
+        spriteIndex: 772,
     },
     (() => {
         let helm = Get.Item.FullHelm(910, 911, 'Shell Helmet', 1, 340, 315, -1, 5, [0, 0, 12, 0, 0, 4, -4, -4, 0]);

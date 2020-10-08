@@ -145,7 +145,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 
     'Use the <note>saw</note> on the <note>logs</note> to create the <note>Copper Mining Camp</note>\n\n' +
     
-    'Once constructed, \'Operate\' the camp.',
+    'Once constructed, click on it to \'Operate\' the camp.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [2]]}),
@@ -182,7 +182,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 18,
     title: '<b>Mining Guide</b>',
-    message: 'Allow me to give you a tour of the <note>Teragon Mining Guild</note>',
+    message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Teragon Mining Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 81, 362, 86, 363, 2, [[
             buildStep(StepType.START_TOUR, {params: [0, [[
@@ -818,7 +818,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 77,
     title: '<b>Fishing Guide</b>',
-    message: 'Allow me to give you a tour of the <note>Salmo Fishing Guild</note>',
+    message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Salmo Fishing Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 151, 15, 155, 16, 2, [[
             buildStep(StepType.START_TOUR, {params: [1, [[
@@ -885,7 +885,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 83,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Allow me to give you a tour of the <note>Acernis Woodcutting Guild</note>',
+    message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Acernis Woodcutting Guild</note>',
     continueSteps: [[
         buildStep(StepType.TELEPORT, {params: [0, 331, 51, 333, 53, 2, [[
             buildStep(StepType.START_TOUR, {params: [2, [[

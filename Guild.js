@@ -87,7 +87,7 @@ class ShopUpgrade {
 const Guilds = [{
     id: 0,
     name: "Teragon - Mining Guild",
-    loreDescription: 'Deep in the southern mountain range lies a guild as old as Eloria itself.\nFounded by dwarves, the guild has a rich history of mining.\nThe location was picked due to the abundance of rare and unique ores in the nearby caves.',
+    loreDescription: 'Deep in the southern mountain range lies a guild as old as Eloria itself.\nFounded by dwarves, the guild has a rich history of mining.\nThe guild was formed here due to the abundance of rare and unique ores in the nearby caves.',
     perksDescription: '+10 Mining Levels\nComplete Guild Entrance Quest\nRespawn in Teragon',
     tierDetails: [{
         tierID: -5,
