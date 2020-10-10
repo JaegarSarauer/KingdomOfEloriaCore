@@ -4892,7 +4892,7 @@ const WorldObject = {
             return {
                 id: id,
                 name: 'Market Stall',
-                modelName: 'CAMP',
+                modelName: 'MARKET_STALL',
                 maxTrades,
                 description: 'A player owned stall for buying and selling items.',
                 requirements: ItemDetail.build([

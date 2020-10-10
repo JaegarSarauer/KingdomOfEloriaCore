@@ -1998,6 +1998,20 @@ const Model = {
             z: -1,
         },
     },
+    MARKET_STALL: {
+        id: 'CAMP',
+        BASE: {
+            id: 'BASE',
+            asset: 'worldObjects',
+            sprite: 'camp',
+            parent: null,
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
+    },
     FISHING_POOL: {
         id: 'FISHING_POOL',
         BASE: {
