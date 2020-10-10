@@ -331,7 +331,7 @@ function loadMusicAreas(JSONMap) {
 
 function loadGuilds(JSONMap) {
     let entityObjects = getLayer(JSONMap, "GuildAreas").objects
-    let guildsArray = [];
+    let guildsResult = {};
     if (entityObjects != null) {
         
         entityObjects.sort(function(a,b) { return a.properties.guildID-b.properties.guildID })
@@ -353,10 +353,9 @@ function loadGuilds(JSONMap) {
                 height: obj.height / 64,
             };
     
-            let guild = guildsArray[guildID];
+            let guild = guildsResult[guildName];
             if (guild == null) {
-                guildsArray[guildID] = new GuildData(guildID, guildName);
-                guild = guildsArray[guildID];
+                guild = guildsResult[guildName] = new GuildData(guildID, guildName);
             }
     
             if (areaType == 'city') {
@@ -366,7 +365,7 @@ function loadGuilds(JSONMap) {
             }
         }
     }
-    return guildsArray;
+    return guildsResult;
 }
 
 class ShopStorageData {

@@ -112,8 +112,9 @@ function guildDataToGuilds(guildData) {
         guildsArray : [],
         cityArray : [],
     };
-    for (let i = 0; i < guildData.length; i++) {
-        let obj = guildData[i];
+    let keys = Object.keys(guildData);
+    for (let i = 0; i < keys.length; i++) {
+        let obj = guildData[keys[i]];
         if (obj != null ) {
             // If it has a guild ID, it's a guild
             if (obj.id != null && Guilds[obj.id]) {
