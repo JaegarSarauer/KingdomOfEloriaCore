@@ -1021,8 +1021,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.CHECK_CHARACTER_STATE, { params : [4, 3] }),
         buildStep(StepType.SET_CHARACTER_STATE, { params : [4, 0] }),
-        buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [0, 1], stepResultFail: 'NEXT_STEP' }), // TryRemove default shirt
-        buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [0, 1], stepResultFail: 'NEXT_STEP' }), // TryRemove default psnts
+        buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [343, 1], stepResultFail: 'NEXT_STEP' }), // TryRemove default shirt
+        buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [483, 1], stepResultFail: 'NEXT_STEP' }), // TryRemove default psnts
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [9, 1] }), // Copper pickaxe
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [1, 1] }), // Copper axe
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [117, 1] }), // Fishing net
