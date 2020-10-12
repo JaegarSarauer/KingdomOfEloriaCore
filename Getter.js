@@ -3717,7 +3717,6 @@ const WorldObject = {
                             params: [TUTORIAL_STATE, COMPLETE],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
                         }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['1'] }),
                         buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { 
                             params: [guildID],
                             stepResultPass: 'END_ACTION',
@@ -3725,7 +3724,6 @@ const WorldObject = {
                          }),
                     ],
                     [ // You have to finish the exam and the tutorial
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['??'] }),
                         buildStep(StepType.ASSERT_GOAL_STATES, { 
                             params: [questID, [6], ['EQUALS']],
                             stepResultFail: 'END_AND_GOTO_LIST_5',
@@ -3734,7 +3732,6 @@ const WorldObject = {
                             params: [TUTORIAL_STATE, 3],
                             stepResultFail: 'END_AND_GOTO_LIST_4',
                         }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['2'] }),
                         buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, 8]}),
                         buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [notedResourceID, 8]}),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You have completed your quest!'] }),
@@ -3746,7 +3743,6 @@ const WorldObject = {
                         }),
                     ],
                     [ // If you have to finish the exam, not the tutorial
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['???'] }),
                         buildStep(StepType.ASSERT_GOAL_STATES, { 
                             params: [questID, [6], ['EQUALS']],
                             stepResultFail: 'END_AND_GOTO_LIST_5',
@@ -3755,7 +3751,6 @@ const WorldObject = {
                             params: [TUTORIAL_STATE, COMPLETE],
                             stepResultFail: 'END_AND_GOTO_LIST_5',
                         }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['3'] }),
                         buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount]},),
                         buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount],}),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You have completed your quest!'] }),
@@ -3767,8 +3762,6 @@ const WorldObject = {
                         }),
                     ],
                     [ 
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['????'] }),
-                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['4'] }),
                         buildStep(StepType.SHOW_DIALOG, { params: [95], })
                     ],
                 ],
