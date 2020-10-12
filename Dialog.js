@@ -987,6 +987,54 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
     ]],
+}, {
+    id: 93,
+    title: 'Quest Complete',
+    message: '<note><i>You donate the items to the guild chest</i></note>\n\n' + 
+
+    '<i>While celebrating your successful exam, the <note>Guild Master</note> approches you.</i>\n\n' + 
+
+    '"Congratulations, you have passed your exam and are now a member of our <note>Guild</note>"\n\n' + 
+    
+    '"If you need help settling in or have any questions, speak to <note>Guide</note>."',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.SEND_CLIENT_STATUS, { params: [''] }),
+        buildStep(StepType.SHOW_DIRECTION_ARROW),
+        buildStep(StepType.CHECK_CHARACTER_STATE, { params : [4, 3] }),
+        buildStep(StepType.SHOW_DIALOG, { params : [94] }),
+    ]],
+}, {
+    id: 94,
+    title: 'Guild Master',
+    message: '"There are many skills to master in this world. You have shown skill in one, but you still have much to learn."\n\n' + 
+
+    '<i><note>Guild Master</note> gives you a <note>Copper Pickaxe</note>, <note>Copper Axe</note> and <note>Fishing net</note></i>.\n\n' + 
+
+    '"Many challenges await you. Soon you\'re curiosity may lead you to explore the rest of <note>Eloria</note>.\n' +
+    'You will be needing these."\n\n' +
+    
+    '<i><note>Guild Master</note> gives you a <note>Copper Helmet</note>, <note>Copper Platebody</note>, <note>Copper Platelegs</note>, <note>Copper Dagger</note></i> and <note>500 coins</note>.\n\n' +
+    
+    '"You will make us proud. Welcome to the family."',
+    continueSteps: [[
+        buildStep(StepType.SHOW_DEFAULT_INTERFACES),
+        buildStep(StepType.CHECK_CHARACTER_STATE, { params : [4, 3] }),
+        buildStep(StepType.SET_CHARACTER_STATE, { params : [4, 0] }),
+        buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [0, 1], stepResultFail: 'NEXT_STEP' }), // TryRemove default shirt
+        buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [0, 1], stepResultFail: 'NEXT_STEP' }), // TryRemove default psnts
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [9, 1] }), // Copper pickaxe
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [1, 1] }), // Copper axe
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [117, 1] }), // Fishing net
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [21, 1] }), // Copper helmet
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [42, 1] }), // Copper Platebody
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [29, 1] }), // Copper Platelegs
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [0, 500] }), // 500 gold
+    ]],
+}, {
+    id: 95,
+    title: 'Guild Chest',
+    message: 'You must be a member of the guild to use the <note>Guild Chest</note>. Talk to <note>Guide</note> to request entrance.'
 }]);
 
 module.exports.Dialogs = Dialogs;

@@ -220,7 +220,7 @@ const Guilds = [{
     quest: {
         entrance_exam: {
             id: 2,
-            itemAmount: 8,
+            itemAmount: 25,
             camp : 21,
             dialogs: {
                 EXAM_EXPLAINED: 14,
@@ -415,7 +415,7 @@ const Guilds = [{
     quest: {
         entrance_exam: {
             id: 3,
-            itemAmount: 8,
+            itemAmount: 25,
             camp : 20,
             dialogs: {
                 EXAM_EXPLAINED: 73,
@@ -598,7 +598,7 @@ const Guilds = [{
     quest: {
         entrance_exam: {
             id: 4,
-            itemAmount: 8,
+            itemAmount: 25,
             camp : 16,
             dialogs: {
                 EXAM_EXPLAINED: 79,

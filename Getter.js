@@ -3683,6 +3683,9 @@ const WorldObject = {
         let notedResourceID = guildDef.quest.entrance_exam.items.notedResourceID;
         let resourceAmount = guildDef.quest.entrance_exam.itemAmount;
 
+        const TUTORIAL_STATE = 4;
+        const COMPLETE = 0;
+
         return {
             id,
             name: guildName + ' Community Chest',
@@ -3705,22 +3708,68 @@ const WorldObject = {
                         stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                         stepResultFail: 'END_AND_REPEAT_STEP_LIST'
                     }),
-                    [buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { params: [guildID] })],
-
-                    [
-                        buildStep(StepType.ASSERT_GOAL_STATES, { // You have completed the exam and donated. 100% done
-                            params: [questID, [6], ['EQUALS']],
-                            stepResultPass: 'NEXT_STEP',
-                            stepResultFail: 'NEXT_STEP_LIST',
+                    [ // You have completed the exam and tutorial before. 100% done
+                        buildStep(StepType.ASSERT_GOAL_STATES, { 
+                            params: [questID, [7], ['EQUALS']],
+                            stepResultFail: 'END_AND_GOTO_LIST_3',
                         }),
-                        buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount]},),
-                        buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount]},),
+                        buildStep(StepType.CHECK_CHARACTER_STATE, { 
+                            params: [TUTORIAL_STATE, COMPLETE],
+                            stepResultFail: 'END_AND_GOTO_LIST_3',
+                        }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['1'] }),
+                        buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { 
+                            params: [guildID],
+                            stepResultPass: 'END_ACTION',
+                            stepResultFail: 'END_ACTION',
+                         }),
+                    ],
+                    [ // You have to finish the exam and the tutorial
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['??'] }),
+                        buildStep(StepType.ASSERT_GOAL_STATES, { 
+                            params: [questID, [6], ['EQUALS']],
+                            stepResultFail: 'END_AND_GOTO_LIST_5',
+                        }),
+                        buildStep(StepType.CHECK_CHARACTER_STATE, {
+                            params: [TUTORIAL_STATE, 3],
+                            stepResultFail: 'END_AND_GOTO_LIST_4',
+                        }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['2'] }),
+                        buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, 8]}),
+                        buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [notedResourceID, 8]}),
                         buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You have completed your quest!'] }),
                         buildStep(StepType.SET_USER_GOAL_STATE, { params: [questID, [7]] }),
-                        buildStep(StepType.SEND_CLIENT_STATUS, { params: [''] }),
-                        buildStep(StepType.SHOW_DIRECTION_ARROW),
-                        buildStep(StepType.CHECK_CHARACTER_STATE, { params : [4, 3] }),
-                        buildStep(StepType.SET_CHARACTER_STATE, { params : [4, 0] }),
+                        buildStep(StepType.SHOW_DIALOG, {
+                            params: [93],
+                            stepResultPass: 'END_ACTION',
+                            stepResultFail: 'END_ACTION',
+                        }),
+                    ],
+                    [ // If you have to finish the exam, not the tutorial
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['???'] }),
+                        buildStep(StepType.ASSERT_GOAL_STATES, { 
+                            params: [questID, [6], ['EQUALS']],
+                            stepResultFail: 'END_AND_GOTO_LIST_5',
+                        }),
+                        buildStep(StepType.CHECK_CHARACTER_STATE, {
+                            params: [TUTORIAL_STATE, COMPLETE],
+                            stepResultFail: 'END_AND_GOTO_LIST_5',
+                        }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['3'] }),
+                        buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount]},),
+                        buildStep(StepType.REMOVE_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount],}),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You have completed your quest!'] }),
+                        buildStep(StepType.SET_USER_GOAL_STATE, { params: [questID, [7]] }),
+                        buildStep(StepType.SHOW_DIALOG, {
+                            params: [93],
+                            stepResultPass: 'END_ACTION',
+                            stepResultFail: 'END_ACTION',
+                        }),
+                    ],
+                    [ 
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['????'] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['4'] }),
+                        buildStep(StepType.SHOW_DIALOG, { params: [95], })
                     ],
                 ],
             }],
