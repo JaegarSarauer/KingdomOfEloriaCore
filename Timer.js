@@ -86,5 +86,9 @@ export const Timer = [
     {
         id: 21,
         name: 'Reroll Featured Cosmetics'
-    }
+    },
+    {
+        id: 22,
+        name: 'Idle Logout Timeout',
+    },
 ];
