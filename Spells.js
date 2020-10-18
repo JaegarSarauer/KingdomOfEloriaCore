@@ -169,7 +169,7 @@ const SpellBuilder = {
                 actionInterval: -1,
                 steps: [
                     [
-                        buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 0]}),
+                        buildStep(StepType.IS_TUTORIAL_COMPLETE),
                         buildStep(StepType.PLAY_ANIMATION, { params: ['TELEPORT'] }),
                         buildStep(StepType.TELEPORT_TO_SPAWN, { params: [3] }),
                     ]

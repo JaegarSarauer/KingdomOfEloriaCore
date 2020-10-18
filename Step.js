@@ -844,6 +844,13 @@ module.exports.StepType = StepType = {
         paramTypes: [],
         params: [],
     },
+    IS_TUTORIAL_COMPLETE: {
+        id: 'IS_TUTORIAL_COMPLETE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     TOGGLE_WARDROBE_INTERFACE: {
         id: 'TOGGLE_WARDROBE_INTERFACE',
         stepResultFail: 'END_ACTION',
@@ -1745,6 +1752,7 @@ try {
     const StepUseEnchantmentCharge = require('../internal/Steps/StepUseEnchantmentCharge');
     const StepUseEnchantment = require('../internal/Steps/StepUseEnchantment');
     const StepOpenPurchasesInterface = require('../internal/Steps/StepOpenPurchasesInterface');
+    const StepIsTutorialComplete = require('../internal/Steps/StepIsTutorialComplete');
     const StepToggleWardrobeInterface = require('../internal/Steps/StepToggleWardrobeInterface');
     const StepOpenDropPartyMinigameChestInterface = require('../internal/Steps/StepOpenDropPartyMinigameChestInterface');
     const StepOwnerInWalkBounds = require('../internal/Steps/StepOwnerInWalkBounds');
@@ -1870,6 +1878,11 @@ try {
         OPEN_PURCHASES_INTERFACE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepOpenPurchasesInterface.StepOpenPurchasesInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        IS_TUTORIAL_COMPLETE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepIsTutorialComplete.StepIsTutorialComplete(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         TOGGLE_WARDROBE_INTERFACE: {
