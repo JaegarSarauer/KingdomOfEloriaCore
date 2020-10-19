@@ -851,6 +851,20 @@ module.exports.StepType = StepType = {
         paramTypes: [],
         params: [],
     },
+    CHECK_TUTORIAL_STATE: {
+        id: 'CHECK_TUTORIAL_STATE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //stateValue
+        params: [],
+    },
+    SET_TUTORIAL_STATE: {
+        id: 'SET_TUTORIAL_STATE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //stateValue
+        params: [],
+    },
     TOGGLE_WARDROBE_INTERFACE: {
         id: 'TOGGLE_WARDROBE_INTERFACE',
         stepResultFail: 'END_ACTION',
@@ -1753,6 +1767,8 @@ try {
     const StepUseEnchantment = require('../internal/Steps/StepUseEnchantment');
     const StepOpenPurchasesInterface = require('../internal/Steps/StepOpenPurchasesInterface');
     const StepIsTutorialComplete = require('../internal/Steps/StepIsTutorialComplete');
+    const StepCheckTutorialState = require('../internal/Steps/StepCheckTutorialState');
+    const StepSetTutorialState = require('../internal/Steps/StepSetTutorialState');
     const StepToggleWardrobeInterface = require('../internal/Steps/StepToggleWardrobeInterface');
     const StepOpenDropPartyMinigameChestInterface = require('../internal/Steps/StepOpenDropPartyMinigameChestInterface');
     const StepOwnerInWalkBounds = require('../internal/Steps/StepOwnerInWalkBounds');
@@ -1883,6 +1899,16 @@ try {
         IS_TUTORIAL_COMPLETE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepIsTutorialComplete.StepIsTutorialComplete(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CHECK_TUTORIAL_STATE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepCheckTutorialState.StepCheckTutorialState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        SET_TUTORIAL_STATE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSetTutorialState.StepSetTutorialState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         TOGGLE_WARDROBE_INTERFACE: {
