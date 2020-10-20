@@ -999,8 +999,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     '"If you need help settling in or have any questions, speak to <note>Guide</note>."',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.SEND_CLIENT_STATUS, { params: [''] }),
-        buildStep(StepType.SHOW_DIRECTION_ARROW),
+        buildStep(StepType.CLEANUP_CLIENT_STATUSES),
         buildStep(StepType.CHECK_TUTORIAL_STATE, { params : [3] }),
         buildStep(StepType.SHOW_DIALOG, { params : [94] }),
     ]],

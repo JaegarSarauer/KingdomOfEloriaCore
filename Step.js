@@ -48,6 +48,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['string'], //message
         params: [],
     },
+    CLEANUP_CLIENT_STATUSES: {
+        id: 'CLEANUP_CLIENT_STATUSES',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     START_TUTORIAL_TIMER: {
         id: 'START_TUTORIAL_TIMER',
         stepResultFail: 'END_ACTION',
@@ -1807,6 +1814,7 @@ try {
     const StepStartTutorialTimer = require('../internal/Steps/StepStartTutorialTimer');
     const StepStartGuildEntranceQuestTimer = require('../internal/Steps/StepStartGuildEntranceQuestTimer');
     const StepOpenGuildSelectionInterface = require('../internal/Steps/StepOpenGuildSelectionInterface');
+    const StepCleanupClientStatuses = require('../internal/Steps/StepCleanupClientStatuses');
     const StepSelectGuild = require('../internal/Steps/StepSelectGuild');
     const StepStartTour = require('../internal/Steps/StepStartTour');
     
@@ -1834,6 +1842,11 @@ try {
         SEND_CLIENT_STATUS: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSendClientStatus.StepSendClientStatus(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CLEANUP_CLIENT_STATUSES: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepCleanupClientStatuses.StepCleanupClientStatuses(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         START_TUTORIAL_TIMER: {
