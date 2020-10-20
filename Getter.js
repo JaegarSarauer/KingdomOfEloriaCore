@@ -5343,13 +5343,13 @@ const WorldObject = {
             return readable;
         },
         CatQuestBillyRecipe: function(id) {
-            return this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 1, 50, 0)
+            return this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 'recipe', 1, 50)
         },
         CatQuestVixenRecipe: function(id) {
-            return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects', 2, 51, 1)
+            return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects', 'recipe', 2, 51)
         },
         CatQuestViosSign: function(id) {
-            return this.CatQuestReadObject(id, 'Vio\'s Sign', 'A sign placed here by the home owner', 'worldObjects', 1, 52)
+            return this.CatQuestReadObject(id, 'Vio\'s Sign', 'A sign placed here by the home owner', 'worldObjects', 'plaque', 1, 52)
         },
         CatQuestHerbs: function(id) {
             let herbId = 791;
