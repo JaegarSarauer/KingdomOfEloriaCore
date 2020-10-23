@@ -1100,6 +1100,54 @@ const Cosmetics = [
         rarity: 0,
         itemID: 1086,
         crownCost: getCrownPrice(0, 0),
+    },
+    {
+        id: 175,
+        rarity: 0,
+        itemID: 1087,
+        crownCost: getCrownPrice(0, 0),
+    },
+    {
+        id: 176,
+        rarity: 0,
+        itemID: 1088,
+        crownCost: getCrownPrice(0, 0),
+    },
+    {
+        id: 177,
+        rarity: 0,
+        itemID: 1089,
+        crownCost: getCrownPrice(0, 0),
+    },
+    {
+        id: 178,
+        rarity: 0,
+        itemID: 1090,
+        crownCost: getCrownPrice(0, 0),
+    },
+    {
+        id: 179,
+        rarity: 0,
+        itemID: 1091,
+        crownCost: getCrownPrice(0, 0),
+    },
+    {
+        id: 180,
+        rarity: 0,
+        itemID: 1092,
+        crownCost: getCrownPrice(0, 0),
+    },
+    {
+        id: 181,
+        rarity: 0,
+        itemID: 1093,
+        crownCost: getCrownPrice(0, 0),
+    },
+    {
+        id: 182,
+        rarity: 0,
+        itemID: 1094,
+        crownCost: getCrownPrice(0, 0),
     }
 ];
 
