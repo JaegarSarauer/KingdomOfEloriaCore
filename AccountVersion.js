@@ -107,7 +107,7 @@ const AccountVersion = [{
     onUpgradeComplete: (userDef) => {
         // This migration is to fix tutorial/quest bugs.
         // These were caused by having non-first adventurers do the quest and/or tutorial work.
-        if (user.adventurers.length > 1) {
+        if (userDef.adventurers.length > 1) {
             userDef.forAllAdventurers((adv) => {
                 // Set the tutorial to complete
                 adv.state.setEntityAtSlot(4, [0]);

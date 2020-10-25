@@ -50,6 +50,19 @@ let getCrownPrice = (rarity, factor) => {
     return Math.round(preRound / 100) * 100;
 }
 
+class DateRange {
+    constructor(monthStart, dayStart, monthEnd, dayEnd) {
+        this.monthStart = monthStart;
+        this.dayStart = dayStart;
+        this.monthEnd = monthEnd;
+        this.dayEnE = dayEnd;
+    }
+
+    isValid (curMonth, curDay) {
+        return this.monthStart <= curMonth && this.dayStart <= curDay && (this.monthEnd > curMonth || (this.monthEnd == curMonth && this.dayEnd > curDay));
+    }   
+}
+
 const Cosmetics = [
     {
         id: 0,
@@ -1106,50 +1119,66 @@ const Cosmetics = [
         rarity: 0,
         itemID: 1087,
         crownCost: getCrownPrice(0, 1),
+        purchasableTime: new DateRange(9, 15, 10, 2),
     },
     {
         id: 176,
         rarity: 1,
         itemID: 1088,
         crownCost: getCrownPrice(1, 1),
+        purchasableTime: new DateRange(9, 15, 10, 2),
     },
     {
         id: 177,
         rarity: 1,
         itemID: 1089,
         crownCost: getCrownPrice(1, 1),
+        purchasableTime: new DateRange(9, 15, 10, 2),
     },
     {
         id: 178,
         rarity: 2,
         itemID: 1090,
         crownCost: getCrownPrice(2, 1),
+        purchasableTime: new DateRange(9, 15, 10, 2),
     },
     {
         id: 179,
         rarity: 0,
         itemID: 1091,
         crownCost: getCrownPrice(0, 1),
+        purchasableTime: new DateRange(9, 15, 10, 2),
     },
     {
         id: 180,
         rarity: 3,
         itemID: 1092,
         crownCost: getCrownPrice(3, 1),
+        purchasableTime: new DateRange(9, 15, 10, 2),
     },
     {
         id: 181,
         rarity: 1,
         itemID: 1093,
         crownCost: getCrownPrice(1, 1),
+        purchasableTime: new DateRange(9, 15, 10, 2),
     },
     {
         id: 182,
         rarity: 0,
         itemID: 1094,
         crownCost: getCrownPrice(0, 1),
+        purchasableTime: new DateRange(9, 15, 10, 2),
     }
 ];
+
+const isPurchasableTime = (cosmeticID, curMonth, curDay) => {
+    let cosmetic = Cosmetics[cosmeticID];
+    if (cosmetic == null) {
+        return false;
+    }
+    return !cosmetic.purchasableTime || cosmetic.purchasableTime.isValid(curMonth, curDay);
+}
 
 const CosmeticsToPurchaseCatalog = () => {
     let cosmeticPurchases = {};
@@ -1282,3 +1311,4 @@ const CosmeticRarityItems = (() => {
 module.exports.CosmeticRarityItems = CosmeticRarityItems;
 module.exports.Rarity = Rarity;
 module.exports.Cosmetics = Cosmetics;
+module.exports.isPurchasableTime = isPurchasableTime;
