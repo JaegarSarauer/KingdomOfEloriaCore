@@ -24,21 +24,21 @@ const Rarity = [{
     id: 3,
     name: 'Mythical',
     color: 0x8c0cad,
-    rollChance: 2600,
+    rollChance: 2900,
     minCrownCost: 10000,
     maxCrownCost: 25000,
 }, {
     id: 4,
     name: 'Royal',
     color: 0xfc0000,
-    rollChance: 16800,
+    rollChance: 21800,
     minCrownCost: 25000,
     maxCrownCost: 50000,
 }, {
     id: 5,
     name: 'Godly',
     color: 0xff63ed,
-    rollChance: 350000,
+    rollChance: 600000,
     minCrownCost: 100000,
     maxCrownCost: 500000,
 }];
@@ -1116,6 +1116,11 @@ const CosmeticsToPurchaseCatalog = () => {
     }
     return cosmeticPurchases;
 }
+
+const CommunityPurchases = [{
+    id: 0,
+    name: 'x1.25 XP for 1 Hour'
+}];
 
 module.exports.PURCHASE_CATALOG = {
     PERMIT_14DAY: {
