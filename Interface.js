@@ -2314,9 +2314,9 @@ const Interface = [
             actionInterval: -1,
             steps: [
                 [
-                    buildStep(StepType.CHECK_CHARACTER_STATE, { params: [4, 1] }),
+                    buildStep(StepType.CHECK_TUTORIAL_STATE, { params: [1] }),
                     buildStep(StepType.SELECT_GUILD, {params: ['GUILD_ID']}),
-                    buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+                    buildStep(StepType.SET_TUTORIAL_STATE, {params: [2]}),
                     buildStep(StepType.SET_CHARACTER_STATE, {params: [8, 'GUILD_ID']}),
                     buildStep(StepType.START_TUTORIAL_TIMER),
                     buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: ['GUILD_ID']}),

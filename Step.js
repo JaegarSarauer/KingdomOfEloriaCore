@@ -48,6 +48,13 @@ module.exports.StepType = StepType = {
         paramTypes: ['string'], //message
         params: [],
     },
+    CLEANUP_CLIENT_STATUSES: {
+        id: 'CLEANUP_CLIENT_STATUSES',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: [],
+        params: [],
+    },
     START_TUTORIAL_TIMER: {
         id: 'START_TUTORIAL_TIMER',
         stepResultFail: 'END_ACTION',
@@ -849,6 +856,20 @@ module.exports.StepType = StepType = {
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
         paramTypes: [],
+        params: [],
+    },
+    CHECK_TUTORIAL_STATE: {
+        id: 'CHECK_TUTORIAL_STATE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //stateValue
+        params: [],
+    },
+    SET_TUTORIAL_STATE: {
+        id: 'SET_TUTORIAL_STATE',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //stateValue
         params: [],
     },
     TOGGLE_WARDROBE_INTERFACE: {
@@ -1753,6 +1774,8 @@ try {
     const StepUseEnchantment = require('../internal/Steps/StepUseEnchantment');
     const StepOpenPurchasesInterface = require('../internal/Steps/StepOpenPurchasesInterface');
     const StepIsTutorialComplete = require('../internal/Steps/StepIsTutorialComplete');
+    const StepCheckTutorialState = require('../internal/Steps/StepCheckTutorialState');
+    const StepSetTutorialState = require('../internal/Steps/StepSetTutorialState');
     const StepToggleWardrobeInterface = require('../internal/Steps/StepToggleWardrobeInterface');
     const StepOpenDropPartyMinigameChestInterface = require('../internal/Steps/StepOpenDropPartyMinigameChestInterface');
     const StepOwnerInWalkBounds = require('../internal/Steps/StepOwnerInWalkBounds');
@@ -1791,6 +1814,7 @@ try {
     const StepStartTutorialTimer = require('../internal/Steps/StepStartTutorialTimer');
     const StepStartGuildEntranceQuestTimer = require('../internal/Steps/StepStartGuildEntranceQuestTimer');
     const StepOpenGuildSelectionInterface = require('../internal/Steps/StepOpenGuildSelectionInterface');
+    const StepCleanupClientStatuses = require('../internal/Steps/StepCleanupClientStatuses');
     const StepSelectGuild = require('../internal/Steps/StepSelectGuild');
     const StepStartTour = require('../internal/Steps/StepStartTour');
     
@@ -1818,6 +1842,11 @@ try {
         SEND_CLIENT_STATUS: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepSendClientStatus.StepSendClientStatus(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CLEANUP_CLIENT_STATUSES: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepCleanupClientStatuses.StepCleanupClientStatuses(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         START_TUTORIAL_TIMER: {
@@ -1883,6 +1912,16 @@ try {
         IS_TUTORIAL_COMPLETE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepIsTutorialComplete.StepIsTutorialComplete(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        CHECK_TUTORIAL_STATE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepCheckTutorialState.StepCheckTutorialState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        SET_TUTORIAL_STATE: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepSetTutorialState.StepSetTutorialState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         TOGGLE_WARDROBE_INTERFACE: {

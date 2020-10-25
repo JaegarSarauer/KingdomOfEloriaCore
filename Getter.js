@@ -2925,7 +2925,7 @@ const ItemGetter = {
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [id, 1] }),
                     buildStep(StepType.GIVE_XP, { params: [22, 25] }),
                     buildStep(StepType.TELEPORT, { params: [0, 31, 22, 32, 23, 3, 
-                        [[buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 7]} ),
+                        [[buildStep(StepType.SET_TUTORIAL_STATE, {params: [7]} ),
                         buildStep(StepType.SHOW_DIALOG, {
                             params: [21],
                             stepResultPass: 'END_ACTION',
@@ -3683,7 +3683,6 @@ const WorldObject = {
         let notedResourceID = guildDef.quest.entrance_exam.items.notedResourceID;
         let resourceAmount = guildDef.quest.entrance_exam.itemAmount;
 
-        const TUTORIAL_STATE = 4;
         const COMPLETE = 0;
 
         return {
@@ -3713,8 +3712,8 @@ const WorldObject = {
                             params: [questID, [7], ['EQUALS']],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
                         }),
-                        buildStep(StepType.CHECK_CHARACTER_STATE, { 
-                            params: [TUTORIAL_STATE, COMPLETE],
+                        buildStep(StepType.CHECK_TUTORIAL_STATE, { 
+                            params: [COMPLETE],
                             stepResultFail: 'END_AND_GOTO_LIST_3',
                         }),
                         buildStep(StepType.OPEN_GUILD_CHEST_INTERFACE, { 
@@ -3728,8 +3727,8 @@ const WorldObject = {
                             params: [questID, [6], ['EQUALS']],
                             stepResultFail: 'END_AND_GOTO_LIST_5',
                         }),
-                        buildStep(StepType.CHECK_CHARACTER_STATE, {
-                            params: [TUTORIAL_STATE, 3],
+                        buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                            params: [3],
                             stepResultFail: 'END_AND_GOTO_LIST_4',
                         }),
                         buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, 8]}),
@@ -3747,8 +3746,8 @@ const WorldObject = {
                             params: [questID, [6], ['EQUALS']],
                             stepResultFail: 'END_AND_GOTO_LIST_5',
                         }),
-                        buildStep(StepType.CHECK_CHARACTER_STATE, {
-                            params: [TUTORIAL_STATE, COMPLETE],
+                        buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                            params: [COMPLETE],
                             stepResultFail: 'END_AND_GOTO_LIST_5',
                         }),
                         buildStep(StepType.HAS_INVENTORY_ITEM, {params: [notedResourceID, resourceAmount]},),
@@ -4800,8 +4799,8 @@ const WorldObject = {
                     buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [logId, 1] }),
                     buildStep(StepType.GIVE_XP, { params: [9, xp] }),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You get some ' + logName + '.'] }),
-                    buildStep(StepType.CHECK_CHARACTER_STATE, {
-                        params: [4, 4],
+                    buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                        params: [4],
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
@@ -5344,13 +5343,13 @@ const WorldObject = {
             return readable;
         },
         CatQuestBillyRecipe: function(id) {
-            return this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 1, 50, 0)
+            return this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 'recipe', 1, 50)
         },
         CatQuestVixenRecipe: function(id) {
-            return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects', 2, 51, 1)
+            return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects', 'recipe', 2, 51)
         },
         CatQuestViosSign: function(id) {
-            return this.CatQuestReadObject(id, 'Vio\'s Sign', 'A sign placed here by the home owner', 'worldObjects', 1, 52)
+            return this.CatQuestReadObject(id, 'Vio\'s Sign', 'A sign placed here by the home owner', 'worldObjects', 'plaque', 1, 52)
         },
         CatQuestHerbs: function(id) {
             let herbId = 791;
@@ -6765,8 +6764,8 @@ const Character = {
             name: 'Talk To',
             steps: [
                 // If we have previously completed the tutorial, go straight to questions dialog
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 0],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [0],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6777,8 +6776,8 @@ const Character = {
                 })],
 
                 // if we are at step 1 => Give you the fishing net => step 2
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 2],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [2],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6789,8 +6788,8 @@ const Character = {
                 })],
     
                 // If we are at step 2 AND have a raw shrimp => step 3
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 3],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [3],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6806,8 +6805,8 @@ const Character = {
                 })],
     
                 // If we are at step 3 AND have a cooked shrimp => step 4
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 4],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [4],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6825,8 +6824,8 @@ const Character = {
 
                 
                 // If we are at step 3 still AND have a burnt shrimp => step 4
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 4],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [4],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6842,8 +6841,8 @@ const Character = {
                 })],
     
                 // If we are at step 4 AND have Osaiks key => step 5
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 5],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [5],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6860,8 +6859,8 @@ const Character = {
                 })],
     
                 // If we are at step 2 still, we need a raw shrimp => ask for shrimp
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 3],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [3],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6872,8 +6871,8 @@ const Character = {
                 })],
                 
                 // If we are at step 3 still, we need a cooked shrimp => ask for shrimp
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 4],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [4],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6884,8 +6883,8 @@ const Character = {
                 })],
     
                 // If we are at step 4 still, we need a key => ask for shrimp
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 5],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [5],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6896,8 +6895,8 @@ const Character = {
                 })],
     
                 // If we are at step 5, we havent teleported, 
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 6],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [6],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),
@@ -6909,8 +6908,8 @@ const Character = {
 
                 
                 // If we are at step 6, we have teleported but not yet spoke to Osaik by Fiewon, 
-                [buildStep(StepType.CHECK_CHARACTER_STATE, {
-                    params: [4, 7],
+                [buildStep(StepType.CHECK_TUTORIAL_STATE, {
+                    params: [7],
                     stepResultPass: 'NEXT_STEP',
                     stepResultFail: 'NEXT_STEP_LIST',
                 }),

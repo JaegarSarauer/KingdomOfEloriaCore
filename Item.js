@@ -3878,6 +3878,14 @@ const Item = Object.freeze([
     Get.Item.CosmeticHat(1084, 172, 'Toque', 'A cool purple toque', 768, 0.9, 0.575 ),
     Get.Item.CosmeticHat(1085, 173, 'Toque', 'Flaming hot toque', 769, 0.9, 0.575 ),
     Get.Item.CosmeticHat(1086, 174, 'Toque', 'Simple gray toque', 770, 0.9, 0.575 ),
+    Get.Item.CosmeticHat(1087, 175, 'Goblin Mask', 'A spooky halloween goblin mask', 773, 0.4 ),
+    Get.Item.CosmeticHat(1088, 176, 'Zombie Mask', 'A spooky halloween zombie mask', 774, 0.4 ),
+    Get.Item.CosmeticHat(1089, 177, 'Ghoul Mask', 'A spooky halloween ghoul mask', 775, 0.4 ),
+    Get.Item.CosmeticHat(1090, 178, 'Skeleton Mask', 'A spooky halloween skeleton mask', 776, 0.33 ),
+    Get.Item.CosmeticHat(1091, 179, 'Fright Hat', 'A spooky halloween fright mask', 777, 0.4 ),
+    Get.Item.CosmeticHat(1092, 180, 'Demon Mask', 'A spooky halloween demon mask', 778, 0.55 ),
+    Get.Item.CosmeticHat(1093, 181, 'Mummy Mask', 'A spooky halloween mummy mask', 779, 0.4 ),
+    Get.Item.CosmeticHat(1094, 182, 'Jack-o\'-lantern Mask', 'A spooky halloween jack-o\'-lantern mask', 780, 0.5 ),
 ]);
 
 var ItemName = [];

@@ -128,9 +128,9 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     //'Complete quests and build up your skills so when the time comes to face him, you are ready. With your help, the residents of <note>Eloria</note> may live in peace once again.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        // buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 1]}),
-        // // TODO: Go to Guild Selection, which THEN calls SET_CHARACTER_STATE from (4,1) to (4,2)
-        // buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 2]}),
+        // buildStep(StepType.CHECK_TUTORIAL_STATE, {params: [1]}),
+        // // TODO: Go to Guild Selection, which THEN calls SET_TUTORIAL_STATE from (1) to (2)
+        // buildStep(StepType.SET_TUTORIAL_STATE, {params: [2]}),
         // // Guild Selection on continue decides where we teleport and which quest we started. Below is "Start Woodcutting"
         // buildStep(StepType.SET_USER_GOAL_STATE, { params: [4, [1]] }),
         buildStep(StepType.SHOW_DIALOG, {params: [1] }),
@@ -189,8 +189,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
                 buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [6]]}),
                 buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [0]}),
                 buildStep(StepType.SHOW_DIALOG, {params: [19]}),
-                buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
-                buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+                buildStep(StepType.CHECK_TUTORIAL_STATE, {params: [2]}),
+                buildStep(StepType.SET_TUTORIAL_STATE, {params: [3]}),
             ]]]})
         ]]]}),
     ]],
@@ -381,7 +381,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     continueSteps: [[
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [-1]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 0]}),
+        buildStep(StepType.SET_TUTORIAL_STATE, {params: [0]}),
         buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [13, 1]}),
         buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [21, 1]}),
         buildStep(StepType.GIVE_INVENTORY_ITEM, {params: [42, 1]}),
@@ -825,8 +825,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
                 buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [6]]}),
                 buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [1]}),
                 buildStep(StepType.SHOW_DIALOG, {params: [78]}),
-                buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
-                buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+                buildStep(StepType.CHECK_TUTORIAL_STATE, {params: [2]}),
+                buildStep(StepType.SET_TUTORIAL_STATE, {params: [3]}),
             ]]]})
         ]]]}),
     ]],
@@ -892,8 +892,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
                 buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
                 buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [2]}),
                 buildStep(StepType.SHOW_DIALOG, {params: [84]}),
-                buildStep(StepType.CHECK_CHARACTER_STATE, {params: [4, 2]}),
-                buildStep(StepType.SET_CHARACTER_STATE, {params: [4, 3]}),
+                buildStep(StepType.CHECK_TUTORIAL_STATE, {params: [2]}),
+                buildStep(StepType.SET_TUTORIAL_STATE, {params: [3]}),
             ]]]})
         ]]]}),
     ]],
@@ -999,9 +999,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     '"If you need help settling in or have any questions, speak to <note>Guide</note>."',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.SEND_CLIENT_STATUS, { params: [''] }),
-        buildStep(StepType.SHOW_DIRECTION_ARROW),
-        buildStep(StepType.CHECK_CHARACTER_STATE, { params : [4, 3] }),
+        buildStep(StepType.CLEANUP_CLIENT_STATUSES),
+        buildStep(StepType.CHECK_TUTORIAL_STATE, { params : [3] }),
         buildStep(StepType.SHOW_DIALOG, { params : [94] }),
     ]],
 }, {
@@ -1019,8 +1018,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     '"You will make us proud. Welcome to the family."',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
-        buildStep(StepType.CHECK_CHARACTER_STATE, { params : [4, 3] }),
-        buildStep(StepType.SET_CHARACTER_STATE, { params : [4, 0] }),
+        buildStep(StepType.CHECK_TUTORIAL_STATE, { params : [3] }),
+        buildStep(StepType.SET_TUTORIAL_STATE, { params : [0] }),
         buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [343, 1], stepResultFail: 'NEXT_STEP' }), // TryRemove default shirt
         buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [483, 1], stepResultFail: 'NEXT_STEP' }), // TryRemove default psnts
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [9, 1] }), // Copper pickaxe

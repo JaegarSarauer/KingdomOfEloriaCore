@@ -100,7 +100,26 @@ const AccountVersion = [{
             }
         })
     },
-}];
+}, 
+{
+    id: 3,
+    upgradeData: (userDef)  => userDef,
+    onUpgradeComplete: (userDef) => {
+        // This migration is to fix tutorial/quest bugs.
+        // These were caused by having non-first adventurers do the quest and/or tutorial work.
+        if (user.adventurers.length > 1) {
+            userDef.forAllAdventurers((adv) => {
+                // Set the tutorial to complete
+                adv.state.setEntityAtSlot(4, [0]);
+                // Clear any status they have
+                adv.state.setEntityAtSlot(7, ['']);
+                // Clear any direction arrows they have
+                adv.clearDirectionArrow();
+            });
+        }
+    },
+}
+];
 
 const upgradeAccount = (userDef) => {
     let upgradesCompleted = [];
