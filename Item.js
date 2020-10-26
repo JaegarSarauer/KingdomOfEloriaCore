@@ -3878,7 +3878,7 @@ const Item = Object.freeze([
     Get.Item.CosmeticHat(1084, 172, 'Toque', 'A cool purple toque', 768, 0.9, 0.575 ),
     Get.Item.CosmeticHat(1085, 173, 'Toque', 'Flaming hot toque', 769, 0.9, 0.575 ),
     Get.Item.CosmeticHat(1086, 174, 'Toque', 'Simple gray toque', 770, 0.9, 0.575 ),
-    Get.Item.CosmeticHat(1087, 175, 'Frankenstein  Mask', 'A spooky halloween Frankenstein mask', 773, 0.4 ),
+    Get.Item.CosmeticHat(1087, 175, 'Frankenstein\'s Monster Mask', 'A spooky halloween Frankenstein\'s monster mask', 773, 0.4 ),
     Get.Item.CosmeticHat(1088, 176, 'Zombie Mask', 'A spooky halloween zombie mask', 774, 0.4 ),
     Get.Item.CosmeticHat(1089, 177, 'Ghoul Mask', 'A spooky halloween ghoul mask', 775, 0.4 ),
     Get.Item.CosmeticHat(1090, 178, 'Skeleton Mask', 'A spooky halloween skeleton mask', 776, 0.33 ),
