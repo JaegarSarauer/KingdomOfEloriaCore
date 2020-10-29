@@ -1108,7 +1108,7 @@ const ItemGetter = {
                 id: 3,
                 name: 'Equip',
                 steps: [
-                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [2, equipLevel] }),
+                    [buildStep(StepType.HAS_SKILL_LEVEL, { params: [8, equipLevel] }),
                     buildStep(StepType.PLAY_ANIMATION, { params: ['EQUIP_HEAD'] }),
                     buildStep(StepType.GIVE_EQUIPMENT_ITEM, { params: [0, 'ITEM_ID', 'ITEM_STATE'] })]
                 ]
