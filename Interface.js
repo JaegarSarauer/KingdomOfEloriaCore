@@ -1883,6 +1883,9 @@ const Interface = [
             Get.Interface.SetSpawnPoint(289, 0),
             Get.Interface.SetSpawnPoint(290, 1),
             Get.Interface.SetSpawnPoint(291, 2),
+            Get.Interface.BuildMiningCamp(292, 'Build Copper Mining Camp (1 Cons., 10 Mining) (5 Logs, 1 Copper Pickaxe)', 5, 9, 10, 1, 21, 100, 'copper mining camp', 1095),
+            Get.Interface.BuildLumberCamp(293, 'Build Lumber Camp (1 Construction, 10 Woodcutting) (5 Logs, 1 Copper Axe)', 5, 1, 10, 1, 16, 100, 'log lumber camp', 1096),
+            Get.Interface.BuildFishingPool(294, 'Build Shallow Pool Fishery (10 Cons., 10 Fishing) (5 Logs, 1 Fishing Net)', 5, 10, 1, 20, 100, 'shallow pool fishery', 1097),
         ],
     },
     {

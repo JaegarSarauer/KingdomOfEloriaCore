@@ -3120,7 +3120,8 @@ const Interface = {
             steps: steps,
         };
     },
-        BuildFishingPool: function (id, name, logsId, fishingLevel, constructionLevel, constructionObject, xp, campName) {
+        BuildFishingPool: function (id, name, logsId, fishingLevel, constructionLevel, constructionObject, xp, campName, sawID = null) {
+            sawID = sawID == null ? 118 : sawID;
             return {
                 id: id,
                 name: name,
@@ -3128,7 +3129,7 @@ const Interface = {
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [logsId, 5] }),
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [117, 1] }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [sawID, 1] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, constructionLevel] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, fishingLevel] }),
                     buildStep(StepType.CREATE_CONSTRUCTION_OBJECT, {
@@ -3249,7 +3250,8 @@ const Interface = {
                 ],
             };
         },
-        BuildLumberCamp: function (id, name, reqLogId, reqAxeId, reqWcLevel, reqConstructionLevel, constructionObjectId, xp, campName) {
+        BuildLumberCamp: function (id, name, reqLogId, reqAxeId, reqWcLevel, reqConstructionLevel, constructionObjectId, xp, campName, sawID = null) {
+            sawID = sawID == null ? 118 : sawID;
             return {
                 id: id,
                 name: name,
@@ -3258,7 +3260,7 @@ const Interface = {
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [reqLogId, 5] }), // logs
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [reqAxeId, 1] }), // axe
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }), //saw
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [sawID, 1] }), //saw
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, reqConstructionLevel] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [9, reqWcLevel] }),
                     buildStep(StepType.CREATE_CONSTRUCTION_OBJECT, {
@@ -3296,7 +3298,8 @@ const Interface = {
                 ],
             };
         },
-        BuildMiningCamp: function (id, name, reqLogId, reqPickaxeId, reqMiningLevel, reqConstructionLevel, constructionObjectId, xp, campName) {
+        BuildMiningCamp: function (id, name, reqLogId, reqPickaxeId, reqMiningLevel, reqConstructionLevel, constructionObjectId, xp, campName, sawID = null) {
+            sawID = sawID == null ? 118 : sawID;
             return {
                 id: id,
                 name: name,
@@ -3305,7 +3308,7 @@ const Interface = {
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [reqLogId, 5] }),
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [reqPickaxeId, 1] }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [sawID, 1] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, reqConstructionLevel] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [10, reqMiningLevel] }),
                     buildStep(StepType.CREATE_CONSTRUCTION_OBJECT, {
