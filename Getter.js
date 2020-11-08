@@ -5113,6 +5113,67 @@ const WorldObject = {
                 spriteIndex: spriteIndex,
             }
         },
+        DoorTollLocked: function(id, name, tollAmount, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
+            return {
+                id: id,
+                name: name,
+                description: description,
+                modelName: 'DOOR',
+                modelParams: {
+                    BASE: {
+                        spriteID: spriteID,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 23,
+                    name: 'Go Through Door',
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [
+                            buildStep(StepType.IS_IN_AREA, {
+                                stepResultFail: StepResult.NEXT_STEP_LIST,
+                                params: [true, entryPoint.x, entryPoint.y, entryPoint.x, entryPoint.y]
+                            }),
+                            buildStep(StepType.HAS_INVENTORY_ITEM, {
+                                params: [0, tollAmount],
+                                stepResultFail: StepResult.END_ACTION,
+                            }),
+                            buildStep(StepType.REMOVE_INVENTORY_ITEM, {
+                                params: [0, tollAmount],
+                            }),
+                            buildStep(StepType.TELEPORT, {
+                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, 0],
+                                stepResultPass: StepResult.END_ACTION,
+                            })
+                        ], 
+                        [
+                            buildStep(StepType.IS_IN_AREA, {
+                                stepResultFail: StepResult.END_ACTION,
+                                params: [true, exitPoint.x - 1, exitPoint.y - 1, exitPoint.x + 1, exitPoint.y]
+                            }),
+                            buildStep(StepType.HAS_INVENTORY_ITEM, {
+                                params: [0, tollAmount],
+                                stepResultFail: StepResult.END_ACTION,
+                            }),
+                            buildStep(StepType.REMOVE_INVENTORY_ITEM, {
+                                params: [0, tollAmount],
+                            }),
+                            buildStep(StepType.TELEPORT, {
+                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, 0,
+                                [
+                                    [buildStep(StepType.TELEPORT, {
+                                        params: [mapID, entryPoint.x, entryPoint.y, entryPoint.x, entryPoint.y, 0],
+                                        stepResultPass: StepResult.END_ACTION,
+                                    })]
+                                ]],
+                                stepResultPass: StepResult.END_ACTION,
+                            })
+                        ]
+                    ],
+                }],
+            }
+        },
         DoorSkillLocked: function(id, name, skillID, skillLevelRequirement, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
             return {
                 id: id,

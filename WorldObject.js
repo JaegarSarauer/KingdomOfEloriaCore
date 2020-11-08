@@ -1198,4 +1198,5 @@ module.exports.WorldObject = WorldObject = [
             })]
         ],
     }]),
+    Get.WorldObject.DoorTollLocked(113, 'Door', 50, 1, null, 1, { x : 349, y : 68}, { x: 349, y: 69 }, 'Rquires a toll costing 50 gold.' ),
 ];
