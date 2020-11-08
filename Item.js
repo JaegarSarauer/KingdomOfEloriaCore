@@ -3871,13 +3871,13 @@ const Item = Object.freeze([
     Get.Item.CosmeticHat(1092, 180, 'Demon Mask', 'A spooky halloween demon mask', 778, 0.55 ),
     Get.Item.CosmeticHat(1093, 181, 'Mummy Mask', 'A spooky halloween mummy mask', 779, 0.4 ),
     Get.Item.CosmeticHat(1094, 182, 'Jack-o\'-lantern Mask', 'A spooky halloween jack-o\'-lantern mask', 780, 0.5 ),
-    Get.Item.Saw(1087, 224, [
+    Get.Item.Saw(1095, 224, [
         Get.Action.BuildWithSaw(9, 5, [96]), // Copper mining camp
     ]),
-    Get.Item.Saw(1088, 224, [
+    Get.Item.Saw(1096, 224, [
         Get.Action.BuildWithSaw(9, 5, [92]), // Log Camp
     ]),
-    Get.Item.Saw(1089, 224, [
+    Get.Item.Saw(1097, 224, [
         Get.Action.BuildWithSaw(9, 5, [101]), // Shallow Fishing Pool Camp
     ]),
 ]);
