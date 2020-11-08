@@ -3875,10 +3875,10 @@ const Item = Object.freeze([
         Get.Action.BuildWithSaw(9, 5, [292]), // Copper mining camp
     ]),
     Get.Item.Saw(1096, 224, [
-        Get.Action.BuildWithSaw(9, 5, [293]), // Log Camp
+        Get.Action.BuildWithSaw(9, 5, [293]), // Shallow Fishing Pool Camp
     ]),
     Get.Item.Saw(1097, 224, [
-        Get.Action.BuildWithSaw(9, 5, [294]), // Shallow Fishing Pool Camp
+        Get.Action.BuildWithSaw(9, 5, [294]), // Log Camp
     ]),
 ]);
 

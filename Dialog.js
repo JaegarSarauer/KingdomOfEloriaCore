@@ -1008,7 +1008,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: 'Guild Master',
     message: '"There are many skills to master in this world. You have shown skill in one, but you still have much to learn."\n\n' + 
 
-    '<i><note>Guild Master</note> gives you a <note>Copper Pickaxe</note>, <note>Copper Axe</note> and <note>Fishing net</note></i>.\n\n' + 
+    '<i><note>Guild Master</note> gives you a <note>Copper Pickaxe</note>, <note>Copper Axe</note>, <note>Fishing net</note> and a <note>Saw</note></i>.\n\n' + 
 
     '"Many challenges await you. Soon you\'re curiosity may lead you to explore the rest of <note>Eloria</note>.\n' +
     'You will be needing these."\n\n' +
@@ -1025,6 +1025,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [9, 1] }), // Copper pickaxe
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [1, 1] }), // Copper axe
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [117, 1] }), // Fishing net
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [118, 1] }), // Saw
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [21, 1] }), // Copper helmet
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [42, 1] }), // Copper Platebody
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [29, 1] }), // Copper Platelegs
