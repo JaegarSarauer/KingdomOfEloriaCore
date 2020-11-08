@@ -197,7 +197,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 19,
     title: '<b>Mining Guide</b>',
-    message: 'Donate your eight <note>Copper Ore</note> to the guild chest.\n\n' +
+    message: 'Donate your <note>Copper Ore</note> to the guild chest.\n\n' +
     
     'Then, you will officially be a member of our guild.',
     continueSteps: [[
@@ -833,7 +833,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 78,
     title: '<b>Fishing Guide</b>',
-    message: 'For your final task, go to our guild chest and donate your eight noted <note>Raw Shrimp</note>',
+    message: 'For your final task, go to our guild chest and donate your noted <note>Raw Shrimp</note>',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [146, 12]}),
@@ -900,7 +900,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 84,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Your final task is to donate your eight noted <note>Logs</note> to the guild chest.',
+    message: 'Your final task is to donate your noted <note>Logs</note> to the guild chest.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [335, 47]}),
