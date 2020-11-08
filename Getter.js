@@ -3010,7 +3010,25 @@ const ItemGetter = {
                 ],
             }],
         };
-    }
+    },
+    Saw : function(id, notedID, useActions) {
+        return {
+            id,
+            name: 'Saw',
+            noted: false,
+            notedID,
+            value: 2,
+            stackable: false,
+            description: '',
+            requirements: ItemDetail.build([
+                ItemDetail.levelSkillDetail('1+', 18, 'USE'),
+                ItemDetail.levelSkillDetail(5, 17, 'INCINERATE'),
+            ]),
+            spriteIndex: 119,
+            essenceValue: EssenceValue(5, 3, [ShardCatalog.SHARP(1), ShardCatalog.EARTH(1), ShardCatalog.METAL(2)]),
+            useActions
+        };
+    },
 };
 
 const Interface = {
@@ -6935,6 +6953,7 @@ const Character = {
         let guide = this.BaseGuide(id, guildID);
         let questID = Guilds[guildID].quest.entrance_exam.id;
         let dialogs = Guilds[guildID].quest.entrance_exam.dialogs;
+        let sawID = Guilds[guildID].quest.entrance_exam.items.sawID;
 
         const questTimerID = 20;
 
@@ -7002,6 +7021,11 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, {
+                        params: [sawID, 20],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP',
+                    },),
                     buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
                         params: [dialogs.PASSED_EXAM],
                         stepResultPass: 'END_ACTION',

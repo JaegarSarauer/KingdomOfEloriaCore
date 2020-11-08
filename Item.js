@@ -1010,30 +1010,15 @@ const Item = Object.freeze([
         itemGroup: 3,
         essenceValue: EssenceValue(2, 2, [ShardCatalog.WATER(1), ShardCatalog.EARTH(1), ShardCatalog.BIND(20)]),
     },
-    {
-        id: 118,
-        name: 'Saw',
-        noted: false,
-        notedID: 224,
-        value: 2,
-        stackable: false,
-        description: '',
-        requirements: ItemDetail.build([
-            ItemDetail.levelSkillDetail('1+', 18, 'USE'),
-            ItemDetail.levelSkillDetail(5, 17, 'INCINERATE'),
-        ]),
-        spriteIndex: 119,
-        essenceValue: EssenceValue(5, 3, [ShardCatalog.SHARP(1), ShardCatalog.EARTH(1), ShardCatalog.METAL(2)]),
-        useActions: [
-            Get.Action.BuildWithSaw(9, 5, [92, 96, 97, 101, 112, 187]), // Logs -> [lumber(1), mine(1), clay, fish, training(1), market stall]
-            Get.Action.BuildWithSaw(10, 6, [93, 98, 113, 188, 282]), // Oak -> [lumber(2), mine(2), training(2), crabpot]
-            Get.Action.BuildWithSaw(11, 7, [94, 99, 261, 114, 189]), // Ash -> [lumber(3), mine(3), mine(gold), training(3)]
-            Get.Action.BuildWithSaw(12, 8, [95, 100, 115, 190]), // Fur -> [lumber(4), mine(4), training(4)]
-            Get.Action.BuildWithSaw(13, 240, [92, 96, 97, 112]), // Construction Frame -> [lumber(1), mine(1), clay, training(1)]
-            Get.Action.BuildWithSaw(14, 315, [146, 148, 152, 150, 191]), // King Maple -> [lumber(5), mine(5), fish(2), training(5)]
-            Get.Action.BuildWithSaw(15, 317, [147, 149, 151, 192]), // Magic -> [lumber(6), mine(6), training(6)]
-        ]
-    },
+    Get.Item.Saw(118, 224, [
+        Get.Action.BuildWithSaw(9, 5, [92, 96, 97, 101, 112, 187]), // Logs -> [lumber(1), mine(1), clay, fish, training(1), market stall]
+        Get.Action.BuildWithSaw(10, 6, [93, 98, 113, 188, 282]), // Oak -> [lumber(2), mine(2), training(2), crabpot]
+        Get.Action.BuildWithSaw(11, 7, [94, 99, 261, 114, 189]), // Ash -> [lumber(3), mine(3), mine(gold), training(3)]
+        Get.Action.BuildWithSaw(12, 8, [95, 100, 115, 190]), // Fur -> [lumber(4), mine(4), training(4)]
+        Get.Action.BuildWithSaw(13, 240, [92, 96, 97, 112]), // Construction Frame -> [lumber(1), mine(1), clay, training(1)]
+        Get.Action.BuildWithSaw(14, 315, [146, 148, 152, 150, 191]), // King Maple -> [lumber(5), mine(5), fish(2), training(5)]
+        Get.Action.BuildWithSaw(15, 317, [147, 149, 151, 192]), // Magic -> [lumber(6), mine(6), training(6)]
+    ]),
     {
         id: 119,
         name: 'Burnt Shrimp',
@@ -3886,6 +3871,15 @@ const Item = Object.freeze([
     Get.Item.CosmeticHat(1092, 180, 'Demon Mask', 'A spooky halloween demon mask', 778, 0.55 ),
     Get.Item.CosmeticHat(1093, 181, 'Mummy Mask', 'A spooky halloween mummy mask', 779, 0.4 ),
     Get.Item.CosmeticHat(1094, 182, 'Jack-o\'-lantern Mask', 'A spooky halloween jack-o\'-lantern mask', 780, 0.5 ),
+    Get.Item.Saw(1087, 224, [
+        Get.Action.BuildWithSaw(9, 5, [96]), // Copper mining camp
+    ]),
+    Get.Item.Saw(1088, 224, [
+        Get.Action.BuildWithSaw(9, 5, [92]), // Log Camp
+    ]),
+    Get.Item.Saw(1089, 224, [
+        Get.Action.BuildWithSaw(9, 5, [101]), // Shallow Fishing Pool Camp
+    ]),
 ]);
 
 var ItemName = [];

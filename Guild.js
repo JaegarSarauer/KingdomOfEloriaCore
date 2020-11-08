@@ -236,6 +236,7 @@ const Guilds = [{
                 tool: 9,
                 resourceID: 55,
                 notedResourceID: 184,
+                sawID: 1087,
             },
             location: {
                 x: 27,
@@ -431,6 +432,7 @@ const Guilds = [{
                 tool: 117,
                 resourceID: 47,
                 notedResourceID: 176,
+                sawID: 1088,
             },
             location: {
                 x: 26,
@@ -614,6 +616,7 @@ const Guilds = [{
                 tool: 1,
                 resourceID: 5,
                 notedResourceID: 135,
+                sawID: 1089,
             },
             location: {
                 x: 26,
