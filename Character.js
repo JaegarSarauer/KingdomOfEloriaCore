@@ -401,7 +401,12 @@ Get.Character.Human(125, 'Doctor', 23, [null, null, null, 363, 489], 4, HairColo
         ]
     ],
 }], 7, EyeColors.Blue ),
-Get.Character.BabyDragon(126, 'Baby Blue Dragon', 1, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	Get.Character.BabyDragon(87, 'Baby Blue Dragon', 1, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
-Get.Character.AdolescentDragon(127, 'Baby Green Dragon', 2, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	Get.Character.AdolescentDragon(88, 'Adolescent Blue Dragon', 2, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
-Get.Character.BabyDragon(128, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	Get.Character.BabyDragon(89, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
+Get.Character.BabyDragon(126, 'Baby Blue Dragon', 1, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	
+Get.Character.AdolescentDragon(127, 'Adolescent Green Dragon', 2, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	
+Get.Character.BabyDragon(128, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	
+(() => {
+    let wizard = Get.Character.PickPocketableHuman(129, 'Guild Wizard', 23, [539, 86, 618, 541, 543], HairStyle.RightSideSwipe, HairColors.Red, 7);
+    wizard.isAggressiveTo = [91, 92, 93, 94, 98, 99, 100, 101, 102];
+    return wizard;
+})(),
 ];
