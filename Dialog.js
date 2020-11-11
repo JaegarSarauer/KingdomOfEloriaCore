@@ -206,20 +206,18 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 20,
-    title: '<b>Doctor</b>',
-    message: 'Thank goodness, you\'re finally awake! We\'re in the infirmary. You\'re safe here.\n\n' +
+    title: '<b>Guild Wizard</b>',
+    message: 'We\'re glad we got to you in time. You\'re safe here.\n\n' +
 
     '<note><i>What happened?</i></note>\n\n' +
 
     'As the ship docked, you were ambushed. Reinforcements quickly arrived and saved all the survivors they could.\n\n' +
 
-    'Once you\'re fully healed, we\'ll escort you to the guild of your choice.\n\n' +
-    
-    '<note><i>Thank you... I\'m feeling better.</i></note>\n\n' +
+    '<note><i>Thank you. I\'m ready to continue my journey. Can you teleport me to the guilds?</i></note>\n\n' +
 
-    'Excellent. Through these tunnels we can access the training grounds for every guild.\n\n' + 
+    'Of course. We can teleport you to any guild.\n\n' + 
     
-    'Which guild would you like to join?',
+    '<b>Which guild would you like to join?</b>',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
