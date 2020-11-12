@@ -217,7 +217,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 
     'Of course. We can teleport you to any guild.\n\n' + 
     
-    '<b>Which guild would you like to join?</b>',
+    'Which guild would you like to join?',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
