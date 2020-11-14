@@ -7086,7 +7086,7 @@ const Character = {
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, {
-                        params: [sawID, 20],
+                        params: [sawID, 500],
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP',
                     },),
