@@ -1374,7 +1374,8 @@ const Model = {
             rotation: -0.15,
             UIModel: null,
         },
-    },BABY_DRAGON: {
+    },
+    BABY_DRAGON: {
         id: 'BABY_DRAGON',
         CORE: {
             id: 'CORE',
@@ -1669,6 +1670,74 @@ const Model = {
             anchor: {x: 3/20, y: 9/12},
             position: {x: -0.1, y: 0.05},
             rotation: 2 / 180 * Math.PI,
+            UIModel: null,
+        },
+    },
+    BEE: {
+        id: 'BEE',
+        CORE: {
+            id: 'CORE',
+            asset: 'chestParts',
+            parent: null,
+            sprite: 'blankChest',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
+        HIDDEN_CHEST: {
+            id: 'HIDDEN_CHEST',
+            asset: 'chestParts',
+            parent: 'CORE',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: -0.25},
+            rotation: 0,
+            UIModel: null,
+        },
+        WING_HIDDEN: {
+            id: 'WING_HIDDEN',
+            asset: 'tailParts',
+            parent: 'HIDDEN_CHEST',
+            sprite: 'beeWing',
+            spriteID: 1,
+            anchor: {x: 3/20, y: 9/12},
+            position: {x: -5, y: -5},
+            rotation: 0, //-2 / 180 * Math.PI,
+            UIModel: null,
+        },
+        CHEST: {
+            id: 'CHEST',
+            asset: 'chestParts',
+            parent: 'CORE',
+            sprite: 'beeBody',
+            spriteID: 1,
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: -0.5},
+            rotation: 0,
+            UIModel: null,
+        },
+        HEAD: {
+            id: 'HEAD',
+            asset: 'headParts',
+            parent: 'CHEST',
+            sprite: 'beeHead',
+            spriteID: 1,
+            anchor: {x: 0.85, y: 0.5},
+            position: {x: -0.45, y: 0},
+            rotation: 0,
+            UIModel: null,
+        },
+        WING_VISIBLE: {
+            id: 'WING_VISIBLE',
+            asset: 'tailParts',
+            parent: 'CHEST',
+            sprite: 'beeWing',
+            spriteID: 1,
+            anchor: {x: 3/20, y: 9/12},
+            position: {x: -0.1, y: -0.25},
+            rotation: 0, //2 / 180 * Math.PI,
             UIModel: null,
         },
     },
@@ -2192,6 +2261,7 @@ const Animation = {
     CHICKEN: {},
     CHICK: {},
     CRAB: {},
+    BEE: {},
     PROJECTILE: {
         WALK_HORIZONTAL: (modelParts, params) => {
             let xChange = (params.xTileChange || 0) * 64;
@@ -2221,7 +2291,6 @@ const Animation = {
         },
     },
 };
-
 
 function CreateAnimationChain(source, transforms, waitDelay = 0) {
     switch(transforms.length) {
