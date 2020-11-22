@@ -418,4 +418,5 @@ Get.Character.BabyDragon(128, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], 
     wizard.isAggressiveTo = [91, 92, 93, 94, 98, 99, 100, 101, 102];
     return wizard;
 })(),
+Get.Character.Wasp(130),
 ];

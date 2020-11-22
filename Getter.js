@@ -6688,6 +6688,25 @@ const Character = {
             goblin.secondaryAttackRange = attackRange;
             return goblin;
         },
+        Wasp: (id) => {
+            return {
+                id,
+                name: 'Wasp',
+                stats: [],
+                attackRange: 1,
+                attackCooldown: 2,
+                combatStyle: Combat.CombatStyle.MELEE,
+                secondaryAttackRange: 4,
+                secondaryAttackCooldown: 2,
+                secondaryCombatStyle: Combat.CombatStyle.RANGE,
+                modelName: 'CHICKEN',
+                actions: [{
+                    interfaceID: 0,
+                    id: 6,
+                    name: 'Attack'
+                }],
+            };
+        },
         Ghost: function (id, name, spriteId, stats, essenceIdToDrop, minAmountToDrop, maxAmountToDrop) {
             let attackByEssenceId = {
                 78: 83, // Air essence -> air attack
