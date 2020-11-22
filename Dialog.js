@@ -197,7 +197,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 19,
     title: '<b>Mining Guide</b>',
-    message: 'Donate your eight <note>Copper Ore</note> to the guild chest.\n\n' +
+    message: 'Donate your <note>Copper Ore</note> to the guild chest.\n\n' +
     
     'Then, you will officially be a member of our guild.',
     continueSteps: [[
@@ -206,18 +206,16 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 20,
-    title: '<b>Doctor</b>',
-    message: 'Thank goodness, you\'re finally awake! We\'re in the infirmary. You\'re safe here.\n\n' +
+    title: '<b>Guild Wizard</b>',
+    message: 'We\'re glad we got to you in time. You\'re safe here.\n\n' +
 
     '<note><i>What happened?</i></note>\n\n' +
 
     'As the ship docked, you were ambushed. Reinforcements quickly arrived and saved all the survivors they could.\n\n' +
 
-    'Once you\'re fully healed, we\'ll escort you to the guild of your choice.\n\n' +
-    
-    '<note><i>Thank you... I\'m feeling better.</i></note>\n\n' +
+    '<note><i>Thank you. I\'m ready to continue my journey. Can you teleport me to the guilds?</i></note>\n\n' +
 
-    'Excellent. Through these tunnels we can access the training grounds for every guild.\n\n' + 
+    'Of course. We can teleport you to any guild.\n\n' + 
     
     'Which guild would you like to join?',
     continueSteps: [[
@@ -833,7 +831,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 78,
     title: '<b>Fishing Guide</b>',
-    message: 'For your final task, go to our guild chest and donate your eight noted <note>Raw Shrimp</note>',
+    message: 'For your final task, go to our guild chest and donate your noted <note>Raw Shrimp</note>',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [146, 12]}),
@@ -900,7 +898,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 }, {
     id: 84,
     title: '<b>Woodcutting Guide</b>',
-    message: 'Your final task is to donate your eight noted <note>Logs</note> to the guild chest.',
+    message: 'Your final task is to donate your noted <note>Logs</note> to the guild chest.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [335, 47]}),
@@ -1008,7 +1006,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: 'Guild Master',
     message: '"There are many skills to master in this world. You have shown skill in one, but you still have much to learn."\n\n' + 
 
-    '<i><note>Guild Master</note> gives you a <note>Copper Pickaxe</note>, <note>Copper Axe</note> and <note>Fishing net</note></i>.\n\n' + 
+    '<i><note>Guild Master</note> gives you a <note>Copper Pickaxe</note>, <note>Copper Axe</note>, <note>Fishing net</note> and a <note>Saw</note></i>.\n\n' + 
 
     '"Many challenges await you. Soon you\'re curiosity may lead you to explore the rest of <note>Eloria</note>.\n' +
     'You will be needing these."\n\n' +
@@ -1025,6 +1023,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [9, 1] }), // Copper pickaxe
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [1, 1] }), // Copper axe
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [117, 1] }), // Fishing net
+        buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [118, 1] }), // Saw
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [21, 1] }), // Copper helmet
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [42, 1] }), // Copper Platebody
         buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [29, 1] }), // Copper Platelegs

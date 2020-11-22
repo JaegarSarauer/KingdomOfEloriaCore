@@ -389,20 +389,34 @@ Get.Character.TrainingGuide(121, 2), // Training Woodcutting Guilde Guide
 Get.Character.TourGuide(122, 0), // Upstairs Mining Guild Guide
 Get.Character.TourGuide(123, 1), // Upstairs Fishing Guilde Guide
 Get.Character.TourGuide(124, 2), // Upstairs Woodcutting Guilde Guide
-Get.Character.Human(125, 'Doctor', 23, [null, null, null, 363, 489], 4, HairColors.Gray, [{
-    interfaceID: 0,
-    id: 4,
-    name: 'Talk To',
-    steps: [
-        buildStepList(StepList.WALK_ADJACENT),
-        [
-            buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-            buildStep(StepType.SHOW_DIALOG, { params: [20] } )
-        ]
-    ],
-}], 7, EyeColors.Blue ),
-Get.Character.BabyDragon(126, 'Baby Blue Dragon', 1, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	Get.Character.BabyDragon(87, 'Baby Blue Dragon', 1, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
-Get.Character.AdolescentDragon(127, 'Baby Green Dragon', 2, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	Get.Character.AdolescentDragon(88, 'Adolescent Blue Dragon', 2, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
-Get.Character.BabyDragon(128, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	Get.Character.BabyDragon(89, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),
+(() => {
+    let wizard = Get.Character.Human(125, 'Guild Wizard', 23, [539, 86, 618, 541, 543], HairStyle.RightSideSwipe, HairColors.Red, [{
+        interfaceID: 0,
+        id: 4,
+        name: 'Talk To',
+        steps: [
+            buildStepList(StepList.WALK_ADJACENT),
+            [
+                buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+                buildStep(StepType.SHOW_DIALOG, { params: [20] } )
+            ]
+        ],}]
+    , 7, EyeColors.Blue );
+    wizard.stats = [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]];
+    return wizard;
+})(),
+Get.Character.BabyDragon(126, 'Baby Blue Dragon', 1, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	
+Get.Character.AdolescentDragon(127, 'Adolescent Green Dragon', 2, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	
+Get.Character.BabyDragon(128, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], [2, 2]]),	
+(() => {
+    let wizard = Get.Character.Human(129, 'Guild Wizard', 23, [539, 86, 618, 541, 543], HairStyle.RightSideSwipe, HairColors.Red, [{
+        interfaceID: 0,
+        id: 36,
+        name: 'Attack', // NPC only
+    }]);
+    wizard.stats = [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]];
+    wizard.isAggressiveTo = [91, 92, 93, 94, 98, 99, 100, 101, 102];
+    return wizard;
+})(),
 Get.Character.Wasp(130),
 ];

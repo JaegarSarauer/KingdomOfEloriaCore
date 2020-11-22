@@ -3010,7 +3010,25 @@ const ItemGetter = {
                 ],
             }],
         };
-    }
+    },
+    Saw : function(id, notedID, useActions) {
+        return {
+            id,
+            name: 'Saw',
+            noted: false,
+            notedID,
+            value: 2,
+            stackable: false,
+            description: '',
+            requirements: ItemDetail.build([
+                ItemDetail.levelSkillDetail('1+', 18, 'USE'),
+                ItemDetail.levelSkillDetail(5, 17, 'INCINERATE'),
+            ]),
+            spriteIndex: 119,
+            essenceValue: EssenceValue(5, 3, [ShardCatalog.SHARP(1), ShardCatalog.EARTH(1), ShardCatalog.METAL(2)]),
+            useActions
+        };
+    },
 };
 
 const Interface = {
@@ -3102,7 +3120,8 @@ const Interface = {
             steps: steps,
         };
     },
-        BuildFishingPool: function (id, name, logsId, fishingLevel, constructionLevel, constructionObject, xp, campName) {
+        BuildFishingPool: function (id, name, logsId, fishingLevel, constructionLevel, constructionObject, xp, campName, sawID = null) {
+            sawID = sawID == null ? 118 : sawID;
             return {
                 id: id,
                 name: name,
@@ -3110,7 +3129,7 @@ const Interface = {
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [logsId, 5] }),
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [117, 1] }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [sawID, 1] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, constructionLevel] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, fishingLevel] }),
                     buildStep(StepType.CREATE_CONSTRUCTION_OBJECT, {
@@ -3231,7 +3250,8 @@ const Interface = {
                 ],
             };
         },
-        BuildLumberCamp: function (id, name, reqLogId, reqAxeId, reqWcLevel, reqConstructionLevel, constructionObjectId, xp, campName) {
+        BuildLumberCamp: function (id, name, reqLogId, reqAxeId, reqWcLevel, reqConstructionLevel, constructionObjectId, xp, campName, sawID = null) {
+            sawID = sawID == null ? 118 : sawID;
             return {
                 id: id,
                 name: name,
@@ -3240,7 +3260,7 @@ const Interface = {
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [reqLogId, 5] }), // logs
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [reqAxeId, 1] }), // axe
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }), //saw
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [sawID, 1] }), //saw
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, reqConstructionLevel] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [9, reqWcLevel] }),
                     buildStep(StepType.CREATE_CONSTRUCTION_OBJECT, {
@@ -3278,7 +3298,8 @@ const Interface = {
                 ],
             };
         },
-        BuildMiningCamp: function (id, name, reqLogId, reqPickaxeId, reqMiningLevel, reqConstructionLevel, constructionObjectId, xp, campName) {
+        BuildMiningCamp: function (id, name, reqLogId, reqPickaxeId, reqMiningLevel, reqConstructionLevel, constructionObjectId, xp, campName, sawID = null) {
+            sawID = sawID == null ? 118 : sawID;
             return {
                 id: id,
                 name: name,
@@ -3287,7 +3308,7 @@ const Interface = {
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [reqLogId, 5] }),
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [reqPickaxeId, 1] }),
-                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }),
+                    buildStep(StepType.HAS_INVENTORY_ITEM, { params: [sawID, 1] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, reqConstructionLevel] }),
                     buildStep(StepType.HAS_SKILL_LEVEL, { params: [10, reqMiningLevel] }),
                     buildStep(StepType.CREATE_CONSTRUCTION_OBJECT, {
@@ -5090,6 +5111,67 @@ const WorldObject = {
                         ],
                     }],
                 spriteIndex: spriteIndex,
+            }
+        },
+        DoorTollLocked: function(id, name, tollAmount, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
+            return {
+                id: id,
+                name: name,
+                description: description,
+                modelName: 'DOOR',
+                modelParams: {
+                    BASE: {
+                        spriteID: spriteID,
+                    }
+                },
+                actions: [{
+                    interfaceID: 0,
+                    id: 23,
+                    name: 'Go Through Door',
+                    steps: [
+                        buildStepList(StepList.WALK_ADJACENT),
+                        [
+                            buildStep(StepType.IS_IN_AREA, {
+                                stepResultFail: StepResult.NEXT_STEP_LIST,
+                                params: [true, entryPoint.x, entryPoint.y, entryPoint.x, entryPoint.y]
+                            }),
+                            buildStep(StepType.HAS_INVENTORY_ITEM, {
+                                params: [0, tollAmount],
+                                stepResultFail: StepResult.END_ACTION,
+                            }),
+                            buildStep(StepType.REMOVE_INVENTORY_ITEM, {
+                                params: [0, tollAmount],
+                            }),
+                            buildStep(StepType.TELEPORT, {
+                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, 0],
+                                stepResultPass: StepResult.END_ACTION,
+                            })
+                        ], 
+                        [
+                            buildStep(StepType.IS_IN_AREA, {
+                                stepResultFail: StepResult.END_ACTION,
+                                params: [true, exitPoint.x - 1, exitPoint.y - 1, exitPoint.x + 1, exitPoint.y]
+                            }),
+                            buildStep(StepType.HAS_INVENTORY_ITEM, {
+                                params: [0, tollAmount],
+                                stepResultFail: StepResult.END_ACTION,
+                            }),
+                            buildStep(StepType.REMOVE_INVENTORY_ITEM, {
+                                params: [0, tollAmount],
+                            }),
+                            buildStep(StepType.TELEPORT, {
+                                params: [mapID, exitPoint.x, exitPoint.y, exitPoint.x, exitPoint.y, 0,
+                                [
+                                    [buildStep(StepType.TELEPORT, {
+                                        params: [mapID, entryPoint.x, entryPoint.y, entryPoint.x, entryPoint.y, 0],
+                                        stepResultPass: StepResult.END_ACTION,
+                                    })]
+                                ]],
+                                stepResultPass: StepResult.END_ACTION,
+                            })
+                        ]
+                    ],
+                }],
             }
         },
         DoorSkillLocked: function(id, name, skillID, skillLevelRequirement, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
@@ -6954,6 +7036,7 @@ const Character = {
         let guide = this.BaseGuide(id, guildID);
         let questID = Guilds[guildID].quest.entrance_exam.id;
         let dialogs = Guilds[guildID].quest.entrance_exam.dialogs;
+        let sawID = Guilds[guildID].quest.entrance_exam.items.sawID;
 
         const questTimerID = 20;
 
@@ -7021,6 +7104,11 @@ const Character = {
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),
+                    buildStep(StepType.REMOVE_INVENTORY_ITEM, {
+                        params: [sawID, 500],
+                        stepResultPass: 'NEXT_STEP',
+                        stepResultFail: 'NEXT_STEP',
+                    },),
                     buildStep(StepType.SHOW_DIALOG, { // Speak to your guide to complete your exam.
                         params: [dialogs.PASSED_EXAM],
                         stepResultPass: 'END_ACTION',

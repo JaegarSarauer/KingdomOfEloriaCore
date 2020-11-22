@@ -213,6 +213,9 @@ function loadMapCharacters(JSONMap) {
         }
         let isAggressive = obj.properties && obj.properties.isAggressive || false;
         let attackNPCs = obj.properties && obj.properties.attackNPC || false;
+        if ((obj.properties && obj.properties.id != null)) {
+            id = obj.properties.id;
+        }
 
         let npcDef = new EntityData(x, y, id, bounds, isAggressive, tiledID);
         if (obj.properties && obj.properties.dialogMessage) {
@@ -239,7 +242,11 @@ function loadItemSpawns(JSONMap) {
         let y = Math.floor(obj.y / (obj.height * 2)) - 1;
         let itemAmount = obj.properties && obj.properties.itemAmount || 1;
         let isNoted = obj.properties && obj.properties.isNoted || false;
+        let idOverride = (obj.properties && obj.properties.id != null && obj.properties.id >= 0) ? obj.properties.id : null;
         try {
+            if (idOverride != null) {
+                id = idOverride;
+            }
             if (isNoted) {
                 id = Item.Item[id].notedID || id;
             } else {
