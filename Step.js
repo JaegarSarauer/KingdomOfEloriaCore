@@ -577,14 +577,14 @@ module.exports.StepType = StepType = {
         id: 'SELL_ITEM_TO_SHOP',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number', 'object|null', 'number'], //itemID, maxSellAmount, itemStateDef, price
+        paramTypes: ['number', 'number', 'number', 'object|null'], //slotID, itemID, maxSellAmount, itemStateDef
         params: [],
     },
     BUY_ITEM_FROM_SHOP: {
         id: 'BUY_ITEM_FROM_SHOP',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'number', 'object|null', 'number'], //itemID, maxBuyAmount, itemStateDef, price
+        paramTypes: ['number', 'number', 'number', 'object|null'], //slotID, itemID, maxBuyAmount, itemStateDef
         params: [],
     },
     HAD_FIRST_DEATH: {

@@ -263,7 +263,7 @@ const ItemGetter = {
         };
     },
     BaseCosmeticHeadPiece: (id, cosmeticID, name, description, spriteIndex ) => {
-        let result = Get.Item.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
+        let result = ItemGetter.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
         
         result.model = {
             HEAD_WORN: {
@@ -294,7 +294,7 @@ const ItemGetter = {
         return result;
     },
     BaseCosmeticChestPiece: (id, cosmeticID, name, description, spriteIndex, longSleeve = true ) => {
-        let result = Get.Item.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
+        let result = ItemGetter.BaseCosmetic(id, cosmeticID, name, description, spriteIndex );
         
         result.model = {
             RIGHT_SHOULDER_WORN_SHIRT: {
@@ -370,7 +370,7 @@ const ItemGetter = {
         return result;
     },
     BaseCosmeticLegPiece: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.BaseCosmetic(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.BaseCosmetic(id, cosmeticID, name, description, spriteIndex);
 
         result.model = {
             LEFT_THIGH_WORN_PANTS: {
@@ -435,7 +435,7 @@ const ItemGetter = {
     },
     // Creatable
     CosmeticHat: (id, cosmeticID, name, description, spriteIndex, yAnchor = null, xAnchor = null) => {
-        let result = Get.Item.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
         if (yAnchor != null) {
             result.model.HEAD_WORN.anchor.y = yAnchor;
         }
@@ -445,51 +445,51 @@ const ItemGetter = {
         return result;
     },
     CosmeticHatBeanie: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
         let head = result.model.HEAD_WORN;
         head.anchor = { x : 0.525, y : 0.85 };
         return result;
     },
     CosmeticHatBear: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
         let head = result.model.HEAD_WORN;
         head.anchor = { x : 0.6, y : 0.9 };
         head.position.y += 0.6;
         return result;
     },
     CosmeticHatFriendlyFire: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
         let head = result.model.HEAD_WORN;
         head.anchor = { x : 0.15, y : 0.85 };
         head.position = { x : 0.15, y : -0.7 };
         return result;
     },
     CosmeticHatJester: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
         let head = result.model.HEAD_WORN;
         head.anchor = { x : 0.525, y : 0.8 };
         return result;
     },
     CosmeticHatAnimalWithTail: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.CosmeticHat(id, cosmeticID, name, description, spriteIndex);
         let head = result.model.HEAD_WORN;
         head.anchor = { x : 0.35, y : 0.85 };
         return result;
     },
     CosmeticSunglasses: (id, cosmeticID, name, description, spriteIndex, yAnchor = 0.5 ) => {
-        let result = Get.Item.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.BaseCosmeticHeadPiece(id, cosmeticID, name, description, spriteIndex);
         result.model.HEAD_WORN.anchor = { x: 0.5, y: yAnchor };
         result.model.HEAD_WORN.position.y = -0.375;
         result.model.HEAD_WORN.hideParts = null;
         return result;
     },
     CosmeticShirt: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
 
         return result;
     },
     CosmeticShortSleeveShirt: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
         delete result.model.RIGHT_FOREARM_WORN_SHIRT;
         delete result.model.LEFT_FOREARM_WORN_SHIRT;
         result.model.CHEST_WORN_SHIRT.anchor.y = 0.7;
@@ -498,13 +498,13 @@ const ItemGetter = {
         return result;
     },
     CosmeticShirtHustler: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
         result.model.RIGHT_SHOULDER_WORN_SHIRT.position.x -= 0.05;
         result.model.LEFT_SHOULDER_WORN_SHIRT.position.x += 0.05;
         return result;
     },
     CosmeticShirtJesterFancyShoulder: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.BaseCosmeticChestPiece(id, cosmeticID, name, description, spriteIndex);
         result.model.RIGHT_SHOULDER_WORN_SHIRT.anchor = { x: 0.6, y: 0.18 };
         result.model.RIGHT_SHOULDER_WORN_SHIRT.position = {x: -0.3, y: 0.0};
         result.model.LEFT_SHOULDER_WORN_SHIRT.anchor = { x: 0.4, y: 0.18 };
@@ -512,7 +512,7 @@ const ItemGetter = {
         return result;
     },
     CosmeticPants: (id, cosmeticID, name, description, spriteIndex) => {
-        let result = Get.Item.BaseCosmeticLegPiece(id, cosmeticID, name, description, spriteIndex);
+        let result = ItemGetter.BaseCosmeticLegPiece(id, cosmeticID, name, description, spriteIndex);
 
         return result;
     },
@@ -2946,7 +2946,7 @@ const ItemGetter = {
         return item;
     },
     Pan: function(id) {
-        let pan = Get.Item.Item(id, null, 'Pan', 2, 501, 'Put dough inside and bake some goods.', EssenceValue(5, 2, [ShardCatalog.EARTH(10)]), true );
+        let pan = this.Item(id, null, 'Pan', 2, 501, 'Put dough inside and bake some goods.', EssenceValue(5, 2, [ShardCatalog.EARTH(10)]), true );
 
         pan.actions = [{
             interfaceID: 5,
@@ -5989,7 +5989,7 @@ const Character = {
             ItemDetail.levelSkillDetail(30, 20, 'STEAL'),
         ]);
         human.stats = [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]];
-        human.drops =  [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[128, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], Get.DropTables.ItemPickupPages(128), Get.DropTables.TeleportScrolls(350)];
+        human.drops =  [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]], [[128, 10], [636, 1, 1, 6], [638, 1, 1, 3], [640, 1, 1, 1]], DropTables.ItemPickupPages(128), DropTables.TeleportScrolls(350)];
         human.isGuard = true;
         human.actions = [{
             interfaceID: 0,
@@ -6038,7 +6038,7 @@ const Character = {
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.ROLL_DROP_TABLE, { 
-                    params: [50, Get.DropTables.UncutGems(50).slice(1)],
+                    params: [50, DropTables.UncutGems(50).slice(1)],
                     stepResultFail: StepResult.NEXT_STEP
                 }),
                 buildStep(StepType.GIVE_XP, { params: [20, 50] }),
@@ -7614,19 +7614,6 @@ const Character = {
     },
 };
 
-
-const Get = {
-    Action,
-    Item: ItemGetter,
-    WorldObject,
-    Model,
-    Interface,
-    Character,
-    DropTables,
-    Recipes
-}
-
-module.exports.Get = Get;
 module.exports.ColoredClothes = {
     GetShirtStyleAndColorFromId : (id) => {
         let styleAndColor = coloredShirtStyleAndColorById[id];
@@ -7680,7 +7667,15 @@ module.exports.ColoredClothes = {
         return result;
     },
 };
+
+
 module.exports.EmperorTeamNPCIds = EmperorTeamNPCIds;
 module.exports.GuildNPCIds = GuildNPCIds;
-
-
+module.exports.Action = Action;
+module.exports.Item = ItemGetter;
+module.exports.WorldObject = WorldObject;
+module.exports.Model = Model;
+module.exports.Interface = Interface;
+module.exports.Character = Character;
+module.exports.DropTables = DropTables;
+module.exports.Recipes = Recipes;

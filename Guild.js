@@ -1,4 +1,5 @@
 const Bounds = require('../def/Bounds');
+const ItemStates = require('../def/interface/ItemStateDef');
 
 const GuardType = {
     // Mining Guild
@@ -76,8 +77,8 @@ class ShopUpgrade {
         let tiersIndex = tierToIndex(tier);
         for (let i = 0; i < this.shopStock.length; ++i) {
             let itemData = this.shopStock[i];
-            if (itemData.length == 2 && itemData[1].length > tiersIndex) {
-                shop.push([itemData[0], itemData[1][tiersIndex]]);
+            if (itemData.length >= 2 && itemData.length <= 3 && itemData[1].length > tiersIndex) {
+                shop.push([itemData[0], itemData[1][tiersIndex], itemData[2]]);
             }
         }
         return shop;
@@ -193,6 +194,7 @@ const Guilds = [{
             [2, [0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 10]],
             [10, [0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 10]],
             [37, [0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3]],
+            [42, [0,0,0,0,0,0,0,0,0,1,2,3,4]]
         ]),
         new ShopUpgrade(13, 'Tergaron Metalsmith Store', [
             [63, [1, 2, 3, 5, 8, 10, 15, 20, 25, 30, 50]],
@@ -212,6 +214,7 @@ const Guilds = [{
             [57, [0, 0, 0, 0, 1, 1, 5, 10, 15, 20, 25]],
             [75, [0, 0, 0, 0, 0, 0, 0, 10, 20, 30, 50]],
             [58, [0, 0, 0, 0, 0, 0, 0, 1, 5, 10, 20]],
+            [329, [0, 0, 0, 0, 0, 0, 1, 2, 3, 5, 10], ItemStates.ItemStates.STORAGE_BAG.build(55, 5, 5)],
         ]),
     ],
     tier2Barricades: [[71, 362], [74, 362], [75, 361], [76, 361], [77, 362], [80, 362]],

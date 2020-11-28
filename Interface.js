@@ -5,7 +5,7 @@ const StepResult = require('./Step').StepResult;
 const StepType = require('./Step').StepType;
 const buildStep = require('./Step').buildStep;
 const buildStepList = require('./Step').buildStepList;
-const Get = require('./Getter').Get;
+const Get = require('./Getter');
 const EssenceCatalog = require('./Essence').EssenceCatalog;
 const HairStyle = require('./Model').HairStyle;
 const SpriteColor = require('./Model').SpriteColor;
@@ -976,7 +976,7 @@ const Interface = [
             },
             {
                 id: 61,
-                name: 'Sew Blue Wizard Hat (1 Crafting) (3 Cloth, 3 Thread)',
+                name: 'Sew Blue Wizard Hat (1 Crafting) (3 Silk, 3 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -992,7 +992,7 @@ const Interface = [
             },
             {
                 id: 62,
-                name: 'Sew Blue Wizard Bottom (4 Crafting) (4 Cloth, 4 Thread)',
+                name: 'Sew Blue Wizard Bottom (4 Crafting) (4 Silk, 4 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1008,7 +1008,7 @@ const Interface = [
             },
             {
                 id: 63,
-                name: 'Sew Blue Wizard Top (8 Crafting) (5 Cloth, 5 Thread)',
+                name: 'Sew Blue Wizard Top (8 Crafting) (5 Silk, 5 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1024,7 +1024,7 @@ const Interface = [
             },
             {
                 id: 64,
-                name: 'Sew Green Wizard Hat (10 Crafting) (3 Cloth, 3 Thread)',
+                name: 'Sew Green Wizard Hat (10 Crafting) (3 Silk, 3 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1040,7 +1040,7 @@ const Interface = [
             },
             {
                 id: 65,
-                name: 'Sew Green Wizard Bottom (14 Crafting) (4 Cloth, 4 Thread)',
+                name: 'Sew Green Wizard Bottom (14 Crafting) (4 Silk, 4 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1056,7 +1056,7 @@ const Interface = [
             },
             {
                 id: 66,
-                name: 'Sew Green Wizard Top (18 Crafting) (5 Cloth, 5 Thread)',
+                name: 'Sew Green Wizard Top (18 Crafting) (5 Silk, 5 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1072,7 +1072,7 @@ const Interface = [
             },
             {
                 id: 67,
-                name: 'Sew Purple Wizard Hat (20 Crafting) (3 Cloth, 3 Thread)',
+                name: 'Sew Purple Wizard Hat (20 Crafting) (3 Silk, 3 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1088,7 +1088,7 @@ const Interface = [
             },
             {
                 id: 68,
-                name: 'Sew Purple Wizard Bottom (24 Crafting) (4 Cloth, 4 Thread)',
+                name: 'Sew Purple Wizard Bottom (24 Crafting) (4 Silk, 4 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1104,7 +1104,7 @@ const Interface = [
             },
             {
                 id: 69,
-                name: 'Sew Purple Wizard Top (28 Crafting) (5 Cloth, 5 Thread)',
+                name: 'Sew Purple Wizard Top (28 Crafting) (5 Silk, 5 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1120,7 +1120,7 @@ const Interface = [
             },
             {
                 id: 70,
-                name: 'Sew Burgundy Wizard Hat (30 Crafting) (3 Cloth, 3 Thread)',
+                name: 'Sew Burgundy Wizard Hat (30 Crafting) (3 Silk, 3 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1136,7 +1136,7 @@ const Interface = [
             },
             {
                 id: 71,
-                name: 'Sew Burgundy Wizard Bottom (34 Crafting) (4 Cloth, 4 Thread)',
+                name: 'Sew Burgundy Wizard Bottom (34 Crafting) (4 Silk, 4 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1152,7 +1152,7 @@ const Interface = [
             },
             {
                 id: 72,
-                name: 'Sew Burgundy Wizard Top (38 Crafting) (5 Cloth, 5 Thread)',
+                name: 'Sew Burgundy Wizard Top (38 Crafting) (5 Silk, 5 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1477,7 +1477,7 @@ const Interface = [
             },
             {
                 id: 155,
-                name: 'Sew Item Bag (1 Crafting) (1 Drawstring, 3 Blue Cloth, 3 Thread)',
+                name: 'Sew Item Bag (1 Crafting) (1 Drawstring, 3 Blue Silk, 3 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1493,14 +1493,14 @@ const Interface = [
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You sew an item bag.']})]
                 ],
             },
-            Get.Interface.RepairBag(156, 'Repair Bag - 10 Uses (1 Blue Cloth, 1 Thread) (1 Crafting)', 87, 1, 1),
-            Get.Interface.RepairBag(157, 'Repair Bag - 25 Uses (1 Green Cloth, 1 Thread) (10 Crafting)', 88, 10, 2),
-            Get.Interface.RepairBag(158, 'Repair Bag - 50 Uses (1 Purple Cloth, 1 Thread) (20 Crafting)', 89, 20, 3),
-            Get.Interface.RepairBag(159, 'Repair Bag - 100 Uses (1 Burgundy Cloth, 1 Thread) (30 Crafting)', 90, 30, 4),
-            Get.Interface.UpgradeBag(160, 'Upgrade Bag - Max 10 (1 Blue Cloth, 1 Thread) (1 Crafting)', 87, 1, 1),
-            Get.Interface.UpgradeBag(161, 'Upgrade Bag - Max 25 (1 Green Cloth, 1 Thread) (10 Crafting)', 88, 10, 2),
-            Get.Interface.UpgradeBag(162, 'Upgrade Bag - Max 50 (1 Purple Cloth, 1 Thread) (20 Crafting)', 89, 20, 3),
-            Get.Interface.UpgradeBag(163, 'Upgrade Bag - Max 100 (1 Burgundy Cloth, 1 Thread) (30 Crafting)', 90, 30, 4),
+            Get.Interface.RepairBag(156, 'Repair Bag - 10 Uses (1 Blue Silk, 1 Thread) (1 Crafting)', 87, 1, 1),
+            Get.Interface.RepairBag(157, 'Repair Bag - 25 Uses (1 Green Silk, 1 Thread) (10 Crafting)', 88, 10, 2),
+            Get.Interface.RepairBag(158, 'Repair Bag - 50 Uses (1 Purple Silk, 1 Thread) (20 Crafting)', 89, 20, 3),
+            Get.Interface.RepairBag(159, 'Repair Bag - 100 Uses (1 Burgundy Silk, 1 Thread) (30 Crafting)', 90, 30, 4),
+            Get.Interface.UpgradeBag(160, 'Upgrade Bag - Max 10 (1 Blue Silk, 1 Thread) (1 Crafting)', 87, 1, 1),
+            Get.Interface.UpgradeBag(161, 'Upgrade Bag - Max 25 (1 Green Silk, 1 Thread) (10 Crafting)', 88, 10, 2),
+            Get.Interface.UpgradeBag(162, 'Upgrade Bag - Max 50 (1 Purple Silk, 1 Thread) (20 Crafting)', 89, 20, 3),
+            Get.Interface.UpgradeBag(163, 'Upgrade Bag - Max 100 (1 Burgundy Silk, 1 Thread) (30 Crafting)', 90, 30, 4),
             Get.Interface.ShowDialog(164, ''),
 
             Get.Interface.FletchIncinerate(165, 'Cut Arrow Shafts (5) (1 Fletching) (1 Log)', 5, 1, 1, 74, 5, 20, 'You cut 5 arrow shafts and the knife incinerates them.'),
@@ -1517,7 +1517,7 @@ const Interface = [
             Get.Interface.FletchIncinerate(176, 'Cut Magic Bow (55 Fletching) (1 Magic Log)', 317, 1, 55, 325, 1, 180, 'You cut a magic bow and the knife incinerates it.'),
             {
                 id: 177,
-                name: 'Sew Red Wizard Hat (40 Crafting) (3 Cloth, 3 Thread)',
+                name: 'Sew Red Wizard Hat (40 Crafting) (3 Silk, 3 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1533,7 +1533,7 @@ const Interface = [
             },
             {
                 id: 178,
-                name: 'Sew Red Wizard Bottom (44 Crafting) (4 Cloth, 4 Thread)',
+                name: 'Sew Red Wizard Bottom (44 Crafting) (4 Silk, 4 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1549,7 +1549,7 @@ const Interface = [
             },
             {
                 id: 179,
-                name: 'Sew Red Wizard Top (48 Crafting) (5 Cloth, 5 Thread)',
+                name: 'Sew Red Wizard Top (48 Crafting) (5 Silk, 5 Thread)',
                 flags: ['REPEAT_ACTION'],
                 actionInterval: 4,
                 steps: [
@@ -1563,8 +1563,8 @@ const Interface = [
                     buildStep(StepType.SEND_CLIENT_MESSAGE, {params: ['You sew a red wizard top.']})]
                 ],
             },
-            Get.Interface.RepairBag(180, 'Repair Bag - 200 Uses (1 Red Cloth, 1 Thread) (40 Crafting)', 537, 40, 5),
-            Get.Interface.UpgradeBag(181, 'Upgrade Bag - Max 200 (1 Red Cloth, 1 Thread) (40 Crafting)', 537, 40, 5),
+            Get.Interface.RepairBag(180, 'Repair Bag - 200 Uses (1 Red Silk, 1 Thread) (40 Crafting)', 537, 40, 5),
+            Get.Interface.UpgradeBag(181, 'Upgrade Bag - Max 200 (1 Red Silk, 1 Thread) (40 Crafting)', 537, 40, 5),
             {
                 id: 182,
                 name: 'Sew Grey Pelt Pants (30 Crafting) (4 Pelts, 4 Thread)',
@@ -1844,7 +1844,7 @@ const Interface = [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [7, 3] }), // logs
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [61, 2] }), // bars
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }), //saw
-                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, 20] })],
+                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, 30] })],
                     [buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [7, 3] }),
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [61, 2] }),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [679, 1] }), //crab pot

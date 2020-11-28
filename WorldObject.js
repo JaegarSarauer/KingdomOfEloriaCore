@@ -6,7 +6,7 @@ const StepType = require('./Step').StepType;
 const buildStep = require('./Step').buildStep;
 const buildStepList = require('./Step').buildStepList;
 const Entity = require('../typedef/Entity');
-const Get = require('./Getter').Get;
+const Get = require('./Getter');
 const ItemDetail = require("./ItemDetail").ItemDetail;
 
 

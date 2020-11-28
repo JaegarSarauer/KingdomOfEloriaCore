@@ -1,6 +1,8 @@
 const Item = require('./Item').Item;
 const Skill = require('./Skill').Skill;
 const Spells = require('./Spells').Spells;
+const Interface = require('./Interface');
+const Get = require('./Getter');
 
 const GuideIcons = {
     ITEM: 'Items',
@@ -8,6 +10,12 @@ const GuideIcons = {
     SPELL: 'spellIcons',
 };
 
+/**
+ * Cook Shrimp
+ * [Shrimp icon]
+ * Cooking Level 1
+ * (with Fishing Level 1)
+ */
 const MultiSkillReqBuilder = (primarySkillLevel, secondarySkillsArray, iconType, iconID, description) => {
     let fullDesc = description;
     if (secondarySkillsArray != null) {
@@ -33,6 +41,11 @@ const MultiSkillReqBuilder = (primarySkillLevel, secondarySkillsArray, iconType,
     };
 };
 
+/**
+ * Fishing Shrimp
+ * [Shrimp icon]
+ * Fishing Level 1
+ */
 const SingleSkillBuilder = (primarySkillLevel, iconType, iconID, description) => {
     return MultiSkillReqBuilder(primarySkillLevel, null, iconType, iconID, description);
 }
@@ -66,131 +79,368 @@ const BuildGuidesFromSpells = (skillID) => {
     return guides;
 }
 
+const BuildCookingRecipesGuide = () => {
+    let guides = [];
+    let keys = Object.keys(Get.Recipes);
+    for(let i = 0; i > keys.length; ++i) {
+        let recipe = Get.Recipes[keys[i]];
+        let desc = 'Mix ';
+        for(let j = 0; j < recipe.itemIdsRequired.length; j++) {
+            let itemToMix = Item[recipe.itemIdsRequired[j]];
+            desc += itemToMix.name;
+            if (j != recipe.itemIdsRequired.length - 1) {
+                desc += ',';
+            }
+            desc += ' ';
+        }
+        desc += 'to make ' + (Item[recipe.iconItemId].name);
+
+        guides.push(SingleItemSkillBuilder(recipe.levelRequirement, recipe.iconItemId, desc));
+    }
+    return guides;
+};
+
+const SmeltSkillBuilder = (smeltBarInterfaceId) => {
+    let interface = Interface.Interface[smeltBarInterfaceId];
+    let bar = Item[interface.barId];
+    return SingleSkillBuilder(interface.smithingLevel, GuideIcons.ITEM, interface.barId, 'Smelt ' + bar.name);
+};
+
+const BuildSmithingGuide = (metalName, smeltBarInterfaceId, smithingInterfaceIds) => {
+    let content = [
+        SmeltSkillBuilder(smeltBarInterfaceId)
+    ];
+
+    for(let i = 0; i < smithingInterfaceIds.length; ++i) {
+        let interface = Interface.Interface[smithingInterfaceIds[i]];
+        let smithedItem = Item[interface.smithedItemId];
+        content.push(SingleSkillBuilder(interface.smithingLevel, GuideIcons.ITEM, interface.smithedItemId, 'Smith ' + smithedItem.name));
+    }
+
+    return {
+        title: metalName,
+        content: content
+    }
+};
+
 const BuildMagicFocusGuides = () => {
     return BuildGuidesFromSpells(6);
 }
 
 const SkillGuides = [{
     id: 0,
-    content: [
-        SingleItemSkillBuilder(1, 17, 'Wield copper weapons'),
-        SingleItemSkillBuilder(10, 18, 'Wield iron weapons'),
-        SingleItemSkillBuilder(15, 526, 'Wield bone weapons'),
-        SingleItemSkillBuilder(20, 19, 'Wield steel weapons'),
-        SingleItemSkillBuilder(30, 20, 'Wield nelenite weapons'),
-        SingleItemSkillBuilder(35, 532, 'Wield ogre weapons'),
-        SingleItemSkillBuilder(40, 273, 'Wield gothite weapons'),
-        SingleItemSkillBuilder(50, 301, 'Wield osmium weapons'),
-    ],
+    contents: [
+        {
+            title: 'Wield',
+            content: [
+                SingleItemSkillBuilder(1, 17, 'Wield copper weapons'),
+                SingleItemSkillBuilder(10, 18, 'Wield iron weapons'),
+                SingleItemSkillBuilder(15, 526, 'Wield bone weapons'),
+                SingleItemSkillBuilder(20, 19, 'Wield steel weapons'),
+                SingleItemSkillBuilder(30, 20, 'Wield nelenite weapons'),
+                SingleItemSkillBuilder(35, 532, 'Wield ogre weapons'),
+                SingleItemSkillBuilder(40, 273, 'Wield gothite weapons'),
+                SingleItemSkillBuilder(50, 301, 'Wield osmium weapons'),
+            ],
+        }
+    ]
 }, {
     id: 1,
-    content: [
+    contents: [
+
     ],
 }, {
     id: 2,
-    content: [
-        SingleItemSkillBuilder(1, 42, 'Wear copper armor'),
-        SingleItemSkillBuilder(10, 43, 'Wear iron armor'),
-        SingleItemSkillBuilder(20, 44, 'Wear steel armor'),
-        SingleItemSkillBuilder(30, 45, 'Wear nelenite armor'),
-        SingleItemSkillBuilder(40, 263, 'Wear gothite armor'),
-        SingleItemSkillBuilder(50, 291, 'Wear osmium armor'),
-    ],
+    contents: [
+        {
+            title: 'Wear',
+            content: [
+                SingleItemSkillBuilder(1, 42, 'Wear copper armor'),
+                SingleItemSkillBuilder(10, 43, 'Wear iron armor'),
+                SingleItemSkillBuilder(20, 44, 'Wear steel armor'),
+                SingleItemSkillBuilder(30, 45, 'Wear nelenite armor'),
+                SingleItemSkillBuilder(40, 263, 'Wear gothite armor'),
+                SingleItemSkillBuilder(50, 291, 'Wear osmium armor'),
+            ],
+        }
+    ]
 }, {
     id: 3,
-    content: [
-        SingleItemSkillBuilder(1, 33, 'Wield regular bows'),
-        SingleItemSkillBuilder(1, 68, 'Shoot copper arrows'),
-        SingleItemSkillBuilder(10, 43, 'Wield oak bows'),
-        SingleItemSkillBuilder(10, 69, 'Shoot iron arrows'),
-        SingleItemSkillBuilder(20, 44, 'Wield ash bows'),
-        SingleItemSkillBuilder(20, 70, 'Shoot iron arrows'),
-        SingleItemSkillBuilder(25, 44, 'Shoot wolf claw arrows'),
-        SingleItemSkillBuilder(25, 44, 'Shoot rock bolts'),
-        SingleItemSkillBuilder(30, 45, 'Wield fur bows'),
-        SingleItemSkillBuilder(30, 70, 'Shoot nelenite arrows'),
-        SingleItemSkillBuilder(35, 528, 'Wield skeleton bows'),
-        SingleItemSkillBuilder(35, 547, 'Wield anchor crossbows'),
-        SingleItemSkillBuilder(40, 319, 'Wield king maple bows'),
-        SingleItemSkillBuilder(40, 276, 'Shoot gothite arrows'),
-        SingleItemSkillBuilder(50, 321, 'Wield magic bows'),
-        SingleItemSkillBuilder(50, 304, 'Shoot gothite arrows'),
-    ],
+    contents: [
+        {
+            title: 'Wield',
+            content: [
+                SingleItemSkillBuilder(1, 33, 'Wield regular bows'),
+                SingleItemSkillBuilder(1, 68, 'Shoot copper arrows'),
+                SingleItemSkillBuilder(10, 43, 'Wield oak bows'),
+                SingleItemSkillBuilder(10, 69, 'Shoot iron arrows'),
+                SingleItemSkillBuilder(20, 44, 'Wield ash bows'),
+                SingleItemSkillBuilder(20, 70, 'Shoot iron arrows'),
+                SingleItemSkillBuilder(25, 44, 'Shoot wolf claw arrows'),
+                SingleItemSkillBuilder(25, 44, 'Shoot rock bolts'),
+                SingleItemSkillBuilder(30, 45, 'Wield fur bows'),
+                SingleItemSkillBuilder(30, 70, 'Shoot nelenite arrows'),
+                SingleItemSkillBuilder(35, 528, 'Wield skeleton bows'),
+                SingleItemSkillBuilder(35, 547, 'Wield anchor crossbows'),
+                SingleItemSkillBuilder(40, 319, 'Wield king maple bows'),
+                SingleItemSkillBuilder(40, 276, 'Shoot gothite arrows'),
+                SingleItemSkillBuilder(50, 321, 'Wield magic bows'),
+                SingleItemSkillBuilder(50, 304, 'Shoot gothite arrows'),
+            ],
+        }
+    ]
 }, {
     id: 4,
-    content: [
+    contents: [
     ],
 }, {
     id: 5,
-    content: [
-        SingleItemSkillBuilder(1, 113, 'Wear copper chainmail'),
-        SingleItemSkillBuilder(10, 114, 'Wear iron chainmail'),
-        SingleItemSkillBuilder(20, 115, 'Wear steel chainmail'),
-        SingleItemSkillBuilder(30, 116, 'Wear nelenite chainmail'),
-        SingleItemSkillBuilder(40, 269, 'Wear gothite chainmail'),
-        SingleItemSkillBuilder(50, 297, 'Wear osmium chainmail'),
-    ],
+    contents: [
+        {
+            title: 'Wear',
+            content: [
+                SingleItemSkillBuilder(1, 113, 'Wear copper chainmail'),
+                SingleItemSkillBuilder(10, 114, 'Wear iron chainmail'),
+                SingleItemSkillBuilder(20, 115, 'Wear steel chainmail'),
+                SingleItemSkillBuilder(30, 116, 'Wear nelenite chainmail'),
+                SingleItemSkillBuilder(40, 269, 'Wear gothite chainmail'),
+                SingleItemSkillBuilder(50, 297, 'Wear osmium chainmail'),
+            ],
+        }
+    ]
 }, {
     id: 6,
-    content: [
-        ...BuildMagicFocusGuides(6),
-    ],
+    contents: [
+        {
+            title: 'Cast',
+            content: [
+                ...BuildMagicFocusGuides(6),
+            ],
+        }
+    ]
 }, {
     id: 7,
-    content: [
+    contents: [
     ],
 }, {
     id: 8,
-    content: [
-        SingleItemSkillBuilder(1, 93, 'Wear blue wizard robes'),
-        SingleItemSkillBuilder(10, 94, 'Wear green wizard robes'),
-        SingleItemSkillBuilder(20, 95, 'Wear purple wizard robes'),
-        SingleItemSkillBuilder(30, 96, 'Wear burgundy wizard robes'),
-        SingleItemSkillBuilder(35, 530, 'Wear ghostly equipment'),
-        SingleItemSkillBuilder(40, 539, 'Wear red wizard robes'),
-    ],
+    contents: [
+        {
+            title: 'Wear',
+            content: [
+                SingleItemSkillBuilder(1, 93, 'Wear blue wizard robes'),
+                SingleItemSkillBuilder(10, 94, 'Wear green wizard robes'),
+                SingleItemSkillBuilder(20, 95, 'Wear purple wizard robes'),
+                SingleItemSkillBuilder(30, 96, 'Wear burgundy wizard robes'),
+                SingleItemSkillBuilder(35, 530, 'Wear ghostly equipment'),
+                SingleItemSkillBuilder(40, 539, 'Wear red wizard robes'),
+            ],
+        }
+    ]
 }, {
     id: 9,
-    content: [
-        SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Use copper axes'),
-        SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT, 0, 'Chop pine trees'),
-        SingleSkillBuilder(10, GuideIcons.ITEM, 2, 'Use iron axes'),
-        SingleSkillBuilder(10, GuideIcons.WORLD_OBJECT, 1, 'Chop oak trees'),
-        SingleSkillBuilder(20, GuideIcons.ITEM, 3, 'Use steel axes'),
-        SingleSkillBuilder(20, GuideIcons.WORLD_OBJECT, 2, 'Chop ash trees'),
-        SingleSkillBuilder(30, GuideIcons.ITEM, 4, 'Use nelenite axes'),
-        SingleSkillBuilder(30, GuideIcons.WORLD_OBJECT, 3, 'Chop fur trees'),
-        SingleSkillBuilder(40, GuideIcons.ITEM, 157, 'Use gothite axes'),
-        SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 4, 'Chop king maple trees'),
-        SingleSkillBuilder(50, GuideIcons.ITEM, 172, 'Use osmium axes'),
-        SingleSkillBuilder(50, GuideIcons.WORLD_OBJECT, 5, 'Chop magic trees'),
+    contents: [
+        {
+            title: 'Items',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Use copper axes'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 2, 'Use iron axes'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 3, 'Use steel axes'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 4, 'Use nelenite axes'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 157, 'Use gothite axes'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 172, 'Use osmium axes'),
+            ]
+        },
+        {
+            title: 'World Objects',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT, 0, 'Chop pine trees'),
+                SingleSkillBuilder(10, GuideIcons.WORLD_OBJECT, 1, 'Chop oak trees'),
+                SingleSkillBuilder(20, GuideIcons.WORLD_OBJECT, 2, 'Chop ash trees'),
+                SingleSkillBuilder(30, GuideIcons.WORLD_OBJECT, 3, 'Chop fur trees'),
+                SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 4, 'Chop king maple trees'),
+                SingleSkillBuilder(50, GuideIcons.WORLD_OBJECT, 5, 'Chop magic trees'),
+            ]
+        },
     ],
 }, {
     id: 10,
-    content: [
-        SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Use copper pickaxes'),
-        SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT, 0, 'Mine copper rocks'),
-        SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT, 0, 'Mine clay rocks'),
-        SingleSkillBuilder(10, GuideIcons.ITEM, 2, 'Use iron pickaxes'),
-        SingleSkillBuilder(10, GuideIcons.WORLD_OBJECT, 1, 'Mine iron rocks'),
-        SingleSkillBuilder(20, GuideIcons.ITEM, 3, 'Use steel pickaxes'),
-        SingleSkillBuilder(20, GuideIcons.WORLD_OBJECT, 2, 'Mine coal rocks'),
-        SingleSkillBuilder(25, GuideIcons.WORLD_OBJECT, 2, 'Mine gold rocks'),
-        SingleSkillBuilder(30, GuideIcons.ITEM, 4, 'Use nelenite pickaxes'),
-        SingleSkillBuilder(30, GuideIcons.WORLD_OBJECT, 3, 'Mine nelenite rocks'),
-        SingleSkillBuilder(40, GuideIcons.ITEM, 157, 'Use gothite pickaxes'),
-        SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 4, 'Mine gothite rocks'),
-        SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 4, 'Mine pure coal rocks'),
-        SingleSkillBuilder(50, GuideIcons.ITEM, 172, 'Use osmium pickaxes'),
-        SingleSkillBuilder(50, GuideIcons.WORLD_OBJECT, 5, 'Mine osmium rocks'),
-        SingleSkillBuilder(60, GuideIcons.WORLD_OBJECT, 5, 'Mine gem rocks'),
+    contents: [
+        {
+            title: 'Items',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Use copper pickaxes'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 2, 'Use iron pickaxes'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 3, 'Use steel pickaxes'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 4, 'Use nelenite pickaxes'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 157, 'Use gothite pickaxes'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 172, 'Use osmium pickaxes'),
+            ]
+        },
+        {
+            title: 'World Objects',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT, 0, 'Mine copper rocks'),
+                SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT, 0, 'Mine clay rocks'),
+                SingleSkillBuilder(10, GuideIcons.WORLD_OBJECT, 1, 'Mine iron rocks'),
+                SingleSkillBuilder(20, GuideIcons.WORLD_OBJECT, 2, 'Mine coal rocks'),
+                SingleSkillBuilder(25, GuideIcons.WORLD_OBJECT, 2, 'Mine gold rocks'),
+                SingleSkillBuilder(30, GuideIcons.WORLD_OBJECT, 3, 'Mine nelenite rocks'),
+                SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 4, 'Mine gothite rocks'),
+                SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 4, 'Mine pure coal rocks'),
+                SingleSkillBuilder(50, GuideIcons.WORLD_OBJECT, 5, 'Mine osmium rocks'),
+                SingleSkillBuilder(60, GuideIcons.WORLD_OBJECT, 5, 'Mine gem rocks'),
+            ]
+        },
     ],
 }, {
     id: 11,
-    content: [
+    contents: [
     ],
 }, {
     id: 12,
-    content: [
+    contents: [
+        {
+            title: 'Fishing Pools',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT, 9, 'Use Shallow Fishing Pool'),
+                SingleSkillBuilder(30, GuideIcons.WORLD_OBJECT, 102, 'Use Crap Pot Fishing Pool'),
+                SingleSkillBuilder(30, GuideIcons.WORLD_OBJECT, 57, 'Use Deep Fishing Pool'),
+                SingleSkillBuilder(70, GuideIcons.WORLD_OBJECT, 103, 'Use Hand Fishing Pool'),
+            ]
+        },
+        {
+            title: 'Fish',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 47, 'Catch raw shrimp'),
+                SingleSkillBuilder(5, GuideIcons.ITEM, 785, 'Catch raw freshwater tuna'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 48, 'Catch raw sardine'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 49, 'Catch raw herring'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 50, 'Catch raw mullet'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 900, 'Catch raw crab'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 232, 'Catch raw boxfish'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 241, 'Catch raw rockfish'),
+                SingleSkillBuilder(60, GuideIcons.ITEM, 247, 'Catch raw starslug'),
+                SingleSkillBuilder(70, GuideIcons.ITEM, 844, 'Catch raw octopus'),
+            ]
+        }
     ],
+}, {
+    id: 13,
+    contents: [
+        {
+            title: 'Cook',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Cook shrimp'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Cook steak'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Cook egg'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Cook chicken'),
+                SingleSkillBuilder(5, GuideIcons.ITEM, 5, 'Cook freshwater Tuna'),
+                SingleSkillBuilder(8, GuideIcons.ITEM, 8, 'Cook chicken Pot Pie'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 10, 'Cook sardine'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 10, 'Cook meat pie'),
+                SingleSkillBuilder(14, GuideIcons.ITEM, 14, 'Cook cake'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 20, 'Cook herring'),
+                SingleSkillBuilder(25, GuideIcons.ITEM, 25, 'Cook octopus tentacle'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 30, 'Cook mullet'),
+                SingleSkillBuilder(35, GuideIcons.ITEM, 35, 'Cook crab'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 40, 'Cook boxfish'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 50, 'Cook rockfish'),
+                SingleSkillBuilder(60, GuideIcons.ITEM, 60, 'Cook starslug'),
+            ]
+        },
+        {
+            title: 'Recipes',
+            content: [
+                ...BuildCookingRecipesGuide(),
+            ]
+        }
+    ],
+}, {
+    id: 14,
+    contents: [
+        BuildSmithingGuide('Copper', 8, [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
+        BuildSmithingGuide('Iron', 9, [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]),
+        BuildSmithingGuide('Steel', 10, [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]),
+        {
+            title: 'Gold',
+            content: [
+                SmeltSkillBuilder(256),
+                MultiSkillReqBuilder(5, [5, 15], GuideIcons.ITEM, 672, 'Cast gold ring'),
+                MultiSkillReqBuilder(20, [20, 15], GuideIcons.ITEM, 674, 'Cast gold amulet'),
+            ]
+        },
+        BuildSmithingGuide('Nelenite', 11, [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]),
+        BuildSmithingGuide('Gothite', 116, [117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128]),
+        BuildSmithingGuide('Osmium', 129, [130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141]),
+    ],
+}, {
+    id: 15,
+    contents: [
+        {
+            title: 'Firing',
+            content: [
+                SingleSkillBuilder(10, GuideIcons.ITEM, 77, 'Fire clay pot'),
+            ]
+        },
+        {
+            title: 'Spinning',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 92, 'Spin thread'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 793, 'Spin yarn'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 677, 'Spin silk'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 41, 'Spin bowstring'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 330, 'Spin drawstring'),
+            ]
+        },
+        {
+            title: 'Casting',
+            content: [
+                MultiSkillReqBuilder(5, [5, 15], GuideIcons.ITEM, 672, 'Cast gold ring'),
+                MultiSkillReqBuilder(20, [20, 15], GuideIcons.ITEM, 674, 'Cast gold amulet'),
+            ]
+        },
+        {
+            title: 'Threading',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 329, 'Sew item bag'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 87, 'Repair bag (10 Uses)'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 88, 'Repair bag (25 Uses)'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 89, 'Repair bag (50 Uses)'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 90, 'Repair bag (100 Uses)'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 537, 'Repair bag (200 Uses)'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 87, 'Upgrade bag (Max 10)'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 88, 'Upgrade bag (Max 25)'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 89, 'Upgrade bag (Max 50)'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 90, 'Upgrade bag (Max 100)'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 537,'Upgrade bag (Max 200)'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 566, 'String copper golem fragment necklace'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 566, 'String clay golem fragment necklace'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 566, 'String iron golem fragment necklace'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 566, 'String steel golem fragment necklace'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 566, 'String nelenite golem fragment necklace'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 566, 'String gothite golem fragment necklace'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 566, 'String osmium golem fragment necklace'),
+                SingleSkillBuilder(60, GuideIcons.ITEM, 566, 'String gem golem fragment necklace'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 561, 'String wolf paw necklace'),
+            ]
+        },
+        {
+            title: 'Chiseling',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 523, 'Chisel chiseled stone'),
+            ]
+        },
+    ]
+}, {
+    id: 16,
+    contents : [
+        {
+            title: 'Fletch',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+
+            ]
+        }
+    ]
 }];

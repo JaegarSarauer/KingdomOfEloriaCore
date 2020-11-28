@@ -7,9 +7,9 @@ const buildStep = require('./Step').buildStep;
 const buildStepList = require('./Step').buildStepList;
 const Entity = require('../typedef/Entity');
 const Combat = require('../internal/Combat');
-const Get = require("./Getter").Get;
+const Get = require("./Getter");
 const ItemDetail = require("./ItemDetail").ItemDetail;
-const ItemStates = require('../def/interface/ItemStateDef').ItemStates;
+const ItemStates = require('../def/interface/ItemStateDef');
 const EssenceValue = require("./Essence").EssenceValue;
 const ShardCatalog = require("./Essence").ShardCatalog;
 const EssenceCatalog = require("./Essence").EssenceCatalog;
@@ -1762,7 +1762,7 @@ const Item = Object.freeze([
         ]),
         essenceValue: EssenceValue(65, 70, [ShardCatalog.AIR(5000), ShardCatalog.SOUL(500), ShardCatalog.FIRE(100), ShardCatalog.NATURE(100), ShardCatalog.BIND(200)]),
         spriteIndex: 183,
-        state: ItemStates.ITEM_CHARGE.build(0, 1000),
+        state: ItemStates.ItemStates.ITEM_CHARGE.build(0, 1000),
         useActions: [{
             interfaceID: 5,
             id: 11,
@@ -1830,7 +1830,7 @@ const Item = Object.freeze([
                 UIModel: null,
             },
         },
-        state: ItemStates.DONATE_AMOUNT.build(2),
+        state: ItemStates.ItemStates.DONATE_AMOUNT.build(2),
         actions: [{
             interfaceID: 5,
             id: 5,
@@ -1864,7 +1864,7 @@ const Item = Object.freeze([
         ]),
         essenceValue: EssenceValue(38, 70, [ShardCatalog.AIR(600), ShardCatalog.EARTH(600), ShardCatalog.SOUL(20), ShardCatalog.NATURE(500), ShardCatalog.BIND(20)]),
         spriteIndex: 194,
-        state: ItemStates.STORAGE_BAG.build(-1, 0, 1),
+        state: ItemStates.ItemStates.STORAGE_BAG.build(-1, 0, 1),
         actions: [{
             interfaceID: 5,
             id: 20,
@@ -3069,7 +3069,7 @@ const Item = Object.freeze([
         ]),
         essenceValue: EssenceValue(65, 70, [ShardCatalog.AIR(3130), ShardCatalog.EARTH(2430), ShardCatalog.SOUL(800), ShardCatalog.NATURE(100), ShardCatalog.FIRE(290)]),
         spriteIndex: 326,
-        state: ItemStates.CHARGE.build(20),
+        state: ItemStates.ItemStates.CHARGE.build(20),
         actions: [],
         useActions: [{
             interfaceID: 5,
@@ -3178,7 +3178,7 @@ const Item = Object.freeze([
         noted: false,
         value: 0,
         stackable: false,
-        state: ItemStates.INFORMATION.build('Full Indie DEMO NIGHT!\nJuly 2019'),
+        state: ItemStates.ItemStates.INFORMATION.build('Full Indie DEMO NIGHT!\nJuly 2019'),
         // requirements: ItemDetail.build([
         //     ItemDetail.levelSkillDetail(1, 17, 'INCINERATE'),
         // ]),
@@ -3243,17 +3243,17 @@ const Item = Object.freeze([
         ]),
         spriteIndex: 483,
     },
-    Get.Item.CutGem(659, 'Opal', 1, 13, 5, 1, ItemStates.CUT_GEM.build(0), 50, 385, 676),
-    Get.Item.CutGem(660, 'Topaz', 6, 17, 6, 2, ItemStates.CUT_GEM.build(0), 100, 389, 677),
-    Get.Item.CutGem(661, 'Quartz', 12, 21, 13, 3, ItemStates.CUT_GEM.build(0), 200, 393, 678),
-    Get.Item.CutGem(662, 'Jade', 18, 25, 23, 4, ItemStates.CUT_GEM.build(0), 300, 397, 679),
-    Get.Item.CutGem(663, 'Amber', 24, 29, 36, 5, ItemStates.CUT_GEM.build(0), 400, 401, 680),
-    Get.Item.CutGem(664, 'Sapphire', 30, 33, 51, 6, ItemStates.CUT_GEM.build(0), 500, 405, 681),
-    Get.Item.CutGem(665, 'Amethyst', 36, 37, 70, 7, ItemStates.CUT_GEM.build(0), 600, 409, 682),
-    Get.Item.CutGem(666, 'Emerald', 42, 41, 88, 8, ItemStates.CUT_GEM.build(0), 800, 413, 683),
-    Get.Item.CutGem(667, 'Ruby', 48, 45, 114, 9, ItemStates.CUT_GEM.build(0), 1000, 417, 684),
-    Get.Item.CutGem(668, 'Onyx', 54, 49, 212, 10, ItemStates.CUT_GEM.build(0), 1250, 423, 685),
-    Get.Item.CutGem(669, 'Diamond', 60, 53, 360, 11, ItemStates.CUT_GEM.build(0), 1500, 427, 686),
+    Get.Item.CutGem(659, 'Opal', 1, 13, 5, 1, ItemStates.ItemStates.CUT_GEM.build(0), 50, 385, 676),
+    Get.Item.CutGem(660, 'Topaz', 6, 17, 6, 2, ItemStates.ItemStates.CUT_GEM.build(0), 100, 389, 677),
+    Get.Item.CutGem(661, 'Quartz', 12, 21, 13, 3, ItemStates.ItemStates.CUT_GEM.build(0), 200, 393, 678),
+    Get.Item.CutGem(662, 'Jade', 18, 25, 23, 4, ItemStates.ItemStates.CUT_GEM.build(0), 300, 397, 679),
+    Get.Item.CutGem(663, 'Amber', 24, 29, 36, 5, ItemStates.ItemStates.CUT_GEM.build(0), 400, 401, 680),
+    Get.Item.CutGem(664, 'Sapphire', 30, 33, 51, 6, ItemStates.ItemStates.CUT_GEM.build(0), 500, 405, 681),
+    Get.Item.CutGem(665, 'Amethyst', 36, 37, 70, 7, ItemStates.ItemStates.CUT_GEM.build(0), 600, 409, 682),
+    Get.Item.CutGem(666, 'Emerald', 42, 41, 88, 8, ItemStates.ItemStates.CUT_GEM.build(0), 800, 413, 683),
+    Get.Item.CutGem(667, 'Ruby', 48, 45, 114, 9, ItemStates.ItemStates.CUT_GEM.build(0), 1000, 417, 684),
+    Get.Item.CutGem(668, 'Onyx', 54, 49, 212, 10, ItemStates.ItemStates.CUT_GEM.build(0), 1250, 423, 685),
+    Get.Item.CutGem(669, 'Diamond', 60, 53, 360, 11, ItemStates.ItemStates.CUT_GEM.build(0), 1500, 427, 686),
     Get.Item.Ore(670, 671, 'Gold Ore', 15, 430, 3.5),
     Get.Item.Note(671, 670, 'Gold Ore', 15, 430),
     Get.Item.GoldBar(672, 673, 'Gold Bar', 50, 431, 3.5),
