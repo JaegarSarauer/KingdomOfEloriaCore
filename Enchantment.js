@@ -164,7 +164,7 @@ module.exports.Enchantment = [{
     id: 15,
     name: 'Auto Consume',
     gemBonuses: [0.1, 0.0, 0.2, 0.3, 0.5, 0.8, 1, 0.9, 1.1, 1.2, 1.8],
-    enchantCost: 0.03,
+    enchantCost: 1,
     consumable: true,
     itemDefStateParams: ['ITEM_ID'],
 }];

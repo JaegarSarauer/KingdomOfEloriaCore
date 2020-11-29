@@ -966,6 +966,7 @@ const ItemGetter = {
     },
     Food: function(id, notedId, fullName, amountHealed, value, spriteIndex, description, essenceValue, stackable = false) {
         let result = this.Item(id, notedId, fullName, value, spriteIndex, description, essenceValue, stackable);
+        result.consumable = true;
         result.actions = [{
             actionInterval: 0,
             interfaceID: 5,
@@ -2987,6 +2988,7 @@ const ItemGetter = {
             id,
             name,
             noted: false,
+            consumable: true,
             notedID,
             value,
             stackable: false,
