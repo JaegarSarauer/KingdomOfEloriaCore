@@ -331,22 +331,23 @@ const SkillGuides = [{
         {
             title: 'Cook',
             content: [
-                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Cook shrimp'),
-                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Cook steak'),
-                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Cook egg'),
-                SingleSkillBuilder(1, GuideIcons.ITEM, 1, 'Cook chicken'),
-                SingleSkillBuilder(5, GuideIcons.ITEM, 5, 'Cook freshwater Tuna'),
-                SingleSkillBuilder(8, GuideIcons.ITEM, 8, 'Cook chicken Pot Pie'),
-                SingleSkillBuilder(10, GuideIcons.ITEM, 10, 'Cook sardine'),
-                SingleSkillBuilder(10, GuideIcons.ITEM, 10, 'Cook meat pie'),
-                SingleSkillBuilder(14, GuideIcons.ITEM, 14, 'Cook cake'),
-                SingleSkillBuilder(20, GuideIcons.ITEM, 20, 'Cook herring'),
-                SingleSkillBuilder(25, GuideIcons.ITEM, 25, 'Cook octopus tentacle'),
-                SingleSkillBuilder(30, GuideIcons.ITEM, 30, 'Cook mullet'),
-                SingleSkillBuilder(35, GuideIcons.ITEM, 35, 'Cook crab'),
-                SingleSkillBuilder(40, GuideIcons.ITEM, 40, 'Cook boxfish'),
-                SingleSkillBuilder(50, GuideIcons.ITEM, 50, 'Cook rockfish'),
-                SingleSkillBuilder(60, GuideIcons.ITEM, 60, 'Cook starslug'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 51, 'Cook shrimp'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 754, 'Cook steak'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 734, 'Cook egg'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 740, 'Cook chicken'),
+                SingleSkillBuilder(5, GuideIcons.ITEM, 787, 'Cook freshwater Tuna'),
+                SingleSkillBuilder(8, GuideIcons.ITEM, 771, 'Cook chicken Pot Pie'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 52, 'Cook sardine'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 765, 'Cook meat pie'),
+                SingleSkillBuilder(14, GuideIcons.ITEM, 777, 'Cook cake'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 53, 'Cook herring'),
+                SingleSkillBuilder(25, GuideIcons.ITEM, 852, 'Cook octopus tentacle'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 50, 'Cook mullet'),
+                SingleSkillBuilder(35, GuideIcons.ITEM, 902, 'Cook crab'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 234, 'Cook boxfish'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 243, 'Cook rockfish'),
+                SingleSkillBuilder(60, GuideIcons.ITEM, 249, 'Cook starslug'),
+                SingleSkillBuilder(70, GuideIcons.ITEM, 846, 'Cook octopus'),
             ]
         },
         {
@@ -354,7 +355,14 @@ const SkillGuides = [{
             content: [
                 ...BuildCookingRecipesGuide(),
             ]
-        }
+        },
+        {
+            title: 'Sliced',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 850, 'Slice octopus tentacles'),
+            ]
+        },
+
     ],
 }, {
     id: 14,
@@ -438,9 +446,78 @@ const SkillGuides = [{
         {
             title: 'Fletch',
             content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 523, 'Arrow Shafts'),
+            ]
+        }
+    ]
+}, {
+    id: 17,
+    contents : [
+        {
+            title: 'Firemaking',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+            ]
+        }
+    ]
+},{
+    id: 18,
+    name: 'Construction',
+    contents : [
+        {
+            title: 'Fletch',
+            content: [
                 SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
 
             ]
         }
     ]
-}];
+},{
+    id: 19,
+    name: 'Alchemy',
+    contents : [
+        {
+            title: 'Fletch',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+
+            ]
+        }
+    ]
+},{
+    id: 20,
+    name: 'Thieving',
+    contents : [
+        {
+            title: 'Fletch',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+
+            ]
+        }
+    ]
+},{
+    id: 21,
+    name: 'Gemcutting',
+    contents : [
+        {
+            title: 'Fletch',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+
+            ]
+        }
+    ]
+},{
+    id: 22,
+    name: 'Environment Magic',
+    contents : [
+        {
+            title: 'Fletch',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+
+            ]
+        }
+    ]
+},];
