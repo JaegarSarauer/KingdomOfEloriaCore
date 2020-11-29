@@ -210,8 +210,8 @@ module.exports.Spells = [
     SpellBuilder.TELEPORT(18, 55, 'Island Teleport', [[22, 22]], [EssenceCatalog.AIR(2), EssenceCatalog.FIRE(1), EssenceCatalog.VOID(1)], [0, 11, 92, 13, 94, 3], 18),
     SpellBuilder.TELEPORT(19, 65, 'Hyrill Teleport', [[22, 26]], [EssenceCatalog.AIR(2), EssenceCatalog.FIRE(1), EssenceCatalog.EARTH(1), EssenceCatalog.VOID(1)], [0, 28, 167, 35, 174, 3], 19),
     SpellBuilder.TELEPORT(20, 75, 'Bodiam Teleport', [[22, 30]], [EssenceCatalog.AIR(2), EssenceCatalog.METAL(1), EssenceCatalog.VOID(1)], [0, 176, 177, 182, 183, 3], 20),
-    SpellBuilder.TELEPORT(21, 85, 'Woodcutting Guild Teleport', [[22, 34]], [EssenceCatalog.AIR(3), EssenceCatalog.WATER(1), EssenceCatalog.EARTH(1), EssenceCatalog.VOID(1)], [0, 337, 68, 345, 72, 3], 21),
-    SpellBuilder.TELEPORT(22, 95, 'Mining Guild Teleport', [[22, 38]], [EssenceCatalog.AIR(3), EssenceCatalog.METAL(1), EssenceCatalog.EARTH(1), EssenceCatalog.VOID(1)], [0, 72, 350, 79, 357, 3], 22),
+    SpellBuilder.TELEPORT(21, 85, 'Acernis Teleport', [[22, 34]], [EssenceCatalog.AIR(3), EssenceCatalog.WATER(1), EssenceCatalog.EARTH(1), EssenceCatalog.VOID(1)], [0, 337, 68, 345, 72, 3], 21),
+    SpellBuilder.TELEPORT(22, 95, 'Teragon Teleport', [[22, 38]], [EssenceCatalog.AIR(3), EssenceCatalog.METAL(1), EssenceCatalog.EARTH(1), EssenceCatalog.VOID(1)], [0, 72, 350, 79, 357, 3], 22),
     
     SpellBuilder.ITEM_PICKUP_AREA(23, 10, 'Pickup 3x3', [[22, 1]], [EssenceCatalog.AIR(3), EssenceCatalog.EARTH(3)], 3, 23),
     SpellBuilder.ITEM_PICKUP_AREA(24, 30, 'Pickup 5x5', [[22, 30]], [EssenceCatalog.AIR(5), EssenceCatalog.EARTH(5)], 5, 24),

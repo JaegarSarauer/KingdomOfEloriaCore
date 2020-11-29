@@ -18,7 +18,7 @@ const FacialStyles = require("./Model").FacialStyles;
 const EyeColors = require("./Model").EyeColors;
 const ShardIDs = require("./Essence").ShardIDs;
 const EssenceIDs = require("./Essence").EssenceIDs;
-const Guilds = require("./Guild").Guilds;
+const Guilds = require("./Guild");
 
 const LEVEL_INDEX = {
     COOKING: 13
@@ -3050,7 +3050,7 @@ const Interface = {
         };
     },
     AttemptGuildExam: (id, guildID) => {
-        let guild = Guilds[guildID];
+        let guild = Guilds.Guilds[guildID];
         let goalID = guild.quest.entrance_exam.id;
         let x = guild.quest.entrance_exam.location.x;
         let y = guild.quest.entrance_exam.location.y;
@@ -3071,7 +3071,7 @@ const Interface = {
         };
     },
     SetSpawnPoint: (id, guildID) => {
-        let guild = Guilds[guildID];
+        let guild = Guilds.Guilds[guildID];
         let spawnStateID = 8;
         return {
             id,
@@ -3700,7 +3700,7 @@ const Action = {
 
 const WorldObject = {
     GuildChest: (id, guildName, guildID) => {
-        let guildDef = Guilds[guildID];
+        let guildDef = Guilds.Guilds[guildID];
         
         let questID = guildDef.quest.entrance_exam.id;
         let notedResourceID = guildDef.quest.entrance_exam.items.notedResourceID;
@@ -7036,9 +7036,9 @@ const Character = {
     },
     TrainingGuide : function(id, guildID) {
         let guide = this.BaseGuide(id, guildID);
-        let questID = Guilds[guildID].quest.entrance_exam.id;
-        let dialogs = Guilds[guildID].quest.entrance_exam.dialogs;
-        let sawID = Guilds[guildID].quest.entrance_exam.items.sawID;
+        let questID = Guilds.Guilds[guildID].quest.entrance_exam.id;
+        let dialogs = Guilds.Guilds[guildID].quest.entrance_exam.dialogs;
+        let sawID = Guilds.Guilds[guildID].quest.entrance_exam.items.sawID;
 
         const questTimerID = 20;
 
@@ -7144,9 +7144,9 @@ const Character = {
     TourGuide : function(id, guildID) {
         let guide = this.BaseGuide(id, guildID);
         
-        let questID = Guilds[guildID].quest.entrance_exam.id;
-        let dialogs = Guilds[guildID].quest.entrance_exam.dialogs;
-        let skillID = Guilds[guildID].skillID;
+        let questID = Guilds.Guilds[guildID].quest.entrance_exam.id;
+        let dialogs = Guilds.Guilds[guildID].quest.entrance_exam.dialogs;
+        let skillID = Guilds.Guilds[guildID].skillID;
 
         let states = {
             UNSTARTED : 0,

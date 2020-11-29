@@ -1502,7 +1502,6 @@ const Interface = [
             Get.Interface.UpgradeBag(162, 'Upgrade Bag - Max 50 (1 Purple Silk, 1 Thread) (20 Crafting)', 89, 20, 3),
             Get.Interface.UpgradeBag(163, 'Upgrade Bag - Max 100 (1 Burgundy Silk, 1 Thread) (30 Crafting)', 90, 30, 4),
             Get.Interface.ShowDialog(164, ''),
-
             Get.Interface.FletchIncinerate(165, 'Cut Arrow Shafts (5) (1 Fletching) (1 Log)', 5, 1, 1, 74, 5, 20, 'You cut 5 arrow shafts and the knife incinerates them.'),
             Get.Interface.FletchIncinerate(166, 'Cut Bow (5 Fletching) (1 Log)', 5, 1, 5, 33, 1, 30, 'You cut a bow and the knife incinerates it.'),
             Get.Interface.FletchIncinerate(167, 'Cut Arrow Shafts (10) (10 Fletching) (1 Oak Log)', 6, 1, 10, 74, 10, 40, 'You cut 10 arrow shafts and the knife incinerates them.'),
@@ -1709,13 +1708,13 @@ const Interface = [
             Get.Interface.MixSpellPot(231, 'Earth Wound', ' (14 Alchemy) (3 Air, 2 Earth, 2 Force)', 19, 14, 60, 7, 705),
             Get.Interface.MixSpellPot(232, 'Fire Wound', ' (16 Alchemy) (3 Air, 2 Fire, 2 Force)', 19, 16, 65, 8, 706),
             Get.Interface.MixSpellPot(233, 'Metal Wound', ' (18 Alchemy) (3 Air, 2 Metal, 2 Force)', 19, 18, 70, 9, 707),
-            Get.Interface.MixSpellPot(234, 'Greater Air Wound', ' (20 Alchemy) (4 Air, 2 Force)', 19, 10, 50, 10, 708),
-            Get.Interface.MixSpellPot(235, 'Greater Water Wound', ' (22 Alchemy) (4 Air, 2 Water, 2 Force)', 19, 12, 55, 11, 709),
-            Get.Interface.MixSpellPot(236, 'Greater Earth Wound', ' (24 Alchemy) (4 Air, 2 Earth, 2 Force)', 19, 14, 60, 12, 710),
-            Get.Interface.MixSpellPot(237, 'Greater Fire Wound', ' (26 Alchemy) (4 Air, 2 Fire, 2 Force)', 19, 16, 65, 13, 711),
-            Get.Interface.MixSpellPot(238, 'Greater Metal Wound', ' (28 Alchemy) (4 Air, 2 Metal, 2 Force)', 19, 18, 70, 14, 712),
-            Get.Interface.MixSpellPot(239, 'Woodcutting Guild Teleport', ' (34 Alchemy) (3 Air, 1 Water, 1 Earth, 1 Void)', 19, 34, 85, 21, 713),
-            Get.Interface.MixSpellPot(240, 'Mining Guild Teleport', ' (38 Alchemy) (3 Air, 1 Earth, 1 Metal, 1 Void)', 19, 38, 95, 22, 714),
+            Get.Interface.MixSpellPot(234, 'Greater Air Wound', ' (20 Alchemy) (4 Air, 2 Force)', 19, 20, 50, 10, 708),
+            Get.Interface.MixSpellPot(235, 'Greater Water Wound', ' (22 Alchemy) (4 Air, 2 Water, 2 Force)', 19, 22, 55, 11, 709),
+            Get.Interface.MixSpellPot(236, 'Greater Earth Wound', ' (24 Alchemy) (4 Air, 2 Earth, 2 Force)', 19, 24, 60, 12, 710),
+            Get.Interface.MixSpellPot(237, 'Greater Fire Wound', ' (26 Alchemy) (4 Air, 2 Fire, 2 Force)', 19, 26, 65, 13, 711),
+            Get.Interface.MixSpellPot(238, 'Greater Metal Wound', ' (28 Alchemy) (4 Air, 2 Metal, 2 Force)', 19, 28, 70, 14, 712),
+            Get.Interface.MixSpellPot(239, 'Acernis Teleport', ' (34 Alchemy) (3 Air, 1 Water, 1 Earth, 1 Void)', 19, 34, 85, 21, 713),
+            Get.Interface.MixSpellPot(240, 'Teragon Teleport', ' (38 Alchemy) (3 Air, 1 Earth, 1 Metal, 1 Void)', 19, 38, 95, 22, 714),
             // Osaik
             Get.Interface.AskNPCQuestion(241, 'How do I smith tools and armor?', 23),
             Get.Interface.AskNPCQuestion(242, 'How do I fletch bows and arrows?', 24),
@@ -1844,7 +1843,8 @@ const Interface = [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [7, 3] }), // logs
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [61, 2] }), // bars
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [118, 1] }), //saw
-                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, 30] })],
+                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [18, 30] }),
+                    buildStep(StepType.HAS_SKILL_LEVEL, { params: [12, 30] })],
                     [buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [7, 3] }),
                     buildStep(StepType.REMOVE_INVENTORY_ITEM, { params: [61, 2] }),
                     buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [679, 1] }), //crab pot
