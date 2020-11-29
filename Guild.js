@@ -1,5 +1,5 @@
 const Bounds = require('../def/Bounds');
-const ItemStates = require('../def/interface/ItemStateDef');
+// const ItemStates = require('../def/interface/ItemStateDef');
 
 const GuardType = {
     // Mining Guild
@@ -214,7 +214,7 @@ const Guilds = [{
             [57, [0, 0, 0, 0, 1, 1, 5, 10, 15, 20, 25]],
             [75, [0, 0, 0, 0, 0, 0, 0, 10, 20, 30, 50]],
             [58, [0, 0, 0, 0, 0, 0, 0, 1, 5, 10, 20]],
-            [329, [0, 0, 0, 0, 0, 0, 1, 2, 3, 5, 10], ItemStates.ItemStates.STORAGE_BAG.build(55, 5, 5)],
+            // [329, [0, 0, 0, 0, 0, 0, 1, 2, 3, 5, 10], ItemStates.ItemStates.STORAGE_BAG.build(55, 5, 5)],
         ]),
     ],
     tier2Barricades: [[71, 362], [74, 362], [75, 361], [76, 361], [77, 362], [80, 362]],

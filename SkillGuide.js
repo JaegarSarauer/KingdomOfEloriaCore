@@ -1,4 +1,4 @@
-const Item = require('./Item').Item;
+const Item = require('./Item');
 const Skill = require('./Skill').Skill;
 const Spells = require('./Spells').Spells;
 const Interface = require('./Interface');
@@ -7,6 +7,7 @@ const Get = require('./Getter');
 const GuideIcons = {
     ITEM: 'Items',
     WORLD_OBJECT: 'worldObjects',
+    CHARACTER: 'character',
     SPELL: 'spellIcons',
 };
 
@@ -20,19 +21,30 @@ const MultiSkillReqBuilder = (primarySkillLevel, secondarySkillsArray, iconType,
     let fullDesc = description;
     if (secondarySkillsArray != null) {
         if (secondarySkillsArray.length == 1) {
-            description += ' (with ' + secondarySkillsArray[0][1] + ' ' + Skill[secondarySkillsArray[0][0]].name + ')';
+            fullDesc += ' (with ' + secondarySkillsArray[0][1] + ' ' + Skill[secondarySkillsArray[0][0]].name + ')';
         } else {
             for (let i = 0; i < secondarySkillsArray.length; ++i) {
                 if (i == 0) {
-                    description += ' (with ' + secondarySkillsArray[i][1] + ' ' + Skill[secondarySkillsArray[i][0]].name + ', ';
+                    fullDesc += ' (with ' + secondarySkillsArray[i][1] + ' ' + Skill[secondarySkillsArray[i][0]].name + ', ';
                 } else if (i == secondarySkillsArray.length - 1) {
-                    description += 'and ' + secondarySkillsArray[i][1] + ' ' + Skill[secondarySkillsArray[i][0]].name + ')';
+                    fullDesc += 'and ' + secondarySkillsArray[i][1] + ' ' + Skill[secondarySkillsArray[i][0]].name + ')';
                 } else {
-                    description += secondarySkillsArray[i][1] + ' ' + Skill[secondarySkillsArray[i][0]].name + ', ';
+                    fullDesc += secondarySkillsArray[i][1] + ' ' + Skill[secondarySkillsArray[i][0]].name + ', ';
                 }
             }
         }
     }
+    return {
+        level: primarySkillLevel,
+        iconType,
+        iconID,
+        description: fullDesc,
+    };
+};
+
+const MultiSkillCombatReqBuilder = (primarySkillLevel, combatLevel, iconType, iconID, description) => {
+    let fullDesc = description;
+    fullDesc += '(with ' + combatLevel + ' combat level)';
     return {
         level: primarySkillLevel,
         iconType,
@@ -51,7 +63,7 @@ const SingleSkillBuilder = (primarySkillLevel, iconType, iconID, description) =>
 }
 
 const SingleItemSkillBuilder = (primarySkillLevel, itemID, description) => {
-    return SingleSkillBuilder(primarySkillLevel, GuideIcons.ITEM, Item[itemID].spriteIndex, description);
+    return SingleSkillBuilder(primarySkillLevel, GuideIcons.ITEM, Item.Item[itemID].spriteIndex, description);
 }
 
 const BuildGuidesFromSpells = (skillID) => {
@@ -60,6 +72,7 @@ const BuildGuidesFromSpells = (skillID) => {
         for (let j = 0; j < Spells[i].magicLevelReq.length; ++j) {
             if (Spells[i].magicLevelReq[j][0] == skillID) {
                 let primaryLevel = Spells[i].magicLevelReq[j][1];
+
                 let levelReqs = Object.assign({}, Spells[i].magicLevelReq);
                 let inserted = false;
                 levelReqs.splice(j, 1);
@@ -86,14 +99,14 @@ const BuildCookingRecipesGuide = () => {
         let recipe = Get.Recipes[keys[i]];
         let desc = 'Mix ';
         for(let j = 0; j < recipe.itemIdsRequired.length; j++) {
-            let itemToMix = Item[recipe.itemIdsRequired[j]];
+            let itemToMix = Item.Item[recipe.itemIdsRequired[j]];
             desc += itemToMix.name;
             if (j != recipe.itemIdsRequired.length - 1) {
                 desc += ',';
             }
             desc += ' ';
         }
-        desc += 'to make ' + (Item[recipe.iconItemId].name);
+        desc += 'to make ' + (Item.Item[recipe.iconItemId].name);
 
         guides.push(SingleItemSkillBuilder(recipe.levelRequirement, recipe.iconItemId, desc));
     }
@@ -101,8 +114,8 @@ const BuildCookingRecipesGuide = () => {
 };
 
 const SmeltSkillBuilder = (smeltBarInterfaceId) => {
-    let interface = Interface.Interface[smeltBarInterfaceId];
-    let bar = Item[interface.barId];
+    let interface = Interface.Interface[14].actions[smeltBarInterfaceId];
+    let bar = Item.Item[interface.barId];
     return SingleSkillBuilder(interface.smithingLevel, GuideIcons.ITEM, interface.barId, 'Smelt ' + bar.name);
 };
 
@@ -112,8 +125,8 @@ const BuildSmithingGuide = (metalName, smeltBarInterfaceId, smithingInterfaceIds
     ];
 
     for(let i = 0; i < smithingInterfaceIds.length; ++i) {
-        let interface = Interface.Interface[smithingInterfaceIds[i]];
-        let smithedItem = Item[interface.smithedItemId];
+        let interface = Interface.Interface[14].actions[smithingInterfaceIds[i]];
+        let smithedItem = Item.Item[interface.smithedItemId];
         content.push(SingleSkillBuilder(interface.smithingLevel, GuideIcons.ITEM, interface.smithedItemId, 'Smith ' + smithedItem.name));
     }
 
@@ -124,7 +137,7 @@ const BuildSmithingGuide = (metalName, smeltBarInterfaceId, smithingInterfaceIds
 };
 
 const BuildMagicFocusGuides = () => {
-    return BuildGuidesFromSpells(6);
+    return []; //BuildGuidesFromSpells(6);
 }
 
 const SkillGuides = [{
@@ -205,6 +218,11 @@ const SkillGuides = [{
                 SingleItemSkillBuilder(30, 116, 'Wear nelenite chainmail'),
                 SingleItemSkillBuilder(40, 269, 'Wear gothite chainmail'),
                 SingleItemSkillBuilder(50, 297, 'Wear osmium chainmail'),
+                MultiSkillReqBuilder(30, [[8, 10,]], GuideIcons.ITEM, 517, 'Wear grey pelt torso'),
+                MultiSkillReqBuilder(30, [[8, 10,]], GuideIcons.ITEM, 519, 'Wear grey pelt pants'),
+                MultiSkillReqBuilder(50, [[8, 10,]], GuideIcons.ITEM, 517, 'Wear d. grey pelt torso'),
+                MultiSkillReqBuilder(50, [[8, 10,]], GuideIcons.ITEM, 519, 'Wear d. grey pelt pants'),
+
             ],
         }
     ]
@@ -238,7 +256,7 @@ const SkillGuides = [{
         }
     ]
 }, {
-    id: 9,
+    id: 9, // Woodcutting
     contents: [
         {
             title: 'Items',
@@ -264,7 +282,7 @@ const SkillGuides = [{
         },
     ],
 }, {
-    id: 10,
+    id: 10, // Mining
     contents: [
         {
             title: 'Items',
@@ -298,7 +316,7 @@ const SkillGuides = [{
     contents: [
     ],
 }, {
-    id: 12,
+    id: 12, // Fishing
     contents: [
         {
             title: 'Fishing Pools',
@@ -326,7 +344,7 @@ const SkillGuides = [{
         }
     ],
 }, {
-    id: 13,
+    id: 13, // Cooking
     contents: [
         {
             title: 'Cook',
@@ -365,7 +383,7 @@ const SkillGuides = [{
 
     ],
 }, {
-    id: 14,
+    id: 14, // Smithing
     contents: [
         BuildSmithingGuide('Copper', 8, [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
         BuildSmithingGuide('Iron', 9, [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]),
@@ -374,8 +392,8 @@ const SkillGuides = [{
             title: 'Gold',
             content: [
                 SmeltSkillBuilder(256),
-                MultiSkillReqBuilder(5, [5, 15], GuideIcons.ITEM, 672, 'Cast gold ring'),
-                MultiSkillReqBuilder(20, [20, 15], GuideIcons.ITEM, 674, 'Cast gold amulet'),
+                MultiSkillReqBuilder(5, [[15, 5]], GuideIcons.ITEM, 672, 'Cast gold ring'),
+                MultiSkillReqBuilder(20, [[15, 20]], GuideIcons.ITEM, 674, 'Cast gold amulet'),
             ]
         },
         BuildSmithingGuide('Nelenite', 11, [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]),
@@ -383,7 +401,7 @@ const SkillGuides = [{
         BuildSmithingGuide('Osmium', 129, [130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141]),
     ],
 }, {
-    id: 15,
+    id: 15, // Crafting
     contents: [
         {
             title: 'Firing',
@@ -404,8 +422,8 @@ const SkillGuides = [{
         {
             title: 'Casting',
             content: [
-                MultiSkillReqBuilder(5, [5, 15], GuideIcons.ITEM, 672, 'Cast gold ring'),
-                MultiSkillReqBuilder(20, [20, 15], GuideIcons.ITEM, 674, 'Cast gold amulet'),
+                MultiSkillReqBuilder(5, [[21, 5]], GuideIcons.ITEM, 672, 'Cast gold ring'),
+                MultiSkillReqBuilder(20, [[21, 20]], GuideIcons.ITEM, 674, 'Cast gold amulet'),
             ]
         },
         {
@@ -441,83 +459,260 @@ const SkillGuides = [{
         },
     ]
 }, {
-    id: 16,
+    id: 16, // Fletching
     contents : [
         {
             title: 'Fletch',
             content: [
-                SingleSkillBuilder(1, GuideIcons.ITEM, 523, 'Arrow Shafts'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 74, 'Fletch 5 arrow shafts (1 Log)'),
+                SingleSkillBuilder(5, GuideIcons.ITEM, 37, 'Fletch bow'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 74, 'Fletch 10 arrow shafts (1 Oak Log)'),
+                SingleSkillBuilder(15, GuideIcons.ITEM, 38, 'Fletch oak bow'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 74, 'Fletch 15 arrow shafts (1 Ash Log)'),
+                SingleSkillBuilder(25, GuideIcons.ITEM, 39, 'Fletch ash bow'),
+                SingleSkillBuilder(25, GuideIcons.ITEM, 550, 'Fletch rock bolts'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 74, 'Fletch 20 arrow shafts (1 Fur Log)'),
+                SingleSkillBuilder(35, GuideIcons.ITEM, 40, 'Fletch fur bow'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 74, 'Fletch 25 arrow shafts (1 King Maple Log)'),
+                SingleSkillBuilder(45, GuideIcons.ITEM, 319, 'Fletch king maple bow'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 74, 'Fletch 30 arrow shafts (1 Magic Log)'),
+                SingleSkillBuilder(55, GuideIcons.ITEM, 321, 'Fletch magic bow'),
             ]
-        }
+        },
     ]
 }, {
-    id: 17,
+    id: 17, // Firemaking
     contents : [
         {
             title: 'Firemaking',
             content: [
-                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 5, 'Light log'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 6, 'Light oak log'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 7, 'Light ash log'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 8, 'Light fur log'),
+                SingleSkillBuilder(40, GuideIcons.ITEM, 315, 'Light king maple log'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 317, 'Light magic log'),
             ]
         }
     ]
 },{
-    id: 18,
-    name: 'Construction',
+    id: 18, // Construction
     contents : [
         {
-            title: 'Fletch',
+            title: 'Mining',
             content: [
-                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
-
+                MultiSkillReqBuilder(1, [[10, 10]], GuideIcons.WORLD_OBJECT, 21, 'Build copper mining camp'),
+                MultiSkillReqBuilder(1, [[10, 10]], GuideIcons.WORLD_OBJECT, 22, 'Build clay mining camp'),
+                MultiSkillReqBuilder(10, [[10, 20]], GuideIcons.WORLD_OBJECT, 23, 'Build iron mining camp'),
+                MultiSkillReqBuilder(20, [[10, 30]], GuideIcons.WORLD_OBJECT, 24, 'Build coal mining camp'),
+                MultiSkillReqBuilder(25, [[10, 35]], GuideIcons.WORLD_OBJECT, 24, 'Build gold mining camp'),
+                MultiSkillReqBuilder(30, [[10, 40]], GuideIcons.WORLD_OBJECT, 25, 'Build nelenite mining camp'),
+                MultiSkillReqBuilder(40, [[10, 50]], GuideIcons.WORLD_OBJECT, 53, 'Build gothite mining camp'),
+                MultiSkillReqBuilder(50, [[10, 60]], GuideIcons.WORLD_OBJECT, 54, 'Build osmium mining camp'),
+            ]
+        },
+        {
+            title: 'Fishing',
+            content: [
+                MultiSkillReqBuilder(1, [[12, 10]], GuideIcons.WORLD_OBJECT, 20, 'Build shallow pool fishery'),
+                MultiSkillReqBuilder(30, [[12, 30]], GuideIcons.WORLD_OBJECT, 109, 'Build crab pot'),
+                MultiSkillReqBuilder(40, [[12, 50]], GuideIcons.WORLD_OBJECT, 58, 'Build deep pool fishery'),
+            ]
+        },
+        {
+            title: 'Woodcutting',
+            content: [
+                MultiSkillReqBuilder(1, [[9, 10]], GuideIcons.WORLD_OBJECT, 16, 'Build lumber camp'),
+                MultiSkillReqBuilder(10, [[9, 20]], GuideIcons.WORLD_OBJECT, 17, 'Build oak lumber camp'),
+                MultiSkillReqBuilder(20, [[9, 30]], GuideIcons.WORLD_OBJECT, 18, 'Build ash lumber camp'),
+                MultiSkillReqBuilder(30, [[9, 40]], GuideIcons.WORLD_OBJECT, 19, 'Build fur lumber camp'),
+                MultiSkillReqBuilder(40, [[9, 50]], GuideIcons.WORLD_OBJECT, 51, 'Build king maple lumber camp'),
+                MultiSkillReqBuilder(50, [[9, 60]], GuideIcons.WORLD_OBJECT, 52, 'Build magic lumber camp'),
+            ]
+        },
+        {
+            title: 'Combat',
+            content: [
+                MultiSkillCombatReqBuilder(1, 10, GuideIcons.WORLD_OBJECT, 41, 'Build copper training dummy'),
+                MultiSkillCombatReqBuilder(10, 20, GuideIcons.WORLD_OBJECT, 42, 'Build iron training dummy'),
+                MultiSkillCombatReqBuilder(20, 30, GuideIcons.WORLD_OBJECT, 43, 'Build steel training dummy'),
+                MultiSkillCombatReqBuilder(30, 40, GuideIcons.WORLD_OBJECT, 44, 'Build nelenite training dummy'),
+                MultiSkillCombatReqBuilder(40, 50, GuideIcons.WORLD_OBJECT, 55, 'Build gothite training dummy'),
+                MultiSkillCombatReqBuilder(50, 60, GuideIcons.WORLD_OBJECT, 56, 'Build osmium training dummy'),
+            ]
+        },
+        {
+            title: 'Upgrades',
+            content: [
+                MultiSkillReqBuilder(10, [[13, 20]], GuideIcons.WORLD_OBJECT, 32, 'Upgrade iron range'),
+                MultiSkillReqBuilder(25, [[14, 35]], GuideIcons.WORLD_OBJECT, 26, 'Upgrade steel furnace'),
+                MultiSkillReqBuilder(30, [[15, 40]], GuideIcons.WORLD_OBJECT, 27, 'Upgrade fur pottery wheel'),
+            ]
+        },
+    ]
+},{
+    id: 19, // Alchemy
+    contents : [
+        {
+            title: 'Ashing',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 82, 'Ash pot'),
+            ]
+        },
+        {
+            title: 'Crush',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 78, 'Crush air shards'),
+                SingleSkillBuilder(3, GuideIcons.ITEM, 79, 'Crush water shards'),
+                SingleSkillBuilder(6, GuideIcons.ITEM, 80, 'Crush earth shards'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 81, 'Crush fire shards'),
+                SingleSkillBuilder(16, GuideIcons.ITEM, 493, 'Crush metal shards'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 495, 'Crush sharp shards'),
+                SingleSkillBuilder(28, GuideIcons.ITEM, 494, 'Crush force shards'),
+                SingleSkillBuilder(34, GuideIcons.ITEM, 496, 'Crush poison shards'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 499, 'Crush nature shards'),
+                SingleSkillBuilder(50, GuideIcons.ITEM, 126, 'Crush void shards'),
+                SingleSkillBuilder(70, GuideIcons.ITEM, 497, 'Crush brind shards'),
+                SingleSkillBuilder(80, GuideIcons.ITEM, 498, 'Crush soul shards'),
+            ]
+        },
+        {
+            title: 'Mix',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.ITEM, 83, 'Mix lesser air wound'),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 127, 'Mix Fiwon teleport'),
+                SingleSkillBuilder(2, GuideIcons.ITEM, 84, 'Mix lesser water wound'),
+                SingleSkillBuilder(4, GuideIcons.ITEM, 85, 'Mix lesser earth wound'),
+                SingleSkillBuilder(6, GuideIcons.ITEM, 86, 'Mix lesser fire wound'),
+                SingleSkillBuilder(8, GuideIcons.ITEM, 702, 'Mix lesser metal wound'),
+                SingleSkillBuilder(10, GuideIcons.ITEM, 703, 'Mix air wound'),
+                SingleSkillBuilder(12, GuideIcons.ITEM, 704, 'Mix water wound'),
+                SingleSkillBuilder(14, GuideIcons.ITEM, 705, 'Mix earth wound'),
+                SingleSkillBuilder(14, GuideIcons.ITEM, 128, 'Mix Salmo teleport'),
+                SingleSkillBuilder(16, GuideIcons.ITEM, 706, 'Mix fire wound'),
+                SingleSkillBuilder(18, GuideIcons.ITEM, 707, 'Mix metal wound'),
+                SingleSkillBuilder(18, GuideIcons.ITEM, 129, 'Mix volcano teleport'),
+                SingleSkillBuilder(20, GuideIcons.ITEM, 708, 'Mix greater air wound'),
+                SingleSkillBuilder(22, GuideIcons.ITEM, 709, 'Mix greater water wound'),
+                SingleSkillBuilder(22, GuideIcons.ITEM, 130, 'Mix island teleport'),
+                SingleSkillBuilder(24, GuideIcons.ITEM, 710, 'Mix greater earth wound'),
+                SingleSkillBuilder(26, GuideIcons.ITEM, 711, 'Mix greater fire wound'),
+                SingleSkillBuilder(26, GuideIcons.ITEM, 608, 'Mix Hyrill teleport'),
+                SingleSkillBuilder(28, GuideIcons.ITEM, 712, 'Mix greater metal wound'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 609, 'Mix Bodiam teleport'),
+                SingleSkillBuilder(34, GuideIcons.ITEM, 713, 'Mix Acernis teleport'),
+                SingleSkillBuilder(38, GuideIcons.ITEM, 714, 'Mix Teragon teleport'),
+            ]
+        },
+    ]
+},{
+    id: 20, // Thieving
+    contents : [
+        {
+            title: 'Thieve',
+            content: [
+                SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT, 45, 'Thieve chest'),
+                SingleSkillBuilder(10, GuideIcons.CHARACTER, 60, 'Thieve man'),
+                SingleSkillBuilder(15, GuideIcons.CHARACTER, 61, 'Thieve woman'),
+                SingleSkillBuilder(20, GuideIcons.WORLD_OBJECT, 61, 'Thieve chest'),
+                SingleSkillBuilder(25, GuideIcons.CHARACTER, 62, 'Thieve man'),
+                SingleSkillBuilder(30, GuideIcons.CHARACTER, 25, 'Thieve guard'),
+                SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 65, 'Thieve chest'),
+                SingleSkillBuilder(50, GuideIcons.WORLD_OBJECT, 86, 'Thieve chest'),
             ]
         }
     ]
 },{
-    id: 19,
-    name: 'Alchemy',
+    id: 21, // Gemcutting
     contents : [
         {
-            title: 'Fletch',
+            title: 'Cut',
             content: [
-                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+                SingleSkillBuilder(1, GuideIcons.ITEM, 659, 'Cut opal'),
+                SingleSkillBuilder(6, GuideIcons.ITEM, 660, 'Cut topaz'),
+                SingleSkillBuilder(12, GuideIcons.ITEM, 661, 'Cut quartz'),
+                SingleSkillBuilder(18, GuideIcons.ITEM, 662, 'Cut jade'),
+                SingleSkillBuilder(24, GuideIcons.ITEM, 663, 'Cut amber'),
+                SingleSkillBuilder(30, GuideIcons.ITEM, 664, 'Cut sapphire'),
+                SingleSkillBuilder(36, GuideIcons.ITEM, 665, 'Cut amethyst'),
+                SingleSkillBuilder(42, GuideIcons.ITEM, 666, 'Cut emerald'),
+                SingleSkillBuilder(48, GuideIcons.ITEM, 667, 'Cut ruby'),
+                SingleSkillBuilder(54, GuideIcons.ITEM, 668, 'Cut onyx'),
+                SingleSkillBuilder(60, GuideIcons.ITEM, 669, 'Cut diamond'),
 
             ]
-        }
+        },
+        {
+            title: 'Casting',
+            content: [
+                MultiSkillReqBuilder(5, [[15, 5]], GuideIcons.ITEM, 672, 'Cast gold ring'),
+                MultiSkillReqBuilder(20, [[15, 20]], GuideIcons.ITEM, 674, 'Cast gold amulet'),
+            ]
+        },
     ]
 },{
-    id: 20,
-    name: 'Thieving',
+    id: 22, // Environment Magic
     contents : [
         {
-            title: 'Fletch',
+            title: 'Cast',
             content: [
-                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
-
+                SingleSkillBuilder(1, GuideIcons.SPELL, 23, 'Pickup 3x3'),
+                SingleSkillBuilder(30, GuideIcons.SPELL, 24, 'Pickup 5x5'),
             ]
-        }
-    ]
-},{
-    id: 21,
-    name: 'Gemcutting',
-    contents : [
+        },
         {
-            title: 'Fletch',
+            title: 'Teleport',
             content: [
-                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
-
+                SingleSkillBuilder(10, GuideIcons.SPELL, 15, 'Fiewon telelport'),
+                SingleSkillBuilder(14, GuideIcons.SPELL, 16, 'Salmo telelport'),
+                SingleSkillBuilder(18, GuideIcons.SPELL, 17, 'Volcano telelport'),
+                SingleSkillBuilder(22, GuideIcons.SPELL, 18, 'Island telelport'),
+                SingleSkillBuilder(26, GuideIcons.SPELL, 19, 'Hyrill telelport'),
+                SingleSkillBuilder(30, GuideIcons.SPELL, 20, 'Bodiam telelport'),
+                SingleSkillBuilder(34, GuideIcons.SPELL, 21, 'Acernis telelport'),
             ]
-        }
-    ]
-},{
-    id: 22,
-    name: 'Environment Magic',
-    contents : [
+        },
         {
-            title: 'Fletch',
+            title: 'Syphons',
             content: [
-                SingleSkillBuilder(1, GuideIcons.ITEM, 523, ''),
+                SingleSkillBuilder(1, GuideIcons.SPELL, 40, 'Syphon air essence'),
+                SingleSkillBuilder(3, GuideIcons.SPELL, 41, 'Syphon water essence'),
+                SingleSkillBuilder(6, GuideIcons.SPELL, 42, 'Syphon earth essence'),
+                SingleSkillBuilder(10, GuideIcons.SPELL, 43, 'Syphon fire essence'),
+                SingleSkillBuilder(16, GuideIcons.SPELL, 45, 'Syphon metal essence'),
+                SingleSkillBuilder(20, GuideIcons.SPELL, 47, 'Syphon sharp essence'),
+                SingleSkillBuilder(28, GuideIcons.SPELL, 46, 'Syphon force essence'),
+                SingleSkillBuilder(34, GuideIcons.SPELL, 48, 'Syphon poison essence'),
+                SingleSkillBuilder(50, GuideIcons.SPELL, 44, 'Syphon void essence'),
+                SingleSkillBuilder(50, GuideIcons.SPELL, 51, 'Syphon nature essence'),
+                SingleSkillBuilder(70, GuideIcons.SPELL, 49, 'Syphon bind essence'),
+                SingleSkillBuilder(80, GuideIcons.SPELL, 50, 'Syphon soul essence'),
+            ]
+        },
+        {
+            title: 'Enchantments',
+            content: [
+                SingleSkillBuilder(12, GuideIcons.SPELL, 35, 'Enchant Goblin Outpost teleport'),
+                SingleSkillBuilder(16, GuideIcons.SPELL, 38, 'Enchant Drop Party teleport'),
+                SingleSkillBuilder(20, GuideIcons.SPELL, 39, 'Patreon Palace teleport'),
+                SingleSkillBuilder(22, GuideIcons.SPELL, 26, 'Enchant fortify ranged defense'),
+                SingleSkillBuilder(26, GuideIcons.SPELL, 27, 'Enchant fortify magic defense'),
+                SingleSkillBuilder(28, GuideIcons.SPELL, 29, 'Enchant fortify melee focus'),
+                SingleSkillBuilder(30, GuideIcons.SPELL, 28, 'Enchant fortify melee defense'),
+                SingleSkillBuilder(32, GuideIcons.SPELL, 30, 'Enchant fortify melee focus'),
+                SingleSkillBuilder(32, GuideIcons.SPELL, 36, 'Enchant volcano teleport'),
+                SingleSkillBuilder(34, GuideIcons.SPELL, 32, 'Enchant fortify melee power'),
+                SingleSkillBuilder(36, GuideIcons.SPELL, 31, 'Enchant fortify melee focus'),
+                SingleSkillBuilder(38, GuideIcons.SPELL, 33, 'Enchant fortify melee power'),
+                SingleSkillBuilder(42, GuideIcons.SPELL, 34, 'Enchant fortify melee power'),
+                SingleSkillBuilder(44, GuideIcons.SPELL, 37, 'Enchant Wizard Tower teleport'),
+                SingleSkillBuilder(65, GuideIcons.SPELL, 52, 'Enchant item collection'),
+                SingleSkillBuilder(70, GuideIcons.SPELL, 53, 'Enchant auto consume'),
 
             ]
-        }
+        },
+
     ]
 },];
+
+console.info(JSON.stringify(SkillGuides));
