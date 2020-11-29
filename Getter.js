@@ -3191,6 +3191,7 @@ const Interface = {
                     name: fullName,
                     flags: ['REPEAT_ACTION'],
                     actionInterval: 3,
+                    barId,
                     steps: [
                         [buildStep(StepType.UPGRADE_ACTION_INTERVAL),
                         buildStep(StepType.HAS_INVENTORY_ITEM, { params: [requiredOreId, oreAmount] }),
@@ -3215,6 +3216,7 @@ const Interface = {
                     name: fullName,
                     flags: ['REPEAT_ACTION'],
                     actionInterval: 3,
+                    barId,
                     steps: [
                         [buildStep(StepType.UPGRADE_ACTION_INTERVAL),
                         buildStep(StepType.HAS_INVENTORY_ITEM, { params: [requiredOreId, oreAmount] }),
@@ -3239,6 +3241,7 @@ const Interface = {
                 name: fullName,
                 flags: ['REPEAT_ACTION'],
                 actionInterval: actionInterval,
+                smithedItemId,
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [63, 1] }),
                     buildStep(StepType.HAS_INVENTORY_ITEM, { params: [barId, barAmount] }),
