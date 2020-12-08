@@ -503,6 +503,7 @@ module.exports.compressMapData = (mapID, name) => {
             getLayer(tiledMap, 'dirtRisenOutput').data,
             getLayer(tiledMap, 'sandRisenOutput').data,
             getLayer(tiledMap, 'stoneRisenOutput').data,
+            getLayer(tiledMap, 'detailStoneRisen').data,
         ], getBlockingTiles(tiledMap)),
         structureTiles : getOptimizedDataArray([
             getLayer(tiledMap, 'detail').data,
