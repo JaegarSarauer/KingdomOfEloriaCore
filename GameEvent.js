@@ -8,13 +8,13 @@ const createEventOptions = (optionsObj) => {
 };
 
 const GameEvent = {
-    KILL: 0,
+    // KILL: 0,
     // GATHER_ITEM: 1,
     // CRAFT_ITEM: 2,
     // DROP_ITEM: 3,
     // ATTACK: 4,
     // DEFEND: 5,
-    // DIE: 6,
+    DIE: 6,
     // EQUIP_ITEM: 7,
     // UNEQUIP_ITEM: 8,
     // DEPOSIT_ITEM: 9,
