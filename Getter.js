@@ -159,62 +159,6 @@ const CutGemIDs = {
 module.exports.UncutGemIDs = UncutGemIDs;
 module.exports.CutGemIDs = CutGemIDs;
 
-const Recipes = {
-    Dough : () => {
-        return  {
-            name: 'Mix Dough',
-            itemIdsRequired : [746, 750, 732],
-            newItemIds:  [744, 744, 760], 
-            xp : 10,
-            levelRequirement : 4,
-        }
-    },
-    UncookedChickenPotPie : () => {
-        return  {
-            name: 'Prepare Chicken Pot Pie',
-            itemIdsRequired : [761, 760, 740],
-            newItemIds:  [769], 
-            xp : 15,
-            levelRequirement : 8,
-        }
-    },
-    UncookedMeatPie : () => {
-        return  {
-            name: 'Prepare Meat Pie',
-            itemIdsRequired : [761, 760, 754],
-            newItemIds:  [763], 
-            xp : 20,
-            levelRequirement : 10,
-        }
-    },
-    UncookedCake : () => {
-        return  {
-            name: 'Prepare Cake',
-            itemIdsRequired : [761, 760, 732, 748],
-            newItemIds:  [775, 744], 
-            xp : 25,
-            levelRequirement : 14,
-        }
-    },
-    ChickenSupreme: () => {
-        return {
-            name: 'Prepare Chicken Supreme',
-            itemIdsRequired : [740, 793],
-            newItemIds:  [795, 744], 
-            xp : 50,
-            levelRequirement : 5,
-        };
-    },
-    GourmetTuna: () => {
-        return {
-            name: 'Gourmet Tuna',
-            itemIdsRequired : [787, 793],
-            newItemIds:  [797, 744], 
-            xp : 50,
-            levelRequirement : 5,
-        };
-    },
-};
 
 const CreateStepListFromRecipe = function(recipe) {
     let stepList = [];
@@ -3192,6 +3136,7 @@ const Interface = {
                     flags: ['REPEAT_ACTION'],
                     actionInterval: 3,
                     barId,
+                    smithingLevel : requiredLevel,
                     steps: [
                         [buildStep(StepType.UPGRADE_ACTION_INTERVAL),
                         buildStep(StepType.HAS_INVENTORY_ITEM, { params: [requiredOreId, oreAmount] }),
@@ -3217,6 +3162,7 @@ const Interface = {
                     flags: ['REPEAT_ACTION'],
                     actionInterval: 3,
                     barId,
+                    smithingLevel : requiredLevel,
                     steps: [
                         [buildStep(StepType.UPGRADE_ACTION_INTERVAL),
                         buildStep(StepType.HAS_INVENTORY_ITEM, { params: [requiredOreId, oreAmount] }),
@@ -3241,6 +3187,7 @@ const Interface = {
                 name: fullName,
                 flags: ['REPEAT_ACTION'],
                 actionInterval: actionInterval,
+                smithingLevel : minSmithingLevel,
                 smithedItemId,
                 steps: [
                     [buildStep(StepType.HAS_INVENTORY_ITEM, { params: [63, 1] }),
@@ -5829,7 +5776,7 @@ const Character = {
         return patreoner;
     },
     KaityPatreon: function(id, amountDonated, talkToDialog) {
-        let result = this.Patreoner(id, 'Babyshark', 33, [null, null, 1022, 379, 483], 5, 0x523000, 0x523000, 0, amountDonated, talkToDialog);
+        let result = this.Patreoner(id, 'Babyshark', 33, [null, null, null, 379, 483], 5, 0x523000, 0x523000, 0, amountDonated, talkToDialog);
         result.modelParams.FACE.spriteID = 'Kaity';
         result.modelParams.HEAD.spriteID = 'Kaity';
         result.modelParams.HAIR.sprite = 'hairStyle';
@@ -7683,4 +7630,3 @@ module.exports.Model = Model;
 module.exports.Interface = Interface;
 module.exports.Character = Character;
 module.exports.DropTables = DropTables;
-module.exports.Recipes = Recipes;
