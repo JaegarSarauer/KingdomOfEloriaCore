@@ -9,6 +9,7 @@ const Get = require('./Getter');
 const EssenceCatalog = require('./Essence').EssenceCatalog;
 const HairStyle = require('./Model').HairStyle;
 const SpriteColor = require('./Model').SpriteColor;
+const Recipes = require('./Recipes');
 
 let priorityInterfaces = [];
 
@@ -1741,15 +1742,15 @@ const Interface = [
             Get.Interface.BuildMiningCamp(261, 'Build Gold Mining Camp (25 Cons., 35 Mining) (5 Ash Logs, 1 Steel Pickaxe)', 7, 11, 35, 25, 84, 350, 'gold mining camp'),
             Get.Interface.MillXIntoY(262, 758, 1, 750, 15, 'Mill Wheat into Bucket of Flour', 'You turn wheat into flour and fill the bucket.'),
 
-            Get.Interface.Recipe(263, Get.Recipes.UncookedMeatPie() ),
-            Get.Interface.Recipe(264, Get.Recipes.UncookedChickenPotPie() ),
-            Get.Interface.Recipe(265, Get.Recipes.UncookedCake() ),
+            Get.Interface.Recipe(263, Recipes.Recipes.UncookedMeatPie() ),
+            Get.Interface.Recipe(264, Recipes.Recipes.UncookedChickenPotPie() ),
+            Get.Interface.Recipe(265, Recipes.Recipes.UncookedCake() ),
             
             Get.Interface.SpinXIntoY(266, 781, 1, 783, 1, 15, 1, 10, 'Wool', 'Yarn'),
             Get.Interface.SpinXIntoY(267, 783, 1, 92, 10, 15, 1, 10, 'Yarn', 'Thread', 6),
             Get.Interface.MillXIntoY(268, 791, 4, 793, 30, 'Mill Herbs into Bucket of Refined Herbs', 'You refined some herbs and fill the bucket.'),
 
-            Get.Interface.Recipe(269, Get.Recipes.ChickenSupreme(), [
+            Get.Interface.Recipe(269, Recipes.Recipes.ChickenSupreme(), [
                 buildStep(StepType.ASSERT_GOAL_STATES, {
                     params: [1, [1, null], ['EQUALS', 'N/A'] ],
                     stepResultFail: 'END_ACTION',
@@ -1758,7 +1759,7 @@ const Interface = [
                     params: [1, [2, null] ]
                 }),
             ]),
-            Get.Interface.Recipe(270, Get.Recipes.GourmetTuna(), [
+            Get.Interface.Recipe(270, Recipes.Recipes.GourmetTuna(), [
                 buildStep(StepType.ASSERT_GOAL_STATES, {
                     params: [1, [null, 1], ['N/A', 'EQUALS'] ],
                     stepResultFail: 'END_ACTION',

@@ -14,6 +14,7 @@ const EssenceValue = require("./Essence").EssenceValue;
 const ShardCatalog = require("./Essence").ShardCatalog;
 const EssenceCatalog = require("./Essence").EssenceCatalog;
 const SpriteColor = require('./Model').SpriteColor;
+const Recipes = require('./Recipes');
 
 module.exports.ItemStackTypes = ItemStackTypes = {
     NONE: 0,
@@ -3259,7 +3260,7 @@ const Item = Object.freeze([
     Get.Item.CutGem(665, 'Amethyst', 36, 37, 70, 7, ItemStates.ItemStates.CUT_GEM.build(0), 600, 409, 682),
     Get.Item.CutGem(666, 'Emerald', 42, 41, 88, 8, ItemStates.ItemStates.CUT_GEM.build(0), 800, 413, 683),
     Get.Item.CutGem(667, 'Ruby', 48, 45, 114, 9, ItemStates.ItemStates.CUT_GEM.build(0), 1000, 417, 684),
-    Get.Item.CutGem(668, 'Onyx', 54, 49, 212, 10, ItemStates.ItemStates.CUT_GEM.build(0), 1250, 423, 685),
+    Get.Item.CutGem(668, 'Onyx', 54, 49, 212, 10, ItemStates.ItemStates.CUT_GEM.build(4), 1250, 423, 685),
     Get.Item.CutGem(669, 'Diamond', 60, 53, 360, 11, ItemStates.ItemStates.CUT_GEM.build(0), 1500, 427, 686),
     Get.Item.Ore(670, 671, 'Gold Ore', 15, 430, 3.5),
     Get.Item.Note(671, 670, 'Gold Ore', 15, 430),
@@ -3323,7 +3324,7 @@ const Item = Object.freeze([
     Get.Item.TutorialTeleport(729),
     Get.Item.Item(730, null, 'Osaik\'s Key', 5, 482, 'The key to Osaik\'s safe. Give this to him', EssenceValue(1, 2, [ShardCatalog.EARTH(2)]), false),
     Get.Item.NullItem(731),
-    Get.Item.MixableCookingItem(732, 733, 'Egg', 2, 486, 'An egg.', EssenceValue(1, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false, Get.Recipes.Dough() ), // Jaegar look at last 3 params
+    Get.Item.MixableCookingItem(732, 733, 'Egg', 2, 486, 'An egg.', EssenceValue(1, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false, Recipes.Recipes.Dough() ), // Jaegar look at last 3 params
     Get.Item.Note(733, 732, 'Egg', 2, 486),
     Get.Item.Food(734, 733, 'Egg', 2, 3, 487, 'A nicely fried egg.', EssenceValue(2, 2, [ShardCatalog.EARTH(5), ShardCatalog.NATURE(4), ShardCatalog.FIRE(5)]), false),
     Get.Item.Note(735, 734, 'Egg', 3, 487),
@@ -3379,11 +3380,11 @@ const Item = Object.freeze([
     Get.Item.Note(743, 742, 'Burnt Chicken', 0, 491),
     Get.Item.Item(744, null, 'Empty Bucket', 2, 492, 'A empty bucket.', EssenceValue(3, 2, [ShardCatalog.EARTH(4)]), true ), // Jaegar look at last 3 params
     Get.Item.Note(745, 744, 'Empty Bucket', 2, 492),
-    Get.Item.BucketOfWater(746, 747, 'Bucket of Water', 2, 493, 'The bucket is full of water', EssenceValue(5, 2, [ShardCatalog.EARTH(4), ShardCatalog.WATER(4)]), false, Get.Recipes.Dough() ), // Jaegar look at last 3 params
+    Get.Item.BucketOfWater(746, 747, 'Bucket of Water', 2, 493, 'The bucket is full of water', EssenceValue(5, 2, [ShardCatalog.EARTH(4), ShardCatalog.WATER(4)]), false, Recipes.Recipes.Dough() ), // Jaegar look at last 3 params
     Get.Item.Note(747, 746, 'Bucket of Water', 2, 493),
     Get.Item.FullBucket(748, 749, 'Bucket of Milk', 5, 494, 'The bucket is full of milk', EssenceValue(7, 2, [ShardCatalog.EARTH(4), ShardCatalog.WATER(4)]), false), // Jaegar look at last 3 params
     Get.Item.Note(749, 748, 'Bucket of Milk', 5, 494),
-    Get.Item.FullBucket(750, 751, 'Bucket of Flour', 4, 495, 'The bucket is full of flour', EssenceValue(10, 2, [ShardCatalog.EARTH(6)]), Get.Recipes.Dough(), false), // Jaegar look at last 3 params
+    Get.Item.FullBucket(750, 751, 'Bucket of Flour', 4, 495, 'The bucket is full of flour', EssenceValue(10, 2, [ShardCatalog.EARTH(6)]), Recipes.Recipes.Dough(), false), // Jaegar look at last 3 params
     Get.Item.Note(751, 750, 'Bucket of Flour', 4, 495),
     Get.Item.RawCoockableFood(752, 753, 'Raw Steak', 3, 496, 'A raw steak, perfect for cooking.', 2, EssenceValue(4, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false), // Jaegar look at last 3 params
     Get.Item.Note(753, 752, 'Raw Steak', 3, 496),
@@ -3431,9 +3432,9 @@ const Item = Object.freeze([
     Get.Item.Note(792, 791, 'Herbs', 1, 516),
     Get.Item.BucketOfHerbs(793, 794, 'Bucket of Refined Herbs', 15, 517, 'Used as spicing in recipes.', EssenceValue(1, 2, [ShardCatalog.EARTH(10), ShardCatalog.NATURE(5)]), false  ),
     Get.Item.Note(794, 793, 'Bucket of Refined Herbs', 15, 517),
-    Get.Item.Food(795, 796, 'Chicken Supreme', 4, 30, 518, 'A delicious, well seasoned chicken dish.', EssenceValue(1, 2, [ShardCatalog.EARTH(15), ShardCatalog.NATURE(10)]), false, Get.Recipes.ChickenSupreme() ),
+    Get.Item.Food(795, 796, 'Chicken Supreme', 4, 30, 518, 'A delicious, well seasoned chicken dish.', EssenceValue(1, 2, [ShardCatalog.EARTH(15), ShardCatalog.NATURE(10)]), false, Recipes.Recipes.ChickenSupreme() ),
     Get.Item.Note(796, 795, 'Chicken Supreme', 30, 518),
-    Get.Item.Food(797, 798, 'Gourmet Tuna', 4, 30, 519, 'Seasoned freshwater tuna cooked to perfection.', EssenceValue(1, 2, [ShardCatalog.EARTH(15), ShardCatalog.NATURE(10)]), false, Get.Recipes.GourmetTuna() ),
+    Get.Item.Food(797, 798, 'Gourmet Tuna', 4, 30, 519, 'Seasoned freshwater tuna cooked to perfection.', EssenceValue(1, 2, [ShardCatalog.EARTH(15), ShardCatalog.NATURE(10)]), false, Recipes.Recipes.GourmetTuna() ),
     Get.Item.Note(798, 797, 'Gourmet Tuna', 30, 519),
     Get.Item.GoldRing(799, 800, 'Gold Ring', 5, 20, 52, 522),
     Get.Item.Note(800, 799, 'Gold Ring', 52, 522),
