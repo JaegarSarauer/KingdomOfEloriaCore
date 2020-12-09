@@ -169,7 +169,15 @@ module.exports.GetSkillGuide = () => {
         }, {
             id: 1,
             contents: [
-        
+                {
+                    title: 'Power',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Melee Power increases your damage output from melee attacks.'
+                        }
+                    ],
+                }
             ],
         }, {
             id: 2,
@@ -214,6 +222,15 @@ module.exports.GetSkillGuide = () => {
         }, {
             id: 4,
             contents: [
+                {
+                    title: 'Power',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Range Power increases your damage output from range attacks.'
+                        }
+                    ],
+                }
             ],
         }, {
             id: 5,
@@ -241,13 +258,36 @@ module.exports.GetSkillGuide = () => {
                 {
                     title: 'Cast',
                     content: [
-                        ...BuildMagicFocusGuides(6),
-                    ],
+                        SingleSkillBuilder(1, GuideIcons.SPELL, 0, 'Lesser Air Wound'),
+                        SingleSkillBuilder(2, GuideIcons.SPELL, 1, 'Lesser Water Wound'),
+                        SingleSkillBuilder(4, GuideIcons.SPELL, 2, 'Lesser Earth Wound'),
+                        SingleSkillBuilder(6, GuideIcons.SPELL, 3, 'Lesser Fire Wound'),
+                        SingleSkillBuilder(8, GuideIcons.SPELL, 4, 'Lesser Metal Wound'),
+                        SingleSkillBuilder(10, GuideIcons.SPELL, 5, 'Air Wound'),
+                        SingleSkillBuilder(12, GuideIcons.SPELL, 6, 'Water Wound'),
+                        SingleSkillBuilder(14, GuideIcons.SPELL, 7, 'Earth Wound'),
+                        SingleSkillBuilder(16, GuideIcons.SPELL, 8, 'Fire Wound'),
+                        SingleSkillBuilder(18, GuideIcons.SPELL, 9, 'Metal Wound'),
+                        SingleSkillBuilder(20, GuideIcons.SPELL, 10, 'Greater Air Wound'),
+                        SingleSkillBuilder(22, GuideIcons.SPELL, 11, 'Greater Water Wound'),
+                        SingleSkillBuilder(24, GuideIcons.SPELL, 12, 'Greater Earth Wound'),
+                        SingleSkillBuilder(26, GuideIcons.SPELL, 13, 'Greater Fire Wound'),
+                        SingleSkillBuilder(28, GuideIcons.SPELL, 14, 'Greater Metal Wound'),
+                    ]
                 }
             ]
         }, {
             id: 7,
             contents: [
+                {
+                    title: 'Power',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Magic Power increases your damage output from magic attacks.'
+                        }
+                    ]
+                }
             ],
         }, {
             id: 8,
@@ -346,7 +386,15 @@ module.exports.GetSkillGuide = () => {
             ],
         }, {
             id: 11,
+            title: 'Hitpoints',
             contents: [
+                {
+                    title: 'Hitpoints (HP)',
+                    usesLevel: false,
+                    content: [{
+                        description: 'Your hitpoints level determines your maximum health.'
+                    }]
+                }
             ],
         }, {
             id: 12, // Fishing
