@@ -99,7 +99,7 @@ const BuildCookingRecipesGuide = () => {
     console.info(keys);
     for(let i = 0; i < keys.length; ++i) {
         let recipe = Recipes[keys[i]]();
-        let desc = 'Mix ';
+        let desc = Item.Item[recipe.iconItemId].name + '\nMix ';
         for(let j = 0; j < recipe.itemIdsRequired.length; j++) {
             let itemToMix = Item.Item[recipe.itemIdsRequired[j]];
             desc += itemToMix.name;
@@ -111,7 +111,6 @@ const BuildCookingRecipesGuide = () => {
             }
             desc += ' ';
         }
-        desc += '\nto make ' + (Item.Item[recipe.iconItemId].name);
 
         guides.push(SingleItemSkillBuilder(recipe.levelRequirement, recipe.iconItemId, desc));
     }
@@ -164,6 +163,15 @@ module.exports.GetSkillGuide = () => {
                         SingleItemSkillBuilder(40, 273, 'Wield gothite weapons'),
                         SingleItemSkillBuilder(50, 301, 'Wield osmium weapons'),
                     ],
+                },
+                {
+                    title: 'Info',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Melee Focus increases your accuracy. Training this skill will help you miss less with melee attacks.'
+                        }
+                    ],
                 }
             ]
         }, {
@@ -174,7 +182,7 @@ module.exports.GetSkillGuide = () => {
                     usesLevel: false,
                     content: [
                         {
-                            description: 'Melee Power increases your damage output from melee attacks.'
+                            description: 'Melee Power increases your maximum damage per hit from melee attacks.'
                         }
                     ],
                 }
@@ -192,30 +200,53 @@ module.exports.GetSkillGuide = () => {
                         SingleItemSkillBuilder(40, 259, 'Wear gothite armor'),
                         SingleItemSkillBuilder(50, 287, 'Wear osmium armor'),
                     ],
+                },
+                {
+                    title: 'Info',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Melee Defense increases your chance to block melee hits.'
+                        }
+                    ],
                 }
             ]
         }, {
             id: 3,
             contents: [
                 {
-                    title: 'Wield',
+                    title: 'Bows',
                     content: [
                         SingleItemSkillBuilder(1, 37, 'Wield regular bows'),
-                        SingleItemSkillBuilder(1, 68, 'Shoot copper arrows'),
                         SingleItemSkillBuilder(10, 38, 'Wield oak bows'),
-                        SingleItemSkillBuilder(10, 69, 'Shoot iron arrows'),
                         SingleItemSkillBuilder(20, 39, 'Wield ash bows'),
-                        SingleItemSkillBuilder(20, 70, 'Shoot iron arrows'),
-                        SingleItemSkillBuilder(25, 558, 'Shoot wolf claw arrows'),
-                        SingleItemSkillBuilder(25, 550, 'Shoot rock bolts'),
                         SingleItemSkillBuilder(30, 40, 'Wield fur bows'),
-                        SingleItemSkillBuilder(30, 70, 'Shoot nelenite arrows'),
                         SingleItemSkillBuilder(35, 528, 'Wield skeleton bows'),
                         SingleItemSkillBuilder(35, 547, 'Wield anchor crossbows'),
                         SingleItemSkillBuilder(40, 319, 'Wield king maple bows'),
-                        SingleItemSkillBuilder(40, 276, 'Shoot gothite arrows'),
                         SingleItemSkillBuilder(50, 321, 'Wield magic bows'),
-                        SingleItemSkillBuilder(50, 304, 'Shoot gothite arrows'),
+                    ],
+                },
+                {
+                    title: 'Projectiles',
+                    content: [
+                        SingleItemSkillBuilder(1, 68, 'Shoot copper arrows'),
+                        SingleItemSkillBuilder(10, 69, 'Shoot iron arrows'),
+                        SingleItemSkillBuilder(20, 70, 'Shoot steel arrows'),
+                        SingleItemSkillBuilder(25, 558, 'Shoot wolf claw arrows'),
+                        SingleItemSkillBuilder(25, 550, 'Shoot rock bolts'),
+                        SingleItemSkillBuilder(30, 71, 'Shoot nelenite arrows'),
+                        SingleItemSkillBuilder(40, 276, 'Shoot gothite arrows'),
+                        SingleItemSkillBuilder(50, 304, 'Shoot osmium arrows'),
+                    ],
+                },
+                {
+                    title: 'Info',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Range Focus increases your accuracy with projectiles. Training this skill will help you miss less with arrows and thrown weapons.'
+                        }
                     ],
                 }
             ]
@@ -242,13 +273,20 @@ module.exports.GetSkillGuide = () => {
                         SingleItemSkillBuilder(10, 114, 'Wear iron chainmail'),
                         SingleItemSkillBuilder(20, 115, 'Wear steel chainmail'),
                         SingleItemSkillBuilder(30, 116, 'Wear nelenite chainmail'),
+                        MultiSkillReqBuilder(30, [[8, 10,]], GuideIcons.ITEM, 517, 'Wear grey pelt'),
                         SingleItemSkillBuilder(40, 269, 'Wear gothite chainmail'),
                         SingleItemSkillBuilder(50, 297, 'Wear osmium chainmail'),
-                        MultiSkillReqBuilder(30, [[8, 10,]], GuideIcons.ITEM, 517, 'Wear grey pelt torso'),
-                        MultiSkillReqBuilder(30, [[8, 10,]], GuideIcons.ITEM, 519, 'Wear grey pelt pants'),
-                        MultiSkillReqBuilder(50, [[8, 10,]], GuideIcons.ITEM, 554, 'Wear d. grey pelt torso'),
-                        MultiSkillReqBuilder(50, [[8, 10,]], GuideIcons.ITEM, 556, 'Wear d. grey pelt pants'),
+                        MultiSkillReqBuilder(50, [[8, 10,]], GuideIcons.ITEM, 554, 'Wear dark grey pelt'),
         
+                    ],
+                },
+                {
+                    title: 'Info',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Range Defense increases your chance to block projectiles.'
+                        }
                     ],
                 }
             ]
@@ -274,6 +312,15 @@ module.exports.GetSkillGuide = () => {
                         SingleSkillBuilder(26, GuideIcons.SPELL, 13, 'Greater Fire Wound'),
                         SingleSkillBuilder(28, GuideIcons.SPELL, 14, 'Greater Metal Wound'),
                     ]
+                },
+                {
+                    title: 'Info',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Magic Focus increases your accuracy with spells. Training this skill will help you miss less with spells and spell pots.'
+                        }
+                    ],
                 }
             ]
         }, {
@@ -301,6 +348,15 @@ module.exports.GetSkillGuide = () => {
                         SingleItemSkillBuilder(30, 96, 'Wear burgundy wizard robes'),
                         SingleItemSkillBuilder(35, 530, 'Wear ghostly equipment'),
                         SingleItemSkillBuilder(40, 539, 'Wear red wizard robes'),
+                    ],
+                },
+                {
+                    title: 'Info',
+                    usesLevel: false,
+                    content: [
+                        {
+                            description: 'Magic Defense increases your chance to deflect spells.'
+                        }
                     ],
                 }
             ]
@@ -389,10 +445,10 @@ module.exports.GetSkillGuide = () => {
             title: 'Hitpoints',
             contents: [
                 {
-                    title: 'Hitpoints (HP)',
+                    title: 'Hitpoints',
                     usesLevel: false,
                     content: [{
-                        description: 'Your hitpoints level determines your maximum health.'
+                        description: 'Your hitpoints (HP) level determines your maximum health. When you take damage, your HP will be temporarily reduced. Eat food to restore your HP. If your hitpoints reach 0, you will have a visit with death...',
                     }]
                 }
             ],
@@ -467,9 +523,9 @@ module.exports.GetSkillGuide = () => {
                     title: 'Prepare',
                     content: [
                         SingleSkillBuilder(1, GuideIcons.ITEM, 748, 'Milk a cow'),
-                        SingleSkillBuilder(1, GuideIcons.ITEM, 850, 'Chop octopus tentacles'),
                         SingleSkillBuilder(1, GuideIcons.ITEM, 750, 'Mill bucket of flour'),
                         SingleSkillBuilder(1, GuideIcons.ITEM, 793, 'Mill bucket of refined herbs'),
+                        SingleSkillBuilder(15, GuideIcons.ITEM, 850, 'Chop octopus tentacles'),
                     ]
                 },
             ],
@@ -483,7 +539,7 @@ module.exports.GetSkillGuide = () => {
                     title: 'Gold',
                     content: [
                         SmeltSkillBuilder(256),
-                        MultiSkillReqBuilder(5, [[15, 5]], GuideIcons.ITEM, 672, 'Cast gold ring'),
+                        MultiSkillReqBuilder(5, [[15, 5]], GuideIcons.ITEM, 799, 'Cast gold ring'),
                         MultiSkillReqBuilder(20, [[15, 20]], GuideIcons.ITEM, 674, 'Cast gold amulet'),
                     ]
                 },
@@ -513,7 +569,7 @@ module.exports.GetSkillGuide = () => {
                 {
                     title: 'Casting',
                     content: [
-                        MultiSkillReqBuilder(5, [[21, 5]], GuideIcons.ITEM, 672, 'Cast gold ring'),
+                        MultiSkillReqBuilder(5, [[21, 5]], GuideIcons.ITEM, 799, 'Cast gold ring'),
                         MultiSkillReqBuilder(20, [[21, 20]], GuideIcons.ITEM, 674, 'Cast gold amulet'),
                     ]
                 },
@@ -531,14 +587,14 @@ module.exports.GetSkillGuide = () => {
                         SingleSkillBuilder(20, GuideIcons.ITEM, 89, 'Upgrade bag (Max 50)'),
                         SingleSkillBuilder(30, GuideIcons.ITEM, 90, 'Upgrade bag (Max 100)'),
                         SingleSkillBuilder(40, GuideIcons.ITEM, 537,'Upgrade bag (Max 200)'),
-                        SingleSkillBuilder(1, GuideIcons.ITEM, 566, 'String copper golem fragment necklace'),
-                        SingleSkillBuilder(1, GuideIcons.ITEM, 566, 'String clay golem fragment necklace'),
-                        SingleSkillBuilder(10, GuideIcons.ITEM, 566, 'String iron golem fragment necklace'),
-                        SingleSkillBuilder(20, GuideIcons.ITEM, 566, 'String steel golem fragment necklace'),
-                        SingleSkillBuilder(30, GuideIcons.ITEM, 566, 'String nelenite golem fragment necklace'),
-                        SingleSkillBuilder(40, GuideIcons.ITEM, 566, 'String gothite golem fragment necklace'),
-                        SingleSkillBuilder(50, GuideIcons.ITEM, 566, 'String osmium golem fragment necklace'),
-                        SingleSkillBuilder(60, GuideIcons.ITEM, 566, 'String gem golem fragment necklace'),
+                        SingleSkillBuilder(1, GuideIcons.ITEM, 566, 'String copper golem necklace'),
+                        SingleSkillBuilder(1, GuideIcons.ITEM, 572, 'String clay golem necklace'),
+                        SingleSkillBuilder(10, GuideIcons.ITEM, 578, 'String iron golem necklace'),
+                        SingleSkillBuilder(20, GuideIcons.ITEM, 584, 'String steel golem necklace'),
+                        SingleSkillBuilder(30, GuideIcons.ITEM, 590, 'String nelenite golem necklace'),
+                        SingleSkillBuilder(40, GuideIcons.ITEM, 596, 'String gothite golem necklace'),
+                        SingleSkillBuilder(50, GuideIcons.ITEM, 602, 'String osmium golem necklace'),
+                        //SingleSkillBuilder(60, GuideIcons.ITEM, 580, 'String gem golem necklace'),
                         SingleSkillBuilder(50, GuideIcons.ITEM, 561, 'String wolf paw necklace'),
                     ]
                 },
@@ -575,7 +631,14 @@ module.exports.GetSkillGuide = () => {
             id: 17, // Firemaking
             contents : [
                 {
-                    title: 'Firemaking',
+                    title: 'Incineration',
+                    usesLevel: false,
+                    content: [{
+                        description: 'Any item can be turned into magic essence shards at an incinerator or volcano. Each item has a different burn point and requires a different firemaking to incinerate.\n\nHover your mouse over an item to see its incineration level.',
+                    }]
+                },
+                {
+                    title: 'Logs',
                     content: [
                         SingleSkillBuilder(1, GuideIcons.ITEM, 5, 'Light log'),
                         SingleSkillBuilder(10, GuideIcons.ITEM, 6, 'Light oak log'),
@@ -736,7 +799,7 @@ module.exports.GetSkillGuide = () => {
                 {
                     title: 'Casting',
                     content: [
-                        MultiSkillReqBuilder(5, [[15, 5]], GuideIcons.ITEM, 672, 'Cast gold ring'),
+                        MultiSkillReqBuilder(5, [[15, 5]], GuideIcons.ITEM, 799, 'Cast gold ring'),
                         MultiSkillReqBuilder(20, [[15, 20]], GuideIcons.ITEM, 674, 'Cast gold amulet'),
                     ]
                 },
@@ -745,7 +808,7 @@ module.exports.GetSkillGuide = () => {
             id: 22, // Environment Magic
             contents : [
                 {
-                    title: 'Cast',
+                    title: 'Area',
                     content: [
                         SingleSkillBuilder(1, GuideIcons.SPELL, 23, 'Pickup 3x3'),
                         SingleSkillBuilder(30, GuideIcons.SPELL, 24, 'Pickup 5x5'),
