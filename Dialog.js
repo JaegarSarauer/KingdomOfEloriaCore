@@ -184,7 +184,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Mining Guide</b>',
     message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Teragon Mining Guild</note>',
     continueSteps: [[
-        buildStep(StepType.ASSERT_USER_GOAL_STATES, {params: [2, [5], ['EQUALS']]}),
+        buildStep(StepType.ASSERT_GOAL_STATES, {params: [2, [5], ['EQUALS']]}),
         buildStep(StepType.TELEPORT, {params: [0, 81, 362, 86, 363, 2, [[
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [2, [6]]}),
             buildStep(StepType.START_TOUR, {params: [0, [[
@@ -819,7 +819,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Fishing Guide</b>',
     message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Salmo Fishing Guild</note>',
     continueSteps: [[
-        buildStep(StepType.ASSERT_USER_GOAL_STATES, {params: [3, [5], ['EQUALS']]}),
+        buildStep(StepType.ASSERT_GOAL_STATES, {params: [3, [5], ['EQUALS']]}),
         buildStep(StepType.TELEPORT, {params: [0, 151, 15, 155, 16, 2, [[
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [3, [6]]}),
             buildStep(StepType.START_TOUR, {params: [1, [[
@@ -887,7 +887,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     title: '<b>Woodcutting Guide</b>',
     message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Acernis Woodcutting Guild</note>',
     continueSteps: [[
-        buildStep(StepType.ASSERT_USER_GOAL_STATES, {params: [4, [5], ['EQUALS']]}),
+        buildStep(StepType.ASSERT_GOAL_STATES, {params: [4, [5], ['EQUALS']]}),
         buildStep(StepType.TELEPORT, {params: [0, 331, 51, 333, 53, 2, [[
             buildStep(StepType.SET_USER_GOAL_STATE, {params: [4, [6]]}),
             buildStep(StepType.START_TOUR, {params: [2, [[
