@@ -6022,13 +6022,13 @@ const Character = {
                 guard.equipmentModel = [24, 20, null, 45, 32];
                 break;
             case 5:
-                guard.equipmentModel = [259, 273, 271, 263, 261];
+                guard.equipmentModel = [257, 273, 271, 263, 261];
                 break;
             case 6:
             case 7:
             case 8:
             case 9:
-                guard.equipmentModel = [287, 301, 299, 291, 289];
+                guard.equipmentModel = [285, 301, 299, 291, 289];
                 break;
         }
         
