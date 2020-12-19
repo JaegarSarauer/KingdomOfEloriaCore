@@ -1169,7 +1169,35 @@ const Cosmetics = [
         itemID: 1094,
         crownCost: getCrownPrice(0, 1),
         purchasableTime: new DateRange(9, 15, 10, 2),
-    }
+    },
+    {
+        id: 183,
+        rarity: 0,
+        itemID: 1098,
+        crownCost: getCrownPrice(0, 1),
+        purchasableTime: new DateRange(12, 15, 1, 2),
+    },
+    {
+        id: 184,
+        rarity: 0,
+        itemID: 1099,
+        crownCost: getCrownPrice(0, 1),
+        purchasableTime: new DateRange(12, 15, 1, 2),
+    },
+    {
+        id: 185,
+        rarity: 0,
+        itemID: 1100,
+        crownCost: getCrownPrice(0, 1),
+        purchasableTime: new DateRange(12, 15, 1, 2),
+    },
+    {
+        id: 186,
+        rarity: 2,
+        itemID: 1101,
+        crownCost: getCrownPrice(2, 1),
+        purchasableTime: new DateRange(12, 15, 1, 2),
+    },
 ];
 
 const isPurchasableTime = (cosmeticID, curMonth, curDay) => {

@@ -3888,6 +3888,10 @@ const Item = Object.freeze([
     Get.Item.Saw(1097, 224, [
         Get.Action.BuildWithSaw(9, 5, [294]), // Log Camp
     ]),
+    Get.Item.CosmeticShirt(1098, 183, 'Sweater', 'A decorative Christmas sweater', 781 ),
+    Get.Item.CosmeticShirt(1099, 184, 'Sweater', 'A decorative Christmas sweater', 782 ),
+    Get.Item.CosmeticShirt(1100, 185, 'Sweater', 'A decorative Christmas sweater', 783 ),
+    Get.Item.CosmeticHat(1101, 186, 'Christmas Tree Hat', 'A decorative Christmas tree hat', 784, 0.95 ),
 ]);
 
 var ItemName = [];
