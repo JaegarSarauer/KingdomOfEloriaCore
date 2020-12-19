@@ -6385,7 +6385,6 @@ const Character = {
 
         human.equipmentModel = [null, 301, null, 291, 289];
         human.stats = [[0, 200], [1, 200], [2, 200], [3, 100], [4, 100], [5, 100], [6, 250], [7, 250], [8, 250], [11, 500],];
-        human.drops = [[[1, 200], [0, 20, 50, 80], [15, 1, 1, 20]], [[10, 100], [53, 1, 2, 90], [54, 1, 2, 10]]];
         human.isAggressiveTo = GuildNPCIds;
         human.modelParams = {
             CHEST: { spriteID: 11},
