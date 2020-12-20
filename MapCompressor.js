@@ -507,13 +507,17 @@ module.exports.compressMapData = (mapID, name) => {
         ], getBlockingTiles(tiledMap)),
         structureTiles : getOptimizedDataArray([
             getLayer(tiledMap, 'detail').data,
-            getLayer(tiledMap, 'detailRisenBehind').data,
-            getLayer(tiledMap, 'detailRisen').data,
         ], []),
         sceneryTiles : getOptimizedDataArray([
             getLayer(tiledMap, 'flowersOutput').data,
             getLayer(tiledMap, 'detailGround').data,
-        ], [])
+        ], []),
+    };
+    mapData.sortableTileData = {
+        structureTiles : getOptimizedDataArray([
+            getLayer(tiledMap, 'detailRisenBehind').data,
+            getLayer(tiledMap, 'detailRisen').data,
+        ], []),
     };
     mapData.worldObjectData = loadMapWorldObjects(tiledMap);
     mapData.npcData = loadMapCharacters(tiledMap);
