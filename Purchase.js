@@ -54,12 +54,12 @@ class DateRange {
     constructor(monthStart, dayStart, monthEnd, dayEnd) {
         this.monthStart = monthStart;
         this.dayStart = dayStart;
-        this.monthEnd = monthEnd;
-        this.dayEnE = dayEnd;
+        this.monthEnd = monthEnd == 0 ? 12 : monthEnd;
+        this.dayEnd = dayEnd;
     }
 
     isValid (curMonth, curDay) {
-        return this.monthStart <= curMonth && this.dayStart <= curDay && (this.monthEnd > curMonth || (this.monthEnd == curMonth && this.dayEnd > curDay));
+        return this.monthStart <= curMonth && this.dayStart <= curDay && (this.monthEnd > curMonth || (this.monthEnd % 12 == curMonth && this.dayEnd > curDay));
     }   
 }
 
@@ -1175,28 +1175,28 @@ const Cosmetics = [
         rarity: 0,
         itemID: 1098,
         crownCost: getCrownPrice(0, 1),
-        purchasableTime: new DateRange(12, 15, 1, 2),
+        purchasableTime: new DateRange(11, 15, 12, 2),
     },
     {
         id: 184,
         rarity: 0,
         itemID: 1099,
         crownCost: getCrownPrice(0, 1),
-        purchasableTime: new DateRange(12, 15, 1, 2),
+        purchasableTime: new DateRange(11, 15, 12, 2),
     },
     {
         id: 185,
         rarity: 0,
         itemID: 1100,
         crownCost: getCrownPrice(0, 1),
-        purchasableTime: new DateRange(12, 15, 1, 2),
+        purchasableTime: new DateRange(11, 15, 12, 2),
     },
     {
         id: 186,
         rarity: 2,
         itemID: 1101,
         crownCost: getCrownPrice(2, 1),
-        purchasableTime: new DateRange(12, 15, 1, 2),
+        purchasableTime: new DateRange(11, 15, 12, 2),
     },
 ];
 
