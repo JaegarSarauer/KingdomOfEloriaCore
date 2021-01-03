@@ -7459,6 +7459,37 @@ const Character = {
 
         return cat;
     },
+    Unicorn: function(id, spriteIndex, name = 'Unicorn') {
+        let unicorn = this.FourLeggedMammalWithTail(id, name, 'unicorn', spriteIndex,  [[0, 25], [1, 25], [2, 25], [3, 25]]);
+
+        unicorn.modelParams.THIGH_HIDDEN_BACK.anchor = {x: 0.8, y: 0.15};
+        unicorn.modelParams.THIGH_VISIBLE_BACK.anchor = {x: 0.8, y: 0.15};
+        unicorn.modelParams.THIGH_HIDDEN_FRONT.anchor = {x: 0.5, y: 0.15};
+        unicorn.modelParams.THIGH_VISIBLE_FRONT.anchor = {x: 0.5, y: 0.15};
+
+        unicorn.modelParams.THIGH_HIDDEN_BACK.position = {x: 0.45, y: 0.05};
+        unicorn.modelParams.THIGH_VISIBLE_BACK.position = {x: 0.3, y: 0.15};
+        unicorn.modelParams.SHIN_HIDDEN_BACK.position = {x: -0.35, y: 0.75};
+        unicorn.modelParams.SHIN_VISIBLE_BACK.position = {x: -0.35, y: 0.75};
+        unicorn.modelParams.THIGH_HIDDEN_FRONT.position = {x: -0.05, y: 0.1};
+        unicorn.modelParams.THIGH_VISIBLE_FRONT.position = {x: -0.2, y: 0.2};
+        unicorn.modelParams.SHIN_HIDDEN_FRONT.position = {x: 0.0, y: 0.85};
+        unicorn.modelParams.SHIN_VISIBLE_FRONT.position = {x: 0.0, y: 0.85};
+
+        unicorn.modelParams.TAIL.anchor = {x: 0.1, y: 0.15};
+        unicorn.modelParams.TAIL.position = {x: 0.45, y: -0.05};
+
+        let rawSteakId = 752;
+       
+        unicorn.actions = [{
+                interfaceID: 0,
+                id: 6,
+                name: 'Attack'
+            },
+        ];
+        unicorn.drops = [[[1, 100], [rawSteakId, 1, 1, 100]]];
+        return unicorn;
+    },
     PatreonQuestCat: function(id, isBilly, donatedAmount) {
         let tier = Math.round( donatedAmount / 50 / 2); // Half a Patreon users normal amount
         let stats = [[0, 6 + tier * 2], [1, tier * 2], [2, 6 + tier * 2], [3, 4 + tier * 2], [4, 4 + tier * 2], [5, 4 + tier * 2], [6, 2 + tier * 2], [7, 1 + tier * 2], [8, 1 + tier * 2], [11, 6 + tier * 2],];
