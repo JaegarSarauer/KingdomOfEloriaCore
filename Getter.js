@@ -6673,7 +6673,7 @@ const Character = {
                 secondaryAttackRange: 4,
                 secondaryAttackCooldown: 2,
                 secondaryCombatStyle: Combat.CombatStyle.RANGE,
-                modelName: 'BEE',
+                modelName: 'WASP',
                 actions: [{
                     interfaceID: 0,
                     id: 6,
