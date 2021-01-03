@@ -1984,8 +1984,8 @@ const Model = {
             sprite: 'rock',
             parent: null,
             spriteID: 0,
-            anchor: {x: 0.5, y: 1},
-            position: {x: 0, y: 32},
+            anchor: {x: 0.5, y: 0.5},
+            position: {x: 0, y: 0},
             rotation: 0,
             UIModel: null,
         }
