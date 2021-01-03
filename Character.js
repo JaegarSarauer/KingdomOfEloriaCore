@@ -419,4 +419,5 @@ Get.Character.BabyDragon(128, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], 
     return wizard;
 })(),
 Get.Character.Wasp(130),
+Get.Character.Unicorn(131, 1),
 ];
