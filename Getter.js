@@ -6187,6 +6187,8 @@ const Character = {
         guard.equipmentModel = [0, 39, 0, 425, 481];
         // Dagger to left hand
 
+        guard.modelParams.HEAD.sprite = 'elfHead';
+        
         guard.drops = [
             DropTables.Table(1, [[0, 10, 40, 60], [0, 20, 50, 20], [37, 1, 1, 15], [38, 1, 1, 5], [39, 1, 1, 1], [68, 8, 25, 5]]),
             DropTables.ItemPickupPages(128 - (tier * 4)),
