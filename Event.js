@@ -181,14 +181,17 @@ module.exports.Event = [{
     startEvent: (currentMap, targetEntity) => {
         return startGolemEvent(currentMap, targetEntity, 58);
     }
-}, {
-    id: 7,
-    startEvent: (currentMap, targetEntity) => {
-        return startHauntedGhost(currentMap, targetEntity, targetEntity);
-    }
-}, {
-    id: 8,
-    startEvent: (currentMap, targetEntity) => {
-        return startWasp(currentMap, targetEntity);
-    }
-}];
+}, 
+// {
+//     id: 7,
+//     startEvent: (currentMap, targetEntity) => {
+//         return startHauntedGhost(currentMap, targetEntity, targetEntity);
+//     }
+// }, 
+// {
+//     id: 8,
+//     startEvent: (currentMap, targetEntity) => {
+//         return startWasp(currentMap, targetEntity);
+//     }
+// }
+];
