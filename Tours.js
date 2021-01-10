@@ -51,5 +51,58 @@ module.exports.Tours = Tours = [
         position: {x : 340, y : 75},
         text: 'And these are our shops, where you can buy and sell items.',
         hold: 4000,
-    },]
+    },],
+    [{
+        position: {x : 271, y : 71},
+        text: 'You arrive in Eloria',
+        hold: 1000,
+    }, {
+        position: {x : 303, y : 71},
+        text: 'You arrive in Eloria',
+        hold: 0,
+    },{
+        position: {x : 324, y : 50},
+        text: 'The Guild Wizards await you',
+        hold: 0,
+    },{
+        position: {x : 351, y : 73},
+        text: 'The Guild Wizards await you',
+        hold: 0,
+    },{
+        position: {x : 358, y : 73},
+        text: 'The Guild Wizards await you',
+        hold: 0,
+    },{
+        position: {x : 368, y : 70},
+        text: 'The Guild Wizards await you',
+        hold: 0,
+    },{
+        position: {x : 373, y : 64},
+        text: 'The Guild Wizards await you',
+        hold: 0,
+    },{
+        position: {x : 368, y : 70},
+        text: 'The Guild Wizards await you',
+        hold: 0,
+    },{
+        position: {x : 358, y : 73},
+        text: 'The Guild Wizards await you',
+        hold: 0,
+    },{
+        position: {x : 351, y : 73},
+        text: 'The Guild Wizards await you',
+        hold: 0,
+    }, {
+        position: {x : 324, y : 50},
+        text: 'Run past the enemy guards\nto get to the friendly wizards.',
+        hold: 0,
+    }, {
+        position: {x : 303, y : 71},
+        text: 'Run past the enemy guards\nto get to the friendly wizards.',
+        hold: 0,
+    }, {
+        position: {x : 271, y : 71},
+        text: 'Run past the enemy guards\nto get to the friendly wizards.',
+        hold: 1000,
+    },],
 ];

@@ -1,6 +1,6 @@
 const ItemState = require('../def/interface/ItemStateDef');
 const MapManager = require('../manager/MapManager');
-const StepStartTutorialTimer = require('../internal/Steps/StepStartTutorialTimer');
+const { StepStartTour } = require('../internal/Steps/StepStartTour');
 const StepTypeClassDictionary = require('./Step');
 const StateType = require('../internal/State').StateType;
 
@@ -86,17 +86,18 @@ const AccountVersion = [{
                 if (adv.mapID != 2) {
                     MapManager.i.changeMap(adv, 2);
                 }
-                adv.setPosition(272, 72);
+                adv.setPosition(271, 72);
                 adv.state.setEntityAtSlot(4, [1]);
-
-                let step = new StepStartTutorialTimer.StepStartTutorialTimer(null, StepTypeClassDictionary.StepType.OPEN_SHOP_INTERFACE, adv, adv, {});
-                step._perform([]);
                 
                 let tutorialStateDef = StateType[4].state[1];
+
+                let stepsAfterTour = [
+                    buildStep(StepType.START_TUTORIAL_TIMER, {params: []}),
+                ];
                 if (tutorialStateDef.dialogID != null) {
-                    adv.dialog.showDialog(tutorialStateDef.dialogID);
-                    adv.interfaces.enableInterfaces([13, 17]);
+                    stepsAfterTour.push(buildStep(StepType.SHOW_DIALOG, {params: [tutorialStateDef.dialogID]}));
                 } 
+                StepStartTour.startTour(3, adv, [stepsAfterTour]);
             }
         })
     },

@@ -416,6 +416,12 @@ Get.Character.BabyDragon(128, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], 
     }]);
     wizard.stats = [[0, 30], [1, 70], [2, 50], [3, 10], [4, 10], [5, 45], [6, 1], [7, 1], [8, 20], [11, 60]];
     wizard.isAggressiveTo = [91, 92, 93, 94, 98, 99, 100, 101, 102];
+    wizard.behaviorLoop = (entity) => {
+        entity.timers.setTimer(17, 10, () => {
+            KingdomOfEloria.i.getMap(entity.mapID).despawnEntity(entity);
+            return -1;
+        })
+    };
     return wizard;
 })(),
 Get.Character.Wasp(130),
