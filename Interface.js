@@ -2319,6 +2319,7 @@ const Interface = [
             steps: [
                 [
                     buildStep(StepType.CHECK_TUTORIAL_STATE, { params: [1] }),
+                    buildStep(StepType.PLAY_ANIMATION, {params: ['TELEPORT']}),
                     buildStep(StepType.SELECT_GUILD, {params: ['GUILD_ID']}),
                     buildStep(StepType.SET_TUTORIAL_STATE, {params: [2]}),
                     buildStep(StepType.SET_CHARACTER_STATE, {params: [8, 'GUILD_ID']}),
