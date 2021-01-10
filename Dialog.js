@@ -36,6 +36,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.START_TUTORIAL_TIMER),
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [360, 76]}),
+        buildStep(StepType.TELEPORT, {params: [2, 272, 71, 272, 71, 0]}),
     ]],
 },{
     id: 2,
