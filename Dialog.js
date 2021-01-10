@@ -19,7 +19,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 
     'Soldiers evacuate the wreckage, and began fighting the attacking forces.\n\n' +
 
-    'You hear a friendly voice shout <note>\'<i>There is a ladder, find it and get out of here!</i>\'</note>\n\n' +
+    'You hear a friendly voice shout <note>\'<i>Our allied Wizards are just past the battle field! Find them!</i>\'</note>\n\n' +
 
     '<b>\tHow to Play</b>\n' + 
     ' - Left click your mouse to move around.\n' + 
