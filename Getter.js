@@ -3759,6 +3759,7 @@ const WorldObject = {
             actions: [],
             useActions: [Action.FillBucketsWithWater(0, 60)],
             spriteIndex: spriteIndex,
+            legendID: 29,
         };
     },
     Mill: function(id, name, spriteIndex) {
@@ -3770,6 +3771,7 @@ const WorldObject = {
                 ItemDetail.levelSkillDetail('1+', 13, 'USE'),
             ]),
             modelName: 'ROCK',
+            legendID: 30,
             modelParams: {
                 BASE: {
                     asset: 'worldObjects',
@@ -4010,6 +4012,7 @@ const WorldObject = {
                     ItemDetail.levelSkillDetail('1-30', 12, 'FISH'),
                     ItemDetail.itemNameDetail('Fishing Net', 'TOOL_NAME'),
                 ]),
+                legendID: 18,
                 modelName: 'FISHING_POOL',
                 modelParams: {
                     BASE: {
@@ -4106,6 +4109,7 @@ const WorldObject = {
                     ItemDetail.itemNameDetail('Fishing Net', 'TOOL_NAME'),
                 ]),
                 modelName: 'FISHING_POOL',
+                legendID: 18,
                 modelParams: {
                     BASE: {
                         spriteID: 1,
@@ -4159,6 +4163,7 @@ const WorldObject = {
                     ItemDetail.itemNameDetail('Crab Pot', 'TOOL_NAME'),
                 ]),
                 modelName: 'FISHING_POOL',
+                legendID: 18,
                 modelParams: {
                     BASE: {
                         spriteID: 1,
@@ -4244,6 +4249,7 @@ const WorldObject = {
                     ItemDetail.levelSkillDetail(skillLevel + '+', 12, 'FISH'),
                 ]),
                 modelName: 'FISHING_POOL',
+                legendID: 18,
                 modelParams: {
                     BASE: {
                         spriteID: 1,
@@ -4323,6 +4329,7 @@ const WorldObject = {
                     ItemDetail.itemNameDetail('Fishing Net', 'TOOL_NAME'),
                 ]),
                 modelName: 'FISHING_POOL',
+                legendID: 18,
                 modelParams: {
                     BASE: {
                         spriteID: 2,
@@ -4612,13 +4619,14 @@ const WorldObject = {
                 spriteIndex: 'Pile',
             }
         },
-        GemObelisk: function (id, name, gemNumber, environmentMagicLevel, xp, coloredClothID, bindEssenceCost) {
+        GemObelisk: function (id, name, legendID, gemNumber, environmentMagicLevel, xp, coloredClothID, bindEssenceCost) {
             return {
                 id: id,
                 name: name,
                 description : 'A powerful gem!',
                 requirements: ItemDetail.build([
                 ]),
+                legendID: legendID,
                 modelName: 'OBELISK',
                 modelParams: {
                     CORE: {
@@ -4742,6 +4750,7 @@ const WorldObject = {
                         spriteID: spriteID,
                     }
                 },
+                legendID: 27,
                 actions: actions,
             }
         },
@@ -5076,6 +5085,7 @@ const WorldObject = {
                         spriteID: spriteID,
                     }
                 },
+                legendID: 41,
                 actions: [{
                     interfaceID: 0,
                     id: 23,
@@ -5137,6 +5147,7 @@ const WorldObject = {
                         spriteID: spriteID,
                     }
                 },
+                legendID: 41,
                 actions: [{
                     interfaceID: 0,
                     id: 23,
@@ -5192,6 +5203,7 @@ const WorldObject = {
                         spriteID: spriteID,
                     }
                 },
+                legendID: 41,
                 actions: [{
                     interfaceID: 0,
                     id: 23,
@@ -5282,10 +5294,14 @@ const WorldObject = {
             };
         },
         Flax: function(id) {
-            return this.ForageablePlant(id, 'Flax', 'A plant with strong fibers. Good for making strings.', 'flax', 0, 124, 15, 5);
+            let flax = this.ForageablePlant(id, 'Flax', 'A plant with strong fibers. Good for making strings.', 'flax', 0, 124, 15, 5);
+            flax.legendID = 21;
+            return flax;
         },
         Wheat: function(id) {
-            return this.ForageablePlant(id, 'Wheat', 'A plant used for making flour.', 'wheat', 0, 758, 13, 3);
+            let wheat = this.ForageablePlant(id, 'Wheat', 'A plant used for making flour.', 'wheat', 0, 758, 13, 3);
+            wheat.legendID = 28;
+            return wheat;
         },
         CatQuestFishingPool: function(id) {
             let pool = this.ShallowFishingPool(id);
@@ -5377,7 +5393,9 @@ const WorldObject = {
             return readable;
         },
         CatQuestBillyRecipe: function(id) {
-            return this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 'recipe', 1, 50)
+            let recipe = this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 'recipe', 1, 50)
+            recipe.legendID = 32;
+            return recipe;
         },
         CatQuestVixenRecipe: function(id) {
             return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects', 'recipe', 2, 51)
@@ -5785,6 +5803,7 @@ const Character = {
     },
     PatreonPim : function(id) {
         let result = this.Human(id, 'Patreon Pim', 13, [null, null, null, 377, 489], 4, HairColors.CherryRed );
+        result.legendID = 42;
         result.actions = [
             {
                 interfaceID: 0,
@@ -5812,6 +5831,7 @@ const Character = {
     },
     PatreonTat : function(id) {
         let result = this.Human(id, 'Patreon Tat', 13, [null, null, null, 375, 487], 3, HairColors.CherryRed );
+        result.legendID = 42;
         result.actions = [
             {
                 interfaceID: 0,
@@ -5915,7 +5935,7 @@ const Character = {
         golem.modelParams.LEFT_THIGH.sprite += "Coal";
         return golem;
     },
-    HumanShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, shopsMenuInterfaceID) {
+    HumanShopOwner : function(id, name, spriteID, legendID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, shopsMenuInterfaceID) {
         let def = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
                 interfaceID: 0,
                 id: 5,
@@ -5927,6 +5947,7 @@ const Character = {
             }], faceId, eyeColor);
 
         def.shopID = shopsMenuInterfaceID;
+        def.legendID = legendID;
         return def;
     },
     Guard: function(id, name, spriteID = null, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, bountyTypeEnterSafeAreas = false) {
@@ -6412,8 +6433,8 @@ const Character = {
         };
         return human;
     },
-    HumanAppearanceShopOwner : function(id, name, spriteID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, appearanceShopMenuID) {
-        return this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
+    HumanAppearanceShopOwner : function(id, name, spriteID, legendID, equipmentModel = [0, 0, 0, 0, 0], hairStyleId = 0, hairColor = 0, faceId = null, eyeColor = 0x4f3822, appearanceShopMenuID) {
+        let result = this.Human(id, name, spriteID, equipmentModel, hairStyleId, hairColor, [{
                 interfaceID: 0,
                 id: 5,
                 name: 'Trade',
@@ -6421,7 +6442,9 @@ const Character = {
                     [buildStep(StepType.PLAY_ANIMATION, { params: ['TALK_TO'] }),
                     buildStep(StepType.OPEN_CHANGE_APPEARANCE, { params: [appearanceShopMenuID] })]
                 ],
-            }], faceId, eyeColor);
+            }], faceId, eyeColor)
+            result.legendID = legendID;
+            return result;
         },
         Skeleton: function (id, name, spriteID, stats, drops, equipmentModel, headSpriteID = null) {
             return {
@@ -6725,6 +6748,7 @@ const Character = {
             COMPLETE : 3
         }
         let childGoblin = this.Goblin(id, name, 1,  [[0, 10], [1, 10], [2, 50], [3, 10]], [[]], null, 4);
+        childGoblin.legendID = 31;
         childGoblin.cannotDie = true;
         childGoblin.actions = [{
             interfaceID: 0,
@@ -7096,6 +7120,8 @@ const Character = {
         let questID = Guilds.Guilds[guildID].quest.entrance_exam.id;
         let dialogs = Guilds.Guilds[guildID].quest.entrance_exam.dialogs;
         let skillID = Guilds.Guilds[guildID].skillID;
+
+        guide.legendID = Guilds.Guilds[guildID].legendID;
 
         let states = {
             UNSTARTED : 0,
