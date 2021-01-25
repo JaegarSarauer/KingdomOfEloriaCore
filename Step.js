@@ -1412,10 +1412,6 @@ const StepList = {
                 stepResultPass: 'NEXT_STEP_LIST', 
                 stepResultFail: 'NEXT_STEP'
             }),
-            buildStep(StepType.CAN_ATTACK_OWNER, {
-                stepResultPass: 'NEXT_STEP', 
-                stepResultFail: 'END_ACTION'
-            }),
             buildStep(StepType.WALK_ADJACENT, {
                 stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
