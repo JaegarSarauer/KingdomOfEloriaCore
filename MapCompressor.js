@@ -13,6 +13,9 @@ const GroundItemDef = require('../def/GroundItemDef');
 const Bounds = require('../def/Bounds').Bounds;
 const GuildState = require('../internal/GuildState').GuildState;
 const Item = require('./Item');
+const Character = require('./Character');
+const WorldObject = require('./WorldObject');
+const Guild = require('./Guild');
 const guildTierToIndex = require('../typedef/Guild').tierToIndex;
 
 const MAP_WIDTH = 400;
@@ -196,7 +199,6 @@ function loadMapWorldObjects(JSONMap) {
     return entitiesArray;
 }
 
-
 function loadMapCharacters(JSONMap) {
     let gidStart = JSONMap.tilesets[3].firstgid;
     let entityObjects = getLayer(JSONMap, "Characters").objects;
@@ -229,6 +231,95 @@ function loadMapCharacters(JSONMap) {
         entitiesArray.push(npcDef);
     }
     return entitiesArray;
+}
+
+function loadMinimapData(mapID, worldObjectsData, npcData, citiesData) {
+    let usedXYs = {};
+
+    let result = {
+        legend : {},
+        cities : {}
+    };
+
+    let MERGE_SIZE = 5;
+
+    let addResult = (legendID, x, y ) => {
+        if (result.legend[legendID] == null) {
+            result.legend[legendID] = [];
+            usedXYs[legendID] = {};
+        };
+        if (usedXYs[legendID][x] == null) {
+            usedXYs[legendID][x] = {};
+        }
+
+        let doAdd = true;
+        for(let x2 = x + Math.floor(-MERGE_SIZE / 2); x2 < x + MERGE_SIZE / 2; ++x2) {
+            for(let y2 = y + Math.floor( -MERGE_SIZE / 2 ); y2 < y + MERGE_SIZE / 2; ++y2) {
+                if (x2 >= 0 && y2 >= 0 && usedXYs[legendID][x2] && usedXYs[legendID][x2][y2]) {
+                    doAdd = false;
+                }
+            }
+        }
+        if (doAdd) {
+            usedXYs[legendID][x][y] = true;
+            result.legend[legendID].push([x, y]);
+        }
+
+    };
+
+    for(let i = 0; i < worldObjectsData.length; ++i) {
+        let data = worldObjectsData[i];
+        let x = data[0];
+        let y = data[1];
+        let id = data[2];
+
+        if (WorldObject.WorldObject[id] != null && WorldObject.WorldObject[id].legendID != null) {
+            addResult(WorldObject.WorldObject[id].legendID, x, y);
+        }
+    }
+
+    let guildIDs = Object.keys(Guild.Guilds);
+    for(let i = 0; i < guildIDs.length; ++i) {
+        let guild = Guild.Guilds[guildIDs[i]];
+        if (guild.obelisk != null && mapID == guild.obelisk.mapID && WorldObject.WorldObject[guild.obelisk.id].legendID != null) {
+            addResult(WorldObject.WorldObject[guild.obelisk.id].legendID, guild.obelisk.x, guild.obelisk.y);
+        }
+    }
+
+    for(let i = 0; i < npcData.length; ++i) {
+        let npcDef = npcData[i];
+        let x = npcDef.x;
+        let y = npcDef.y;
+        let id = npcDef.id;
+
+        if (Character.Character[id] != null && Character.Character[id].legendID != null) {
+            addResult(Character.Character[id].legendID, x, y);
+        }
+    }
+
+    let citiesName = Object.keys(citiesData);
+    for(let i = 0; i < citiesName.length; ++i) {
+        let cityName = citiesName[i];
+        let data = citiesData[cityName];
+        
+        let area = data.cityArea;
+        if (area == null) {
+            area = data.mayorArea;
+        }
+
+        let x = area.x + Math.floor( area.width / 2)
+        let y = area.y + Math.floor( area.height / 2)
+
+        result.cities[cityName] = {
+            x,
+            y,
+        };
+        if (data.id != null) {
+            result.cities[cityName].guildID = data.id;
+        }
+    }
+
+    return result;
 }
 
 function loadItemSpawns(JSONMap) {
@@ -427,7 +518,7 @@ module.exports.compressMapData = (mapID, name) => {
                     new ShopStorageData(7, 'Melee Store', [[13, 10], [14, 5], [15, 1], [17, 5], [18, 2], [21, 10], [22, 5], [23, 1], [25, 5], [26, 2], [42, 10], [43, 5], [29, 10], [30, 5]], 120),
                     new ShopStorageData(8, 'Archery Store', [[37, 10], [38, 5], [39, 1], [68, 500], [69, 100], [70, 50], [71, 10], [105, 10], [106, 5], [109, 10], [110, 5], [113, 10], [114, 5]], 120),
                     new ShopStorageData(9, 'Magic Store', [[83, 500], [84, 100], [85, 50], [86, 10], [93, 10], [94, 5], [97, 10], [98, 5], [101, 10], [102, 5]], 120),
-                    new ShopStorageData(10, 'Clothing Store', [[331, 5] ,[333, 5] ,[335, 5] ,[337, 5] ,[339, 5] ,[341, 5] ,[343, 5] ,[345, 5] ,[347, 5] ,[475, 5] ,[349, 5] ,[351, 5] ,[353, 5] ,[355, 5] ,[357, 5] ,[359, 5] ,[361, 5] ,[363, 5] ,[365, 5] ,[477, 5] ,[367, 5] ,[369, 5] ,[371, 5] ,[373, 5] ,[375, 5] ,[377, 5] ,[379, 5] ,[381, 5] ,[383, 5] ,[479, 5] ,[385, 5] ,[387, 5] ,[389, 5] ,[391, 5] ,[393, 5] ,[395, 5] ,[397, 5] ,[399, 5] ,[401, 5] ,[481, 5] ,[403, 5] ,[405, 5] ,[407, 5] ,[409, 5] ,[411, 5] ,[413, 5] ,[415, 5] ,[417, 5] ,[419, 5] ,[483, 5] ,[421, 5] ,[423, 5] ,[425, 5] ,[427, 5] ,[429, 5] ,[431, 5] ,[433, 5] ,[435, 5] ,[437, 5] ,[485, 5] ,[439, 5] ,[441, 5] ,[443, 5] ,[445, 5] ,[447, 5] ,[449, 5] ,[451, 5] ,[453, 5] ,[455, 5] ,[487, 5] ,[457, 5] ,[459, 5] ,[461, 5] ,[463, 5] ,[465, 5] ,[467, 5] ,[469, 5] ,[471, 5] ,[473, 5],[489, 5]], 120), 
+                    new ShopStorageData(10, 'NULL STORE', [], 120), 
                     new ShopStorageData(11, 'Farming Store', [[744, 1000]], 120),
                     new ShopStorageData(12, 'Tergaron General Store', [], 120, 0),
                     new ShopStorageData(13, 'Tergaron Metalsmith Store', [], 120, 0),
@@ -531,6 +622,8 @@ module.exports.compressMapData = (mapID, name) => {
 
     mapData.guildsData = loadGuilds( tiledMap );
     mapData.musicData = loadMusicAreas( tiledMap );
+    // MINIMAP DATA HERE
+    // let minimapData = loadMinimapData(mapID, mapData.worldObjectData, mapData.npcData, mapData.guildsData);
 
     let fileName = '../GuildsOfGodsAssets/MapDesign/' + name + '.json';
     try {

@@ -724,9 +724,9 @@ module.exports.GetSkillGuide = () => {
                         SingleSkillBuilder(20, GuideIcons.ITEM, 495, 'Crush sharp shards'),
                         SingleSkillBuilder(28, GuideIcons.ITEM, 494, 'Crush force shards'),
                         SingleSkillBuilder(34, GuideIcons.ITEM, 496, 'Crush poison shards'),
+                        SingleSkillBuilder(46, GuideIcons.ITEM, 497, 'Crush bind shards'),
                         SingleSkillBuilder(50, GuideIcons.ITEM, 499, 'Crush nature shards'),
                         SingleSkillBuilder(50, GuideIcons.ITEM, 126, 'Crush void shards'),
-                        SingleSkillBuilder(70, GuideIcons.ITEM, 497, 'Crush brind shards'),
                         SingleSkillBuilder(80, GuideIcons.ITEM, 498, 'Crush soul shards'),
                     ]
                 },
@@ -837,9 +837,9 @@ module.exports.GetSkillGuide = () => {
                         SingleSkillBuilder(20, GuideIcons.SPELL, 47, 'Syphon sharp essence'),
                         SingleSkillBuilder(28, GuideIcons.SPELL, 46, 'Syphon force essence'),
                         SingleSkillBuilder(34, GuideIcons.SPELL, 48, 'Syphon poison essence'),
+                        SingleSkillBuilder(46, GuideIcons.SPELL, 49, 'Syphon bind essence'),
                         SingleSkillBuilder(50, GuideIcons.SPELL, 44, 'Syphon void essence'),
                         SingleSkillBuilder(50, GuideIcons.SPELL, 51, 'Syphon nature essence'),
-                        SingleSkillBuilder(70, GuideIcons.SPELL, 49, 'Syphon bind essence'),
                         SingleSkillBuilder(80, GuideIcons.SPELL, 50, 'Syphon soul essence'),
                     ]
                 },

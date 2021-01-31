@@ -52,31 +52,35 @@ module.exports.Character = Character = [{
         })
     }
 }, 
-Get.Character.Human(1, 'Banker', 24, [null, null, null, 100, 104], HairStyle.LeftSideSwipe, HairColors.Black, [{
-    interfaceID: 0,
-    id: 7,
-    name: 'Bank',
-}, {
-    interfaceID: 0,
-    id: 11,
-    name: 'Lost Items',
-    actionInterval: 0,
-    steps: [
-        buildStepList(StepList.WALK_ADJACENT),
-        [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
-        buildStep(StepType.OPEN_LOST_ITEMS_INTERFACE)]
-    ],
-}]),
-Get.Character.HumanShopOwner(2, 'General Store Owner', 11, [21, null, null, 42, 29], HairStyle.Bald, HairColors.Black, null, EyeColors.DarkBrown, 0),
-Get.Character.HumanShopOwner(3, 'Woodcutting Store Owner', 11, [null, 4, null, 417, 477], HairStyle.RightSideSwipe, HairColors.DarkBrown, 6, EyeColors.DarkBrown, 1),
-Get.Character.HumanShopOwner(4, 'Fishing Store Owner', 13, [null, null, null, 353, 477], 1, HairColors.Ginger, null, EyeColors.Blue, 2),
-Get.Character.HumanShopOwner(5, 'Metalsmith Store Owner', 13, [22, 12, null, 43, 30], HairStyle.Bald,HairColors.Ginger, null, EyeColors.DarkBrown, 3),
-Get.Character.HumanShopOwner(6, 'Mining Store Owner', 11, [null, 12, null, 42, 29], HairStyle.RightSideSwipe, HairColors.CherryRed, 7, EyeColors.Ginger, 4),
-Get.Character.HumanShopOwner(7, 'Crafting Store Owner', 23, [null, null, null, 389, 487], HairStyle.Bald, HairColors.Gray, 7, EyeColors.Green, 5),
-Get.Character.HumanShopOwner(8, 'Alchemy Store Owner', 14, [95, 86, null, 99, 103], HairStyle.Bald, HairColors.Black, null, EyeColors.DarkBrown, 6),
-Get.Character.HumanShopOwner(9, 'Melee Store Owner', 11, [null, 20, null, 44, 31], HairStyle.RightSideSwipe, HairColors.Gray, 9, EyeColors.Blue, 7),
-Get.Character.HumanShopOwner(10, 'Archery Store Owner', 11, [106, 38, null, 114, 110], HairStyle.RightSideSwipe, HairColors.White, 10, EyeColors.Green, 8),
-Get.Character.HumanShopOwner(11, 'Magic Store Owner', 14, [96, 84, null, 100, 104], 3, HairColors.CherryRed, 8, EyeColors.Purple, 9),
+(() => {
+    let human = Get.Character.Human(1, 'Banker', 24, [null, null, null, 100, 104], HairStyle.LeftSideSwipe, HairColors.Black, [{
+        interfaceID: 0,
+        id: 7,
+        name: 'Bank',
+    }, {
+        interfaceID: 0,
+        id: 11,
+        name: 'Lost Items',
+        actionInterval: 0,
+        steps: [
+            buildStepList(StepList.WALK_ADJACENT),
+            [buildStep(StepType.PLAY_ANIMATION, {params: ['TALK_TO']}),
+            buildStep(StepType.OPEN_LOST_ITEMS_INTERFACE)]
+        ],
+    }]);
+    human.legendID = 14;
+    return human;
+})(),
+Get.Character.HumanShopOwner(2, 'General Store Owner', 11, 0, [21, null, null, 42, 29], HairStyle.Bald, HairColors.Black, null, EyeColors.DarkBrown, 0),
+Get.Character.HumanShopOwner(3, 'Woodcutting Store Owner', 11, 1, [null, 4, null, 417, 477], HairStyle.RightSideSwipe, HairColors.DarkBrown, 6, EyeColors.DarkBrown, 1),
+Get.Character.HumanShopOwner(4, 'Fishing Store Owner', 13, 2, [null, null, null, 353, 477], 1, HairColors.Ginger, null, EyeColors.Blue, 2),
+Get.Character.HumanShopOwner(5, 'Metalsmith Store Owner', 13, 3, [22, 12, null, 43, 30], HairStyle.Bald,HairColors.Ginger, null, EyeColors.DarkBrown, 3),
+Get.Character.HumanShopOwner(6, 'Mining Store Owner', 11, 4, [null, 12, null, 42, 29], HairStyle.RightSideSwipe, HairColors.CherryRed, 7, EyeColors.Ginger, 4),
+Get.Character.HumanShopOwner(7, 'Crafting Store Owner', 23, 5,  [null, null, null, 389, 487], HairStyle.Bald, HairColors.Gray, 7, EyeColors.Green, 5),
+Get.Character.HumanShopOwner(8, 'Alchemy Store Owner', 14, 6, [95, 86, null, 99, 103], HairStyle.Bald, HairColors.Black, null, EyeColors.DarkBrown, 6),
+Get.Character.HumanShopOwner(9, 'Melee Store Owner', 11, 7, [null, 20, null, 44, 31], HairStyle.RightSideSwipe, HairColors.Gray, 9, EyeColors.Blue, 7),
+Get.Character.HumanShopOwner(10, 'Archery Store Owner', 11, 8, [106, 38, null, 114, 110], HairStyle.RightSideSwipe, HairColors.White, 10, EyeColors.Green, 8),
+Get.Character.HumanShopOwner(11, 'Magic Store Owner', 14, 9, [96, 84, null, 100, 104], 3, HairColors.CherryRed, 8, EyeColors.Purple, 9),
 Get.Character.Goblin(12, 'Goblin', 1,  
     [[11, 5], [0, 5], [1, 5], [2, 3]], ////5hp, 5atk, 5pow, 3def
     [[[1, 100], [0, 3, 10, 76], [13, 1, 1, 20], [127, 1, 1, 4],], [[10, 100], [79, 1, 3, 30], [87, 1, 1, 50], [126, 1, 1, 20],]], //80% chance for coins, 20% chance for copper dagger, and 1 in 10 chance for water essence or blue cloth //[ [[chance to roll table, table roll size (min to max chance to roll)], [id, min, max, weight], ...] [table2...] ]
@@ -160,7 +164,7 @@ Get.Character.Ghost(31, 'Ghost', 2, [[11, 40], [6, 18], [7, 28], [2, 50], [8, 1]
 Get.Character.Ghost(32, 'Ghost', 3, [[11, 70], [6, 28], [7, 50], [2, 75], [8, 1], [5, 75]], 81, 1, 240),// Fire - [70hp, 28mfocus, 50mpower, 75def, 1 mdef, 75 range defence]
 Get.Character.ElementalGhost(33, 'Elemental Ghost ', 4, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], [78, 79, 80, 81], 1, 960),// Elemental - [150hp, 40mfocus, 99mpower, 99def, 1 mdef, 99 range defence]
 Get.Character.Crab(34, 'Cave Crawler', 1, [[11, 150], [6, 40], [7, 99], [2, 99], [8, 1], [5, 99]], null),
-Get.Character.HumanAppearanceShopOwner(35, 'Clothing Store Owner', 36, [null, null, null, 395, 491], HairStyle.Scruffy, HairColors.Black, 1, EyeColors.Purple, 2),
+Get.Character.HumanAppearanceShopOwner(35, 'Clothing Store Owner', 36, 11, [null, null, null, 395, 491], HairStyle.Scruffy, HairColors.Black, 1, EyeColors.Purple, 2),
 Get.Character.Osaik(36), 
 {
     id: 37,
@@ -339,15 +343,15 @@ Get.Character.Kiaso(71),
 Get.Character.Duck(72, 'Male Duck', 1),
 Get.Character.Duck(73, 'Female Duck', 2),
 Get.Character.Cow(74, 1),
-Get.Character.HumanShopOwner(75, 'Farming Store Owner', 13, [null, 610, null, 331, 483], HairStyle.MidlifeCrisis, HairColors.Blond, null, EyeColors.DarkBrown, 11),
+Get.Character.HumanShopOwner(75, 'Farming Store Owner', 13, 10, [null, 610, null, 331, 483], HairStyle.MidlifeCrisis, HairColors.Blond, null, EyeColors.DarkBrown, 11),
 Get.Character.QuestChildGoblin(76, 'Child Goblin'),
 Get.Character.Bull(77),
 Get.Character.Sheep(78, 1),
 Get.Character.PatreonQuestCat(79, true, 224),
 Get.Character.PatreonQuestCat(80, false, 224),
-Get.Character.HumanAppearanceShopOwner(81, 'Barber', 13, [null, null, null, 393, 489], HairStyle.MidlifeCrisis, HairColors.Brown, null, EyeColors.Blue, 0),
+Get.Character.HumanAppearanceShopOwner(81, 'Barber', 13, 12, [null, null, null, 393, 489], HairStyle.MidlifeCrisis, HairColors.Brown, null, EyeColors.Blue, 0),
 Get.Character.KaityPatreon(82, 50, 60),
-Get.Character.HumanAppearanceShopOwner(83, 'Wizard Surgeon', 13, [539, null, null, 541, 543], 4, HairColors.Blue, null, EyeColors.DarkBrown, 3),
+Get.Character.HumanAppearanceShopOwner(83, 'Wizard Surgeon', 13, 13, [539, null, null, 541, 543], 4, HairColors.Blue, null, EyeColors.DarkBrown, 3),
 Get.Character.PatreonPim(84),
 Get.Character.PatreonTat(85),
 Get.Character.Patreoner(86, 'Aeronic', 22, [null, null, null, 407, 479], 8, HairColors.Brown, EyeColors.Brown, FacialStyles.Beard_Short, 40 + 6, 70),

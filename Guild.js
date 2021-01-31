@@ -171,6 +171,7 @@ const Guilds = [{
         mapID: 1
     },
     tourID: 0,
+    legendID: 33,
     spawnID: 1,
     cityBounds: new Bounds.Bounds(43, 341, 86, 370),
     guildBounds: new Bounds.Bounds(65, 366, 86, 370),
@@ -333,6 +334,7 @@ const Guilds = [{
         mapID: 1
     },
     tourID: 1,
+    legendID: 34,
     spawnID: 2,
     cityBounds: new Bounds.Bounds(141, 10, 170, 20),
     guildBounds: new Bounds.Bounds(145, 12, 151, 17),
@@ -463,6 +465,7 @@ const Guilds = [{
         mapID: 0
     },
     tourID: 2,
+    legendID: 35,
     spawnID: 3,
     tierDetails: [{
         tierID: -5,

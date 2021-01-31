@@ -244,7 +244,7 @@ module.exports.Spells = [
     SpellBuilder.SYPHON_ESSENCE(46, "Syphon Force Essence", 13, 150, 28, ShardCatalog.FORCE(1)[0], 46),
     SpellBuilder.SYPHON_ESSENCE(47, "Syphon Sharp Essence", 6, 100, 20, ShardCatalog.SHARP(1)[0], 47),
     SpellBuilder.SYPHON_ESSENCE(48, "Syphon Poison Essence", 6, 150, 34, ShardCatalog.POISON(1)[0], 48),
-    SpellBuilder.SYPHON_ESSENCE(49, "Syphon Bind Essence", 6, 200, 70, ShardCatalog.BIND(1)[0], 49),
+    SpellBuilder.SYPHON_ESSENCE(49, "Syphon Bind Essence", 6, 200, 46, ShardCatalog.BIND(1)[0], 49),
     SpellBuilder.SYPHON_ESSENCE(50, "Syphon Soul Essence", 6, 200, 80, ShardCatalog.SOUL(1)[0], 50),
     SpellBuilder.SYPHON_ESSENCE(51, "Syphon Nature Essence", 6, 200, 50, ShardCatalog.NATURE(1)[0], 51),
     SpellBuilder.ENCHANT(52, 170, 'Enchant Item Collection', [[22, 65]], [EssenceCatalog.NATURE(5), EssenceCatalog.EARTH(16), EssenceCatalog.SOUL(6)], 12, 38),

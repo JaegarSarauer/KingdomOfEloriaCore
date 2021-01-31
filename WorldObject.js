@@ -62,6 +62,7 @@ module.exports.WorldObject = WorldObject = [
             ItemDetail.levelSkillDetail('1+', 14, 'USE'),
         ]),
         modelName: 'ROCK',
+        legendID: 19,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -119,6 +120,7 @@ module.exports.WorldObject = WorldObject = [
             ItemDetail.itemNameDetail('Hammer', 'TOOL_NAME'),
         ]),
         modelName: 'ROCK',
+        legendID: 20,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -156,6 +158,7 @@ module.exports.WorldObject = WorldObject = [
             ItemDetail.levelSkillDetail('1+', 15, 'USE'),
         ]),
         modelName: 'ROCK',
+        legendID: 22,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -253,6 +256,7 @@ module.exports.WorldObject = WorldObject = [
             ItemDetail.levelSkillDetail('10+', 15, 'USE'),
         ]),
         modelName: 'ROCK',
+        legendID: 23,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -303,6 +307,7 @@ module.exports.WorldObject = WorldObject = [
             ItemDetail.itemNameDetail('Hammer', 'TOOL_NAME'),
         ]),
         modelName: 'ROCK',
+        legendID: 19,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -427,6 +432,7 @@ module.exports.WorldObject = WorldObject = [
                 buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, { params: [[205]] })]
             ],
         }],
+        legendID: 24,
         useActions: [
             Get.Action.Cook(11, 47, 51, 119, 1, 'shrimp', 10, 10, 35), 
             Get.Action.Cook(49, 785, 787, 789, 5, 'freshwater tuna', 10, 25, 50),
@@ -463,6 +469,7 @@ module.exports.WorldObject = WorldObject = [
             ItemDetail.levelSkillDetail(10, 18, 'CRAFT'),
             ItemDetail.itemNameDetail('Saw', 'TOOL_NAME'),
         ]),
+        legendID: 24,
         actions: [{
                 interfaceID: 0,
                 id: 29,
@@ -533,6 +540,7 @@ module.exports.WorldObject = WorldObject = [
             ItemDetail.levelSkillDetail(1, 20, 'STEAL'),
         ]),
         modelName: 'ROCK',
+        legendID: 25,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -588,13 +596,30 @@ module.exports.WorldObject = WorldObject = [
                 spriteID: 1,
             }
         },
+        legendID: 25,
         actions: [],
         spriteIndex: 47,
     },
-    Get.WorldObject.Rock(47, 'Gothite Rock', 40, [10, 35, 8, true, 0.5, 0.5], [[253, 1, 1, 100]], 125, 5, 40, 12, 'A rock with hints of gothite ore.', 8, 596, 599), 
-    Get.WorldObject.Rock(48, 'Osmium Rock', 50, [10, 40, 9, true, 0.5, 0.5], [[281, 1, 1, 100]], 150, 6, 48, 14, 'A rock with veins of osmium metal.', 7, 602, 605),
-    Get.WorldObject.Tree(49, 315, 'King Maple', 40, 4, 35, 8, 125, 25, 80, 'A grand king maple tree.'),
-    Get.WorldObject.Tree(50, 317, 'Magic', 50, 5, 40, 9, 150, 30, 96, 'A color-changing magical tree.'),
+    (() => {
+        let rock = Get.WorldObject.Rock(47, 'Gothite Rock', 40, [10, 35, 8, true, 0.5, 0.5], [[253, 1, 1, 100]], 125, 5, 40, 12, 'A rock with hints of gothite ore.', 8, 596, 599);
+        rock.legendID = 17;
+        return rock;
+    })(),
+    (() => {
+        let rock = Get.WorldObject.Rock(48, 'Osmium Rock', 50, [10, 40, 9, true, 0.5, 0.5], [[281, 1, 1, 100]], 150, 6, 48, 14, 'A rock with veins of osmium metal.', 7, 602, 605);
+        rock.legendID = 17;
+        return rock;
+    })(),
+    (() => {
+        let tree = Get.WorldObject.Tree(49, 315, 'King Maple', 40, 4, 35, 8, 125, 25, 80, 'A grand king maple tree.');
+        tree.legendID = 16;
+        return tree;
+    })(),
+    (() => {
+        let tree = Get.WorldObject.Tree(50, 317, 'Magic', 50, 5, 40, 9, 150, 30, 96, 'A color-changing magical tree.');
+        tree.legendID = 16;
+        return tree;
+    })(),
     Get.WorldObject.LumberCamp(51, 'King Maple', 315, 49, 5, 25, 40, 50), 
     Get.WorldObject.LumberCamp(52, 'Magic', 317, 50, 6, 30, 50, 60),
     Get.WorldObject.MiningCamp(53, 'Gothite', 253, [[1, 47]], 5, 25, 40, 50),
@@ -608,6 +633,7 @@ module.exports.WorldObject = WorldObject = [
         name: 'Incinerator',
         description: 'A hot boiler used to extract essence from items.',
         modelName: 'ROCK',
+        legendID: 26,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -634,6 +660,7 @@ module.exports.WorldObject = WorldObject = [
         name: 'Lava',
         description: 'Hot! Good for extracting essence from items.',
         modelName: 'ROCK',
+        legendID: 26,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -670,6 +697,7 @@ module.exports.WorldObject = WorldObject = [
                 spriteID: 1,
             }
         },
+        legendID: 25,
         actions: [{
             interfaceID: 0,
             id: 30,
@@ -776,6 +804,7 @@ module.exports.WorldObject = WorldObject = [
             ItemDetail.itemNameDetail('Shell Chest Key', 'ITEM'),
             ItemDetail.levelSkillDetail(40, 20, 'STEAL'),
         ]),
+        legendID: 25,
         actions: [{
             interfaceID: 0,
             id: 30,
@@ -1049,6 +1078,7 @@ module.exports.WorldObject = WorldObject = [
                 spriteID: 1,
             }
         },
+        legendID: 15,
         actions: [{
             interfaceID: 0,
             id: 11,
@@ -1069,6 +1099,7 @@ module.exports.WorldObject = WorldObject = [
             ]
         }],
         spriteIndex: 46,
+        legendID : 15,
     },
     Get.WorldObject.Tree(78, 5, undefined, 1, 0, 3, 2, 25, 5, 16, 'Use your axe on the tree to get logs.'),
     Get.WorldObject.Rock(79, 'Copper Rock', 1, [10, 3, 2, true, 0.5, 0.5], [[55, 1, 1, 100]], 25, 1, 8, 4, 'There appears to be copper in this rock.', 12, 572, 575), 
@@ -1093,6 +1124,7 @@ module.exports.WorldObject = WorldObject = [
                 spriteID: 1,
             }
         },
+        legendID: 25,
         actions: [{
             interfaceID: 0,
             id: 30,
@@ -1158,17 +1190,18 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.RockPile(101),
     Get.WorldObject.CrabPotFishingPool(102),
     Get.WorldObject.HandFishingPool(103),
-    Get.WorldObject.GemObelisk(104, 'Blue Gem Obelisk', 1, 1, 25, 87, 1),
-    Get.WorldObject.GemObelisk(105, 'Green Gem Obelisk', 2, 10, 50, 88, 2),
-    Get.WorldObject.GemObelisk(106, 'Purple Gem Obelisk', 3, 20, 75, 89, 3),
-    Get.WorldObject.GemObelisk(107, 'Burgunty Gem Obelisk', 4, 30, 100, 90, 4),
-    Get.WorldObject.GemObelisk(108, 'Red Gem Obelisk', 5, 40, 125, 537, 5),
+    Get.WorldObject.GemObelisk(104, 'Blue Gem Obelisk', 36, 1, 1, 25, 87, 1),
+    Get.WorldObject.GemObelisk(105, 'Green Gem Obelisk', 37, 2, 10, 50, 88, 2),
+    Get.WorldObject.GemObelisk(106, 'Purple Gem Obelisk', 38, 3, 20, 75, 89, 3),
+    Get.WorldObject.GemObelisk(107, 'Burgunty Gem Obelisk', 39, 4, 30, 100, 90, 4),
+    Get.WorldObject.GemObelisk(108, 'Red Gem Obelisk', 40, 5, 40, 125, 537, 5),
     Get.WorldObject.CrabPot(109, 'Crab Pot'),
     {
         id: 110,
         name: 'Storage Chest',
         description: 'A strangely large chest from inside...',
         modelName: 'ROCK',
+        legendID: 14,
         modelParams: {
             BASE: {
                 asset: 'worldObjects',
@@ -1200,3 +1233,5 @@ module.exports.WorldObject = WorldObject = [
     }]),
     Get.WorldObject.DoorTollLocked(113, 'Door', 50, 1, null, 1, { x : 349, y : 68}, { x: 349, y: 69 }, 'Rquires a toll costing 50 gold.' ),
 ];
+
+
