@@ -188,6 +188,66 @@ const CreateStepListFromRecipe = function(recipe) {
     return stepList;
 }
 
+const CreateThieveActionList = function(thieveItems, nounText) {
+    let result = [];
+    for(let i = 0; i < thieveItems.length; ++i) {
+        if (thieveItems[i].length == 2) {
+            let itemID = thieveItems[i][0];
+            let percentChance = thieveItems[i][1];
+            result.push({
+                    interfaceID: 0,
+                    id: 30,
+                    name: 'Steal',
+                    steps: [
+                        [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 30] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to steal from the guard.'] }),
+                        buildStep(StepType.SET_ACTION_INTERVAL, { params: [6] })],
+                        [buildStep(StepType.HAS_SKILL_LEVEL, { params: [20, 30] }),
+                        buildStep(StepList.WALK_ADJACENT),
+                        buildStep(StepType.PLAY_ANIMATION, { params: ['ACTION_RIGHTHAND', {repeat: 6}] }),
+                        buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [20, 35, 3, false, 0.5, 0.5],
+                            stepResultFail: StepResult.END_AND_REPEAT_STEP_LIST
+                        })],
+                        [buildStep(StepType.ROLL_SKILL_SUCCESS, {
+                            params: [20, 10, 1000, false, -4, -4],
+                            stepResultPass: StepResult.NEXT_STEP,
+                            stepResultFail: StepResult.NEXT_STEP_LIST,
+                        }),
+                        buildStep(StepType.SET_BOUNTY, {
+                            params: [bountyTypeEnterSafeAreas, 300],
+                        }),
+                        buildStep(StepType.DAMAGE, {params: [2]}),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, {
+                            params: ['You were caught stealing from the guard!'],
+                            stepResultPass: StepResult.END_AND_REPEAT_ACTION,
+                            stepResultFail: StepResult.END_AND_REPEAT_ACTION,
+                        })],
+                        [buildStep(StepType.ROLL_DROP_TABLE, { 
+                            params: [1, [[0, 4, 16, 50], [0, 9, 22, 25], [0, 15, 30, 20], [0, 20, 40, 5]]],
+                            stepResultFail: StepResult.NEXT_STEP
+                        }),
+                        buildStep(StepType.ROLL_DROP_TABLE, { 
+                            params: [1, [[13, 1, 1, 25], [14, 1, 1, 20], [15, 1, 1, 15], [73, 2, 4, 10], [22, 1, 1, 5]]],
+                            stepResultFail: StepResult.NEXT_STEP
+                        }),
+                        buildStep(StepType.ROLL_DROP_TABLE, { 
+                            params: [50, DropTables.UncutGems(50).slice(1)],
+                            stepResultFail: StepResult.NEXT_STEP
+                        }),
+                        buildStep(StepType.GIVE_XP, { params: [20, 50] }),
+                        buildStep(StepType.SEND_CLIENT_MESSAGE, { 
+                            params: ['You find some items in the guard\'s pocket.'],
+                            stepResultPass: StepResult.END_AND_GOTO_LIST_1,
+                        }),
+                    ],
+                ],}
+            );
+        }
+    }
+    return result;
+}
+
 const ItemGetter = {
     // Base Cosmetics
     BaseCosmetic: (id, cosmeticID, name, description, spriteIndex ) => {
