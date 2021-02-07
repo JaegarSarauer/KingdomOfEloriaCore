@@ -334,6 +334,7 @@ function loadItemSpawns(JSONMap) {
         let itemAmount = obj.properties && obj.properties.itemAmount || 1;
         let isNoted = obj.properties && obj.properties.isNoted || false;
         let idOverride = (obj.properties && obj.properties.id != null && obj.properties.id >= 0) ? obj.properties.id : null;
+        let onTable = (obj.properties && obj.properties.onTable) || false;
         try {
             if (idOverride != null) {
                 id = idOverride;
@@ -342,11 +343,15 @@ function loadItemSpawns(JSONMap) {
                 id = Item.Item[id].notedID || id;
             } else {
                 id = Item.Item[id].unnotedID || id;
-            } 
+            }
         } catch(e) {
             console.info( 'Failed to create World Object from Tiled at position', obj.x / 64, obj.y / 64, e);
         }
-        entitiesArray.push([id, itemAmount, x, y]);
+        let entity = [id, itemAmount, x, y];
+        if (onTable) {
+            entity.push(onTable);
+        }
+        entitiesArray.push(entity);
     }
     return entitiesArray;
 }
@@ -495,6 +500,8 @@ function loadMultiAreas(JSONMap) {
     return areas;
 }
 
+let mapLegends = [];
+
 module.exports.compressMapData = (mapID, name) => {
     let width = MAP_WIDTH;
     let height = MAP_WIDTH;
@@ -624,6 +631,7 @@ module.exports.compressMapData = (mapID, name) => {
     mapData.musicData = loadMusicAreas( tiledMap );
     // MINIMAP DATA HERE
     // let minimapData = loadMinimapData(mapID, mapData.worldObjectData, mapData.npcData, mapData.guildsData);
+    // mapLegends.push(minimapData);
 
     let fileName = '../GuildsOfGodsAssets/MapDesign/' + name + '.json';
     try {
