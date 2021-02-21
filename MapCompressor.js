@@ -288,6 +288,7 @@ function loadMinimapData(mapID, worldObjectsData, npcData, citiesData) {
 
     for(let i = 0; i < npcData.length; ++i) {
         let npcDef = npcData[i];
+
         let x = npcDef.x;
         let y = npcDef.y;
         let id = npcDef.id;
@@ -302,10 +303,7 @@ function loadMinimapData(mapID, worldObjectsData, npcData, citiesData) {
         let cityName = citiesName[i];
         let data = citiesData[cityName];
         
-        let area = data.cityArea;
-        if (area == null) {
-            area = data.mayorArea;
-        }
+        let area = data.cityArea || data.mayorArea || data.landmarkArea;
 
         let x = area.x + Math.floor( area.width / 2)
         let y = area.y + Math.floor( area.height / 2)
@@ -313,9 +311,13 @@ function loadMinimapData(mapID, worldObjectsData, npcData, citiesData) {
         result.cities[cityName] = {
             x,
             y,
+            areaType : data.areaType
         };
         if (data.id != null) {
             result.cities[cityName].guildID = data.id;
+        }
+        if (data.subtitle != null) {
+            result.cities[cityName].subtitle = data.subtitle;
         }
     }
 
@@ -448,6 +450,7 @@ function loadGuilds(JSONMap) {
             let guildID = obj.properties.guildID; 
             let guildName = obj.properties.guildName; 
             let areaType = obj.properties.areaType; 
+            let subtitle = obj.properties.subtitle;
     
             let area = {
                 x: obj.x / 64,
@@ -464,7 +467,14 @@ function loadGuilds(JSONMap) {
             if (areaType == 'city') {
                 guild.cityArea = area;
             } else if (areaType == 'mayor') {
-                guild.mayorArea = area;
+                guild.mayorArea = 'area';
+            }
+            else if (areaType == 'landmark') {
+                guild.landmarkArea = area;
+            }
+            guild.areaType = guildID == null ? (areaType == 'landmark' ? 'landmark' : 'city') : 'guild';
+            if (subtitle != null ) {
+                guild.subtitle = subtitle;
             }
         }
     }
@@ -630,8 +640,8 @@ module.exports.compressMapData = (mapID, name) => {
     mapData.guildsData = loadGuilds( tiledMap );
     mapData.musicData = loadMusicAreas( tiledMap );
     // MINIMAP DATA HERE
-    // let minimapData = loadMinimapData(mapID, mapData.worldObjectData, mapData.npcData, mapData.guildsData);
-    // mapLegends.push(minimapData);
+    let minimapData = loadMinimapData(mapID, mapData.worldObjectData, mapData.npcData, mapData.guildsData);
+    mapLegends.push(minimapData);
 
     let fileName = '../GuildsOfGodsAssets/MapDesign/' + name + '.json';
     try {
@@ -652,6 +662,7 @@ if (COMPRESS) {
     module.exports.compressMapData(1, 'Underworld');
     module.exports.compressMapData(2, 'SpecialWorld');
     console.info("Maps compressed");
+    console.info(JSON.stringify(mapLegends));
 }
 
 
