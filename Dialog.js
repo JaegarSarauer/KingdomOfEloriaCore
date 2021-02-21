@@ -221,6 +221,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     
     'Which guild would you like to join?',
     continueSteps: [[
+        buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [-1]}),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
         buildStep(StepType.OPEN_GUILD_SELECTION_INTERFACE),
     ]],
