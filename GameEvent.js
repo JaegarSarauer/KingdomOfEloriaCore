@@ -21,7 +21,14 @@ const GameEvent = {
     // WITHDRAW_ITEM: 10,
     // BUY_SHOP_ITEM: 11,
     // SELL_SHOP_ITEM: 12,
-
+    MARKET_STALL_BUY : 13,
+    MARKET_STALL_SELL : 14,
+    MARKET_STALL_REMOVE_OFFER : 15,
+    MARKET_STALL_DISASSEMBLE : 16,
+    DROP_PARTY : 17,
+    OBELISK : 18,
+    SKILL_MASTERY : 19,
+    GUILD_STATUS: 20,
 };
 
 module.exports.createEventOptions = createEventOptions;
