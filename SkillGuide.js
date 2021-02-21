@@ -696,6 +696,17 @@ module.exports.GetSkillGuide = () => {
                     ]
                 },
                 {
+                    title: 'Markets',
+                    content: [
+                        SingleSkillBuilder(1, GuideIcons.WORLD_OBJECT,  71, 'Build Market Stall (1 Slot)'),
+                        SingleSkillBuilder(10, GuideIcons.WORLD_OBJECT, 72, 'Build Oak Market Stall (2 Slots)'),
+                        SingleSkillBuilder(20, GuideIcons.WORLD_OBJECT, 73, 'Build Ash Market Stall (3 Slots)'),
+                        SingleSkillBuilder(30, GuideIcons.WORLD_OBJECT, 74, 'Build Fur Market Stall (4 Slots)'),
+                        SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 75, 'Build King Maple Market Stall (5 Slots)'),
+                        SingleSkillBuilder(50, GuideIcons.WORLD_OBJECT, 76, 'Build Magic Market Stall (6 Slots)'),
+                    ]
+                },
+                {
                     title: 'Upgrades',
                     content: [
                         MultiSkillReqBuilder(10, [[13, 20]], GuideIcons.WORLD_OBJECT, 32, 'Upgrade iron range'),
