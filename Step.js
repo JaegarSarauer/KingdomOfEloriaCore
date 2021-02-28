@@ -1416,6 +1416,10 @@ const StepList = {
                 stepResultPass: 'END_AND_REPEAT_STEP_LIST', 
                 stepResultFail: 'END_AND_REPEAT_STEP_LIST'
             }),
+            // buildStep(StepType.CAN_ATTACK_OWNER, {
+            //     stepResultPass: 'NEXT_STEP', 
+            //     stepResultFail: 'END_ACTION'
+            // }),
         ],
     },
     WALK_IN_ATTACK_RANGE: {
