@@ -107,21 +107,27 @@ function entityDataToMapEntities(worldObjectData, charData, mapID) {
     return {entities, customEntityData};
 }
 
-function guildDataToGuilds(guildData) {
+function locationDataToLocations(guildData) {
     let result = {
         guildsArray : [],
         cityArray : [],
+        landmarkArray : [],
     };
     let keys = Object.keys(guildData);
     for (let i = 0; i < keys.length; i++) {
         let obj = guildData[keys[i]];
         if (obj != null ) {
             // If it has a guild ID, it's a guild
-            if (obj.id != null && Guilds[obj.id]) {
-                result.guildsArray[obj.id] = GuildState.createGuildState(obj.id, obj.cityArea, obj.mayorArea);
+            if (obj.guildID != null && Guilds[obj.guildID]) {
+                result.guildsArray[obj.guildID] = GuildState.createGuildState(obj.name, obj.subtitle, obj.guildID, obj.cityID, obj.cityArea, obj.mayorArea);
             }
-            else if (obj.cityArea) {
-                result.cityArray.push(GuildState.createCityDef(obj.cityArea));  
+            // If it has a cityID but no guildID, its a city
+            else if (obj.cityID != null && obj.cityArea) {
+                result.cityArray.push(GuildState.createCityDef(obj.name, obj.cityID, obj.cityArea));  
+            }
+            // If it has neither cityID nor guildID, its a landmark
+            else {
+                result.landmarkArray.push(GuildState.createLandmarkDef(obj.name, obj.landmarkArea));
             }
         }
     }
@@ -167,7 +173,7 @@ function mapDataToMap(mapData) {
         mapSortableBaseTiles: mapData.sortableTileData,
         mapWalls: wallDataToMapWalls(mapData.wallData),
         mapEntities: mapEntityData.entities,
-        mapGuilds: guildDataToGuilds(mapData.guildsData),
+        mapLocations: locationDataToLocations(mapData.locationData),
         musicAreas: mapData.musicData,
         shops: shopDataToShops(mapData.shopsData),
         safeAreas: copyBoundsArray(mapData.SafeAreas),

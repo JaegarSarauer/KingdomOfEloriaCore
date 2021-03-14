@@ -702,7 +702,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
             
             'There are rewards in placed based on the tiers and total amounts donated. A subscription of any tier will give you access to <note>Patreon Palace</note>!\n\n' +
             
-            '<note>Money Bag</note> donations will contribute towards your donated amount when reaching <note>Patreon</note> reward goals.',
+            '<note>Money Bag</note> donations will contribute towards your donated amount when reaching <note>Patreon</note> reward quests.',
     continueSteps: [[
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[273, 275]] }),
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),

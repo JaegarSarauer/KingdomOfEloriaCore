@@ -6,7 +6,6 @@ const Category = {
     FIEWON : 3,
     BODIAM : 4, 
     HYRILL : 5,
-    USER : 7,
 }
 
 const Difficulty = {
@@ -15,15 +14,21 @@ const Difficulty = {
     HARD : 2,
 }
 
+const States = {
+    DEFAULT : 0,
+    COMPLETED : 1,
+    REWARD_CLAIMED : 2,
+}
+
 function createAchievement(id, name, category, difficulty, description,  requirement = null) {
     return {
         id,
         name,
-        goalType: GoalType.ACHIEVEMENT,
         category,
         difficulty,
         description,
-        requirement
+        requirement,
+        rewards : [[1, 0]]
     };
 }
 
@@ -77,4 +82,21 @@ const Achievements = [
     createAchievement(46, 'The Obelisk: Reach Wave 100', Category.BODIAM, Difficulty.HARD, 'Reach Wave 100 in The Obelisk.'),
 ];
 
+module.exports.States = States;
 module.exports.Achievements = Achievements;
+
+/**
+ * X Split QuestsInterface into Quests typedef and QuestsInterface
+ * X Renaming QuestsInterface/Quests into QuestInterface/Quest
+ * X Cloning Quests to create achievements that are simplified - only int rather than int array. 0 = unstarted, 1 = done but unclaimed, 2 = done & claimed
+ * - Create method to get nearest category // Yes but now were changing to locationId so go back to tiled and plug that through
+ * x Add helper methods to AchievementsInterface
+ * - Update Achievements typedef to include rewards
+ * x Finish StepTryCompleteAchievement
+ * x Create StepTryClaimReward(id)
+ * x Create StepTryClaimRewards(categoryId)
+ * - Achievements UI splash that can appear and dissapear upon earning a achievement
+ * - Mayor NPCs // Osaik becomes Fiewon mayor, Baroness becomes Hyrill mayor, need a NPC for Bodiam mayor
+ * - Talk to mayor/guildsmater to claim all rewards for their achievements if any
+ * - Call the steps
+ */

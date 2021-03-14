@@ -3055,7 +3055,7 @@ const Interface = {
     },
     AttemptGuildExam: (id, guildID) => {
         let guild = Guilds.Guilds[guildID];
-        let goalID = guild.quest.entrance_exam.id;
+        let questID = guild.quest.entrance_exam.id;
         let x = guild.quest.entrance_exam.location.x;
         let y = guild.quest.entrance_exam.location.y;
         let mapID = guild.quest.entrance_exam.location.mapID;
@@ -3064,8 +3064,8 @@ const Interface = {
             name: 'I want to join ' + guild.name,
             actionInterval: -1,
             steps: [[
-                    buildStep(StepType.ASSERT_GOAL_STATES, {params: [goalID, [0], ['EQUALS']]}),
-                    buildStep(StepType.SET_USER_GOAL_STATE, {params: [goalID, [1]]}),
+                    buildStep(StepType.ASSERT_GOAL_STATES, {params: [questID, [0], ['EQUALS']]}),
+                    buildStep(StepType.SET_USER_GOAL_STATE, {params: [questID, [1]]}),
                     buildStep(StepType.TELEPORT, {params: [mapID, x - 1, y - 1, x + 1, y + 1, 0, [[
                         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
                         buildStep(StepType.START_GUILD_ENTRANCE_QUEST_TIMER, {params: [guildID]}),
@@ -7604,7 +7604,7 @@ const Character = {
         
         cat.cannotDie = true;
 
-        let buildStepAssertGoal = function(state) {
+        let buildStepAssertQuest = function(state) {
             if (isBilly) {
                 return buildStep(StepType.ASSERT_GOAL_STATES, {
                     params: [questStateId, [state, null], ['EQUALS', 'N/A'] ],
@@ -7620,7 +7620,7 @@ const Character = {
                 });
             }
         }
-        let setFeedCatGoal = (isBilly) ? ([3, null]) : ([null, 3]);
+        let setFeedCatQuest = (isBilly) ? ([3, null]) : ([null, 3]);
 
         cat.actions.unshift({
             interfaceID: 0,
@@ -7630,7 +7630,7 @@ const Character = {
                 buildStepList(StepList.WALK_ADJACENT),
                 
                 // if you are at step 0 => wonder if he's hungry dialog
-                [buildStepAssertGoal(states.HAVENT_READ_RECIPE),
+                [buildStepAssertQuest(states.HAVENT_READ_RECIPE),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [dialogs.HAVENT_READ_RECIPE], // wonder if hes hungry dialog
                     stepResultPass: 'END_ACTION',
@@ -7638,7 +7638,7 @@ const Character = {
                 })],
 
                 // if you are step 1 => I should finish preparing his dish
-                [buildStepAssertGoal(states.PREPARING_FOOD),
+                [buildStepAssertQuest(states.PREPARING_FOOD),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [dialogs.PREPARING_FOOD], // I should finish preparing the dish in the recipe
                     stepResultPass: 'END_ACTION',
@@ -7647,7 +7647,7 @@ const Character = {
 
 
                 // if you are at step 2 AND have the dish => Feed blly, goto step 3
-                [buildStepAssertGoal(states.HAVE_FOOD_MUST_FEED_CAT),
+                [buildStepAssertQuest(states.HAVE_FOOD_MUST_FEED_CAT),
                 buildStep(StepType.HAS_INVENTORY_ITEM, {
                     params: [questItemId, 1]
                 }),
@@ -7655,7 +7655,7 @@ const Character = {
                     params: [questItemId, 1]
                 }),
                 buildStep(StepType.SET_USER_GOAL_STATE, {
-                    params: [questStateId, setFeedCatGoal]
+                    params: [questStateId, setFeedCatQuest]
                 }),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [dialogs.FEED_CAT], // Fed the cat
@@ -7664,7 +7664,7 @@ const Character = {
                 })],
 
                 // if you are at step 2 => I should bring him the Chicken Supreme
-                [buildStepAssertGoal(states.HAVE_FOOD_MUST_FEED_CAT),
+                [buildStepAssertQuest(states.HAVE_FOOD_MUST_FEED_CAT),
                 buildStep(StepType.SHOW_DIALOG, {
                     params: [dialogs.PREPARING_FOOD], // I should finish preparing the dish in the recipe
                     stepResultPass: 'END_ACTION',

@@ -157,14 +157,14 @@ module.exports.StepType = StepType = {
         id: 'ASSERT_GOAL_STATES',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'Array', 'Array'], //goalID, stateArrayCheck, stateAssertArray
+        paramTypes: ['number', 'Array', 'Array'], //questID, stateArrayCheck, stateAssertArray
         params: [],
     },
     SET_USER_GOAL_STATE: {
         id: 'SET_USER_GOAL_STATE',
         stepResultFail: 'END_ACTION',
         stepResultPass: 'NEXT_STEP',
-        paramTypes: ['number', 'Array'], //goalID, stateArray
+        paramTypes: ['number', 'Array'], //questID, stateArray
         params: [],
     },
     OPEN_JEWELRY_CRAFT_INTERFACE: {
@@ -1355,6 +1355,27 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], //slotID
         params: [],
     },
+    TRY_COMPLETE_ACHIEVEMENT: {
+        id: 'TRY_COMPLETE_ACHIEVEMENT',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //achievementId
+        params: [],
+    },
+    TRY_CLAIM_ACHIEVEMENT_REWARD: {
+        id: 'TRY_CLAIM_ACHIEVEMENT_REWARD',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //achievementId
+        params: [],
+    },
+    TRY_CLAIM_ACHIEVEMENT_REWARDS: {
+        id: 'TRY_CLAIM_ACHIEVEMENT_REWARDS',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['number'], //locationId
+        params: [],
+    },
 };
 
 module.exports.buildStep = buildStep = (sType, newDataObject = {}) => {
@@ -1637,7 +1658,7 @@ try {
     const StepOfferEnergy = require('../internal/Steps/StepOfferEnergy');
     const StepAssertItemState = require('../internal/Steps/StepAssertItemState');
     const StepAssertGuildTier = require('../internal/Steps/StepAssertGuildTier');
-    const StepAssertGoalStates = require('../internal/Steps/StepAssertGoalStates');
+    const StepAssertQuestStates = require('../internal/Steps/StepAssertQuestStates');
     const StepHealOther = require('../internal/Steps/StepHealOther');
     const StepCreateBarricade = require('../internal/Steps/StepCreateBarricade');
     const StepRollRandomEvent = require('../internal/Steps/StepRollRandomEvent');
@@ -1795,7 +1816,7 @@ try {
     const StepAddMarketBuyOffer = require('../internal/Steps/StepAddMarketBuyOffer');
     const StepAddMarketSellOffer = require('../internal/Steps/StepAddMarketSellOffer');
     const StepMakeClosestNPCAttackClosestNPC = require('../internal/Steps/StepMakeClosestNPCAttackClosestNPC');
-    const StepSetUserGoalState = require('../internal/Steps/StepSetUserGoalState');
+    const StepSetUserQuestState = require('../internal/Steps/StepSetUserQuestState');
     const StepOpenJewelryCraftInterface = require('../internal/Steps/StepOpenJewelryCraftInterface');
     const StepSayMessage = require('../internal/Steps/StepSayMessage');
     const StepCastEnchantment = require('../internal/Steps/StepCastEnchantment');
@@ -1817,6 +1838,9 @@ try {
     const StepCleanupClientStatuses = require('../internal/Steps/StepCleanupClientStatuses');
     const StepSelectGuild = require('../internal/Steps/StepSelectGuild');
     const StepStartTour = require('../internal/Steps/StepStartTour');
+    const StepTryCompleteAchievement = require('../internal/Steps/StepTryCompleteAchievement');
+    const StepTryClaimAchievementReward = require('../internal/Steps/StepTryClaimAchievementReward');
+    const StepTryClaimAchievementRewards = require('../internal/Steps/StepTryClaimAchievementRewards');
     
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         OPEN_GUILD_SELECTION_INTERFACE : {
@@ -2056,7 +2080,7 @@ try {
         },
         ASSERT_GOAL_STATES: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepAssertGoalStates.StepAssertGoalStates(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+                return new StepAssertQuestStates.StepAssertQuestStates(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         HAS_INVENTORY_ITEM: {
@@ -2766,12 +2790,27 @@ try {
         },
         SET_USER_GOAL_STATE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepSetUserGoalState.StepSetUserGoalState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+                return new StepSetUserQuestState.StepSetUserQuestState(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         OPEN_JEWELRY_CRAFT_INTERFACE: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepOpenJewelryCraftInterface.StepOpenJewelryCraftInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        TRY_COMPLETE_ACHIEVEMENT: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepTryCompleteAchievement.StepTryCompleteAchievement(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        TRY_CLAIM_ACHIEVEMENT_REWARD: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepTryClaimAchievmentReward.StepTryClaimAchievmentReward(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        TRY_CLAIM_ACHIEVEMENT_REWARDS: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepTryClaimAchievmentRewards.StepTryClaimAchievmentRewards(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         }
     };

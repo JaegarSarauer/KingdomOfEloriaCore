@@ -2112,7 +2112,7 @@ const Interface = [
     ],
 }, {
     id: 22,
-    name: 'Goals Interface',
+    name: 'Quests Interface',
     actions: [],
 }, {
     id: 23,

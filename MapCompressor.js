@@ -21,7 +21,7 @@ const guildTierToIndex = require('../typedef/Guild').tierToIndex;
 const MAP_WIDTH = 400;
 const SOLID_SQUARE_ID = 60;
 const EMPTY_IDS = [0, 1024];
-const COMPRESS = false;
+const COMPRESS = true;
 
 class TileData {
     constructor(x, y) {
@@ -77,10 +77,22 @@ class MapData {
 
 };
 
-class GuildData {
-    constructor(guildID, guildName) {
-        this.id = guildID;
-        this.name = guildName;
+class LocationData {
+    constructor(name) {
+        this.name = name;
+    }
+
+    setSubtitle(subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    setCity(cityID) {
+        this.cityID = cityID;
+    }
+
+    setGuild(guildID, cityID) {
+        this.guildID = guildID;
+        this.cityID = cityID;
     }
 }
 
@@ -314,7 +326,7 @@ function loadMinimapData(mapID, worldObjectsData, npcData, citiesData) {
             areaType : data.areaType
         };
         if (data.id != null) {
-            result.cities[cityName].guildID = data.id;
+            result.cities[cityName].guildID = data.guildID;
         }
         if (data.subtitle != null) {
             result.cities[cityName].subtitle = data.subtitle;
@@ -434,9 +446,9 @@ function loadMusicAreas(JSONMap) {
     return musicAreas;
 }
 
-function loadGuilds(JSONMap) {
-    let entityObjects = getLayer(JSONMap, "GuildAreas").objects
-    let guildsResult = {};
+function loadLocations(JSONMap) {
+    let entityObjects = getLayer(JSONMap, "LocationAreas").objects
+    let locationResult = {};
     if (entityObjects != null) {
         
         entityObjects.sort(function(a,b) { return a.properties.guildID-b.properties.guildID })
@@ -444,14 +456,31 @@ function loadGuilds(JSONMap) {
         for (let i = 0; i < entityObjects.length; i++) {
             let obj = entityObjects[i];
             if (!obj.properties) {
-                throw 'Error loading guild ' + obj;
+                throw 'Error loading city ' + obj;
             }
-    
-            let guildID = obj.properties.guildID; 
-            let guildName = obj.properties.guildName; 
-            let areaType = obj.properties.areaType; 
+
+            let name = obj.properties.name; 
+            let location = locationResult[name];
+            if (location == null) {
+                location = locationResult[name] = new LocationData(name);
+            }
+            
             let subtitle = obj.properties.subtitle;
-    
+            if (subtitle != null) {
+                location.setSubtitle(subtitle);
+            }
+
+            let guildID = obj.properties.guildID; 
+            let cityID = obj.properties.cityID; 
+
+            if (guildID != null) {
+                location.setGuild(guildID, cityID);
+            }
+            else if (cityID != null) {
+                location.setCity(cityID);
+            }
+
+            let areaType = obj.properties.areaType; 
             let area = {
                 x: obj.x / 64,
                 y: obj.y / 64,
@@ -459,26 +488,18 @@ function loadGuilds(JSONMap) {
                 height: obj.height / 64,
             };
     
-            let guild = guildsResult[guildName];
-            if (guild == null) {
-                guild = guildsResult[guildName] = new GuildData(guildID, guildName);
-            }
-    
             if (areaType == 'city') {
-                guild.cityArea = area;
+                location.cityArea = area;
             } else if (areaType == 'mayor') {
-                guild.mayorArea = 'area';
+                location.mayorArea = 'area';
             }
             else if (areaType == 'landmark') {
-                guild.landmarkArea = area;
+                location.landmarkArea = area;
             }
-            guild.areaType = guildID == null ? (areaType == 'landmark' ? 'landmark' : 'city') : 'guild';
-            if (subtitle != null ) {
-                guild.subtitle = subtitle;
-            }
+            location.areaType = guildID == null ? (areaType == 'landmark' ? 'landmark' : 'city') : 'guild';
         }
     }
-    return guildsResult;
+    return locationResult;
 }
 
 class ShopStorageData {
@@ -637,10 +658,10 @@ module.exports.compressMapData = (mapID, name) => {
         getLayer(tiledMap, "WORLD_OBJECTS_THAT_BLOCK").data,
         width );
 
-    mapData.guildsData = loadGuilds( tiledMap );
+    mapData.locationData = loadLocations( tiledMap );
     mapData.musicData = loadMusicAreas( tiledMap );
     // MINIMAP DATA HERE
-    let minimapData = loadMinimapData(mapID, mapData.worldObjectData, mapData.npcData, mapData.guildsData);
+    let minimapData = loadMinimapData(mapID, mapData.worldObjectData, mapData.npcData, mapData.locationData);
     mapLegends.push(minimapData);
 
     let fileName = '../GuildsOfGodsAssets/MapDesign/' + name + '.json';
