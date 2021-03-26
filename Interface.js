@@ -440,6 +440,11 @@ const Interface = [
                 name: 'Hair Styling From',
                 actionInterval: 0,
             },
+            {
+                id: 65,
+                name: 'Claim Rewards',
+                actionInterval: 0,
+            }
         ],
     },
     {

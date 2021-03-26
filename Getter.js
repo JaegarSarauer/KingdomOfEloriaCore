@@ -4618,7 +4618,8 @@ const WorldObject = {
                     , [UncutGemIDs.UNCUT_ONYX, 1, 1, -840, 10]
                     , [UncutGemIDs.UNCUT_DIAMOND, 1, 1, -960, 10]
                     ]],
-                })],
+                }),
+                buildStep(StepType.TRY_COMPLETE_ACHIEVEMENT, {params: [40]})],
             ];
 
             actionsSteps.push([
@@ -6427,7 +6428,16 @@ const Character = {
                 interfaceID: 0,
                 id: 36,
                 name: 'Attack',
-            }
+            },
+            {
+                interfaceID: 0,
+                id: 65,
+                name: 'Claim Rewards',
+                steps: [
+                    buildStepList(StepList.WALK_ADJACENT),
+                    [buildStep(StepType.TRY_CLAIM_ACHIEVEMENT_REWARDS, { params: [0] })]
+                ],
+            },
         ];
         human.doNotRespawn = true;
 

@@ -2805,12 +2805,12 @@ try {
         },
         TRY_CLAIM_ACHIEVEMENT_REWARD: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepTryClaimAchievmentReward.StepTryClaimAchievmentReward(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+                return new StepTryClaimAchievementReward.StepTryClaimAchievementReward(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         },
         TRY_CLAIM_ACHIEVEMENT_REWARDS: {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
-                return new StepTryClaimAchievmentRewards.StepTryClaimAchievmentRewards(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+                return new StepTryClaimAchievementRewards.StepTryClaimAchievementRewards(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
         }
     };
