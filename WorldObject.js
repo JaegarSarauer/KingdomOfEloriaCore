@@ -790,7 +790,7 @@ module.exports.WorldObject = WorldObject = [
         }],
     }, {
         id: 65,
-        name: 'Chest',
+        name: 'Shell Chest',
         description: 'A chest decorated with shells and rocks.',
         modelName: 'ROCK',
         modelParams: {
@@ -1111,7 +1111,7 @@ module.exports.WorldObject = WorldObject = [
     Get.WorldObject.DoorSkillLocked(85, 'Door', 20, 70, 1, null, 0, { x : 232, y : 270}, { x: 232, y: 269 }, 'Through the door cracks you see goblins protecting many chests.' ),
     {
         id: 86,
-        name: 'Chest',
+        name: 'Orc Chest',
         description: 'A chest containing someone\'s belongings. It seems to be trapped.',
         requirements: ItemDetail.build([
             ItemDetail.levelSkillDetail(50, 20, 'STEAL'),

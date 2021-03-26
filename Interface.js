@@ -440,6 +440,11 @@ const Interface = [
                 name: 'Hair Styling From',
                 actionInterval: 0,
             },
+            {
+                id: 65,
+                name: 'Claim Rewards',
+                actionInterval: 0,
+            }
         ],
     },
     {
@@ -2370,7 +2375,13 @@ const Interface = [
             ],
         },
     ],
-},];
+}, {
+    id: 35,
+    name: 'Achievements Interface',
+    actions: [
+
+    ]
+}];
 
 let keys = Object.keys(Interface);
 for(let i = 0; i < keys.length; ++i) {

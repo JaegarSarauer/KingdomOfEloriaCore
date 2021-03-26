@@ -4589,7 +4589,6 @@ const WorldObject = {
         GemRock: function (id, name, skillLevelToMine, rollSuccessParams, xp, spriteIndex, spawnTimer, despawnRoll, description) {
             let actionsSteps = [
                 buildStepList(StepList.WALK_ADJACENT),
-
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [10, skillLevelToMine] }),
                 buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [2] }),
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to mine a gem.'] }),
@@ -4618,7 +4617,9 @@ const WorldObject = {
                     , [UncutGemIDs.UNCUT_ONYX, 1, 1, -840, 10]
                     , [UncutGemIDs.UNCUT_DIAMOND, 1, 1, -960, 10]
                     ]],
-                })],
+                }),
+                buildStep(StepType.TRY_COMPLETE_ACHIEVEMENT, {params: [40]})
+                ],
             ];
 
             actionsSteps.push([
@@ -6427,7 +6428,18 @@ const Character = {
                 interfaceID: 0,
                 id: 36,
                 name: 'Attack',
-            }
+            },
+            {
+                interfaceID: 0,
+                id: 65,
+                name: 'Claim Rewards',
+                steps: [
+                    [
+                        buildStep(StepType.TRY_CLAIM_ACHIEVEMENT_REWARDS, { params: [0] })
+                    ]
+                ],
+            },
+            
         ];
         human.doNotRespawn = true;
 

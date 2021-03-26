@@ -21,7 +21,7 @@ const guildTierToIndex = require('../typedef/Guild').tierToIndex;
 const MAP_WIDTH = 400;
 const SOLID_SQUARE_ID = 60;
 const EMPTY_IDS = [0, 1024];
-const COMPRESS = true;
+const COMPRESS = false;
 
 class TileData {
     constructor(x, y) {
