@@ -612,18 +612,29 @@ module.exports.GetSkillGuide = () => {
                     title: 'Fletch',
                     content: [
                         SingleSkillBuilder(1, GuideIcons.ITEM, 74, 'Fletch 5 arrow shafts (1 Log)'),
-                        SingleSkillBuilder(5, GuideIcons.ITEM, 37, 'Fletch bow'),
+                        SingleSkillBuilder(5, GuideIcons.ITEM, 33, 'Fletch unstrung bow'),
                         SingleSkillBuilder(10, GuideIcons.ITEM, 74, 'Fletch 10 arrow shafts (1 Oak Log)'),
-                        SingleSkillBuilder(15, GuideIcons.ITEM, 38, 'Fletch oak bow'),
+                        SingleSkillBuilder(15, GuideIcons.ITEM, 34, 'Fletch unstrung oak bow'),
                         SingleSkillBuilder(20, GuideIcons.ITEM, 74, 'Fletch 15 arrow shafts (1 Ash Log)'),
-                        SingleSkillBuilder(25, GuideIcons.ITEM, 39, 'Fletch ash bow'),
+                        SingleSkillBuilder(25, GuideIcons.ITEM, 35, 'Fletch unstrung ash bow'),
                         SingleSkillBuilder(25, GuideIcons.ITEM, 550, 'Fletch rock bolts'),
                         SingleSkillBuilder(30, GuideIcons.ITEM, 74, 'Fletch 20 arrow shafts (1 Fur Log)'),
-                        SingleSkillBuilder(35, GuideIcons.ITEM, 40, 'Fletch fur bow'),
+                        SingleSkillBuilder(35, GuideIcons.ITEM, 36, 'Fletch unstrung fur bow'),
                         SingleSkillBuilder(40, GuideIcons.ITEM, 74, 'Fletch 25 arrow shafts (1 King Maple Log)'),
-                        SingleSkillBuilder(45, GuideIcons.ITEM, 319, 'Fletch king maple bow'),
+                        SingleSkillBuilder(45, GuideIcons.ITEM, 323, 'Fletch unstrungking maple bow'),
                         SingleSkillBuilder(50, GuideIcons.ITEM, 74, 'Fletch 30 arrow shafts (1 Magic Log)'),
-                        SingleSkillBuilder(55, GuideIcons.ITEM, 321, 'Fletch magic bow'),
+                        SingleSkillBuilder(55, GuideIcons.ITEM, 325, 'Fletch unstrung magic bow'),
+                    ]
+                },
+                {
+                    title: 'String',
+                    content: [
+                        SingleSkillBuilder(1, GuideIcons.ITEM, 37, 'String bow (1 Bowstring, 1 Unstrung Bow)'),
+                        SingleSkillBuilder(10, GuideIcons.ITEM, 38, 'String oak bow (1 Bowstring, 1 Unstrung Oak Bow)'),
+                        SingleSkillBuilder(20, GuideIcons.ITEM, 39, 'String ash bow (1 Bowstring, 1 Unstrung Ash Bow)'),
+                        SingleSkillBuilder(30, GuideIcons.ITEM, 40, 'String fur bow (1 Bowstring, 1 Unstrung Fur Bow)'),
+                        SingleSkillBuilder(40, GuideIcons.ITEM, 319, 'String king maple bow (1 Bowstring, 1 Unstrung King Maple Bow)'),
+                        SingleSkillBuilder(50, GuideIcons.ITEM, 321, 'String magic bow (1 Bowstring, 1 Unstrung Magic Bow)'),
                     ]
                 },
             ]
@@ -782,8 +793,8 @@ module.exports.GetSkillGuide = () => {
                         SingleSkillBuilder(20, GuideIcons.WORLD_OBJECT, 61, 'Thieve chest'),
                         SingleSkillBuilder(25, GuideIcons.CHARACTER, 62, 'Thieve man'),
                         SingleSkillBuilder(30, GuideIcons.CHARACTER, 25, 'Thieve guard'),
-                        SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 65, 'Thieve chest'),
-                        SingleSkillBuilder(50, GuideIcons.WORLD_OBJECT, 86, 'Thieve chest'),
+                        SingleSkillBuilder(40, GuideIcons.WORLD_OBJECT, 65, 'Thieve Shell Chest'),
+                        SingleSkillBuilder(50, GuideIcons.WORLD_OBJECT, 86, 'Thieve King Orc Chest'),
                     ]
                 }
             ]

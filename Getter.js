@@ -4589,7 +4589,6 @@ const WorldObject = {
         GemRock: function (id, name, skillLevelToMine, rollSuccessParams, xp, spriteIndex, spawnTimer, despawnRoll, description) {
             let actionsSteps = [
                 buildStepList(StepList.WALK_ADJACENT),
-
                 [buildStep(StepType.HAS_SKILL_LEVEL, { params: [10, skillLevelToMine] }),
                 buildStep(StepType.HAS_INVENTORY_ITEM_GROUP, { params: [2] }),
                 buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You attempt to mine a gem.'] }),

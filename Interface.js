@@ -2375,7 +2375,13 @@ const Interface = [
             ],
         },
     ],
-},];
+}, {
+    id: 35,
+    name: 'Achievements Interface',
+    actions: [
+
+    ]
+}];
 
 let keys = Object.keys(Interface);
 for(let i = 0; i < keys.length; ++i) {

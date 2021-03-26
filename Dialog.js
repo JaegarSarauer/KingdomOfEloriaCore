@@ -1,6 +1,6 @@
 const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     id: 0,
-    title: '<b>Welcome to Guilds of Gods!</b>',
+    title: '<h2>Welcome to Guilds of Gods!</h2>',
     message: 'Welcome to the beautiful lands of Eloria.\n\n' +
     
     'Start your journey by customizing your adventurer.',
@@ -10,7 +10,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 1,
-    title: '<b>\tBrand New World</b>' ,
+    title: '<h2>\tBrand New World</h2>' ,
     message: 'You were traveling by ship to start your new life in <note>Eloria</note>. Eloria is known for its beautiful scenery, natural resources and the struggle between powers to control it all.\n\n' +
 
     'On this ship carries soldiers from various Elorian guilds, and new adventurers, such as yourself, looking to the future.\n\n' +
@@ -21,12 +21,12 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 
     'You hear a friendly voice shout <note>\'<i>Our allied Wizards are just past the battle field! Find them!</i>\'</note>\n\n' +
 
-    '<b>\tHow to Play</b>\n' + 
+    '<h3>\tHow to Play</h3>\n' + 
     ' - Left click your mouse to move around.\n' + 
     ' - Follow the arrow.\n' +
     ' - Try to escape.',
 
-    // '<b>\tHow to Play</b>\n' + 
+    // '<h2>\tHow to Play</h2>\n' + 
     // ' - Left click your mouse to move around and interact with your surrounding world and items. Right click to view more options.\n\n' + 
 
     // ' - View the left menu for account controls such as: game notifications, chat room, friends list, settings and quests list.\n\n' +
@@ -40,18 +40,18 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 },{
     id: 2,
-    title: '<b>Osaik</b>',
+    title: '<h2>Osaik</h2>',
     message: 'Hello again! What can I help you with?',
     continueSteps: [[
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[241, 242, 243, 244, 245, 246, 247, 248, 249, 250]] }),
     ]]
 }, {
     id: 3,
-    title: '<b>Mysterious Man</b>',
+    title: '<h2>Mysterious Man</h2>',
     message: 'Leave me to my experiments unless you are looking for a Level 100 Standard.\n\n',
 }, {
     id: 4,
-    title: '<b>Cavern Supervisor</b>',
+    title: '<h2>Cavern Supervisor</h2>',
     message: 'We have uncovered a cavern but our entrance has woken up some creatures. We need your help fighting them off.\n\n' +
     'We found an obelisk in the centre of the cavern with some interesting artifacts around it.' +    
     'It appears that the obelisk has been placed there as some sort of offering table. It feeds off the energy of the creatures.\n\n' +
@@ -60,7 +60,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Be careful in there! If you die, you will lose your items.',
 },{
     id: 5,
-    title: '<b>Death</b>',
+    title: '<h2>Death</h2>',
     message: 'Why hello there, peculiar human.\n\n' +
     'Nice to see you finally bit the bullet. ' +    
     'I\'ll show you mercy, but it\'ll cost you to get your items back.\n' +
@@ -75,11 +75,11 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]]
 }, {
     id: 6,
-    title: '<b>A Citizen</b>',
+    title: '<h2>A Citizen</h2>',
     message: 'Good day...',
 }, {
     id: 7,
-    title: '<b>Mysterious Man</b>',
+    title: '<h2>Mysterious Man</h2>',
     message: 'I see you have become a very skilled adventurer! Would you like to buy a weildable standard to display your great achievment?\n\n' +
     'An adventurer of your talent should have no problem paying 100,000 coins, right? ...',
     continueSteps: [[
@@ -87,26 +87,26 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]]
 }, {
     id: 8, // Sandwich
-    title: '<b>Sandwich</b>',
+    title: '<h2>Sandwich</h2>',
     message: 'In Memoriam: Sandwich (10/19 - to be determined)\n\n' +
     'The 2nd most handsome boy to grace our shores. Shout outs to NPC, finalroge, Stv, Inspiria and Knox.\n' +
     'You could have all beaten me here if you had stuck it out!\n' +
     'Remember the rats...',
 }, {
     id: 9, // Red500
-    title: '<b>Redd</b>',
+    title: '<h2>Redd</h2>',
     message: 'Guilds of Gods is everything I love about Runescape and Incremental Games but put together into one game,\n' +
    'It deserves all my money, as thanks for the fun I\'ve had and will have.\n' +
     '\n...\n\n' +
     'Remember how we crashed the server in the early days by messing with burnt fish? lmao',
 }, {
     id: 10, // AidenCanadian
-    title: '<b>Aiden</b>',
+    title: '<h2>Aiden</h2>',
     message: 'Fancy seeing you here! I\'m just looking for a nice Maple Tree. Been craving some syrup.\n\n' +
     'I\'m sure I saw one around here somewhere!',
 }, {
     id: 11, // WSM_Orange
-    title: '<b>WeSkillNow</b>',
+    title: '<h2>WeSkillNow</h2>',
     message: 'As the first Twitch streamer to ever stream this game, and as a long term Patreoner, this game is the best game ever!\n\n' +
     'It is the sequel that RS Classic deserved! WAY better than RS3!\n\n' +
     '...\n\n' +
@@ -115,12 +115,12 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'I am Twitch.tv\'s WeSkillNow and I technically approved this message!',
 }, {
     id: 12, // MilkN2Sugars
-    title: '<b>Thomas</b>',
+    title: '<h2>Thomas</h2>',
     message: 'When you know the best strategies, training your skills is easy-peasy! ',
 },
 {
     id: 13,
-    title: '<b>Welcome to Guilds of Gods</b>',
+    title: '<h2>Welcome to Guilds of Gods</h2>',
     message: '<note>Eloria</note> has been overruled by a corrupt emperor who has pitted the human race against goblins and orcs! \n\n' + 
 
     'Explore each guild and choose a community to join in your fight against the evil tyrant. Whether you fancy fishing, mining, or woodcutting, all guilds play a role in the fight against the emperor.\n\n' +
@@ -139,7 +139,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 14,
-    title: '<b>Mining Guide</b>',
+    title: '<h2>Mining Guide</h2>',
     message: 'First, pick up all the items you need to create a <note>Copper Mining Camp</note>\n\n' +
 
     'To do this, you will need <note>Two Copper Pickaxes</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
@@ -154,7 +154,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 15,
-    title: '<b>Mining Guide</b>',
+    title: '<h2>Mining Guide</h2>',
     message: 'Pick up <note>Two Copper Pickaxes</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
 
     'Use the <note>saw</note> on the <note>logs</note> to create the <note>Copper Mining Camp</note>.\n\n' +
@@ -166,14 +166,14 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 16,
-    title: '<b>Mining Guide</b>',
+    title: '<h2>Mining Guide</h2>',
     message: 'Welcome back. I hope your adventurers have taught you much.\n\nWhat can I help you with?',
     continueSteps: [[
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[289, 241, 242, 243, 244, 245, 246, 247, 248, 249]] }),
     ]],
 }, {
     id: 17,
-    title: '<b>Mining Guide</b>',
+    title: '<h2>Mining Guide</h2>',
     message: 'It took you long enough...\n\n' +
 
     'Congratulations on passing your exam. You have what it takes to join the <note>Teragon Mining Guild</note>.',
@@ -182,7 +182,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 18,
-    title: '<b>Mining Guide</b>',
+    title: '<h2>Mining Guide</h2>',
     message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Teragon Mining Guild</note>',
     continueSteps: [[
         buildStep(StepType.ASSERT_GOAL_STATES, {params: [2, [5], ['EQUALS']]}),
@@ -198,7 +198,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 19,
-    title: '<b>Mining Guide</b>',
+    title: '<h2>Mining Guide</h2>',
     message: 'Donate your <note>Copper Ore</note> to the guild chest.\n\n' +
     
     'Then, you will officially be a member of our guild.',
@@ -208,7 +208,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 20,
-    title: '<b>Guild Wizard</b>',
+    title: '<h2>Guild Wizard</h2>',
     message: 'We\'re glad we got to you in time. You\'re safe here.\n\n' +
 
     '<note><i>What happened?</i></note>\n\n' +
@@ -227,7 +227,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 21,
-    title: '<b>The Land of Eloria</b>',
+    title: '<h2>The Land of Eloria</h2>',
     message: '<note>You hear the guards whisper of the return of Osaik and gleam info on his whereabouts.</note>',
     continueSteps: [[
         buildStep(StepType.SHOW_DIRECTION_ARROW, {params: [25, 8]}),
@@ -235,7 +235,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 22,
-    title: '<b>Osaik</b>',
+    title: '<h2>Osaik</h2>',
     message: 'Thank you for helping me off that wretched island.\n\n' +
     'I don\'t believe I properly introduced myself. My name is <note>Osaik</note>. I am one of the first adventurers to set foot on Eloria, the place you now call home.\n\n' +
     'Eloria is rich in natural resources and culture. A new world awaits you my friend.',
@@ -249,27 +249,27 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 23,
-    title: '<b>Guide</b>', // <How do I make tools and armor?>
+    title: '<h2>Guide</h2>', // <How do I make tools and armor?>
     message: 'Armor, axes and pickaxes are all smithed from ores found in the land of Eloria. Making such tools uses a combination of two skills, Mining and Smithing.\n\n' +
     'To mine, you will want to wield a pickaxe and find a rock. When you are new to mining, you will want to acquire a copper pickaxe and then click on a copper rock to mine it.\n\n'+
     'Once you have enough ore, you will smith them into bars. Bring the ores to a furnace and click on the furnace. Furnaces are often found in Metalsmith Stores within the cities.\n\n'+
     'Then you use a hammer on an anvil to smith it into whatever you desire. You can buy a hammer at a General Store.\n\n',
 },{
     id: 24,
-    title: '<b>Guide</b>', // <How do I make bows and arrows?>
+    title: '<h2>Guide</h2>', // <How do I make bows and arrows?>
     message: 'Bows and arrows are fletched from trees found in grassy areas. Creating bows and arrows is a multi-step process. Creating unstrung bows and arrow shafts, however, only required Woodcutting and Fletching.\n\n' +
     'To woodcut, you will want to wield an axe and find a tree. When you are new to woodcutting, you will want to acquire a copper axe and then click on a regular tree to mine it. Once you have logs, you will fletch them into bows or arrow shafts. Use a knife on the log to fletch it. Knives can be purchased from a General Store.\n\n'+
     'To turn an unstrung bow into a bow, you must string it with a bowstring, which are created by spinning flax. Flax can be around around the lands.\n\n'+
     'To turn arrow shafts into arrows, you must first put feathers on the arrow shafts, which can be acquired by slaying chickens. You must then put arrow heads onto the shafts. Ask me about making tools and armor to learn how to make arrowheads.',
 },{
     id: 25,
-    title: '<b>Guide</b>', // <How do I learn magic?>
+    title: '<h2>Guide</h2>', // <How do I learn magic?>
     message: 'Magic can is learnt by acquiring spell scrolls and studying them. Once you read a spell scroll, it crumbles into dust, but the spell is permanently added to your Spell Book.\n\n' +
     'Once a spell is learned, you can find it in your Spell Book, a tab found in the menu on the right. To use a spell, carry the appropriate essence in your inventory and then click on the spell in your spell book. If it is a combat spell, it will be equipped activated and used once you get into a fight.\n\n' +
     'Both spell scrolls and essence can be dropped by enemies upon being slain, or acquired through thieving chests. You can also be create essence with essence shards.',
 },{
     id: 26,
-    title: '<b>Guide</b>', // <Where do I store my items?>
+    title: '<h2>Guide</h2>', // <Where do I store my items?>
     message: 'You can store your items safely at a bank. Banks are found in nearly every town in Eloria.\n\n' +
 
     'To deposit your items into a bank, talk to a Banker. Bankers will let you deposit  or withdraw all your items.\n' +
@@ -278,14 +278,14 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Items can be deposited or withdrawn normally or as notes. To toggle between noted, check the Note/Item toggle in the upper right  of the bank menu.',
 },{
     id: 27,
-    title: '<b>Guide</b>', // <How can I make money?>
+    title: '<h2>Guide</h2>', // <How can I make money?>
     message: 'Money can be made by selling items to stores and market stalls or trading directly with players.\n' + 
     'Items can be acquired by gathering resources such as mining or woodcutting, creating items from resources such as through smithing, fletching or crafting. They can also be dropped by slain enemies in combat, or stolen through thieving NPCs and chests.\n\n' +
     
     'Many players suggest stealing items through thieving as it is a highly profitable way to make money, but it comes with high risk.',
 },{
     id: 28,
-    title: '<b>Guide</b>', // <What is thieving?>
+    title: '<h2>Guide</h2>', // <What is thieving?>
     message: 'Thieving is one of the best sources of Coins and Cloth in the game currently. It consists of 2 activities: Pickpocketting certain NPCs, and opening Chests.\n\n' +
 
     'Opening a chest, or uncommonly failing a pickpocket will earn the player a bounty skull. This means that thieving is a somewhat risky activity. Not only will this allow another player within your level range to attack you, it means that guards in town will attack you on sight.\n\n' +
@@ -293,7 +293,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Thieving is a high risk, high reward activity. Proceed with caution, it\'s not exactly encouraged around here... but Eloria is the new wild west. People don\'t exactly trust The Emperor\'s guards anyway...',
 }, {
     id: 29,
-    title: '<b>Guide</b>', // <What are notes and where can I redeem them?>
+    title: '<h2>Guide</h2>', // <What are notes and where can I redeem them?>
     message: 'Notes are an IOU that the bank accept at a 1:1 rate with the described item.\n\n' +
 
     'Items can often take up a lot of space in your inventory. Notes are a way of carrying many of the same item, while having each item only take up spot in your inventory.\n\n' +
@@ -301,7 +301,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'If you wish to use an item that is noted, you must deposit it into your bank and withdraw the item normally. To toggle between withdrawing and depositing noted items, check the Note/Item toggle in the upper right  of the bank menu.',
 }, {
     id: 30,
-    title: '<b>Guide</b>', // <How does crafting work?>
+    title: '<h2>Guide</h2>', // <How does crafting work?>
     message: 'Crafting provides a number of benefits to other skills in Guilds of Gods - it is required for creating magic combat armors, spinning flax for bowstrings for fletching and drawstrings for making bags as well as the creation of Pots for alchemy. These uses, plus its relative ease to train means it is a great skill to work on early for a new player.\n\n' +
     
     'Crafting relies on tools such as Needles and Threads, which can be purchased from Crafting Stores. It often requires using a spinning wheel or pottery wheel, which can be found in most Crafting Stores.\n\n' +
@@ -309,14 +309,14 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     'Cloth can be crafted into wizard robes, clay crafted into claypots, and flax into bowstrings. Each of these tools is very useful for other skills.',
 }, {
     id: 31,
-    title: '<b>Guide</b>', // <How can I connect with other adventurers?>
+    title: '<h2>Guide</h2>', // <How can I connect with other adventurers?>
     message: 'In the menu on the left, there is a \'Chat\' tab which allows you to talk to all players who are currently online.\n\n' +
     
     'Below that is the \'Friends List\' tab, which lets you add other adventurers as friends.\n' +
     'Friends can see when each other is online and talk to each other privately.',
 }, {
     id: 32,
-    title: '<b>Osaik</b>', // <I want to learn more>
+    title: '<h2>Osaik</h2>', // <I want to learn more>
     message: 'My brother <note>Kiaso</note> is more experienced than myself.\n\n' +
     
     'You can find him in his house east of the Fishing Guild, which is the city east of us. Just exit Fiewon heading south, and when the path forks, continue on the north east paths.',
@@ -324,7 +324,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 ////// Kiaso
 {
     id: 33,
-    title: '<b>Kiaso</b>',
+    title: '<h2>Kiaso</h2>',
     message: 'Hello, I am Kiaso, brother of Osaik.\n\n' +
     'What can I help you with today?',
     continueSteps: [[
@@ -332,43 +332,43 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]]
 }, {
     id: 34,
-    title: '<b>Kiaso</b>', // <How can I expand my party?>
+    title: '<h2>Kiaso</h2>', // <How can I expand my party?>
     message: 'You can purchase new adventurers to expand your party with gold.\n\n' +
     'The top menu bar shows your currently selected adventurer, their health and their status.\n\n' + 
     'On that bar, you will see a price listed. That is the cost of your next adventurer. You can purchase up to four adventurers, making your max party size of five adventurers.',
 }, {
     id: 35,
-    title: '<b>Kiaso</b>', // '<What are camps and how do they work?>
+    title: '<h2>Kiaso</h2>', // '<What are camps and how do they work?>
     message: 'Camps are structures which allow you to automate resource collection and combat training, freeing you up to playing on other adventurers while the camp autopilots the adventurer operating it. They are built through the Construction skill and can be created for mining, woodcutting, fishing and combat.\n\n' +
     'To create a camp, you must have a saw, five logs and the appropriate tool related to the camp you are building. For example, a woodcutting camp would require an axe while a training dummy would require a platebody. You first select your saw, then use it on the logs to create the camp.\n\n' +
     'As an example, if you wish to create a copper ore mining camp, you would need a copper pickaxe, five regular logs and a saw. Creating higher tier camps requires higher tier wood and higher tier tools.',
 }, {
     id: 36,
-    title: '<b>Kiaso</b>', // <What are PvP bounties and how do they work?>
+    title: '<h2>Kiaso</h2>', // <What are PvP bounties and how do they work?>
     message: 'Bounties allows for adventurers to fight in player vs player combat. You cannot fight players unless you both have bounties.\n\n' +
     'A white skull over a players head means they are a lawful player who is willing to duel. To get your own white skull, you must talk to The Emperor in Hyrill and request a PvP Bounty.\n\n' +
     'A red skull depicts an unlawful player. This player was either caught thieving or thieved from chests. Red skulls cannot initiate a fight with white skulls, however a white skull can initiate a fight with red skulls. Red skulled players will be attacked by guards on sight.\n\n' +
     'Bountied players can only fight other plays with similar combat levels.',
 }, {
     id: 37,
-    title: '<b>Kiaso</b>', // <What are bags?>
+    title: '<h2>Kiaso</h2>', // <What are bags?>
     message: '<note>Bags</note> allow you to hold multiple of an unstackable item in a single slot in your inventory. This allows similar benefits to noted items, however items in a bag can be withdrawn and deposited without going to a bank, letting you hold many items in your inventory at once.\n\n' +
     'Bags can be crafted through sewing multiple cloth together with thread and a drawstring. To create a tier 1 bag, you need three blue cloth, three threads, a needle and a drawstring. Additional cloth can be sewn onto the bag to provide additional storage capacity.',
 }, {
     id: 38,
-    title: '<b>Kiaso</b>', // <What are Gems>
+    title: '<h2>Kiaso</h2>', // <What are Gems>
     message: 'A <note>Gem</note> is a enchantable item that can be found through mining. Once enchanted, they can be crafted into jewelry.\n\n' +
     'Enchanted gems can provide various effects, such as increasing your power, collecting dropped items, or even teleporting.',
 },
 {
     id: 39,
-    title: '<b>Osaik</b>',
+    title: '<h2>Osaik</h2>',
     message: 'You don\'t expect me to eat a burnt shrimp, do you?...\n\n' +
     'Try again until you get me one that isn\'t burnt.',
 },
 {
     id: 40,
-    title: '<b>Osaik</b>',
+    title: '<h2>Osaik</h2>',
     message: 'Before you go, I can\'t let you leave here without the proper gear. There are dangerous creatures around, you must be adequately protected if you choose to wander off the beaten path.\n\n' +
 
     '<note>[Osaik gives you a set of copper armor]</note>\n\n' +
@@ -392,7 +392,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 41,
-    title: '<b>Child Goblin</b>',
+    title: '<h2>Child Goblin</h2>',
     message: 'mean bull go! No nice, hurt me! go!\n' +
     'help me make bull go away\n\n' +
 
@@ -407,7 +407,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 42,
-    title: '<b>Child Goblin</b>',
+    title: '<h2>Child Goblin</h2>',
     message: 'ouuuu knife stabby stabby!\n\n' + 
 
     '<note>Child Goblin takes the Copper Dagger and Copper Helmet</note>\n\n' +
@@ -424,7 +424,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 43,
-    title: '<b>Child Goblin</b>',
+    title: '<h2>Child Goblin</h2>',
     message: 'thank you!\n' +
     'mean bull no more...\n\n' +
     
@@ -441,7 +441,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 44,
-    title: '<b>Child Goblin</b>',
+    title: '<h2>Child Goblin</h2>',
     message: 'bull came back!\n' +
     'killing bull fun!',
     continueSteps: [[
@@ -451,7 +451,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 45,
-    title: '<b>Child Goblin</b>',
+    title: '<h2>Child Goblin</h2>',
     message: 'where brown knife and helmet?\n\n' +
 
     'get me stabby so bull go away forever.\n\n' +
@@ -463,7 +463,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 46,
-    title: '<b>Child Goblin</b>',
+    title: '<h2>Child Goblin</h2>',
     message: 'bye bye!\n',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -471,31 +471,31 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 47, // Default cat pet dialog
-    title: '<b>Cat</b>',
+    title: '<h2>Cat</h2>',
     message: 'Meow!\n',
     continueSteps: [[buildStep(StepType.SHOW_DEFAULT_INTERFACES)]],
 },
 {
     id: 48, // Billys 'pet' dialog
-    title: '<b>Billy</b>',
+    title: '<h2>Billy</h2>',
     message: 'Meow!\n\n<note>Billy begins to purr</note>',
     continueSteps: [[buildStep(StepType.SHOW_DEFAULT_INTERFACES),]],
 },
 {
     id: 49, // Vixens 'pet' dialog
-    title: '<b>Vixen</b>',
+    title: '<h2>Vixen</h2>',
     message: 'Purr! <3\n\n<note>Vixen looks happy</note>',
     continueSteps: [[buildStep(StepType.SHOW_DEFAULT_INTERFACES),]],
 },
 {
     id: 50, 
-    title: '<b>Chicken Supreme Recipe</b>',
-    message: '<b>Ingredients</b>\n' +
+    title: '<h2>Chicken Supreme Recipe</h2>',
+    message: '<h3>Ingredients</h3>\n' +
              '* Raw Chicken\n' +
              '* Herbs\n\n' +
              
-             '<b>Steps</b>\n' +
-             '* Pick Herbs from the <note>Herb Farmer</b>. Follow the river bank.\n' +
+             '<h3>Steps</h3>\n' +
+             '* Pick Herbs from the <note>Herb Farmer</h2>. Follow the river bank.\n' +
              '* Turn Herbs into Buckets of Refined Herbs\n' +
              '* Get Raw Chicken by killing a Chicken from a farm. There are farms east of the river.\n' +
              '* Cook Raw Chicken into Chicken\n' +
@@ -506,15 +506,15 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 51, 
-    title: '<b>Gourmet Tuna Recipe</b>',
-    message: '<b>Ingredients</b>\n' +
+    title: '<h2>Gourmet Tuna Recipe</h2>',
+    message: '<h3>Ingredients</h3>\n' +
              '* Raw Freshwater Tuna\n' +
              '* Herbs\n\n' +
              
-             '<b>Steps</b>\n' +
-             '* Pick Herbs from the <note>Herb Farmer</b>. Follow the river bank.\n' +
+             '<h3>Steps</h3>\n' +
+             '* Pick Herbs from the <note>Herb Farmer</h2>. Follow the river bank.\n' +
              '* Turn Herbs into Buckets of Refined Herbs\n' +
-             '* Fish Raw Freshwater Tuna from <note>Freshwater Freddy</b>\'s backyard. He lives east of the Woodcutting Guild.\n' +
+             '* Fish Raw Freshwater Tuna from <note>Freshwater Freddy</h2>\'s backyard. He lives east of the Woodcutting Guild.\n' +
              '* Cook Raw Freshwater Tuna into Freshwater Tuna\n' +
              '* Season Freshwater Tuna with Buckets of Refined Herbs',
     continueSteps: [[
@@ -523,8 +523,8 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 52, 
-    title: '<b>Vio\'s Plaque</b>',
-    message: '<b>Vio</b>\n\n' +
+    title: '<h2>Vio\'s Plaque</h2>',
+    message: '<h3>Vio</h3>\n\n' +
              'Home Sweet Home',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -532,7 +532,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 53, 
-    title: '<b>Billy</b>',
+    title: '<h2>Billy</h2>',
     message: '<note>You observe Billy wandering around. He appears safe and gentle.</note>\n\n' + 
     
               '<i>I wonder what treats he likes.</i>',
@@ -542,7 +542,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 54, 
-    title: '<b>Billy</b>',
+    title: '<h2>Billy</h2>',
     message: '<note>You notice Billy playing with a small rock.</note>\n\n' + 
     
              '<i>He looks bored. I should finish making his Chicken Surpeme.</i>',
@@ -552,7 +552,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 55, 
-    title: '<b>Billy</b>',
+    title: '<h2>Billy</h2>',
     message: 'Meow!\n\n' +
     
              '<note>You give Billy the Chicken Supreme</note>\n\n' +
@@ -574,7 +574,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 56, 
-    title: '<b>Billy & Vixen\'s Quest Complete</b>',
+    title: '<h2>Billy & Vixen\'s Quest Complete</h2>',
     message: 'You have successfully fed <note>Billy</note> and <note>Vixen</note> their favorite meals!\n\n' +
              
              '<note>You have been awarded 5,000 fishing experience</note>\n' + 
@@ -592,7 +592,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 57, 
-    title: '<b>Vixen</b>',
+    title: '<h2>Vixen</h2>',
     message: '<note>You observe Vixen playing in the grass. She appears to be a sweet kitty.</note>\n\n' + 
     
              '<i>I wonder what treats she likes.</i>',
@@ -602,7 +602,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 58, 
-    title: '<b>Vixen</b>',
+    title: '<h2>Vixen</h2>',
     message: '<note>You notice Vixen watching the ants crawl by.</note>\n\n' + 
     
              '<i>She looks unamused. I should finish making her Gourmet Tuna.</i>',
@@ -612,7 +612,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 59, 
-    title: '<b>Vixen</b>',
+    title: '<h2>Vixen</h2>',
     message: 'Meeooowwww\n\n' +
     
             '<note>You give Vixen the Gourmet Tuna</note>\n\n' +
@@ -634,7 +634,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 60, 
-    title: '<b>Babyshark</b>',
+    title: '<h2>Babyshark</h2>',
     message: 'Hello, new friend!\n\n' +
             
             'They say that cupcakes bring happiness to all who are lucky enough to receive them. I made this one just for you. I hope you like it!\n\n\n' +
@@ -648,7 +648,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 61, 
-    title: '<b>Patreon Pim</b>',
+    title: '<h2>Patreon Pim</h2>',
     message: 'Hello traveler. Welcome to <note>The Patreon Embassy</note>\n\n' +
 
             '<note>Patreon Palace</note> is a luxurious palace devoted to those who keep the Elorian Treasury full. This embassy acts as the gateway between <note>Eloria</note> and <note>Patreon Palace</note>.\n\n' + 
@@ -661,7 +661,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 62, 
-    title: '<b>Patreon Pim</b>',
+    title: '<h2>Patreon Pim</h2>',
     message: 'Welcome!\n\n' + 
     
             'Thank you for being a devoted Patreon supporter.\n\n' +
@@ -675,7 +675,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 63, 
-    title: '<b>Patreon Pim</b>',
+    title: '<h2>Patreon Pim</h2>',
     message: 'Have a safe trip!',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -684,7 +684,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 64, 
-    title: '<b>Patreon Pim</b>',
+    title: '<h2>Patreon Pim</h2>',
     message: '<note>Patreon Palace</note> is a small kingdom created for Patreon supporters.\n\n' +
             
             'These supporters keep the Elorian Teasury full and help forge these beautiful lands.\n\n' +
@@ -697,7 +697,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 65, 
-    title: '<b>Patreon Pim</b>',
+    title: '<h2>Patreon Pim</h2>',
     message: 'You can become a Patron by donating monthly to Guilds of Gods at Patreon.com/GuildsOfGods.\n\n' +
             
             'There are rewards in placed based on the tiers and total amounts donated. A subscription of any tier will give you access to <note>Patreon Palace</note>!\n\n' +
@@ -710,7 +710,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 66, 
-    title: '<b>Patreon Pim</b>',
+    title: '<h2>Patreon Pim</h2>',
     message: 'You are most welcome.', 
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -718,7 +718,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 67, 
-    title: '<b>Patreon Tat</b>',
+    title: '<h2>Patreon Tat</h2>',
     message: 'Thank you for visiting!\n\n' +
 
             'Would you like for me to teleport you to the <note>Patreon Embassy</note>?', 
@@ -729,7 +729,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 68, 
-    title: '<b>Patreon Tat</b>',
+    title: '<h2>Patreon Tat</h2>',
     message: 'Have a safe trip and come again!', 
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -738,7 +738,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 69, 
-    title: '<b>Patreon Tat</b>',
+    title: '<h2>Patreon Tat</h2>',
     message: 'Just let me know whenever you are ready to go home.', 
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -746,17 +746,17 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 70, // Aeronic
-    title: '<b>Aeronic</b>',
+    title: '<h2>Aeronic</h2>',
     message: 'I hope you like my musical additions and suggestions for GoG! Remember to stand for the Elorian Anthem!',
 },
 {
     id: 71, // Guildmaster generic (for now)
-    title: '<b>Guildmaster</b>',
+    title: '<h2>Guildmaster</h2>',
     message: 'Hello adventurer.\n\nPlease help our guild flourish by donating some items to our community chest.\nWith your help we can stay strong against the emperor.',
 },
 {
     id: 72,
-    title: '<b>Death</b>',
+    title: '<h2>Death</h2>',
     message: 'I see you have fallen!\n' +
     'If you have your possessions, I can send you home.',
     continueSteps: [[
@@ -765,7 +765,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 // {
 //     id: 83, 
-//     title: '<b>Baker</b>',
+//     title: '<h2>Baker</h2>',
 //     message: 'Baking cakes is easy!\n\n' +
             
 //             'Just take a<note>Pan</note>, <note>Raw Dough</note>, ann <note>Egg</note> and a <note>Bucket of Milk</note>. \n\n' +
@@ -776,7 +776,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 // },
 {
     id: 73,
-    title: '<b>Fishing Guide</b>',
+    title: '<h2>Fishing Guide</h2>',
     message: 'First, pick up all the items you need to create a <note>Shallow Pool Fishery Camp</note>\n\n' +
 
     'To do this, you will need <note>Two Fishing Nets</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
@@ -791,7 +791,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 74,
-    title: '<b>Fishing Guide</b>',
+    title: '<h2>Fishing Guide</h2>',
     message: 'Pick up <note>Two Fishing Nets</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
 
     'Use the <note>saw</note> on the <note>logs</note> to create the <note>Shallow Pool Fishery Camp</note>.\n\n' +
@@ -803,14 +803,14 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 75,
-    title: '<b>Fishing Guide</b>',
+    title: '<h2>Fishing Guide</h2>',
     message: 'Nice to see you again. What can I help you with?',
     continueSteps: [[
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[290, 241, 242, 243, 244, 245, 246, 247, 248, 249]] }),
     ]],
 }, {
     id: 76,
-    title: '<b>Fishing Guide</b>',
+    title: '<h2>Fishing Guide</h2>',
     message: 'Well well well, it looks like you had what it took all along!\n\n' +
     'Congratulations, you have passed your exam!',
     continueSteps: [[
@@ -818,7 +818,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 77,
-    title: '<b>Fishing Guide</b>',
+    title: '<h2>Fishing Guide</h2>',
     message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Salmo Fishing Guild</note>',
     continueSteps: [[
         buildStep(StepType.ASSERT_GOAL_STATES, {params: [3, [5], ['EQUALS']]}),
@@ -834,7 +834,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 78,
-    title: '<b>Fishing Guide</b>',
+    title: '<h2>Fishing Guide</h2>',
     message: 'For your final task, go to our guild chest and donate your noted <note>Raw Shrimp</note>',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -843,7 +843,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 79,
-    title: '<b>Woodcutting Guide</b>',
+    title: '<h2>Woodcutting Guide</h2>',
     message: 'First, pick up all the items you need to create a <note>Lumber Camp</note>\n\n' +
 
     'To do this, you will need <note>Two Copper Axes</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
@@ -858,7 +858,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 80,
-    title: '<b>Woodcutting Guide</b>',
+    title: '<h2>Woodcutting Guide</h2>',
     message: 'Pick up <note>Two Copper Axes</note>, a <note>Saw</note> and five <note>Logs</note>.\n\n' +
 
     'Use the <note>saw</note> on the <note>logs</note> to create the <note>Lumber Camp</note>.\n\n' +
@@ -870,14 +870,14 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
 },
 {
     id: 81,
-    title: '<b>Woodcutting Guide</b>',
+    title: '<h2>Woodcutting Guide</h2>',
     message: 'Welcome back traveler. What can I help you with?',
     continueSteps: [[
         buildStep(StepType.OPEN_ACTION_MENU_INTERFACE, {params: [[291, 241, 242, 243, 244, 245, 246, 247, 248, 249]] }),
     ]],
 }, {
     id: 82,
-    title: '<b>Woodcutting Guide</b>',
+    title: '<h2>Woodcutting Guide</h2>',
     message: 'Congratulations, you have completed your exam.\n\n' + 
     
     'I am very proud to call you a member of our family!',
@@ -886,7 +886,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 83,
-    title: '<b>Woodcutting Guide</b>',
+    title: '<h2>Woodcutting Guide</h2>',
     message: 'Well done!\n\nNow that you know the basics, allow me to give you a tour of the <note>Acernis Woodcutting Guild</note>',
     continueSteps: [[
         buildStep(StepType.ASSERT_GOAL_STATES, {params: [4, [5], ['EQUALS']]}),
@@ -902,7 +902,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 84,
-    title: '<b>Woodcutting Guide</b>',
+    title: '<h2>Woodcutting Guide</h2>',
     message: 'Your final task is to donate your noted <note>Logs</note> to the guild chest.',
     continueSteps: [[
         buildStep(StepType.SHOW_DEFAULT_INTERFACES),
@@ -910,7 +910,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 85,
-    title: '<b>Mining Guide</b>',
+    title: '<h2>Mining Guide</h2>',
     message: 'Welcome adventurer.\n\n' + 
     
     'The proud <note>Teragon Mining Guild</note> is looking for new members.\n\n' +
@@ -921,7 +921,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 86,
-    title: '<b>Fishing Guide</b>',
+    title: '<h2>Fishing Guide</h2>',
     message: 'Welcome fellow fisher.\n\n' + 
     
     'The <note>Salmo Fishing Guild</note> could use more members like yourself.\n\n' +
@@ -932,7 +932,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 87,
-    title: '<b>Woodcutting Guide</b>',
+    title: '<h2>Woodcutting Guide</h2>',
     message: 'Hello wandering adventurer.\n\n' + 
     
     'The <note>Acernis Woodcutting Guild</note> is always eagerly accepting new members.\n\n' +
@@ -950,7 +950,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 },{
     id: 89,
-    title: '<b>Mining Guide</b>',
+    title: '<h2>Mining Guide</h2>',
     message: 'Welcome adventurer.\n\n' + 
     
     'The proud <note>Teragon Mining Guild</note> is looking for new members.\n\n' +
@@ -961,7 +961,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 90,
-    title: '<b>Fishing Guide</b>',
+    title: '<h2>Fishing Guide</h2>',
     message: 'Welcome fellow fisher.\n\n' + 
     
     'The <note>Salmo Fishing Guild</note> could use more members like yourself.\n\n' +
@@ -972,7 +972,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 91,
-    title: '<b>Woodcutting Guide</b>',
+    title: '<h2>Woodcutting Guide</h2>',
     message: 'Hello wandering adventurer.\n\n' + 
     
     'The <note>Acernis Woodcutting Guild</note> is always eagerly accepting new members.\n\n' +
@@ -983,7 +983,7 @@ const Dialogs = Object.freeze([{ // Change hovertip of Account to Settings
     ]],
 }, {
     id: 92,
-    title: '<b>Guide</b>',
+    title: '<h2>Guide</h2>',
     message: 'All set!\n\n' + 
     
     'The next time you die, you will respawn here, in the guild.',

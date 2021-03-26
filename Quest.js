@@ -74,7 +74,7 @@ const Quests = [{
     },
     getStateDescription: (stateArray) => {
         let text1 = '';
-        text1 += '<b>Billy</b>\n';
+        text1 += '<h3>Billy</h3>\n';
         text1 += createOrderedTaskList([
             'Read Billy\'s Chicken Supreme Recipe',
             'Prepare Billy\'s Chicken Supreme Recipe',
@@ -82,7 +82,7 @@ const Quests = [{
         ], stateArray[0]);
 
         let text2 = '';
-        text2 += '<b>Vixen</b>\n';
+        text2 += '<h3>Vixen</h3>\n';
         text2 += createOrderedTaskList([
             'Read Vixen\'s Gourmet Tuna Recipe',
             'Prepare Vixen\'s Gourmet Tuna Recipe',
@@ -113,7 +113,7 @@ const Quests = [{
     },
     getStateDescription: (stateArray) => {
         let text1 = '';
-        text1 += '<b>Tasks</b>\n';
+        text1 += '<h3>Tasks</h3>\n';
         text1 += createOrderedTaskList([
             'Talk to Guide',
             'Begin Mining Guild Exam',
@@ -148,7 +148,7 @@ const Quests = [{
     },
     getStateDescription: (stateArray) => {
         let text1 = '';
-        text1 += '<b>Tasks</b>\n';
+        text1 += '<h3>Tasks</h3>\n';
         text1 += createOrderedTaskList([
             'Talk to Guide',
             'Begin Fishing Guild Exam',
@@ -183,7 +183,7 @@ const Quests = [{
     },
     getStateDescription: (stateArray) => {
         let text1 = '';
-        text1 += '<b>Tasks</b>\n';
+        text1 += '<h3>Tasks</h3>\n';
         text1 += createOrderedTaskList([
             'Talk to Guide',
             'Begin Woodcutting Guild Exam',
