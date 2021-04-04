@@ -288,6 +288,7 @@ function loadMinimapData(mapID, worldObjectsData, npcData, citiesData) {
 
     for(let i = 0; i < npcData.length; ++i) {
         let npcDef = npcData[i];
+
         let x = npcDef.x;
         let y = npcDef.y;
         let id = npcDef.id;
@@ -302,10 +303,7 @@ function loadMinimapData(mapID, worldObjectsData, npcData, citiesData) {
         let cityName = citiesName[i];
         let data = citiesData[cityName];
         
-        let area = data.cityArea;
-        if (area == null) {
-            area = data.mayorArea;
-        }
+        let area = data.cityArea || data.mayorArea || data.landmarkArea;
 
         let x = area.x + Math.floor( area.width / 2)
         let y = area.y + Math.floor( area.height / 2)
@@ -313,9 +311,13 @@ function loadMinimapData(mapID, worldObjectsData, npcData, citiesData) {
         result.cities[cityName] = {
             x,
             y,
+            areaType : data.areaType
         };
         if (data.id != null) {
             result.cities[cityName].guildID = data.id;
+        }
+        if (data.subtitle != null) {
+            result.cities[cityName].subtitle = data.subtitle;
         }
     }
 
@@ -334,6 +336,7 @@ function loadItemSpawns(JSONMap) {
         let itemAmount = obj.properties && obj.properties.itemAmount || 1;
         let isNoted = obj.properties && obj.properties.isNoted || false;
         let idOverride = (obj.properties && obj.properties.id != null && obj.properties.id >= 0) ? obj.properties.id : null;
+        let onTable = (obj.properties && obj.properties.onTable) || false;
         try {
             if (idOverride != null) {
                 id = idOverride;
@@ -342,11 +345,15 @@ function loadItemSpawns(JSONMap) {
                 id = Item.Item[id].notedID || id;
             } else {
                 id = Item.Item[id].unnotedID || id;
-            } 
+            }
         } catch(e) {
             console.info( 'Failed to create World Object from Tiled at position', obj.x / 64, obj.y / 64, e);
         }
-        entitiesArray.push([id, itemAmount, x, y]);
+        let entity = [id, itemAmount, x, y];
+        if (onTable) {
+            entity.push(onTable);
+        }
+        entitiesArray.push(entity);
     }
     return entitiesArray;
 }
@@ -443,6 +450,7 @@ function loadGuilds(JSONMap) {
             let guildID = obj.properties.guildID; 
             let guildName = obj.properties.guildName; 
             let areaType = obj.properties.areaType; 
+            let subtitle = obj.properties.subtitle;
     
             let area = {
                 x: obj.x / 64,
@@ -459,7 +467,14 @@ function loadGuilds(JSONMap) {
             if (areaType == 'city') {
                 guild.cityArea = area;
             } else if (areaType == 'mayor') {
-                guild.mayorArea = area;
+                guild.mayorArea = 'area';
+            }
+            else if (areaType == 'landmark') {
+                guild.landmarkArea = area;
+            }
+            guild.areaType = guildID == null ? (areaType == 'landmark' ? 'landmark' : 'city') : 'guild';
+            if (subtitle != null ) {
+                guild.subtitle = subtitle;
             }
         }
     }
@@ -494,6 +509,8 @@ function loadMultiAreas(JSONMap) {
     }
     return areas;
 }
+
+let mapLegends = [];
 
 module.exports.compressMapData = (mapID, name) => {
     let width = MAP_WIDTH;
@@ -598,13 +615,17 @@ module.exports.compressMapData = (mapID, name) => {
         ], getBlockingTiles(tiledMap)),
         structureTiles : getOptimizedDataArray([
             getLayer(tiledMap, 'detail').data,
-            getLayer(tiledMap, 'detailRisenBehind').data,
-            getLayer(tiledMap, 'detailRisen').data,
         ], []),
         sceneryTiles : getOptimizedDataArray([
             getLayer(tiledMap, 'flowersOutput').data,
             getLayer(tiledMap, 'detailGround').data,
-        ], [])
+        ], []),
+    };
+    mapData.sortableTileData = {
+        structureTiles : getOptimizedDataArray([
+            getLayer(tiledMap, 'detailRisenBehind').data,
+            getLayer(tiledMap, 'detailRisen').data,
+        ], []),
     };
     mapData.worldObjectData = loadMapWorldObjects(tiledMap);
     mapData.npcData = loadMapCharacters(tiledMap);
@@ -619,7 +640,8 @@ module.exports.compressMapData = (mapID, name) => {
     mapData.guildsData = loadGuilds( tiledMap );
     mapData.musicData = loadMusicAreas( tiledMap );
     // MINIMAP DATA HERE
-    // let minimapData = loadMinimapData(mapID, mapData.worldObjectData, mapData.npcData, mapData.guildsData);
+    let minimapData = loadMinimapData(mapID, mapData.worldObjectData, mapData.npcData, mapData.guildsData);
+    mapLegends.push(minimapData);
 
     let fileName = '../GuildsOfGodsAssets/MapDesign/' + name + '.json';
     try {
@@ -640,6 +662,7 @@ if (COMPRESS) {
     module.exports.compressMapData(1, 'Underworld');
     module.exports.compressMapData(2, 'SpecialWorld');
     console.info("Maps compressed");
+    console.info(JSON.stringify(mapLegends));
 }
 
 
