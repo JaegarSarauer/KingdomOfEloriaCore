@@ -2038,6 +2038,22 @@ const Interface = [
                 [buildStep(StepType.TOGGLE_WARDROBE_INTERFACE, {params: ['IS_FEATURE']})]
             ],
         },
+        {
+            id: 5,
+            name: 'Try Pair Ethereum Address',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.TRY_PAIR_ETHEREUM_ADDRESS, {params: ['TO_ETH_ADDRESS', 'TO_SIGNATURE']})]
+            ],
+        },
+        {
+            id: 6,
+            name: 'Try Swap Ethereum Address',
+            actionInterval: -1,
+            steps: [
+                [buildStep(StepType.TRY_SWAP_ETHEREUM_ADDRESS, {params: ['FROM_ETH_ADDRESS', 'FROM_SIGNATURE', 'TO_ETH_ADDRESS', 'TO_SIGNATURE']})]
+            ],
+        }
     ],
 }, {
     id: 19,

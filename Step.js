@@ -1355,6 +1355,20 @@ module.exports.StepType = StepType = {
         paramTypes: ['number'], //slotID
         params: [],
     },
+    TRY_PAIR_ETHEREUM_ADDRESS: {
+        id: 'TRY_PAIR_ETHEREUM_ADDRESS',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['string', 'string'], // eth address, signature
+        params: [],
+    },
+    TRY_SWAP_ETHEREUM_ADDRESS: {
+        id: 'TRY_SWAP_ETHEREUM_ADDRESS',
+        stepResultFail: 'END_ACTION',
+        stepResultPass: 'NEXT_STEP',
+        paramTypes: ['string', 'string', 'string', 'string'], // eth address, signature
+        params: [],
+    },
 };
 
 module.exports.buildStep = buildStep = (sType, newDataObject = {}) => {
@@ -1623,6 +1637,22 @@ module.exports.ParameterMappingKeys = ParameterMappingKeys = {
         id: 'IS_FEATURE',
         type: 'boolean'
     },
+    TO_ETH_ADDRESS: {
+        id: 'TO_ETH_ADDRESS',
+        type: 'string'
+    },
+    TO_SIGNATURE: {
+        id: 'TO_SIGNATURE',
+        type: 'string'
+    },
+    FROM_ETH_ADDRESS: {
+        id: 'FROM_ETH_ADDRESS',
+        type: 'string'
+    },
+    FROM_SIGNATURE: {
+        id: 'FROM_SIGNATURE',
+        type: 'string'
+    },
 };
 
 try {
@@ -1817,6 +1847,8 @@ try {
     const StepCleanupClientStatuses = require('../internal/Steps/StepCleanupClientStatuses');
     const StepSelectGuild = require('../internal/Steps/StepSelectGuild');
     const StepStartTour = require('../internal/Steps/StepStartTour');
+    const StepTryPairEthereumAddress = require('../internal/Steps/StepTryPairEthereumAddress');
+    const StepTrySwapEthereumAddress = require('../internal/Steps/StepTrySwapEthereumAddress');
     
     module.exports.StepTypeClassDictionary = StepTypeClassDictionary = {
         OPEN_GUILD_SELECTION_INTERFACE : {
@@ -2773,7 +2805,17 @@ try {
             build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
                 return new StepOpenJewelryCraftInterface.StepOpenJewelryCraftInterface(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
             },
-        }
+        },
+        TRY_PAIR_ETHEREUM_ADDRESS: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepTryPairEthereumAddress.StepTryPairEthereumAddress(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
+        TRY_SWAP_ETHEREUM_ADDRESS: {
+            build: (actionDef, stepDef, enactingEntity, ownerEntity, parameterMap) => {
+                return new StepTrySwapEthereumAddress.StepTrySwapEthereumAddress(actionDef, stepDef, enactingEntity, ownerEntity, parameterMap);
+            },
+        },
     };
 } catch (e) {
     if (e.code !== 'MODULE_NOT_FOUND') {
