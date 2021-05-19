@@ -2,18 +2,9 @@ const Point = require('../def/Point').Point;
 var WorldObjectDef = require('../def/WorldObjectDef').WorldObjectDef;
 var NPCDef = require('../def/NPCDef').NPCDef;
 var ShopStorage = require('../internal/ShopStorage').ShopStorage;
-var Action = require('../internal/Action').Action;
-if (WorldObjectDef == null) {
-    WorldObjectDef = require('../def/WorldObjectDef').default;
-    NPCDef = require('../def/NPCDef').default;
-    ShopStorage = require('../internal/ShopStorage').default;
-    Action = require('../internal/Action').default;
-}
-const GroundItemDef = require('../def/GroundItemDef');
 const Bounds = require('../def/Bounds').Bounds;
 const GuildState = require('../internal/GuildState');
 const Guilds = require('../typedef/Guild').Guilds;
-const Item = require('../typedef/Item');
 
 const MapCompressor = require('./MapCompressor');
 
