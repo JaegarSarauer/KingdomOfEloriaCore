@@ -363,6 +363,7 @@ module.exports.WorldObject = WorldObject = [
             ],
         }],
         spriteIndex: 29,
+        stateParams: ['usesUntilDepletion', 'downgradeRefID']
     }, {
         id: 27,
         name: 'Fur Pottery Wheel',
@@ -409,6 +410,7 @@ module.exports.WorldObject = WorldObject = [
         }],
         useActions: [],
         spriteIndex: 39,
+        stateParams: ['usesUntilDepletion', 'downgradeRefID']
     }, {
         id: 28,
     }, {
@@ -511,6 +513,7 @@ module.exports.WorldObject = WorldObject = [
                 spriteID: 1,	
             }	
         },
+        stateParams: ['usesUntilDepletion', 'downgradeRefID']
     }, {
         id: 33,
     }, {

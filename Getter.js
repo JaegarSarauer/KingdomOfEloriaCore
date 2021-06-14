@@ -4061,6 +4061,7 @@ const WorldObject = {
                     ],
                 },],
                 spriteIndex: spriteIndex,
+                stateParams : ['usesUntilDepletion', 'ownerUID']
             };
         },
         ShallowFishingPool: function (id) {
@@ -4297,6 +4298,7 @@ const WorldObject = {
                     ]
                 }],
                 spriteIndex: 10,
+                stateParams : ['usesUntilDepletion', 'ownerUID']
             };
         },
         HandFishingPool: function (id) {
@@ -4795,6 +4797,7 @@ const WorldObject = {
                     ],
                 }],
                 spriteIndex: spriteIndex,
+                stateParams : ['isDroppingSilk']
             };
         },
         Ladder: function(id, name, description, spriteID, actions = []) {
@@ -4969,6 +4972,7 @@ const WorldObject = {
                     ],
                 }],
                 spriteIndex: spriteIndex,
+                stateParams : ['usesUntilDepletion', 'ownerUID']
             };
         },
         MarketStall: function (id, maxTrades, spriteIndex, campLevel) {
@@ -5007,6 +5011,7 @@ const WorldObject = {
                         ],
                     }],
                 spriteIndex: spriteIndex,
+                stateParams : ['usesUntilDepletion', 'ownerUID']
             };
         },
         MiningCamp: function (id, oreName, oreId, woRockIds, spriteIndex, xpMultiplier, campLevel, skillLevel) {
@@ -5098,6 +5103,7 @@ const WorldObject = {
                     ],
                 }],
                 spriteIndex: spriteIndex,
+                stateParams : ['usesUntilDepletion', 'ownerUID']
             };
         },
         TrainingDummy: function (id, name, hp, defenceLevel, spriteIndex, campLevel, cbLevel) {
@@ -5132,6 +5138,7 @@ const WorldObject = {
                         ],
                     }],
                 spriteIndex: spriteIndex,
+                stateParams : ['usesUntilDepletion', 'ownerUID', 'stats']
             }
         },
         DoorTollLocked: function(id, name, tollAmount, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
