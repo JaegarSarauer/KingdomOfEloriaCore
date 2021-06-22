@@ -2780,8 +2780,7 @@ try {
         throw e;
     }
     try {
-        const ENV = require('../../index').ENV;
-        if (ENV && ENV.isServer) {
+        if (process.env.isServer) {
             e.oldE = true;
             throw e;
         }
