@@ -45,7 +45,7 @@ module.exports.Character = Character = [{
             if (chance <= 1) {
                 let eggGroundItem = new GroundItemDef(732, entity.x, entity.y, 1, null);
                 // Mobile release fix (.default.)
-                MapManager.i.getMap(entity.mapID).spawnEntity(eggGroundItem);
+                KingdomOfEloria.i.getMap(entity.mapID).spawnEntity(eggGroundItem);
                 // Mobile release fix
             }
             return 30;
@@ -422,7 +422,7 @@ Get.Character.BabyDragon(128, 'Baby Red Dragon', 3, [[11, 3], [0, 0], [1, 0.5], 
     wizard.isAggressiveTo = [91, 92, 93, 94, 98, 99, 100, 101, 102];
     wizard.behaviorLoop = (entity) => {
         entity.timers.setTimer(17, 10, () => {
-            MapManager.i.getMap(entity.mapID).despawnEntity(entity);
+            KingdomOfEloria.i.getMap(entity.mapID).despawnEntity(entity);
             return -1;
         })
     };
