@@ -5460,12 +5460,12 @@ const WorldObject = {
             return readable;
         },
         CatQuestBillyRecipe: function(id) {
-            let recipe = this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 'recipe', 1, 50)
+            let recipe = this.CatQuestReadObject(id, 'Supreme Chicken Recipe', 'A special recipe for chicken', 'worldObjects', 'recipe', 1, 50, 1)
             recipe.legendID = 32;
             return recipe;
         },
         CatQuestVixenRecipe: function(id) {
-            return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects', 'recipe', 2, 51)
+            return this.CatQuestReadObject(id, 'Gourmet Tuna Recipe', 'A special recipe for freshwater tuna', 'worldObjects', 'recipe', 2, 51, 2)
         },
         CatQuestViosSign: function(id) {
             return this.CatQuestReadObject(id, 'Vio\'s Sign', 'A sign placed here by the home owner', 'worldObjects', 'plaque', 1, 52)

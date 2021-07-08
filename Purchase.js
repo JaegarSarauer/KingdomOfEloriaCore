@@ -1532,6 +1532,6 @@ let keys = Object.keys(Cosmetics);
 for(let i = 0; i < keys.length; ++i) {
     mapping[keys[i]] = Cosmetics[keys[i]].tokenID;
 }
-console.info(JSON.stringify(mapping));
+// console.info(JSON.stringify(mapping));
 
 module.exports.isPurchasableTime = isPurchasableTime;
