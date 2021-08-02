@@ -1,10 +1,6 @@
-const ActionFlags = require('./Step').ActionFlags;
-const ParameterMappingKeys = require('./Step').ParameterMappingKeys;
-const StepList = require('./Step').StepList;
 const StepResult = require('./Step').StepResult;
 const StepType = require('./Step').StepType;
 const buildStep = require('./Step').buildStep;
-const buildStepList = require('./Step').buildStepList;
 const Entity = require('../typedef/Entity');
 const Combat = require('../internal/Combat');
 const Get = require("./Getter");
@@ -12,7 +8,6 @@ const ItemDetail = require("./ItemDetail").ItemDetail;
 const ItemStates = require('../def/interface/ItemStateDef');
 const EssenceValue = require("./Essence").EssenceValue;
 const ShardCatalog = require("./Essence").ShardCatalog;
-const EssenceCatalog = require("./Essence").EssenceCatalog;
 const SpriteColor = require('./Model').SpriteColor;
 const Recipes = require('./Recipes');
 

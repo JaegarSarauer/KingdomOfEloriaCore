@@ -1526,12 +1526,4 @@ const CosmeticRarityItems = (() => {
 module.exports.CosmeticRarityItems = CosmeticRarityItems;
 module.exports.Rarity = Rarity;
 module.exports.Cosmetics = Cosmetics;
-
-let mapping = {};
-let keys = Object.keys(Cosmetics);
-for(let i = 0; i < keys.length; ++i) {
-    mapping[keys[i]] = Cosmetics[keys[i]].tokenID;
-}
-// console.info(JSON.stringify(mapping));
-
 module.exports.isPurchasableTime = isPurchasableTime;

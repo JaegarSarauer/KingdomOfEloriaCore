@@ -55,15 +55,15 @@ const TestType = {
 };
 module.exports.TestType = TestType;
 
-const TestIncinerateAllItems = require('../internal/Tests/TestIncinerateAllItems');
-const TestKillAlphaWolf = require('../internal/Tests/TestKillAlphaWolf');
-const TestMineCopperOre = require('../internal/Tests/TestMineCopperOre');
-const TestMineToMax = require('../internal/Tests/TestMineToMax');
-const TestCutBankedGems = require('../internal/Tests/TestCutBankedGems');
-const TestWalkRandom = require('../internal/Tests/TestWalkRandom');
-const TestMineGemRock = require('../internal/Tests/TestMineGemRock');
-const TestSetGuildTiers = require('../internal/Tests/TestSetGuildTiers');
-const TestGuildManagerCycle = require('../internal/Tests/TestGuildManagerCycle');
+const TestIncinerateAllItems = require('../internal/Tests/Functional/TestIncinerateAllItems');
+const TestKillAlphaWolf = require('../internal/Tests/Functional/TestKillAlphaWolf');
+const TestMineCopperOre = require('../internal/Tests/Functional/TestMineCopperOre');
+const TestMineToMax = require('../internal/Tests/Functional/TestMineToMax');
+const TestCutBankedGems = require('../internal/Tests/Functional/TestCutBankedGems');
+const TestWalkRandom = require('../internal/Tests/Functional/TestWalkRandom');
+const TestMineGemRock = require('../internal/Tests/Functional/TestMineGemRock');
+const TestSetGuildTiers = require('../internal/Tests/Functional/TestSetGuildTiers');
+const TestGuildManagerCycle = require('../internal/Tests/Functional/TestGuildManagerCycle');
 
 module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     INCINERATE_ALL_ITEMS: {
