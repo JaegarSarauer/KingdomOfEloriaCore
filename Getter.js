@@ -4844,13 +4844,8 @@ const WorldObject = {
                     buildStep(StepType.GIVE_INVENTORY_ITEM, { params: [logId, 1] }),
                     buildStep(StepType.GIVE_XP, { params: [9, xp] }),
                     buildStep(StepType.SEND_CLIENT_MESSAGE, { params: ['You get some ' + logName + '.'] }),
-<<<<<<< Updated upstream
                     buildStep(StepType.CHECK_TUTORIAL_STATE, {
                         params: [4],
-=======
-                    buildStep(StepType.CHECK_CHARACTER_STATE, {
-                        params: [4, 4],
->>>>>>> Stashed changes
                         stepResultPass: 'NEXT_STEP',
                         stepResultFail: 'NEXT_STEP_LIST',
                     }),

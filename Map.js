@@ -15,6 +15,7 @@ let mapData = [
     MapCompressor.getMapData(0, 'Overworld'),
     MapCompressor.getMapData(1, 'Underworld'),
     MapCompressor.getMapData(2, 'SpecialWorld'),
+    MapCompressor.getMapData(3, 'TestWorld'),
 ];
 
 function tileDataToMapBaseTiles(tileData) {
@@ -172,6 +173,7 @@ function mapDataToMap(mapData) {
 const MAP_FLOOR_0 = mapDataToMap(mapData[0]);
 const MAP_UNDERGROUND_1 = mapDataToMap(mapData[1]);
 const MAP_SPECIAL_2 = mapDataToMap(mapData[2]);
+const MAP_TEST_NEG1 = mapDataToMap(mapData[3]);
 
 module.exports.MAP_FLOOR_0 = MAP_FLOOR_0;
 module.exports.MAP_UNDERGROUND_1 = MAP_UNDERGROUND_1;
@@ -182,5 +184,6 @@ module.exports.getMapTypeDef = (mapID) => {
         case 0: return MAP_FLOOR_0;
         case 1: return MAP_UNDERGROUND_1;
         case 2: return MAP_SPECIAL_2;
+        case 3: return MAP_TEST_NEG1;
     }
 }
