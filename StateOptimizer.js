@@ -24,31 +24,15 @@ const PropertyToTerm = {
     maxDistance : 'mD',
 };
 
-const TermToProperty = {
-    oID : 'ownerID',
-    rID : 'refID',
-    tID : 'tiledID',
-    mID : 'mapID',
-    iVP : 'isVisibilityPrivate',
-    eT : 'entityType',
-    pVT : 'privateVisiblityTicks',
-    iA : 'isAttackable',
-    uUD : 'usesUntilDepletion',
-    iDS : 'isDroppingSilk',
-    st : 'stats',
-    dRID : 'downgradeRefID',
-    inv : 'inventory',
-    eqp : 'equipment',
-    ste : 'state',
-    cbt : 'combat',
-    spl : 'spells',
-    hB : 'hasBounty',
-    bt : 'bountyTicks',
-    aS : 'appearanceState',
-    cESA : 'canEnterSafeAreas',
-    dPS : 'distancePerStep',
-    mD : 'maxDistance'
-};
+let propertyKeys = Object.keys(PropertyToTerm);
+let termToProperty = {};
+for(let i = 0; i < propertyKeys.length; ++i) {
+    let property = propertyKeys[i];
+    let term = PropertyToTerm[property];
+    termToProperty[term] = property;
+}
+
+const TermToProperty = termToProperty;
 
 module.exports.PropertyToTerm;
 module.exports.TermToProperty;
