@@ -4061,7 +4061,7 @@ const WorldObject = {
                     ],
                 },],
                 spriteIndex: spriteIndex,
-                stateParams : ['usesUntilDepletion', 'ownerUID']
+                stateParams : ['usesUntilDepletion']
             };
         },
         ShallowFishingPool: function (id) {
@@ -4298,7 +4298,7 @@ const WorldObject = {
                     ]
                 }],
                 spriteIndex: 10,
-                stateParams : ['usesUntilDepletion', 'ownerUID']
+                stateParams : ['usesUntilDepletion']
             };
         },
         HandFishingPool: function (id) {
@@ -4972,7 +4972,7 @@ const WorldObject = {
                     ],
                 }],
                 spriteIndex: spriteIndex,
-                stateParams : ['usesUntilDepletion', 'ownerUID']
+                stateParams : ['usesUntilDepletion']
             };
         },
         MarketStall: function (id, maxTrades, spriteIndex, campLevel) {
@@ -5011,7 +5011,7 @@ const WorldObject = {
                         ],
                     }],
                 spriteIndex: spriteIndex,
-                stateParams : ['usesUntilDepletion', 'ownerUID']
+                stateParams : ['usesUntilDepletion']
             };
         },
         MiningCamp: function (id, oreName, oreId, woRockIds, spriteIndex, xpMultiplier, campLevel, skillLevel) {
@@ -5103,7 +5103,7 @@ const WorldObject = {
                     ],
                 }],
                 spriteIndex: spriteIndex,
-                stateParams : ['usesUntilDepletion', 'ownerUID']
+                stateParams : ['usesUntilDepletion']
             };
         },
         TrainingDummy: function (id, name, hp, defenceLevel, spriteIndex, campLevel, cbLevel) {
@@ -5138,7 +5138,7 @@ const WorldObject = {
                         ],
                     }],
                 spriteIndex: spriteIndex,
-                stateParams : ['usesUntilDepletion', 'ownerUID', 'stats']
+                stateParams : ['usesUntilDepletion', 'stats']
             }
         },
         DoorTollLocked: function(id, name, tollAmount, spriteID, upDownLeftRight, mapID, entryPoint, exitPoint, description) {
