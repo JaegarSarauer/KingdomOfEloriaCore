@@ -1,38 +1,35 @@
-const PropertyToTerm = {
-    ownerID : 'oID',
-    refID : 'rID',
-    tiledID : 'tID',
-    mapID : 'mID',
-    isVisibilityPrivate : 'iVP',
-    entityType : 'eT',
-    privateVisiblityTicks : 'pVT',
-    isAttackable : 'iA',
-    usesUntilDepletion : 'uUD',
-    isDroppingSilk : 'iDS',
-    stats : 'st',
-    downgradeRefID : 'dRID',
-    inventory : 'inv',
-    equipment : 'eqp',
-    state : 'ste',
-    combat : 'cbt',
-    spells : 'spl',
-    hasBounty : 'hB',
-    bountyTicks : 'bt',
-    appearanceState : 'aS',
-    canEnterSafeAreas : 'cESA',
-    distancePerStep : 'dPS',
-    maxDistance : 'mD',
-};
+const TermToProperty = [
+    'ownerID',
+    'refID',
+    'tiledID',
+    'mapID',
+    'isVisibilityPrivate',
+    'entityType',
+    'privateVisiblityTicks',
+    'isAttackable',
+    'usesUntilDepletion',
+    'isDroppingSilk',
+    'stats',
+    'downgradeRefID',
+    'inventory',
+    'equipment',
+    'state',
+    'combat',
+    'spells',
+    'hasBounty',
+    'bountyTicks',
+    'appearanceState',
+    'canEnterSafeAreas',
+    'distancePerStep',
+    'maxDistance',
+];
 
-let propertyKeys = Object.keys(PropertyToTerm);
-let termToProperty = {};
-for(let i = 0; i < propertyKeys.length; ++i) {
-    let property = propertyKeys[i];
-    let term = PropertyToTerm[property];
-    termToProperty[term] = property;
+let propertyToTerm = {};
+for(let i = 0, len = TermToProperty.length; i < len; ++i) {
+    propertyToTerm[TermToProperty[i]] = i;
 }
 
-const TermToProperty = termToProperty;
+const PropertyToTerm = propertyToTerm;
 
 module.exports.PropertyToTerm;
 module.exports.TermToProperty;
