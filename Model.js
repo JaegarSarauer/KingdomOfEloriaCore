@@ -2858,7 +2858,9 @@ let CreatePIXIJSAnimationFromSpriterAnimation = function(animation) {
                     }
                 }
                 else {
-                    console.info('No chest on animation ', animationName, transformsByPart);
+                    if (process.env.EVN.isDev) {
+                        console.info('No chest on animation ', animationName, transformsByPart);
+                    }
                 }
             }
             else {
