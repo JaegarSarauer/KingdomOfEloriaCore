@@ -673,6 +673,9 @@ module.exports.getMapData = (mapID, name) => {
             case 2:
             mapDataLookup[mapID] = require('../SpecialWorld.json');
             break;
+            case 3:
+            mapDataLookup[mapID] = require('../TestWorld.json');
+            break;
         }
     }
     return mapDataLookup[mapID];

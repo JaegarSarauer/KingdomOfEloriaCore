@@ -6,6 +6,26 @@ module.exports.TestResult = TestResult = {
     FAIL: 2,
 };
 
+module.exports.Assert = Assert = (passOrFail, failMessage, onComplete) => {
+    if (!passOrFail) {
+        onComplete(this.TestResult.FAIL, failMessage);
+    }
+}
+
+module.exports.ArrayMatch = ArrayMatch = (arr1, arr2) => {
+    arr1.sort();
+    arr2.sort();
+	if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+	for (var i = 0; i < arr1.length; i++) {
+		if (arr1[i] !== arr2[i]) return false;
+	}
+
+	return true;
+};
+
 const TestType = {
     INCINERATE_ALL_ITEMS: {
         id: 'INCINERATE_ALL_ITEMS',
@@ -52,6 +72,11 @@ const TestType = {
         executeString: 'guild_manager_cycle',
         suiteString: 'release',
     },
+    SEGMENTS_CONTROLLER: {
+        id: 'SEGMENTS_CONTROLLER',
+        executeString: 'segments_controller',
+        suiteString: 'release',
+    },
 };
 module.exports.TestType = TestType;
 
@@ -64,6 +89,7 @@ const TestWalkRandom = require('../internal/Tests/Functional/TestWalkRandom');
 const TestMineGemRock = require('../internal/Tests/Functional/TestMineGemRock');
 const TestSetGuildTiers = require('../internal/Tests/Functional/TestSetGuildTiers');
 const TestGuildManagerCycle = require('../internal/Tests/Functional/TestGuildManagerCycle');
+const TestSegmentsController = require('../internal/Tests/Functional/TestSegmentsController');
 
 module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     INCINERATE_ALL_ITEMS: {
@@ -109,6 +135,11 @@ module.exports.TestTypeClassDictionary = TestTypeClassDictionary = {
     WALK_RANDOM: {
         build: (parameters) => {
             return new TestWalkRandom.TestWalkRandom(...parameters);
+        },
+    },
+    SEGMENTS_CONTROLLER : {
+        build: (parameters) => {
+            return new TestSegmentsController.TestSegmentsController(...parameters);
         },
     },
 };
